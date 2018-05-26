@@ -61,6 +61,8 @@ use App\Models\Sostenibilidad_Visitante;
 use App\Models\Actividades_Sostenibilidad_Idiomas;
 use App\Models\Opcion_Actividad_Realizada_Con_Idioma;
 use App\Models\Opcion_Actividad_Realizada;
+use App\Models\Visitante_Transporte_Dentro;
+use App\Models\Visitante_Transporte_Llegada;
 
 class TurismoReceptorController extends Controller
 {
@@ -98,7 +100,7 @@ class TurismoReceptorController extends Controller
             })->select('tipos_atencion_salud_id','nombre');
         }])->get();
         
-        $departamentos = Departamento::where('pais_id',47)->select('id','nombre')->get();
+        $departamentos = Departamento::where('pais_id',47)->select('id','nombre')->orderBy('nombre')->get();
         
         $result = [ 
             'grupos' => $grupos, 
@@ -133,7 +135,8 @@ class TurismoReceptorController extends Controller
 			'Salud' => 'exists:tipos_atencion_salud,id|required_if:Motivo,5',
 			'Horas' => 'required_if:Motivo,3',
 			'Otro' => 'required_if:Motivo,18|max:150',
-			'Actor' => 'required',
+			//'Actor' => 'required',
+			'codigo_encuesta' => 'required|max:50|unique:visitantes,codigo_encuesta'
     	],[
        		'Grupo.required' => 'Debe seleccionar el grupo de viaje.',
        		'Grupo.exists' => 'El grupo de viaje seleccionado no se encuentra registrado en el sistema.',
@@ -166,7 +169,10 @@ class TurismoReceptorController extends Controller
        		'Horas.required_if' => 'Debe ingresar el número de horas de viaje.',
        		'Otro.required_if' => 'Debe ingresar datos en el campo otro.',
        		'Otro.max' => 'El campo otro no debe superar los 150 caracteres.',
-       		'Actor.required' => 'Debe seleccionar el actor.'
+       		//'Actor.required' => 'Debe seleccionar el actor.',
+       		'codigo_encuesta.required' => 'El código de la encuesta es requerido.',
+       		'codigo_encuesta.max' => 'El código de la encuesta no debe superar los 50 caracteres.',
+       		'codigo_encuesta.unique' => 'Ya existe otro visitante con el mismo código de encuesta.'
     	]);
        
     	if($validator->fails()){
@@ -202,6 +208,7 @@ class TurismoReceptorController extends Controller
 		$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
 		$visitante->sexo = $request->Sexo;
 		$visitante->ultima_sesion = 1;
+		$visitante->codigo_encuesta = $request->codigo_encuesta;
 		$visitante->save();
 		
 		switch ($visitante->motivo_viaje)
@@ -252,6 +259,7 @@ class TurismoReceptorController extends Controller
             $visitante = collect();
             
             $visitante['Id'] = $visitanteCargar->id;
+            $visitante['codigo_encuesta'] = $visitanteCargar->codigo_encuesta;
             $visitante['Grupo'] = $visitanteCargar->grupo_viaje_id;
             $visitante['Encuestador'] = $visitanteCargar->encuestador_creada;
             $visitante['Encuestador_nombre'] = $visitanteCargar->digitadoreDigitada->aspNetUser->username;
@@ -271,7 +279,7 @@ class TurismoReceptorController extends Controller
             $visitante['Motivo'] = $visitanteCargar->motivo_viaje;
             $visitante['Destino'] = $visitanteCargar->destino_principal;
             $visitante['DepartamentoDestino'] = $visitanteCargar->municipioPrincipal!=null?$visitanteCargar->municipioPrincipal->departamento_id : null;
-            $visitante['Salud'] = count($visitanteCargar->tiposAtencionSaluds) > 0 ? $visitanteCargar->tiposAtencionSaluds->take(1)->id : null;
+            $visitante['Salud'] = count($visitanteCargar->tiposAtencionSaluds) > 0 ? $visitanteCargar->tiposAtencionSaluds->first()->id : null;
             $visitante['Horas'] = $visitanteCargar->visitantesTransito != null ? $visitanteCargar->visitantesTransito->horas_transito : null ;
             $visitante['Otro'] = $visitanteCargar->otrosMotivo != null ? $visitanteCargar->otrosMotivo->otro_motivo : null ;
             
@@ -316,6 +324,7 @@ class TurismoReceptorController extends Controller
 			'Salud' => 'exists:tipos_atencion_salud,id|required_if:Motivo,5',
 			'Horas' => 'required_if:Motivo,3',
 			'Otro' => 'required_if:Motivo,18|max:150',
+			'codigo_encuesta' => 'required|max:50|unique:visitantes,codigo_encuesta,'.$request->Id.',id'
     	],[
     	    'Id.required' => 'Debe seleccionar el visitante a realizar la encuesta.',
        		'Id.exists' => 'El visitante seleccionado no se encuentra seleccionado en el sistema.',
@@ -350,7 +359,14 @@ class TurismoReceptorController extends Controller
        		'Horas.required_if' => 'Debe ingresar el número de horas de viaje.',
        		'Otro.required_if' => 'Debe ingresar datos en el campo otro.',
        		'Otro.max' => 'El campo otro no debe superar los 150 caracteres.',
+       		'codigo_encuesta.required' => 'El código de la encuesta es requerido.',
+       		'codigo_encuesta.max' => 'El código de la encuesta no debe superar los 50 caracteres.',
+       		'codigo_encuesta.unique' => 'Ya existe otro visitante con el mismo código de encuesta.'
     	]);
+    	
+    	if($validator->fails()){
+    		return ["success"=>false,"errores"=>$validator->errors()];
+		}
     	
     	$municipio = Municipio::find($request->Municipio);
 		if($municipio->departamento->pais_id != 47 && $request->Destino==null){
@@ -374,6 +390,7 @@ class TurismoReceptorController extends Controller
 		$visitante->opciones_lugares_id = $request->Nacimiento;
 		$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
 		$visitante->sexo = $request->Sexo;
+		$visitante->codigo_encuesta = $request->codigo_encuesta;
 		
 		$visitante->visitantesTransito()->delete();
 		$visitante->tiposAtencionSaluds()->detach();
@@ -406,12 +423,12 @@ class TurismoReceptorController extends Controller
     }
     
     public function getDepartamento($id){
-        $departamentos = Departamento::where('pais_id',$id)->select('id','nombre')->get();
+        $departamentos = Departamento::where('pais_id',$id)->select('id','nombre')->orderBy('nombre')->get();
         return $departamentos;
     }
     
     public function getMunicipio($id){
-        $municipios = Municipio::where('departamento_id',$id)->select('id','nombre')->get();
+        $municipios = Municipio::where('departamento_id',$id)->select('id','nombre')->orderBy('nombre')->get();
         return $municipios;
     }
     
@@ -691,6 +708,8 @@ class TurismoReceptorController extends Controller
             'calificacion'=>$sostenibilidad == null?null:$sostenibilidad->facil_llegar,
             'mover' => $visitante->transporte_interno,
             'llegar' => $visitante->transporte_llegada,
+            'otroLlegar' => $visitante->transporte_llegada == 11 ? $visitante->otroTransporteLlegada->otro : null,
+            'otroMover' => $visitante->transporte_interno == 11 ? $visitante->otroTransporteMover->otro : null,
         ];
         
         return $retorno;
@@ -701,7 +720,9 @@ class TurismoReceptorController extends Controller
 			'Id' => 'required|exists:visitantes,id',
 			'Llegar' => 'required|exists:tipos_transporte,id',
 			'Mover' => 'required|exists:tipos_transporte,id',
-			'Calificacion'=>'integer'
+			'Calificacion'=>'integer',
+			'otroLlegar' => 'required_if:Llegar,11|max:50',
+			'otroMover' => 'required_if:Mover,11|max:50',
     	],[
        		'Id.required' => 'Debe seleccionar el visitante a realizar la encuesta.',
        		'Id.exists' => 'El visitante seleccionado no se encuentra seleccionado en el sistema.',
@@ -709,7 +730,10 @@ class TurismoReceptorController extends Controller
        		'Llegar.exists' => 'El transporte de llegada seleccionado no se encuentra registrado en el sistema.',
        		'Mover.required' => 'Debe seleccionar el transporte para moverse dentro del departamento.',
        		'Mover.exists' => 'El campo de transporte dentro del departamento no se encuentra registrado en el sistema.',
-       		
+       		'otroLlegar.required' => 'El campo otro en el transporte de llegada es requerido.',
+       		'otroLlegar.max' => 'El campo otro en el transporte de llegada no debe superar los 50 caracteres.',
+       		'otroMover.required' => 'El campo otro en el transporte de llegada es requerido.',
+       		'otroMover.max' => 'El campo otro en el transporte de llegada no debe superar los 50 caracteres.',
     	]);
        
     	if($validator->fails()){
@@ -721,7 +745,8 @@ class TurismoReceptorController extends Controller
 		$sw = 0;
 		if($visitante->ultima_sesion >= 3){
 		    $sw =1;
-		   
+		   $visitante->otroTransporteLlegada()->delete();
+		   $visitante->otroTransporteMover()->delete();
 		}else{
 		    $visitante->ultima_sesion = 3;
 		}
@@ -729,6 +754,12 @@ class TurismoReceptorController extends Controller
 		$visitante->transporte_llegada = $request->Llegar;
 		$visitante->transporte_interno = $request->Mover;
 		
+		if($visitante->transporte_llegada == 11){
+		    $visitante->otroTransporteLlegada()->save(new Visitante_Transporte_Llegada(['otro' => $request->otroLlegar]));
+		}
+		if($visitante->transporte_interno == 11){
+		    $visitante->otroTransporteMover()->save(new Visitante_Transporte_Dentro(['otro' => $request->otroMover]));
+		}
 	
 		
 		if(isset($request->Calificacion)){
@@ -1292,21 +1323,21 @@ class TurismoReceptorController extends Controller
     		return ["success"=>false,"errores"=>$validator->errors()];
 		}
 		
-		$aux = collect($request->Evaluacion)->pluck('Id')->toArray();
-		if($request->Alojamiento == 1){
-		    for($i=1;$i<=7;$i++){
-		        if(!in_array($i,$aux)){
-		            return ["success"=>false,"errores"=>[["Por favor califique todos los items del aspecto de alojamiento."]]];
-		        }
-		    }
-		}
-		if($request->Restaurante == 1){
-		    for($i=8;$i<=12;$i++){
-		        if(!in_array($i,$aux)){
-		            return ["success"=>false,"errores"=>[["Por favor califique todos los items del aspecto de restaurante."]]];
-		        }
-		    }
-		}
+// 		$aux = collect($request->Evaluacion)->pluck('Id')->toArray();
+// 		if($request->Alojamiento == 1){
+// 		    for($i=1;$i<=7;$i++){
+// 		        if(!in_array($i,$aux)){
+// 		            return ["success"=>false,"errores"=>[["Por favor califique todos los items del aspecto de alojamiento."]]];
+// 		        }
+// 		    }
+// 		}
+// 		if($request->Restaurante == 1){
+// 		    for($i=8;$i<=12;$i++){
+// 		        if(!in_array($i,$aux)){
+// 		            return ["success"=>false,"errores"=>[["Por favor califique todos los items del aspecto de restaurante."]]];
+// 		        }
+// 		    }
+// 		}
 		if( (!isset($request->OtroElementos)) && in_array(11,$request->Elementos) ){
 		    return ["success"=>false,"errores"=>[["Por favor ingrese el campo de valor otro."]]];
 		}

@@ -73,6 +73,28 @@
         </div>
         <div class="panel panel-success">
             <div class="panel-heading p1">
+                <!-- P1. Codigo de encuesta-->
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Código de encuesta</b></h3>
+            </div>
+            <div class="panel-footer"><b>Ingrese el código de la encuesta</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" id="codigo_encuesta" name="codigo_encuesta" ng-model="encuesta.codigo_encuesta" placeholder="Presione aquí para ingresar el código del Encuestado" ng-required="true" ng-maxlength="50" />
+                                <span ng-show="DatosForm.$submitted || DatosForm.codigo_encuesta.$touched">
+                                    <span class="label label-danger" ng-show="DatosForm.codigo_encuesta.$error.required">*El campo es requerido</span>
+                                    <span class="label label-danger" ng-show="DatosForm.codigo_encuesta.$invalid">*El campo no debe superar los 50 caracteres</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading p1">
                 <!-- P2. Encuestador-->
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Encuestador</b></h3>
             </div>
@@ -289,7 +311,7 @@
                                 <!--P4P8Select1. Seleccione el país de nacimiento-->
                                 <select class="form-control" id="inputPaisNacimiento" ng-model="encuesta.Pais_Nacimiento" name="pais_nacimiento" ng-required="encuesta.Nacimiento == 3">
                                     <option value="" disabled>Seleccione el país de nacimiento</option>
-                                    <option ng-repeat="item in paises" value="{{item.id}}">{{item.paises_con_idiomas[0].nombre}}</option>
+                                    <option ng-repeat="item in paises | orderBy:'item.paises_con_idiomas[0].nombre'" value="{{item.id}}">{{item.paises_con_idiomas[0].nombre}}</option>
                                 </select>
                                 <!--P4P8Alert1. El campo pais de nacimiento es requerido-->
                                 <span class="label label-danger" ng-show="!DatosForm.$pristine && DatosForm.pais_nacimiento.$error.required">*El campo pais de nacimiento es requerido</span>
@@ -307,7 +329,7 @@
                                 <!--P4P9Select1. País de Residencia-->
                                 <select class="form-control" ng-model="pais_residencia" id="inputPaisResidencia" name="pais_residencia" ng-change="changedepartamento()" ng-required="true">
                                     <option value="" disabled>País de Residencia</option>
-                                    <option ng-repeat="item in paises" value="{{item.id}}">{{item.paises_con_idiomas[0].nombre}}</option>
+                                    <option ng-repeat="item in paises| orderBy:'item.paises_con_idiomas[0].nombre'" value="{{item.id}}">{{item.paises_con_idiomas[0].nombre}}</option>
                                 </select>
                                 <!--P4P9Alert1. País de Residencia-->
                                 <span ng-show="DatosForm.$submitted || DatosForm.pais_residencia.$touched">
@@ -465,57 +487,57 @@
                 </div>
             </div>
         </div>
-        <div class="panel panel-success">
-            <div class="panel-heading">
+        <!--<div class="panel panel-success">-->
+        <!--    <div class="panel-heading">-->
                 <!-- P7. ¿Quien va a diligenciar la encuesta?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Quien va a diligenciar la encuesta?</b></h3>
-            </div>
-            <div class="panel-footer"><b>Presione aquí para desplegar las opciones</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <select class="form-control" name="actor" ng-model="encuesta.Actor" ng-required="true">
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Quien va a diligenciar la encuesta?</b></h3>-->
+        <!--    </div>-->
+        <!--    <div class="panel-footer"><b>Presione aquí para desplegar las opciones</b></div>-->
+        <!--    <div class="panel-body">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-md-12">-->
+        <!--                <select class="form-control" name="actor" ng-model="encuesta.Actor" ng-required="true">-->
                             <!--P7Op1. Selecciona una persona-->
-                            <option value="" disabled>Selecciona una persona</option>
+        <!--                    <option value="" disabled>Selecciona una persona</option>-->
                             <!--P7Op2. Visitante-->
-                            <option value="true">Visitante</option>
+        <!--                    <option value="true">Visitante</option>-->
                             <!--P7Op3. Encuestador-->
-                            <option value="false">Encuestador</option>
-                        </select>
-                        <span ng-show="DatosForm.$submitted || DatosForm.actor.$touched">
+        <!--                    <option value="false">Encuestador</option>-->
+        <!--                </select>-->
+        <!--                <span ng-show="DatosForm.$submitted || DatosForm.actor.$touched">-->
                             <!--P7Alert1. Encuestador-->
-                            <span class="label label-danger" ng-show="DatosForm.actor.$error.required">*El campo diligenciar encuesta es requerido</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="panel panel-success" ng-if="encuesta.Actor=='true'">
-            <div class="panel-heading">
+        <!--                    <span class="label label-danger" ng-show="DatosForm.actor.$error.required">*El campo diligenciar encuesta es requerido</span>-->
+        <!--                </span>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <!--<div class="panel panel-success" ng-if="encuesta.Actor=='true'">-->
+        <!--    <div class="panel-heading">-->
                 <!-- P7. ¿Quien va a diligenciar la encuesta?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿En que idioma se va a diligenciar la encuesta?</b></h3>
-            </div>
-            <div class="panel-footer"><b>Presione aquí para desplegar las opciones</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <select class="form-control" name="idioma" ng-model="encuesta.Idioma" ng-required="encuesta.Actor">
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿En que idioma se va a diligenciar la encuesta?</b></h3>-->
+        <!--    </div>-->
+        <!--    <div class="panel-footer"><b>Presione aquí para desplegar las opciones</b></div>-->
+        <!--    <div class="panel-body">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-md-12">-->
+        <!--                <select class="form-control" name="idioma" ng-model="encuesta.Idioma" ng-required="encuesta.Actor">-->
                             <!--P7Op1. Selecciona una opción-->
-                            <option value="" disabled>Seleccione una opcion</option>
+        <!--                    <option value="" disabled>Seleccione una opcion</option>-->
                             <!--P7Op2. Español-->
-                            <option value="false">Español</option>
+        <!--                    <option value="false">Español</option>-->
                             <!--P7Op3. Inglés-->
-                            <option value="true">Inglés</option>
+        <!--                    <option value="true">Inglés</option>-->
 
-                        </select>
-                        <span ng-show="DatosForm.$submitted || DatosForm.idioma.$touched">
+        <!--                </select>-->
+        <!--                <span ng-show="DatosForm.$submitted || DatosForm.idioma.$touched">-->
                             <!--P7Alert1. Encuestador-->
-                            <span class="label label-danger" ng-show="DatosForm.actor.idioma.required">*El campo es requerido</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--                    <span class="label label-danger" ng-show="DatosForm.actor.idioma.required">*El campo es requerido</span>-->
+        <!--                </span>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
         <div class="row" style="text-align:center">
             <input type="submit" class="btn btn-raised btn-success" ng-click="guardar()" value="Siguiente" />
         </div>

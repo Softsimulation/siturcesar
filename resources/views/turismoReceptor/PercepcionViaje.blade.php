@@ -91,6 +91,7 @@
                                     @for ($j = 1; $j <= 10; $j++)
                                         <th> {{$j}} </th>
                                     @endfor
+                                    <th> Sin Respuesta </th>
                                 </tr>
 
                             </thead>
@@ -107,6 +108,13 @@
                                             </div>
                                         </td>
                                     @endfor
+                                    <td>
+                                        <div class="radio radio-primary">
+                                            <label>
+                                                <input type="radio"  ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="alojamiento_@{{it.id}}" value="0">
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
 
                             </tbody>
@@ -161,6 +169,7 @@
                                     @for ($j = 1; $j <= 10; $j++)
                                         <th> {{$j}} </th>
                                     @endfor
+                                    <th> Sin Respuesta </th>
                                 </tr>
 
                             </thead>
@@ -178,7 +187,13 @@
                                             </div>
                                         </td>
                                     @endfor
-                                   
+                                    <td>
+                                        <div class="radio radio-primary">
+                                            <label>
+                                                <input type="radio"  ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="restaurante_@{{it.id}}" value="0">
+                                            </label>
+                                        </div>
+                                    </td>
                                 </tr>
 
                             </tbody>
@@ -254,7 +269,7 @@
                                     <td>
                                         <div class="radio radio-primary">
                                             <label>
-                                                <input type="radio" ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="infraestructura_@{{it.id}}" value="0">
+                                                <input type="radio" ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="factores_@{{it.id}}" value="0">
                                             </label>
                                         </div>
                                     </td>
@@ -332,7 +347,7 @@
                                     <td>
                                         <div class="radio radio-primary">
                                             <label>
-                                                <input type="radio" ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="infraestructura_@{{it.id}}" value="0">
+                                                <input type="radio" ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="ocio_@{{it.id}}" value="0">
                                             </label>
                                         </div>
                                     </td>
@@ -476,7 +491,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Qué recomendaría para lograr atraer más visitantes al Magdalena?-->
-                <h3 class="panel-title"><b>Qué aspectos no le gustaron de Atlántico?</b></h3>
+                <h3 class="panel-title"><b>¿Qué recomendaría para lograr atraer más visitantes al Atlántico? (Resalte en detalle aspectos que realmente le disgustaron)</b></h3>
             </div>
             <!-- Resalte en detalle aspectos que realmente le disgustaron-->
             <div class="panel-footer"><b>Respuesta abierta</b></div>
@@ -528,7 +543,7 @@
                 <!-- Experiencia de viaje-->
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Experiencia de viaje</b></h3>
             </div>
-            <div class="panel-footer"><b>Califique en una escala del 1 al 10, donde 1 es muy insatisfecho y 10 muy satisfecho</b></div>
+            <div class="panel-footer"><b>Califique en una escala del 1 al 10, donde 1 es muy insatisfecho y 10 muy satisfecho. Valore la experiencia de su viaje.Respuesta única.</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12" style="overflow-x: auto;">
