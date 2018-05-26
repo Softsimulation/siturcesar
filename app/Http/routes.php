@@ -11,11 +11,17 @@
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('welcome');
+    
+    $date = new Carbon\Carbon('2018-04-02 00:00:00', 'Europe/London');  
+    return  $date->diffInDays('2018-03-28 00:00:00');
+    
+    
 });
 
-
+Route::controller('/temporada','TemporadaController');
 Route::controller('/turismointerno','TurismoInternoController');
 
 Route::controller('/turismoreceptor','TurismoReceptorController');
