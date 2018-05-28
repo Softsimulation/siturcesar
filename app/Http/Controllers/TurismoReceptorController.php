@@ -72,7 +72,7 @@ class TurismoReceptorController extends Controller
     
     public function getInformaciondatoscrear(){
         
-        $grupos = Grupo_Viaje::orderBy('id')->get()->pluck('id');
+        //$grupos = Grupo_Viaje::orderBy('id')->get()->pluck('id');
         
         $encuestadores = Digitador::with([ 'aspNetUser'=>function($q){$q->select('id','username');} ])->get();
         
@@ -103,7 +103,7 @@ class TurismoReceptorController extends Controller
         $departamentos = Departamento::where('pais_id',47)->select('id','nombre')->orderBy('nombre')->get();
         
         $result = [ 
-            'grupos' => $grupos, 
+            //'grupos' => $grupos, 
             'encuestadores' => $encuestadores, 
             'lugar_nacimiento' => $lugar_nacimiento, 
             'paises' => $paises,
@@ -117,7 +117,7 @@ class TurismoReceptorController extends Controller
     
     public function postGuardardatos(Request $request){
         $validator = \Validator::make($request->all(), [
-			'Grupo' => 'required|exists:grupos_viaje,id',
+			//'Grupo' => 'required|exists:grupos_viaje,id',
 			'Encuestador' => 'required|exists:digitadores,id',
 			'Llegada' => 'required|date|before:tomorrow',
 			'Salida' => 'required|date|after:Llegada',
@@ -184,11 +184,11 @@ class TurismoReceptorController extends Controller
 		    return ["success"=>false,"errores"=> [ ["El id del destino principal es inválido."] ] ];
 		}
 		
-		$grupo = Grupo_Viaje::find($request->Grupo);
-		//return count($grupo->visitantes).'-'.$grupo->personas_encuestadas;
-		if( count($grupo->visitantes) >= $grupo->personas_encuestadas ){
-		    return ["success"=>false,"errores"=> [ ["El grupo seleccionado ya tiene el número de encuestas completas."] ] ];
-		}
+// 		$grupo = Grupo_Viaje::find($request->Grupo);
+// 		//return count($grupo->visitantes).'-'.$grupo->personas_encuestadas;
+// 		if( count($grupo->visitantes) >= $grupo->personas_encuestadas ){
+// 		    return ["success"=>false,"errores"=> [ ["El grupo seleccionado ya tiene el número de encuestas completas."] ] ];
+// 		}
 		
 		$visitante = new Visitante();
 		$visitante->telefono = isset($request->Telefono) ? $request->Telefono : null;
@@ -200,7 +200,7 @@ class TurismoReceptorController extends Controller
 		$visitante->encuestador_creada = $request->Encuestador;
 		$visitante->fecha_llegada = $request->Llegada;
 		$visitante->fecha_salida = $request->Salida;
-		$visitante->grupo_viaje_id = $request->Grupo;
+		//$visitante->grupo_viaje_id = $request->Grupo;
 		$visitante->motivo_viaje = $request->Motivo;
 		$visitante->municipio_residencia = $request->Municipio;
 		$visitante->nombre = $request->Nombre;
@@ -260,7 +260,7 @@ class TurismoReceptorController extends Controller
             
             $visitante['Id'] = $visitanteCargar->id;
             $visitante['codigo_encuesta'] = $visitanteCargar->codigo_encuesta;
-            $visitante['Grupo'] = $visitanteCargar->grupo_viaje_id;
+            //$visitante['Grupo'] = $visitanteCargar->grupo_viaje_id;
             $visitante['Encuestador'] = $visitanteCargar->encuestador_creada;
             $visitante['Encuestador_nombre'] = $visitanteCargar->digitadoreDigitada->aspNetUser->username;
             $visitante['Llegada'] = $visitanteCargar->fecha_llegada;
@@ -306,7 +306,7 @@ class TurismoReceptorController extends Controller
     public function postGuardareditardatos(Request $request){
         $validator = \Validator::make($request->all(), [
 			'Id' => 'required|exists:visitantes,id',
-			'Grupo' => 'required|exists:grupos_viaje,id',
+			//'Grupo' => 'required|exists:grupos_viaje,id',
 			'Encuestador' => 'required|exists:digitadores,id',
 			'Llegada' => 'required|date|before:tomorrow',
 			'Salida' => 'required|date|after:Llegada',
@@ -383,7 +383,7 @@ class TurismoReceptorController extends Controller
 		$visitante->encuestador_creada = $request->Encuestador;
 		$visitante->fecha_llegada = $request->Llegada;
 		$visitante->fecha_salida = $request->Salida;
-		$visitante->grupo_viaje_id = $request->Grupo;
+		//$visitante->grupo_viaje_id = $request->Grupo;
 		$visitante->motivo_viaje = $request->Motivo;
 		$visitante->municipio_residencia = $request->Municipio;
 		$visitante->nombre = $request->Nombre;
