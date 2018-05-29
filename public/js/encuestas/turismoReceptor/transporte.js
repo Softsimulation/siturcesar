@@ -15,6 +15,8 @@ angular.module('receptor.transporte', ["checklist-model"])
                 if (data.mover != null && data.llegar != null) {
                     $scope.transporte.Llegar = data.llegar;
                     $scope.transporte.Mover = data.mover;
+                    $scope.transporte.otroLlegar = data.otroLlegar;
+                    $scope.transporte.otroMover = data.otroMover;
                     $scope.transporte.Alquiler = data.opcion_lugar;
                     $scope.transporte.Empresa = data.empresa;
                     $scope.transporte.Calificacion = data.calificacion;

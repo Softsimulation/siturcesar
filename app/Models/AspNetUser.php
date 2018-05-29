@@ -8,6 +8,8 @@ class AspNetUser extends Model
 {
     protected $table = 'users';
     
-    protected $fillable = ['id	', 'email', 'username'];
+    protected $fillable = ['Id	', 'Email', 'UserName'];
+    
+    protected $primaryKey = 'Id';
     
 }

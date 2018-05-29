@@ -62,24 +62,47 @@
     <form role="form" name="DatosForm" novalidate>
         <input type="hidden" ng-model="id" ng-init="id={{$id}}" />       
         
+        <!--<div class="panel panel-success">-->
+        <!--    <div class="panel-heading p1">-->
+                <!-- P1. Grupo de Viaje-->
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Grupo de Viaje</b></h3>-->
+        <!--    </div>-->
+        <!--    <div class="panel-footer"><b>Presione aquí para desplegar las opciones</b></div>-->
+        <!--    <div class="panel-body">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-md-12">-->
+        <!--                <select name="grupo" class="form-control" ng-model="encuesta.Grupo" ng-options="item for item in grupos" ng-required="true">-->
+                            <!--P1Select1. Presione aquí para seleccionar un grupo-->
+        <!--                    <option value="" disabled>Presione aquí para seleccionar algún grupo</option>-->
+        <!--                    <option ng-repeat="item in grupos" value="@{{item}}">@{{item}}</option>-->
+        <!--                </select>-->
+        <!--                <span ng-show="DatosForm.$submitted || DatosForm.grupo.$touched">-->
+                            <!--P1Alert1. El campo grupo de Viaje es requerido.-->
+        <!--                    <span class="label label-danger" ng-show="DatosForm.grupo.$error.required">*El campo grupo de Viaje es requerido.</span>-->
+        <!--                </span>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
+        
         <div class="panel panel-success">
             <div class="panel-heading p1">
-                <!-- P1. Grupo de Viaje-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Grupo de Viaje</b></h3>
+                <!-- P1. Codigo de encuesta-->
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Código de encuesta</b></h3>
             </div>
-            <div class="panel-footer"><b>Presione aquí para desplegar las opciones</b></div>
+            <div class="panel-footer"><b>Ingrese el código de la encuesta</b></div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <select name="grupo" class="form-control" ng-model="encuesta.Grupo" ng-options="item for item in grupos" ng-required="true">
-                            <!--P1Select1. Presione aquí para seleccionar un grupo-->
-                            <option value="" disabled>Presione aquí para seleccionar algún grupo</option>
-                            <option ng-repeat="item in grupos" value="@{{item}}">@{{item}}</option>
-                        </select>
-                        <span ng-show="DatosForm.$submitted || DatosForm.grupo.$touched">
-                            <!--P1Alert1. El campo grupo de Viaje es requerido.-->
-                            <span class="label label-danger" ng-show="DatosForm.grupo.$error.required">*El campo grupo de Viaje es requerido.</span>
-                        </span>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <input type="text" class="form-control" id="codigo_encuesta" name="codigo_encuesta" ng-model="encuesta.codigo_encuesta" placeholder="Presione aquí para ingresar el código del Encuestado" ng-required="true" ng-maxlength="50" />
+                                <span ng-show="DatosForm.$submitted || DatosForm.codigo_encuesta.$touched">
+                                    <span class="label label-danger" ng-show="DatosForm.codigo_encuesta.$error.required">*El campo es requerido</span>
+                                    <span class="label label-danger" ng-show="DatosForm.codigo_encuesta.$invalid">*El campo no debe superar los 50 caracteres</span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

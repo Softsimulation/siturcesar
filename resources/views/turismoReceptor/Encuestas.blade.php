@@ -49,6 +49,8 @@
 
 @section('NumSeccion', '0%')
 
+@section('app','ng-app="encuesta"')
+
 @section('controller','ng-controller="listadoEncuestasCtrl"')
 
 @section('content')
@@ -90,10 +92,9 @@
                     <tr>
                         <th style="width: 50px;"></th>                           
                             <th>Número de encuesta</th>
-                            <th style="width: 60px;">Grupo</th>
-                            <th>Lugar de aplicación</th>
-                            <th>Fecha de aplicación</th>
+                            <th>Código de encuesta</th>
                             <th>Fecha de llegada</th>
+                            <th>Fecha de salida</th>
                             <th>Encuestador</th>
                             <th style="width: 150px;">Estado</th>
                             <th style="width: 110px;">Última sección</th>
@@ -103,10 +104,9 @@
                     <tr dir-paginate="item in encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search |itemsPerPage:10 as results" pagination-id="paginacion_encuestas" >
                         <td>@{{$index+1}}</td>
                             <td>@{{item.id}}</td>
-                            <td>@{{item.grupo}}</td>
-                            <td>@{{item.lugar}}</td>
-                            <td>@{{item.fecha}}</td>
+                            <td>@{{item.codigoencuesta}}</td>
                             <td>@{{item.fechallegada | date:'dd-MM-yyyy'}}</td>
+                            <td>@{{item.fechasalida | date:'dd-MM-yyyy'}}</td>
                             <td>@{{item.username}}</td>
                             <td>@{{item.estado}}</td>
                             <td style="text-align: right;">@{{item.ultima}}</td>
