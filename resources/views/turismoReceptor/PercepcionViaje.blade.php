@@ -204,35 +204,35 @@
             
         </div>
         
-        <div class="panel panel-success">
-            <div class="panel-heading p1">
+        <!--<div class="panel panel-success">-->
+        <!--    <div class="panel-heading p1">-->
                 <!-- ¿Durante su viaje utilizó servicio de alojamiento?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de factores ambientales durante sus estancia?</b></h3>
-            </div>
-            <div class="panel-footer"><b>Pregunta con selección única</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" id="factoresSi" value="1" name="factores"  ng-required="true" ng-model="calificacion.Factores">
-                                Si
-                            </label>
-                        </div>
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" id="factoresNo" name="factores" ng-required="true" ng-change="limpiar(calificacion.Factores,13,15)" value="0" ng-model="calificacion.Factores" >
-                                No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <span ng-show="PercepcionForm.$submitted || PercepcionForm.factores.$touched">
-                    <span class="label label-danger" ng-show="PercepcionForm.factores.$error.required">*El campo Durante su viaje utilizó servicio de factores ambientales es requerido.</span>
-                </span>
-            </div>
-        </div>
-        <div class="panel panel-success" ng-if="calificacion.Factores==1">
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de factores ambientales durante sus estancia?</b></h3>-->
+        <!--    </div>-->
+        <!--    <div class="panel-footer"><b>Pregunta con selección única</b></div>-->
+        <!--    <div class="panel-body">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-md-12">-->
+        <!--                <div class="radio radio-primary">-->
+        <!--                    <label>-->
+        <!--                        <input type="radio" id="factoresSi" value="1" name="factores"  ng-required="true" ng-model="calificacion.Factores">-->
+        <!--                        Si-->
+        <!--                    </label>-->
+        <!--                </div>-->
+        <!--                <div class="radio radio-primary">-->
+        <!--                    <label>-->
+        <!--                        <input type="radio" id="factoresNo" name="factores" ng-required="true" ng-change="limpiar(calificacion.Factores,13,15)" value="0" ng-model="calificacion.Factores" >-->
+        <!--                        No-->
+        <!--                    </label>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <span ng-show="PercepcionForm.$submitted || PercepcionForm.factores.$touched">-->
+        <!--            <span class="label label-danger" ng-show="PercepcionForm.factores.$error.required">*El campo Durante su viaje utilizó servicio de factores ambientales es requerido.</span>-->
+        <!--        </span>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title"><b>@{{aspectos[2].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
             </div>
@@ -283,35 +283,35 @@
 
         </div>
         
-        <div class="panel panel-success">
-            <div class="panel-heading p1">
+        <!--<div class="panel panel-success">-->
+        <!--    <div class="panel-heading p1">-->
                 <!-- ¿Durante su viaje utilizó servicio de alojamiento?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de ocio y recreación durante sus estancia?</b></h3>
-            </div>
-            <div class="panel-footer"><b>Pregunta con selección única</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" id="ocioSi" value="1" name="ocio"  ng-required="true" ng-model="calificacion.Ocio">
-                                Si
-                            </label>
-                        </div>
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" id="ocioNo" name="ocio" ng-required="true" ng-change="limpiar(calificacion.Ocio,17,20)" value="0" ng-model="calificacion.Ocio" >
-                                No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <span ng-show="PercepcionForm.$submitted || PercepcionForm.ocio.$touched">
-                    <span class="label label-danger" ng-show="PercepcionForm.ocio.$error.required">*El campo Durante su viaje utilizó servicio de ocio y recreación es requerido.</span>
-                </span>
-            </div>
-        </div>
-        <div class="panel panel-success" ng-if="calificacion.Ocio == 1">
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de ocio y recreación durante sus estancia?</b></h3>-->
+        <!--    </div>-->
+        <!--    <div class="panel-footer"><b>Pregunta con selección única</b></div>-->
+        <!--    <div class="panel-body">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-md-12">-->
+        <!--                <div class="radio radio-primary">-->
+        <!--                    <label>-->
+        <!--                        <input type="radio" id="ocioSi" value="1" name="ocio"  ng-required="true" ng-model="calificacion.Ocio">-->
+        <!--                        Si-->
+        <!--                    </label>-->
+        <!--                </div>-->
+        <!--                <div class="radio radio-primary">-->
+        <!--                    <label>-->
+        <!--                        <input type="radio" id="ocioNo" name="ocio" ng-required="true" ng-change="limpiar(calificacion.Ocio,17,20)" value="0" ng-model="calificacion.Ocio" >-->
+        <!--                        No-->
+        <!--                    </label>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <span ng-show="PercepcionForm.$submitted || PercepcionForm.ocio.$touched">-->
+        <!--            <span class="label label-danger" ng-show="PercepcionForm.ocio.$error.required">*El campo Durante su viaje utilizó servicio de ocio y recreación es requerido.</span>-->
+        <!--        </span>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title"><b>@{{aspectos[3].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
             </div>
@@ -361,35 +361,35 @@
 
         </div>
         
-         <div class="panel panel-success">
-            <div class="panel-heading p1">
+        <!-- <div class="panel panel-success">-->
+        <!--    <div class="panel-heading p1">-->
                 <!-- ¿Durante su viaje utilizó servicio de alojamiento?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de infraestructura durante sus estancia?</b></h3>
-            </div>
-            <div class="panel-footer"><b>Pregunta con selección única</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" id="ocio2Si" value="1" name="inf"  ng-required="true" ng-model="calificacion.Infra">
-                                Si
-                            </label>
-                        </div>
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" id="ocio1No" name="inf" ng-required="true" ng-change="limpiar(calificacion.Infra,17,20)" value="0" ng-model="calificacion.Infra" >
-                                No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <span ng-show="PercepcionForm.$submitted || PercepcionForm.infraestructura.$touched">
-                    <span class="label label-danger" ng-show="PercepcionForm.infraestructura.$error.required">*El campo Durante su viaje utilizó servicio de infraestructura es requerido.</span>
-                </span>
-            </div>
-        </div>
-        <div class="panel panel-success" ng-if="calificacion.Infra == 1">
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de infraestructura durante sus estancia?</b></h3>-->
+        <!--    </div>-->
+        <!--    <div class="panel-footer"><b>Pregunta con selección única</b></div>-->
+        <!--    <div class="panel-body">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-md-12">-->
+        <!--                <div class="radio radio-primary">-->
+        <!--                    <label>-->
+        <!--                        <input type="radio" id="ocio2Si" value="1" name="inf"  ng-required="true" ng-model="calificacion.Infra">-->
+        <!--                        Si-->
+        <!--                    </label>-->
+        <!--                </div>-->
+        <!--                <div class="radio radio-primary">-->
+        <!--                    <label>-->
+        <!--                        <input type="radio" id="ocio1No" name="inf" ng-required="true" ng-change="limpiar(calificacion.Infra,17,20)" value="0" ng-model="calificacion.Infra" >-->
+        <!--                        No-->
+        <!--                    </label>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--        <span ng-show="PercepcionForm.$submitted || PercepcionForm.infraestructura.$touched">-->
+        <!--            <span class="label label-danger" ng-show="PercepcionForm.infraestructura.$error.required">*El campo Durante su viaje utilizó servicio de infraestructura es requerido.</span>-->
+        <!--        </span>-->
+        <!--    </div>-->
+        <!--</div>-->
+        <div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title"><b>@{{aspectos[4].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
             </div>

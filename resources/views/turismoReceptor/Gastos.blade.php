@@ -132,7 +132,7 @@
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> El viaje al departamento hizo parte de un paquete/plan turístico o excursión</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E1. El viaje al departamento hizo parte de un paquete/plan turístico o excursión</b></h3>
                 </div>
                 <div class="panel-footer"><b>Pregunta con selección única</b></div>
                 <div class="panel-body">
@@ -171,7 +171,7 @@
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
-                                    <label for="pago" class="col-md-12 control-label" style="color:dimgray;">¿Cuánto pagó usted por el paquete turístico o excursión?</label>
+                                    <label for="pago" class="col-md-12 control-label" style="color:dimgray;">E2. ¿Cuánto pagó usted por el paquete turístico o excursión?</label>
 
                                     <div class="col-md-12">
                                         <input type="number" ng-required="encuestaReceptor.ViajoDepartamento==1" class="form-control" min="1" name="pago" ng-model="encuestaReceptor.CostoPaquete" placeholder="Solo números">
@@ -221,7 +221,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <!-- P3. ¿El paquete/plan turístico incluyó municipios fuera del Magdalena?-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿El paquete/plan turístico incluyó municipios fuera del Atlántico?</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E1.1 ¿El paquete/plan turístico incluyó municipios fuera del Atlántico?</b></h3>
                     </div>
                     <div class="panel-footer"><b>Pregunta con selección única</b></div>
                     <div class="panel-body">
@@ -275,7 +275,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <!-- P6. El paquete/plan turístico o excursión fue comprado a:-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> El paquete/plan turístico o excursión fue comprado a</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E3. El paquete/plan turístico o excursión fue comprado a</b></h3>
                     </div>
                     <div class="panel-footer"><b>Pregunta con selección única</b></div>
                     <div class="panel-body">
@@ -298,7 +298,7 @@
                 <div class="panel panel-success" ng-show="encuestaReceptor.Proveedor==1">
                     <div class="panel-heading">
                         <!-- P7. ¿En donde está ubicada la agencia de viajes/operador turístico?-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿En donde está ubicada la agencia de viajes/operador turístico?</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E3.1 ¿En donde está ubicada la agencia de viajes/operador turístico?</b></h3>
                     </div>
                     <div class="panel-footer"><b>Pregunta con selección única</b></div>
                     <div class="panel-body">
@@ -321,7 +321,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <!-- P8. ¿Qué productos y servicios incluía el paquete turístico o excursión?-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Qué productos y servicios incluía el paquete turístico o excursión?</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E4. ¿Qué productos y servicios incluía el paquete turístico o excursión?</b></h3>
                     </div>
                     <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
                     <div class="panel-body">
@@ -388,13 +388,13 @@
                                     <thead id="head-tgastos">
                                         <tr>
                                             <!--P9Col1. Rubro-->
-                                            <th class="text-center" style="width:20%;">Rubro</th>
+                                            <th class="text-center" style="width:20%;">E5 Rubro</th>
                                             <!--P9Col2. Cantidad pagada-->
-                                            <th class="text-center" style="width:55%;">Cantidad pagada</th>
+                                            <th class="text-center" style="width:55%;">E5.1¿Cuánto gastó?</th>
                                             <!--P9Col3. ¿A cuántas personas cubrió?-->
-                                            <th class="text-center" style="width:10%;">¿A cuántas personas cubrió?</th>
+                                            <th class="text-center" style="width:10%;">E.5.2 ¿ Cuantas personas cubrió?</th>
                                             <!--P9Col4. Fue pagado por otra persona u organización/ empresa diferente a usted o a su grupo de viaje -->
-                                            <th class="text-center" style="width:15%;">Fue pagado por otra persona u organización/ empresa diferente a usted o a su grupo de viaje</th>
+                                            <th class="text-center" style="width:15%;">E6 .Gastos pagados por otra persona u organización</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -503,7 +503,7 @@
         <div class="panel panel-success" ng-show="abrirTerrestre">
             <div class="panel-heading">
                 <!-- ¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizado desde una ciudad de Colombia al Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizado desde una ciudad de Colombia al Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> E7.¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizado desde una ciudad de  Colombia a Atlántico?</b></h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -521,7 +521,7 @@
         <div class="panel panel-success" ng-show="abrirAlquiler">
             <div class="panel-heading">
                 <!-- >El alquiler de vehículo fue realizado en:-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> El alquiler de vehículo fue realizado en</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> E8. El alquiler de vehículo fue realizado en</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -542,7 +542,7 @@
         </div>
         <div class="panel panel-success" ng-show="abrirRopa">
             <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> En dónde fue realizado el mayor gasto de productos como ropa, calzado,  artesanías etc. (bienes duraderos) antes y durante el viaje a Atlántico : Respuesta única</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E9. En dónde fue realizado el mayor gasto de productos como ropa, calzado,  artesanías etc. (bienes duraderos) antes y durante el viaje a Atlántico :</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">

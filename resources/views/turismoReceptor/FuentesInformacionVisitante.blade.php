@@ -98,6 +98,33 @@
         </div>
         <div class="panel panel-success">
             <div class="panel-heading">
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Sostenibilidad ¿Fue fácil encontrar los servicios, productos y atractivos de Atlántico?</b></h3>
+            </div>
+            <div class="panel-footer"><b>Respuesta única</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="facilidad" id="facilidad" required value="1" ng-model="enteran.facilidad">
+                                Si
+                            </label>
+                        </div>
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="facilidad" id="facilidad" required value="-1" ng-model="enteran.facilidad">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <span ng-show="inForm.$submitted">
+                    <span class="label label-danger" ng-show="inForm.facilidad.$error.required">* Debe seleccionar alguna de las opciones.</span>
+                </span>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
                 <!-- ¿Después del viaje al Magdalena en qué redes sociales compartió su experiencia de viaje (Comentarios, fotos, etc)?-->
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Después del viaje al Atlántico en qué redes sociales compartió su experiencia de viaje (Comentarios, fotos, etc)?</b></h3>
             </div>
@@ -200,33 +227,7 @@
             </div>
         </div>
 
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Sostenibilidad ¿Fue fácil encontrar los servicios, productos y atractivos de Atlántico?</b></h3>
-            </div>
-            <div class="panel-footer"><b>Respuesta única</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" name="facilidad" id="facilidad" required value="1" ng-model="enteran.facilidad">
-                                Si
-                            </label>
-                        </div>
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" name="facilidad" id="facilidad" required value="-1" ng-model="enteran.facilidad">
-                                No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <span ng-show="inForm.$submitted">
-                    <span class="label label-danger" ng-show="inForm.facilidad.$error.required">* Debe seleccionar alguna de las opciones.</span>
-                </span>
-            </div>
-        </div>
+        
         
         <div class="panel panel-success">
             <div class="panel-heading">

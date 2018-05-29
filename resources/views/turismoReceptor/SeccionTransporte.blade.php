@@ -54,7 +54,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Qué tipo de transporte utilizó para llegar al departamento del Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Qué tipo de transporte utilizó para llegar al departamento del Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>C1. ¿Qué tipo de transporte utilizó para llegar al departamento del Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -85,7 +85,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Cuál fue el transporte utilizado la mayor parte del tiempo para desplazarse por el departamento?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuál fue el transporte utilizado la mayor parte del tiempo para desplazarse por el departamento?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>C2.  ¿Cuál fue el transporte utilizado la mayor parte del tiempo para desplazarse por el departamento?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -114,7 +114,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- Experiencia de viaje-->
-                <h3 class="panel-title"><b>Sostenibilidad</b></h3>
+                <h3 class="panel-title"><b>C3. Sostenibilidad</b></h3>
             </div>
             <div class="panel-footer"><b>En una escala de 1 a 10, donde 1 es Ninguna dificultad y 10 Mucha dificultad. ¿Qué tanta dificultad tuvo para llegar a Atlántico ?</b></div>
             <div class="panel-body">

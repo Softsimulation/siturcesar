@@ -23,7 +23,8 @@
     <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/select.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/select2.css')}}" rel='stylesheet' type='text/css' />
-    
+    <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel="stylesheet" type="text/css" />
+        
     @yield('estilos')
     <style>
         .carga {
@@ -242,7 +243,8 @@
     <script src="{{asset('/js/plugins/select.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/js/plugins/angular-filter.js')}}"></script>
     <script src="{{asset('/js/plugins/angular-repeat-n.min.js')}}"></script>
-    
+    <script src="{{asset('/js/ADM-dateTimePicker.min.js')}}" type="text/javascript"></script>
+        
     <script src="{{asset('/js/sweetalert.min.js')}}"></script>
     <script src="{{asset('/js/dir-pagination.js')}}"></script>
     <script src="{{asset('/js/encuestas/turismoReceptor/encuesta.js')}}"></script>
@@ -256,7 +258,7 @@
     
     <script src="{{asset('/js/encuestas/turismoReceptor/services/receptorServices.js')}}"></script>
     <script src="{{asset('/js/encuestas/turismoReceptor/services/grupoViajeServices.js')}}"></script>
-
+    
     <script>
         $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });
     </script>

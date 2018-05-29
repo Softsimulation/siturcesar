@@ -63,6 +63,7 @@ use App\Models\Opcion_Actividad_Realizada_Con_Idioma;
 use App\Models\Opcion_Actividad_Realizada;
 use App\Models\Visitante_Transporte_Dentro;
 use App\Models\Visitante_Transporte_Llegada;
+use App\Models\Lugar_Aplicacion_Encuesta;
 
 class TurismoReceptorController extends Controller
 {
@@ -102,6 +103,8 @@ class TurismoReceptorController extends Controller
         
         $departamentos = Departamento::where('pais_id',47)->select('id','nombre')->orderBy('nombre')->get();
         
+        $lugares_aplicacion = Lugar_Aplicacion_Encuesta::all();
+        
         $result = [ 
             //'grupos' => $grupos, 
             'encuestadores' => $encuestadores, 
@@ -110,6 +113,7 @@ class TurismoReceptorController extends Controller
             'motivos' => $motivos,
             'medicos' => $medicos,
             'departamentos' => $departamentos,
+            'lugares_aplicacion' => $lugares_aplicacion
         ];
         
         return $result;
@@ -124,7 +128,7 @@ class TurismoReceptorController extends Controller
 			'Nombre' => 'required|max:150',
 			'Edad' => 'required|numeric|between:15,150',
 			'Sexo' => 'required',
-			'Email' => 'required|email',
+			'Email' => 'email',
 			'Telefono' => 'max:50',
 			'Celular' => 'max:50',
 			'Nacimiento' => 'required|exists:opciones_lugares,id',
@@ -136,7 +140,9 @@ class TurismoReceptorController extends Controller
 			'Horas' => 'required_if:Motivo,3',
 			'Otro' => 'required_if:Motivo,18|max:150',
 			//'Actor' => 'required',
-			'codigo_encuesta' => 'required|max:50|unique:visitantes,codigo_encuesta'
+			'codigo_encuesta' => 'required|max:50',
+			'codigo_grupo' => 'required|unique:visitantes,codigo_grupo',
+			'aplicacion' => 'required|exists:lugares_aplicacion_encuesta,id'
     	],[
        		'Grupo.required' => 'Debe seleccionar el grupo de viaje.',
        		'Grupo.exists' => 'El grupo de viaje seleccionado no se encuentra registrado en el sistema.',
@@ -172,7 +178,8 @@ class TurismoReceptorController extends Controller
        		//'Actor.required' => 'Debe seleccionar el actor.',
        		'codigo_encuesta.required' => 'El código de la encuesta es requerido.',
        		'codigo_encuesta.max' => 'El código de la encuesta no debe superar los 50 caracteres.',
-       		'codigo_encuesta.unique' => 'Ya existe otro visitante con el mismo código de encuesta.'
+       		'codigo_encuesta.unique' => 'Ya existe otro visitante con el mismo código de encuesta.',
+       		'codigo_grupo.unique' => 'Ya existe un visitante con el código de encuesta asignado.'
     	]);
        
     	if($validator->fails()){
@@ -196,7 +203,7 @@ class TurismoReceptorController extends Controller
 		$visitante->destino_principal = isset($request->Destino) ? $request->Destino : null;
 		$visitante->digitada = 1;
 		$visitante->edad = $request->Edad;
-		$visitante->email = $request->Email;
+		$visitante->email = isset($request->Email) ? $request->Email : null;
 		$visitante->encuestador_creada = $request->Encuestador;
 		$visitante->fecha_llegada = $request->Llegada;
 		$visitante->fecha_salida = $request->Salida;
@@ -209,6 +216,9 @@ class TurismoReceptorController extends Controller
 		$visitante->sexo = $request->Sexo;
 		$visitante->ultima_sesion = 1;
 		$visitante->codigo_encuesta = $request->codigo_encuesta;
+		$visitante->codigo_grupo = $request->codigo_grupo;
+		$visitante->fecha_aplicacion = $request->fechaAplicacion;
+		$visitante->lugar_aplicacion_id = $request->aplicacion;
 		$visitante->save();
 		
 		switch ($visitante->motivo_viaje)
@@ -265,6 +275,8 @@ class TurismoReceptorController extends Controller
             $visitante['Encuestador_nombre'] = $visitanteCargar->digitadoreDigitada->aspNetUser->username;
             $visitante['Llegada'] = $visitanteCargar->fecha_llegada;
             $visitante['Salida'] = $visitanteCargar->fecha_salida;
+            $visitante['fechaAplicacion'] = $visitanteCargar->fecha_aplicacion;
+            $visitante['aplicacion'] = $visitanteCargar->lugar_aplicacion_id;
             $visitante['Nombre'] = $visitanteCargar->nombre;
             $visitante['Edad'] = $visitanteCargar->edad;
             $visitante['Sexo'] = $visitanteCargar->sexo ? 1 : 0;
@@ -313,7 +325,7 @@ class TurismoReceptorController extends Controller
 			'Nombre' => 'required|max:150',
 			'Edad' => 'required|numeric|between:15,150',
 			'Sexo' => 'required',
-			'Email' => 'required|email',
+			'Email' => 'email',
 			'Telefono' => 'max:50',
 			'Celular' => 'max:50',
 			'Nacimiento' => 'required|exists:opciones_lugares,id',
@@ -324,7 +336,9 @@ class TurismoReceptorController extends Controller
 			'Salud' => 'exists:tipos_atencion_salud,id|required_if:Motivo,5',
 			'Horas' => 'required_if:Motivo,3',
 			'Otro' => 'required_if:Motivo,18|max:150',
-			'codigo_encuesta' => 'required|max:50|unique:visitantes,codigo_encuesta,'.$request->Id.',id'
+			'codigo_encuesta' => 'required|max:50',
+			'codigo_grupo' => 'required|unique:visitantes,codigo_grupo,'.$request->Id.',id',
+			'aplicacion' => 'required|exists:lugares_aplicacion_encuesta,id'
     	],[
     	    'Id.required' => 'Debe seleccionar el visitante a realizar la encuesta.',
        		'Id.exists' => 'El visitante seleccionado no se encuentra seleccionado en el sistema.',
@@ -379,7 +393,7 @@ class TurismoReceptorController extends Controller
 		$visitante->destino_principal = isset($request->Destino) ? $request->Destino : null;
 		$visitante->digitada = 1;
 		$visitante->edad = $request->Edad;
-		$visitante->email = $request->Email;
+		$visitante->email = isset($request->Email) ? $request->Email : null;
 		$visitante->encuestador_creada = $request->Encuestador;
 		$visitante->fecha_llegada = $request->Llegada;
 		$visitante->fecha_salida = $request->Salida;
@@ -391,6 +405,9 @@ class TurismoReceptorController extends Controller
 		$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
 		$visitante->sexo = $request->Sexo;
 		$visitante->codigo_encuesta = $request->codigo_encuesta;
+		$visitante->codigo_grupo = $request->codigo_grupo;
+		$visitante->fecha_aplicacion = $request->fechaAplicacion;
+		$visitante->lugar_aplicacion_id = $request->aplicacion;
 		
 		$visitante->visitantesTransito()->delete();
 		$visitante->tiposAtencionSaluds()->detach();
@@ -1249,11 +1266,11 @@ class TurismoReceptorController extends Controller
         
         $alojamiento = collect($calificaciones)->where("Id",1)->first() != null ? 1 : 0;
         $restaurante = collect($calificaciones)->where("Id",8)->first() != null ? 1 : 0;
-        $factores = count(Calificacion::where("visitante_id",$visitante->id)->whereIn('item_evaluar_id',[13,15])->get()) >0 ?1:0;
+        //$factores = count(Calificacion::where("visitante_id",$visitante->id)->whereIn('item_evaluar_id',[13,15])->get()) >0 ?1:0;
         
-        $ocio = count(Calificacion::where("visitante_id",$visitante->id)->whereIn('item_evaluar_id',[17,20])->get())> 0 ?1:0;
+        //$ocio = count(Calificacion::where("visitante_id",$visitante->id)->whereIn('item_evaluar_id',[17,20])->get())> 0 ?1:0;
         
-        $infraestructura = count(Calificacion::where("visitante_id",$visitante->id)->whereIn('item_evaluar_id',[21,23])->get()) >0 ?1:0;
+        //$infraestructura = count(Calificacion::where("visitante_id",$visitante->id)->whereIn('item_evaluar_id',[21,23])->get()) >0 ?1:0;
         
         $sostenibilidad = Sostenibilidad_Visitante::find($id);
         if($sostenibilidad != null){
@@ -1284,9 +1301,9 @@ class TurismoReceptorController extends Controller
             'calificar' => $calificaciones,
             'alojamiento' => $alojamiento,
             'restaurante' => $restaurante,
-            'factores'=>$factores,
-            'ocio'=>$ocio,
-            'infraestructura'=>$infraestructura,
+            //'factores'=>$factores,
+            //'ocio'=>$ocio,
+            //'infraestructura'=>$infraestructura,
             'respuestaElementos' => $respuestaElementos,
             'valoracion' => $valo,
             'otroElemento' => $otroElemento,
@@ -1304,9 +1321,9 @@ class TurismoReceptorController extends Controller
 			'Id' => 'required|exists:visitantes,id',
 			'Alojamiento' => 'required',
 			'Restaurante' => 'required',
-			'Factores'=>'required',
-			'Ocio'=>'required',
-			'Infra'=>'required',
+			//'Factores'=>'required',
+			//'Ocio'=>'required',
+			//'Infra'=>'required',
 			'Elementos' => 'exists:actividades_sostenibilidad,id',
 			'Recomendaciones'=> 'max:250',
 			'Calificacion' => 'required|between:1,10',
@@ -1338,7 +1355,7 @@ class TurismoReceptorController extends Controller
 // 		        }
 // 		    }
 // 		}
-		if( (!isset($request->OtroElementos)) && in_array(11,$request->Elementos) ){
+		if( (!isset($request->OtroElementos)) && in_array(12,$request->Elementos) ){
 		    return ["success"=>false,"errores"=>[["Por favor ingrese el campo de valor otro."]]];
 		}
 		
