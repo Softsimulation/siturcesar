@@ -943,6 +943,7 @@ class TurismoReceptorController extends Controller
             }
             
             $encuesta["GastosAparte"] = Gasto_Visitante::where('visitante_id',$id)->count()>0 ? 1 :0;
+            $encuesta["poderLLenar"] =$visitante->no_hizo_gasto;
         }
         $encuesta["Financiadores"] = Visitante::find($id)->financiadoresViajes()->pluck('id');
          
@@ -968,10 +969,9 @@ class TurismoReceptorController extends Controller
 			'LugarAgencia' => 'required_if:Proveedor,1|exists:opciones_lugares,id',
 			'ServiciosIncluidos' => 'required_if:ViajoDepartamento,1|array',
 			'ServiciosIncluidos.*' => 'required|exists:servicios_paquete,id',
-			'GastosAparte' => 'required_if:RealizoGasto,1|between:0,1',
 			'Financiadores' => 'required|array',
 			'Financiadores.*' => 'required|exists:financiadores_viajes,id',
-			'Rubros'=>'required_if:GastosAparte,1|array',
+			'Rubros'=>'array',
 			
     	],[
        		'RealizoGasto.required' => 'Debe seleccionar la opción de realizar los gastos.',
@@ -991,7 +991,6 @@ class TurismoReceptorController extends Controller
        		'LugarAgencia.exists' => 'El lugar de la ubicación de la agencia no está registrada en el sistema.',
        		'ServiciosIncluidos.required_if' => 'Los servicios incluidos son requeridos.',
        		'ServiciosIncluidos.*.exists' => 'El servicio incluido no existe en el sistema.',
-       		'GastosAparte.required' => 'El campo de proporcionar gastos adicionales es requerido.',
        		'Financiadores.required' => 'El campo de financiadores de viaje es requerido.',
        		'Financiadores.*.exists' => 'El financiador de viaje no existe.',
     	]);
@@ -1016,25 +1015,28 @@ class TurismoReceptorController extends Controller
         	     }
     	    }
         	
-        	switch($rub["id"]){
-        	    case 3:
-        	        if(!isset($request->Empresa)){
-        	            return ["success"=>false,"errores"=> [ ["El campo empresa es requerido."] ] ];
-        	        }
-        	        break;
-        	    case 5:
-        	        if(!isset($request->Alquiler)){
-        	            return ["success"=>false,"errores"=> [ ["El campo localizacion de empresa de alquiler  es requerido."] ] ];
-        	        }
-        	        break;
-        	    case 10:
-        	        if(!isset($request->Ropa)){
-        	            return ["success"=>false,"errores"=> [ ["El campo don es requerido."] ] ];
-        	        }
-        	        break;
-        	    default:
-        	        break;
-        	}    
+        	if($request->poderLLenar){
+        	    
+            	switch($rub["id"]){
+            	    case 3:
+            	        if(!isset($request->Empresa)){
+            	            return ["success"=>false,"errores"=> [ ["El campo empresa es requerido."] ] ];
+            	        }
+            	        break;
+            	    case 5:
+            	        if(!isset($request->Alquiler)){
+            	            return ["success"=>false,"errores"=> [ ["El campo localizacion de empresa de alquiler  es requerido."] ] ];
+            	        }
+            	        break;
+            	    case 10:
+            	        if(!isset($request->Ropa)){
+            	            return ["success"=>false,"errores"=> [ ["El campo don es requerido."] ] ];
+            	        }
+            	        break;
+            	    default:
+            	        break;
+            	}    
+        	}
     	  
     	}
     	
@@ -1078,20 +1080,13 @@ class TurismoReceptorController extends Controller
     	    
     	    // Rubros
     	    $rubros = Gasto_Visitante::where('visitante_id',$request->id)->delete();
-    	    if($request["GastosAparte"] == 1){
+    	    
     	        foreach($request["Rubros"] as $rub){
     	            
     	            $gasto = new Gasto_Visitante;
     	            $gasto->visitante_id = $request->id;
     	            $gasto->rubros_id = $rub["id"];
     	            
-    	            if(isset($rub["gastos_visitantes"][0]["divisas_fuera"]) && isset($rub["gastos_visitantes"][0]["cantidad_pagada_fuera"])){
-    	                
-    	                if($rub["gastos_visitantes"][0]["divisas_fuera"] != null && $rub["gastos_visitantes"][0]["cantidad_pagada_fuera"] != null){
-        	                $gasto->divisas_fuera = $rub["gastos_visitantes"][0]["divisas_fuera"];
-        	                $gasto->cantidad_pagada_fuera = $rub["gastos_visitantes"][0]["cantidad_pagada_fuera"];
-    	                }
-    	            }
     	            
     	            if(isset($rub["gastos_visitantes"][0]["divisas_magdalena"]) && isset($rub["gastos_visitantes"][0]["cantidad_pagada_magdalena"])){
     	                if($rub["gastos_visitantes"][0]["divisas_magdalena"] != null && $rub["gastos_visitantes"][0]["cantidad_pagada_magdalena"] != null){
@@ -1100,53 +1095,70 @@ class TurismoReceptorController extends Controller
     	                }
     	            }
     	            
-    	            
-    	            if($rub["gastos_visitantes"][0]["personas_cubiertas"] != null){
-    	                $gasto->personas_cubiertas = $rub["gastos_visitantes"][0]["personas_cubiertas"];
+    	            if(isset($rub["gastos_visitantes"][0]["personas_cubiertas"] )){
+    	                if($rub["gastos_visitantes"][0]["personas_cubiertas"] != null){
+    	                    $gasto->personas_cubiertas = $rub["gastos_visitantes"][0]["personas_cubiertas"];
+    	                }
     	            }
+    	            
     	            
     	            if(isset($rub["gastos_visitantes"][0]["gastos_asumidos_otros"])){
     	                $gasto->gastos_asumidos_otros = $rub["gastos_visitantes"][0]["gastos_asumidos_otros"];
     	            }
     	            $gasto->save();
-    	            
-    	            switch($rub["id"]){
-                	    case 3:
-                	        if(isset($visitante->visitanteTransporteTerrestre)){
-                		        $visitante->visitanteTransporteTerrestre()->delete();
-                		    }
-                		    if(isset($request->Empresa)){
-                		        $visitante->visitanteTransporteTerrestre()->save(new Visitante_Transporte_Terrestre([
-                	                'nombre_empresa' =>  $request->Empresa
-                	            ]));   
-                		    }
-                		     
-                	        break;
-                	    case 5:
-                	        if(count($visitante->opcionesLugares) > 0){
-                		        $visitante->opcionesLugares()->detach();
-                		    }
-                		    if(isset($request->Alquiler)){
-                		        $visitante->opcionesLugares()->attach($request->Alquiler);   
-                		    }
-                		     
-                	        break;
-                	    case 10:
-                	        if(count($visitante->opcionesLugaresG) > 0){
-                		        $visitante->opcionesLugaresG()->detach();
-                		    }
-                		    if(isset($request->Ropa)){
-                		        $visitante->opcionesLugaresG()->attach($request->Ropa);   
-                		    }
-                	        break;
-                	    default:
-                	        break;
-                	}
+        	        
+        	        if($request->poderLLenar == true){
+        	        
+        	            if(isset($visitante->visitanteTransporteTerrestre)){
+                        	$visitante->visitanteTransporteTerrestre()->delete();
+                        }
+                        if(count($visitante->opcionesLugares) > 0){
+                        	$visitante->opcionesLugares()->detach();
+                        }
+                         if(count($visitante->opcionesLugaresG) > 0){
+                        	$visitante->opcionesLugaresG()->detach();
+                        }
+    	            }else{
+    	                
+        	            switch($rub["id"]){
+                    	    case 3:
+                    	        if(isset($visitante->visitanteTransporteTerrestre)){
+                                	$visitante->visitanteTransporteTerrestre()->delete();
+                                }
+                    		    if(isset($request->Empresa)){
+                    		        $visitante->visitanteTransporteTerrestre()->save(new Visitante_Transporte_Terrestre([
+                    	                'nombre_empresa' =>  $request->Empresa
+                    	            ]));   
+                    		    }
+                    		     
+                    	        break;
+                    	    case 5:
+                    	        if(count($visitante->opcionesLugares) > 0){
+                                	$visitante->opcionesLugares()->detach();
+                                }
+                    		    if(isset($request->Alquiler)){
+                    		        $visitante->opcionesLugares()->attach($request->Alquiler);   
+                    		    }
+                    		     
+                    	        break;
+                    	    case 12:
+                    	         if(count($visitante->opcionesLugaresG) > 0){
+                                	$visitante->opcionesLugaresG()->detach();
+                                }
+                    		    if(isset($request->Ropa)){
+                    		        $visitante->opcionesLugaresG()->attach($request->Ropa); 
+                    		        $visitante->save();
+                    		    }
+                    	        break;
+                    	    default:
+                    	        break;
+                    	}
+    	            }
     	        }
     	        
     	        
     	        
-    	    }
+    	    
     	    
     	}else{
     	   $paquete = Visitante_Paquete_Turistico::find($request->id);
@@ -1161,6 +1173,7 @@ class TurismoReceptorController extends Controller
     	}
         $visitante->financiadoresViajes()->detach();
         $visitante->financiadoresViajes()->attach($request["Financiadores"]);
+        $visitante->no_hizo_gasto = $request->poderLLenar == null ? false:$request->poderLLenar;
         if($visitante->ultima_sesion<5){
             $visitante->ultima_sesion =5;
         }

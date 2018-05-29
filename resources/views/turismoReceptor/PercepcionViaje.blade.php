@@ -528,7 +528,7 @@
                 <!-- Experiencia de viaje-->
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Experiencia de viaje</b></h3>
             </div>
-            <div class="panel-footer"><b>Califique en una escala del 1 al 10, donde 1 es muy insatisfecho y 10 muy satisfecho</b></div>
+            <div class="panel-footer"><b>Califique en una escala del 1 al 10, donde 1 es muy insatisfecho y 10 muy satisfecho. Valore la experiencia de su visita a Respuesta única</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12" style="overflow-x: auto;">

@@ -75,6 +75,24 @@ angular.module('receptor.gasto', ['ui.select'])
         }
     }
     
+    
+    $scope.limpiarMatriz = function(){
+        
+        if($scope.encuestaReceptor.poderLLenar){
+           for(var i = 0; i<$scope.rubros.length;i++){
+                if($scope.rubros[i].gastos_visitantes[0] != null){
+                    $scope.rubros[i].gastos_visitantes[0] = null;
+                }
+            }
+            $scope.abrirTerrestre = false;
+            $scope.abrirAlquiler = false;
+            $scope.abrirRopa = false;
+            
+        }
+        
+        
+    }
+    
     $scope.cambiarAlquiler = function(rub){
         
         if(rub.gastos_visitantes.length==0){
@@ -127,16 +145,16 @@ angular.module('receptor.gasto', ['ui.select'])
                 return;   
             }
         }
-        if($scope.encuestaReceptor.RealizoGasto == 1 && ($scope.encuestaReceptor.ViajoDepartamento == 0 && $scope.encuestaReceptor.GastosAparte ==0)){
-            return;
-        }
         
         $scope.encuestaReceptor.Rubros = [];
         for(var i = 0 ;i<$scope.rubros.length;i++){
             if($scope.rubros[i].gastos_visitantes.length>0){
-                if(($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_fuera != null && $scope.rubros[i].gastos_visitantes[0].divisas_fuera != null) || ($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena != null && $scope.rubros[i].gastos_visitantes[0].divisas_magdalena != null) && $scope.rubros[i].gastos_visitantes[0].personas_cubiertas != null ){
+                if($scope.rubros[i].gastos_visitantes[0] != null){
+                    if((($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena != null && $scope.rubros[i].gastos_visitantes[0].divisas_magdalena != null) && $scope.rubros[i].gastos_visitantes[0].personas_cubiertas != null)|| $scope.rubros[i].gastos_visitantes[0].gastos_asumidos_otros != undefined  ){
                         $scope.encuestaReceptor.Rubros.push($scope.rubros[i]);
+                    }
                 }
+                
             }
         }
         $scope.encuestaReceptor.id = $scope.id;
