@@ -287,6 +287,7 @@ angular.module('encuestas.datos_encuestado', [])
             $("body").attr("class", "charging");
             
             var split1 = $scope.encuesta.fechaAplicacion.split(" ");
+            var hora = split1[1];
             split1 = split1[0].split("/");
             var fechaAp = new Date(split1[2], split1[1] - 1, split1[0]);
             var mes = fechaAp.getMonth() +1;

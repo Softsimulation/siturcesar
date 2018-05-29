@@ -217,7 +217,7 @@ class TurismoReceptorController extends Controller
 		$visitante->ultima_sesion = 1;
 		$visitante->codigo_encuesta = $request->codigo_encuesta;
 		$visitante->codigo_grupo = $request->codigo_grupo;
-		$visitante->fecha_aplicacion = $request->fechaAplicacion;
+		$visitante->fecha_aplicacion = date('Y-m-d H:i',strtotime(str_replace("/","-",$request->fechaAplicacion)));
 		$visitante->lugar_aplicacion_id = $request->aplicacion;
 		$visitante->save();
 		
@@ -406,7 +406,7 @@ class TurismoReceptorController extends Controller
 		$visitante->sexo = $request->Sexo;
 		$visitante->codigo_encuesta = $request->codigo_encuesta;
 		$visitante->codigo_grupo = $request->codigo_grupo;
-		$visitante->fecha_aplicacion = $request->fechaAplicacion;
+		$visitante->fecha_aplicacion = date('Y-m-d H:i',strtotime(str_replace("/","-",$request->fechaAplicacion)));
 		$visitante->lugar_aplicacion_id = $request->aplicacion;
 		
 		$visitante->visitantesTransito()->delete();
