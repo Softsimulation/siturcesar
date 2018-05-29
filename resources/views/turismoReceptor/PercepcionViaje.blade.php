@@ -49,7 +49,7 @@
         <div class="panel panel-success">
             <div class="panel-heading p1">
                 <!-- ¿Durante su viaje utilizó servicio de alojamiento?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Durante su viaje utilizó servicio de alojamiento?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>F1. ¿Durante su viaje utilizó servicio de alojamiento?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -127,7 +127,7 @@
         <div class="panel panel-success">
             <div class="panel-heading p3">
                 <!-- ¿Durante su viaje utilizó servicios de restaurante?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Durante su viaje utilizó servicios de restaurante?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>F2. ¿Durante su viaje utilizó servicios de restaurante?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -207,7 +207,7 @@
         <!--<div class="panel panel-success">-->
         <!--    <div class="panel-heading p1">-->
                 <!-- ¿Durante su viaje utilizó servicio de alojamiento?-->
-        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de factores ambientales durante sus estancia?</b></h3>-->
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>F3. ¿Desea calificar el aspecto de factores ambientales durante sus estancia?</b></h3>-->
         <!--    </div>-->
         <!--    <div class="panel-footer"><b>Pregunta con selección única</b></div>-->
         <!--    <div class="panel-body">-->
@@ -286,7 +286,7 @@
         <!--<div class="panel panel-success">-->
         <!--    <div class="panel-heading p1">-->
                 <!-- ¿Durante su viaje utilizó servicio de alojamiento?-->
-        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de ocio y recreación durante sus estancia?</b></h3>-->
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>F4. ¿Desea calificar el aspecto de ocio y recreación durante sus estancia?</b></h3>-->
         <!--    </div>-->
         <!--    <div class="panel-footer"><b>Pregunta con selección única</b></div>-->
         <!--    <div class="panel-body">-->
@@ -364,7 +364,7 @@
         <!-- <div class="panel panel-success">-->
         <!--    <div class="panel-heading p1">-->
                 <!-- ¿Durante su viaje utilizó servicio de alojamiento?-->
-        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea calificar el aspecto de infraestructura durante sus estancia?</b></h3>-->
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>F5. ¿Desea calificar el aspecto de infraestructura durante sus estancia?</b></h3>-->
         <!--    </div>-->
         <!--    <div class="panel-footer"><b>Pregunta con selección única</b></div>-->
         <!--    <div class="panel-body">-->
@@ -443,7 +443,7 @@
       <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Cuál fue el  atractivo y/o el elemento de la ciudad que más llamó su atención?-->
-                <h3 class="panel-title"><b> Sostenibilidad ¿Realizó alguna de las siguientes actividades para ayudar a la conservación del medio ambiente en Atlántico?</b></h3>
+                <h3 class="panel-title"><b>F6. Sostenibilidad ¿Realizó alguna de las siguientes actividades para ayudar a la conservación del medio ambiente en Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">
@@ -465,7 +465,7 @@
         <div class="panel panel-success">
             <div class="panel-heading p1">
                 <!-- ¿Durante su viaje utilizó servicio de alojamiento?-->
-                <h3 class="panel-title"><b> ¿Fue informado sobre las normas y cuidados que debe tener el visitante con la flora y fauna de Atlántico?</b></h3>
+                <h3 class="panel-title"><b>F7. ¿Fue informado sobre las normas y cuidados que debe tener el visitante con la flora y fauna de Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -491,7 +491,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Qué recomendaría para lograr atraer más visitantes al Magdalena?-->
-                <h3 class="panel-title"><b>¿Qué recomendaría para lograr atraer más visitantes al Atlántico? (Resalte en detalle aspectos que realmente le disgustaron)</b></h3>
+                <h3 class="panel-title"><b>F8. ¿Qué recomendaría para lograr atraer más visitantes al Atlántico? (Resalte en detalle aspectos que realmente le disgustaron)</b></h3>
             </div>
             <!-- Resalte en detalle aspectos que realmente le disgustaron-->
             <div class="panel-footer"><b>Respuesta abierta</b></div>
@@ -507,7 +507,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- Experiencia de viaje-->
-                <h3 class="panel-title"><b>Sostenibilidad</b></h3>
+                <h3 class="panel-title"><b>F9. Sostenibilidad</b></h3>
             </div>
             <div class="panel-footer"><b>En una escala de 1 a 10, donde 1 es Mal trato y 10 Trato excelente. ¿Cómo califica el trato que reciben los turistas en Barranquilla? Respuesta única.</b></div>
             <div class="panel-body">
@@ -541,7 +541,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- Experiencia de viaje-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Experiencia de viaje</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> F10. Experiencia de viaje</b></h3>
             </div>
             <div class="panel-footer"><b>Califique en una escala del 1 al 10, donde 1 es muy insatisfecho y 10 muy satisfecho. Valore la experiencia de su viaje.Respuesta única.</b></div>
             <div class="panel-body">
@@ -581,7 +581,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Volvería a visitar el departamento del Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Volvería a visitar el departamento del Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>F11.  ¿Volvería a visitar el departamento del Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -603,7 +603,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Recomendaría visitar el departamento del Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Recomendaría visitar el departamento del Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>F12. ¿Recomendaría visitar el departamento del Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -625,7 +625,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Cuántas veces ha venido al Magdalena en los últimos dos años?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuántas veces ha venido al Atlántico en los últimos dos años?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>F13. ¿Cuántas veces ha venido al Atlántico en los últimos dos años?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">
