@@ -1518,12 +1518,12 @@ class TurismoReceptorController extends Controller
             'OtroFuenteDurante' => isset($OtroFuenteDurante) ? $OtroFuenteDurante : null,
             'facebook' => $visitante->visitanteCompartirRede != null ? $visitante->visitanteCompartirRede->nombre_facebook : null,
             'twitter' => $visitante->visitanteCompartirRede != null ? $visitante->visitanteCompartirRede->nombre_twitter : null,
-            'invitacion_correo' => $visitante->invitacion_correo == 1 ? 1 : null,
-            'invitacion' => $visitante->visitanteCompartirRede != null ? 1 : null,
-            'facilidad' => $visitante->facilidad == 1 ? 1 : null,
-            'conoce_marca' => $visitante->conoce_marca == 1 ? 1 : null,
-            'acepta_autorizacion' => $visitante->acepta_autorizacion == 1 ? 1 : null,
-            'acepta_tratamiento' => $visitante->acepta_tratamiento == 1 ? 1 : null,
+            'invitacion_correo' => $visitante->invitacion_correo == 1 ? 1 : ($visitante->ultima_sesion == 7 ? -1 : null),
+            'invitacion' => $visitante->visitanteCompartirRede != null ? 1 : ($visitante->ultima_sesion == 7 ? -1 : null),
+            'facilidad' => $visitante->facilidad == 1 ? 1 : ($visitante->ultima_sesion == 7 ? -1 : null),
+            'conoce_marca' => $visitante->conoce_marca ? 1 : ($visitante->ultima_sesion == 7 ? -1 : null),
+            'acepta_autorizacion' => $visitante->acepta_autorizacion == 1 ? 1 : ($visitante->ultima_sesion == 7 ? -1 : null),
+            'acepta_tratamiento' => $visitante->acepta_tratamiento == 1 ? 1 : ($visitante->ultima_sesion == 7 ? -1 : null),
         ];
         
         return $retorno;
