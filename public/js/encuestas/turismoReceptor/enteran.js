@@ -138,13 +138,13 @@ angular.module('receptor.enteran', [])
                     title: "Realizado",
                     text: "Se ha " + msj + " satisfactoriamente la sección. Se ha finalizado la encuesta " + data.codigo +'.',
                     type: "success",
-                    timer: 1000,
+                    timer: 2000,
                     showConfirmButton: false
                 });
                 
                 setTimeout(function () {
                     window.location.href = "/turismoreceptor/listadoencuestas";
-                }, 1000);
+                }, 2000);
                 
                 if(data.rol == "Encuestador"){
                     setTimeout(function () {
