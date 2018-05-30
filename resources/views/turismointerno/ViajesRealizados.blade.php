@@ -104,7 +104,7 @@
                                         Fecha final
                                     </th>
                                     <th>
-                                        Principal
+                                        Seleccionado
 
                                     </th>
                                     <th style="width: 120px">
@@ -455,13 +455,13 @@
            <div class="panel panel-success" ng-if="existe(2)">
                <div class="panel-heading">
                    <!-- -->
-                   <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Cuántas personas del hogar? </b></h3>
+                   <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Cuántas personas del hogar compartiendo gastos? </b></h3>
                </div>
                <div class="panel-footer"><b>Campo Numero</b></div>
                <div class="panel-body">
                    <div class="row">
                        <div class="col-md-12">
-                           <input type="number" name="numerohogar" class="form-control" min="1" max="@{{TotalD}}" ng-model="encuesta.Numerohogar" ng-change="verificaT()" ng-required="true" placeholder="Ingrese el No. de personas del hogar"/>
+                           <input type="number" name="numerohogar" class="form-control" min="1" max="@{{TotalD}}" ng-model="encuesta.Numerohogar" ng-change="verificaT()" ng-required="true" placeholder="Ingrese el No. de personas del hogar con gatos"/>
                        </div>
                    </div>
                    <span ng-show="EstanciaForm.$submitted || EstanciaForm.numerohogar.$touched">
@@ -473,7 +473,28 @@
            </div>
 
 
-           <div class="panel panel-success" ng-if="existe(4)">
+           <div class="panel panel-success" ng-if="existe(3)">
+               <div class="panel-heading">
+                   <!-- -->
+                   <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Cuántas personas del hogar sin compartir gastos? </b></h3>
+               </div>
+               <div class="panel-footer"><b>Campo Numero</b></div>
+               <div class="panel-body">
+                   <div class="row">
+                       <div class="col-md-12">
+                           <input type="number" name="numerohogarsingasto" class="form-control" min="1" max="@{{TotalG}}" ng-model="encuesta.NumerohogarSinGasto" ng-change="verificaT()" ng-required="true" placeholder="Ingrese el No. de personas del hogar sin gatos"/>
+                       </div>
+                   </div>
+                   <span ng-show="EstanciaForm.$submitted || EstanciaForm.numerohogarsingasto.$touched">
+                       <span class="label label-danger" ng-show="EstanciaForm.numerohogarsingasto.$error.required">El campo es requerido.</span>
+                       <span class="label label-danger" ng-show="EstanciaForm.numerohogarsingasto.$error.number">Debe introducir solo números</span>
+                       <span class="label label-danger" ng-show="!EstanciaForm.numerohogarsingasto.$valid">Número menor o igual @{{TotalG}}</span>
+                   </span>
+               </div>
+           </div>
+
+
+           <div class="panel panel-success" ng-if="existe(6)">
                <div class="panel-heading">
                    <!-- -->
                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Cuántos eran otros turistas?  </b></h3>

@@ -42,6 +42,10 @@ class TemporadaController extends Controller
                 
                 $q->where('es_principal',true);
                 
+        })->whereHas('hogare.edificacione',function($q)use($temporada){
+            
+                $q->where('temporada_id',$temporada->id);
+            
         })->with('viajes')->with('hogare.digitadore')->get();
         
         
@@ -79,6 +83,30 @@ class TemporadaController extends Controller
         if($validator->fails()){
             return ["success"=>false,'errores'=>$validator->errors()];
         }
+        
+        $aux=Temporada::where(function ($query) use ($request) {
+            
+                                    $query->where('fecha_ini', '>=', $request->Fecha_ini);
+                                    $query->Where('fecha_ini', '<=', $request->Fecha_fin);
+                                    
+                                })->orwhere(function ($query) use ($request) {
+                                    
+                                    $query->where('fecha_fin', '>=', $request->Fecha_ini);
+                                    $query->Where('fecha_fin', '<=', $request->Fecha_fin);
+                                    
+                                })->orwhere(function ($query) use ($request) {
+                                    
+                                    $query->where('fecha_ini', '<', $request->Fecha_ini);
+                                    $query->Where('fecha_fin', '>', $request->Fecha_fin);
+                                    
+                                })->get();
+                                
+        if($aux->count()>1){
+            
+            return ["success"=>false,"errores"=>["temporada"=>["La temporada se solapan"]]];
+            
+        }
+                            
         
         if($request->id == null){
             $temporada=new Temporada();

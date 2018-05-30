@@ -165,6 +165,7 @@ angular.module('interno.viajesrealizados', [])
             if ($scope.encuesta.Numero == 1) {
                 $scope.encuesta.Personas = [1]
                 $scope.encuesta.Numerohogar = null;
+                $scope.encuesta.NumerohogarSinGasto = null;
                 $scope.encuesta.Numerotros = null;
              
             } else {
@@ -184,7 +185,7 @@ angular.module('interno.viajesrealizados', [])
 
             for (i = 0; i < $scope.encuesta.Personas.length; i++){
             
-                if ($scope.encuesta.Personas[i] == k || $scope.encuesta.Personas[i] == (k + 1)) {
+                if ($scope.encuesta.Personas[i] == k ) {
 
                     return true
 
@@ -198,8 +199,13 @@ angular.module('interno.viajesrealizados', [])
                 $scope.TotalD = $scope.Total
 
             }
+            if(k == 3){
+                
+                $scope.encuesta.NumerohogarSinGasto = 0;
+                $scope.TotalG = $scope.Total
+            }
 
-            if (k == 4) {
+            if (k == 6) {
                 $scope.encuesta.Numerotros = 0
                 $scope.TotalF = $scope.Total
             }
@@ -214,20 +220,15 @@ angular.module('interno.viajesrealizados', [])
     }
 
     $scope.verificaT = function () {
-        if ($scope.encuesta.Numerohogar != null) {
-            $scope.TotalF = $scope.Total - $scope.encuesta.Numerohogar
 
-        } else {
-            $scope.TotalF = $scope.Total
-        }
-       
-        if ($scope.encuesta.Numerotros != null) {
-            $scope.TotalD = $scope.Total - $scope.encuesta.Numerotros
+            $scope.TotalF = $scope.Total - ($scope.encuesta.Numerohogar == null ? 0 : $scope.encuesta.Numerohogar ) - ($scope.encuesta.NumerohogarSinGasto == null ? 0 : $scope.encuesta.NumerohogarSinGasto ) 
 
-        } else {
-            $scope.TotalD = $scope.Total
-        }
+      
+            $scope.TotalD = $scope.Total  - ($scope.encuesta.Numerotros == null ? 0 : $scope.encuesta.Numerotros ) - ($scope.encuesta.NumerohogarSinGasto == null ? 0 : $scope.encuesta.NumerohogarSinGasto ) 
 
+            $scope.TotalG = $scope.Total - ($scope.encuesta.Numerotros == null ? 0 : $scope.encuesta.Numerotros ) - ($scope.encuesta.Numerohogar == null ? 0 : $scope.encuesta.Numerohogar ) 
+      
+    
 
         
 

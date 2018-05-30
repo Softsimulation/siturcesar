@@ -1,6 +1,6 @@
 @extends('layout._AdminLayout')
 
-@section('Title','Administrador de temporadas :: SITUR Magdalena')
+@section('Title','Administrador de temporadas :: SITUR Atlántico')
 @section('app','ng-app="situr_admin"')
 @section ('estilos')
     <style>

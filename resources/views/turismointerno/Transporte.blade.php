@@ -68,13 +68,14 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="radio" ng-repeat="item in transportes" ng-if="item.id != 10">
+                        <div class="radio" ng-repeat="item in transportes">
                             <label>
-                                <input type="radio" name="mover" ng-value="item.id" ng-model="transporte.Mover" ng-required="true"> @{{item.nombre}}
+                                <input type="radio" name="mover" ng-change="cambio()" ng-value="item.id" ng-model="transporte.Mover" ng-required="true"> @{{item.nombre}}
                             </label>
                             <i ng-if="item.id==6" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left" title="@Resource.AyudaTipoTransporte"
                                style="text-align:right;">
                             </i>
+                            <input type="text" class="form-control" name="otro" ng-model="transporte.Tipo_otro" ng-if="item.id==10" ng-disabled="transporte.Mover!=10"   />
                         </div>
                     </div>
                 </div>
@@ -83,10 +84,34 @@
                 </span>
             </div>
         </div>
-
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <!-- ¿Qué tipo de transporte utilizó para recorrer-->
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Tipo de transporte más utilizado para desplazarse durante su estancia en el departamento del Atlantico </b></h3>
+            </div>
+            <div class="panel-footer"><b>Pregunta de selección única</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="radio" ng-repeat="item in medios" >
+                            <label>
+                                <input type="radio" name="medio" ng-change="cambio2()" ng-value="item.id" ng-model="transporte.Medio" ng-required="true"> @{{item.nombre}}
+                                <input type="text" class="form-control" name="otro" ng-model="transporte.Medio_otro" ng-if="item.id == 8" ng-disabled="transporte.Medio!=8" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <span ng-show="transForm.$submitted || transForm.medio.$touched">
+                    <span class="label label-danger" ng-show="transForm.medio.$error.required">* El campo es requerido.</span>
+                </span>
+            </div>
+        </div>
+        
+        <!--
         <div ng-if="transporte.Mover == 6" class="panel panel-success">
             <div class="panel-heading">
-                <!-- Nombre de la empresa de transporte-->
+                <!-- Nombre de la empresa de transporte
                 <h3 class="panel-title"><b> ¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizados desde una ciudad de Colombia al Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta abierta</b></div>
@@ -98,7 +123,8 @@
                 </div>
             </div>
         </div>
-
+        -->
+        
         <div class="row" style="text-align:center">
             <a href="#" class="btn btn-raised btn-default">{{trans('resources.EncuestaBtnAnterior')}}</a>
             <input type="submit" class="btn btn-raised btn-success" value="{{trans('resources.EncuestaBtnSiguiente')}}" ng-click="guardar()">

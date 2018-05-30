@@ -165,16 +165,40 @@
                         <div class="form-group">
                             <label for="inputNombreEncuestado" class="col-xs-12 control-label">Telefono Fijo</label>
                             <div class="col-xs-12">
-                                <input type="text" class="form-control" id="inputNombreEncuestado" name="telefono" ng-model="encuesta.Telefono" ng-required="true" placeholder="Telefono fijo" />
+                                <input type="text" class="form-control" id="inputNombreEncuestado"  name="telefono" ng-model="encuesta.Telefono" ng-required="true" placeholder="Telefono fijo" />
                                 <span ng-show="DatosForm.$submitted || DatosForm.telefono.$touched">
                                     <!--P4P1Input1. El campo fecha de aplicación es requerido-->
                                     <span class="label label-danger" ng-show="DatosForm.telefono.$error.required">*El campo es requerido</span>
+                                   
                                 </span>
                             </div>
                         </div>
                     </div>                    
 
                 </div>
+                
+                <div class="row">
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+
+                            <label for="inputDepartamentoResidencia" class="col-xs-12 control-label">Encuestador</label>
+                            <div class="col-xs-12">
+                                <!--P4P10Select1. Seleccione un Encuestador-->
+                                <select class="form-control" id="inputDepartamentoResidencia" name="encuestador" ng-model="encuesta.Encuestador" ng-required="true">
+                                    <option value="" disabled>Seleccione un encuestador</option>
+                                    <option ng-repeat="item in encuestadores" value="@{{item.id}}">@{{item.asp_net_user.username}}</option>
+                                </select>
+                                <!--P4P10Alert1. El campo Barrio de residencia es requerido-->
+                                <span ng-show="DatosForm.$submitted || DatosForm.barrio.$touched">
+                                    <span class="label label-danger" ng-show="DatosForm.encuestador.$error.required">*El campo es requerido</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
             </div>
         </div>       
 
@@ -380,7 +404,7 @@
                                                                                                
                                                                                                -->
 
-                            <div class="col-xs-12 col-sm-12 col-md-">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
                                     <label for="inputNombreEncuestado" class="col-xs-12 control-label">Celular</label>
                                     <div class="col-xs-12">
@@ -393,6 +417,67 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        
+                        <div class="row">
+                            
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="inputNombreEncuestado" class="col-xs-12 control-label">Estado Civil</label>
+                                    <div class="col-xs-12">
+                                        <!--P4P1Input1. Presione aquí para ingresar el nombre del Encuestado-->
+                                        <select class="form-control" ng-model="integrante.Civil" id="inputPaisResidencia" name="civil" ng-required="true">
+                                            <option value="" disabled>Seleccione una opción</option>
+                                            <option ng-repeat="item in estados" value="@{{item.id}}">@{{item.nombre}}</option>
+                                        </select>
+                                        <span ng-show="IntegranteForm.$submitted || IntegranteForm.civil.$touched">
+                                            <!--P4P1Input1. El campo nombre es requerido-->
+                                            <span class="label label-danger" ng-show="IntegranteForm.civil.$error.required">*El campo es requerido</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row">
+                            
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="inputNombreEncuestado" class="col-xs-12 control-label">Ocupacion</label>
+                                    <div class="col-xs-12">
+                                        <!--P4P1Input1. Presione aquí para ingresar el nombre del Encuestado-->
+                                        <input type="text" class="form-control" id="inputNombreEncuestado" name="ocupacion" ng-model="integrante.Ocupacion" placeholder="Ocupacion" required />
+                                        <span ng-show="IntegranteForm.$submitted || IntegranteForm.ocupacion.$touched">
+                                            <!--P4P1Input1. El campo nombre es requerido-->
+                                            <span class="label label-danger" ng-show="IntegranteForm.ocupacion.$error.required">*El campo es requerido</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="row">
+                            
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="inputNombreEncuestado" class="col-xs-12 control-label">¿Vive continuamente en el Hogar?</label>
+                                    <div class="col-xs-12">
+                                        <!--P4P1Input1. Presione aquí para ingresar el nombre del Encuestado-->
+                                       <select class="form-control" ng-model="integrante.Vive" id="inputPaisResidencia" name="vive" ng-required="true">
+                                            <option value="" disabled>Seleccione una opción</option>
+                                            <option value="1">Si</option>
+                                            <option value="0">No</option>
+                                        </select>
+                                        <span ng-show="IntegranteForm.$submitted || IntegranteForm.vive.$touched">
+                                            <!--P4P1Input1. El campo nombre es requerido-->
+                                            <span class="label label-danger" ng-show="IntegranteForm.vive.$error.required">*El campo es requerido</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            
                         </div>
 
                         <div class="row">
