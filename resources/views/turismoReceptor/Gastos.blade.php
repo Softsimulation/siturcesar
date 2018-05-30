@@ -99,9 +99,9 @@
     </div>
   
     <form role="form" name="GastoForm" novalidate>
-        <div class="panel panel-success">
+        <!--<div class="panel panel-success">
             <div class="panel-heading">
-                <!-- P1. Seleccione los gastos realizados por usted antes (gastos de preparación del viaje al Magdalena) y durante su viaje al Magdalena-->
+               
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>  Seleccione los gastos realizados por usted antes (gastos de preparación del viaje al Atlántico) y durante su viaje al Atlántico</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
@@ -126,9 +126,9 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         
-        <div class="gastosRealizados" ng-show="encuestaReceptor.RealizoGasto==1">
+        <div class="gastosRealizados">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
@@ -377,7 +377,7 @@
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P9. Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos induviduales-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos induviduale</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos induviduales</b></h3>
                 </div>
                 <div class="panel-footer"><b>Complete la siguiente tabla</b></div>
                 <div class="panel-body">
@@ -403,7 +403,7 @@
                                             <td style="width:20%;"> 
                                                 <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="asumido" ng-model="encuestaReceptor.poderLLenar" ng-change="limpiarMatriz()" value="true">  No realicé ningún tipo de gasto/ Esa situación no se presentó en el viaje
+                                                            <input type="checkbox" name="asumido" ng-model="encuestaReceptor.poderLLenar" ng-change="limpiarMatriz()" value="true"> E.5.99 No realicé ningún tipo de gasto/ Esa situación no se presentó en el viaje
                                                         </label>
                                                 </div>
                                             </td>
@@ -422,7 +422,7 @@
                                         </tr>
                                         <tr ng-repeat="rub in rubros">
                                             
-                                            <td style="width:20%;">@{{rub.rubros_con_idiomas[0].nombre}}</td>
+                                            <td style="width:20%;">E.5.@{{$index+1}} @{{rub.rubros_con_idiomas[0].nombre}}</td>
                                             <td style="width:55%;">
                                                 <div class="row">
                                                     <!--<div class="col-xs-12 col-md-6">

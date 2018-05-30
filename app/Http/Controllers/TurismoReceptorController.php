@@ -932,7 +932,7 @@ class TurismoReceptorController extends Controller
         
         $divisas = Divisa_Con_Idioma::whereHas('idioma',function($q){
             $q->where('culture','es');
-        })->select('divisas_id as id','nombre')->get();
+        })->select('divisas_id as id','nombre')->get()->toArray();
         
         $financiadores = Financiador_Viaje_Con_Idioma::whereHas('idioma',function($q){
             $q->where('culture','es');
@@ -965,7 +965,7 @@ class TurismoReceptorController extends Controller
         $encuesta["id"]= $id;
         if($visitante->ultima_sesion>=5){
             
-            $encuesta["RealizoGasto"] = Gasto_Visitante::where('visitante_id',$id)->count()>0 || $paquete != null ? 1:0;
+         
             
             $encuesta["ViajoDepartamento"] = $paquete != null ? 1 :0;
             
@@ -1001,8 +1001,21 @@ class TurismoReceptorController extends Controller
         }
         $encuesta["Financiadores"] = Visitante::find($id)->financiadoresViajes()->pluck('id');
          
-
-        return ["divisas"=>$divisas ,"financiadores"=>$financiadores ,"municipios"=>$municipios,"opciones"=>$opciones,"servicios"=>$servicios,"rubros"=>$rubros,"tipos"=>$tipos,"encuesta"=>$encuesta];
+        $di = collect($divisas)->where('id',39)->first();
+        
+        $div= Divisa_Con_Idioma::whereHas('idioma',function($q){
+                $q->where('culture','es');
+            })->where('id','!=',39)->select('divisas_id as id','nombre')->get()->toArray();
+            
+        $var = array();
+        array_push($var,$di);
+        
+        foreach($div as $d){
+            array_push($var,$d);
+        }
+        
+             
+        return ["divisas"=>$var ,"financiadores"=>$financiadores ,"municipios"=>$municipios,"opciones"=>$opciones,"servicios"=>$servicios,"rubros"=>$rubros,"tipos"=>$tipos,"encuesta"=>$encuesta];
         
     }
     
@@ -1011,8 +1024,7 @@ class TurismoReceptorController extends Controller
          $validator = \Validator::make($request->all(), [
              
 			'id' => 'required|exists:visitantes,id',
-			'RealizoGasto' => 'required|between:0,1',
-			'ViajoDepartamento' => 'required_if:RealizoGasto,1|between:0,1',
+			'ViajoDepartamento' => 'between:0,1',
 			'CostoPaquete' => 'required_if:ViajoDepartamento,1',
 			'DivisaPaquete' => 'required_if:ViajeDepartamento,1|exists:divisas,id',
 			'PersonasCubrio' => 'required_if:ViajeDepartamento,1|integer|min:1',
@@ -1028,8 +1040,7 @@ class TurismoReceptorController extends Controller
 			'Rubros'=>'array',
 			
     	],[
-       		'RealizoGasto.required' => 'Debe seleccionar la opción de realizar los gastos.',
-       		'RealizoGasto.between' => 'No es un valor válido para el campo.',
+       		
        		'CostoPaquete.required_if' => 'Debe seleccionar el costo del paquete.',
        		'DivisaPaquete.required_if' => 'Debe seleccionar la divisa del paquete.',
        		'DivisaPaquete.exists' => 'Esta divisa no se encuentra almacenada en el sistema.',
@@ -1069,7 +1080,7 @@ class TurismoReceptorController extends Controller
         	     }
     	    }
         	
-        	if($request->poderLLenar){
+        	if($request->poderLLenar == false){
         	    
             	switch($rub["id"]){
             	    case 3:
@@ -1095,7 +1106,7 @@ class TurismoReceptorController extends Controller
     	}
     	
     	$visitante = Visitante::find($request->id);
-    	if($request["RealizoGasto"] == 1){
+    
     	    // Paquete
     	    $paquete = Visitante_Paquete_Turistico::find($request->id);
     	    if($request["ViajoDepartamento"] == 1){
@@ -1214,17 +1225,7 @@ class TurismoReceptorController extends Controller
     	        
     	    
     	    
-    	}else{
-    	   $paquete = Visitante_Paquete_Turistico::find($request->id);
-    	   if($paquete != null){
-    	            $paquete->municipios()->detach();
-    	            $paquete->opcionesLugares()->detach();
-    	            $paquete->serviciosPaquetes()->detach();
-    	            $paquete->delete();
-    	   }
-    	   $rubros = Gasto_Visitante::where('visitante_id',$request->id)->delete();
-    	        
-    	}
+    	
         $visitante->financiadoresViajes()->detach();
         $visitante->financiadoresViajes()->attach($request["Financiadores"]);
         $visitante->no_hizo_gasto = $request->poderLLenar == null ? false:$request->poderLLenar;
@@ -1233,7 +1234,7 @@ class TurismoReceptorController extends Controller
         }
         
         $visitante->historialEncuestas()->save(new Historial_Encuesta([
-            'estado_id' => 1,
+            'estado_id' => $visitante->ultima_sesion == 7?2:1,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => $visitante->ultima_sesion ==5?"Se ha creado la sección de gastos":"Se ha editado la sección de gastos",
             'usuario_id' => 1
