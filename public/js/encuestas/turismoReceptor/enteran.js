@@ -138,24 +138,12 @@ angular.module('receptor.enteran', [])
                     title: "Realizado",
                     text: "Se ha " + msj + " satisfactoriamente la sección. Se ha finalizado la encuesta " + data.codigo +'.',
                     type: "success",
-                    timer: 2000,
-                    showConfirmButton: false
+                    showConfirmButton: true
+                },function(success){
+                    if(success){
+                       window.location.href = "/turismoreceptor/listadoencuestas"; 
+                    }
                 });
-                
-                setTimeout(function () {
-                    window.location.href = "/turismoreceptor/listadoencuestas";
-                }, 2000);
-                
-                if(data.rol == "Encuestador"){
-                    setTimeout(function () {
-                        //window.location.href = "/EncuestaReceptor/EncuestasSitur";
-                    }, 1000);
-    
-                }else {
-                    setTimeout(function () {
-                        //window.location.href = "/EncuestaReceptor/Encuestas";
-                    }, 1000);
-                }
             } else {
                 $("body").attr("class", "cbp-spmenu-push");
                 swal("Error", "Por favor corrija los errores", "error");
