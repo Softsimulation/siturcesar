@@ -53,7 +53,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿ Antes de venir al departamento del Magdalena, de qué forma usted se enteró de los destinos turísticos visitados?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Antes de venir al departamento del Atlántico, de qué forma usted se enteró de los destinos turísticos visitados?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>G1. ¿Antes de venir al departamento del Atlántico, de qué forma usted se enteró de los destinos turísticos visitados?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">
@@ -76,7 +76,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Durante la permanencia en el Magdalena, de qué forma usted buscó más información sobre destinos turísticos?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Durante la permanencia en el Atlántico, de qué forma usted buscó más información sobre destinos turísticos?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>G2. ¿Durante la permanencia en el Atlántico, de qué forma usted buscó más información sobre destinos turísticos?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">
@@ -98,8 +98,35 @@
         </div>
         <div class="panel panel-success">
             <div class="panel-heading">
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>G3. Sostenibilidad ¿Fue fácil encontrar los servicios, productos y atractivos de Atlántico?</b></h3>
+            </div>
+            <div class="panel-footer"><b>Respuesta única</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="facilidad" id="facilidad" required value="1" ng-model="enteran.facilidad">
+                                Si
+                            </label>
+                        </div>
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="facilidad" id="facilidad" required value="-1" ng-model="enteran.facilidad">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <span ng-show="inForm.$submitted">
+                    <span class="label label-danger" ng-show="inForm.facilidad.$error.required">* Debe seleccionar alguna de las opciones.</span>
+                </span>
+            </div>
+        </div>
+        <div class="panel panel-success">
+            <div class="panel-heading">
                 <!-- ¿Después del viaje al Magdalena en qué redes sociales compartió su experiencia de viaje (Comentarios, fotos, etc)?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Después del viaje al Atlántico en qué redes sociales compartió su experiencia de viaje (Comentarios, fotos, etc)?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>G4. ¿Después del viaje al Atlántico en qué redes sociales compartió su experiencia de viaje (Comentarios, fotos, etc)?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">
@@ -123,7 +150,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Le gustaría que le enviáramos información sobre el Magdalena a su correo electrónico?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Le gustaría que le enviáramos información sobre el Atlántico a su correo electrónico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>G5. ¿Le gustaría que le enviáramos información sobre el Atlántico a su correo electrónico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -151,7 +178,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Le gustaría que le enviáramos una invitación por redes sociales para seguir al Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Le gustaría que le enviáramos una invitación por redes sociales para seguir al Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>G6. ¿Le gustaría que le enviáramos una invitación por redes sociales para seguir al Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -200,37 +227,11 @@
             </div>
         </div>
 
-        <div class="panel panel-success">
-            <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Sostenibilidad ¿Fue fácil encontrar los servicios, productos y atractivos de Atlántico?</b></h3>
-            </div>
-            <div class="panel-footer"><b>Respuesta única</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" name="facilidad" id="facilidad" required value="1" ng-model="enteran.facilidad">
-                                Si
-                            </label>
-                        </div>
-                        <div class="radio radio-primary">
-                            <label>
-                                <input type="radio" name="facilidad" id="facilidad" required value="-1" ng-model="enteran.facilidad">
-                                No
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <span ng-show="inForm.$submitted">
-                    <span class="label label-danger" ng-show="inForm.facilidad.$error.required">* Debe seleccionar alguna de las opciones.</span>
-                </span>
-            </div>
-        </div>
+        
         
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Conoce la marca que acaba de ver?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>H1. ¿Conoce la marca que acaba de ver?</b></h3>
             </div>
             <div class="panel-footer"><b>Respuesta única</b></div>
             <div class="panel-body">

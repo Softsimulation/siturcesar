@@ -34,9 +34,7 @@ angular.module('receptor.percepcion_viaje', [])
                         $scope.estadoEncuesta = 0;
                     } else {
                         $scope.calificacion.Alojamiento = data.alojamiento;
-                        $scope.calificacion.Factores = data.factores;
-                        $scope.calificacion.Ocio = data.ocio;
-                        $scope.calificacion.Infra = data.infraestructura;
+                        
                         if($scope.calificacion.Infra == 1){
                             document.getElementById("infraestructuraSi").checked = true;
                         }else{
