@@ -99,9 +99,9 @@
     </div>
   
     <form role="form" name="GastoForm" novalidate>
-        <div class="panel panel-success">
+        <!--<div class="panel panel-success">
             <div class="panel-heading">
-                <!-- P1. Seleccione los gastos realizados por usted antes (gastos de preparación del viaje al Magdalena) y durante su viaje al Magdalena-->
+               
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>  Seleccione los gastos realizados por usted antes (gastos de preparación del viaje al Atlántico) y durante su viaje al Atlántico</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
@@ -126,13 +126,13 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
         
-        <div class="gastosRealizados" ng-show="encuestaReceptor.RealizoGasto==1">
+        <div class="gastosRealizados">
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> El viaje al departamento hizo parte de un paquete/plan turístico o excursión</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E1. El viaje al departamento hizo parte de un paquete/plan turístico o excursión</b></h3>
                 </div>
                 <div class="panel-footer"><b>Pregunta con selección única</b></div>
                 <div class="panel-body">
@@ -171,7 +171,7 @@
                             <div class="col-xs-12 col-md-4">
                                 <div class="form-group">
                                     <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
-                                    <label for="pago" class="col-md-12 control-label" style="color:dimgray;">¿Cuánto pagó usted por el paquete turístico o excursión?</label>
+                                    <label for="pago" class="col-md-12 control-label" style="color:dimgray;">E2. ¿Cuánto pagó usted por el paquete turístico o excursión?</label>
 
                                     <div class="col-md-12">
                                         <input type="number" ng-required="encuestaReceptor.ViajoDepartamento==1" class="form-control" min="1" name="pago" ng-model="encuestaReceptor.CostoPaquete" placeholder="Solo números">
@@ -221,7 +221,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <!-- P3. ¿El paquete/plan turístico incluyó municipios fuera del Magdalena?-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿El paquete/plan turístico incluyó municipios fuera del Atlántico?</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E1.1 ¿El paquete/plan turístico incluyó municipios fuera del Atlántico?</b></h3>
                     </div>
                     <div class="panel-footer"><b>Pregunta con selección única</b></div>
                     <div class="panel-body">
@@ -250,7 +250,7 @@
                 <div class="panel panel-success" ng-show="encuestaReceptor.IncluyoOtros==1">
                     <div class="panel-heading">
                         <!-- ¿Qué otras ciudades/municipios fuera del Magdalena incluyó el paquete/plan turístico?-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Qué otras ciudades/municipios fuera del Atlántico incluyó el paquete/plan turístico?</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E1.1 ¿Qué otras ciudades/municipios fuera del Atlántico incluyó el paquete/plan turístico?</b></h3>
                     </div>
                     <div class="panel-footer"><b>Presione aquí para desplegar las opciones</b></div>
                     <div class="panel-body">
@@ -275,7 +275,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <!-- P6. El paquete/plan turístico o excursión fue comprado a:-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> El paquete/plan turístico o excursión fue comprado a</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E3. El paquete/plan turístico o excursión fue comprado a</b></h3>
                     </div>
                     <div class="panel-footer"><b>Pregunta con selección única</b></div>
                     <div class="panel-body">
@@ -298,7 +298,7 @@
                 <div class="panel panel-success" ng-show="encuestaReceptor.Proveedor==1">
                     <div class="panel-heading">
                         <!-- P7. ¿En donde está ubicada la agencia de viajes/operador turístico?-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿En donde está ubicada la agencia de viajes/operador turístico?</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E3.1 ¿En donde está ubicada la agencia de viajes/operador turístico?</b></h3>
                     </div>
                     <div class="panel-footer"><b>Pregunta con selección única</b></div>
                     <div class="panel-body">
@@ -321,7 +321,7 @@
                 <div class="panel panel-success">
                     <div class="panel-heading">
                         <!-- P8. ¿Qué productos y servicios incluía el paquete turístico o excursión?-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Qué productos y servicios incluía el paquete turístico o excursión?</b></h3>
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E4. ¿Qué productos y servicios incluía el paquete turístico o excursión?</b></h3>
                     </div>
                     <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
                     <div class="panel-body">
@@ -342,9 +342,9 @@
                 </div>
             </div>
 
-            <div class="panel panel-success">
+            <!--<div class="panel panel-success">
                 <div class="panel-heading">
-                    <!--P8A. ¿Desea proporcionar información adicional de sus gastos?-->
+                    
                     <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Desea proporcionar información adicional de sus gastos</b></h3>
                 </div>
                 <div class="panel-footer"><b>Pregunta con selección única</b></div>
@@ -372,12 +372,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div>-->
 
-            <div class="panel panel-success" ng-show="encuestaReceptor.GastosAparte == 1">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P9. Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos induviduales-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos induviduale</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos induviduales</b></h3>
                 </div>
                 <div class="panel-footer"><b>Complete la siguiente tabla</b></div>
                 <div class="panel-body">
@@ -388,19 +388,41 @@
                                     <thead id="head-tgastos">
                                         <tr>
                                             <!--P9Col1. Rubro-->
-                                            <th class="text-center" style="width:20%;">Rubro</th>
+                                            <th class="text-center" style="width:20%;">E5 Rubro</th>
                                             <!--P9Col2. Cantidad pagada-->
-                                            <th class="text-center" style="width:55%;">Cantidad pagada</th>
+                                            <th class="text-center" style="width:55%;">E5.1¿Cuánto gastó?</th>
                                             <!--P9Col3. ¿A cuántas personas cubrió?-->
-                                            <th class="text-center" style="width:10%;">¿A cuántas personas cubrió?</th>
+                                            <th class="text-center" style="width:10%;">E.5.2 ¿ Cuantas personas cubrió?</th>
                                             <!--P9Col4. Fue pagado por otra persona u organización/ empresa diferente a usted o a su grupo de viaje -->
-                                            <th class="text-center" style="width:15%;">Fue pagado por otra persona u organización/ empresa diferente a usted o a su grupo de viaje</th>
+                                            <th class="text-center" style="width:15%;">E6 .Gastos pagados por otra persona u organización</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                         <tr>
+                                            
+                                            <td style="width:20%;"> 
+                                                <div class="checkbox">
+                                                        <label>
+                                                            <input type="checkbox" name="asumido" ng-model="encuestaReceptor.poderLLenar" ng-change="limpiarMatriz()" value="true"> E.5.99 No realicé ningún tipo de gasto/ Esa situación no se presentó en el viaje
+                                                        </label>
+                                                </div>
+                                            </td>
+                                            <td style="width:55%;">
+                                               
+                                            </td>
+                                            <td style="width:10%;">
+                                                
+                                                
+                                                
+                                            </td>
+                                            <td style="width:15%;">
+                                                
+                                            </td>
+                                            
+                                        </tr>
                                         <tr ng-repeat="rub in rubros">
                                             
-                                            <td style="width:20%;">@{{rub.rubros_con_idiomas[0].nombre}}</td>
+                                            <td style="width:20%;">E.5.@{{$index+1}} @{{rub.rubros_con_idiomas[0].nombre}}</td>
                                             <td style="width:55%;">
                                                 <div class="row">
                                                     <!--<div class="col-xs-12 col-md-6">
@@ -448,7 +470,7 @@
                                                             <div class="col-xs-12 col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="gastoFuera" class="control-label" style="color:dimgray;">Cantidad</label>
-                                                                    <input type="number" class="form-control" name="cantDentro@{{$index}}" min="1" placeholder="Cantidad" ng-blur="cambiarAlquiler(rub)" ng-model="rub.gastos_visitantes[0].cantidad_pagada_magdalena" ng-required ="rub.gastos_visitantes[0].divisas_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null" >
+                                                                    <input type="number" class="form-control" name="cantDentro@{{$index}}" min="1" placeholder="Cantidad" ng-blur="cambiarAlquiler(rub)" ng-model="rub.gastos_visitantes[0].cantidad_pagada_magdalena" ng-disabled="encuestaReceptor.poderLLenar" ng-required ="rub.gastos_visitantes[0].divisas_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null" >
                                                                     <span ng-show="GastoForm.$submitted || GastoForm.cantDentro@{{$index}}.$touched">
                                                                         <span class="label label-danger" ng-show="GastoForm.cantDentro@{{$index}}.$error.min">*El valor debe ser mayor a 0</span>
                                                                         <span class="label label-danger" ng-show="GastoForm.cantDentro@{{$index}}.$error.number">* Solo números.</span>
@@ -459,7 +481,7 @@
                                                             <div class="col-xs-12 col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="selectDivisa" class="control-label" style="color:dimgray;">Divisa</label>
-                                                                    <select id="selectDivisa3" class="form-control" name="divisaDentro@{{$index}}" ng-blur="cambiarAlquiler(rub)" ng-options ="item.id as item.nombre for item in divisas" ng-model="rub.gastos_visitantes[0].divisas_magdalena" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null">
+                                                                    <select id="selectDivisa3" class="form-control" name="divisaDentro@{{$index}}" ng-blur="cambiarAlquiler(rub)" ng-options ="item.id as item.nombre for item in divisas" ng-model="rub.gastos_visitantes[0].divisas_magdalena" ng-disabled="encuestaReceptor.poderLLenar" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null">
                                                                         <option value="">Seleccionar divisa</option>
                                                                     </select>
                                                                     <span ng-show="GastoForm.$submitted || GastoForm.divisaDentro@{{$index}}.$touched">
@@ -473,7 +495,7 @@
                                             </td>
                                             <td style="width:10%;">
                                                 <label class="control-label">&nbsp;</label>
-                                                <input type="number" min="1" class="form-control" name="personas@{{$index}}" ng-model="rub.gastos_visitantes[0].personas_cubiertas" ng-blur="cambiarAlquiler(rub)" placeholder="0" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null || rub.gastos_visitantes[0].divisas_magdalena != null"/>
+                                                <input type="number" min="1" class="form-control" name="personas@{{$index}}" ng-model="rub.gastos_visitantes[0].personas_cubiertas" ng-blur="cambiarAlquiler(rub)" ng-disabled="encuestaReceptor.poderLLenar" placeholder="0" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null || rub.gastos_visitantes[0].divisas_magdalena != null"/>
                                                 <span ng-show="GastoForm.$submitted || GastoForm.personas@{{$index}}.$touched">
                                                     <span class="label label-danger" ng-show="GastoForm.personas@{{$index}}.$error.number">* Solo números.</span>
                                                     <span class="label label-danger" ng-show="GastoForm.personas@{{$index}}.$error.min">* El valor debe ser mayor a 0.</span>
@@ -503,7 +525,7 @@
         <div class="panel panel-success" ng-show="abrirTerrestre">
             <div class="panel-heading">
                 <!-- ¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizado desde una ciudad de Colombia al Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizado desde una ciudad de Colombia al Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> E7.¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizado desde una ciudad de  Colombia a Atlántico?</b></h3>
             </div>
             <div class="panel-body">
                 <div class="row">
@@ -521,7 +543,7 @@
         <div class="panel panel-success" ng-show="abrirAlquiler">
             <div class="panel-heading">
                 <!-- >El alquiler de vehículo fue realizado en:-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> El alquiler de vehículo fue realizado en</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> E8. El alquiler de vehículo fue realizado en</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -542,7 +564,7 @@
         </div>
         <div class="panel panel-success" ng-show="abrirRopa">
             <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> En dónde fue realizado el mayor gasto de productos como ropa, calzado,  artesanías etc. (bienes duraderos) antes y durante el viaje a Atlántico : Respuesta única</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>E9. En dónde fue realizado el mayor gasto de productos como ropa, calzado,  artesanías etc. (bienes duraderos) antes y durante el viaje a Atlántico :</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -564,7 +586,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- P10. Los gastos de las personas que conformaron el grupo de viaje fueron pagados por:-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>  Los gastos de las personas que conformaron el grupo de viaje fueron pagados por:</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>  E10. Los gastos de las personas que conformaron el grupo de viaje fueron pagados por:</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">

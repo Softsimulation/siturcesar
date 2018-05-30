@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sistema de Información Turistica del Magdalena">
-    <meta name="author" content="SITUR Magdalena">
+    <meta name="description" content="Sistema de Información Turistica del Atlántico">
+    <meta name="author" content="SITUR Atlántico">
     <title>@yield('Title')</title>
     <link rel="icon" type="image/ico" href="{{asset('Content/icons/favicon-96x96.png')}}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -23,7 +23,8 @@
     <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/select.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/select2.css')}}" rel='stylesheet' type='text/css' />
-    
+    <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel="stylesheet" type="text/css" />
+        
     @yield('estilos')
     <style>
         .carga {
@@ -230,28 +231,34 @@
 
    
     <script src="{{asset('/js/plugins/angular.min.js')}}"></script>
-    <script src="{{asset('/js/plugins/jquery.min.js')}}"></script>
-
-    <script src="{{asset('/js/plugins/bootstrap.min.js')}}"></script>
-    <script src="{{asset('/js/plugins/material.min.js')}}"></script>
-    <script src="{{asset('/js/plugins/ripples.min.js')}}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{asset('/Content/bootstrap_material/dist/js/material.min.js')}}"></script>
+    <script src="{{asset('/Content/bootstrap_material/dist/js/ripples.min.js')}}"></script>
+    <script>
+        $.material.init();
+    </script>
     <script src="{{asset('/js/plugins/checklist-model.js')}}"></script>
+    <script src="{{asset('/js/plugins/select.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('/js/plugins/angular-filter.js')}}"></script>
     <script src="{{asset('/js/plugins/angular-repeat-n.min.js')}}"></script>
-    <script src="{{asset('/js/plugins/sweetalert.min.js')}}"></script>
-    <script src="{{asset('/js/plugins/selectjp.js')}}"></script>
-    <script src="{{asset('/js/plugins/ng-map.min.js')}}"></script>
-    <script src="{{asset('/js/plugins/object-table.js')}}"></script>
-    
-    <script src="{{asset('/js/plugins/ADM-dateTimePicker.min.js')}}"></script>
-    <script src="{{asset('/js/plugins/select.min.js')}}"></script>
+    <script src="{{asset('/js/ADM-dateTimePicker.min.js')}}" type="text/javascript"></script>
+        
+    <script src="{{asset('/js/sweetalert.min.js')}}"></script>
     <script src="{{asset('/js/dir-pagination.js')}}"></script>
-    <script src="{{asset('/js/plugins/angular-sanitize.js')}}"></script>
-    <script src="{{asset('/js/administrador/administrador.js')}}"></script>
-    <script src="{{asset('/js/administrador/temporadas.js')}}"></script>
-
-
+    <script src="{{asset('/js/encuestas/turismoReceptor/encuesta.js')}}"></script>
+    <script src="{{asset('/js/encuestas/turismoReceptor/datos_encuestado.js')}}"></script>
+    <script src="{{asset('/js/encuestas/turismoReceptor/estanciayvisitados.js')}}"></script>
+    <script src="{{asset('/js/encuestas/turismoReceptor/transporte.js')}}"></script>
+    <script src="{{asset('/js/encuestas/turismoReceptor/grupo_viaje.js')}}"></script>
+    <script src="{{asset('/js/encuestas/turismoReceptor/gasto.js')}}"></script>
+    <script src="{{asset('/js/encuestas/turismoReceptor/percepcion_viaje.js')}}"></script>
+    <script src="{{asset('/js/encuestas/turismoReceptor/enteran.js')}}"></script>
+    
+    <script src="{{asset('/js/encuestas/turismoReceptor/services/receptorServices.js')}}"></script>
+    <script src="{{asset('/js/encuestas/turismoReceptor/services/grupoViajeServices.js')}}"></script>
+    
     <script>
         $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });
     </script>

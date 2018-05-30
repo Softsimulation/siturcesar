@@ -49,13 +49,15 @@
 
 @section('NumSeccion', '0%')
 
+@section('app','ng-app="encuesta"')
+
 @section('controller','ng-controller="listadoEncuestasCtrl"')
 
 @section('content')
     
 
 <div class="container">
-    <h1 class="title1">Listar encuestas</h1>
+    <h1 class="title1">Listado de encuestas</h1>
     <br />
     <div class="blank-page widget-shadow scroll" id="style-2 div1">
         <div class="row">
@@ -88,12 +90,14 @@
             <div class="col-xs-12">
                 <table class="table table-striped">
                     <tr>
-                        <th style="width: 50px;"></th>                           
-                            <th>Número de encuesta</th>
-                            <th style="width: 60px;">Grupo</th>
-                            <th>Lugar de aplicación</th>
-                            <th>Fecha de aplicación</th>
+                        <th style="width: 50px;"></th>
+
+                            
+                            <th>Código de encuesta</th>
+                            <th>Código de grupo</th>
+                            <th>Fecha de digitación</th>
                             <th>Fecha de llegada</th>
+                            <th>Fecha de salida</th>
                             <th>Encuestador</th>
                             <th style="width: 150px;">Estado</th>
                             <th style="width: 110px;">Última sección</th>
@@ -102,11 +106,11 @@
                     </tr>
                     <tr dir-paginate="item in encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search |itemsPerPage:10 as results" pagination-id="paginacion_encuestas" >
                         <td>@{{$index+1}}</td>
-                            <td>@{{item.id}}</td>
-                            <td>@{{item.grupo}}</td>
-                            <td>@{{item.lugar}}</td>
-                            <td>@{{item.fecha}}</td>
+                            <td>@{{item.codigoencuesta}}</td>
+                            <td>@{{item.codigogrupo}}</td>
+                            <td>@{{item.fechadigitacion | date:'dd-MM-yyyy'}}</td>
                             <td>@{{item.fechallegada | date:'dd-MM-yyyy'}}</td>
+                            <td>@{{item.fechasalida | date:'dd-MM-yyyy'}}</td>
                             <td>@{{item.username}}</td>
                             <td>@{{item.estado}}</td>
                             <td style="text-align: right;">@{{item.ultima}}</td>

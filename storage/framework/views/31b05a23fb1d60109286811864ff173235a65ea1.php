@@ -67,15 +67,15 @@
                                 <tr>
                                     <th>
                                         <!-- P1Col1. Municipio visitado-->
-                                        Municipio visitado
+                                        B2. Municipio visitado
                                     </th>
                                     <th>
                                         <!-- P1Col2. Número de noches-->
-                                        Número de noches
+                                        B1. Número de noches
                                     </th>
                                     <th>
                                         <!-- P1Col3. Tipo de Alojamiento utilizadoa-->
-                                        Tipo de Alojamiento utilizado
+                                        B3. Tipo de Alojamiento utilizado
                                         <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="Si utilizó más de un servicio de alojamiento en este municipio, seleccione en el que pasó el mayor número de noches.">
                                         </i>
@@ -83,7 +83,7 @@
                                     </th>
                                     <th>
                                         <!-- P1Col4. Destino Principal-->
-                                        Destino Principal
+                                        B4.  Destino Principal
                                     </th>
                                     <th>
                                         <!--EncuestaEstanciaBtnAgregarDest. Agregar destino-->
@@ -183,7 +183,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- P2. ¿Que actividades realizó en el Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Que actividades realizó en el Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>B5. ¿Que actividades realizó en el Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">

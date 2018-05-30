@@ -51,7 +51,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Cuántas personas incluyéndose usted, realizaron juntos el viaje desde la llegada hasta la salida del Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuántas personas incluyéndose usted, realizaron juntos el viaje desde la llegada hasta la salida del Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>D1.  ¿Cuántas personas incluyéndose usted, realizaron juntos el viaje desde la llegada hasta la salida del Atlántico?</b></h3>
             </div>
             <div class="panel-footer"><b>Sólo se pueden introducir números en este campo</b></div>
             <div class="panel-body">
@@ -70,7 +70,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Quiénes eran esas personas?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Quiénes eran esas personas?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>D2. Las personas anteriormente mencionadas son:</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">

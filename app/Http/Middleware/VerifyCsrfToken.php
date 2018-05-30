@@ -18,16 +18,6 @@ class VerifyCsrfToken extends BaseVerifier
         '/turismointerno/barrios',
         '/turismointerno/hogar',
         '/turismointerno/datoshogar',
-        '/turismointerno/eliminarpersona',
-        '/turismointerno/guardareditarhogar',
-        '/turismointerno/guardartransporte',
-        '/turismointerno/datagastos',
-        '/turismointerno/guardargastos',
-        '/turismointerno/guardarfuentesinformacion',
-        '/turismointerno/crearestancia',
-        '/turismointerno/datoseditar',
-        '/turismointerno/guardarhogar',
-        '/turismointerno/createviaje',
-        '/turismointerno/siguienteviaje'
+        '/*'
     ];
 }
