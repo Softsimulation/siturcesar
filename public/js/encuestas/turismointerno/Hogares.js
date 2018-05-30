@@ -4,6 +4,20 @@ angular.module('interno.hogares', [])
     $scope.encuesta = {}
     $scope.encuesta.integrantes = []
     $scope.integrante = {}
+    
+    $scope.optionFecha = {
+        calType: 'gregorian',
+        format: 'YYYY-MM-DD hh:mm',
+        zIndex: 1060,
+        autoClose: true,
+        default: null,
+        gregorianDic: {
+            title: 'Fecha',
+            monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            daysNames: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            todayBtn: "Hoy"
+        }
+    };
 
     $http.get('/turismointerno/datoshogar')
         .success(function (data) {
@@ -100,9 +114,6 @@ angular.module('interno.hogares', [])
         }
 
         if ($scope.DatosForm.$valid) {
-            $scope.encuesta.Fecha_aplicacion.setHours($scope.encuesta.Hora_aplicacion.getHours())
-            $scope.encuesta.Fecha_aplicacion.setMinutes($scope.encuesta.Hora_aplicacion.getMinutes())
-            $scope.encuesta.Fecha_aplicacion.setSeconds($scope.encuesta.Hora_aplicacion.getSeconds())
             
             $("body").attr("class", "charging");
             $http.post('/turismointerno/guardarhogar', $scope.encuesta)
@@ -136,6 +147,7 @@ angular.module('interno.hogares', [])
 })
 
 .controller("editar_Hogar", function ($scope, $http) {
+    
     $scope.encuesta = {}
     $scope.encuesta.integrantes = []
     $scope.integrante = {}
@@ -153,13 +165,8 @@ angular.module('interno.hogares', [])
                 $scope.municipio = String(data.encuesta.edificacione.barrio.municipio_id)
                 $scope.encuestadores=data.datos.encuestadores
                 $scope.estados=data.datos.estados
-                var hora_fecha=data.encuesta.fecha_realizacion.split(" ");
-                var fecha = hora_fecha[0].split("-")
-                
-                var hora = hora_fecha[1].replace("-05", "").split(":")               
                 $scope.encuesta = data.encuesta;
-                $scope.encuesta.Fecha_aplicacion = new Date(fecha[0], (fecha[1]-1), fecha[2])
-                $scope.encuesta.Hora_aplicacion = new Date(fecha[0], fecha[1], fecha[2], hora[0], hora[1], hora[2])
+                $scope.encuesta.Fecha_aplicacion = data.encuesta.fecha_realizacion
                 $scope.encuesta.Barrio=String(data.encuesta.edificacione.barrio_id)
                 $scope.encuesta.Estrato=String(data.encuesta.edificacione.estrato_id)
                 $scope.encuesta.Direccion=data.encuesta.edificacione.direccion
@@ -305,11 +312,6 @@ angular.module('interno.hogares', [])
         $scope.encuesta.id=$scope.id;
         if ($scope.DatosForm.$valid) {
             $("body").attr("class", "charging");
-            
-            $scope.encuesta.Fecha_aplicacion.setHours($scope.encuesta.Hora_aplicacion.getHours())
-            $scope.encuesta.Fecha_aplicacion.setMinutes($scope.encuesta.Hora_aplicacion.getMinutes())
-            $scope.encuesta.Fecha_aplicacion.setSeconds($scope.encuesta.Hora_aplicacion.getSeconds())
-            
             $http.post('/turismointerno/guardareditarhogar', $scope.encuesta)
                 .success(function (data) {
                     $("body").attr("class", "");

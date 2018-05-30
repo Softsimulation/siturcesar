@@ -119,8 +119,7 @@ class TurismoInternoController extends Controller
         
         $validator=\Validator::make($request->all(),[
                 
-                'Fecha_aplicacion'=>'required|date',
-                'Hora_aplicacion'=>'required',
+                'Fecha_aplicacion'=>'required|date|before:tomorrow',
                 'Barrio'=>'required|exists:barrios,id',
                 'Estrato'=>'required|exists:estratos,id',
                 'Direccion'=>'required',
@@ -129,7 +128,7 @@ class TurismoInternoController extends Controller
                 'Celular_Entrevistado'=>'numeric',
                 'Email_Entrevistado'=>'email',
                 'Encuestador'=>'required|exists:digitadores,id'
-            ],["Telefono.regex"=>"El telefono debe tener minimos 7 digitos"]);
+            ],["Telefono.regex"=>"El telefono debe tener minimos 7 digitos","Fecha_aplicacion.tomorrow"=>"La fecha de aplicacion debe ser menor a la fecha de hoy"]);
             
         if($validator->fails()){
             return ["success"=>false,'errores'=>$validator->errors()];
@@ -201,6 +200,8 @@ class TurismoInternoController extends Controller
                   ->with('edificacione')
                   ->with('edificacione.barrio')
                   ->first();
+        $encuesta->fecha_realizacion=new \Carbon\Carbon($encuesta->fecha_realizacion);
+        $encuesta->fecha_realizacion=$encuesta->fecha_realizacion->format('Y-m-d h:i');
         $encuesta->personas=Persona::where('hogar_id',$encuesta->id)->with('motivoNoViajes')->get();
         $barrios=Barrio::where('municipio_id',$encuesta->edificacione->barrio->municipio_id)->get();
         return ["datos"=>$datos,"encuesta"=>$encuesta,"barrios"=>$barrios];
@@ -230,8 +231,7 @@ class TurismoInternoController extends Controller
         
         $validator=\Validator::make($request->all(),[
                 
-                'Fecha_aplicacion'=>'required|date',
-                'Hora_aplicacion'=>'required',
+                'Fecha_aplicacion'=>'required|date|before:tomorrow',
                 'Barrio'=>'required|exists:barrios,id',
                 'Estrato'=>'required|exists:estratos,id',
                 'Direccion'=>'required',
@@ -240,7 +240,7 @@ class TurismoInternoController extends Controller
                 'Celular_Entrevistado'=>'numeric',
                 'Email_Entrevistado'=>'email',
                 'Encuestador'=>'required|exists:digitadores,id'
-            ],["Telefono.regex"=>"El telefono debe tener minimos 7 digitos"]);
+            ],["Telefono.regex"=>"El telefono debe tener minimos 7 digitos","Fecha_aplicacion.tomorrow"=>"La fecha de aplicacion debe ser menor a la fecha de hoy"]);
             
         if($validator->fails()){
             return ["success"=>false,'errores'=>$validator->errors()];

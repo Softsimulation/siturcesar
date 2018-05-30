@@ -68,11 +68,12 @@
             <div class="panel-footer"><b>{{trans('resources.EncuestaMsgCompleteInformacion')}}</b></div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-xs-6 col-sm-6 col-md-6">
+                    
+                    <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
                             <label for="inputNombreEncuestado" class="col-xs-12 control-label">Fecha de aplicación</label>
                             <div class="col-xs-12">
-                                <input type="date" class="form-control" id="inputNombreEncuestado" name="fecha_aplicacion" ng-model="encuesta.Fecha_aplicacion" placeholder="yyyy-mm-dd" ng-required="true" />
+                                <adm-dtp name="fecha_aplicacion" ng-model="encuesta.Fecha_aplicacion" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha de aplicacion"  ng-required="true"></adm-dtp>
                                 <span ng-show="DatosForm.$submitted || DatosForm.fecha_aplicacion.$touched">
                                     <!--P4P1Input1. El campo fecha de aplicación es requerido-->
                                     <span class="label label-danger" ng-show="DatosForm.fecha_aplicacion.$error.required">*El campo es requerido</span>
@@ -81,19 +82,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6">
-                        <div class="form-group">
-                            <label for="inputNombreEncuestado" class="col-xs-12 control-label">Hora de aplicación</label>
-                            <div class="col-xs-12">
-                                <input type="time" class="form-control" id="inputNombreEncuestado" name="hora_aplicacion" ng-model="encuesta.Hora_aplicacion" placeholder="hh:mm" ng-required="true" />
-                                <span ng-show="DatosForm.$submitted || DatosForm.hora_aplicacion.$touched">
-                                    <!--P4P1Input1. El campo nombre es requerido-->
-                                    <span class="label label-danger" ng-show="DatosForm.hora_aplicacion.$error.required">*El campo es requerido</span>
-                                    <span class="label label-danger" ng-show="DatosForm.hora_aplicacion.$error.time">*El campo debe ser una hora valida</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-4 col-md-4">
