@@ -124,7 +124,7 @@ class TurismoReceptorController extends Controller
 			//'Grupo' => 'required|exists:grupos_viaje,id',
 			'Encuestador' => 'required|exists:digitadores,id',
 			'Llegada' => 'required|date|before:tomorrow',
-			'Salida' => 'required|date|after:Llegada',
+			'Salida' => 'required|date',
 			'Nombre' => 'required|max:150',
 			'Edad' => 'required|numeric|between:15,150',
 			'Sexo' => 'required',
@@ -189,6 +189,10 @@ class TurismoReceptorController extends Controller
 		$municipio = Municipio::find($request->Municipio);
 		if($municipio->departamento->pais_id != 47 && $request->Destino==null){
 		    return ["success"=>false,"errores"=> [ ["El id del destino principal es inválido."] ] ];
+		}
+		
+		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
+		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];
 		}
 		
 // 		$grupo = Grupo_Viaje::find($request->Grupo);
@@ -328,7 +332,7 @@ class TurismoReceptorController extends Controller
 			//'Grupo' => 'required|exists:grupos_viaje,id',
 			'Encuestador' => 'required|exists:digitadores,id',
 			'Llegada' => 'required|date|before:tomorrow',
-			'Salida' => 'required|date|after:Llegada',
+			'Salida' => 'required|date',
 			'Nombre' => 'required|max:150',
 			'Edad' => 'required|numeric|between:15,150',
 			'Sexo' => 'required',
@@ -355,7 +359,7 @@ class TurismoReceptorController extends Controller
        		'Encuestador.exists' => 'El encuenstador seleccionado no se encuentra registrado en el sistema.',
        		'Llegada.required' => 'El campo fecha de llegada es requerido.',
        		'Llegada.date' => 'El formato del campo fecha de llegada es inválido.',
-       		'Llegada.before_or_equal' => 'La fecha de llegada debe ser menor al día de hoy.',
+       		'Llegada.before' => 'La fecha de llegada debe ser menor al día de hoy.',
        		'Salida.required' => 'El campo fecha de salida es requerido.',
        		'Salida.date' => 'El formato del campo fecha de salida es inválido.',
        		'Salida.after' => 'La fecha de salida debe ser mayor o igual a la de llegada.',
@@ -392,6 +396,10 @@ class TurismoReceptorController extends Controller
     	$municipio = Municipio::find($request->Municipio);
 		if($municipio->departamento->pais_id != 47 && $request->Destino==null){
 		    return ["success"=>false,"errores"=> [ ["El id del destino principal es inválido."] ] ];
+		}
+		
+		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
+		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];
 		}
 		
 		$visitante = Visitante::find($request->Id);
