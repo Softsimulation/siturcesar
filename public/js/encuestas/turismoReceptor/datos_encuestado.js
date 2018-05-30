@@ -105,14 +105,14 @@ angular.module('encuestas.datos_encuestado', [])
         if ($scope.DatosForm.$valid) {
             $("body").attr("class", "charging");
             
-            var split1 = $scope.encuesta.fechaAplicacion.split(" ");
-            split1 = split1[0].split("/");
-            var fechaAp = new Date(split1[2], split1[1] - 1, split1[0]);
-            var mes = fechaAp.getMonth() +1;
-            var anio = fechaAp.getFullYear();
-            var encuestador = $filter('filter')($scope.encuestadores, {'id':parseInt($scope.encuesta.Encuestador)}, true);
-            var codigoEncuestador = encuestador[0].codigo;
-            $scope.encuesta.codigo_grupo = anio+'_'+mes+'_'+codigoEncuestador+'_'+$scope.encuesta.codigo_encuesta;
+            // var split1 = $scope.encuesta.fechaAplicacion.split(" ");
+            // split1 = split1[0].split("/");
+            // var fechaAp = new Date(split1[2], split1[1] - 1, split1[0]);
+            // var mes = fechaAp.getMonth() +1;
+            // var anio = fechaAp.getFullYear();
+            // var encuestador = $filter('filter')($scope.encuestadores, {'id':parseInt($scope.encuesta.Encuestador)}, true);
+            // var codigoEncuestador = encuestador[0].codigo;
+            // $scope.encuesta.codigo_grupo = anio+'_'+mes+'_'+codigoEncuestador+'_'+$scope.encuesta.codigo_encuesta;
             
             receptorServi.guardarCrearEncuesta($scope.encuesta).then(function (data) {
                 $("body").attr("class", "");
@@ -127,11 +127,10 @@ angular.module('encuestas.datos_encuestado', [])
                         showConfirmButton: false
                     });
                     setTimeout(function () {
-                        window.location = "/turismoreceptor/seccionestancia/"+data.id;
-                        if (JSON.parse(data.actor)) {
-                            //window.location = "/EncuestaReceptor/Encuestas";
+                        if (data.terminada == 1) {
+                            window.location = "/turismoreceptor/listadoencuestas";
                         } else {
-                            //window.location = "/EncuestaReceptor/SeccionEstanciayvisitados/"+data.id;
+                            window.location = "/turismoreceptor/seccionestancia/"+data.id;
                         }
                     }, 1000);
                 } else {
@@ -284,17 +283,15 @@ angular.module('encuestas.datos_encuestado', [])
         if ($scope.DatosForm.$valid) {
             $("body").attr("class", "charging");
             
-            $("body").attr("class", "charging");
-            
-            var split1 = $scope.encuesta.fechaAplicacion.split(" ");
-            var hora = split1[1];
-            split1 = split1[0].split("/");
-            var fechaAp = new Date(split1[2], split1[1] - 1, split1[0]);
-            var mes = fechaAp.getMonth() +1;
-            var anio = fechaAp.getFullYear();
-            var encuestador = $filter('filter')($scope.encuestadores, {'id':parseInt($scope.encuesta.Encuestador)}, true);
-            var codigoEncuestador = encuestador[0].codigo;
-            $scope.encuesta.codigo_grupo = anio+'_'+mes+'_'+codigoEncuestador+'_'+$scope.encuesta.codigo_encuesta;
+            //var split1 = $scope.encuesta.fechaAplicacion.split(" ");
+            //var hora = split1[1];
+            // split1 = split1[0].split("/");
+            // var fechaAp = new Date(split1[2], split1[1] - 1, split1[0]);
+            // var mes = fechaAp.getMonth() +1;
+            // var anio = fechaAp.getFullYear();
+            //var encuestador = $filter('filter')($scope.encuestadores, {'id':parseInt($scope.encuesta.Encuestador)}, true);
+            //var codigoEncuestador = encuestador[0].codigo;
+            //$scope.encuesta.codigo_grupo = anio+'_'+mes+'_'+codigoEncuestador+'_'+$scope.encuesta.codigo_encuesta;
             
             receptorServi.guardarEditarDatos($scope.encuesta).then(function (data) {
                 $("body").attr("class", "cbp-spmenu-push");
@@ -307,8 +304,11 @@ angular.module('encuestas.datos_encuestado', [])
                         showConfirmButton: false
                     });
                     setTimeout(function () {
-                        window.location = "/turismoreceptor/seccionestancia/"+ $scope.encuesta.Id;
-                        //window.location = "/EncuestaReceptor/SeccionEstanciayvisitados/" + $scope.encuesta.Id;
+                        if (data.terminada == 1) {
+                            window.location = "/turismoreceptor/listadoencuestas";
+                        } else {
+                            window.location = "/turismoreceptor/seccionestancia/"+$scope.id;
+                        }
                     }, 1000);
                 } else {
                     swal("Error", "Hay errores en el formulario corrigelos", "error");

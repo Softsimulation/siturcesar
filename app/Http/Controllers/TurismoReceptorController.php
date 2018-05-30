@@ -140,8 +140,8 @@ class TurismoReceptorController extends Controller
 			'Horas' => 'required_if:Motivo,3',
 			'Otro' => 'required_if:Motivo,18|max:150',
 			//'Actor' => 'required',
-			'codigo_encuesta' => 'required|max:50',
-			'codigo_grupo' => 'required|unique:visitantes,codigo_grupo',
+			//'codigo_encuesta' => 'required|max:50',
+			//'codigo_grupo' => 'required|unique:visitantes,codigo_grupo',
 			'aplicacion' => 'required|exists:lugares_aplicacion_encuesta,id'
     	],[
        		'Grupo.required' => 'Debe seleccionar el grupo de viaje.',
@@ -197,6 +197,12 @@ class TurismoReceptorController extends Controller
 // 		    return ["success"=>false,"errores"=> [ ["El grupo seleccionado ya tiene el número de encuestas completas."] ] ];
 // 		}
 		
+		$year = date('Y',strtotime(str_replace("/","-",$request->fechaAplicacion)));
+		$month = date('m',strtotime(str_replace("/","-",$request->fechaAplicacion)));
+		$numeroEncuesta = Visitante::whereYear('fecha_aplicacion','=',$year)->whereMonth('fecha_aplicacion','=',$month)->get()->count() + 1;
+		
+		$digitador = Digitador::find($request->Encuestador);
+		
 		$visitante = new Visitante();
 		$visitante->telefono = isset($request->Telefono) ? $request->Telefono : null;
 		$visitante->celular = isset($request->Celular) ? $request->Celular : null;
@@ -215,8 +221,8 @@ class TurismoReceptorController extends Controller
 		$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
 		$visitante->sexo = $request->Sexo;
 		$visitante->ultima_sesion = 1;
-		$visitante->codigo_encuesta = $request->codigo_encuesta;
-		$visitante->codigo_grupo = $request->codigo_grupo;
+		$visitante->codigo_encuesta = $numeroEncuesta;
+		$visitante->codigo_grupo = $year.'_'.$month.'_'.$digitador->codigo.'_'.$numeroEncuesta;
 		$visitante->fecha_aplicacion = date('Y-m-d H:i',strtotime(str_replace("/","-",$request->fechaAplicacion)));
 		$visitante->lugar_aplicacion_id = $request->aplicacion;
 		$visitante->save();
@@ -235,17 +241,17 @@ class TurismoReceptorController extends Controller
                 break;
         }
         
+        $condicion = ($visitante->motivo_viaje == 3 && $request->Horas <5) || ($visitante->motivo_viaje == 17) ? 1 : 0;
         
         $visitante->historialEncuestas()->save(new Historial_Encuesta([
-            'estado_id' => 1,
+            'estado_id' => $condicion == 1  ? 3 : 1,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => 'La encuesta ha sido creada',
             'usuario_id' => 1
         ]));
         
         
-        
-		return ["success" => true, 'id' => $visitante->id];
+		return ["success" => true, 'id' => $visitante->id, 'terminada' => $condicion];
     }
     
     public function getEditardatos($id){
@@ -270,6 +276,7 @@ class TurismoReceptorController extends Controller
             
             $visitante['Id'] = $visitanteCargar->id;
             $visitante['codigo_encuesta'] = $visitanteCargar->codigo_encuesta;
+            $visitante['codigo_grupo'] = $visitanteCargar->codigo_grupo;
             //$visitante['Grupo'] = $visitanteCargar->grupo_viaje_id;
             $visitante['Encuestador'] = $visitanteCargar->encuestador_creada;
             $visitante['Encuestador_nombre'] = $visitanteCargar->digitadoreDigitada->aspNetUser->username;
@@ -336,8 +343,8 @@ class TurismoReceptorController extends Controller
 			'Salud' => 'exists:tipos_atencion_salud,id|required_if:Motivo,5',
 			'Horas' => 'required_if:Motivo,3',
 			'Otro' => 'required_if:Motivo,18|max:150',
-			'codigo_encuesta' => 'required|max:50',
-			'codigo_grupo' => 'required|unique:visitantes,codigo_grupo,'.$request->Id.',id',
+			//'codigo_encuesta' => 'required|max:50',
+			//'codigo_grupo' => 'required|unique:visitantes,codigo_grupo,'.$request->Id.',id',
 			'aplicacion' => 'required|exists:lugares_aplicacion_encuesta,id'
     	],[
     	    'Id.required' => 'Debe seleccionar el visitante a realizar la encuesta.',
@@ -404,8 +411,6 @@ class TurismoReceptorController extends Controller
 		$visitante->opciones_lugares_id = $request->Nacimiento;
 		$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
 		$visitante->sexo = $request->Sexo;
-		$visitante->codigo_encuesta = $request->codigo_encuesta;
-		$visitante->codigo_grupo = $request->codigo_grupo;
 		$visitante->fecha_aplicacion = date('Y-m-d H:i',strtotime(str_replace("/","-",$request->fechaAplicacion)));
 		$visitante->lugar_aplicacion_id = $request->aplicacion;
 		
@@ -427,16 +432,17 @@ class TurismoReceptorController extends Controller
                 break;
         }
         
+        $condicion = ($visitante->motivo_viaje == 3 && $request->Horas <5) || ($visitante->motivo_viaje == 17) ? 1 : 0;
         
         $visitante->historialEncuestas()->save(new Historial_Encuesta([
-            'estado_id' => $visitante->ultima_sesion != 7 ? 2 : 3,
+            'estado_id' => $condicion == 1 ? 3 : $visitante->ultima_sesion != 7 ? 2 : 3,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => 'Se ha modificado la sección de información general.',
             'usuario_id' => 1
         ]));
     	
     	$visitante->save();
-    	return ["success" => true];
+    	return ["success" => true, 'terminada' => $condicion];
     }
     
     public function getDepartamento($id){
@@ -1628,14 +1634,14 @@ class TurismoReceptorController extends Controller
 		$visitante->acepta_tratamiento = $request->acepta_tratamiento == 1 ? 1 : 0;
 		
 		$visitante->historialEncuestas()->save(new Historial_Encuesta([
-            'estado_id' => $visitante->ultima_sesion != 7 ? 2 : 3,
+            'estado_id' =>3,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => $sw == 0 ? 'Se completó la sección de fuente de información del visitante' : 'Se editó la sección de fuente de información del visitante',
             'usuario_id' => 1
         ]));
 		
         $visitante->save();
-        return ["success" => true, 'sw' => $sw];
+        return ["success" => true, 'sw' => $sw, 'codigo' => $visitante->codigo_grupo];
     }
     
 }
