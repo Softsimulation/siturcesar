@@ -1499,10 +1499,10 @@ class TurismoReceptorController extends Controller
         $compar_redes = $visitante->redesSociales()->pluck('id')->toArray();
         
         if(in_array(14,$fuentes_antes)){
-            $OtroFuenteAntes = $visitante->otrasFuenteInformacionAntesViaje->nombre;
+            $OtroFuenteAntes = $visitante->otrasFuenteInformacionAntesViaje != null ? $visitante->otrasFuenteInformacionAntesViaje->nombre : null;
         }
         if(in_array(14,$fuentes_durante)){
-            $OtroFuenteDurante = $visitante->otrasFuenteInformacionDuranteViaje->nombre;
+            $OtroFuenteDurante = $visitante->otrasFuenteInformacionDuranteViaje != null ? $visitante->otrasFuenteInformacionDuranteViaje->nombre : null;
         }
         
         $retorno = [
