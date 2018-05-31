@@ -4,6 +4,20 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
 
     $("body").attr("class", "cbp-spmenu-push charging");
     
+     $scope.optionFecha = {
+        calType: 'gregorian',
+        format: 'YYYY-MM-DD',
+        zIndex: 1060,
+        autoClose: true,
+        default: null,
+        gregorianDic: {
+            title: 'Fecha',
+            monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            daysNames: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            todayBtn: "Hoy"
+        }
+    };
+    
     $http.get('/temporada/gettemporadas')
         .success(function (data) {
             $("body").attr("class", "cbp-spmenu-push");
@@ -19,8 +33,6 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
         $scope.addForm.$setPristine();
         $scope.addForm.$setUntouched();
         $scope.addForm.$submitted = false;
-        $('#date_apli').val('');
-        $('#date_apli_2').val('');
         $('#crearTemporada').modal('show');
     }
 
@@ -35,17 +47,9 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
     }
 
     $scope.guardar = function () {
-        $scope.temporada.Fecha_ini = $('#date_apli').val().split("/").join("-");
-        $scope.temporada.Fecha_fin = $('#date_apli_2').val().split("/").join("-");
+        
         if (!$scope.addForm.$valid) {
             return;
-        }
-
-        for (var i in $scope.temporadas) {
-            if (!validarFechas($scope.temporada.Fecha_ini, $scope.temporada.Fecha_fin, $scope.temporadas[i].Fecha_ini, $scope.temporadas[i].Fecha_fin)) {
-                swal("Error", "Las fechas coinciden con una temporada ya creada.", "error");
-                return;
-            }
         }
 
         $("body").attr("class", "cbp-spmenu-push charging");
@@ -71,17 +75,9 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
     }
 
     $scope.editar = function () {
-        $scope.temporada.Fecha_ini = $('#date_apli_3').val().split("/").join("-");
-        $scope.temporada.Fecha_fin = $('#date_apli_4').val().split("/").join("-");
+      
         if (!$scope.editForm.$valid) {
             return;
-        }
-
-        for (var i in $scope.temporadas) {
-            if (!validarFechas($scope.temporada.Fecha_ini, $scope.temporada.Fecha_fin, $scope.temporadas[i].Fecha_ini, $scope.temporadas[i].Fecha_fin) && $scope.temporadas[i].Id != $scope.temporada.Id) {
-                swal("Error", "Las fechas coinciden con una temporada ya creada.", "error");
-                return;
-            }
         }
 
         $("body").attr("class", "cbp-spmenu-push charging");

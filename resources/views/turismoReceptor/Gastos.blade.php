@@ -422,47 +422,18 @@
                                         </tr>
                                         <tr ng-repeat="rub in rubros">
                                             
-                                            <td style="width:20%;">E.5.@{{$index+1}} @{{rub.rubros_con_idiomas[0].nombre}}</td>
+                                            <td style="width:20%;">E.5.@{{$index+1}} @{{rub.rubros_con_idiomas[0].nombre}} 
+                                        
+                                                <div class="form-group" ng-if="rub.id==16" >
+                                                           <label for="otroRubros" class="col-md-12 control-label">Otro, ¿Cuál?</label>
+                                                           <input type="text" class="form-control" name="otroRubros" ng-model="rub.gastos_visitantes[0].otro"   ng-disabled="encuestaReceptor.poderLLenar" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null && rub.gastos_visitantes[0].divisas_magdalena != null && rub.gastos_visitantes[0].personas_cubiertas != null"  />
+                                                           <span ng-show="GastoForm.$submitted || GastoForm.otroRubros.$touched">
+                                                                   <span class="label label-danger" ng-show="GastoForm.otroRubros.$error.required">* El campo es requerido.</span>
+                                                           </span>
+                                                </div>
+                                            </td>
                                             <td style="width:55%;">
                                                 <div class="row">
-                                                    <!--<div class="col-xs-12 col-md-6">
-                                                        
-                                                        <h5 style="margin-bottom: 0;"><b>Fuera del Atlántico</b></h5>
-                                                        <div class="row">
-                                                            <div class="col-xs-12 col-md-6">
-                                                                <div class="form-group">
-                                                                   
-                                                                    <label for="gastoFuera" class="col-md-12 control-label" style="color:dimgray;">Cantidad</label>
-
-                                                                    <div class="col-md-12">
-                                                                        <input type="number" class="form-control" name="cantFuera@{{$index}}" placeholder="0" min="1" ng-model="rub.gastos_visitantes[0].cantidad_pagada_fuera" ng-required="rub.gastos_visitantes[0].divisas_fuera != null || rub.gastos_visitantes[0].personas_cubiertas != null && rub.gastos_visitantes[0].cantidad_pagada_magdalena == null ">
-                                                                        <span ng-show="GastoForm.$submitted || GastoForm.cantFuera@{{$index}}.$touched">
-                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera@{{$index}}.$error.min">*El valor debe ser mayor a 0</span>
-                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera@{{$index}}.$error.number">* Solo números.</span>
-                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera@{{$index}}.$error.required">* Campo requerido.</span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-xs-12 col-md-6">
-                                                                <div class="form-group">
-                                                                    
-                                                                    <label for="selecDivisa2" class="col-md-2 control-label" style="color:dimgray;">Divisa</label>
-
-                                                                    <div class="col-md-10">
-                                                                        <select id="selectDivisa2" class="form-control" name="divisaFuera@{{$index}}" ng-options ="item.id as item.nombre for item in divisas" ng-required="rub.gastos_visitantes[0].cantidad_pagada_fuera != null || rub.gastos_visitantes[0].personas_cubiertas != null && rub.gastos_visitantes[0].cantidad_pagada_magdalena == null" ng-model="rub.gastos_visitantes[0].divisas_fuera">
-                                                                           
-                                                                            <option value="">Seleccionar divisa</option>
-                                                                          
-                                                                        </select>
-                                                                        <span ng-show="GastoForm.$submitted || GastoForm.divisaFuera@{{$index}}.$touched">
-                                                                            <span class="label label-danger" ng-show="GastoForm.divisaFuera@{{$index}}.$error.required">* Campo requerido.</span>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>-->
                                                     <div class="col-xs-12 col-md-12">
                                                         <!--P9Col2Title2. En el Magdalena-->
                                                         
@@ -595,6 +566,7 @@
                         <div class="checkbox" ng-repeat="fin in financiadores" ng-show="!(encuestaReceptor.RealizoGasto==0 && fin.id==1)">
                             <label>
                                 <input type="checkbox" checklist-model="encuestaReceptor.Financiadores" name ="Financiadores" checklist-value="fin.id" > @{{fin.nombre}}
+                                <input type="text" style="display: inline-block;" class="form-control" id="inputOtro" placeholder="Escriba su otra opción" ng-model="encuestaReceptor.Otro" ng-change="verificarOtro()" ng-if="fin.id==11" />
                             </label>
                             
                         </div>

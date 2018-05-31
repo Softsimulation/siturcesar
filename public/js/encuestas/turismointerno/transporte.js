@@ -9,14 +9,39 @@ angular.module('interno.transporte', ["checklist-model"])
             .success(function (data) {
                 $("body").attr("class", "cbp-spmenu-push")
                 $scope.transportes = data.transportes
+                $scope.medios=data.medios
                 $scope.transporte.id = $scope.id
                 $scope.transporte.Mover = data.tipo_transporte
-                $scope.transporte.Empresa = data.empresa
+                $scope.transporte.Medio = data.medio_transporte
+                $scope.transporte.Tipo_otro=data.otrotipo
+                $scope.transporte.Medio_otro=data.otromedio
+                
             }).error(function () {
                 $("body").attr("class", "cbp-spmenu-push")
                 swal("Error", "Error en la carga, por favor recarga la pagina", "error")
             })
     })
+    
+    $scope.cambio=function(){
+        
+        if($scope.transporte.Mover!=10){
+            
+            $scope.transporte.Tipo_otro="";
+            
+        }
+        
+    }
+    
+    $scope.cambio2=function(){
+        
+         if($scope.transporte.Medio!=8){
+            
+            $scope.transporte.Medio_otro="";
+            
+        }
+        
+    }
+   
 
     
 

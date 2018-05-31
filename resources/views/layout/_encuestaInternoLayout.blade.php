@@ -17,6 +17,7 @@
     <link href="{{asset('/css/sweetalert.min.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/ionicons.min.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/styleLoading.css')}}" rel='stylesheet' type='text/css' />
+    <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel='stylesheet' type='text/css' />
     @yield('estilos')
     <style>
         .banner {
@@ -115,12 +116,7 @@
             padding-left: 1.8em;
         }
 
-        footer {
-            width: 100%;
-            background-color: rgba(0,0,0,.35);
-            padding: 1em;
-            text-align: right;
-        }
+        
 
         #log form {
             float: none !important;
@@ -135,6 +131,13 @@
             }
             .tooltip-inner {
                 text-align:left !important;
+            }
+             .ADMdtp-box footer .timeSelectIcon, .ADMdtp-box footer .today, .ADMdtp-box footer .calTypeContainer p{
+                fill: darkorange;
+                color: darkorange;
+            }
+            .ADMdtp-box footer .calTypeContainer p{
+                display: none;
             }
     </style>
 </head>
@@ -218,6 +221,8 @@
     <script src="{{asset('/js/plugins/angular-repeat-n.min.js')}}"></script>
     <script src="{{asset('/js/plugins/sweetalert.min.js')}}"></script>
     <script src="{{asset('/js/plugins/selectjp.js')}}"></script>
+    <script src="{{asset('/js/ADM-dateTimePicker.min.js')}}" type="text/javascript"></script>
+   
 
     <script src="{{asset('/js/encuestas/turismointerno/encuestaInterno.js')}}"></script>
     <script src="{{asset('/js/encuestas/turismointerno/transporte.js')}}"></script>

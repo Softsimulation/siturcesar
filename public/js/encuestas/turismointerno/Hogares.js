@@ -4,6 +4,20 @@ angular.module('interno.hogares', [])
     $scope.encuesta = {}
     $scope.encuesta.integrantes = []
     $scope.integrante = {}
+    
+    $scope.optionFecha = {
+        calType: 'gregorian',
+        format: 'YYYY-MM-DD hh:mm',
+        zIndex: 1060,
+        autoClose: true,
+        default: null,
+        gregorianDic: {
+            title: 'Fecha',
+            monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            daysNames: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            todayBtn: "Hoy"
+        }
+    };
 
     $http.get('/turismointerno/datoshogar')
         .success(function (data) {
@@ -12,6 +26,8 @@ angular.module('interno.hogares', [])
             $scope.niveles = data.niveles
             $scope.motivos = data.motivos
             $scope.estratos=data.estratos
+            $scope.encuestadores=data.encuestadores
+            $scope.estados=data.estados
 
         })
         .error(function () {
@@ -98,6 +114,7 @@ angular.module('interno.hogares', [])
         }
 
         if ($scope.DatosForm.$valid) {
+            
             $("body").attr("class", "charging");
             $http.post('/turismointerno/guardarhogar', $scope.encuesta)
                 .success(function (data) {
@@ -130,6 +147,7 @@ angular.module('interno.hogares', [])
 })
 
 .controller("editar_Hogar", function ($scope, $http) {
+    
     $scope.encuesta = {}
     $scope.encuesta.integrantes = []
     $scope.integrante = {}
@@ -145,16 +163,15 @@ angular.module('interno.hogares', [])
                 $scope.estratos = data.datos.estratos
                 $scope.barrios = data.barrios
                 $scope.municipio = String(data.encuesta.edificacione.barrio.municipio_id)
-                var hora_fecha=data.encuesta.fecha_realizacion.split(" ");
-                var fecha = hora_fecha[0].split("-")
-                var hora = hora_fecha[1].split(":")               
+                $scope.encuestadores=data.datos.encuestadores
+                $scope.estados=data.datos.estados
                 $scope.encuesta = data.encuesta;
-                $scope.encuesta.Fecha_aplicacion = new Date(fecha[0], (fecha[1]-1), fecha[2])
-                $scope.encuesta.Hora_aplicacion = new Date(fecha[0], fecha[1], fecha[2], hora[0], hora[1], hora[2])
+                $scope.encuesta.Fecha_aplicacion = data.encuesta.fecha_realizacion
                 $scope.encuesta.Barrio=String(data.encuesta.edificacione.barrio_id)
                 $scope.encuesta.Estrato=String(data.encuesta.edificacione.estrato_id)
                 $scope.encuesta.Direccion=data.encuesta.edificacione.direccion
                 $scope.encuesta.Telefono=data.encuesta.telefono
+                $scope.encuesta.Encuestador=String(data.encuesta.digitadores_id)
                 $scope.encuesta.Nombre_Entrevistado=data.encuesta.edificacione.nombre_entrevistado
                 $scope.encuesta.Celular_Entrevistado=data.encuesta.edificacione.telefono_entrevistado
                 $scope.encuesta.Email_Entrevistado=data.encuesta.edificacione.email_entrevistado
@@ -334,6 +351,11 @@ angular.module('interno.hogares', [])
             array[i].Viaje=(array[i].es_viajero)?"1":"0";
             array[i].Nivel_Educacion=String(array[i].nivel_educacion);
             array[i].jefe_hogar=String(array[i].jefe_hogar);
+            
+            array[i].Civil=String(array[i].estado_civil_id);
+            array[i].Ocupacion=String(array[i].ocupacion);
+            array[i].Vive=(array[i].es_residente)?"1":"0";
+            
             if(array[i].motivo_no_viajes.length>0){
                 array[i].Motivo=String(array[i].motivo_no_viajes[0].motivo_no_viaje_id);
              }

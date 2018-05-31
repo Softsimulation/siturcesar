@@ -1,6 +1,6 @@
 @extends('layout._AdminLayout')
 
-@section('Title','Administrador de temporadas :: SITUR Magdalena')
+@section('Title','Administrador de temporadas :: SITUR Atlántico')
 @section('app','ng-app="situr_admin"')
 @section ('estilos')
     <style>
@@ -62,14 +62,10 @@
         }
     </style>
 @endsection
+@section('controller','ng-controller="temporadasCtrl"')
 @section('content')
-<div class="main-page" ng-controller="temporadasCtrl">
+<div class="main-page" >
     <h1 class="title1">Temporadas</h1><br />
-    
-    <div ng-repeat="error in errores" ng-if="error.length>0">
-        -@{{error[0]}}
-    </div>
-
     <div class="blank-page widget-shadow scroll" id="style-2 div1">
         
         <div class="row">
@@ -134,11 +130,14 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Agregar temporada</h4>
                 </div>
-                <div ng-repeat="error in errores" ng-if="error.length>0">
-                    -@{{error[0]}}
-                </div>
                 <form role="form" name="addForm" novalidate>
-                    <div class="modal-body">
+                        <div class="modal-body">
+                            <div class="alert alert-danger" ng-if="errores != null">
+                                <p ng-repeat="error in errores" >
+                                    -@{{error[0]}}
+                                </p>
+                            </div>
+                
                         <div class="row">
                             <div class="col-md-12 col-xs-12 col-sm-12">
                                 <div class="form-group">
@@ -164,12 +163,7 @@
                                 <div class="form-group">
                                     
                                         <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha inicial</label>
-                                        <div class='input-group date' id='date_apli1'>
-                                            <input id='date_apli' name="fecha" type='text' class="form-control" placeholder="Fecha de aplicación" ng-model="grupo.Fecha" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
+                                        <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model="temporada.Fecha_ini" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha inicial"></adm-dtp>
                                 </div>
                             </div>
 
@@ -177,12 +171,7 @@
                                 <div class="form-group">
                                    
                                         <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha final</label>
-                                        <div class='input-group date' id='date_apli2'>
-                                            <input id='date_apli_2' name="fecha" type='text' class="form-control" placeholder="Fecha de aplicación" ng-model="grupo.Fecha" />
-                                            <span class="input-group-addon">
-                                                <span class="glyphicon glyphicon-calendar"></span>
-                                            </span>
-                                        </div>
+                                        <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model="temporada.Fecha_fin" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha final"></adm-dtp>
                                     
                                 </div>
                             </div>
@@ -207,11 +196,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="myModalLabel">Agregar temporada</h4>
                 </div>
-                <div ng-repeat="error in errores" ng-if="error.errores.length>0">
-                    -@{{error[0]}}
-                </div>
                 <form role="form" name="editForm" novalidate>
                     <div class="modal-body">
+                        <div class="alert alert-danger" ng-if="errores != null">
+                                <p ng-repeat="error in errores" >
+                                    -@{{error[0]}}
+                                </p>
+                        </div>
                         <div class="row">
                             <div class="col-md-12 col-xs-12 col-sm-12">
                                 <div class="form-group">
@@ -235,28 +226,18 @@
 
                             <div class="col-md-6 col-xs-12 col-sm-12">
                                 <div class="form-group">
-
-                                    <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha inicial</label>
-                                    <div class='input-group date' id='date_apli3'>
-                                        <input id='date_apli_3' ng-model="temporada.Fecha_ini" name="fecha" type='text' class="form-control" placeholder="Fecha de aplicación" ng-model="grupo.Fecha" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
-
+                                    
+                                        <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha inicial</label>
+                                        <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model="temporada.Fecha_ini" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha inicial"></adm-dtp>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12 col-sm-12">
                                 <div class="form-group">
-
-                                    <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha final</label>
-                                    <div class='input-group date' id='date_apli4'>
-                                        <input id='date_apli_4' ng-model="temporada.Fecha_fin" name="fecha" type='text' class="form-control" placeholder="Fecha de aplicación" ng-model="grupo.Fecha" />
-                                        <span class="input-group-addon">
-                                            <span class="glyphicon glyphicon-calendar"></span>
-                                        </span>
-                                    </div>
+                                   
+                                        <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha final</label>
+                                        <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model="temporada.Fecha_fin" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha final"></adm-dtp>
+                                    
                                 </div>
                             </div>
 

@@ -86,6 +86,10 @@
         .alert-fixed {
             z-index: 11 !important;
         }
+        td.disabled-table {
+            pointer-events: none;
+            background: #0000000d;
+        }
     </style>
 @endsection
 
@@ -109,10 +113,12 @@
         </div>
     
         <form role="form" name="GastoForm" novalidate>
-    
+          
+            
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Seleccione los gastos realizados por usted antes (gastos de preparación del viaje al Atlántico) y durante su viaje al Atlántico</b></h3>
+                    <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿El viaje hizo parte de un paquete/plan turístico o excursión?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Pregunta con selección única</b></div>
                 <div class="panel-body">
@@ -120,247 +126,224 @@
                         <div class="col-md-12">
                             <div class="radio radio-primary">
                                 <label>
-                                    <input type="radio" value="1" name="realizoGastos" ng-model="encuesta.realizoGasto" ng-required="true">
-                                    Realicé gastos en el destino
+                                    <input type="radio" value="1" name="viajePaquete" ng-model="encuesta.viajePaquete" ng-required="true">
+                                    Si
                                 </label>
                             </div>
                             <div class="radio radio-primary">
                                 <label>
-                                    <input type="radio" value="0" name="realizoGastos" ng-model="encuesta.realizoGasto" ng-required="true">
-                                    No realicé ningún tipo de gasto
+                                    <input type="radio" value="0" name="viajePaquete" ng-model="encuesta.viajePaquete" ng-required="true">
+                                    No
                                 </label>
                             </div>
-                            <span ng-show="GastoForm.$submitted || GastoForm.realizoGastos.$touched">
-                                <span class="label label-danger" ng-show="GastoForm.realizoGastos.$error.required">* El campo es requerido.</span>
+                            <span ng-show="GastoForm.$submitted || GastoForm.viajePaquete.$touched">
+                                <span class="label label-danger" ng-show="GastoForm.viajePaquete.$error.required">* El campo es requerido.</span>
                             </span>
                         </div>
                     </div>
                 </div>
-            </div>
-    
-            <div class="gastosRealizados" ng-show="encuesta.realizoGasto==1">
+        </div>
+            
+            <div ng-if="encuesta.viajePaquete==1">
+                
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿El viaje hizo parte de un paquete/plan turístico o excursión?</b></h3>
+                        <!-- Información del paquete turístico-->
+                        <h3 class="panel-title"><b>Información del paquete turístico</b></h3>
                     </div>
-                    <div class="panel-footer"><b>Pregunta con selección única</b></div>
+                    <div class="panel-footer"><b>Complete la siguiente información</b></div>
                     <div class="panel-body">
                         <div class="row">
-                            <div class="col-md-12">
-                                <div class="radio radio-primary">
-                                    <label>
-                                        <input type="radio" value="1" name="viajePaquete" ng-model="encuesta.viajePaquete" ng-required="encuesta.realizoGasto==1">
-                                        Si
-                                    </label>
+                            <div class="col-xs-12 col-md-5">
+                                <div class="form-group">
+                                    <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
+                                    <label for="costo" class="col-md-12 control-label" style="color:dimgray;"><span class="asterik glyphicon glyphicon-asterisk" style="font-size: .9em;"></span>  ¿Cuánto pagó usted por el paquete turístico o excursión?</label>
+
+                                    <div class="col-md-12">
+                                        <i class="material-icons" title="Aproximadamente en pesos colombianos" style="font-size: 1.6em;position: relative; top: 8px;">help</i>
+                                        <input type="number" class="form-control" min="1000" name="costo" ng-model="encuesta.viajeExcursion.valor_paquete" placeholder="" ng-required="encuesta.viajePaquete==1" style="display:inline-block;width:90%;">
+                                    </div>
+                                    <span ng-show="GastoForm.$submitted || GastoForm.costo.$touched">
+                                        <span class="label label-danger" ng-show="GastoForm.costo.$error.required">* El campo es requerido.</span>
+                                        <span class="label label-danger" ng-show="GastoForm.costo.$error.min">* El valor mínimo es de 1.000 pesos</span>
+                                        <span class="label label-danger" ng-show="GastoForm.costo.$error.number">* Sólo números</span>
+                                    </span>
                                 </div>
-                                <div class="radio radio-primary">
-                                    <label>
-                                        <input type="radio" value="0" name="viajePaquete" ng-model="encuesta.viajePaquete" ng-required="encuesta.realizoGasto==1">
-                                        No
-                                    </label>
-                                </div>
-                                <span ng-show="GastoForm.$submitted || GastoForm.viajePaquete.$touched">
-                                    <span class="label label-danger" ng-show="GastoForm.viajePaquete.$error.required">* El campo es requerido.</span>
-                                </span>
                             </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="ViajeDepartamento" ng-if="encuesta.viajePaquete==1">
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <!-- Información del paquete turístico-->
-                            <h3 class="panel-title"><b>Información del paquete turístico</b></h3>
-                        </div>
-                        <div class="panel-footer"><b>Complete la siguiente información</b></div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-xs-12 col-md-5">
-                                    <div class="form-group">
-                                        <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
-                                        <label for="costo" class="col-md-12 control-label" style="color:dimgray;"><span class="asterik glyphicon glyphicon-asterisk" style="font-size: .9em;"></span>  ¿Cuánto pagó usted por el paquete turístico o excursión?</label>
-    
-                                        <div class="col-md-12">
-                                            <i class="material-icons" title="Aproximadamente en pesos colombianos" style="font-size: 1.6em;position: relative; top: 8px;">help</i>
-                                            <input type="number" class="form-control" min="1000" name="costo" ng-model="encuesta.viajeExcursion.valor_paquete" placeholder="" ng-required="encuesta.viajePaquete==1" style="display:inline-block;width:90%;">
-                                        </div>
-                                        <span ng-show="GastoForm.$submitted || GastoForm.costo.$touched">
-                                            <span class="label label-danger" ng-show="GastoForm.costo.$error.required">* El campo es requerido.</span>
-                                            <span class="label label-danger" ng-show="GastoForm.costo.$error.min">* El valor mínimo es de 1.000 pesos</span>
-                                            <span class="label label-danger" ng-show="GastoForm.costo.$error.number">* Sólo números</span>
+                            <div class="col-xs-12 col-md-4">
+                                <div class="form-group">
+                                    <!-- P5P2. Moneda de compra del paquete turístico o excursión-->
+                                    <label for="selectDivisa" class="col-md-12 control-label" style="color:dimgray;"><span class="asterik glyphicon glyphicon-asterisk" style="font-size: .9em;"></span>  Moneda de compra del paquete turístico o excursión</label>
+
+                                    <div class="col-md-12">
+                                        <select id="selectDivisa" class="form-control" ng-options="it.id as it.divisas_con_idiomas[0].nombre for it in divisas" ng-model="encuesta.viajeExcursion.divisas_id" name="Divisa" ng-required="encuesta.viajePaquete==1">
+                                            <!-- P5P2Input1. Seleccione una moneda-->
+                                            <option value="" selecd disabled >seleccione una opción</option>
+                                        </select>
+                                        <span ng-show="GastoForm.$submitted || GastoForm.Divisa.$touched">
+                                            <span class="label label-danger" ng-show="GastoForm.Divisa.$error.required">* El campo es requerido.</span>
                                         </span>
                                     </div>
                                 </div>
-                                <div class="col-xs-12 col-md-4">
-                                    <div class="form-group">
-                                        <!-- P5P2. Moneda de compra del paquete turístico o excursión-->
-                                        <label for="selectDivisa" class="col-md-12 control-label" style="color:dimgray;"><span class="asterik glyphicon glyphicon-asterisk" style="font-size: .9em;"></span>  Moneda de compra del paquete turístico o excursión</label>
-    
-                                        <div class="col-md-12">
-                                            <select id="selectDivisa" class="form-control" ng-options="it.id as it.divisas_con_idiomas[0].nombre for it in divisas" ng-model="encuesta.viajeExcursion.divisas_id" name="Divisa" ng-required="encuesta.viajePaquete==1">
-                                                <!-- P5P2Input1. Seleccione una moneda-->
-                                                <option value="" selecd disabled >seleccione una opción</option>
-                                            </select>
-                                            <span ng-show="GastoForm.$submitted || GastoForm.Divisa.$touched">
-                                                <span class="label label-danger" ng-show="GastoForm.Divisa.$error.required">* El campo es requerido.</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xs-12 col-md-3">
-                                    <div class="form-group">
-                                        <!-- P5P3. ¿A cuántas personas cubrió?-->
-                                        <label for="personas_cubiertas" class="col-md-12 control-label" style="color:dimgray;">¿A cuántas personas cubrió?</label>
-    
-                                        <div class="col-md-12">
-                                            <input type="number" class="form-control" min="1" name="personas_cubiertas" ng-model="encuesta.viajeExcursion.personas_cubrio" placeholder="">
-                                            <span ng-show="GastoForm.$submitted || GastoForm.personas_cubiertas.$touched">
-                                                <span class="label label-danger" ng-show="GastoForm.personas_cubiertas.$error.min">* El valor debe ser mayor a 0.</span>
-                                                <span class="label label-danger" ng-show="GastoForm.personas_cubiertas.$error.number">* Solo números.</span>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                    </div>
-    
-                    <div class="panel panel-success" ng-show="encuesta.viajeExcursion.divisas_id==39">
-                        <div class="panel-heading">
-                            <!-- P2. ¿Cuál fue la modalidad efectuada en el pago del paquete turístico?-->
-                            <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuál fue la modalidad efectuada en el pago del paquete turístico?</b></h3>
-                        </div>
-                        <div class="panel-footer"><b>Pregunta con selección única</b></div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="radio radio-primary">
-                                        <label>
-                                            <input type="radio" id="efectivo" value="1" name="modalidadPago" ng-model="encuesta.modalidadPago" ng-required="encuesta.viajeExcursion.divisas_id==39">
-                                            Efectivo
-                                        </label>
+                            <div class="col-xs-12 col-md-3">
+                                <div class="form-group">
+                                    <!-- P5P3. ¿A cuántas personas cubrió?-->
+                                    <label for="personas_cubiertas" class="col-md-12 control-label" style="color:dimgray;">¿A cuántas personas cubrió?</label>
+
+                                    <div class="col-md-12">
+                                        <input type="number" class="form-control" min="1" name="personas_cubiertas" ng-model="encuesta.viajeExcursion.personas_cubrio" placeholder="">
+                                        <span ng-show="GastoForm.$submitted || GastoForm.personas_cubiertas.$touched">
+                                            <span class="label label-danger" ng-show="GastoForm.personas_cubiertas.$error.min">* El valor debe ser mayor a 0.</span>
+                                            <span class="label label-danger" ng-show="GastoForm.personas_cubiertas.$error.number">* Solo números.</span>
+                                        </span>
                                     </div>
-                                    <div class="radio radio-primary">
-                                        <label>
-                                            <input type="radio" id="credito" value="0" name="modalidadPago" ng-model="encuesta.modalidadPago" ng-required="encuesta.viajeExcursion.divisas_id==39">
-                                            Tarjeta de crédito
-                                        </label>
-                                    </div>
-                                    <span ng-show="GastoForm.$submitted || GastoForm.modalidadPago.$touched">
-                                        <span class="label label-danger" ng-show="GastoForm.modalidadPago.$error.required">* El campo es requerido.</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <!-- P6. El paquete/plan turístico o excursión fue comprado a una agencia de viajes u operador turístico:-->
-                            <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> El paquete/plan turístico o excursión fue comprado a una agencia de viajes u operador turístico</b></h3>
-                        </div>
-                        <div class="panel-footer"><b> Pregunta con selección única</b></div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="radio radio-primary">
-                                        <label>
-                                            <input type="radio" value="1" name="comproEnAgencia" ng-model="encuesta.comproEnAgencia" ng-required="encuesta.viajePaquete==1">
-                                            Si
-                                        </label>
-                                    </div>
-                                    <div class="radio radio-primary">
-                                        <label>
-                                            <input type="radio" value="0" name="comproEnAgencia" ng-model="encuesta.comproEnAgencia" ng-required="encuesta.viajePaquete==1">
-                                            No
-                                        </label>
-                                    </div>
-                                    <span ng-show="GastoForm.$submitted || GastoForm.comproEnAgencia.$touched">
-                                        <span class="label label-danger" ng-show="GastoForm.comproEnAgencia.$error.required">* El campo es requerido.</span>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-    
-                    <div class="panel panel-success" ng-show="encuesta.comproEnAgencia==1">
-                        <div class="panel-heading">
-                            <!-- P7. ¿En donde está ubicada la agencia de viajes/operador turístico?-->
-                            <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿En donde está ubicada la agencia de viajes/operador turístico?</b></h3>
-                        </div>
-                        <div class="panel-footer"><b>Pregunta con selección única</b></div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="radio radio-primary" ng-repeat="opc in opcionesLugares">
-                                        <label>
-                                            <input type="radio" id="radio-opt-@{{opc.Id}}" value="@{{opc.id}}" name="lugar" ng-model="encuesta.lugarAgencia" ng-required="encuesta.comproEnAgencia==1">
-                                            @{{opc.opciones_lugares_con_idiomas[0].nombre}}
-                                        </label>
-                                    </div>
-                                    <span ng-show="GastoForm.$submitted">
-                                        <span class="label label-danger" ng-show="GastoForm.lugar.$error.required">* El campo es requerido.</span>
-                                    </span>
-    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="panel panel-success">
-                        <div class="panel-heading">
-                            <!-- P8. ¿Qué productos y servicios incluía el paquete turístico o excursión?-->
-                            <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Qué productos y servicios incluía el paquete turístico o excursión?</b></h3>
-                        </div>
-                        <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="checkbox" ng-repeat="servicio in serviciosPaquetes">
-                                        <label>
-                                            <input type="checkbox" name="servicios" checklist-model="encuesta.serviciosPaquetes" checklist-value="servicio.id"> 
-                                            @{{servicio.nombre}}
-                                        </label>
-                                    </div>
-                                    <span ng-show="GastoForm.$submitted || GastoForm.servicios.$touched">
-                                        <span class="label label-danger" ng-show="encuesta.serviciosPaquetes.length == 0 ||  encuesta.serviciosPaquetes == null">* El campo es requerido.</span>
-                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-    
+                
                 <div class="panel panel-success">
                     <div class="panel-heading">
-                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Desea proporcionar información adicional de sus gastos?</b></h3>
+                        <!-- P6. El paquete/plan turístico o excursión fue comprado a una agencia de viajes u operador turístico:-->
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> El paquete/plan turístico o excursión fue comprado a una agencia de viajes u operador turístico</b></h3>
                     </div>
-                    <div class="panel-footer"><b>Pregunta con selección única</b></div>
+                    <div class="panel-footer"><b> Pregunta con selección única</b></div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="radio radio-primary">
+                                <div class="radio radio-primary" ng-repeat="item in TipoProveedorPaquete" >
                                     <label>
-                                        <input type="radio" id="gatsi" value="1" name="opt6" ng-model="encuesta.gastosAparte" ng-required="encuestaInterno.realizoGasto==1">
-                                        Si
+                                        <input type="radio" value="@{{item.id}}" name="comproEnAgencia" ng-model="encuesta.viajeExcursion.tipo_proveedor_paquete_id" ng-required="true">
+                                        @{{item.tipo_proveedor_paquete_con_idiomas[0].nombre}}
                                     </label>
                                 </div>
-                                <div class="radio radio-primary">
-                                    <label>
-                                        <input type="radio" id="gastno" value="0" name="opt6" ng-model="encuesta.gastosAparte" ng-required="encuestaInterno.realizoGasto==1">
-                                        No
-                                    </label>
-                                </div>
-                                <span ng-show="GastoForm.$submitted || GastoForm.opt6.$touched">
-                                    <span class="label label-danger" ng-show="GastoForm.opt6.$error.required">* El campo es requerido.</span>
+                                <span ng-show="GastoForm.$submitted || GastoForm.comproEnAgencia.$touched">
+                                    <span class="label label-danger" ng-show="GastoForm.comproEnAgencia.$error.required">* El campo es requerido.</span>
                                 </span>
                             </div>
                         </div>
                     </div>
                 </div>
-    
-                <div class="panel panel-success" ng-show="encuesta.gastosAparte == 1">
+                
+                <div class="panel panel-success" ng-show="encuesta.viajeExcursion.tipo_proveedor_paquete_id==1">
+                    <div class="panel-heading">
+                        <!-- P7. ¿En donde está ubicada la agencia de viajes/operador turístico?-->
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿En donde está ubicada la agencia de viajes/operador turístico?</b></h3>
+                    </div>
+                    <div class="panel-footer"><b>Pregunta con selección única</b></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="radio radio-primary" ng-repeat="opc in opcionesLugares">
+                                    <label>
+                                        <input type="radio" id="radio-opt-@{{opc.Id}}" value="@{{opc.id}}" name="lugar" ng-model="encuesta.lugarAgencia" ng-required="encuesta.comproEnAgencia==1">
+                                        @{{opc.opciones_lugares_con_idiomas[0].nombre}}
+                                    </label>
+                                </div>
+                                <span ng-show="GastoForm.$submitted">
+                                    <span class="label label-danger" ng-show="GastoForm.lugar.$error.required">* El campo es requerido.</span>
+                                </span>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <!-- P8. ¿Qué productos y servicios incluía el paquete turístico o excursión?-->
+                        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Qué productos y servicios incluía el paquete turístico o excursión?</b></h3>
+                    </div>
+                    <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="checkbox" ng-repeat="servicio in serviciosPaquetes">
+                                    <label>
+                                        <input type="checkbox" name="servicios" checklist-model="encuesta.serviciosPaquetes" checklist-value="servicio.id" checklist-change="changeServiciosPaquetes(servicio)" > 
+                                        @{{servicio.nombre}}
+                                        <div class="form-group" ng-if="servicio.id==12 && encuesta.serviciosPaquetes.indexOf(12)!=-1">
+                                            <label for="otroServicio" class="col-md-12 control-label">Otro, ¿Cuál?</label>
+                                            <input type="text" class="form-control" name="otroServicio" ng-model="encuesta.otrosServicios"  />
+                                        </div>
+                                    </label>
+                                </div>
+                                <span ng-show="GastoForm.$submitted || GastoForm.servicios.$touched">
+                                    <span class="label label-danger" ng-show="encuesta.serviciosPaquetes.length == 0 ||  encuesta.serviciosPaquetes == null">* El campo es requerido.</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div ng-if="encuesta.gastosServicosPaquetes.length>0" >
+                        <div class="panel-heading">
+                            <!-- P8. ¿Qué productos y servicios incluía el paquete turístico o excursión?-->
+                            <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Qué porcentaje del gasto realizó:</b></h3>
+                        </div>
+                        <div class="panel-footer"><b>Complete la siguiente tabla</b></div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                   
+                                    <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th>Servicio</th>
+                                            <th>En Atlántico</th>
+                                            <th>Fuera de Atlántico</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr ng-repeat="servicio in encuesta.gastosServicosPaquetes" >
+                                            <td> @{{servicio.nombre}}</td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
+                                                    <label for="costoA@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
+                                                    <input type="number" class="form-control" min="0" min="100" name="costoA@{{$index}}" ng-model="servicio.dentro" ng-required="true" style="display:inline-block;width:90%;">
+                                                    <span ng-show="GastoForm.$submitted || GastoForm.costoA@{{$index}}.$touched">
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.required">* El campo es requerido.</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.min">* El valor mínimo es 0</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.max">* El valor máximo es 100</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.number">* Sólo números</span>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
+                                                    <label for="costoB@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
+                                                    <input type="number" class="form-control" min="0" min="100" name="costoB@{{$index}}" ng-model="servicio.fuera" ng-required="true" style="display:inline-block;width:90%;">
+                                                    <span ng-show="GastoForm.$submitted || GastoForm.costoB@{{$index}}.$touched">
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.required">* El campo es requerido.</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.min">* El valor mínimo es 0</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.max">* El valor máximo es 100</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.number">* Sólo números</span>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                   
+                                  
+                                   
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+        
+            
+            
+            <div class="panel panel-success" >
                     <div class="panel-heading">
                         <!-- P9. Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos individuales-->
                         <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>  Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos induviduales</b></h3>
@@ -384,36 +367,71 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="rub in encuesta.rubros">
-                                                <td style="width:35%;">@{{rub.nombre}}</td>
-                                                <td style="width:25%;">
+                                            
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox" >
+                                                        <label>
+                                                            <input type="checkbox"  name="noGastos" ng-model="encuesta.noRealiceGastos" ng-change="changeNorealiceGastos()"  ng-true-value="1" ng-false-value="0"  > 
+                                                            No realicé ningún tipo de gasto
+                                                        </label>
+                                                    </div>
+                                                    <span ng-show="GastoForm.$submitted || GastoForm.Financiadores.$touched">
+                                                        <span class="label label-danger" ng-show="encuesta.financiadores.length == 0 ||  encuesta.financiadores == null">* El campo es requerido.</span>
+                                                    </span>
+                                                </td>
+                                                <td></td><td></td><td></td>
+                                            </tr>
+                                            
+                                            <tr ng-repeat="rub in encuesta.rubros"  >
+                                                <td style="width:35%;">
+                                                    @{{rub.nombre}}
+                                                    <!--
+                                                    <div class="form-group" ng-if="rub.id==20" >
+                                                        <label for="otroRubros" class="col-md-12 control-label">Otro, ¿Cuál?</label>
+                                                        <input type="text" class="form-control" name="otroRubros" ng-model="encuesta.otroRubros"  />
+                                                    </div>
+                                                    -->
+                                                </td>
+                                                <td style="width:25%;" ng-class="{ 'disabled-table' : encuesta.noRealiceGastos==1 }" >
                                                     <div class="row">
                                                         <div class="col-xs-12 col-md-6">
-                                                            <label for="cantidadFuera@{{$index}}" class="col-md-12 control-label" style="color:dimgray;">Fuera del Atlántico </label>
-                                                            <input type="number" class="form-control" name="cantidadFuera@{{$index}}" placeholder="0" min="1000" ng-model="rub.viajes_gastos_internos[0].valor_fuera">
-                                                            <span ng-show="GastoForm.$submitted || GastoForm.cantidadFuera@{{$index}}.$touched">
-                                                                <span class="label label-danger" ng-show="GastoForm.cantidadFuera@{{$index}}.$error.min">*El valor mínimo es de 1.000 pesos</span>
-                                                                <span class="label label-danger" ng-show="GastoForm.cantidadFuera@{{$index}}.$error.number">* Solo números.</span>
+                                                            <label for="cantidadFuera@{{$index}}" class="col-md-12 control-label" style="color:dimgray;">Cantidad </label>
+                                                            <input type="number" class="form-control" placeholder="Cantidad" name="valor@{{$index}}" placeholder="0" min="1000" ng-model="rub.viajes_gastos_internos[0].valor" ng-change="changeRubros(rub)"  ng-required="rub.viajes_gastos_internos[0].divisa_id" >
+                                                            <span ng-show="GastoForm.$submitted || GastoForm.valor@{{$index}}.$touched">
+                                                                <span class="label label-danger" ng-show="GastoForm.valor@{{$index}}.$error.required">* El campo es requerido.</span>
+                                                                <span class="label label-danger" ng-show="GastoForm.valor@{{$index}}.$error.min">*El valor mínimo es de 1.000 pesos</span>
+                                                                <span class="label label-danger" ng-show="GastoForm.valor@{{$index}}.$error.number">* Solo números.</span>
                                                             </span>
                                                         </div>
                                                         <div class="col-xs-12 col-md-6">
-                                                            <label for="cantidad@{{$index}}" class="col-md-12 control-label" style="color:dimgray;">Dentro del Atlántico</label>
-                                                            <input type="number" class="form-control" name="cantidad@{{$index}}" placeholder="0" min="1000" ng-model="rub.viajes_gastos_internos[0].valor" >
-                                                            <span ng-show="GastoForm.$submitted || GastoForm.cantidad@{{$index}}.$touched">
-                                                                <span class="label label-danger" ng-show="GastoForm.cantidad@{{$index}}.$error.min">*El valor mínimo es de 1000 pesos</span>
-                                                                <span class="label label-danger" ng-show="GastoForm.cantidad@{{$index}}.$error.number">* Solo números.</span>
-                                                            </span>
+                                                            
+                                                            <div class="form-group">
+                                                                <!-- P5P2. Moneda de compra del paquete turístico o excursión-->
+                                                                <label for="divisa@{{$index}}" class="col-md-12 control-label" style="color:dimgray;">Moneda</label>
+                            
+                                                                <div class="col-md-12">
+                                                                    <select id="divisa@{{$index}}" name="divisa@{{$index}}" class="form-control" ng-options="it.id as it.divisas_con_idiomas[0].nombre for it in divisas" ng-model="rub.viajes_gastos_internos[0].divisa_id"   ng-change="changeRubros(rub)" ng-required="rub.viajes_gastos_internos[0].valor"  >
+                                                                        <!-- P5P2Input1. Seleccione una moneda-->
+                                                                        <option value="" selecd >Moneda</option>
+                                                                    </select>
+                                                                    <span ng-show="GastoForm.$submitted || GastoForm.divisa@{{$index}}.$touched">
+                                                                        <span class="label label-danger" ng-show="GastoForm.divisa@{{$index}}.$error.required">* El campo es requerido.</span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            
                                                         </div>
                                                         <div class="col-xs-12">
                                                             <span ng-show="GastoForm.$submitted || GastoForm.personas@{{$index}}.$touched">
-                                                                <span class="label label-danger" ng-show="encuestaInterno.lista[$index].PersonasCubiertas != null && encuestaInterno.lista[$index].CantidadFuera==null && encuestaInterno.lista[$index].Cantidad==null ">*Debe llenar una cantidad</span>
+                                                                <span class="label label-danger" ng-show="rub.viajes_gastos_internos[0].personas_cubrio != null && (!rub.viajes_gastos_internos[0].valor && !rub.viajes_gastos_internos[0].divisa_id )">*Debe llenar una cantidad</span>
                                                             </span>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td style="width:15%;">
+                                                <td style="width:15%;" ng-class="{ 'disabled-table' : encuesta.noRealiceGastos==1 }" >
                                                     <label for="personas@{{$index}}" class="col-md-12 control-label" style="color:dimgray;">Número personas</label>
-                                                    <input type="number" min="1" class="form-control" name="personas@{{$index}}" ng-model="rub.viajes_gastos_internos[0].personas_cubrio" ng-required="rub.viajes_gastos_internos[0].valor_fuera || rub.viajes_gastos_internos[0].valor" placeholder="0" />
+                                                    <input type="number" placeholder="Número personas" min="1" class="form-control" name="personas@{{$index}}" ng-model="rub.viajes_gastos_internos[0].personas_cubrio" ng-required="rub.viajes_gastos_internos[0].valor || rub.viajes_gastos_internos[0].divisa_id" ng-change="changeRubros(rub)" />
                                                     <span ng-show="GastoForm.$submitted || GastoForm.personas@{{$index}}.$touched">
                                                         <span class="label label-danger" ng-show="GastoForm.personas@{{$index}}.$error.required">*Requerido este campo</span>
                                                         <span class="label label-danger" ng-show="GastoForm.personas@{{$index}}.$error.min">*El valor debe ser mayor a 0.</span>
@@ -423,7 +441,7 @@
                                                 <td style="width:25%;text-align: center;">
                                                     <div class="checkbox">
                                                         <label>
-                                                            <input type="checkbox" name="asumido@{{$index}}" ng-model="rub.viajes_gastos_internos[0].gastos_realizados_otros" value="true"> Si
+                                                            <input type="checkbox" name="asumido@{{$index}}" ng-model="rub.viajes_gastos_internos[0].gastos_realizados_otros" value="true" ng-change="changeRubros(rub)"> Si
                                                         </label>
                                                     </div>
                                                 </td>
@@ -434,9 +452,94 @@
                             </div>
                         </div>
                     </div>
+                    
+                    
+                    <div ng-if="verNombreEmpresa" >
+                        
+                        <div class="panel-heading"  >
+                            <!-- P9. Indique los gastos totales hechos por usted, para usted o su grupo de viaje. No coloque gastos individuales-->
+                            <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>  Nombre de la empresa de transporte</b></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
+                                        <label for="empresaTransporte" class="col-md-12 control-label" style="color:dimgray;"></label>
+                                        <input type="text" class="form-control" name="empresaTransporte" ng-model="encuesta.empresaTransporte" ng-required="true" maxlength="150" style="display:inline-block;width:90%;">
+                                        <span ng-show="GastoForm.$submitted || GastoForm.costoA@{{$index}}.$touched">
+                                            <span class="label label-danger" ng-show="GastoForm.empresaTransporte.$error.required">* El campo es requerido.</span>
+                                            <span class="label label-danger" ng-show="GastoForm.empresaTransporte.$error.maxlength">* El número maximo de caracteres es 150</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <div ng-if="encuesta.porcentajeGastoRubros.length>0" >
+                        
+                        <div class="panel-heading">
+                            <!-- P8. ¿Qué productos y servicios incluía el paquete turístico o excursión?-->
+                            <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Qué porcentaje del gasto realizó:</b></h3>
+                        </div>
+                        <div class="panel-footer"><b>Complete la siguiente tabla</b></div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                   
+                                    <table class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th>Rubro</th>
+                                            <th>En Atlántico</th>
+                                            <th>Fuera de Atlántico</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr ng-repeat="rb in encuesta.porcentajeGastoRubros" >
+                                            <td> @{{rb.nombre}}</td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
+                                                    <label for="costoA@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
+                                                    <input type="number" class="form-control" min="0" max="100" name="costoA@{{$index}}" ng-model="rb.dentro" ng-required="true" style="display:inline-block;width:90%;">
+                                                    <span ng-show="GastoForm.$submitted || GastoForm.costoA@{{$index}}.$touched">
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.required">* El campo es requerido.</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.min">* El valor mínimo de 0</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.max">* El valor máximo de 0</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.number">* Sólo números</span>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="form-group">
+                                                    <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
+                                                    <label for="costoB@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
+                                                    <input type="number" class="form-control" min="0" max="100" name="costoB@{{$index}}" ng-model="rb.fuera" ng-required="true" style="display:inline-block;width:90%;">
+                                                    <span ng-show="GastoForm.$submitted || GastoForm.costoB@{{$index}}.$touched">
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.required">* El campo es requerido.</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.min">* El valor mínimo es 0</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.max">* El valor máximo es 100</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.number">* Sólo números</span>
+                                                    </span>
+                                                </div>
+                                            </td>
+                                          </tr>
+                                        </tbody>
+                                    </table>
+                                   
+                                  
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
                 </div>
-            </div>
-    
+            
             <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P10. Los gastos de las personas que conformaron el grupo de viaje fueron pagados por:-->
