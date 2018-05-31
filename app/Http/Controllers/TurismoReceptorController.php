@@ -993,7 +993,14 @@ class TurismoReceptorController extends Controller
             $encuesta["GastosAparte"] = Gasto_Visitante::where('visitante_id',$id)->count()>0 ? 1 :0;
             $encuesta["poderLLenar"] =$visitante->no_hizo_gasto;
         }
-        $encuesta["Financiadores"] = Visitante::find($id)->financiadoresViajes()->pluck('id');
+        $encuesta["Financiadores"] = Visitante::find($id)->financiadoresViajes()->pluck('id')->toArray();
+        
+        
+        $encuesta["Otro"] = null;
+        if(in_array(11,$encuesta["Financiadores"])){
+           $encuesta["Otro"]= Visitante::find($id)->financiadoresViajes()->wherePivot('otro','!=',null)->first()->pivot->otro;
+        }
+        
          
         $di = collect($divisas)->where('id',39)->first();
         
@@ -1164,6 +1171,9 @@ class TurismoReceptorController extends Controller
     	            if(isset($rub["gastos_visitantes"][0]["gastos_asumidos_otros"])){
     	                $gasto->gastos_asumidos_otros = $rub["gastos_visitantes"][0]["gastos_asumidos_otros"];
     	            }
+    	            if(isset($rub["gastos_visitantes"][0]["otro"])){
+    	                $gasto->otro = $rub["gastos_visitantes"][0]["otro"];
+    	            }
     	            $gasto->save();
         	        
         	        if($request->poderLLenar == true){
@@ -1221,8 +1231,19 @@ class TurismoReceptorController extends Controller
     	    
     	
         $visitante->financiadoresViajes()->detach();
-        $visitante->financiadoresViajes()->attach($request["Financiadores"]);
+        
+        foreach($request["Financiadores"] as $el){
+		            
+		            if($el == 11){
+		                
+		                  $visitante->financiadoresViajes()->attach($el,['otro'=>$request->Otro]);
+		            }else{
+		                  $visitante->financiadoresViajes()->attach($el);
+		            }
+		            
+		        }
         $visitante->no_hizo_gasto = $request->poderLLenar == null ? false:$request->poderLLenar;
+        
         if($visitante->ultima_sesion<5){
             $visitante->ultima_sesion =5;
         }

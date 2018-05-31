@@ -35,7 +35,7 @@ class Gasto_Visitante extends Model
     /**
      * @var array
      */
-    protected $fillable = ['divisas_fuera', 'divisas_magdalena', 'cantidad_pagada_fuera', 'cantidad_pagada_magdalena', 'personas_cubiertas', 'gastos_asumidos_otros','visitante_id','rubros_id'];
+    protected $fillable = ['divisas_fuera', 'divisas_magdalena', 'cantidad_pagada_fuera', 'cantidad_pagada_magdalena', 'personas_cubiertas', 'gastos_asumidos_otros','visitante_id','rubros_id','otro'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
