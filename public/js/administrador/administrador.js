@@ -1,29 +1,30 @@
-var situr = angular.module("situr_admin", ['ngSanitize', 'angularUtils.directives.dirPagination', 'checklist-model', 'angular-repeat-n', 'ngMap', 'admin.temporadas']);
+var situr = angular.module("situr_admin", ['ngSanitize','ADM-dateTimePicker', 'angularUtils.directives.dirPagination', 'checklist-model', 'angular-repeat-n', 'admin.temporadas','recpetorService']);
 
-
-situr.directive('fileInput', ['$parse', function ($parse) {
-
-    return {
-        restrict: 'A',
-        link: function (scope, elm, attrs) {
-            elm.bind('change', function () {
-                $parse(attrs.fileInput).assign(scope, elm[0].files);
-                scope.$apply();
-            })
-
-        }
-
+situr.controller('listadoEncuestasCtrl', ['$scope','receptorServi', function ($scope,receptorServi) {
+    $scope.prop = {
+        search:''
     }
-
-}])
-
-situr.directive('finalizacion', function () {
-    return function (scope, element, attrs) {
-
-        if (scope.$last) {
-            $(".select2 ").select2({
-
-            });
-        }
+    $("body").attr("class", "charging");
+    receptorServi.getEncuestas().then(function (data) {
+        $scope.encuestas = data;
+        for (var i = 0; i < $scope.encuestas.length; i++) {
+              if ($scope.encuestas[i].estadoid > 0 && $scope.encuestas[i].estadoid < 7) {
+                  $scope.encuestas[i].Filtro = 'sincalcular';
+              } else {
+                  $scope.encuestas[i].Filtro = 'calculadas';
+              }
+          }
+        $("body").attr("class", "cbp-spmenu-push");
+        
+    }).catch(function () {
+        $('#processing').removeClass('process-in');
+        swal("Error", "Error en la carga, por favor recarga la página.", "error");
+    })
+    $scope.filtrarEncuesta = function (item) {
+        return ($scope.filtroEstadoEncuesta != "" && item.Filtro == $scope.filtroEstadoEncuesta) || $scope.filtroEstadoEncuesta == "";
     };
-})
+    $scope.campoSelected = "";
+    $scope.filtrarCampo = function (item) {
+        return ($scope.campoSelected != "" && item[$scope.campoSelected].indexOf($scope.prop.search) > -1) || $scope.campoSelected == "";
+    };
+}])

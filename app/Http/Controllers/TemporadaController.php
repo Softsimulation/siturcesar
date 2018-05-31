@@ -42,6 +42,10 @@ class TemporadaController extends Controller
                 
                 $q->where('es_principal',true);
                 
+        })->whereHas('hogare.edificacione',function($q)use($temporada){
+            
+                $q->where('temporada_id',$temporada->id);
+            
         })->with('viajes')->with('hogare.digitadore')->get();
         
         
@@ -71,14 +75,70 @@ class TemporadaController extends Controller
                        
                'Nombre'=>'required',
                'Name'=>'required',
-               'Fecha_ini'=>'required|date',
-               'Fecha_fin'=>'required|date|after:Fecha_ini'
+               'Fecha_ini'=>'required|date|before:tomorrow',
+               'Fecha_fin'=>'required|date|after:Fecha_ini|before:tomorrow'
                
-            ]);
+            ],["Fecha_ini.required"=>"La fecha de inicio de la temporada es requerida",
+               "Fecha_fin.required"=>"La fecha de fin de la temporada es requerida",
+               "Fecha_ini.date"=>"La fecha de inicio debe ser una fecha valida",
+               "Fecha_ini.before"=>"La fecha de inicio no debe ser futura",
+               "Fecha_fin.date"=>"La fecha de fin debe ser una fecha valida",
+               "Fecha_fin.after"=>"La fecha de fin debe ser posterior a la fecha de inicio",
+               
+               
+               ]);
             
         if($validator->fails()){
             return ["success"=>false,'errores'=>$validator->errors()];
         }
+        
+        
+        if($request->id == null){
+            
+            $aux=Temporada::where(function ($query) use ($request) {
+                
+                                        $query->where('fecha_ini', '>=', $request->Fecha_ini);
+                                        $query->where('fecha_ini', '<=', $request->Fecha_fin);
+                                        
+                                    })->orwhere(function ($query) use ($request) {
+                                        
+                                        $query->where('fecha_fin', '>=', $request->Fecha_ini);
+                                        $query->where('fecha_fin', '<=', $request->Fecha_fin);
+                                        
+                                    })->orwhere(function ($query) use ($request) {
+                                        
+                                        $query->where('fecha_ini', '<', $request->Fecha_ini);
+                                        $query->where('fecha_fin', '>', $request->Fecha_fin);
+                                        
+                                    })->get();
+        }else{
+            
+            $aux=Temporada::where('id','!=',$request->id)->where(function ($query) use ($request) {
+                
+                                        $query->where('fecha_ini', '>=', $request->Fecha_ini);
+                                        $query->Where('fecha_ini', '<=', $request->Fecha_fin);
+                                        
+                                    })->orwhere(function ($query) use ($request) {
+                                        
+                                        $query->where('fecha_fin', '>=', $request->Fecha_ini);
+                                        $query->Where('fecha_fin', '<=', $request->Fecha_fin);
+                                        
+                                    })->orwhere(function ($query) use ($request) {
+                                        
+                                        $query->where('fecha_ini', '<', $request->Fecha_ini);
+                                        $query->Where('fecha_fin', '>', $request->Fecha_fin);
+                                        
+                                    })->get();
+            
+            
+        }
+                                
+        if($aux->count()>1){
+            
+            return ["success"=>false,"errores"=>["temporada"=>["Ya existen una temporada creada para estas fechas"]]];
+            
+        }
+                            
         
         if($request->id == null){
             $temporada=new Temporada();

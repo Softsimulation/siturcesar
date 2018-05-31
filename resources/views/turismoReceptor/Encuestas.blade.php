@@ -49,7 +49,7 @@
 
 @section('NumSeccion', '0%')
 
-@section('app','ng-app="encuesta"')
+@section('app','ng-app="situr_admin"')
 
 @section('controller','ng-controller="listadoEncuestasCtrl"')
 
@@ -90,9 +90,12 @@
             <div class="col-xs-12">
                 <table class="table table-striped">
                     <tr>
-                        <th style="width: 50px;"></th>                           
-                            <th>Número de encuesta</th>
+                        <th style="width: 50px;"></th>
+
+                            
                             <th>Código de encuesta</th>
+                            <th>Código de grupo</th>
+                            <th>Fecha de digitación</th>
                             <th>Fecha de llegada</th>
                             <th>Fecha de salida</th>
                             <th>Encuestador</th>
@@ -103,8 +106,9 @@
                     </tr>
                     <tr dir-paginate="item in encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search |itemsPerPage:10 as results" pagination-id="paginacion_encuestas" >
                         <td>@{{$index+1}}</td>
-                            <td>@{{item.id}}</td>
                             <td>@{{item.codigoencuesta}}</td>
+                            <td>@{{item.codigogrupo}}</td>
+                            <td>@{{item.fechadigitacion | date:'dd-MM-yyyy'}}</td>
                             <td>@{{item.fechallegada | date:'dd-MM-yyyy'}}</td>
                             <td>@{{item.fechasalida | date:'dd-MM-yyyy'}}</td>
                             <td>@{{item.username}}</td>
