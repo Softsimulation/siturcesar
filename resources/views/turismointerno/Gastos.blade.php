@@ -266,7 +266,10 @@
                                         @{{servicio.nombre}}
                                         <div class="form-group" ng-if="servicio.id==12 && encuesta.serviciosPaquetes.indexOf(12)!=-1">
                                             <label for="otroServicio" class="col-md-12 control-label">Otro, ¿Cuál?</label>
-                                            <input type="text" class="form-control" name="otroServicio" ng-model="encuesta.otrosServicios"  />
+                                            <input type="text" class="form-control" name="otroServicio" ng-model="encuesta.otrosServicios" ng-required="encuesta.serviciosPaquetes.indexOf(12)!=-1" />
+                                            <span ng-show="GastoForm.$submitted || GastoForm.otroServicio.$touched">
+                                                <span class="label label-danger" ng-show="GastoForm.otroServicio.$error.required">* El campo es requerido.</span>
+                                            </span>
                                         </div>
                                     </label>
                                 </div>
@@ -303,7 +306,7 @@
                                                 <div class="form-group">
                                                     <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
                                                     <label for="costoA@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
-                                                    <input type="number" class="form-control" min="0" min="100" name="costoA@{{$index}}" ng-model="servicio.dentro" ng-required="true" style="display:inline-block;width:90%;">
+                                                    <input type="number" placeholder="%%" class="form-control" min="0" max="100" name="costoA@{{$index}}" ng-model="servicio.dentro" ng-required="true" style="display:inline-block;width:90%;">
                                                     <span ng-show="GastoForm.$submitted || GastoForm.costoA@{{$index}}.$touched">
                                                         <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.required">* El campo es requerido.</span>
                                                         <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.min">* El valor mínimo es 0</span>
@@ -316,11 +319,11 @@
                                                 <div class="form-group">
                                                     <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
                                                     <label for="costoB@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
-                                                    <input type="number" class="form-control" min="0" min="100" name="costoB@{{$index}}" ng-model="servicio.fuera" ng-required="true" style="display:inline-block;width:90%;">
+                                                    <input type="number" placeholder="%%" class="form-control" min="0" max="100" name="costoB@{{$index}}" ng-model="servicio.fuera" ng-required="true" style="display:inline-block;width:90%;">
                                                     <span ng-show="GastoForm.$submitted || GastoForm.costoB@{{$index}}.$touched">
                                                         <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.required">* El campo es requerido.</span>
                                                         <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.min">* El valor mínimo es 0</span>
-                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.max">* El valor máximo es 100</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.max">* El valor mínimo es 0</span>
                                                         <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.number">* Sólo números</span>
                                                     </span>
                                                 </div>
@@ -386,12 +389,15 @@
                                             <tr ng-repeat="rub in encuesta.rubros"  >
                                                 <td style="width:35%;">
                                                     @{{rub.nombre}}
-                                                    <!--
+                                                    
                                                     <div class="form-group" ng-if="rub.id==20" >
                                                         <label for="otroRubros" class="col-md-12 control-label">Otro, ¿Cuál?</label>
-                                                        <input type="text" class="form-control" name="otroRubros" ng-model="encuesta.otroRubros"  />
+                                                        <input type="text" class="form-control" name="otroRubros" ng-model="rub.viajes_gastos_internos[0].otro" ng-required="rub.viajes_gastos_internos[0].valor && rub.viajes_gastos_internos[0].divisa_id && rub.viajes_gastos_internos[0].personas_cubrio"  />
+                                                        <span ng-show="GastoForm.$submitted || GastoForm.otroRubros.$touched">
+                                                                <span class="label label-danger" ng-show="GastoForm.otroRubros.$error.required">* El campo es requerido.</span>
+                                                        </span>
                                                     </div>
-                                                    -->
+                                                
                                                 </td>
                                                 <td style="width:25%;" ng-class="{ 'disabled-table' : encuesta.noRealiceGastos==1 }" >
                                                     <div class="row">
@@ -504,11 +510,11 @@
                                                 <div class="form-group">
                                                     <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
                                                     <label for="costoA@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
-                                                    <input type="number" class="form-control" min="0" max="100" name="costoA@{{$index}}" ng-model="rb.dentro" ng-required="true" style="display:inline-block;width:90%;">
+                                                    <input type="number" placeholder="%%" class="form-control" min="0" max="100" name="costoA@{{$index}}" ng-model="rb.dentro" ng-required="true" style="display:inline-block;width:90%;">
                                                     <span ng-show="GastoForm.$submitted || GastoForm.costoA@{{$index}}.$touched">
                                                         <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.required">* El campo es requerido.</span>
                                                         <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.min">* El valor mínimo de 0</span>
-                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.max">* El valor máximo de 0</span>
+                                                        <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.max">* El valor máximo de 100</span>
                                                         <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.number">* Sólo números</span>
                                                     </span>
                                                 </div>
@@ -517,7 +523,7 @@
                                                 <div class="form-group">
                                                     <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
                                                     <label for="costoB@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
-                                                    <input type="number" class="form-control" min="0" max="100" name="costoB@{{$index}}" ng-model="rb.fuera" ng-required="true" style="display:inline-block;width:90%;">
+                                                    <input type="number" placeholder="%%" class="form-control" min="0" max="100" name="costoB@{{$index}}" ng-model="rb.fuera" ng-required="true" style="display:inline-block;width:90%;">
                                                     <span ng-show="GastoForm.$submitted || GastoForm.costoB@{{$index}}.$touched">
                                                         <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.required">* El campo es requerido.</span>
                                                         <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.min">* El valor mínimo es 0</span>
@@ -554,6 +560,15 @@
                                     <input type="checkbox" checklist-model="encuesta.financiadores" name="Financiadores" checklist-value="fin.id"> 
                                     @{{fin.financiadores_viajes_con_idiomas[0].nombre}}
                                 </label>
+                                <!--
+                                <div class="form-group" ng-if="fin.id==11 && encuesta.financiadores.indexOf(11)!=-1">
+                                    <label for="otroFinanciadores" class="col-md-12 control-label">Otro, ¿Cuál?</label>
+                                    <input type="text" class="form-control" name="otroFinanciadores" ng-model="encuesta.otroFinanciadores" ng-required="encuesta.financiadores.indexOf(11)!=-1"  />
+                                    <span ng-show="GastoForm.$submitted || GastoForm.otroFinanciadores.$touched">
+                                        <span class="label label-danger" ng-show="GastoForm.otroFinanciadores.$error.required">* El campo es requerido.</span>
+                                    </span>
+                                </div>
+                                -->
                             </div>
                             <span ng-show="GastoForm.$submitted || GastoForm.Financiadores.$touched">
                                 <span class="label label-danger" ng-show="encuesta.financiadores.length == 0 ||  encuesta.financiadores == null">* El campo es requerido.</span>

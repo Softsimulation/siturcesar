@@ -46,6 +46,7 @@
 <?php $__env->startSection('contenido'); ?>
 <div>
     <input type="hidden" ng-model="id" ng-init="id=<?php echo e($id); ?>" />
+    
     <div class="alert alert-danger" ng-if="errores != null">
         <label><b>Corrige los errores:</b></label>
         <br />
@@ -54,6 +55,7 @@
         </div>
 
     </div>
+    
     <form name="DatosForm" novalidate>
         <div class="panel panel-success">
             <div class="panel-heading p1">

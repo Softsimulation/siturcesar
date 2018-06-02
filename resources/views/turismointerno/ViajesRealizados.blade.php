@@ -58,23 +58,15 @@
     
     <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
 
-        <div class="alert alert-danger" ng-if="errores != null">
-            <label><b>{{trans('resources.EncuestaMsgError')}}:</b></label>
-            <br />
-            <div ng-repeat="error in errores" ng-if="error.length>0">
-                -@{{error[0]}}
-            </div>
-
-        </div>
-
-    <div class="alert alert-danger" ng-if="error != nul">
-        <label><b>{{trans('Encuesta MsgError')}}:</b></label>
+    <div class="alert alert-danger" ng-if="errores != null">
+        <label><b>{{trans('resources.EncuestaMsgError')}}:</b></label>
         <br />
-        <div>
-            @{{error}}
+        <div ng-repeat="error in errores" ng-if="error.length>0">
+            -@{{error[0]}}
         </div>
-
     </div>
+    
+    
         <br />
 
         <div class="panel panel-success">

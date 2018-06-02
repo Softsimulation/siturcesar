@@ -119,9 +119,21 @@ angular.module('interno.hogares', [])
             $http.post('/turismointerno/guardarhogar', $scope.encuesta)
                 .success(function (data) {
                     $("body").attr("class", "");
-                    if (data.success) {                      
+                    if (data.success) {    
                         
-                        window.location = "/turismointerno/editarhogar/"+data.id;
+                        swal({
+                                title: "Realizado",
+                                text: "Se ha guardado el hogar exitosamente",
+                                type: "success",
+                                timer: 1000,
+                                showConfirmButton: false
+                            });
+                            
+                    setTimeout(function () {
+                         window.location = "/turismointerno/editarhogar/"+data.id;
+                    }, 1000);
+                        
+                       
                         
                     } else {
                         swal("Error", "Hay errores en el formulario corrigelos", "error")
@@ -317,7 +329,17 @@ angular.module('interno.hogares', [])
                     $("body").attr("class", "");
                     if (data.success) {
 
-                        window.location = "/turismointerno/editarhogar/" + data.id;
+                       swal({
+                                title: "Realizado",
+                                text: "Se ha guardado el hogar exitosamente",
+                                type: "success",
+                                timer: 1000,
+                                showConfirmButton: false
+                            });
+                            
+                    setTimeout(function () {
+                         window.location = "/turismointerno/editarhogar/"+data.id;
+                    }, 1000);
 
                     } else {
                         swal("Error", "Hay errores en el formulario corrigelos", "error")

@@ -321,7 +321,12 @@ class TurismoInternoController extends Controller
             $q->whereHas('idioma', function($p){
                 $p->where('culture','es');
             })->select('actividad_realizada_id','nombre');
-        },"opcionesActividadesRealizadasInternos" =>  function($q){ $q->with(["subOpcionesActividadesRealizadasInternos"]); }])->get();
+        },"opcionesActividadesRealizadasInternos" =>  
+        function($q){ 
+            $q->with(["subOpcionesActividadesRealizadasInternos"]);
+            $q->orderby('peso');
+        
+        }])->get();
         
     
         
@@ -717,7 +722,7 @@ class TurismoInternoController extends Controller
         
     }
     
-   public function getGastos($id){     
+    public function getGastos($id){     
         return view('turismointerno.Gastos', ["id"=>$id]);
     }
     
@@ -737,6 +742,7 @@ class TurismoInternoController extends Controller
                 "gastosServicosPaquetes"=> Porcentajes_servicios_paquete_viaje::where("viaje_id",$idViaje)->get(),
                 "porcentajeGastoRubros"=> Porcentaje_rubros_internos_viaje::where("viaje_id",$idViaje)->get(),
                 "otrosServicios"=> Servicio_Excursion_Incluido_Interno::where([ ["viajes_id",$idViaje], ["servicios_paquete_id",12] ])->pluck('otro')->first(), 
+                "otroFinanciadores"=> Viaje_Financiadore::where([ ["viaje_id",$idViaje], ["financiadores_id",11] ])->pluck('otro')->first(), 
                 "empresaTransporte"=> Viaje_terrestre::where("viaje_id",$idViaje)->pluck('nombre')->first(),
         ];
         
@@ -744,11 +750,15 @@ class TurismoInternoController extends Controller
         $encuesta["viajePaquete"] =    $encuesta["viajeExcursion"] != null > 0 ? 1 : 0;
         $encuesta["noRealiceGastos"] = $encuesta["noRealiceGastos"] == null  ? 0 : $encuesta["noRealiceGastos"];
         
+        $divCop =  Divisa::where("id",39)->with([ "divisasConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get()->toArray();
+        $divisas = Divisa::where("id","!=",39)->with([ "divisasConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get()->toArray();
+        
+        
         return [ 
-                "financiadores"=> Financiador_Viaje::with([ "financiadoresViajesConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
+                "financiadores"=> Financiador_Viaje::where("id","!=",11)->with([ "financiadoresViajesConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
                 "serviciosPaquetes"=> Servicio_Paquete_Interno::orderBy('id')->get(),
                 "opcionesLugares"=> Opcion_Lugar::with([ "opcionesLugaresConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
-                "divisas"=> Divisa::with([ "divisasConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
+                "divisas"=> array_merge($divCop, $divisas),
                 "TipoProveedorPaquete"=>Tipo_Proveedor_Paquete::with([ "tipoProveedorPaqueteConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
                 "encuesta"=>$encuesta,
             ];
@@ -878,6 +888,7 @@ class TurismoInternoController extends Controller
             }
         }
         
+        
         $viaje->financiadoresViajes()->attach($request->financiadores);
        
         $historial = new Historial_Encuesta_Interno([ 
@@ -927,7 +938,7 @@ class TurismoInternoController extends Controller
                 'Mover'=>'required|exists:tipos_transporte,id',
                 'Medio'=>'required|exists:medio_transporte_interno,id',
                 'Tipo_otro'=>"required_if:Mover,10",
-                'Medio_otro'=>"required_if:Mover,8"
+                'Medio_otro'=>"required_if:Medio,8"
                 
             ],[
                 'Mover.required'=>"El tipo de transporte es requerido",
@@ -1130,7 +1141,6 @@ class TurismoInternoController extends Controller
     }
     
     if($noches > $numeroDias){
-        return ["noches"=> $noches,"dias"=> $numeroDias];
         return ["success" => false, "errores" => [["La suma del número de noches no debe ser mayor al número de días del viaje."]] ];
     }
     

@@ -76,17 +76,18 @@ angular.module('interno.gastos', [] )
                                 valor : rubro.viajes_gastos_internos[0].valor,
                                 divisa_id : rubro.viajes_gastos_internos[0].divisa_id,
                                 personas_cubrio : rubro.viajes_gastos_internos[0].personas_cubrio,
-                                gastos_realizados_otros : rubro.viajes_gastos_internos[0].gastos_realizados_otros
+                                gastos_realizados_otros : rubro.viajes_gastos_internos[0].gastos_realizados_otros,
+                                otro : rubro.viajes_gastos_internos[0].otro,
                             });  
                         }
-                        else{
-                            swal("Error", "por favor corrija los errores y vuelva a intentarlo", 'error');
-                            return;
-                        }  
                 }
                 
             }
         } 
+        
+        if(data.rubros.length==0 && !data.noRealiceGastos){
+            swal("Error", "Debe llenar por lo menos un gasto, de lo contrario marque no realice ningun gasto.", 'info'); return;
+        }
         
         $("body").attr("class", "cbp-spmenu-push charging");
         
