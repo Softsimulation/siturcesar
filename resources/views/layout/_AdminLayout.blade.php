@@ -18,8 +18,6 @@
     <link href="{{asset('/css/ionicons.min.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/styleLoading.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/object-table-style.css')}}" rel='stylesheet' type='text/css' />
-    
-    
     <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/select.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/select2.css')}}" rel='stylesheet' type='text/css' />
@@ -132,14 +130,6 @@
         .radio label, label.radio-inline {
             padding-left: 1.8em;
         }
-
-        footer {
-            width: 100%;
-            background-color: rgba(0,0,0,.35);
-            padding: 1em;
-            text-align: right;
-        }
-
         #log form {
             float: none !important;
         }
@@ -162,6 +152,13 @@
             }
             .ui-select-multiple.ui-select-bootstrap .ui-select-match-item{
                 font-size: 16px;
+            }
+             .ADMdtp-box footer .timeSelectIcon, .ADMdtp-box footer .today, .ADMdtp-box footer .calTypeContainer p{
+                fill: darkorange;
+                color: darkorange;
+            }
+            .ADMdtp-box footer .calTypeContainer p{
+                display: none;
             }
     </style>
 </head>
@@ -244,21 +241,19 @@
     <script src="{{asset('/js/plugins/angular-filter.js')}}"></script>
     <script src="{{asset('/js/plugins/angular-repeat-n.min.js')}}"></script>
     <script src="{{asset('/js/ADM-dateTimePicker.min.js')}}" type="text/javascript"></script>
-        
+    <script src="{{asset('/js/plugins/angular-sanitize.js')}}" type="text/javascript"></script>
+    <script src="{{asset('/js/plugins/object-table.js')}}" type="text/javascript"></script>
+       
+    <script src="{{asset('/js/administrador/administrador.js')}}" type="text/javascript"></script> 
+    <script src="{{asset('/js/administrador/temporadas.js')}}" type="text/javascript"></script> 
+    <script src="{{asset('/js/administrador/services.js')}}" type="text/javascript"></script> 
+    
     <script src="{{asset('/js/sweetalert.min.js')}}"></script>
     <script src="{{asset('/js/dir-pagination.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/encuesta.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/datos_encuestado.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/estanciayvisitados.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/transporte.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/grupo_viaje.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/gasto.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/percepcion_viaje.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/enteran.js')}}"></script>
+  
     
-    <script src="{{asset('/js/encuestas/turismoReceptor/services/receptorServices.js')}}"></script>
-    <script src="{{asset('/js/encuestas/turismoReceptor/services/grupoViajeServices.js')}}"></script>
     
+
     <script>
         $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });
     </script>

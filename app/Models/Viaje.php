@@ -72,6 +72,22 @@ class Viaje extends Model
     {
         return $this->belongsTo('App\Models\Digitador', 'creada_por');
     }
+    
+    public function actividadesRealizadasInternos()
+    {
+        return $this->belongsToMany('App\Models\Actividad_Realizada', 'actividades_realizadas_interno','viajes_id','actividades_realizadas_id');
+    }
+
+    public function opcionesActividadesRealizadasInternos()
+    {
+        return $this->belongsToMany('App\Models\Opcion_Actividad_Realizada_Interno', 'opciones_actividades_realizada_viajero','viaje_id','opciones_actividades_realizadas_interno_id');
+    }
+
+
+    public function subOpcionesActividadesRealizadasInternos()
+    {
+        return $this->belongsToMany('App\Models\Sub_Opcion_Actividad_Realizada_Interno', 'sub_opciones_act_realizadas_interno_viajes', 'viaje_id','sub_opciones_actividades_realizadas_interno_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -104,14 +120,7 @@ class Viaje extends Model
     {
         return $this->belongsTo('App\Models\TiposTransporte', 'tipo_transporte_id');
     }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function actividadesRealizadasInternos()
-    {
-        return $this->hasMany('App\Models\ActividadesRealizadasInterno', 'viajes_id');
-    }
+    
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

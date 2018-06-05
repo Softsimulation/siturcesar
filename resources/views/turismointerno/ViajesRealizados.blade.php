@@ -58,23 +58,15 @@
     
     <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
 
-        <div class="alert alert-danger" ng-if="errores != null">
-            <label><b>{{trans('resources.EncuestaMsgError')}}:</b></label>
-            <br />
-            <div ng-repeat="error in errores" ng-if="error.length>0">
-                -@{{error[0]}}
-            </div>
-
-        </div>
-
-    <div class="alert alert-danger" ng-if="error != nul">
-        <label><b>{{trans('Encuesta MsgError')}}:</b></label>
+    <div class="alert alert-danger" ng-if="errores != null">
+        <label><b>{{trans('resources.EncuestaMsgError')}}:</b></label>
         <br />
-        <div>
-            @{{error}}
+        <div ng-repeat="error in errores" ng-if="error.length>0">
+            -@{{error[0]}}
         </div>
-
     </div>
+    
+    
         <br />
 
         <div class="panel panel-success">
@@ -104,7 +96,7 @@
                                         Fecha final
                                     </th>
                                     <th>
-                                        Principal
+                                        Seleccionado
 
                                     </th>
                                     <th style="width: 120px">
@@ -172,7 +164,7 @@
                                <label for="fechaLlegada" class="col-xs-12 control-label">fecha de inicio del viaje</label>
 
                                <div class="col-xs-12">
-                                   <input type="date" class="form-control" id="fechaLlegada" name="llegada" ng-model="encuesta.Inicio" max="@DateTime.Now.ToString("yyyy-MM-dd")" placeholder="YYYY-MM-DD" ng-required="true" />
+                                   <adm-dtp name="llegada" ng-model="encuesta.Inicio" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha de aplicacion"  ng-required="true"></adm-dtp>
                                    <span ng-show="EstanciaForm.$submitted || EstanciaForm.llegada.$touched">
                                        <!--P3P1Alert1. El campo fecha de llegada es requerido-->
                                        <span class="label label-danger" ng-show="EstanciaForm.llegada.$error.required">*El campo fecha de llegada es requerido</span>
@@ -188,7 +180,7 @@
                                <label for="fechaSalida" class="col-xs-12 control-label">fecha fin del viaje</label>
 
                                <div class="col-xs-12">
-                                   <input type="date" id="fechaSalida" name="salida" class="form-control" min="@{{encuesta.Inicio}}" ng-model="encuesta.Fin" placeholder="YYYY-MM-DD" ng-required="true" />
+                                   <adm-dtp name="salida" ng-model="encuesta.Fin" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha de aplicacion"  ng-required="true"></adm-dtp>
                                    <span ng-show="EstanciaForm.$submitted || EstanciaForm.salida.$touched">
                                        <!--P3P2Alert1. El campo fecha de salida es requerido-->
                                        <span class="label label-danger" ng-show="EstanciaForm.salida.$error.required">*El campo fecha de salida es requerido</span>
@@ -455,13 +447,13 @@
            <div class="panel panel-success" ng-if="existe(2)">
                <div class="panel-heading">
                    <!-- -->
-                   <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Cuántas personas del hogar? </b></h3>
+                   <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Cuántas personas del hogar compartiendo gastos? </b></h3>
                </div>
                <div class="panel-footer"><b>Campo Numero</b></div>
                <div class="panel-body">
                    <div class="row">
                        <div class="col-md-12">
-                           <input type="number" name="numerohogar" class="form-control" min="1" max="@{{TotalD}}" ng-model="encuesta.Numerohogar" ng-change="verificaT()" ng-required="true" placeholder="Ingrese el No. de personas del hogar"/>
+                           <input type="number" name="numerohogar" class="form-control" min="1" max="@{{TotalD}}" ng-model="encuesta.Numerohogar" ng-change="verificaT()" ng-required="true" placeholder="Ingrese el No. de personas del hogar con gatos"/>
                        </div>
                    </div>
                    <span ng-show="EstanciaForm.$submitted || EstanciaForm.numerohogar.$touched">
@@ -473,7 +465,28 @@
            </div>
 
 
-           <div class="panel panel-success" ng-if="existe(4)">
+           <div class="panel panel-success" ng-if="existe(3)">
+               <div class="panel-heading">
+                   <!-- -->
+                   <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Cuántas personas del hogar sin compartir gastos? </b></h3>
+               </div>
+               <div class="panel-footer"><b>Campo Numero</b></div>
+               <div class="panel-body">
+                   <div class="row">
+                       <div class="col-md-12">
+                           <input type="number" name="numerohogarsingasto" class="form-control" min="1" max="@{{TotalG}}" ng-model="encuesta.NumerohogarSinGasto" ng-change="verificaT()" ng-required="true" placeholder="Ingrese el No. de personas del hogar sin gatos"/>
+                       </div>
+                   </div>
+                   <span ng-show="EstanciaForm.$submitted || EstanciaForm.numerohogarsingasto.$touched">
+                       <span class="label label-danger" ng-show="EstanciaForm.numerohogarsingasto.$error.required">El campo es requerido.</span>
+                       <span class="label label-danger" ng-show="EstanciaForm.numerohogarsingasto.$error.number">Debe introducir solo números</span>
+                       <span class="label label-danger" ng-show="!EstanciaForm.numerohogarsingasto.$valid">Número menor o igual @{{TotalG}}</span>
+                   </span>
+               </div>
+           </div>
+
+
+           <div class="panel panel-success" ng-if="existe(6)">
                <div class="panel-heading">
                    <!-- -->
                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Cuántos eran otros turistas?  </b></h3>

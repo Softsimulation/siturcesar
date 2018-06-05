@@ -26,7 +26,7 @@ class Viaje_Gasto_Interno extends Model
     /**
      * @var array
      */
-    protected $fillable = [ 'rubros_id', 'valor', 'gastos_realizados_otros', 'personas_cubrio', 'valor_fuera'];
+    protected $fillable = [ 'rubros_id', 'valor', 'gastos_realizados_otros', 'personas_cubrio', 'alquila_vehiculo', 'divisa_id', 'otro'];
     
     public $timestamps = false;
     
@@ -34,7 +34,6 @@ class Viaje_Gasto_Interno extends Model
 
     protected $casts = [
         'valor' => 'int',
-        'valor_fuera' => 'int',
     ];
 
 

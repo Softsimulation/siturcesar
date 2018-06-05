@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sistema de Información Turistica del Magdalena">
-    <meta name="author" content="SITUR Magdalena">
+    <meta name="description" content="Sistema de Información Turistica del Cesar">
+    <meta name="author" content="SITUR Cesar">
     <title><?php echo $__env->yieldContent('Title'); ?></title>
     <link rel="icon" type="image/ico" href="<?php echo e(asset('Content/icons/favicon-96x96.png')); ?>" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -17,6 +17,7 @@
     <link href="<?php echo e(asset('/css/sweetalert.min.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/ionicons.min.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/styleLoading.css')); ?>" rel='stylesheet' type='text/css' />
+    <link href="<?php echo e(asset('/css/ADM-dateTimePicker.min.css')); ?>" rel='stylesheet' type='text/css' />
     <?php echo $__env->yieldContent('estilos'); ?>
     <style>
         .banner {
@@ -115,12 +116,7 @@
             padding-left: 1.8em;
         }
 
-        footer {
-            width: 100%;
-            background-color: rgba(0,0,0,.35);
-            padding: 1em;
-            text-align: right;
-        }
+        
 
         #log form {
             float: none !important;
@@ -135,6 +131,13 @@
             }
             .tooltip-inner {
                 text-align:left !important;
+            }
+             .ADMdtp-box footer .timeSelectIcon, .ADMdtp-box footer .today, .ADMdtp-box footer .calTypeContainer p{
+                fill: darkorange;
+                color: darkorange;
+            }
+            .ADMdtp-box footer .calTypeContainer p{
+                display: none;
             }
     </style>
 </head>
@@ -185,7 +188,7 @@
             <h3 style="margin-top: 0.5em;"><strong><?php echo $__env->yieldContent('TitleSection'); ?></strong></h3>
         </div>
         <div class="progress progress-striped active">
-            <div class="progress-bar progress-bar-info" style="width: yield('Progreso')"><?php echo $__env->yieldContent('NumSeccion'); ?></div>
+            <div class="progress-bar progress-bar-info" style="width: <?php echo $__env->yieldContent('Progreso'); ?>"><?php echo $__env->yieldContent('NumSeccion'); ?></div>
         </div>
     </header>
     <div class="container" <?php echo $__env->yieldContent('Control'); ?>>
@@ -218,6 +221,8 @@
     <script src="<?php echo e(asset('/js/plugins/angular-repeat-n.min.js')); ?>"></script>
     <script src="<?php echo e(asset('/js/plugins/sweetalert.min.js')); ?>"></script>
     <script src="<?php echo e(asset('/js/plugins/selectjp.js')); ?>"></script>
+    <script src="<?php echo e(asset('/js/ADM-dateTimePicker.min.js')); ?>" type="text/javascript"></script>
+   
 
     <script src="<?php echo e(asset('/js/encuestas/turismointerno/encuestaInterno.js')); ?>"></script>
     <script src="<?php echo e(asset('/js/encuestas/turismointerno/transporte.js')); ?>"></script>

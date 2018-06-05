@@ -195,6 +195,10 @@ class TurismoReceptorController extends Controller
 		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];
 		}
 		
+		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
+		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];
+		}
+		
 // 		$grupo = Grupo_Viaje::find($request->Grupo);
 // 		//return count($grupo->visitantes).'-'.$grupo->personas_encuestadas;
 // 		if( count($grupo->visitantes) >= $grupo->personas_encuestadas ){
@@ -397,6 +401,10 @@ class TurismoReceptorController extends Controller
 // 		if($municipio->departamento->pais_id != 47 && $request->Destino==null){
 // 		    return ["success"=>false,"errores"=> [ ["El id del destino principal es inválido."] ] ];
 // 		}
+		
+		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
+		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];
+		}
 		
 		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
 		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];

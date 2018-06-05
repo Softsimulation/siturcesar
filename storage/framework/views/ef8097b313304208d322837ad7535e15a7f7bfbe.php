@@ -46,7 +46,7 @@
 
 <?php $__env->startSection('NumSeccion', '0%'); ?>
 
-<?php $__env->startSection('app','ng-app="encuesta"'); ?>
+<?php $__env->startSection('app','ng-app="situr_admin"'); ?>
 
 <?php $__env->startSection('controller','ng-controller="listadoEncuestasCtrl"'); ?>
 
