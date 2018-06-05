@@ -69,15 +69,15 @@
                                 <tr>
                                     <th>
                                         <!-- P1Col1. Municipio visitado-->
-                                        Municipio visitado
+                                        B2. Municipio visitado
                                     </th>
                                     <th>
                                         <!-- P1Col2. Número de noches-->
-                                        Número de noches
+                                        B1. Número de noches
                                     </th>
                                     <th>
                                         <!-- P1Col3. Tipo de Alojamiento utilizadoa-->
-                                        Tipo de Alojamiento utilizado
+                                        B3. Tipo de Alojamiento utilizado
                                         <i class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="right" title=""
                                            data-original-title="Si utilizó más de un servicio de alojamiento en este municipio, seleccione en el que pasó el mayor número de noches.">
                                         </i>
@@ -85,7 +85,7 @@
                                     </th>
                                     <th>
                                         <!-- P1Col4. Destino Principal-->
-                                        Destino Principal
+                                        B4.  Destino Principal
                                     </th>
                                     <th>
                                         <!--EncuestaEstanciaBtnAgregarDest. Agregar destino-->
@@ -185,7 +185,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- P2. ¿Que actividades realizó en el Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Que actividades realizó en el Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>B5. ¿Que actividades realizó en el Cesar?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">
@@ -221,7 +221,7 @@
                             <label>
                                 <input type="checkbox" name ="opcion_@{{opcion.id}}" id="opcion_@{{opcion.id}}" checklist-model="opcion.Respuestas" checklist-value="item.id" > @{{item.opciones_actividades_realizadas_idiomas[0].nombre}}
                             </label>
-                            <span ng-if="item.id==22 || item.id==26 || item.id==34">:<input type="text" name="opcionOtro_@{{opcion.id}}" style="display: inline-block;" class="form-control" id="opcionOtro_@{{opcion.id}}" placeholder="Escriba su otra opción" ng-model="opcion.otro" ng-change="validarOtro(item.id,opcion)" ng-required="(item.id==22 || item.id==26 || item.id==34) && validarContenido(item.id,opcion)"/></span>
+                            <span ng-if="item.id==15 || item.id==28 || item.id==34 || item.id==42">:<input type="text" name="opcionOtro_@{{opcion.id}}" style="display: inline-block;" class="form-control" id="opcionOtro_@{{opcion.id}}" placeholder="Escriba su otra opción" ng-model="opcion.otro" ng-change="validarOtro(item.id,opcion)" ng-required="(item.id==15 || item.id==28 || item.id==34 || item.id==42) && validarContenido(item.id,opcion)"/></span>
                         </div>
                         <span ng-show="EstanciaForm.$submitted || EstanciaForm.opcion_@{{opcion.id}}.$touched || opcion.Respuestas.length > 0">
                             <span class="label label-danger" ng-show="opcion.Respuestas.length == 0 || opcion.Respuestas == undefined">* Debe seleccionar alguna opción</span>

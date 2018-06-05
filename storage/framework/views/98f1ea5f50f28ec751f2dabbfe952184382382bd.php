@@ -71,28 +71,28 @@
         <!--        </div>-->
         <!--    </div>-->
         <!--</div>-->
-        <div class="panel panel-success">
-            <div class="panel-heading p1">
+        <!--<div class="panel panel-success">-->
+        <!--    <div class="panel-heading p1">-->
                 <!-- P1. Codigo de encuesta-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Código de encuesta</b></h3>
-            </div>
-            <div class="panel-footer"><b>Ingrese el código de la encuesta</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <input type="text" class="form-control" id="codigo_encuesta" name="codigo_encuesta" ng-model="encuesta.codigo_encuesta" placeholder="Presione aquí para ingresar el código del Encuestado" ng-required="true" ng-maxlength="50" />
-                                <span ng-show="DatosForm.$submitted || DatosForm.codigo_encuesta.$touched">
-                                    <span class="label label-danger" ng-show="DatosForm.codigo_encuesta.$error.required">*El campo es requerido</span>
-                                    <span class="label label-danger" ng-show="DatosForm.codigo_encuesta.$invalid">*El campo no debe superar los 50 caracteres</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Código de encuesta</b></h3>-->
+        <!--    </div>-->
+        <!--    <div class="panel-footer"><b>Ingrese el código de la encuesta</b></div>-->
+        <!--    <div class="panel-body">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-xs-12 col-sm-12 col-md-12">-->
+        <!--                <div class="form-group">-->
+        <!--                    <div class="col-xs-12">-->
+        <!--                        <input type="text" class="form-control" id="codigo_encuesta" name="codigo_encuesta" ng-model="encuesta.codigo_encuesta" placeholder="Presione aquí para ingresar el código del Encuestado" ng-required="true" ng-maxlength="50" />-->
+        <!--                        <span ng-show="DatosForm.$submitted || DatosForm.codigo_encuesta.$touched">-->
+        <!--                            <span class="label label-danger" ng-show="DatosForm.codigo_encuesta.$error.required">*El campo es requerido</span>-->
+        <!--                            <span class="label label-danger" ng-show="DatosForm.codigo_encuesta.$invalid">*El campo no debe superar los 50 caracteres</span>-->
+        <!--                        </span>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
         <div class="panel panel-success">
             <div class="panel-heading p1">
                 <!-- P2. Encuestador-->
@@ -115,6 +115,46 @@
                 </div>
             </div>
         </div>
+        
+        <div class="panel panel-success">
+            <div class="panel-heading p1">
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Datos de encuesta</b></h3>
+            </div>
+            <div class="panel-footer"><b>Complete la siguiente información</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <!--P3P1. Fecha de aplicación-->
+                            <label for="fechaLlegada" class="col-xs-12 control-label">Fecha de aplicación</label>
+                            <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model='encuesta.fechaAplicacion' maxdate="{{fechaActual}}" ng-required="true" options="optionFecha" placeholder="Ingrese fecha de aplicación"></adm-dtp>
+                            <span ng-show="DatosForm.$submitted || DatosForm.fechaAplicacion.$touched">
+                                <!--P3P1Alert1. El campo fecha de llegada es requerido-->
+                                <span class="label label-danger" ng-show="DatosForm.fechaAplicacion.$error.required">*El campo fecha de aplicación es requerido</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <!--P4P7. Lugar de aplicación-->
+                            <label for="aplicacion" class="col-xs-12 control-label">Lugar de aplicación</label>
+                            <div class="col-xs-12">
+                                <!--P4P7Select1. Seleccione el lugar de nacimiento-->
+                                <select class="form-control" id="aplicacion" name="aplicacion" ng-model="encuesta.aplicacion" ng-required="true">
+                                    <option value="" disabled>Seleccione el lugar de aplicación</option>
+                                    <option ng-repeat="item in lugares_aplicacion" value="{{item.id}}">{{item.nombre}}</option>
+                                </select>
+                                <!--P4P7Alert1. El campo en donde nació es requerido-->
+                                <span ng-show="DatosForm.$submitted || DatosForm.aplicacion.$touched">
+                                    <span class="label label-danger" ng-show="DatosForm.aplicacion.$error.required">*El campo es requerido</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <div class="panel panel-success">
             <div class="panel-heading p1">
                 <!-- P3. Fecha de viaje-->
@@ -188,7 +228,7 @@
 
                             <div class="col-xs-12">
                                 <!--P4P3Input1. Ingrese su email-->
-                                <input type="email" class="form-control" name="email" placeholder="Ingrese su email" ng-model="encuesta.Email" ng-required="true" />
+                                <input type="email" class="form-control" name="email" placeholder="Ingrese su email (Opcional)" ng-model="encuesta.Email" />
                                 <span ng-show="DatosForm.$submitted || DatosForm.email.$touched">
                                     <!--P4P2Alert1. El campo email es requerido-->
                                     <span class="label label-danger" ng-show="DatosForm.email.$error.required">*El campo email es requerido</span>
@@ -377,58 +417,58 @@
             </div>
 
         </div>
-        <div class="panel panel-success" ng-if="pais_residencia != 47">
-            <div class="panel-heading p1">
+        <!--<div class="panel panel-success" ng-if="pais_residencia != 47">-->
+        <!--    <div class="panel-heading p1">-->
                 <!-- P5. ¿Cual fue su destino principal en colombia?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cual fue su destino principal en colombia?</b></h3>
-            </div>
-            <div class="panel-footer"><b>Complete la siguiente información</b></div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
+        <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cual fue su destino principal en el Cesar?</b></h3>-->
+        <!--    </div>-->
+        <!--    <div class="panel-footer"><b>Complete la siguiente información</b></div>-->
+        <!--    <div class="panel-body">-->
+        <!--        <div class="row">-->
+        <!--            <div class="col-xs-12 col-sm-6 col-md-6">-->
+        <!--                <div class="form-group">-->
                             <!-- P5P1. Departamento-->
-                            <label for="inputDepartamentoDestino" class="col-xs-12 control-label">Departamento</label>
+        <!--                    <label for="inputDepartamentoDestino" class="col-xs-12 control-label">Departamento</label>-->
 
-                            <div class="col-xs-12">
+        <!--                    <div class="col-xs-12">-->
                                 <!-- P5P1Select1. Seleccione un Departamento-->
-                                <select class="form-control" id="inputDepartamentoDestino" name="departamento_p" ng-model="departamentod.id" ng-change="changemunicipiocolombia()" ng-required="pais_residencia != 47">
-                                    <option value="" disabled>Seleccione un Departamento</option>
-                                    <option ng-repeat="item in departamentos_colombia" value="{{item.id}}">{{item.nombre}}</option>
-                                </select>
-                                {{departamento_p}}
+        <!--                        <select class="form-control" id="inputDepartamentoDestino" name="departamento_p" ng-model="departamentod.id" ng-change="changemunicipiocolombia()" ng-required="pais_residencia != 47">-->
+        <!--                            <option value="" disabled>Seleccione un Departamento</option>-->
+        <!--                            <option ng-repeat="item in departamentos_colombia" value="{{item.id}}">{{item.nombre}}</option>-->
+        <!--                        </select>-->
+        <!--                        {{departamento_p}}-->
                                 <!-- P5P1Alert1. El campo departamento del destino principal es requerido-->
-                                <span ng-show="DatosForm.$submitted || DatosForm.departamento_p.$touched">
-                                    <span class="label label-danger" ng-show="DatosForm.departamento_p.$error.required">*El campo departamento del destino principal es requerido</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <div class="form-group">
+        <!--                        <span ng-show="DatosForm.$submitted || DatosForm.departamento_p.$touched">-->
+        <!--                            <span class="label label-danger" ng-show="DatosForm.departamento_p.$error.required">*El campo departamento del destino principal es requerido</span>-->
+        <!--                        </span>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="col-xs-12 col-sm-6 col-md-6">-->
+        <!--                <div class="form-group">-->
                             <!-- P5P2. Municipio-->
-                            <label for="inputMunicipioDestino" class="col-xs-12 control-label">Municipio</label>
+        <!--                    <label for="inputMunicipioDestino" class="col-xs-12 control-label">Municipio</label>-->
 
-                            <div class="col-xs-12">
+        <!--                    <div class="col-xs-12">-->
                                 <!-- P5P2Select1. Seleccione un Municipio-->
-                                <select class="form-control" name="destino" ng-model="encuesta.Destino" ng-required="pais_residencia != 47">
-                                    <option value="" disabled>Seleccione un Municipio</option>
-                                    <option ng-repeat="item in municipios_colombia" value="{{item.id}}">{{item.nombre}}</option>
-                                </select>
+        <!--                        <select class="form-control" name="destino" ng-model="encuesta.Destino" ng-required="pais_residencia != 47">-->
+        <!--                            <option value="" disabled>Seleccione un Municipio</option>-->
+        <!--                            <option ng-repeat="item in municipios_colombia" value="{{item.id}}">{{item.nombre}}</option>-->
+        <!--                        </select>-->
                                 <!-- P5P2Alert1. El campo municipio del destino principal es requerido-->
-                                <span ng-show="DatosForm.$submitted || DatosForm.destino.$touched">
-                                    <span class="label label-danger" ng-show="DatosForm.destino.$error.required">*El campo municipio del destino principal es requerido</span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!--                        <span ng-show="DatosForm.$submitted || DatosForm.destino.$touched">-->
+        <!--                            <span class="label label-danger" ng-show="DatosForm.destino.$error.required">*El campo municipio del destino principal es requerido</span>-->
+        <!--                        </span>-->
+        <!--                    </div>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--</div>-->
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- P6. ¿Cuál fué el motivo principal para venir al departamento del Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuál fué el motivo principal para venir al departamento del Atlántico?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuál fué el motivo principal para venir al departamento del Cesar?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -472,7 +512,7 @@
         <div class="panel panel-success" ng-if="encuesta.Motivo == 3">
             <div class="panel-heading">
                 <!-- P6P2. ¿Cuantas hora duro/durara la parada mas larga en el Magdalena?-->
-                <h3 class="panel-title"><b>¿Cuantas hora duro/durara la parada mas larga en el Atlántico?</b></h3>
+                <h3 class="panel-title"><b>¿Cuantas hora duro/durara la parada mas larga en el Cesar?</b></h3>
             </div>
             <div class="panel-footer"><b>Complete la siguiente información</b></div>
             <div class="panel-body">

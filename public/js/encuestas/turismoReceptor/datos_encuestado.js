@@ -1,8 +1,35 @@
 angular.module('encuestas.datos_encuestado', [])
 
-.controller("crear", ['$scope', 'receptorServi', function ($scope, receptorServi) {
+.controller("crear", ['$scope', 'receptorServi','$filter', function ($scope, receptorServi,$filter) {
     $scope.encuesta = {};
     $scope.departamentod = {};
+    
+    $scope.fechaActual = "'" + formatDate(new Date()) + "'";
+    $scope.optionFecha = {
+        calType: 'gregorian',
+        format: 'DD/MM/YYYY hh:mm',
+        zIndex: 1060,
+        autoClose: true,
+        default: null,
+        gregorianDic: {
+            title: 'Fecha',
+            monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            daysNames: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            todayBtn: "Hoy"
+        }
+    };
+    
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
+
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day,month,year].join('/');
+    }
     
     $scope.$watch('id', function () {
         receptorServi.informacionCrear().then(function (data) {
@@ -13,6 +40,7 @@ angular.module('encuestas.datos_encuestado', [])
             $scope.motivos = data.motivos;
             $scope.medicos = data.medicos;
             $scope.departamentos_colombia = data.departamentos;
+            $scope.lugares_aplicacion = data.lugares_aplicacion;
         }).catch(function () {
             swal("Error", "No se realizo la solicitud, reinicie la página");
         });
@@ -73,9 +101,18 @@ angular.module('encuestas.datos_encuestado', [])
     }
 
     $scope.guardar = function () {
-       
+        
         if ($scope.DatosForm.$valid) {
             $("body").attr("class", "charging");
+            
+            // var split1 = $scope.encuesta.fechaAplicacion.split(" ");
+            // split1 = split1[0].split("/");
+            // var fechaAp = new Date(split1[2], split1[1] - 1, split1[0]);
+            // var mes = fechaAp.getMonth() +1;
+            // var anio = fechaAp.getFullYear();
+            // var encuestador = $filter('filter')($scope.encuestadores, {'id':parseInt($scope.encuesta.Encuestador)}, true);
+            // var codigoEncuestador = encuestador[0].codigo;
+            // $scope.encuesta.codigo_grupo = anio+'_'+mes+'_'+codigoEncuestador+'_'+$scope.encuesta.codigo_encuesta;
             
             receptorServi.guardarCrearEncuesta($scope.encuesta).then(function (data) {
                 $("body").attr("class", "");
@@ -90,11 +127,10 @@ angular.module('encuestas.datos_encuestado', [])
                         showConfirmButton: false
                     });
                     setTimeout(function () {
-                        window.location = "/turismoreceptor/seccionestancia/"+data.id;
-                        if (JSON.parse(data.actor)) {
-                            //window.location = "/EncuestaReceptor/Encuestas";
+                        if (data.terminada == 1) {
+                            window.location = "/turismoreceptor/listadoencuestas";
                         } else {
-                            //window.location = "/EncuestaReceptor/SeccionEstanciayvisitados/"+data.id;
+                            window.location = "/turismoreceptor/seccionestancia/"+data.id;
                         }
                     }, 1000);
                 } else {
@@ -113,8 +149,35 @@ angular.module('encuestas.datos_encuestado', [])
 
 }])
 
-.controller("editar", ['$scope', 'receptorServi',function ($scope, receptorServi) {
+.controller("editar", ['$scope', 'receptorServi','$filter',function ($scope, receptorServi,$filter) {
+    
+    $scope.fechaActual = "'" + formatDate(new Date()) + "'";
+    $scope.optionFecha = {
+        calType: 'gregorian',
+        format: 'DD/MM/YYYY hh:mm',
+        zIndex: 1060,
+        autoClose: true,
+        default: null,
+        gregorianDic: {
+            title: 'Fecha',
+            monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            daysNames: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            todayBtn: "Hoy"
+        }
+    };
+    
+    function formatDate(date) {
+        var d = new Date(date),
+            month = '' + (d.getMonth() + 1),
+            day = '' + d.getDate(),
+            year = d.getFullYear();
 
+        if (month.length < 2) month = '0' + month;
+        if (day.length < 2) day = '0' + day;
+
+        return [day,month,year].join('/');
+    }
+    
     $scope.encuesta = {};
     $scope.departamentod = {};
     $scope.$watch("id", function () {
@@ -135,6 +198,7 @@ angular.module('encuestas.datos_encuestado', [])
                 $scope.paises = data.datos.paises;
                 $scope.motivos = data.datos.motivos;
                 $scope.medicos = data.datos.medicos;
+                $scope.lugares_aplicacion = data.datos.lugares_aplicacion;
                 $scope.departamentos_colombia = data.datos.departamentos;
                 $scope.encuesta = data.visitante;
                 $scope.pais_residencia = data.visitante.Pais;
@@ -145,6 +209,13 @@ angular.module('encuestas.datos_encuestado', [])
                 $scope.encuesta.Llegada = new Date(fechal[0], (parseInt(fechal[1]) - 1), fechal[2]);
                 $scope.encuesta.Salida = new Date(fechas[0], (parseInt(fechas[1]) - 1), fechas[2]);
                 
+                if(data.visitante.fechaAplicacion != null){
+                    var split1 = data.visitante.fechaAplicacion.split(" ");
+                    var split2 = split1[1].split(":");
+                    split1 = split1[0].split("-");
+                    var fechaAp = new Date(split1[0], split1[1] - 1, split1[2],split2[0],split2[1]);
+                    $scope.encuesta.fechaAplicacion = fechaAp;    
+                }
                 
             }).catch(function () {
                 $("body").attr("class", "cbp-spmenu-push");
@@ -212,7 +283,15 @@ angular.module('encuestas.datos_encuestado', [])
         if ($scope.DatosForm.$valid) {
             $("body").attr("class", "charging");
             
-            $("body").attr("class", "charging");
+            //var split1 = $scope.encuesta.fechaAplicacion.split(" ");
+            //var hora = split1[1];
+            // split1 = split1[0].split("/");
+            // var fechaAp = new Date(split1[2], split1[1] - 1, split1[0]);
+            // var mes = fechaAp.getMonth() +1;
+            // var anio = fechaAp.getFullYear();
+            //var encuestador = $filter('filter')($scope.encuestadores, {'id':parseInt($scope.encuesta.Encuestador)}, true);
+            //var codigoEncuestador = encuestador[0].codigo;
+            //$scope.encuesta.codigo_grupo = anio+'_'+mes+'_'+codigoEncuestador+'_'+$scope.encuesta.codigo_encuesta;
             
             receptorServi.guardarEditarDatos($scope.encuesta).then(function (data) {
                 $("body").attr("class", "cbp-spmenu-push");
@@ -225,8 +304,11 @@ angular.module('encuestas.datos_encuestado', [])
                         showConfirmButton: false
                     });
                     setTimeout(function () {
-                        window.location = "/turismoreceptor/seccionestancia/"+ $scope.encuesta.Id;
-                        //window.location = "/EncuestaReceptor/SeccionEstanciayvisitados/" + $scope.encuesta.Id;
+                        if (data.terminada == 1) {
+                            window.location = "/turismoreceptor/listadoencuestas";
+                        } else {
+                            window.location = "/turismoreceptor/seccionestancia/"+$scope.id;
+                        }
                     }, 1000);
                 } else {
                     swal("Error", "Hay errores en el formulario corrigelos", "error");
