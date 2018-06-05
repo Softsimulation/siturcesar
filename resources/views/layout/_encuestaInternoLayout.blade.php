@@ -188,7 +188,7 @@
             <h3 style="margin-top: 0.5em;"><strong>@yield('TitleSection')</strong></h3>
         </div>
         <div class="progress progress-striped active">
-            <div class="progress-bar progress-bar-info" style="width: yield('Progreso')">@yield('NumSeccion')</div>
+            <div class="progress-bar progress-bar-info" style="width: @yield('Progreso')">@yield('NumSeccion')</div>
         </div>
     </header>
     <div class="container" @yield('Control')>

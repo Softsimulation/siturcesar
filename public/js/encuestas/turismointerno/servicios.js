@@ -59,11 +59,23 @@ app.factory("serviInterno", ["$http", "$q", function ($http, $q) {
             })
             return promise;
         },
+  
         guardarviaje: function (data) {
             var defered = $q.defer();
             var promise = defered.promise;
 
             $http.post('/turismointerno/createviaje',data).success(function (data) {
+                defered.resolve(data);
+            }).error(function (err) {
+                defered.reject(err);
+            })
+            return promise;
+        },
+        guardarviajePrincipal: function (data) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http.post('/turismointerno/createviajeprincipal',data).success(function (data) {
                 defered.resolve(data);
             }).error(function (err) {
                 defered.reject(err);
@@ -97,6 +109,17 @@ app.factory("serviInterno", ["$http", "$q", function ($http, $q) {
             var promise = defered.promise;
 
             $http.get('/turismointerno/viaje/'+id).success(function (data) {
+                defered.resolve(data);
+            }).error(function (err) {
+                defered.reject(err);
+            })
+            return promise;
+        },
+     getDatoViajePrincipal: function (id) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http.get('/turismointerno/viajedataprincipal/'+id).success(function (data) {
                 defered.resolve(data);
             }).error(function (err) {
                 defered.reject(err);

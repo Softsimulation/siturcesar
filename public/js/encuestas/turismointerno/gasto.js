@@ -17,6 +17,13 @@ angular.module('interno.gastos', [] )
             
             $scope.verNombreEmpresa  =  data.encuesta.empresaTransporte ? true : false;
             
+            for(var i=0; i< $scope.encuesta.rubros.length ;i++){
+                if($scope.encuesta.rubros[i].id==8){
+                    $scope.rubroAlquilerVehiculo = $scope.encuesta.rubros[i];
+                    $scope.changeRubros($scope.encuesta.rubros[i]); break;
+                }
+            }
+            
             for(var i=0; i< $scope.encuesta.gastosServicosPaquetes.length ;i++){
                
                for (var j = 0; j < $scope.serviciosPaquetes.length; j++){
@@ -76,17 +83,19 @@ angular.module('interno.gastos', [] )
                                 valor : rubro.viajes_gastos_internos[0].valor,
                                 divisa_id : rubro.viajes_gastos_internos[0].divisa_id,
                                 personas_cubrio : rubro.viajes_gastos_internos[0].personas_cubrio,
-                                gastos_realizados_otros : rubro.viajes_gastos_internos[0].gastos_realizados_otros
+                                gastos_realizados_otros : rubro.viajes_gastos_internos[0].gastos_realizados_otros,
+                                otro : rubro.viajes_gastos_internos[0].otro,
+                                alquila_vehiculo_id : rubro.id==8 ? rubro.viajes_gastos_internos[0].alquila_vehiculo_id : null,
                             });  
                         }
-                        else{
-                            swal("Error", "por favor corrija los errores y vuelva a intentarlo", 'error');
-                            return;
-                        }  
                 }
                 
             }
         } 
+        
+        if(data.rubros.length==0 && !data.noRealiceGastos){
+            swal("Error", "Debe llenar por lo menos un gasto, de lo contrario marque no realice ningun gasto.", 'info'); return;
+        }
         
         $("body").attr("class", "cbp-spmenu-push charging");
         
@@ -143,9 +152,14 @@ angular.module('interno.gastos', [] )
     $scope.changeRubros = function(rb){
         
         
-        if( rb.id==6 ){
+        if( rb.id==8 ){
+            $scope.verAlquilerVehiculo = ((rb.viajes_gastos_internos[0].valor || rb.viajes_gastos_internos[0].divisa_id) && rb.viajes_gastos_internos[0].personas_cubrio);
+        }
+        
+        else if( rb.id==6 ){
             $scope.verNombreEmpresa = ((rb.viajes_gastos_internos[0].valor || rb.viajes_gastos_internos[0].divisa_id) && rb.viajes_gastos_internos[0].personas_cubrio);
         }
+        
         else if( rb.id==12 || rb.id==13 || rb.id==14 || rb.id==15 || rb.id==16 || rb.id==17 || rb.id==18 ){
             
             var sw = null;

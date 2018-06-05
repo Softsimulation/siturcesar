@@ -81,6 +81,40 @@ angular.module('interno.Actividades', [])
         return false;
     }
     
+    $scope.existeActividad= function(obj){
+        
+       for (var i = 0; i < $scope.encuesta.ActividadesRelizadas.length; i++) {
+            if($scope.encuesta.ActividadesRelizadas[i].id == obj){
+                
+                return true;
+            }
+        }
+        return false;
+    }
+    
+     $scope.Opcion = function(obj){
+        
+       for (var i = 0; i < $scope.encuesta.OpcionesActividades.length; i++) {
+            if($scope.encuesta.OpcionesActividades[i].id == obj){
+                
+                return $scope.encuesta.OpcionesActividades[i];
+            }
+        }
+        return false;
+    }
+    
+        
+    $scope.Actividad= function(obj){
+        
+       for (var i = 0; i < $scope.encuesta.ActividadesRelizadas.length; i++) {
+            if($scope.encuesta.ActividadesRelizadas[i].id == obj){
+                
+                return $scope.encuesta.ActividadesRelizadas[i];
+            }
+        }
+        return false;
+    }
+    
     
      $scope.requeridoSubOpciones = function(obj){
         

@@ -89,8 +89,7 @@ class Visitante extends Model
     {
         return $this->belongsTo('App\Models\Digitador', 'encuestador_creada');
     }
-
-    /**
+     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function digitadoreDigitada()
