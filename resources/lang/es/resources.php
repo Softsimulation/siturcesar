@@ -16,6 +16,7 @@ return [
     'EncuestaFuenteInfoP4'=>'¿Le gustaría que le enviáramos información sobre el Magdalena a su correo electrónico?',
     'EncuestaFuenteInfoP5'=>'¿Le gustaría que le enviáramos una invitación por redes sociales para seguir al Magdalena?',
     'EncuestaFuenteInfoP6'=>'¿Cómo podemos buscarlo en facebook?',
+    'EncuestaFuenteInfoP7'=>"¿Cómo podemos buscarlo en Twitter?",
     'EncuestaFuenteInfoP6Input1'=>'Escriba su cuenta de Facebook',
     'EncuestaFuenteInfoP7Input1'=>'Escriba su cuenta de Twitter',
     'EncuestaBtnAnterior'=>'Anterior',

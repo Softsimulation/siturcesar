@@ -143,7 +143,7 @@
                                     <td>@{{item.edificacione.barrio.nombre}}</td>
                                     <td>@{{item.edificacione.direccion}}</td>
                                     <td>@{{item.edificacione.estrato.nombre}}</td>
-                                    <td>@{{item.digitadore.asp_net_user.Email}}</td>
+                                    <td>@{{item.digitadore.asp_net_user.username}}</td>
                                     <td>@{{item.edificacione.nombre_entrevistado}}</td>
                                     <td>@{{item.fecha_realizacion }}</td>
                                     <td>
@@ -220,9 +220,9 @@
                                     <td>@{{item.hogare.id}}</td>
                                     <td>@{{item.nombre}}</td>
                                     <td>@{{item.email}}</td>
-                                    <td>@{{item.hogare.direccion}}</td>
-                                    <td>@{{item.hogare.estrato}}</td>
-                                    <td>@{{item.hogare.digitadore.asp_net_user.Email}}</td>
+                                    <td>@{{item.hogare.edificacione.direccion}}</td>
+                                    <td>@{{item.hogare.edificacione.estrato}}</td>
+                                    <td>@{{item.hogare.digitadore.asp_net_user.username}}</td>
                                     <td>@{{item.viajes[0].fecha_inicio}}</td>
                                     <td>@{{item.viajes[0].ultima_sesion}}</td>
                                     <td>
