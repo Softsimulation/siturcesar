@@ -132,7 +132,7 @@
                             </div>
                             <div class="radio radio-primary">
                                 <label>
-                                    <input type="radio" value="0" name="viajePaquete" ng-model="encuesta.viajePaquete" ng-required="true">
+                                    <input type="radio" value="0" name="viajePaquete" ng-model="encuesta.viajePaquete" ng-required="true" ng-click="clearDataViaje()" >
                                     No
                                 </label>
                             </div>
@@ -297,6 +297,7 @@
                                             <th>Servicio</th>
                                             <th>En Atlántico</th>
                                             <th>Fuera de Atlántico</th>
+                                            <th></th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -327,6 +328,11 @@
                                                         <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.number">* Sólo números</span>
                                                     </span>
                                                 </div>
+                                            </td>
+                                            <td ng-show="GastoForm.$submitted || GastoForm.costoB@{{$index}}.$touched || GastoForm.costoA@{{$index}}.$touched " >
+                                                <span ng-show="(servicio.dentro+servicio.fuera)!=100" >
+                                                    <span class="label label-danger">La suma debe completar 100%</span>
+                                                </span>
                                             </td>
                                           </tr>
                                         </tbody>
@@ -540,28 +546,33 @@
                                                 <td>
                                                     <div class="form-group">
                                                         <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
-                                                        <label for="costoA@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
-                                                        <input type="number" placeholder="%%" class="form-control" min="0" max="100" name="costoA@{{$index}}" ng-model="rb.dentro" ng-required="true" style="display:inline-block;width:90%;">
-                                                        <span ng-show="GastoForm.$submitted || GastoForm.costoA@{{$index}}.$touched">
-                                                            <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.required">* El campo es requerido.</span>
-                                                            <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.min">* El valor mínimo de 0</span>
-                                                            <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.max">* El valor máximo de 100</span>
-                                                            <span class="label label-danger" ng-show="GastoForm.costoA@{{$index}}.$error.number">* Sólo números</span>
+                                                        <label for="costoC@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
+                                                        <input type="number" placeholder="%%" class="form-control" min="0" max="100" name="costoC@{{$index}}" ng-model="rb.dentro" ng-required="true" style="display:inline-block;width:90%;">
+                                                        <span ng-show="GastoForm.$submitted || GastoForm.costoC@{{$index}}.$touched">
+                                                            <span class="label label-danger" ng-show="GastoForm.costoC@{{$index}}.$error.required">* El campo es requerido.</span>
+                                                            <span class="label label-danger" ng-show="GastoForm.costoC@{{$index}}.$error.min">* El valor mínimo de 0</span>
+                                                            <span class="label label-danger" ng-show="GastoForm.costoC@{{$index}}.$error.max">* El valor máximo de 100</span>
+                                                            <span class="label label-danger" ng-show="GastoForm.costoC@{{$index}}.$error.number">* Sólo números</span>
                                                         </span>
                                                     </div>
                                                 </td>
                                                 <td>
                                                     <div class="form-group">
                                                         <!-- P5P1. ¿Cuánto pagó usted por el paquete turístico o excursión?-->
-                                                        <label for="costoB@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
-                                                        <input type="number" placeholder="%%" class="form-control" min="0" max="100" name="costoB@{{$index}}" ng-model="rb.fuera" ng-required="true" style="display:inline-block;width:90%;">
-                                                        <span ng-show="GastoForm.$submitted || GastoForm.costoB@{{$index}}.$touched">
-                                                            <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.required">* El campo es requerido.</span>
-                                                            <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.min">* El valor mínimo es 0</span>
-                                                            <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.max">* El valor máximo es 100</span>
-                                                            <span class="label label-danger" ng-show="GastoForm.costoB@{{$index}}.$error.number">* Sólo números</span>
+                                                        <label for="costoD@{{$index}}" class="col-md-12 control-label" style="color:dimgray;"></label>
+                                                        <input type="number" placeholder="%%" class="form-control" min="0" max="100" name="costoD@{{$index}}" ng-model="rb.fuera" ng-required="true" style="display:inline-block;width:90%;">
+                                                        <span ng-show="GastoForm.$submitted || GastoForm.costoD@{{$index}}.$touched">
+                                                            <span class="label label-danger" ng-show="GastoForm.costoD@{{$index}}.$error.required">* El campo es requerido.</span>
+                                                            <span class="label label-danger" ng-show="GastoForm.costoD@{{$index}}.$error.min">* El valor mínimo es 0</span>
+                                                            <span class="label label-danger" ng-show="GastoForm.costoD@{{$index}}.$error.max">* El valor máximo es 100</span>
+                                                            <span class="label label-danger" ng-show="GastoForm.costoD@{{$index}}.$error.number">* Sólo números</span>
                                                         </span>
                                                     </div>
+                                                </td>
+                                                <td ng-show="GastoForm.$submitted || GastoForm.costoC@{{$index}}.$touched || GastoForm.costoD@{{$index}}.$touched " >
+                                                    <span ng-show="(rb.dentro+rb.fuera)!=100" >
+                                                        <span class="label label-danger">La suma debe completar 100%</span>
+                                                    </span>
                                                 </td>
                                               </tr>
                                             </tbody>

@@ -37,6 +37,11 @@ class Persona extends Model
     {
         return $this->belongsTo('App\Models\Hogar', 'hogar_id');
     }
+    
+    public function otraocupacion()
+    {
+        return $this->hasOne('App\Models\OcupacionPersona', 'persona_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

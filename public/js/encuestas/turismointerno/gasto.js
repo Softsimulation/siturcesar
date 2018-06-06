@@ -62,7 +62,7 @@ angular.module('interno.gastos', [] )
         var data = angular.copy($scope.encuesta);
         data.id = $scope.id;
         data.rubros = [];
-
+        
         for (var i = 0; i < $scope.encuesta.rubros.length; i++) {
             if($scope.encuesta.rubros[i].viajes_gastos_internos.length>0){
                 
@@ -88,6 +88,12 @@ angular.module('interno.gastos', [] )
                                 alquila_vehiculo_id : rubro.id==8 ? rubro.viajes_gastos_internos[0].alquila_vehiculo_id : null,
                             });  
                         }
+                        else if(rubro.viajes_gastos_internos[0].gastos_realizados_otros){
+                            data.rubros.push({
+                                rubros_id : rubro.id,
+                                gastos_realizados_otros : rubro.viajes_gastos_internos[0].gastos_realizados_otros
+                            });  
+                        }
                 }
                 
             }
@@ -95,6 +101,17 @@ angular.module('interno.gastos', [] )
         
         if(data.rubros.length==0 && !data.noRealiceGastos){
             swal("Error", "Debe llenar por lo menos un gasto, de lo contrario marque no realice ningun gasto.", 'info'); return;
+        }
+        
+        for (var i = 0; i < $scope.encuesta.porcentajeGastoRubros.length; i++){
+            if( ($scope.encuesta.porcentajeGastoRubros[i].dentro+$scope.encuesta.porcentajeGastoRubros[i].fuera) != 100 ){
+                swal("Error", "La suma de los porcentajes gastados debe ser igual a 100%.", 'info'); return;
+            }
+        }
+        for (var i = 0; i < $scope.encuesta.gastosServicosPaquetes.length; i++){
+            if( ($scope.encuesta.gastosServicosPaquetes[i].dentro+$scope.encuesta.gastosServicosPaquetes[i].fuera) != 100 ){
+                swal("Error", "La suma de los porcentajes gastados debe ser igual a 100%.", 'info'); return;
+            }
         }
         
         $("body").attr("class", "cbp-spmenu-push charging");
@@ -152,15 +169,15 @@ angular.module('interno.gastos', [] )
     $scope.changeRubros = function(rb){
         
         
-        if( rb.id==8 ){
+        if( rb.id==8 && rb.viajes_gastos_internos.length>0 ){
             $scope.verAlquilerVehiculo = ((rb.viajes_gastos_internos[0].valor || rb.viajes_gastos_internos[0].divisa_id) && rb.viajes_gastos_internos[0].personas_cubrio);
         }
         
-        else if( rb.id==6 ){
+        else if( rb.id==6 && rb.viajes_gastos_internos.length>0 ){
             $scope.verNombreEmpresa = ((rb.viajes_gastos_internos[0].valor || rb.viajes_gastos_internos[0].divisa_id) && rb.viajes_gastos_internos[0].personas_cubrio);
         }
         
-        else if( rb.id==12 || rb.id==13 || rb.id==14 || rb.id==15 || rb.id==16 || rb.id==17 || rb.id==18 ){
+        else if( (rb.id==12 || rb.id==13 || rb.id==14 || rb.id==15 || rb.id==16 || rb.id==17 || rb.id==18) && rb.viajes_gastos_internos.length>0 ){
             
             var sw = null;
             for(var i=0; i<$scope.encuesta.porcentajeGastoRubros.length;i++){
@@ -198,6 +215,11 @@ angular.module('interno.gastos', [] )
             $scope.verNombreEmpresa = false;
             $scope.empresaTransporte = null;
         }
+    }
+    
+    
+    $scope.clearDataViaje = function(){
+        $scope.encuesta.gastosServicosPaquetes = [];
     }
     
 })

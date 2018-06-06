@@ -28,6 +28,7 @@ angular.module('interno.hogares', [])
             $scope.estratos=data.estratos
             $scope.encuestadores=data.encuestadores
             $scope.estados=data.estados
+            $scope.ocupaciones=data.ocupaciones
 
         })
         .error(function () {
@@ -173,6 +174,7 @@ angular.module('interno.hogares', [])
                 $scope.niveles = data.datos.niveles
                 $scope.motivos = data.datos.motivos
                 $scope.estratos = data.datos.estratos
+                $scope.ocupaciones=data.datos.ocupaciones
                 $scope.barrios = data.barrios
                 $scope.municipio = String(data.encuesta.edificacione.barrio.municipio_id)
                 $scope.encuestadores=data.datos.encuestadores
@@ -375,11 +377,16 @@ angular.module('interno.hogares', [])
             array[i].jefe_hogar=String(array[i].jefe_hogar);
             
             array[i].Civil=String(array[i].estado_civil_id);
-            array[i].Ocupacion=String(array[i].ocupacion);
+            array[i].Ocupacion=String(array[i].ocupacion_id);
             array[i].Vive=(array[i].es_residente)?"1":"0";
             
             if(array[i].motivo_no_viajes.length>0){
                 array[i].Motivo=String(array[i].motivo_no_viajes[0].motivo_no_viaje_id);
+             }
+             
+             if(array[i].otraocupacion != null){
+                 
+                array[i].Otra_ocupacion=String(array[i].otraocupacion.otro);
              }
                    
                }

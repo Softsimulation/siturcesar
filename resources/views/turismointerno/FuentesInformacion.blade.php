@@ -71,7 +71,7 @@
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="it in fuentesAntes">
                             <label>
-                                <input type="checkbox" name="fuentesAntes" checklist-model="enteran.FuentesAntes" checklist-value="it.id" ng-change="validar(2, it.id)"> @{{it.nombre}}
+                                <input type="checkbox" name="fuentesAntes" checklist-model="enteran.FuentesAntes" checklist-value="it.id" ng-change="validar(2, it.id)"> @{{it.fuente_informacion_antes_viaje_con_idiomas[0].nombre}}
                             </label>
                             <span ng-if="it.id==14">:<input type="text" name="otroFantes" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba su otra opción" ng-model="enteran.OtroFuenteAntes" ng-change="validarOtro(0)" ng-required="enteran.FuentesAntes.indexOf(14) !== -1" /></span>
                         </div>
@@ -92,10 +92,11 @@
             <div class="panel-footer"><b>{{trans('resources.EncuestaMsgSeleccionMultiple')}}</b></div>
             <div class="panel-body">
                 <div class="row">
+
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="it in fuentesDurante">
                             <label>
-                                <input type="checkbox" name="fuentesDurante" checklist-model="enteran.FuentesDurante" ng-disabled="(enteran.FuentesDurante.indexOf(13) > -1 && it.id!=13)" ng-change="validar(0, it.id)" checklist-value="it.id"> @{{it.nombre}}
+                                <input type="checkbox" name="fuentesDurante" checklist-model="enteran.FuentesDurante" ng-disabled="(enteran.FuentesDurante.indexOf(13) > -1 && it.id!=13)" ng-change="validar(0, it.id)" checklist-value="it.id"> @{{it.fuentes_informacion_durante_viaje_con_idiomas[0].nombre}}
                             </label>
                             <span ng-if="it.id==14">:<input type="text" name="otroDurante" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba su otra opción" ng-disabled="enteran.FuentesDurante.indexOf(13) > -1 " ng-model="enteran.OtroFuenteDurante" ng-change="validarOtro(1)" ng-required="enteran.FuentesDurante.indexOf(14) != -1" /></span>
                         </div>

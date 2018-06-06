@@ -94,7 +94,7 @@
                                <label for="fechaLlegada" class="col-xs-12 control-label">fecha de inicio del viaje</label>
 
                                <div class="col-xs-12">
-                                   <input type="date" class="form-control" id="fechaLlegada" name="llegada" ng-model="encuesta.Inicio" max="@DateTime.Now.ToString("yyyy-MM-dd")" placeholder="YYYY-MM-DD" ng-required="true" />
+                                   <adm-dtp name="llegada" ng-model="encuesta.Inicio" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha de aplicacion"  ng-required="true"></adm-dtp>
                                    <span ng-show="EstanciaForm.$submitted || EstanciaForm.llegada.$touched">
                                        <!--P3P1Alert1. El campo fecha de llegada es requerido-->
                                        <span class="label label-danger" ng-show="EstanciaForm.llegada.$error.required">*El campo fecha de llegada es requerido</span>
@@ -110,7 +110,7 @@
                                <label for="fechaSalida" class="col-xs-12 control-label">fecha fin del viaje</label>
 
                                <div class="col-xs-12">
-                                   <input type="date" id="fechaSalida" name="salida" class="form-control" min="@{{encuesta.Inicio}}" ng-model="encuesta.Fin" placeholder="YYYY-MM-DD" ng-required="true" />
+                                   <adm-dtp name="salida" ng-model="encuesta.Fin" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha de aplicacion"  ng-required="true"></adm-dtp>
                                    <span ng-show="EstanciaForm.$submitted || EstanciaForm.salida.$touched">
                                        <!--P3P2Alert1. El campo fecha de salida es requerido-->
                                        <span class="label label-danger" ng-show="EstanciaForm.salida.$error.required">*El campo fecha de salida es requerido</span>
@@ -441,7 +441,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12" style="text-align: center; border-top: .5px solid lightgrey">
-            <a href="/turismointerno/viajesrealizados/{{$persona}}" class="btn btn-raised btn-default" placeholder="Anterior">Anterior</a>
+            <a href="/turismointerno/viajesrealizados/{{$hogar}}" class="btn btn-raised btn-default" placeholder="Anterior">Anterior</a>
             <input type="submit" class="btn btn-raised btn-success" value="Siguente" ng-click="siguiente()" ng-disabled="ver" placeholder="Siguiente">
         </div>
     </div>

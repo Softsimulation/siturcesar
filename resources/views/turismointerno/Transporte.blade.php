@@ -127,7 +127,7 @@
         -->
         
         <div class="row" style="text-align:center">
-            <a href="#" class="btn btn-raised btn-default">{{trans('resources.EncuestaBtnAnterior')}}</a>
+            <a href="/turismointerno/actividadesrealizadas/{{$id}}" class="btn btn-raised btn-default">{{trans('resources.EncuestaBtnAnterior')}}</a>
             <input type="submit" class="btn btn-raised btn-success" value="{{trans('resources.EncuestaBtnSiguiente')}}" ng-click="guardar()">
         </div>
         <br />

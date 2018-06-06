@@ -27,7 +27,7 @@ class Fuente_Informacion_Durante_Viaje extends Model
     /**
      * @var array
      */
-    protected $fillable = ['user_create', 'user_update', 'created_at', 'updated_at', 'estado'];
+    protected $fillable = ['user_create', 'user_update', 'created_at', 'updated_at', 'estado','peso'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany

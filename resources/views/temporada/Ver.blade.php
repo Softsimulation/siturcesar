@@ -101,7 +101,7 @@
         <div class="row">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#hogares" aria-controls="hogares" role="tab" data-toggle="tab">Hogares</a></li>
-                <li role="presentation"><a href="#personas" aria-controls="personas" role="tab" data-toggle="tab">Personas</a></li>
+            <!--    <li role="presentation"><a href="#personas" aria-controls="personas" role="tab" data-toggle="tab">Personas</a></li> -->
             </ul>
         </div>
 
@@ -180,7 +180,7 @@
 
                 </div>
             </div>
-
+<!--
             <div role="tabpanel" class="tab-pane fade" id="personas">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
@@ -259,6 +259,7 @@
 
                 </div>
             </div>
+            -->
         </div>
 
 
