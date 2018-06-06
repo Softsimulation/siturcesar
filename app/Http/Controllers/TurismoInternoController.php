@@ -87,6 +87,7 @@ use App\Models\Viaje_terrestre;
 use App\Models\Tipo_Proveedor_Paquete;
 use App\Models\Ocupacion;
 use App\Models\OcupacionPersona;
+use App\Models\OtraRed;
 
 
 class TurismoInternoController extends Controller
@@ -565,6 +566,13 @@ class TurismoInternoController extends Controller
                 $OtroFuenteDurante=$viaje->otrasFuentesInformacionDuranteViajeInterno->nombre;
                 
             }
+            
+            if(in_array(12,$compar_redes)){
+                
+                $OtroRedes=$viaje->OtraRed->otro;
+                
+            }
+            
             $otro=$viaje->viajeroRedesSociale()->first();
             
             if($otro != null){
@@ -595,6 +603,7 @@ class TurismoInternoController extends Controller
                 'compar_redes'=>$compar_redes,
                 'OtroFuenteAntes'=>$OtroFuenteAntes,
                 'OtroFuenteDurante'=>$OtroFuenteDurante,
+                'Otrared'=>$OtroRedes,
                 'facebook'=>$facebook,
                 'twitter'=>$twitter,
                 'invitacion'=>$invitacion,
@@ -616,7 +625,8 @@ class TurismoInternoController extends Controller
                 'Invitacion'=>'required',
                 'Experiencias'=>'required',
                 'Autorizo'=>'required',
-                'Acepta_tratamiento'=>'required'
+                'Acepta_tratamiento'=>'required',
+                
             ]);
             
         if($validator->fails()){
@@ -654,8 +664,7 @@ class TurismoInternoController extends Controller
             Fuente_Informacion_Durante_Viaje_Interno::where('viajes_id',$viaje->id)->delete();
             Redes_Sociales_Viajero::where('viajero_id',$viaje->id)->delete();
             Calificacion_Experiencia_Interno::where('viajes_id',$viaje->id)->delete();
-            
-            
+            OtraRed::where('viaje_id',$viaje->id)->delete();
        
         
         foreach($request->FuentesAntes as $idantes){
@@ -703,6 +712,14 @@ class TurismoInternoController extends Controller
             $red->redes_sociales_id=$idred;
             $red->viajero_id=$viaje->id;
             $red->save();
+            
+            if($idred == 12){
+                
+                $otra=new OtraRed();
+                $otra->viaje_id=$viaje->id;
+                $otra->otro=$request->otra_red;
+                $otra->save();
+            }
             
         }
         
@@ -1051,11 +1068,23 @@ class TurismoInternoController extends Controller
     
     public function getViajes($id = null){
         $hogar = Hogar::where("id",$id)->first();
- 
+        
+        $idmunicipios=[4184,4203,5208,5394,5453];
+        
         $paises = Pais_Con_Idioma::where("idioma_id",1)->select("nombre","pais_id as id")->get();
       
         $depertamentos = Departamento::select("nombre","id","pais_id as idP")->get();
-        $municipios = Municipio::where("id","!=",$hogar->edificacione->barrio->municipio_id)->select("nombre","id","departamento_id as idD")->get();
+        
+        if(in_array($hogar->edificacione->barrio->municipio_id,$idmunicipios)){
+            
+             $municipios = Municipio::WhereNotIn("id",$idmunicipios)->select("nombre","id","departamento_id as idD")->get();
+            
+        }else{
+             $municipios = Municipio::where("id","!=",$hogar->edificacione->barrio->municipio_id)->select("nombre","id","departamento_id as idD")->get();
+        }
+        
+       
+        
         $alojamientos =  Tipo_Alojamiento_Con_Idioma::where("idiomas_id",1)->select("nombre","tipos_alojamientos_id as id")->get();
         $motivos =  Motivo_Viaje_Con_Idioma::where("idiomas_id",1)->select("nombre","motivo_viaje_id as id")->get();
         $frecuencias = Frecuencia_Viaje::where("estado","=",true)->select("frecuencia","id")->get();
@@ -1118,14 +1147,21 @@ class TurismoInternoController extends Controller
         return ["encuesta"=>$encuesta];
     }
     
-     public function getViajedataprincipal($id = null){
-       
+    public function getViajedataprincipal($id = null){
+        
+        $idmunicipios=[4184,4203,5208,5394,5453];
         $vj = Viaje::where("id","=",$id)->first();
         $viaje = Viaje::where("id","=",$id)->select("frecuencia_id as Frecuencia","motivo_viaje_id as Motivo","fecha_inicio as Inicio","fecha_final as Fin","tamaño_grupo as Numero")->first();
         $paises = Pais_Con_Idioma::where("idioma_id",1)->select("nombre","pais_id as id")->get();
       
         $depertamentos = Departamento::select("nombre","id","pais_id as idP")->get();
-        $municipios = Municipio::where("id","!=",$vj->hogare->edificacione->barrio->municipio_id)->select("nombre","id","departamento_id as idD")->get();
+         if(in_array($vj->hogare->edificacione->barrio->municipio_id,$idmunicipios)){
+            
+             $municipios = Municipio::WhereNotIn("id",$idmunicipios)->select("nombre","id","departamento_id as idD")->get();
+            
+        }else{
+             $municipios = Municipio::where("id","!=",$vj->hogare->edificacione->barrio->municipio_id)->select("nombre","id","departamento_id as idD")->get();
+        }
         $alojamientos =  Tipo_Alojamiento_Con_Idioma::where("idiomas_id",1)->select("nombre","tipos_alojamientos_id as id")->get();
         $motivos =  Motivo_Viaje_Con_Idioma::where("idiomas_id",1)->select("nombre","motivo_viaje_id as id")->get();
         $frecuencias = Frecuencia_Viaje::where("estado","=",true)->select("frecuencia","id")->get();
@@ -1222,49 +1258,6 @@ class TurismoInternoController extends Controller
 
     $hogar = Hogar::where("id","=",$request->Id)->first();
     
- 
-     
-     if($request->Crear){
-
-        if(Viaje::where("hogar_id",$request->Id)->where("fecha_inicio","<=",$request->Inicio)->where("fecha_final",">=",$request->Inicio)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-            
-        }
-        
-         if(Viaje::where("hogar_id",$request->Id)->where("fecha_inicio","<=",$request->Fin)->where("fecha_final",">=",$request->Fin)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-            
-        }
-        
-          if(Viaje::where("hogar_id",$request->Id)->where("fecha_inicio",">=",$request->Inicio)->where("fecha_inicio","<=",$request->Fin)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-          }
-           if(Viaje::where("hogar_id",$request->Id)->where("fecha_final",">=",$request->Inicio)->where("fecha_final","<=",$request->Fin)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-           
-        }
-        
-     }else{
-
-        if(Viaje::where("hogar_id",$request->Id)->where("fecha_inicio","<=",$request->Inicio)->where("fecha_final",">=",$request->Inicio)->where("id","!=",$request->Idv)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-            
-        }
-        
-         if(Viaje::where("hogar_id",$request->Id)->where("fecha_inicio","<=",$request->Fin)->where("fecha_final",">=",$request->Fin)->where("id","!=",$request->Idv)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-            
-        }
-        
-          if(Viaje::where("hogar_id",$request->Id)->where("fecha_inicio",">=",$request->Inicio)->where("fecha_inicio","<=",$request->Fin)->where("id","!=",$request->Idv)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-          }
-           if(Viaje::where("hogar_id",$request->Id)->where("fecha_final",">=",$request->Inicio)->where("fecha_final","<=",$request->Fin)->where("id","!=",$request->Idv)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-           
-        }
-        
-     }
     
     if(collect($request->Estancias)->where("Municipio",$hogar->edificacione->barrio->municipio_id)->first()){
            return ["success" => false, "errores" => [["No se puede seleccionar el municipio de residencia como un destino"]] ];
@@ -1486,24 +1479,6 @@ class TurismoInternoController extends Controller
     $hogar= $viaje->hogare;
 
 
-        if(Viaje::where("hogar_id",$hogar->id)->where("fecha_inicio","<=",$request->Inicio)->where("fecha_final",">=",$request->Inicio)->where("id","!=",$request->Id)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-            
-        }
-        
-         if(Viaje::where("hogar_id",$hogar->id)->where("fecha_inicio","<=",$request->Fin)->where("fecha_final",">=",$request->Fin)->where("id","!=",$request->Id)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-            
-        }
-        
-          if(Viaje::where("hogar_id",$hogar->id)->where("fecha_inicio",">=",$request->Inicio)->where("fecha_inicio","<=",$request->Fin)->where("id","!=",$request->Id)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-          }
-           if(Viaje::where("hogar_id",$hogar->id)->where("fecha_final",">=",$request->Inicio)->where("fecha_final","<=",$request->Fin)->where("id","!=",$request->Id)->first() != null){
-            return ["success" => false, "errores" => [["Ya existe un viaje creado en esas fechas."]] ];
-           
-        }
-        
         if($request->Frecuencia ==  1 || $request->Frecuencia == 2){
              return ["success" => false, "errores" => [["El viaje seleccionado no debe tener frecuencia varias veces a la semana o una vez a la semana."]] ];
       

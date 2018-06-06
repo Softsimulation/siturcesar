@@ -122,6 +122,7 @@
                             <label>
                                 <input type="checkbox" name="redes" checklist-model="enteran.Redes" ng-disabled="enteran.Redes.indexOf(1) > -1 && it.id != 1" ng-change="validar(1, it.id)" checklist-value="it.id"> @{{it.nombre}}
                             </label>
+                            <span ng-if="it.id==12">:<input type="text" name="otrared" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba otro" ng-disabled="enteran.Redes.indexOf(12) < 0" ng-model="enteran.otra_red" /></span>
                         </div>
 
                     </div>

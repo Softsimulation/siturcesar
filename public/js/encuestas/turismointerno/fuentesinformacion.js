@@ -34,6 +34,7 @@ angular.module('interno.fuentes', ["checklist-model"])
                     $scope.enteran.NombreTwitter = data.twitter
                     $scope.enteran.Autorizo=data.autorizo
                     $scope.enteran.Acepta_tratamiento=data.acepta
+                    $scope.enteran.otra_red=data.Otrared
                 }
 
             }).error(function () {
