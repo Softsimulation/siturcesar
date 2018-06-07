@@ -12,7 +12,8 @@
         "orchestra/parser": "~3.0",
         "barryvdh/laravel-dompdf": "^0.8.2",
         "laravelcollective/html": "^5.2.0",
-        "barryvdh/laravel-cors": "^0.8.2"
+        "barryvdh/laravel-cors": "^0.8.2",
+        "zizaco/entrust": "dev-master"
         
     },
     "require-dev": {
