@@ -96,7 +96,7 @@ class TurismoInternoController extends Controller
     public function __construct()
     {
         
-        $this->middleware('interno', ['only' => ['getActividadesrealizadas']]);
+        $this->middleware('interno', ['only' => ['getViajesrealizados','getActividadesrealizadas']]);
     }
     
     public function getDatoshogar(){
