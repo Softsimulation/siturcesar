@@ -38,7 +38,7 @@ class TemporadaController extends Controller
             $q->where('temporada_id',$temporada->id);
         })->with('edificacione.barrio')->with('edificacione.estrato')->with('digitadore.aspNetUser')->get();
         
-        $hogares=Persona::whereHas('viajes',function($q){
+      /*  $hogares=Persona::whereHas('viajes',function($q){
                 
                 $q->where('es_principal',true);
                 
@@ -46,11 +46,11 @@ class TemporadaController extends Controller
             
                 $q->where('temporada_id',$temporada->id);
             
-        })->with('viajes')->with('hogare.digitadore.aspNetUser')->with('hogare.edificacione')->get();
+        })->with('viajes')->with('hogare.digitadore.aspNetUser')->with('hogare.edificacione')->get(); */
         
         
         
-        return ['temporada'=>$temporada,'hogares'=>$hogares];
+        return ['temporada'=>$temporada];
         
     }
     
