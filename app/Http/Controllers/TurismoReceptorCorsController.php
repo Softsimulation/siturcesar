@@ -65,11 +65,9 @@ use App\Models\Visitante_Transporte_Dentro;
 use App\Models\Visitante_Transporte_Llegada;
 use App\Models\Lugar_Aplicacion_Encuesta;
 
-class TurismoReceptorController extends Controller
+class TurismoReceptorCorsController extends Controller
 {
-    public function getDatosencuestados(){
-        return view('turismoReceptor.DatosEncuestados');
-    }
+
     
     public function getInformaciondatoscrear(){
         
@@ -258,15 +256,7 @@ class TurismoReceptorController extends Controller
 		return ["success" => true, 'id' => $visitante->id, 'terminada' => $condicion];
     }
     
-    public function getEditardatos($id){
-        if(Visitante::find($id) == null){
-            return \Redirect::to('/turismoReceptor/encuestas')
-                    ->with('message', 'El visitante seleccionado no se encuentra registrado.')
-                    ->withInput();
-        }
-        
-        return view('turismoReceptor.EditarDatos',["id"=>$id]);
-    }
+    
     
     public function getCargareditardatos($id){
         
@@ -463,15 +453,7 @@ class TurismoReceptorController extends Controller
         return $municipios;
     }
     
-    public function getSeccionestancia($id){
-        if(Visitante::find($id) == null){
-            return \Redirect::to('/turismoReceptor/encuestas')
-                    ->with('message', 'El visitante seleccionado no se encuentra registrado.')
-                    ->withInput();
-        }
-        
-        return view('turismoReceptor.SeccionEstanciayvisitados',["id"=>$id]);
-    }
+    
     
     public function getCargardatosseccionestancia($id = null){
         $municipios = Municipio::where('departamento_id', 1396)->select('id','nombre')->get();
@@ -698,18 +680,7 @@ class TurismoReceptorController extends Controller
         return $encuestas;
     }
     
-    public function getListadoencuestas(){
-        return view('turismoReceptor.Encuestas');
-    }
     
-    public function getSecciontransporte($id){
-        if(Visitante::find($id) == null){
-            return \Redirect::to('/turismoReceptor/encuestas')
-                    ->with('message', 'El visitante seleccionado no se encuentra registrado.')
-                    ->withInput();
-        }
-        return view('turismoReceptor.SeccionTransporte',["id" => $id]);
-    }
     
     public function getCargardatostransporte($id = null){
         
@@ -817,14 +788,6 @@ class TurismoReceptorController extends Controller
         return ["success" => true, 'sw' => $sw];
     }
     
-    public function getSecciongrupoviaje($id){
-        if(Visitante::find($id) == null){
-            return \Redirect::to('/turismoReceptor/encuestas')
-                    ->with('message', 'El visitante seleccionado no se encuentra registrado.')
-                    ->withInput();
-        }
-        return view('turismoReceptor.SeccionViajeGrupo',["id" => $id]);
-    }
     
     public function getCargardatosseccionviaje($id = null){
         $visitante = Visitante::find($id);
@@ -924,16 +887,7 @@ class TurismoReceptorController extends Controller
 		$visitante->save();
 		return ["success" => true, 'sw' => $sw];
     }
-    
-    public function getSecciongastos($id){
-       if(Visitante::find($id) == null){
-            return \Redirect::to('/turismoreceptor/encuestas')
-                    ->with('message', 'El visitante seleccionado no se encuentra registrado.')
-                    ->withInput();
-        }
-        $data = ["id"=>$id];
-        return view('turismoReceptor.Gastos',$data);
-    }
+
     
     public function getInfogasto($id){
         
@@ -1272,14 +1226,6 @@ class TurismoReceptorController extends Controller
         return ["success"=>true];
     }
     
-    public function getSeccionpercepcionviaje($id){
-        if(Visitante::find($id) == null){
-            return \Redirect::to('/turismoReceptor/encuestas')
-                    ->with('message', 'El visitante seleccionado no se encuentra registrado.')
-                    ->withInput();
-        }
-        return view('turismoReceptor.PercepcionViaje',["id" => $id]);
-    }
     
     public function getCargardatospercepcion($id){
         $visitante = Visitante::find($id);
@@ -1486,14 +1432,6 @@ class TurismoReceptorController extends Controller
 		return ["success" => true, 'sw' => $sw];
     }
     
-    public function getSeccionfuentesinformacion($id){
-        if(Visitante::find($id) == null){
-            return \Redirect::to('/turismoReceptor/encuestas')
-                    ->with('message', 'El visitante seleccionado no se encuentra registrado.')
-                    ->withInput();
-        }
-        return view('turismoReceptor.FuentesInformacionVisitante',["id" => $id]);
-    }
     
     public function getCargardatosseccioninformacion($id){
         $visitante = Visitante::find($id);
@@ -1673,5 +1611,4 @@ class TurismoReceptorController extends Controller
         $visitante->save();
         return ["success" => true, 'sw' => $sw, 'codigo' => $visitante->codigo_grupo];
     }
-    
 }
