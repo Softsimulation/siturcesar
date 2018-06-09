@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Models\Temporada;
 use App\Models\Hogar;
 use App\Models\Persona;
+use App\Models\Viaje;
 
 class TemporadaController extends Controller
 {
@@ -38,15 +39,7 @@ class TemporadaController extends Controller
             $q->where('temporada_id',$temporada->id);
         })->with('edificacione.barrio')->with('edificacione.estrato')->with('digitadore.aspNetUser')->get();
         
-      /*  $hogares=Persona::whereHas('viajes',function($q){
-                
-                $q->where('es_principal',true);
-                
-        })->whereHas('hogare.edificacione',function($q)use($temporada){
-            
-                $q->where('temporada_id',$temporada->id);
-            
-        })->with('viajes')->with('hogare.digitadore.aspNetUser')->with('hogare.edificacione')->get(); */
+        //$encuestas=Viaje::where('es_principal',true)->with('hogare')->orderby('id');
         
         
         
@@ -113,7 +106,9 @@ class TemporadaController extends Controller
                                     })->get();
         }else{
             
-            $aux=Temporada::where('id','!=',$request->id)->where(function ($query) use ($request) {
+            $aux=Temporada::where('id','!=',$request->id)->where(function($query1) use ($request){
+                
+                                    $query1->where(function ($query) use ($request) {
                 
                                         $query->where('fecha_ini', '>=', $request->Fecha_ini);
                                         $query->Where('fecha_ini', '<=', $request->Fecha_fin);
@@ -128,12 +123,14 @@ class TemporadaController extends Controller
                                         $query->where('fecha_ini', '<', $request->Fecha_ini);
                                         $query->Where('fecha_fin', '>', $request->Fecha_fin);
                                         
-                                    })->get();
+                                    });
+                
+            })->get();
             
             
         }
                                 
-        if($aux->count()>1){
+        if($aux->count()>0){
             
             return ["success"=>false,"errores"=>["temporada"=>["Ya existen una temporada creada para estas fechas"]]];
             
