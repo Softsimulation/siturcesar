@@ -39,7 +39,7 @@ var pp=angular.module('admin.exportaciones', [])
         $("body").attr("class", "cbp-spmenu-push charging");
         adminService.Exportar($scope.exportacion)
             .then(function(data){
-                
+                $("body").attr("class", "cbp-spmenu-push");
                 if(data.success){
                     
                     swal("Realizado","Exportacion iniciada exitosamente","success");

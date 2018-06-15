@@ -161,11 +161,11 @@
 
                                     <div class="col-md-12">
                                         <i class="material-icons" title="Aproximadamente cual fue el valor" style="font-size: 1.6em;position: relative; top: 8px;">help</i>
-                                        <input type="number" class="form-control" min="1000" name="costo" ng-model="encuesta.viajeExcursion.valor_paquete" placeholder="" ng-required="encuesta.viajePaquete==1" style="display:inline-block;width:90%;">
+                                        <input type="number" class="form-control" min="1" name="costo" ng-model="encuesta.viajeExcursion.valor_paquete" placeholder="" ng-required="encuesta.viajePaquete==1" style="display:inline-block;width:90%;">
                                     </div>
                                     <span ng-show="GastoForm.$submitted || GastoForm.costo.$touched">
                                         <span class="label label-danger" ng-show="GastoForm.costo.$error.required">* El campo es requerido.</span>
-                                        <span class="label label-danger" ng-show="GastoForm.costo.$error.min">* El valor mínimo es de 1.000 pesos</span>
+                                        <span class="label label-danger" ng-show="GastoForm.costo.$error.min">* El valor mínimo es de 1 </span>
                                         <span class="label label-danger" ng-show="GastoForm.costo.$error.number">* Sólo números</span>
                                     </span>
                                 </div>
@@ -409,10 +409,10 @@
                                                     <div class="row">
                                                         <div class="col-xs-12 col-md-6">
                                                             <label for="cantidadFuera@{{$index}}" class="col-md-12 control-label" style="color:dimgray;">Cantidad </label>
-                                                            <input type="number" class="form-control" placeholder="Cantidad" name="valor@{{$index}}" placeholder="0" min="1000" ng-model="rub.viajes_gastos_internos[0].valor" ng-change="changeRubros(rub)"  ng-required="rub.viajes_gastos_internos[0].divisa_id" >
+                                                            <input type="number" class="form-control" placeholder="Cantidad" name="valor@{{$index}}" placeholder="0" min="1" ng-model="rub.viajes_gastos_internos[0].valor" ng-change="changeRubros(rub)"  ng-required="rub.viajes_gastos_internos[0].divisa_id" >
                                                             <span ng-show="GastoForm.$submitted || GastoForm.valor@{{$index}}.$touched">
                                                                 <span class="label label-danger" ng-show="GastoForm.valor@{{$index}}.$error.required">* El campo es requerido.</span>
-                                                                <span class="label label-danger" ng-show="GastoForm.valor@{{$index}}.$error.min">*El valor mínimo es de 1.000 pesos</span>
+                                                                <span class="label label-danger" ng-show="GastoForm.valor@{{$index}}.$error.min">*El valor mínimo es de 1</span>
                                                                 <span class="label label-danger" ng-show="GastoForm.valor@{{$index}}.$error.number">* Solo números.</span>
                                                             </span>
                                                         </div>

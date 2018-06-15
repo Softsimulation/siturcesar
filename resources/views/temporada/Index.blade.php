@@ -60,6 +60,9 @@
         .row {
             margin-top: 1em;
         }
+        .ADMdtp-box.ADMdtp-calendar-container{
+                z-index: 1060!important;
+        }
     </style>
 @endsection
 @section('controller','ng-controller="temporadasCtrl"')

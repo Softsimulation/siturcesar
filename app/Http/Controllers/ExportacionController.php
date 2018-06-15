@@ -9,6 +9,7 @@ use App\Models\Exportacion;
 
 class ExportacionController extends Controller
 {
+  
     
     public function getIndex(){
         
@@ -28,7 +29,7 @@ class ExportacionController extends Controller
         switch($request->nombre){
             
             case 'receptor': 
-                $this->ExportacionTurismoReceptor($request->fecha_inicial,$request->fecha_final);
+                $this->ExportacionTurismoReceptor2($request->fecha_inicial,$request->fecha_final);
             break;
             
         }
@@ -36,7 +37,7 @@ class ExportacionController extends Controller
         return ["success"=>true];
     }
     
-    protected function ExportacionTurismoReceptor($fecha_inicial,$fecha_final){
+    protected function ExportacionTurismoReceptor2($fecha_inicial,$fecha_final){
         
         $exportacion=new Exportacion();
         $exportacion->nombre="Exportacion turismo receptor";
@@ -48,7 +49,8 @@ class ExportacionController extends Controller
         $exportacion->hora_comienzo=\Carbon\Carbon::now()->format('h:i:s');
         $exportacion->save();
         
-        $this->dispatch(new Exportarturismoreceptor($fecha_inicial,$fecha_final,$exportacion->id));
+        
+        $this->dispatchNow(new Exportarturismoreceptor($fecha_inicial,$fecha_final,$exportacion->id));
         
     }
     

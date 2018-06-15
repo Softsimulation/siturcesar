@@ -61,7 +61,7 @@ class Visitante_Paquete_Turistico extends Model
      */
     public function tipoProveedorPaquete()
     {
-        return $this->belongsTo('App\Models\TipoProveedorPaquete');
+        return $this->belongsTo('App\Models\Tipo_Proveedor_Paquete');
     }
 
     /**

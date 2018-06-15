@@ -35,7 +35,7 @@ class Municipio_Visitado_Magdalena extends Model
      */
     public function municipio()
     {
-        return $this->belongsTo('App\Municipio', 'municipios_id');
+        return $this->belongsTo('App\Models\Municipio', 'municipios_id');
     }
 
     /**
@@ -43,7 +43,7 @@ class Municipio_Visitado_Magdalena extends Model
      */
     public function tiposAlojamiento()
     {
-        return $this->belongsTo('App\TiposAlojamiento', 'tipo_alojamiento_id');
+        return $this->belongsTo('App\Models\Tipo_Alojamiento', 'tipo_alojamiento_id');
     }
 
     /**

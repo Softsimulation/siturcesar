@@ -1061,7 +1061,7 @@ class TurismoInternoController extends Controller
     
     public function getViajeprincipal($one){
          $id = $one;
-         $hogar =Hogar::find($id)->id;
+         $hogar =Viaje::find($id)->hogar_id;
         return view('turismointerno.ViajePrincipal',compact('id','hogar'));
     }
     
