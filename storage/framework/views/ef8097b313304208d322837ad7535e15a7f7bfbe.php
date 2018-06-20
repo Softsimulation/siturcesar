@@ -1,9 +1,6 @@
+<?php $__env->startSection('title', 'Listado de encuestas'); ?>
 
-@extends('layout._AdminLayout')
-
-@section('title', 'Listado de encuestas')
-
-@section('estilos')
+<?php $__env->startSection('estilos'); ?>
     <style>
         .row {
             margin: 1em 0 0;
@@ -41,19 +38,19 @@
             display: block;
         }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('TitleSection', 'Listado encuestas')
+<?php $__env->startSection('TitleSection', 'Listado encuestas'); ?>
 
-@section('Progreso', '0%')
+<?php $__env->startSection('Progreso', '0%'); ?>
 
-@section('NumSeccion', '0%')
+<?php $__env->startSection('NumSeccion', '0%'); ?>
 
-@section('app','ng-app="situr_admin"')
+<?php $__env->startSection('app','ng-app="situr_admin"'); ?>
 
-@section('controller','ng-controller="listadoEncuestasCtrl"')
+<?php $__env->startSection('controller','ng-controller="listadoEncuestasCtrl"'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     
 
 <div class="container">
@@ -82,7 +79,7 @@
                 <input type="text" style="margin-bottom: .5em;" ng-model="prop.search" class="form-control" id="inputSearch" placeholder="Buscar encuesta...">
             </div>
             <div class="col-xs-12 col-sm-12 col-lg-2 col-md-12" style="text-align: center;">
-                <span class="chip" style="margin-bottom: .5em;">@{{(encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search).length}} resultados</span>
+                <span class="chip" style="margin-bottom: .5em;">{{(encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search).length}} resultados</span>
             </div>
         </div>
         <br/>
@@ -105,19 +102,19 @@
                         
                     </tr>
                     <tr dir-paginate="item in encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search |itemsPerPage:10 as results" pagination-id="paginacion_encuestas" >
-                        <td>@{{$index+1}}</td>
-                            <td>@{{item.codigoencuesta}}</td>
-                            <td>@{{item.codigogrupo}}</td>
-                            <td>@{{item.fechadigitacion | date:'dd-MM-yyyy'}}</td>
-                            <td>@{{item.fechallegada | date:'dd-MM-yyyy'}}</td>
-                            <td>@{{item.fechasalida | date:'dd-MM-yyyy'}}</td>
-                            <td>@{{item.username}}</td>
-                            <td>@{{item.estado}}</td>
-                            <td style="text-align: right;">@{{item.ultima}}</td>
-                            <td style="text-align: center;"><a href="/turismoreceptor/editardatos/@{{item.id}}" title="Editar encuesta" ng-if="item.EstadoId != 7 && item.EstadoId != 8"><span class="glyphicon glyphicon-pencil"></span></a></td>
+                        <td>{{$index+1}}</td>
+                            <td>{{item.codigoencuesta}}</td>
+                            <td>{{item.codigogrupo}}</td>
+                            <td>{{item.fechadigitacion | date:'dd-MM-yyyy'}}</td>
+                            <td>{{item.fechallegada | date:'dd-MM-yyyy'}}</td>
+                            <td>{{item.fechasalida | date:'dd-MM-yyyy'}}</td>
+                            <td>{{item.username}}</td>
+                            <td>{{item.estado}}</td>
+                            <td style="text-align: right;">{{item.ultima}}</td>
+                            <td style="text-align: center;"><a href="/turismoreceptor/editardatos/{{item.id}}" title="Editar encuesta" ng-if="item.EstadoId != 7 && item.EstadoId != 8"><span class="glyphicon glyphicon-pencil"></span></a></td>
                     </tr>
                 </table>
-                <div class="alert alert-warning" role="alert" ng-show="encuestas.length == 0 || (encuestas|filter:prop.search).length == 0">No hay resultados disponibles <span ng-show="(encuestas|filter:prop.search).length == 0">para la búsqueda '@{{prop.search}}'. <a href="#" ng-click="prop.search = ''">Presione aquí</a> para ver todos los resultados.</span></div>
+                <div class="alert alert-warning" role="alert" ng-show="encuestas.length == 0 || (encuestas|filter:prop.search).length == 0">No hay resultados disponibles <span ng-show="(encuestas|filter:prop.search).length == 0">para la búsqueda '{{prop.search}}'. <a href="#" ng-click="prop.search = ''">Presione aquí</a> para ver todos los resultados.</span></div>
             </div>
             
         </div>
@@ -132,6 +129,8 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
 
+
+<?php echo $__env->make('layout._AdminLayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

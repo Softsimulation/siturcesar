@@ -345,7 +345,12 @@ class TurismoInternoController extends Controller
             $q->whereHas('idioma', function($p){
                 $p->where('culture','es');
             })->select('actividad_realizada_id','nombre');
-        },"opcionesActividadesRealizadasInternos" =>  function($q){ $q->with(["subOpcionesActividadesRealizadasInternos"]); $q->orderby('peso'); }])->get();
+        },"opcionesActividadesRealizadasInternos" =>  
+        function($q){ 
+            $q->with(["subOpcionesActividadesRealizadasInternos"]);
+            $q->orderby('peso');
+        
+        }])->get();
         
     
         
@@ -771,7 +776,7 @@ class TurismoInternoController extends Controller
     }
     
     public function getGastos($id){     
-        return view('turismointerno.Gastos', ["id"=>$id] );
+        return view('turismointerno.Gastos', ["id"=>$id]);
     }
     
     public function postDatagastos(Request $request){
@@ -804,7 +809,7 @@ class TurismoInternoController extends Controller
         
         return [ 
                 "financiadores"=> Financiador_Viaje::where("id","!=",11)->with([ "financiadoresViajesConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
-                "serviciosPaquetes"=> Servicio_Paquete_Interno::where("id","!=",11)->orderBy('id')->get(),
+                "serviciosPaquetes"=> Servicio_Paquete_Interno::orderBy('id')->get(),
                 "opcionesLugares"=> Opcion_Lugar::with([ "opcionesLugaresConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
                 "divisas"=> array_merge($divCop, $divisas),
                 "TipoProveedorPaquete"=>Tipo_Proveedor_Paquete::with([ "tipoProveedorPaqueteConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
@@ -1524,7 +1529,7 @@ class TurismoInternoController extends Controller
     }
     
     if($noches > $numeroDias){
-     
+
         return ["success" => false, "errores" => [["La suma del número de noches no debe ser mayor al número de días del viaje."]] ];
     }
     

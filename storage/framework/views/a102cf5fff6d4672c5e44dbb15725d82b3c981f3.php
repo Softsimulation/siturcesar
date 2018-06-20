@@ -1,8 +1,6 @@
-@extends('layout._encuestaLayout')
+<?php $__env->startSection('title', 'Encuesta turismo receptor'); ?>
 
-@section('title', 'Encuesta turismo receptor')
-
-@section('estilos')
+<?php $__env->startSection('estilos'); ?>
     <style>
         .title-section {
             background-color: #16469e !important;
@@ -27,24 +25,24 @@
                 display: block;
             }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('TitleSection', 'Viaje en grupo')
+<?php $__env->startSection('TitleSection', 'Viaje en grupo'); ?>
 
-@section('Progreso', '49.99%')
+<?php $__env->startSection('Progreso', '49.99%'); ?>
 
-@section('NumSeccion', '50%')
+<?php $__env->startSection('NumSeccion', '50%'); ?>
 
-@section('controller','ng-controller="viaje_grupo"')
+<?php $__env->startSection('controller','ng-controller="viaje_grupo"'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="main-page">
-    <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
+    <input type="hidden" ng-model="id" ng-init="id=<?php echo e($id); ?>" />
     <div class="alert alert-danger" ng-if="errores != null">
         <label><b>Errores:</b></label>
         <br />
         <div ng-repeat="error in errores" ng-if="error.length>0">
-            -@{{error[0]}}
+            -{{error[0]}}
         </div>
     </div>
     <form role="form" name="grupoForm" novalidate>
@@ -78,7 +76,7 @@
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="item in viaje_grupos">
                             <label>
-                                <input type="checkbox" name="personas" checklist-model="grupo.Personas" checklist-value="item.id"  ng-disabled="(grupo.Numero == 1 && item.id != 1) || (grupo.Numero > 1 && item.id == 1) || grupo.Numero == null || grupo.Numero < 1" ng-change="vchek(item.id)" /> @{{item.tipos_acompaniante_con_idiomas[0].nombre}}
+                                <input type="checkbox" name="personas" checklist-model="grupo.Personas" checklist-value="item.id"  ng-disabled="(grupo.Numero == 1 && item.id != 1) || (grupo.Numero > 1 && item.id == 1) || grupo.Numero == null || grupo.Numero < 1" ng-change="vchek(item.id)" /> {{item.tipos_acompaniante_con_idiomas[0].nombre}}
                             </label>
                              <input type="text" name="otro" class="form-control" ng-if="item.id == 12" ng-model="grupo.Otro" ng-disabled="grupo.Numero == null || grupo.Numero <= 1" ng-change="verificarOtro()"  ng-required="grupo.Personas.indexOf(12) != -1" />
                         </div>
@@ -110,7 +108,7 @@
             </div>
         </div>
         <div class="row" style="text-align:center">
-            <a href="/turismoreceptor/secciontransporte/{{$id}}" class="btn btn-raised btn-default">Anterior</a>
+            <a href="/turismoreceptor/secciontransporte/<?php echo e($id); ?>" class="btn btn-raised btn-default">Anterior</a>
             <input type="submit" class="btn btn-raised btn-success" value="Siguiente" ng-click="guardar()">
         </div>
         <br />
@@ -120,5 +118,7 @@
 
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layout._encuestaLayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

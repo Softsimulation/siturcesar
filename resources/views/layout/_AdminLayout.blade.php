@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sistema de Información Turistica del Atlántico">
-    <meta name="author" content="SITUR Atlántico">
+    <meta name="description" content="Sistema de Información Turistica del Cesar">
+    <meta name="author" content="SITUR Cesar">
     <title>@yield('Title')</title>
     <link rel="icon" type="image/ico" href="{{asset('Content/icons/favicon-96x96.png')}}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -21,7 +21,7 @@
     <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/select.css')}}" rel='stylesheet' type='text/css' />
     <link href="{{asset('/css/select2.css')}}" rel='stylesheet' type='text/css' />
-   
+    <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel="stylesheet" type="text/css" />
         
     @yield('estilos')
     <style>
@@ -254,6 +254,7 @@
   
     
     
+
     <script>
         $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });
     </script>

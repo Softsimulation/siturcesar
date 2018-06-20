@@ -107,7 +107,7 @@ angular.module('receptor.gasto', ['ui.select'])
                    case 5:
                         $scope.abrirAlquiler = true;
                        break;
-                   case 12:
+                   case 10:
                         $scope.abrirRopa = true;
                        break;
                    default:
@@ -126,7 +126,7 @@ angular.module('receptor.gasto', ['ui.select'])
             }
         }
         if($scope.abrirRopa){
-            if( rub.id == 12 && rub.gastos_visitantes[0].personas_cubiertas == null && rub.gastos_visitantes[0].divisas_magdalena == null && rub.gastos_visitantes[0].cantidad_pagada_magdalena==null){
+            if( rub.id == 10 && rub.gastos_visitantes[0].personas_cubiertas == null && rub.gastos_visitantes[0].divisas_magdalena == null && rub.gastos_visitantes[0].cantidad_pagada_magdalena==null){
                 $scope.abrirRopa = false;
             }
         }

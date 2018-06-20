@@ -1,8 +1,8 @@
-@extends('layout._encuestaLayout')
 
-@section('title', 'Encuesta turismo receptor')
 
-@section('estilos')
+<?php $__env->startSection('title', 'Encuesta turismo receptor'); ?>
+
+<?php $__env->startSection('estilos'); ?>
     <style>
         .title-section {
             background-color: #16469e !important;
@@ -29,23 +29,23 @@
                 display: block;
             }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('TitleSection', 'Encuesta turismo receptor')
+<?php $__env->startSection('TitleSection', 'Encuesta turismo receptor'); ?>
 
-@section('Progreso', '0%')
+<?php $__env->startSection('Progreso', '0%'); ?>
 
-@section('NumSeccion', '0%')
+<?php $__env->startSection('NumSeccion', '0%'); ?>
 
-@section('controller','ng-controller="editar"')
+<?php $__env->startSection('controller','ng-controller="editar"'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
     <div class="container">
     <div class="alert alert-danger" ng-if="errores != null">
         <label><b>Errores:</b></label>
         <br />
         <div ng-repeat="error in errores" ng-if="error.length>0">
-            -@{{error[0]}}
+            -{{error[0]}}
         </div>
 
     </div>
@@ -60,7 +60,7 @@
     <!--</div>-->
     
     <form role="form" name="DatosForm" novalidate>
-        <input type="hidden" ng-model="id" ng-init="id={{$id}}" />       
+        <input type="hidden" ng-model="id" ng-init="id=<?php echo e($id); ?>" />       
         
         <!--<div class="panel panel-success">-->
         <!--    <div class="panel-heading p1">-->
@@ -74,7 +74,7 @@
         <!--                <select name="grupo" class="form-control" ng-model="encuesta.Grupo" ng-options="item for item in grupos" ng-required="true">-->
                             <!--P1Select1. Presione aquí para seleccionar un grupo-->
         <!--                    <option value="" disabled>Presione aquí para seleccionar algún grupo</option>-->
-        <!--                    <option ng-repeat="item in grupos" value="@{{item}}">@{{item}}</option>-->
+        <!--                    <option ng-repeat="item in grupos" value="{{item}}">{{item}}</option>-->
         <!--                </select>-->
         <!--                <span ng-show="DatosForm.$submitted || DatosForm.grupo.$touched">-->
                             <!--P1Alert1. El campo grupo de Viaje es requerido.-->
@@ -141,7 +141,7 @@
                         <div class="form-group">
                             <!--P3P1. Fecha de aplicación-->
                             <label for="fechaLlegada" class="col-xs-12 control-label">Fecha de aplicación</label>
-                            <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model='encuesta.fechaAplicacion' maxdate="@{{fechaActual}}" ng-required="true" options="optionFecha" placeholder="Ingrese fecha de aplicación"></adm-dtp>
+                            <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model='encuesta.fechaAplicacion' maxdate="{{fechaActual}}" ng-required="true" options="optionFecha" placeholder="Ingrese fecha de aplicación"></adm-dtp>
                             <span ng-show="DatosForm.$submitted || DatosForm.fechaAplicacion.$touched">
                                 <!--P3P1Alert1. El campo fecha de llegada es requerido-->
                                 <span class="label label-danger" ng-show="DatosForm.fechaAplicacion.$error.required">*El campo fecha de aplicación es requerido</span>
@@ -445,7 +445,7 @@
         <!--                        <select class="form-control" id="inputDepartamentoDestino" name="departamento_p" ng-options="item.id as item.nombre for item in departamentos_colombia | orderBy:'nombre'" ng-model="departamentod.id" ng-change="changemunicipiocolombia()" ng-required="pais_residencia != 47">-->
         <!--                            <option value="" disabled>Seleccione un Departamento</option>-->
         <!--                        </select>-->
-        <!--                        @{{departamento_p}}-->
+        <!--                        {{departamento_p}}-->
                                 <!-- P5P1Alert1. El campo departamento del destino principal es requerido-->
         <!--                        <span ng-show="DatosForm.$submitted || DatosForm.departamento_p.$touched">-->
         <!--                            <span class="label label-danger" ng-show="DatosForm.departamento_p.$error.required">*El campo departamento del destino principal es requerido</span>-->
@@ -485,7 +485,7 @@
                     <div class="col-md-12">
                         <div class="radio" ng-repeat="item in motivos">
                             <label>
-                                <input type="radio" ng-change="cambiomotivo()" name="motivo" ng-model="encuesta.Motivo" value="@{{item.id}}" ng-required="true">@{{item.motivos_viaje_con_idiomas[0].nombre}} <input type="text" class="form-control" name="otro" ng-model="encuesta.Otro" ng-change="otro()" ng-if="item.id == 18" />
+                                <input type="radio" ng-change="cambiomotivo()" name="motivo" ng-model="encuesta.Motivo" value="{{item.id}}" ng-required="true">{{item.motivos_viaje_con_idiomas[0].nombre}} <input type="text" class="form-control" name="otro" ng-model="encuesta.Otro" ng-change="otro()" ng-if="item.id == 18" />
                             </label>
                         </div>
                         <!-- P6Alert1. El campo motivo principal es requerido-->
@@ -508,7 +508,7 @@
                     <div class="col-md-12">
                         <div class="radio" ng-repeat="item in medicos">
                             <label>
-                                <input type="radio" name="medico" ng-model="encuesta.Salud" value="@{{item.id}}" ng-required="encuesta.Motivo == 5">@{{item.tipos_atencion_salud_con_idiomas[0].nombre}}
+                                <input type="radio" name="medico" ng-model="encuesta.Salud" value="{{item.id}}" ng-required="encuesta.Motivo == 5">{{item.tipos_atencion_salud_con_idiomas[0].nombre}}
                             </label>
                         </div>
                         <!-- P6P1Alert1. El campo finalidad del servicio medico es obligatorio-->
@@ -547,6 +547,8 @@
 
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
+
+<?php echo $__env->make('layout._encuestaLayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -12,14 +12,33 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link href="<?php echo e(asset('/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo e(asset('/css/bootstrap-material-design.css')); ?>" rel="stylesheet" type="text/css" />
+    <!--<link href="<?php echo e(asset('/css/bootstrap-material-design.css')); ?>" rel="stylesheet" type="text/css" />-->
     <link href="<?php echo e(asset('/css/ripples.css')); ?>" rel="stylesheet" type="text/css" />
     <link href="<?php echo e(asset('/css/sweetalert.min.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/ionicons.min.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/styleLoading.css')); ?>" rel='stylesheet' type='text/css' />
+    <link href="<?php echo e(asset('/css/object-table-style.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/ADM-dateTimePicker.min.css')); ?>" rel='stylesheet' type='text/css' />
+    <link href="<?php echo e(asset('/css/select.css')); ?>" rel='stylesheet' type='text/css' />
+    <link href="<?php echo e(asset('/css/select2.css')); ?>" rel='stylesheet' type='text/css' />
+    <link href="<?php echo e(asset('/css/ADM-dateTimePicker.min.css')); ?>" rel="stylesheet" type="text/css" />
+        
     <?php echo $__env->yieldContent('estilos'); ?>
     <style>
+        .carga {
+           display: none;
+           position: fixed;
+           z-index: 1000;
+           top: 0;
+           left: 0;
+           height: 100%;
+           width: 100%;
+           background: rgba(0, 0, 0, 0.57) url(../../Content/Cargando.gif) 50% 50% no-repeat
+       }
+       
+        body.charging { overflow: hidden; }
+        body.charging .carga { display: block; }
+    
         .banner {
             background-color: white;
             padding-top: 1em;
@@ -75,10 +94,6 @@
             vertical-align: middle;
         }
 
-        .dropdown-menu {
-            left: -85%;
-        }
-
         .fixed {
             position: fixed;
             top: 0;
@@ -115,9 +130,6 @@
         .radio label, label.radio-inline {
             padding-left: 1.8em;
         }
-
-        
-
         #log form {
             float: none !important;
         }
@@ -132,6 +144,15 @@
             .tooltip-inner {
                 text-align:left !important;
             }
+            .btn-default-focus{
+                outline: none;
+                outline-offset: 0;
+                box-shadow: none;
+                background-color: transparent;
+            }
+            .ui-select-multiple.ui-select-bootstrap .ui-select-match-item{
+                font-size: 16px;
+            }
              .ADMdtp-box footer .timeSelectIcon, .ADMdtp-box footer .today, .ADMdtp-box footer .calTypeContainer p{
                 fill: darkorange;
                 color: darkorange;
@@ -141,15 +162,17 @@
             }
     </style>
 </head>
-<body ng-app="encuestaInterno">
+<body <?php echo $__env->yieldContent('app'); ?>  <?php echo $__env->yieldContent('controller'); ?> >
+    
     <div id="preloader">
         <div>
             <div class="loader"></div>
             <h1><?php echo e(trans('resources.LabelPreloader')); ?></h1>
-            <h4><?php echo e(trans('resources.LabelPorFavorEspere')); ?></h4>
+            <h4>Resource.LabelPorFavorEspere</h4>
             <img src="<?php echo e(asset('Content/image/logo.min.png')); ?>" width="200" />
         </div>
     </div>
+    
     <header>
         <div class="banner">
             <div class="container">
@@ -158,13 +181,13 @@
                         <img src="<?php echo e(asset('Content/image/logo.png')); ?>" alt="Logo" />
                     </div>
                     <div class="col-xs-12 col-md-9">
-                        <h1 style="margin-top: 0.6em; text-transform: uppercase"><strong>Encuesta de turísmo interno y emisor</strong></h1>
+                        <h1 style="margin-top: 0.6em; text-transform: uppercase"><strong><?php echo $__env->yieldContent('Title'); ?></strong></h1>
                     </div>
                     <div class="col-xs-12 col-md-1">
                         <div class="btn-group">
                             <a href="bootstrap-elements.html" data-target="#" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">menu</i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="/temporada">Volver</a></li>
+                                <li><a href="/Temporada">Volver</a></li>
                                 <li class="divider"></li>
                                 <li id="log">
                                     <!--
@@ -187,13 +210,10 @@
         <div class="title-section">
             <h3 style="margin-top: 0.5em;"><strong><?php echo $__env->yieldContent('TitleSection'); ?></strong></h3>
         </div>
-        <div class="progress progress-striped active">
-            <div class="progress-bar progress-bar-info" style="width: <?php echo $__env->yieldContent('Progreso'); ?>"><?php echo $__env->yieldContent('NumSeccion'); ?></div>
-        </div>
+     
     </header>
-    <div class="container" <?php echo $__env->yieldContent('Control'); ?>>
-        <?php echo $__env->yieldContent('contenido'); ?>
-
+    <div class="container" >
+        <?php echo $__env->yieldContent('content'); ?>
     </div>
     <!--
     if (ViewContext.HttpContext.User.IsInRole("Admin") || ViewContext.HttpContext.User.IsInRole("Digitador"))
@@ -208,34 +228,38 @@
 
    
     <script src="<?php echo e(asset('/js/plugins/angular.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/plugins/jquery.min.js')); ?>"></script>
-
-    <script src="<?php echo e(asset('/js/plugins/bootstrap.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/plugins/material.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/plugins/ripples.min.js')); ?>"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="<?php echo e(asset('/Content/bootstrap_material/dist/js/material.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('/Content/bootstrap_material/dist/js/ripples.min.js')); ?>"></script>
     <script>
-            $.material.init();
+        $.material.init();
     </script>
     <script src="<?php echo e(asset('/js/plugins/checklist-model.js')); ?>"></script>
+    <script src="<?php echo e(asset('/js/plugins/select.min.js')); ?>" type="text/javascript"></script>
     <script src="<?php echo e(asset('/js/plugins/angular-filter.js')); ?>"></script>
     <script src="<?php echo e(asset('/js/plugins/angular-repeat-n.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/plugins/sweetalert.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/plugins/selectjp.js')); ?>"></script>
     <script src="<?php echo e(asset('/js/ADM-dateTimePicker.min.js')); ?>" type="text/javascript"></script>
-   
+    <script src="<?php echo e(asset('/js/plugins/angular-sanitize.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('/js/plugins/object-table.js')); ?>" type="text/javascript"></script>
+       
+    <script src="<?php echo e(asset('/js/administrador/administrador.js')); ?>" type="text/javascript"></script> 
+    <script src="<?php echo e(asset('/js/administrador/temporadas.js')); ?>" type="text/javascript"></script> 
+    <script src="<?php echo e(asset('/js/administrador/services.js')); ?>" type="text/javascript"></script> 
+    
+    <script src="<?php echo e(asset('/js/sweetalert.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('/js/dir-pagination.js')); ?>"></script>
+  
+    
+    
 
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/encuestaInterno.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/transporte.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/gasto.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/Hogares.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/ActividadesRealizadas.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/ViajesRealizados.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/services.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/fuentesinformacion.js')); ?>"></script>
-    <script src="<?php echo e(asset('/js/encuestas/turismointerno/servicios.js')); ?>"></script>
     <script>
         $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });
     </script>
+
+    <script>  $.material.init(); </script>
+
     <script>
             $(window).on('scroll', function () {
                 if (!$('.alert').hasClass('no-fixed')) {
@@ -245,7 +269,6 @@
                         $('.alert').removeClass('alert-fixed');
                     }
                 }
-                
             });
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
@@ -253,6 +276,8 @@
     </script>
     <?php echo $__env->yieldContent("javascript"); ?>
     <noscript>Su buscador no soporta Javascript!</noscript>
+   
+    <div class="carga" ></div>
+   
 </body>
 </html>
-

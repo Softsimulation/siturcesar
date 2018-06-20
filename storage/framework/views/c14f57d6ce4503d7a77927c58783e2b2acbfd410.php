@@ -1,8 +1,6 @@
-@extends('layout._encuestaLayout')
+<?php $__env->startSection('title', 'Encuesta turismo receptor'); ?>
 
-@section('title', 'Encuesta turismo receptor')
-
-@section('estilos')
+<?php $__env->startSection('estilos'); ?>
     <style>
         .title-section {
             background-color: #16469e !important;
@@ -33,22 +31,22 @@
             width: auto;
         }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('TitleSection', 'Transporte')
+<?php $__env->startSection('TitleSection', 'Transporte'); ?>
 
-@section('Progreso', '33.33%')
+<?php $__env->startSection('Progreso', '33.33%'); ?>
 
-@section('NumSeccion', '33%')
+<?php $__env->startSection('NumSeccion', '33%'); ?>
 
-@section('controller','ng-controller="transporte"')
+<?php $__env->startSection('controller','ng-controller="transporte"'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="main-page">
-    <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
+    <input type="hidden" ng-model="id" ng-init="id=<?php echo e($id); ?>" />
     
     <div class="alert alert-danger" role="alert" ng-if="errores" ng-repeat="error in errores">
-       @{{error[0]}}
+       {{error[0]}}
     </div>
     <form role="form" name="transForm" novalidate>
         <div class="panel panel-success">
@@ -62,7 +60,7 @@
                     <div class="col-md-12">
                         <div class="radio" ng-repeat="item in transportes">
                             <label>
-                                <input type="radio" name="llegar" ng-value="item.id" ng-model="transporte.Llegar" ng-required="true"> @{{item.tipos_transporte_con_idiomas[0].nombre}}
+                                <input type="radio" name="llegar" ng-value="item.id" ng-model="transporte.Llegar" ng-required="true"> {{item.tipos_transporte_con_idiomas[0].nombre}}
                                 <i ng-if="item.id==6" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left" title="@Resource.AyudaTipoTransporte"
                                    style="text-align:right;">
                                 </i>
@@ -93,7 +91,7 @@
                     <div class="col-md-12">
                         <div class="radio" ng-repeat="item in transportes" ng-if="item.Id != 9">
                             <label>
-                                <input type="radio" name="mover" ng-value="item.id" ng-model="transporte.Mover" ng-required="true"> @{{item.tipos_transporte_con_idiomas[0].nombre}}
+                                <input type="radio" name="mover" ng-value="item.id" ng-model="transporte.Mover" ng-required="true"> {{item.tipos_transporte_con_idiomas[0].nombre}}
                                 <i ng-if="item.Id==6" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left" title="@Resource.AyudaTipoTransporte"
                                    style="text-align:right;">
                                 </i>
@@ -124,16 +122,17 @@
                             
                             <tbody>
                                 <tr>
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    <?php for($i = 1; $i <= 10; $i++): ?>
                                         <td>
                                             <div class="radio radio-primary">
                                                 <label>
-                                                    <input type="radio" name="experiencia_@{{it.Id}}" ng-model="transporte.Calificacion" value="{{$i}}">
-                                                    {{$i}}
+                                                    <input type="radio" name="experiencia_{{it.Id}}" ng-model="transporte.Calificacion" value="<?php echo e($i); ?>">
+                                                    <?php echo e($i); ?>
+
                                                 </label>
                                             </div>
                                         </td>
-                                    @endfor
+                                    <?php endfor; ?>
                                 </tr>
                             </tbody>
                         </table>
@@ -145,7 +144,7 @@
         </div>
         
         <div class="row" style="text-align:center">
-            <a href="/turismoreceptor/seccionestancia/{{$id}}" class="btn btn-raised btn-default">Anterior</a>
+            <a href="/turismoreceptor/seccionestancia/<?php echo e($id); ?>" class="btn btn-raised btn-default">Anterior</a>
             <input type="submit" class="btn btn-raised btn-success" value="Siguiente" ng-click="guardar()">
         </div>
         <br />
@@ -156,5 +155,7 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layout._encuestaLayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

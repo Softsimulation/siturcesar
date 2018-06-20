@@ -5,8 +5,8 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Sistema de Información Turistica del Atlántico">
-        <meta name="author" content="SITUR Atlántico">
+        <meta name="description" content="Sistema de Información Turistica del Cesar">
+        <meta name="author" content="SITUR Cesar">
         <title>@yield('title')</title>
         <link rel="icon" type="image/ico" href="{{asset('/Content/icons/favicon-96x96.png')}}" />
         <!--<link href="@Url.Content("/Content/mdl/bootstrap_mdl/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />-->

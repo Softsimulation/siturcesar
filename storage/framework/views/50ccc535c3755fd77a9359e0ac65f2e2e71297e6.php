@@ -1,8 +1,6 @@
-@extends('layout._encuestaLayout')
+<?php $__env->startSection('title', 'Encuesta turismo receptor'); ?>
 
-@section('title', 'Encuesta turismo receptor')
-
-@section('estilos')
+<?php $__env->startSection('estilos'); ?>
     <style>
         .title-section {
             background-color: #16469e !important;
@@ -28,25 +26,25 @@
             }
         
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('TitleSection', 'Como se enteran los visitantes sobre el departamento del Cesar')
+<?php $__env->startSection('TitleSection', 'Como se enteran los visitantes sobre el departamento del Cesar'); ?>
 
-@section('Progreso', '100%')
+<?php $__env->startSection('Progreso', '100%'); ?>
 
-@section('NumSeccion', '100%')
+<?php $__env->startSection('NumSeccion', '100%'); ?>
 
-@section('controller','ng-controller="enteran-crear"')
+<?php $__env->startSection('controller','ng-controller="enteran-crear"'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container">
-    <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
+    <input type="hidden" ng-model="id" ng-init="id=<?php echo e($id); ?>" />
     <div class="alert alert-danger" ng-if="errores != null">
         
         <h4><b>Errores:</b></h4>
         
         <div ng-repeat="error in errores" ng-if="error.length>0">
-            -@{{error[0]}}
+            -{{error[0]}}
         </div>
     </div>
     <form role="form" name="inForm" novalidate>
@@ -61,7 +59,7 @@
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="it in fuentesAntes">
                             <label>
-                                <input type="checkbox" name="fuentesAntes" checklist-model="enteran.FuentesAntes"  checklist-value="it.id" ng-change="validar(2, it.id)" > @{{it.fuente_informacion_antes_viaje_con_idiomas[0].nombre}}
+                                <input type="checkbox" name="fuentesAntes" checklist-model="enteran.FuentesAntes"  checklist-value="it.id" ng-change="validar(2, it.id)" > {{it.fuente_informacion_antes_viaje_con_idiomas[0].nombre}}
                             </label>
                             <span ng-if="it.id==14">:<input type="text" name="otroFantes" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba su otra opción" ng-model="enteran.OtroFuenteAntes" ng-change="validarOtro(0)" ng-required="enteran.FuentesAntes.indexOf(14) !== -1"/></span>
                         </div>
@@ -84,7 +82,7 @@
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="it in fuentesDurante">
                             <label>
-                                <input type="checkbox" name="fuentesDurante" checklist-model="enteran.FuentesDurante" ng-disabled="(enteran.FuentesDurante.indexOf(13) > -1 && it.id!=13)" ng-change="validar(0, it.id)" checklist-value="it.id"> @{{it.fuentes_informacion_durante_viaje_con_idiomas[0].nombre}}
+                                <input type="checkbox" name="fuentesDurante" checklist-model="enteran.FuentesDurante" ng-disabled="(enteran.FuentesDurante.indexOf(13) > -1 && it.id!=13)" ng-change="validar(0, it.id)" checklist-value="it.id"> {{it.fuentes_informacion_durante_viaje_con_idiomas[0].nombre}}
                             </label>
                             <span ng-if="it.id==14">:<input type="text" name="otroDurante" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba su otra opción" ng-disabled="enteran.FuentesDurante.indexOf(13) > -1 " ng-model="enteran.OtroFuenteDurante" ng-change="validarOtro(1)" ng-required="enteran.FuentesDurante.indexOf(14) != -1" /></span>
                         </div>
@@ -134,7 +132,7 @@
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="it in redes" style="margin-bottom: .5em;">
                             <label>
-                                <input type="checkbox" name="redes" checklist-model="enteran.Redes" ng-disabled="enteran.Redes.indexOf(1) > -1 && it.Id != 1" ng-change="validar(1, it.Id)" checklist-value="it.Id"> @{{it.Nombre}}
+                                <input type="checkbox" name="redes" checklist-model="enteran.Redes" ng-disabled="enteran.Redes.indexOf(1) > -1 && it.Id != 1" ng-change="validar(1, it.Id)" checklist-value="it.Id"> {{it.Nombre}}
                             </label>
                             <span ng-if="it.Id==12">:<input type="text" name="otroRed" style="display: inline-block;" class="form-control" id="otroRed" placeholder="Escriba su otra opción" ng-disabled="enteran.Redes.indexOf(1) != -1 " ng-model="enteran.otroRed" ng-change="validarOtro(2)" ng-required="enteran.Redes.indexOf(12) != -1" /></span>
                         </div>
@@ -314,7 +312,7 @@
         </div>
 
         <div class="row" style="text-align:center">
-            <a href="/turismoreceptor/seccionpercepcionviaje/{{$id}}" class="btn btn-raised btn-default">Anterior</a>
+            <a href="/turismoreceptor/seccionpercepcionviaje/<?php echo e($id); ?>" class="btn btn-raised btn-default">Anterior</a>
             <input type="submit" class="btn btn-raised btn-success" value="Siguiente" ng-click="guardar() ">
         </div>
         <br />
@@ -324,5 +322,7 @@
     </div>
 </div>
 
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layout._encuestaLayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

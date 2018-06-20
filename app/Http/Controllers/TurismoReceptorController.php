@@ -135,7 +135,7 @@ class TurismoReceptorController extends Controller
 			'Pais_Nacimiento' => 'required_if:Nacimiento,3',
 			'Municipio' => 'required|exists:municipios,id',
 			'Motivo' => 'required|exists:motivos_viaje,id',
-			'Destino' => 'exists:municipios,id',
+			//'Destino' => 'exists:municipios,id',
 			'Salud' => 'exists:tipos_atencion_salud,id|required_if:Motivo,5',
 			'Horas' => 'required_if:Motivo,3',
 			'Otro' => 'required_if:Motivo,18|max:150',
@@ -186,9 +186,13 @@ class TurismoReceptorController extends Controller
     		return ["success"=>false,"errores"=>$validator->errors()];
 		}
 		
-		$municipio = Municipio::find($request->Municipio);
-		if($municipio->departamento->pais_id != 47 && $request->Destino==null){
-		    return ["success"=>false,"errores"=> [ ["El id del destino principal es inválido."] ] ];
+// 		$municipio = Municipio::find($request->Municipio);
+// 		if($municipio->departamento->pais_id != 47 && $request->Destino==null){
+// 		    return ["success"=>false,"errores"=> [ ["El id del destino principal es inválido."] ] ];
+// 		}
+		
+		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
+		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];
 		}
 		
 		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
@@ -343,7 +347,7 @@ class TurismoReceptorController extends Controller
 			'Pais_Nacimiento' => 'required_if:Nacimiento,3',
 			'Municipio' => 'required|exists:municipios,id',
 			'Motivo' => 'required|exists:motivos_viaje,id',
-			'Destino' => 'exists:municipios,id',
+			//'Destino' => 'exists:municipios,id',
 			'Salud' => 'exists:tipos_atencion_salud,id|required_if:Motivo,5',
 			'Horas' => 'required_if:Motivo,3',
 			'Otro' => 'required_if:Motivo,18|max:150',
@@ -393,9 +397,13 @@ class TurismoReceptorController extends Controller
     		return ["success"=>false,"errores"=>$validator->errors()];
 		}
     	
-    	$municipio = Municipio::find($request->Municipio);
-		if($municipio->departamento->pais_id != 47 && $request->Destino==null){
-		    return ["success"=>false,"errores"=> [ ["El id del destino principal es inválido."] ] ];
+//     	$municipio = Municipio::find($request->Municipio);
+// 		if($municipio->departamento->pais_id != 47 && $request->Destino==null){
+// 		    return ["success"=>false,"errores"=> [ ["El id del destino principal es inválido."] ] ];
+// 		}
+		
+		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
+		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];
 		}
 		
 		if( date('Y-m-d',strtotime(str_replace("/","-",$request->Llegada))) > date('Y-m-d',strtotime(str_replace("/","-",$request->Salida))) ){
@@ -474,7 +482,7 @@ class TurismoReceptorController extends Controller
     }
     
     public function getCargardatosseccionestancia($id = null){
-        $municipios = Municipio::where('departamento_id', 1396)->select('id','nombre')->get();
+        $municipios = Municipio::where('departamento_id', 1403)->select('id','nombre')->get();
         
         $alojamientos = Tipo_Alojamiento::with(["tiposAlojamientoConIdiomas" => function($q){
             $q->whereHas('idioma', function($p){
@@ -518,14 +526,17 @@ class TurismoReceptorController extends Controller
                 
                 if(count($respuestasIds) > 0){
                     $actividad->Respuestas = $respuestasIds;
-                    if(in_array(22,$respuestasIds)){
-                        $actividad->otro = $visitante->opcionesActividadesRealizadas->where('id',22)->first()->pivot->otro;
+                    if(in_array(15,$respuestasIds)){
+                        $actividad->otro = $visitante->opcionesActividadesRealizadas->where('id',15)->first()->pivot->otro;
                     }
-                    if(in_array(26,$respuestasIds)){
-                        $actividad->otro = $visitante->opcionesActividadesRealizadas->where('id',26)->first()->pivot->otro;
+                    if(in_array(28,$respuestasIds)){
+                        $actividad->otro = $visitante->opcionesActividadesRealizadas->where('id',28)->first()->pivot->otro;
                     }
                     if(in_array(34,$respuestasIds)){
                         $actividad->otro = $visitante->opcionesActividadesRealizadas->where('id',34)->first()->pivot->otro;
+                    }
+                    if(in_array(42,$respuestasIds)){
+                        $actividad->otro = $visitante->opcionesActividadesRealizadas->where('id',42)->first()->pivot->otro;
                     }
                     array_push($arreglo,$actividad);
                 }else{
@@ -623,19 +634,24 @@ class TurismoReceptorController extends Controller
 		    }
 		    
 		    switch($actividad['id']){
+		        case 5:
+		            if(in_array(15,$actividad['Respuestas']) && !isset($actividad['otro'])  ){
+	                    return ["success" => false, "errores" => [["Verifique que ingresó el campo otro en las opciones del segundo nivel."]] ];  
+		            }
+		            break;
 		        case 6:
-		            if(in_array(22,$actividad['Respuestas']) && !isset($actividad['otro'])  ){
-	                    return ["success" => false, "errores" => [["Verifique que ingresoó el campo otro en las opciones del segundo nivel."]] ];  
+		            if(in_array(28,$actividad['Respuestas']) && !isset($actividad['otro'])  ){
+	                    return ["success" => false, "errores" => [["Verifique que ingresó el campo otro en las opciones del segundo nivel."]] ];  
 		            }
 		            break;
 	            case 8:
-		            if(in_array(26,$actividad['Respuestas']) && !isset($actividad['otro'])  ){
-	                    return ["success" => false, "errores" => [["Verifique que ingresoó el campo otro en las opciones del segundo nivel."]] ];  
+		            if(in_array(34,$actividad['Respuestas']) && !isset($actividad['otro'])  ){
+	                    return ["success" => false, "errores" => [["Verifique que ingresó el campo otro en las opciones del segundo nivel."]] ];  
 		            }
 		            break;
 	            case 10:
-		            if(in_array(34,$actividad['Respuestas']) && !isset($actividad['otro'])  ){
-	                    return ["success" => false, "errores" => [["Verifique que ingresoó el campo otro en las opciones del segundo nivel."]] ];  
+		            if(in_array(42,$actividad['Respuestas']) && !isset($actividad['otro'])  ){
+	                    return ["success" => false, "errores" => [["Verifique que ingresó el campo otro en las opciones del segundo nivel."]] ];  
 		            }
 		            break;
 		    }
@@ -665,7 +681,7 @@ class TurismoReceptorController extends Controller
 		foreach($request->ActividadesRelizadas as $actividad){
 		    if(count($actividad['opciones']) > 0){
 		        foreach ($actividad['Respuestas'] as $respuesta) {
-		            if( ($actividad['id']==6 && $respuesta == 22) || ($actividad['id']==8 && $respuesta == 26) || ($actividad['id']==10 && $respuesta == 34) ){
+		            if( ($actividad['id']==5 && $respuesta == 15) || ($actividad['id']==6 && $respuesta == 28) || ($actividad['id']==8 && $respuesta == 34) || ($actividad['id']==10 && $respuesta == 42) ){
 		                $visitante->opcionesActividadesRealizadas()->attach($respuesta,['otro' => $actividad['otro']]);
 		            }else{
 		                $visitante->opcionesActividadesRealizadas()->attach($respuesta);

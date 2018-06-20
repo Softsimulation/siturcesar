@@ -1,8 +1,6 @@
-@extends('layout._encuestaLayout')
+<?php $__env->startSection('title', 'Encuesta turismo receptor'); ?>
 
-@section('title', 'Encuesta turismo receptor')
-
-@section('estilos')
+<?php $__env->startSection('estilos'); ?>
     <style>
         .title-section {
             background-color: #16469e!important;
@@ -29,21 +27,21 @@
             }
         
     </style>    
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('TitleSection', 'Percepción del viaje al departamento del Cesar')
+<?php $__env->startSection('TitleSection', 'Percepción del viaje al departamento del Cesar'); ?>
 
-@section('Progreso', '83.31%')
+<?php $__env->startSection('Progreso', '83.31%'); ?>
 
-@section('NumSeccion', '83%')
+<?php $__env->startSection('NumSeccion', '83%'); ?>
 
-@section('controller','ng-controller="percepcion-crear"')
+<?php $__env->startSection('controller','ng-controller="percepcion-crear"'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="container" >
-    <input type="hidden" ng-model="Id" ng-init="Id={{$id}}" />
+    <input type="hidden" ng-model="Id" ng-init="Id=<?php echo e($id); ?>" />
     <div class="alert alert-danger" role="alert" ng-if="errores" ng-repeat="error in errores">
-       @{{error[0]}}
+       {{error[0]}}
     </div>
     <form role="form" name="PercepcionForm" novalidate>
         <div class="panel panel-success">
@@ -87,31 +85,31 @@
                         <table class="table table-striped" ng-required="calificacion.Alojamiento==1">
                             <thead>
                                 <tr>
-                                    <th> @{{aspectos[0].aspectos_evaluados_con_idiomas[0].nombre}} </th>
-                                    @for ($j = 1; $j <= 10; $j++)
-                                        <th> {{$j}} </th>
-                                    @endfor
+                                    <th> {{aspectos[0].aspectos_evaluados_con_idiomas[0].nombre}} </th>
+                                    <?php for($j = 1; $j <= 10; $j++): ?>
+                                        <th> <?php echo e($j); ?> </th>
+                                    <?php endfor; ?>
                                     <th> Sin Respuesta </th>
                                 </tr>
 
                             </thead>
                             <tbody>
                                 <tr ng-repeat="it in aspectos[0].items_evaluars">
-                                    <td> @{{it.items_evaluar_con_idiomas[0].nombre}}</td>
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    <td> {{it.items_evaluar_con_idiomas[0].nombre}}</td>
+                                    <?php for($i = 1; $i <= 10; $i++): ?>
                                         <td>
                                             <div class="radio radio-primary">
                                                 <label>
-                                                    <input type="radio"  id="alojamiento_@{{it.id}}_{{$i}}" name="alojamiento_@{{it.id}}"  ng-model="it.radios" ng-checked="checkedRadio('alojamiento_@{{it.id}}_{{$i}}', it.radios.Valor,{{$i}})" ng-value="{Id:it.id,Valor:{{$i}}}">
+                                                    <input type="radio"  id="alojamiento_{{it.id}}_<?php echo e($i); ?>" name="alojamiento_{{it.id}}"  ng-model="it.radios" ng-checked="checkedRadio('alojamiento_{{it.id}}_<?php echo e($i); ?>', it.radios.Valor,<?php echo e($i); ?>)" ng-value="{Id:it.id,Valor:<?php echo e($i); ?>}">
 
                                                 </label>
                                             </div>
                                         </td>
-                                    @endfor
+                                    <?php endfor; ?>
                                     <td>
                                         <div class="radio radio-primary">
                                             <label>
-                                                <input type="radio"  ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="alojamiento_@{{it.id}}" value="0">
+                                                <input type="radio"  ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="alojamiento_{{it.id}}" value="0">
                                             </label>
                                         </div>
                                     </td>
@@ -165,32 +163,32 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th> @{{aspectos[1].aspectos_evaluados_con_idiomas[0].nombre}} </th>
-                                    @for ($j = 1; $j <= 10; $j++)
-                                        <th> {{$j}} </th>
-                                    @endfor
+                                    <th> {{aspectos[1].aspectos_evaluados_con_idiomas[0].nombre}} </th>
+                                    <?php for($j = 1; $j <= 10; $j++): ?>
+                                        <th> <?php echo e($j); ?> </th>
+                                    <?php endfor; ?>
                                     <th> Sin Respuesta </th>
                                 </tr>
 
                             </thead>
                             <tbody>
                                 <tr ng-repeat="it in aspectos[1].items_evaluars">
-                                    <td> @{{it.items_evaluar_con_idiomas[0].nombre}}</td>
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    <td> {{it.items_evaluar_con_idiomas[0].nombre}}</td>
+                                    <?php for($i = 1; $i <= 10; $i++): ?>
                                     
                                         <td>
                                             <div class="radio radio-primary">
                                                 <label>
-                                                    <input type="radio" id="restaurante_@{{it.id}}_{{$i}}" name="restaurante_@{{it.id}}_{{$i}}" ng-checked="checkedRadio('restaurante_@{{it.id}}_{{$i}}', it.radios.Valor,{{$i}})"  ng-model="it.radios" ng-value="{Id:it.id,Valor:{{$i}}}">
+                                                    <input type="radio" id="restaurante_{{it.id}}_<?php echo e($i); ?>" name="restaurante_{{it.id}}_<?php echo e($i); ?>" ng-checked="checkedRadio('restaurante_{{it.id}}_<?php echo e($i); ?>', it.radios.Valor,<?php echo e($i); ?>)"  ng-model="it.radios" ng-value="{Id:it.id,Valor:<?php echo e($i); ?>}">
                                                     
                                                 </label>
                                             </div>
                                         </td>
-                                    @endfor
+                                    <?php endfor; ?>
                                     <td>
                                         <div class="radio radio-primary">
                                             <label>
-                                                <input type="radio"  ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="restaurante_@{{it.id}}" value="0">
+                                                <input type="radio"  ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="restaurante_{{it.id}}" value="0">
                                             </label>
                                         </div>
                                     </td>
@@ -234,7 +232,7 @@
         <!--</div>-->
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title"><b>@{{aspectos[2].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
+                <h3 class="panel-title"><b>{{aspectos[2].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
             </div>
             <div class="panel-footer"><b>Califique en una escala del 1 al 10, donde 1 es muy insatisfecho y 10 muy satisfecho</b></div>
             <div class="panel-body">
@@ -243,33 +241,33 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th style="width: 40%;"> @{{aspectos[2].aspectos_evaluados_con_idiomas[0].nombre}} </th>
-                                    @for ($j = 1; $j <= 10; $j++)
+                                    <th style="width: 40%;"> {{aspectos[2].aspectos_evaluados_con_idiomas[0].nombre}} </th>
+                                    <?php for($j = 1; $j <= 10; $j++): ?>
                                     
-                                        <th> {{$j}} </th>
-                                    @endfor
+                                        <th> <?php echo e($j); ?> </th>
+                                    <?php endfor; ?>
                                     <th> Sin Respuesta </th>
                                 </tr>
 
                             </thead>
                             <tbody>
                                 <tr ng-repeat="it in aspectos[2].items_evaluars">
-                                    <td> @{{it.items_evaluar_con_idiomas[0].nombre}}</td>
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    <td> {{it.items_evaluar_con_idiomas[0].nombre}}</td>
+                                    <?php for($i = 1; $i <= 10; $i++): ?>
                                     
                                         <td>
                                             <div class="radio radio-primary">
                                                 <label>
-                                                    <input type="radio" name="factores_@{{it.id}}" id="factores_@{{it.id}}_{{$i}}" ng-checked="checkedRadio('factores_@{{it.id}}_{{$i}}', it.radios.Valor,{{$i}})"  ng-model="it.radios" ng-value="{Id:it.id,Valor:{{$i}}}">
+                                                    <input type="radio" name="factores_{{it.id}}" id="factores_{{it.id}}_<?php echo e($i); ?>" ng-checked="checkedRadio('factores_{{it.id}}_<?php echo e($i); ?>', it.radios.Valor,<?php echo e($i); ?>)"  ng-model="it.radios" ng-value="{Id:it.id,Valor:<?php echo e($i); ?>}">
 
                                                 </label>
                                             </div>
                                         </td>
-                                    @endfor
+                                    <?php endfor; ?>
                                     <td>
                                         <div class="radio radio-primary">
                                             <label>
-                                                <input type="radio" ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="factores_@{{it.id}}" value="0">
+                                                <input type="radio" ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="factores_{{it.id}}" value="0">
                                             </label>
                                         </div>
                                     </td>
@@ -313,7 +311,7 @@
         <!--</div>-->
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title"><b>@{{aspectos[3].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
+                <h3 class="panel-title"><b>{{aspectos[3].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
             </div>
             <div class="panel-footer"><b>Califique en una escala del 1 al 10, donde 1 es muy insatisfecho y 10 muy satisfecho</b></div>
             <div class="panel-body">
@@ -322,32 +320,32 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th style="width: 40%"> @{{aspectos[3].aspectos_evaluados_con_idiomas[0].nombre}} </th>
-                                    @for ($j = 1; $j <= 10; $j++)
+                                    <th style="width: 40%"> {{aspectos[3].aspectos_evaluados_con_idiomas[0].nombre}} </th>
+                                    <?php for($j = 1; $j <= 10; $j++): ?>
                                     
-                                        <th> {{$j}} </th>
-                                    @endfor
+                                        <th> <?php echo e($j); ?> </th>
+                                    <?php endfor; ?>
                                     <th> Sin Respuesta </th>
                                 </tr>
 
                             </thead>
                             <tbody>
                                 <tr ng-repeat="it in aspectos[3].items_evaluars">
-                                    <td> @{{it.items_evaluar_con_idiomas[0].nombre}}</td>
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    <td> {{it.items_evaluar_con_idiomas[0].nombre}}</td>
+                                    <?php for($i = 1; $i <= 10; $i++): ?>
                                         <td>
                                             <div class="radio radio-primary">
                                                 <label>
-                                                    <input type="radio" name="ocio_@{{it.id}}" ng-model="it.radios" id="ocio_@{{it.id}}_{{$i}}" ng-checked="checkedRadio('ocio_@{{it.id}}_{{$i}}', it.radios.Valor,{{$i}})"  ng-value="{Id:it.id,Valor:{{$i}}}">
+                                                    <input type="radio" name="ocio_{{it.id}}" ng-model="it.radios" id="ocio_{{it.id}}_<?php echo e($i); ?>" ng-checked="checkedRadio('ocio_{{it.id}}_<?php echo e($i); ?>', it.radios.Valor,<?php echo e($i); ?>)"  ng-value="{Id:it.id,Valor:<?php echo e($i); ?>}">
 
                                                 </label>
                                             </div>
                                         </td>
-                                    @endfor
+                                    <?php endfor; ?>
                                     <td>
                                         <div class="radio radio-primary">
                                             <label>
-                                                <input type="radio" ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="ocio_@{{it.id}}" value="0">
+                                                <input type="radio" ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="ocio_{{it.id}}" value="0">
                                             </label>
                                         </div>
                                     </td>
@@ -391,7 +389,7 @@
         <!--</div>-->
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title"><b>@{{aspectos[4].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
+                <h3 class="panel-title"><b>{{aspectos[4].aspectos_evaluados_con_idiomas[0].nombre}}</b></h3>
             </div>
             <div class="panel-footer"><b>Califique en una escala del 1 al 10, donde 1 es muy insatisfecho y 10 muy satisfecho</b></div>
             <div class="panel-body">
@@ -400,33 +398,33 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th style="width: 40%"> @{{aspectos[4].aspectos_evaluados_con_idiomas[0].nombre}} </th>
-                                    @for ($j = 1; $j <= 10; $j++)
+                                    <th style="width: 40%"> {{aspectos[4].aspectos_evaluados_con_idiomas[0].nombre}} </th>
+                                    <?php for($j = 1; $j <= 10; $j++): ?>
                                     
-                                        <th> {{$j}} </th>
-                                    @endfor
+                                        <th> <?php echo e($j); ?> </th>
+                                    <?php endfor; ?>
                                     <th> Sin Respuesta </th>
                                 </tr>
 
                             </thead>
                             <tbody>
                                 <tr ng-repeat="it in aspectos[4].items_evaluars">
-                                    <td> @{{it.items_evaluar_con_idiomas[0].nombre}}</td>
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    <td> {{it.items_evaluar_con_idiomas[0].nombre}}</td>
+                                    <?php for($i = 1; $i <= 10; $i++): ?>
                                         <td>
                                             <div class="radio radio-primary">
                                                 <label>
-                                                    <input type="radio" name="infraestructura_@{{it.id}}" id="infraestructura_@{{it.id}}_{{$i}}" ng-checked="checkedRadio('infraestructura_@{{it.id}}_{{$i}}', it.radios.Valor,{{$i}})" ng-model="it.radios" ng-value="{Id:it.id,Valor:{{$i}}}">
+                                                    <input type="radio" name="infraestructura_{{it.id}}" id="infraestructura_{{it.id}}_<?php echo e($i); ?>" ng-checked="checkedRadio('infraestructura_{{it.id}}_<?php echo e($i); ?>', it.radios.Valor,<?php echo e($i); ?>)" ng-model="it.radios" ng-value="{Id:it.id,Valor:<?php echo e($i); ?>}">
 
                                                 </label>
                                             </div>
                                         </td>
-                                    @endfor
+                                    <?php endfor; ?>
                                     
                                     <td>
                                         <div class="radio radio-primary">
                                             <label>
-                                                <input type="radio"  ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="infraestructura_@{{it.id}}" value="0">
+                                                <input type="radio"  ng-checked="it.radios==null" ng-click="limpiarFila(it.id)" name="infraestructura_{{it.id}}" value="0">
                                             </label>
                                         </div>
                                     </td>
@@ -451,7 +449,7 @@
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="item in actividades" >
                             <label>
-                                <input type="checkbox" ng-disabled="bandera==false && item.id==12" checklist-model="calificacion.Elementos"  checklist-value="item.id"> @{{item.nombre}}
+                                <input type="checkbox" ng-disabled="bandera==false && item.id==12" checklist-model="calificacion.Elementos"  checklist-value="item.id"> {{item.nombre}}
                             </label>
                             <input type="text" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba su otra opción" ng-model="calificacion.OtroElementos" ng-change="verificarOtro()" ng-if="item.id==12" />
                             
@@ -518,16 +516,17 @@
                             <tbody>
                                 <tr>
                                     
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    <?php for($i = 1; $i <= 10; $i++): ?>
                                         <td>
                                             <div class="radio radio-primary">
                                                 <label>
-                                                    <input type="radio" name="sotenibilidada_@{{it.Id}}" ng-model="calificacion.Sostenibilidad" value="{{$i}}">
-                                                    {{$i}}
+                                                    <input type="radio" name="sotenibilidada_{{it.Id}}" ng-model="calificacion.Sostenibilidad" value="<?php echo e($i); ?>">
+                                                    <?php echo e($i); ?>
+
                                                 </label>
                                             </div>
                                         </td>
-                                    @endfor
+                                    <?php endfor; ?>
                                 </tr>
                             </tbody>
                         </table>
@@ -552,16 +551,17 @@
                             <tbody>
                                 <tr>
                                     
-                                    @for ($i = 1; $i <= 10; $i++)
+                                    <?php for($i = 1; $i <= 10; $i++): ?>
                                         <td>
                                             <div class="radio radio-primary">
                                                 <label>
-                                                    <input type="radio" name="experiencia_@{{it.Id}}" ng-model="calificacion.Calificacion" value="{{$i}}">
-                                                    {{$i}}
+                                                    <input type="radio" name="experiencia_{{it.Id}}" ng-model="calificacion.Calificacion" value="<?php echo e($i); ?>">
+                                                    <?php echo e($i); ?>
+
                                                 </label>
                                             </div>
                                         </td>
-                                    @endfor
+                                    <?php endfor; ?>
                                 </tr>
                             </tbody>
                         </table>
@@ -589,8 +589,8 @@
                     <div class="col-md-12">
                         <div class="radio radio-primary" ng-repeat="it in veces">
                             <label>
-                                <input type="radio" id="veces_@{{it.id}}" value="@{{it.id}}" name="radioVolveria" ng-required="true" ng-model="calificacion.Volveria">
-                                @{{it.volveria_visitar_con_idiomas[0].nombre}}
+                                <input type="radio" id="veces_{{it.id}}" value="{{it.id}}" name="radioVolveria" ng-required="true" ng-model="calificacion.Volveria">
+                                {{it.volveria_visitar_con_idiomas[0].nombre}}
                             </label>
                         </div>
                     </div>
@@ -611,8 +611,8 @@
                     <div class="col-md-12">
                         <div class="radio radio-primary" ng-repeat="it in veces">
                             <label>
-                                <input type="radio" id="recomenda_@{{it.id}}" value="@{{it.id}}" name="radioRecomienda" ng-required="true" ng-model="calificacion.Recomienda">
-                                @{{it.volveria_visitar_con_idiomas[0].nombre}}
+                                <input type="radio" id="recomenda_{{it.id}}" value="{{it.id}}" name="radioRecomienda" ng-required="true" ng-model="calificacion.Recomienda">
+                                {{it.volveria_visitar_con_idiomas[0].nombre}}
                             </label>
                         </div>
                     </div>
@@ -633,9 +633,9 @@
                     <div class="col-md-12">
                         <select class="form-control" name="selectVeces" ng-model="calificacion.VecesVisitadas" ng-required="true" ng-init="calificacion.VecesVisitadas = '0'">
                             <option value="0" selected disabled>Presione aquí para desplegar opciones</option>
-                            @for ($i = 1; $i <= 10; $i++)
-                                <option value="{{$i}}">{{$i}}</option>
-                            @endfor
+                            <?php for($i = 1; $i <= 10; $i++): ?>
+                                <option value="<?php echo e($i); ?>"><?php echo e($i); ?></option>
+                            <?php endfor; ?>
                             <option>10+</option>
                         </select>
                     </div>
@@ -650,7 +650,7 @@
         </div>
 
         <div class="row" style="text-align:center">
-            <a href="/turismoreceptor/secciongastos/{{$id}}" class="btn btn-raised btn-default">Anterior</a>
+            <a href="/turismoreceptor/secciongastos/<?php echo e($id); ?>" class="btn btn-raised btn-default">Anterior</a>
             <input type="submit" class="btn btn-raised btn-success" ng-click="guardar()" value="Siguiente" />
         </div>
         <br />
@@ -660,5 +660,7 @@
 
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('layout._encuestaLayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

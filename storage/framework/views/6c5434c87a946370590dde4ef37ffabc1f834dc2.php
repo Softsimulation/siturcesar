@@ -1,8 +1,6 @@
-@extends('layout._encuestaLayout')
+<?php $__env->startSection('title', 'Encuesta turismo receptor'); ?>
 
-@section('title', 'Encuesta turismo receptor')
-
-@section('estilos')
+<?php $__env->startSection('estilos'); ?>
     <style>
         .title-section {
             background-color: #16469e !important;
@@ -81,21 +79,21 @@
         z-index:11!important;
         }
     </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('TitleSection', 'Gastos')
+<?php $__env->startSection('TitleSection', 'Gastos'); ?>
 
-@section('Progreso', '66.65%')
+<?php $__env->startSection('Progreso', '66.65%'); ?>
 
-@section('NumSeccion', '66%')
+<?php $__env->startSection('NumSeccion', '66%'); ?>
 
-@section('controller','ng-controller="gasto"')
+<?php $__env->startSection('controller','ng-controller="gasto"'); ?>
 
-@section('content')
+<?php $__env->startSection('content'); ?>
 <div class="main-page" >
-    <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
+    <input type="hidden" ng-model="id" ng-init="id=<?php echo e($id); ?>" />
     <div class="alert alert-danger" role="alert" ng-if="errores" ng-repeat="error in errores">
-       @{{error[0]}}
+       {{error[0]}}
     </div>
   
     <form role="form" name="GastoForm" novalidate>
@@ -259,9 +257,9 @@
                             <div class="form-group">
                                 <label class="control-label" for="municipios">Municipios</label>
                                     <ui-select multiple  id="municipios"  name="municipios" ng-model="encuestaReceptor.Municipios"  ng-required="encuestaReceptor.IncluyoOtros == 1">
-                                       <ui-select-match placeholder="Seleccione municipios (multiple)">@{{$item.nombre}}</ui-select-match>
+                                       <ui-select-match placeholder="Seleccione municipios (multiple)">{{$item.nombre}}</ui-select-match>
                                        <ui-select-choices repeat="item.id as item in municipios | filter:$select.search">
-                                           @{{item.nombre}}
+                                           {{item.nombre}}
                                        </ui-select-choices>
                                    </ui-select>
                             </div>
@@ -283,8 +281,8 @@
                             <div class="col-md-12">
                                 <div class="radio radio-primary" ng-repeat="prov in tipos">
                                     <label>
-                                        <input type="radio" id="radio-@{{prov.id}}" value="@{{prov.id}}" ng-change="limpiarLocalizacion()" name="proveedor" ng-model="encuestaReceptor.Proveedor" ng-required="encuestaReceptor.ViajoDepartamento==1" >
-                                        @{{prov.nombre}}
+                                        <input type="radio" id="radio-{{prov.id}}" value="{{prov.id}}" ng-change="limpiarLocalizacion()" name="proveedor" ng-model="encuestaReceptor.Proveedor" ng-required="encuestaReceptor.ViajoDepartamento==1" >
+                                        {{prov.nombre}}
                                     </label>
                                 </div>
                                 <span ng-show="GastoForm.$submitted">
@@ -306,8 +304,8 @@
                             <div class="col-md-12">
                                 <div class="radio radio-primary" ng-repeat="opc in opciones">
                                     <label>
-                                        <input type="radio" id="radio-opt-@{{opc.id}}" value="@{{opc.id}}" name="lugar" ng-model="encuestaReceptor.LugarAgencia" ng-required="encuestaReceptor.Proveedor==1" >
-                                        @{{opc.nombre}}
+                                        <input type="radio" id="radio-opt-{{opc.id}}" value="{{opc.id}}" name="lugar" ng-model="encuestaReceptor.LugarAgencia" ng-required="encuestaReceptor.Proveedor==1" >
+                                        {{opc.nombre}}
                                     </label>
                                 </div>
                                 <span ng-show="GastoForm.$submitted">
@@ -329,7 +327,7 @@
                             <div class="col-md-12">
                                 <div class="checkbox" ng-repeat="servicio in servicios">
                                     <label>
-                                        <input type="checkbox" checklist-model="encuestaReceptor.ServiciosIncluidos" checklist-value="servicio.id"> @{{servicio.nombre}}
+                                        <input type="checkbox" checklist-model="encuestaReceptor.ServiciosIncluidos" checklist-value="servicio.id"> {{servicio.nombre}}
                                     </label>
 
                                 </div>
@@ -422,20 +420,9 @@
                                         </tr>
                                         <tr ng-repeat="rub in rubros">
                                             
-                                            <td style="width:20%;">E.5.@{{$index+1}} @{{rub.rubros_con_idiomas[0].nombre}} 
-                                        
-                                                <div class="form-group" ng-if="rub.id==16" >
-                                                           <label for="otroRubros" class="col-md-12 control-label">Otro, ¿Cuál?</label>
-                                                           <input type="text" class="form-control" name="otroRubros" ng-model="rub.gastos_visitantes[0].otro"   ng-disabled="encuestaReceptor.poderLLenar" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null && rub.gastos_visitantes[0].divisas_magdalena != null && rub.gastos_visitantes[0].personas_cubiertas != null"  />
-                                                           <span ng-show="GastoForm.$submitted || GastoForm.otroRubros.$touched">
-                                                                   <span class="label label-danger" ng-show="GastoForm.otroRubros.$error.required">* El campo es requerido.</span>
-                                                           </span>
-                                                </div>
-                                            </td>
+                                            <td style="width:20%;">E.5.{{$index+1}} {{rub.rubros_con_idiomas[0].nombre}}</td>
                                             <td style="width:55%;">
                                                 <div class="row">
-<<<<<<< HEAD
-=======
                                                     <!--<div class="col-xs-12 col-md-6">
                                                         
                                                         <h5 style="margin-bottom: 0;"><b>Fuera del Cesar</b></h5>
@@ -446,11 +433,11 @@
                                                                     <label for="gastoFuera" class="col-md-12 control-label" style="color:dimgray;">Cantidad</label>
 
                                                                     <div class="col-md-12">
-                                                                        <input type="number" class="form-control" name="cantFuera@{{$index}}" placeholder="0" min="1" ng-model="rub.gastos_visitantes[0].cantidad_pagada_fuera" ng-required="rub.gastos_visitantes[0].divisas_fuera != null || rub.gastos_visitantes[0].personas_cubiertas != null && rub.gastos_visitantes[0].cantidad_pagada_magdalena == null ">
-                                                                        <span ng-show="GastoForm.$submitted || GastoForm.cantFuera@{{$index}}.$touched">
-                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera@{{$index}}.$error.min">*El valor debe ser mayor a 0</span>
-                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera@{{$index}}.$error.number">* Solo números.</span>
-                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera@{{$index}}.$error.required">* Campo requerido.</span>
+                                                                        <input type="number" class="form-control" name="cantFuera{{$index}}" placeholder="0" min="1" ng-model="rub.gastos_visitantes[0].cantidad_pagada_fuera" ng-required="rub.gastos_visitantes[0].divisas_fuera != null || rub.gastos_visitantes[0].personas_cubiertas != null && rub.gastos_visitantes[0].cantidad_pagada_magdalena == null ">
+                                                                        <span ng-show="GastoForm.$submitted || GastoForm.cantFuera{{$index}}.$touched">
+                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera{{$index}}.$error.min">*El valor debe ser mayor a 0</span>
+                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera{{$index}}.$error.number">* Solo números.</span>
+                                                                            <span class="label label-danger" ng-show="GastoForm.cantFuera{{$index}}.$error.required">* Campo requerido.</span>
                                                                         </span>
                                                                     </div>
                                                                 </div>
@@ -461,20 +448,19 @@
                                                                     <label for="selecDivisa2" class="col-md-2 control-label" style="color:dimgray;">Divisa</label>
 
                                                                     <div class="col-md-10">
-                                                                        <select id="selectDivisa2" class="form-control" name="divisaFuera@{{$index}}" ng-options ="item.id as item.nombre for item in divisas" ng-required="rub.gastos_visitantes[0].cantidad_pagada_fuera != null || rub.gastos_visitantes[0].personas_cubiertas != null && rub.gastos_visitantes[0].cantidad_pagada_magdalena == null" ng-model="rub.gastos_visitantes[0].divisas_fuera">
+                                                                        <select id="selectDivisa2" class="form-control" name="divisaFuera{{$index}}" ng-options ="item.id as item.nombre for item in divisas" ng-required="rub.gastos_visitantes[0].cantidad_pagada_fuera != null || rub.gastos_visitantes[0].personas_cubiertas != null && rub.gastos_visitantes[0].cantidad_pagada_magdalena == null" ng-model="rub.gastos_visitantes[0].divisas_fuera">
                                                                            
                                                                             <option value="">Seleccionar divisa</option>
                                                                           
                                                                         </select>
-                                                                        <span ng-show="GastoForm.$submitted || GastoForm.divisaFuera@{{$index}}.$touched">
-                                                                            <span class="label label-danger" ng-show="GastoForm.divisaFuera@{{$index}}.$error.required">* Campo requerido.</span>
+                                                                        <span ng-show="GastoForm.$submitted || GastoForm.divisaFuera{{$index}}.$touched">
+                                                                            <span class="label label-danger" ng-show="GastoForm.divisaFuera{{$index}}.$error.required">* Campo requerido.</span>
                                                                         </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>-->
->>>>>>> 7e3edb6a920c933696a3acd85d5c4a1d658d74e3
                                                     <div class="col-xs-12 col-md-12">
                                                         <!--P9Col2Title2. En el Magdalena-->
                                                         
@@ -482,22 +468,22 @@
                                                             <div class="col-xs-12 col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="gastoFuera" class="control-label" style="color:dimgray;">Cantidad</label>
-                                                                    <input type="number" class="form-control" name="cantDentro@{{$index}}" min="1" placeholder="Cantidad" ng-blur="cambiarAlquiler(rub)" ng-model="rub.gastos_visitantes[0].cantidad_pagada_magdalena" ng-disabled="encuestaReceptor.poderLLenar" ng-required ="rub.gastos_visitantes[0].divisas_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null" >
-                                                                    <span ng-show="GastoForm.$submitted || GastoForm.cantDentro@{{$index}}.$touched">
-                                                                        <span class="label label-danger" ng-show="GastoForm.cantDentro@{{$index}}.$error.min">*El valor debe ser mayor a 0</span>
-                                                                        <span class="label label-danger" ng-show="GastoForm.cantDentro@{{$index}}.$error.number">* Solo números.</span>
-                                                                        <span class="label label-danger" ng-show="GastoForm.cantDentro@{{$index}}.$error.required">* Campo requerido.</span>
+                                                                    <input type="number" class="form-control" name="cantDentro{{$index}}" min="1" placeholder="Cantidad" ng-blur="cambiarAlquiler(rub)" ng-model="rub.gastos_visitantes[0].cantidad_pagada_magdalena" ng-disabled="encuestaReceptor.poderLLenar" ng-required ="rub.gastos_visitantes[0].divisas_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null" >
+                                                                    <span ng-show="GastoForm.$submitted || GastoForm.cantDentro{{$index}}.$touched">
+                                                                        <span class="label label-danger" ng-show="GastoForm.cantDentro{{$index}}.$error.min">*El valor debe ser mayor a 0</span>
+                                                                        <span class="label label-danger" ng-show="GastoForm.cantDentro{{$index}}.$error.number">* Solo números.</span>
+                                                                        <span class="label label-danger" ng-show="GastoForm.cantDentro{{$index}}.$error.required">* Campo requerido.</span>
                                                                     </span>
                                                                 </div>
                                                             </div>
                                                             <div class="col-xs-12 col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="selectDivisa" class="control-label" style="color:dimgray;">Divisa</label>
-                                                                    <select id="selectDivisa3" class="form-control" name="divisaDentro@{{$index}}" ng-blur="cambiarAlquiler(rub)" ng-options ="item.id as item.nombre for item in divisas" ng-model="rub.gastos_visitantes[0].divisas_magdalena" ng-disabled="encuestaReceptor.poderLLenar" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null">
+                                                                    <select id="selectDivisa3" class="form-control" name="divisaDentro{{$index}}" ng-blur="cambiarAlquiler(rub)" ng-options ="item.id as item.nombre for item in divisas" ng-model="rub.gastos_visitantes[0].divisas_magdalena" ng-disabled="encuestaReceptor.poderLLenar" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null">
                                                                         <option value="">Seleccionar divisa</option>
                                                                     </select>
-                                                                    <span ng-show="GastoForm.$submitted || GastoForm.divisaDentro@{{$index}}.$touched">
-                                                                       <span class="label label-danger" ng-show="GastoForm.divisaDentro@{{$index}}.$error.required">* Campo requerido.</span>
+                                                                    <span ng-show="GastoForm.$submitted || GastoForm.divisaDentro{{$index}}.$touched">
+                                                                       <span class="label label-danger" ng-show="GastoForm.divisaDentro{{$index}}.$error.required">* Campo requerido.</span>
                                                                     </span>
                                                                 </div>
                                                             </div>
@@ -507,18 +493,18 @@
                                             </td>
                                             <td style="width:10%;">
                                                 <label class="control-label">&nbsp;</label>
-                                                <input type="number" min="1" class="form-control" name="personas@{{$index}}" ng-model="rub.gastos_visitantes[0].personas_cubiertas" ng-blur="cambiarAlquiler(rub)" ng-disabled="encuestaReceptor.poderLLenar" placeholder="0" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null || rub.gastos_visitantes[0].divisas_magdalena != null"/>
-                                                <span ng-show="GastoForm.$submitted || GastoForm.personas@{{$index}}.$touched">
-                                                    <span class="label label-danger" ng-show="GastoForm.personas@{{$index}}.$error.number">* Solo números.</span>
-                                                    <span class="label label-danger" ng-show="GastoForm.personas@{{$index}}.$error.min">* El valor debe ser mayor a 0.</span>
-                                                    <span class="label label-danger" ng-show="GastoForm.personas@{{$index}}.$error.required">* Campo requerido.</span>
+                                                <input type="number" min="1" class="form-control" name="personas{{$index}}" ng-model="rub.gastos_visitantes[0].personas_cubiertas" ng-blur="cambiarAlquiler(rub)" ng-disabled="encuestaReceptor.poderLLenar" placeholder="0" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null || rub.gastos_visitantes[0].divisas_magdalena != null"/>
+                                                <span ng-show="GastoForm.$submitted || GastoForm.personas{{$index}}.$touched">
+                                                    <span class="label label-danger" ng-show="GastoForm.personas{{$index}}.$error.number">* Solo números.</span>
+                                                    <span class="label label-danger" ng-show="GastoForm.personas{{$index}}.$error.min">* El valor debe ser mayor a 0.</span>
+                                                    <span class="label label-danger" ng-show="GastoForm.personas{{$index}}.$error.required">* Campo requerido.</span>
                                                 </span>
                                                 
                                             </td>
                                             <td style="width:15%;">
                                                 <div class="checkbox">
                                                     <label>
-                                                        <input type="checkbox" name="asumido@{{$index}}"  ng-model="rub.gastos_visitantes[0].gastos_asumidos_otros" value="true"> Si
+                                                        <input type="checkbox" name="asumido{{$index}}"  ng-model="rub.gastos_visitantes[0].gastos_asumidos_otros" value="true"> Si
                                                     </label>
                                                 </div>
                                             </td>
@@ -563,7 +549,7 @@
                     <div class="col-md-12">
                         <div class="radio" ng-repeat="item in opciones">
                             <label ng-show="item.id != 3">
-                                <input type="radio" name="alquiler" ng-value="item.id" ng-model="encuestaReceptor.Alquiler" ng-required="abrirAlquiler"> @{{item.nombre}}
+                                <input type="radio" name="alquiler" ng-value="item.id" ng-model="encuestaReceptor.Alquiler" ng-required="abrirAlquiler"> {{item.nombre}}
                             </label>
 
                         </div>
@@ -584,7 +570,7 @@
                     <div class="col-md-12">
                         <div class="radio" ng-repeat="item in opciones">
                             <label>
-                                <input type="radio" name="ropa" ng-value="item.id" ng-model="encuestaReceptor.Ropa" ng-required="abrirRopa"> @{{item.nombre}}
+                                <input type="radio" name="ropa" ng-value="item.id" ng-model="encuestaReceptor.Ropa" ng-required="abrirRopa"> {{item.nombre}}
                             </label>
 
                         </div>
@@ -606,8 +592,7 @@
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="fin in financiadores" ng-show="!(encuestaReceptor.RealizoGasto==0 && fin.id==1)">
                             <label>
-                                <input type="checkbox" checklist-model="encuestaReceptor.Financiadores" name ="Financiadores" checklist-value="fin.id" > @{{fin.nombre}}
-                                <input type="text" style="display: inline-block;" class="form-control" id="inputOtro" placeholder="Escriba su otra opción" ng-model="encuestaReceptor.Otro" ng-change="verificarOtro()" ng-if="fin.id==11" />
+                                <input type="checkbox" checklist-model="encuestaReceptor.Financiadores" name ="Financiadores" checklist-value="fin.id" > {{fin.nombre}}
                             </label>
                             
                         </div>
@@ -619,7 +604,7 @@
             </div>
         </div>
         <div class="row" style="text-align:center">
-            <a href="/turismoreceptor/secciongrupoviaje/{{$id}}" class="btn btn-raised btn-default">Anterior</a>
+            <a href="/turismoreceptor/secciongrupoviaje/<?php echo e($id); ?>" class="btn btn-raised btn-default">Anterior</a>
             <input type="submit" class="btn btn-raised btn-success" ng-click="guardar()" value="Siguiente" />
         </div>
         <br />
@@ -629,9 +614,9 @@
 
     </div>
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('javascript')
+<?php $__env->startSection('javascript'); ?>
     // <script>
     //     $(window).on('scroll', function () {
             
@@ -662,6 +647,8 @@
             
     //     })
     // </script>
-@endsection
+<?php $__env->stopSection(); ?>
 
 
+
+<?php echo $__env->make('layout._encuestaLayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
