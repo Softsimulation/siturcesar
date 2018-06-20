@@ -88,6 +88,7 @@ use App\Models\Tipo_Proveedor_Paquete;
 use App\Models\Ocupacion;
 use App\Models\OcupacionPersona;
 use App\Models\OtraRed;
+use App\Models\OtroTransporteSalida;
 
 
 class TurismoInternoController extends Controller
@@ -541,6 +542,7 @@ class TurismoInternoController extends Controller
         $fuentes_antes=[];
         $fuentes_durante=[];
         $compar_redes=[];
+        $OtroRedes="";
         $OtroFuenteAntes="";
         $OtroFuenteDurante="";
         $facebook="";
@@ -779,7 +781,7 @@ class TurismoInternoController extends Controller
         
         $encuesta = [
                 "noRealiceGastos"=> Viaje::find($idViaje)->no_hizo_gasto==true ? 1 : 0,
-                "rubros"=> Rubro_Interno::with([ "viajesGastosInternos"=>function($q) use($idViaje){ $q->where("viajes_id",$idViaje); } ])->orderBy("id")->get(),
+                "rubros"=> Rubro_Interno::wherenotin('id',[19,17,13])->with([ "viajesGastosInternos"=>function($q) use($idViaje){ $q->where("viajes_id",$idViaje); } ])->orderBy("id")->get(),
                 "financiadores"=> Viaje_Financiadore::where("viaje_id",$idViaje)->pluck('financiadores_id')->toArray(),
                 "viajeExcursion"=> Viaje_Excursion::where("viajes_id",$idViaje)->first(),
                 "serviciosPaquetes"=> Servicio_Excursion_Incluido_Interno::where("viajes_id",$idViaje)->pluck('servicios_paquete_id')->toArray(),
@@ -802,10 +804,10 @@ class TurismoInternoController extends Controller
         
         return [ 
                 "financiadores"=> Financiador_Viaje::where("id","!=",11)->with([ "financiadoresViajesConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
-                "serviciosPaquetes"=> Servicio_Paquete_Interno::orderBy('id')->get(),
+                "serviciosPaquetes"=> Servicio_Paquete_Interno::where("id","!=",11)->orderBy('id')->get(),
                 "opcionesLugares"=> Opcion_Lugar::with([ "opcionesLugaresConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
                 "divisas"=> array_merge($divCop, $divisas),
-                "TipoProveedorPaquete"=>Tipo_Proveedor_Paquete::where("id","!=",3)->with([ "tipoProveedorPaqueteConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
+                "TipoProveedorPaquete"=>Tipo_Proveedor_Paquete::with([ "tipoProveedorPaqueteConIdiomas"=>function($q) use($idioma){ $q->where("idiomas_id",$idioma); }])->get(),
                 "encuesta"=>$encuesta,
             ];
         
@@ -963,17 +965,21 @@ class TurismoInternoController extends Controller
         
         $aux=ViajesTransporte::where('viaje_id',$viajero->id)->first();
         $aux2=ViajeMedioTransporte::where('viaje_id',$viajero->id)->first();
+        $aux3=OtroTransporteSalida::where('viaje_id',$viajero->id)->first();
         
         $otrotipo=($aux != null)?$aux->otro:"";
         $otromedio=($aux2 != null)?$aux2->otro:"";
+        $otrosalida=($aux3 != null)?$aux3->otro:"";
         
         return [
                 "transportes"=>$transportes,
                 "tipo_transporte"=>$viajero->tipo_transporte_id,
                 "medio_transporte"=>$viajero->medio_transporte_id,
+                "salida_transporte"=>$viajero->tipo_transporte_fuera_id,
                 'medios'=>$medios,'otrotipo'=>$otrotipo,
                 'otromedio'=>$otromedio,
-                'otrotipo'=>$otrotipo
+                'otrotipo'=>$otrotipo,
+                'otrosalida'=>$otrosalida
                 ];
         
     }
@@ -985,13 +991,18 @@ class TurismoInternoController extends Controller
                 'Mover'=>'required|exists:tipos_transporte,id',
                 'Medio'=>'required|exists:medio_transporte_interno,id',
                 'Tipo_otro'=>"required_if:Mover,10",
-                'Medio_otro'=>"required_if:Medio,8"
+                'Medio_otro'=>"required_if:Medio,8",
+                'Salir'=>'required|exists:tipos_transporte,id',
+                'Salir_Otro'=>"required_if:Salir,10"
                 
             ],[
                 'Mover.required'=>"El tipo de transporte es requerido",
                 'Medio.required'=>"El medio de transporte es requerido",
                 'Tipo_otro.required_if'=>"El campo otro es requerido cuando el tipo de transporte es otro",
-                'Medio_otro.required_if'=>'El campo otro medio de transporte cuando el medio de transporte seleccionado es otro'
+                'Medio_otro.required_if'=>'El campo otro medio de transporte cuando el medio de transporte seleccionado es otro',
+                'Salir.required'=>'El campo medio de transporte para salir del cesar es requerido',
+                'Salir_Otro.required_if'=>'El campo otro es requerido cuando medio de transporte para salir del cesar es otro'
+                
                 ]);
             
             if($validator->fails()){
@@ -1019,8 +1030,15 @@ class TurismoInternoController extends Controller
               
           }
           
+          if($viajero->tipo_transporte_fuera_id == 10){
+              
+              OtroTransporteSalida::where('viaje_id',$viajero->id)->delete();
+              
+          }
+          
           $viajero->tipo_transporte_id=$request->Mover;
           $viajero->medio_transporte_id=$request->Medio;
+          $viajero->tipo_transporte_fuera_id=$request->Salir;
           
           if($request->Mover == 10){
               
@@ -1035,6 +1053,14 @@ class TurismoInternoController extends Controller
               $nuevo=new ViajeMedioTransporte();
               $nuevo->viaje_id=$viajero->id;
               $nuevo->otro=$request->Medio_otro;
+              $nuevo->save();
+          }
+          
+          if($request->Salir == 10){
+              
+              $nuevo=new OtroTransporteSalida();
+              $nuevo->viaje_id=$viajero->id;
+              $nuevo->otro=$request->Salir_Otro;
               $nuevo->save();
           }
           

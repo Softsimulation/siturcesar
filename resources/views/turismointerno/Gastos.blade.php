@@ -295,8 +295,8 @@
                                         <thead>
                                           <tr>
                                             <th>Servicio</th>
-                                            <th>En Atlántico</th>
-                                            <th>Fuera de Atlántico</th>
+                                            <th>En en Cesar</th>
+                                            <th>Fuera del Cesar</th>
                                             <th></th>
                                           </tr>
                                         </thead>
@@ -536,8 +536,8 @@
                                             <thead>
                                               <tr>
                                                 <th>Rubro</th>
-                                                <th>En Atlántico</th>
-                                                <th>Fuera de Atlántico</th>
+                                                <th>En el Cesar</th>
+                                                <th>Fuera del Cesar</th>
                                               </tr>
                                             </thead>
                                             <tbody>

@@ -109,6 +109,29 @@
             </div>
         </div>
         
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <!-- ¿Qué tipo de transporte utilizó para recorrer-->
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Tipo de transporte para salir del Cesar. Respuesta única </b></h3>
+            </div>
+            <div class="panel-footer"><b>Pregunta de selección única</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="radio" ng-repeat="item in transportes" >
+                            <label>
+                                <input type="radio" name="salir" ng-change="cambio3()" ng-value="item.id" ng-model="transporte.Salir" ng-required="true"> @{{item.nombre}}
+                                <input type="text" class="form-control" name="otro" ng-model="transporte.Salir_Otro" ng-if="item.id == 10" ng-disabled="transporte.Salir!=10" />
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <span ng-show="transForm.$submitted || transForm.salir.$touched">
+                    <span class="label label-danger" ng-show="transForm.salir.$error.required">* El campo es requerido.</span>
+                </span>
+            </div>
+        </div>
+        
         <!--
         <div ng-if="transporte.Mover == 6" class="panel panel-success">
             <div class="panel-heading">
