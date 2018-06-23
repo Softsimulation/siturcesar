@@ -132,7 +132,7 @@ class TurismoReceptorController extends Controller
 			'Telefono' => 'max:50',
 			'Celular' => 'max:50',
 			'Nacimiento' => 'required|exists:opciones_lugares,id',
-			'Pais_Nacimiento' => 'required_if:Nacimiento,3',
+			//'Pais_Nacimiento' => 'required_if:Nacimiento,3',
 			'Municipio' => 'required|exists:municipios,id',
 			'Motivo' => 'required|exists:motivos_viaje,id',
 			//'Destino' => 'exists:municipios,id',
@@ -207,7 +207,8 @@ class TurismoReceptorController extends Controller
 		
 		$year = date('Y',strtotime(str_replace("/","-",$request->fechaAplicacion)));
 		$month = date('m',strtotime(str_replace("/","-",$request->fechaAplicacion)));
-		$numeroEncuesta = Visitante::whereYear('fecha_aplicacion','=',$year)->whereMonth('fecha_aplicacion','=',$month)->get()->count() + 1;
+		$retornadoProcedimiento = \DB::select('SELECT codigo_encuesta(?, ?)', array($month, $year) );
+		$numeroEncuesta = $retornadoProcedimiento[0]->codigo_encuesta;
 		
 		$digitador = Digitador::find($request->Encuestador);
 		
@@ -226,7 +227,7 @@ class TurismoReceptorController extends Controller
 		$visitante->municipio_residencia = $request->Municipio;
 		$visitante->nombre = $request->Nombre;
 		$visitante->opciones_lugares_id = $request->Nacimiento;
-		$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
+		//$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
 		$visitante->sexo = $request->Sexo;
 		$visitante->ultima_sesion = 1;
 		$visitante->codigo_encuesta = $numeroEncuesta;
@@ -299,7 +300,7 @@ class TurismoReceptorController extends Controller
             $visitante['Telefono'] = $visitanteCargar->telefono;
             $visitante['Celular'] = $visitanteCargar->celular;
             $visitante['Nacimiento'] = $visitanteCargar->opciones_lugares_id;
-            $visitante['Pais_Nacimiento'] = $visitanteCargar->pais_nacimiento;
+            //$visitante['Pais_Nacimiento'] = $visitanteCargar->pais_nacimiento;
             $visitante['Municipio'] = $visitanteCargar->municipio_residencia;
             $visitante['Departamento'] = $visitanteCargar->municipioResidencia->departamento_id;
             $visitante['Pais'] = $visitanteCargar->municipioResidencia->departamento->pais_id;
@@ -344,7 +345,7 @@ class TurismoReceptorController extends Controller
 			'Telefono' => 'max:50',
 			'Celular' => 'max:50',
 			'Nacimiento' => 'required|exists:opciones_lugares,id',
-			'Pais_Nacimiento' => 'required_if:Nacimiento,3',
+			//'Pais_Nacimiento' => 'required_if:Nacimiento,3',
 			'Municipio' => 'required|exists:municipios,id',
 			'Motivo' => 'required|exists:motivos_viaje,id',
 			//'Destino' => 'exists:municipios,id',
@@ -425,7 +426,7 @@ class TurismoReceptorController extends Controller
 		$visitante->municipio_residencia = $request->Municipio;
 		$visitante->nombre = $request->Nombre;
 		$visitante->opciones_lugares_id = $request->Nacimiento;
-		$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
+		//$visitante->pais_nacimiento = $request->Nacimiento != 3 ? 47 : $request->Pais_Nacimiento;
 		$visitante->sexo = $request->Sexo;
 		$visitante->fecha_aplicacion = date('Y-m-d H:i',strtotime(str_replace("/","-",$request->fechaAplicacion)));
 		$visitante->lugar_aplicacion_id = $request->aplicacion;
@@ -1375,7 +1376,7 @@ class TurismoReceptorController extends Controller
 			'Recomienda' => 'required|exists:volveria_visitar,id',
 			'VecesVisitadas' => 'required',
 			'OtroElementos' => 'max:100',
-			'Evaluacion' => 'required',
+			'Evaluacion' => 'array',
     	],[
        		'Id.required' => 'Debe seleccionar el visitante a realizar la encuesta.',
        		'Id.exists' => 'El visitante seleccionado no se encuentra seleccionado en el sistema.',
@@ -1415,12 +1416,15 @@ class TurismoReceptorController extends Controller
 		    $visitante->ultima_sesion = 6;
 		}
 		
-		foreach($request->Evaluacion as $evaluacion){
+		if(isset($request->Evaluacion)){
+		   foreach($request->Evaluacion as $evaluacion){
 		        $visitante->calificacions()->save(new Calificacion([
 	                'item_evaluar_id' => $evaluacion['Id'],
 	                'calificacion' => $evaluacion['Valor']
 	            ]));
-		    }
+		    } 
+		}
+		
 		
 		$sostenibilidad = Sostenibilidad_Visitante::find($request->Id);
 		    if($sostenibilidad == null){

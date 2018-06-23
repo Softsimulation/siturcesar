@@ -324,7 +324,7 @@
                             </div>
                         </div>
                     </div>
-                    <div ng-class="{true:'col-xs-12 col-sm-12 col-md-3',false:'col-xs-12 col-sm-12 col-md-6'}[encuesta.Nacimiento == 3]">
+                    <div class="col-xs-12 col-sm-6 col-md-3">
                         <div class="form-group">
                             <!--P4P7. ¿En dónde nació?-->
                             <label for="inputDondeNacio" class="col-xs-12 control-label">¿En dónde nació?</label>
@@ -342,22 +342,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-3" ng-if="encuesta.Nacimiento == 3">
-                        <div class="form-group">
+                    <!--<div class="col-xs-12 col-sm-12 col-md-3" ng-if="encuesta.Nacimiento == 3">-->
+                    <!--    <div class="form-group">-->
                             <!--P4P8. País de Nacimiento-->
-                            <label for="inputPaisNacimiento" class="col-xs-12 control-label">País de Nacimiento</label>
+                    <!--        <label for="inputPaisNacimiento" class="col-xs-12 control-label">País de Nacimiento</label>-->
 
-                            <div class="col-xs-12">
+                    <!--        <div class="col-xs-12">-->
                                 <!--P4P8Select1. Seleccione el país de nacimiento-->
-                                <select class="form-control" id="inputPaisNacimiento" ng-model="encuesta.Pais_Nacimiento" name="pais_nacimiento" ng-required="encuesta.Nacimiento == 3">
-                                    <option value="" disabled>Seleccione el país de nacimiento</option>
-                                    <option ng-repeat="item in paises | orderBy:'item.paises_con_idiomas[0].nombre'" value="{{item.id}}">{{item.paises_con_idiomas[0].nombre}}</option>
-                                </select>
+                    <!--            <select class="form-control" id="inputPaisNacimiento" ng-model="encuesta.Pais_Nacimiento" name="pais_nacimiento" ng-required="encuesta.Nacimiento == 3">-->
+                    <!--                <option value="" disabled>Seleccione el país de nacimiento</option>-->
+                    <!--                <option ng-repeat="item in paises | orderBy:'item.paises_con_idiomas[0].nombre'" value="{{item.id}}">{{item.paises_con_idiomas[0].nombre}}</option>-->
+                    <!--            </select>-->
                                 <!--P4P8Alert1. El campo pais de nacimiento es requerido-->
-                                <span class="label label-danger" ng-show="!DatosForm.$pristine && DatosForm.pais_nacimiento.$error.required">*El campo pais de nacimiento es requerido</span>
-                            </div>
-                        </div>
-                    </div>
+                    <!--            <span class="label label-danger" ng-show="!DatosForm.$pristine && DatosForm.pais_nacimiento.$error.required">*El campo pais de nacimiento es requerido</span>-->
+                    <!--        </div>-->
+                    <!--    </div>-->
+                    <!--</div>-->
                 </div>
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-4">
