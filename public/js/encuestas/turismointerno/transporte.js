@@ -15,6 +15,8 @@ angular.module('interno.transporte', ["checklist-model"])
                 $scope.transporte.Medio = data.medio_transporte
                 $scope.transporte.Tipo_otro=data.otrotipo
                 $scope.transporte.Medio_otro=data.otromedio
+                $scope.transporte.Salir=data.salida_transporte
+                $scope.transporte.Salir_Otro=data.otrosalida
                 
             }).error(function () {
                 $("body").attr("class", "cbp-spmenu-push")
@@ -41,12 +43,23 @@ angular.module('interno.transporte', ["checklist-model"])
         }
         
     }
+    
+    $scope.cambio3=function(){
+        
+         if($scope.transporte.Medio!=10){
+            
+            $scope.transporte.Medio_otro="";
+            
+        }
+        
+    }
    
 
     
 
     $scope.guardar = function () {
         if (!$scope.transForm.$valid) {
+            swal("Error","Error en el formulario de transporte corrigelos","error")
             return
         }
 

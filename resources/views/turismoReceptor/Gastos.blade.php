@@ -422,9 +422,20 @@
                                         </tr>
                                         <tr ng-repeat="rub in rubros">
                                             
-                                            <td style="width:20%;">E.5.@{{$index+1}} @{{rub.rubros_con_idiomas[0].nombre}}</td>
+                                            <td style="width:20%;">E.5.@{{$index+1}} @{{rub.rubros_con_idiomas[0].nombre}} 
+                                        
+                                                <div class="form-group" ng-if="rub.id==16" >
+                                                           <label for="otroRubros" class="col-md-12 control-label">Otro, ¿Cuál?</label>
+                                                           <input type="text" class="form-control" name="otroRubros" ng-model="rub.gastos_visitantes[0].otro"   ng-disabled="encuestaReceptor.poderLLenar" ng-required="rub.gastos_visitantes[0].cantidad_pagada_magdalena != null && rub.gastos_visitantes[0].divisas_magdalena != null && rub.gastos_visitantes[0].personas_cubiertas != null"  />
+                                                           <span ng-show="GastoForm.$submitted || GastoForm.otroRubros.$touched">
+                                                                   <span class="label label-danger" ng-show="GastoForm.otroRubros.$error.required">* El campo es requerido.</span>
+                                                           </span>
+                                                </div>
+                                            </td>
                                             <td style="width:55%;">
                                                 <div class="row">
+<<<<<<< HEAD
+=======
                                                     <!--<div class="col-xs-12 col-md-6">
                                                         
                                                         <h5 style="margin-bottom: 0;"><b>Fuera del Cesar</b></h5>
@@ -463,6 +474,7 @@
                                                             </div>
                                                         </div>
                                                     </div>-->
+>>>>>>> 7e3edb6a920c933696a3acd85d5c4a1d658d74e3
                                                     <div class="col-xs-12 col-md-12">
                                                         <!--P9Col2Title2. En el Magdalena-->
                                                         
@@ -595,6 +607,7 @@
                         <div class="checkbox" ng-repeat="fin in financiadores" ng-show="!(encuestaReceptor.RealizoGasto==0 && fin.id==1)">
                             <label>
                                 <input type="checkbox" checklist-model="encuestaReceptor.Financiadores" name ="Financiadores" checklist-value="fin.id" > @{{fin.nombre}}
+                                <input type="text" style="display: inline-block;" class="form-control" id="inputOtro" placeholder="Escriba su otra opción" ng-model="encuestaReceptor.Otro" ng-change="verificarOtro()" ng-if="fin.id==11" />
                             </label>
                             
                         </div>

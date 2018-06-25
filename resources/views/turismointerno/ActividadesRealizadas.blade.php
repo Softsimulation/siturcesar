@@ -77,6 +77,11 @@
                         <div class="checkbox" ng-repeat="activ in Datos.Actividadesrelizadas" >
                             <label>
                                 <input type="checkbox" checklist-model="encuesta.ActividadesRelizadas" name= "actividadesr"  checklist-value="activ"  ng-click="cambioActividadesRealizadas(activ)" > @{{activ.actividades_realizadas_con_idiomas[0].nombre}}
+                                 <input type="text" style="display: inline-block;" class="form-control" name ="opcionp@{{$index}}" id="opcionp@{{activ.id}}" ng-if="activ.actividades_realizadas_con_idiomas[0].nombre == 'Otro'" ng-model="Actividad(activ.id).otro" ng-disabled="!existeActividad(activ.id)" ng-required="existeActividad(activ.id)" >
+                                 <span ng-show="EstanciaForm.$submitted || EstanciaForm.opcionp@{{activ.id}}.$touched">
+                                      <span class="label label-danger" ng-show="EstanciaForm.opcionp@{{activ.id}}.$error.required">* Debe escribir otro</span>
+                              
+                                  </span>
                             </label>
                         </div>
                         <span ng-show="EstanciaForm.$submitted || EstanciaForm.actividadesr.$touched">
@@ -104,6 +109,12 @@
                         <div class="checkbox" ng-repeat="opcion2 in opcion.opciones_actividades_realizadas_internos">
                             <label>
                                 <input type="checkbox" name="opcion2" checklist-model="encuesta.OpcionesActividades" checklist-value="opcion2"> @{{opcion2.nombre}}
+                                 <input type="text" ng-if="opcion2.nombre == 'Otro'" style="display: inline-block;" class="form-control" name ="opcion@{{opcion2.id}}" id="opcion@{{opcion2.id}}" ng-disabled="!existeOpcion(opcion2.id)" ng-model="Opcion(opcion2.id).otro"  ng-required="existeOpcion(opcion2.id)"/>
+                                  <span ng-show="EstanciaForm.$submitted || EstanciaForm.opcion@{{opcion2.id}}.$touched">
+                                      <span class="label label-danger" ng-show="EstanciaForm.opcion@{{opcion2.id}}.$error.required">* Debe escribir otro</span>
+                              
+                                  </span>
+                                  
                             </label>
                         </div>
                         <span ng-show="EstanciaForm.$submitted || EstanciaForm.opcion2.$touched">
@@ -128,6 +139,8 @@
                                 <div class="checkbox" ng-repeat="opcion4 in opcion3.sub_opciones_actividades_realizadas_internos">
                                     <label>
                                         <input type="checkbox" name="opcion4" checklist-model="encuesta.SubOpcionesActividades" checklist-value="opcion4.id"> @{{opcion2.nombre}}
+                                         
+                                   
                                     </label>
                                 </div>
                                 <span ng-show="EstanciaForm.$submitted || EstanciaForm.opcion4.$touched">
@@ -149,7 +162,7 @@
 
 
         <div class="row" style="text-align:center">
-            <a href="/turismointerno/viajesrealizados/{{$idpersona}}" class="btn btn-raised btn-default">Anterior</a>
+            <a href="/turismointerno/viajeprincipal/{{$id}}" class="btn btn-raised btn-default">Anterior</a>
             <input type="submit" class="btn btn-raised btn-success" value="Siguiente" ng-click="guardar()">
         </div>
         <br />

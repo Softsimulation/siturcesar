@@ -68,7 +68,7 @@
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="it in fuentesAntes">
                             <label>
-                                <input type="checkbox" name="fuentesAntes" checklist-model="enteran.FuentesAntes" checklist-value="it.id" ng-change="validar(2, it.id)"> {{it.nombre}}
+                                <input type="checkbox" name="fuentesAntes" checklist-model="enteran.FuentesAntes" checklist-value="it.id" ng-change="validar(2, it.id)"> {{it.fuente_informacion_antes_viaje_con_idiomas[0].nombre}}
                             </label>
                             <span ng-if="it.id==14">:<input type="text" name="otroFantes" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba su otra opción" ng-model="enteran.OtroFuenteAntes" ng-change="validarOtro(0)" ng-required="enteran.FuentesAntes.indexOf(14) !== -1" /></span>
                         </div>
@@ -89,10 +89,11 @@
             <div class="panel-footer"><b><?php echo e(trans('resources.EncuestaMsgSeleccionMultiple')); ?></b></div>
             <div class="panel-body">
                 <div class="row">
+
                     <div class="col-md-12">
                         <div class="checkbox" ng-repeat="it in fuentesDurante">
                             <label>
-                                <input type="checkbox" name="fuentesDurante" checklist-model="enteran.FuentesDurante" ng-disabled="(enteran.FuentesDurante.indexOf(13) > -1 && it.id!=13)" ng-change="validar(0, it.id)" checklist-value="it.id"> {{it.nombre}}
+                                <input type="checkbox" name="fuentesDurante" checklist-model="enteran.FuentesDurante" ng-disabled="(enteran.FuentesDurante.indexOf(13) > -1 && it.id!=13)" ng-change="validar(0, it.id)" checklist-value="it.id"> {{it.fuentes_informacion_durante_viaje_con_idiomas[0].nombre}}
                             </label>
                             <span ng-if="it.id==14">:<input type="text" name="otroDurante" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba su otra opción" ng-disabled="enteran.FuentesDurante.indexOf(13) > -1 " ng-model="enteran.OtroFuenteDurante" ng-change="validarOtro(1)" ng-required="enteran.FuentesDurante.indexOf(14) != -1" /></span>
                         </div>
@@ -118,6 +119,7 @@
                             <label>
                                 <input type="checkbox" name="redes" checklist-model="enteran.Redes" ng-disabled="enteran.Redes.indexOf(1) > -1 && it.id != 1" ng-change="validar(1, it.id)" checklist-value="it.id"> {{it.nombre}}
                             </label>
+                            <span ng-if="it.id==12">:<input type="text" name="otrared" style="display: inline-block;" class="form-control" id="inputOtro_atrativo" placeholder="Escriba otro" ng-disabled="enteran.Redes.indexOf(12) < 0" ng-model="enteran.otra_red" /></span>
                         </div>
 
                     </div>
@@ -281,6 +283,62 @@
                         
                     </div>
                 </div>
+            </div>
+        </div>
+        
+         <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Dando cumplimiento a la ley de Protección de datos personales, solicito su autorización para que pueda contactarlo nuevamente. ¿Está usted de acuerdo?</b></h3>
+            </div>
+            <div class="panel-footer"><b>Respuesta única</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="acepta_autorizacion" id="acepta_autorizacion" required value="0" ng-model="enteran.Autorizo">
+                                Si
+                            </label>
+                        </div>
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="acepta_autorizacion" id="acepta_autorizacion" required value="1" ng-model="enteran.Autorizo">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <span ng-show="inForm.$submitted">
+                    <span class="label label-danger" ng-show="inForm.acepta_autorizacion.$error.required">* Debe seleccionar alguna de las opciones.</span>
+                </span>
+            </div>
+        </div>
+        
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Ya para terminar, le solicito su autorización para que SITUR ATLÁNTICO comparta sus respuestas con las entidades que contrataron el proyecto, ¿Está usted de acuerdo?</b></h3>
+            </div>
+            <div class="panel-footer"><b>Respuesta única</b></div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="acepta_tratamiento" id="acepta_tratamiento" required value="0" ng-model="enteran.Acepta_tratamiento">
+                                Si
+                            </label>
+                        </div>
+                        <div class="radio radio-primary">
+                            <label>
+                                <input type="radio" name="acepta_tratamiento" id="acepta_tratamiento" required value="1" ng-model="enteran.Acepta_tratamiento">
+                                No
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <span ng-show="inForm.$submitted">
+                    <span class="label label-danger" ng-show="inForm.acepta_tratamiento.$error.required">* Debe seleccionar alguna de las opciones.</span>
+                </span>
             </div>
         </div>
 

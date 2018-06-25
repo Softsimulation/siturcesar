@@ -2,7 +2,11 @@ angular.module('interno.viajesrealizados', [])
 
 .controller('viajes', function ($scope, serviInterno) {
 
-    $scope.optionFecha = {
+
+    $scope.encuesta = {}
+    $scope.PrincipalViaje = {};
+    
+     $scope.optionFecha = {
         calType: 'gregorian',
         format: 'YYYY-MM-DD',
         zIndex: 1060,
@@ -15,9 +19,6 @@ angular.module('interno.viajesrealizados', [])
             todayBtn: "Hoy"
         }
     };
-
-    $scope.encuesta = {}
-    $scope.PrincipalViaje = {};
 
     $scope.$watch('id', function () {
           if($scope.id){
@@ -417,12 +418,9 @@ angular.module('interno.viajesrealizados', [])
                                });
                                setTimeout(function () {
 
-                                   if (data.Sw == 1) {
-                                       window.location.href = "/turismointerno/actividadesrealizadas/" + $scope.PrincipalViaje.id;
-                                   } else {
-                                       window.location.href = "/turismointerno/transporte/" + $scope.PrincipalViaje.id;
-                                   }
-
+                                  
+                                       window.location.href = "/turismointerno/viajeprincipal/" + $scope.PrincipalViaje.id;
+                                  
 
 
                                    $("body").attr("class", "cbp-spmenu-push")
@@ -446,3 +444,250 @@ angular.module('interno.viajesrealizados', [])
 
 
 })
+
+.controller('viaje', function ($scope, serviInterno) {
+    
+    $scope.optionFecha = {
+        calType: 'gregorian',
+        format: 'YYYY-MM-DD',
+        zIndex: 1060,
+        autoClose: true,
+        default: null,
+        gregorianDic: {
+            title: 'Fecha',
+            monthsNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            daysNames: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab'],
+            todayBtn: "Hoy"
+        }
+    };
+
+
+    $scope.$watch('id', function () {
+          if($scope.id){
+              $("body").attr("class", "cbp-spmenu-push charging");
+        serviInterno.getDatoViajePrincipal($scope.id).then(function (data) {
+              $("body").attr("class", "cbp-spmenu-push");
+                    $scope.Datos = data.Enlaces;
+                   $scope.encuesta = data.encuesta;
+                   $scope.encuesta.Id = $scope.id;
+                   if (data.encuesta.Numero != null) {
+                       $scope.Total = data.encuesta.Numero - 1
+                   }
+                   if (data.encuesta.Inicio != null && data.encuesta.Fin != null) {
+                       fechal = data.encuesta.Inicio.split('-')
+                       fechas = data.encuesta.Fin.split('-')
+                       $scope.encuesta.Inicio = new Date(fechal[0], (parseInt(fechal[1]) - 1), fechal[2])
+                       $scope.encuesta.Fin = new Date(fechas[0], (parseInt(fechas[1]) - 1), fechas[2])
+
+                   }
+                   if (data.encuesta.Estancias == null) {
+                       $scope.agregar();
+                   }
+
+          
+                      
+            }).catch(function () {
+                  $("body").attr("class", "cbp-spmenu-push");
+                swal("Error", "No se realizo la solicitud, reinicie la página");
+        })
+          }
+    })
+
+    $scope.quitar = function (es) {
+        if (es.Municipio == $scope.encuesta.Principal) {
+
+            $scope.encuesta.Principal = 0;
+        }
+
+        $scope.encuesta.Estancias.splice($scope.encuesta.Estancias.indexOf(es), 1)
+        $scope.EstanciaForm.$setUntouched();
+        $scope.EstanciaForm.$setPristine();
+        $scope.EstanciaForm.$submitted=false;
+    }
+
+    $scope.cambioselectpais= function (es) {
+
+        es.Departamento = null;
+        es.Municipio = null;
+
+
+    }
+
+    $scope.cambioselectdepartamento = function (es) {
+
+
+        es.Municipio = null;
+   
+
+    }
+
+    $scope.cambioselectmunicipio = function (es) {
+
+        for (i = 0; i < $scope.encuesta.Estancias.length; i++) {
+            if ($scope.encuesta.Estancias[i] != es) {
+                if ($scope.encuesta.Estancias[i].Municipio == es.Municipio) {
+                    es.Municipio = null;
+                }
+            }
+
+
+        }
+    }
+
+
+    $scope.cambionoches = function (es) {
+
+        if (es.Noches == 0) {
+            es.Alojamiento = 15;
+
+        }
+    }
+
+
+    $scope.cambioselectalojamiento = function (es) {
+
+        if (es.Noches == 0) {
+
+            es.Alojamiento = 15;
+
+        } else {
+            if (es.Alojamiento == 15) {
+                es.Alojamiento = null;
+            }
+        }
+    }
+
+
+    $scope.verifica = function () {
+        $scope.Total = $scope.encuesta.Numero - 1
+        if ($scope.encuesta.Numero > 1 && $scope.encuesta.Numero != null) {
+            $scope.encuesta.Personas = []
+           
+        } else {
+            if ($scope.encuesta.Numero == 1) {
+                $scope.encuesta.Personas = [1]
+                $scope.encuesta.Numerohogar = null;
+                $scope.encuesta.NumerohogarSinGasto = null;
+                $scope.encuesta.Numerotros = null;
+             
+            } else {
+                
+
+                var i = $scope.encuesta.Personas.indexOf(1)
+                if (i != -1) {
+                    $scope.encuesta.Personas.splice(i, 1)
+                }
+            }
+        }
+    }
+
+    $scope.existe = function (k) {
+
+        if ($scope.encuesta.Personas != null) {
+
+            for (i = 0; i < $scope.encuesta.Personas.length; i++){
+            
+                if ($scope.encuesta.Personas[i] == k ) {
+
+                    return true
+
+                }
+            
+            
+            }
+            if (k == 2) {
+
+                $scope.encuesta.Numerohogar = 0;
+                $scope.TotalD = $scope.Total
+
+            }
+            if(k == 3){
+                
+                $scope.encuesta.NumerohogarSinGasto = 0;
+                $scope.TotalG = $scope.Total
+            }
+
+            if (k == 6) {
+                $scope.encuesta.Numerotros = 0
+                $scope.TotalF = $scope.Total
+            }
+
+
+        }
+
+        return false
+
+
+
+    }
+
+    $scope.verificaT = function () {
+
+            $scope.TotalF = $scope.Total - ($scope.encuesta.Numerohogar == null ? 0 : $scope.encuesta.Numerohogar ) - ($scope.encuesta.NumerohogarSinGasto == null ? 0 : $scope.encuesta.NumerohogarSinGasto ) 
+
+      
+            $scope.TotalD = $scope.Total  - ($scope.encuesta.Numerotros == null ? 0 : $scope.encuesta.Numerotros ) - ($scope.encuesta.NumerohogarSinGasto == null ? 0 : $scope.encuesta.NumerohogarSinGasto ) 
+
+            $scope.TotalG = $scope.Total - ($scope.encuesta.Numerotros == null ? 0 : $scope.encuesta.Numerotros ) - ($scope.encuesta.Numerohogar == null ? 0 : $scope.encuesta.Numerohogar ) 
+      
+    
+
+        
+
+    }
+
+    $scope.siguiente = function () {
+
+
+         if (!$scope.EstanciaForm.$valid) {
+             swal("Error", "corrija los errores", "error")
+             return
+         }
+
+         $scope.errores = null
+         $("body").attr("class", "cbp-spmenu-push charging");
+     
+          serviInterno.guardarviajePrincipal($scope.encuesta).then(function (data) {
+                $("body").attr("class", "cbp-spmenu-push");
+                if (data.success == true) {
+                  
+                    swal({
+                        title: "Realizado",
+                        text: "Se ha guardado satisfactoriamente el viaje.",
+                        type: "success",
+                        timer: 1000,
+                        showConfirmButton: false
+                    });
+                    setTimeout(function () {
+                        
+                            if (data.Sw == 1) {
+                                       window.location.href = "/turismointerno/actividadesrealizadas/" + $scope.encuesta.Id;
+                                   } else {
+                                       window.location.href = "/turismointerno/transporte/" + $scope.encuesta.Id;
+                                   }
+
+                               
+                           
+                    }, 1000);
+    
+                
+                } else {
+                    swal("Error", "Por favor corrija los errores", "error");
+                    $scope.errores = data.errores;
+                }
+            }).catch(function () {
+                $("body").attr("class", "cbp-spmenu-push");
+                swal("Error", "No se realizo la solicitud, reinicie la página");
+            })
+
+
+
+ 
+    }
+
+
+  
+
+
+
+});

@@ -64,6 +64,11 @@ class Viaje extends Model
     {
         return $this->belongsTo('App\Models\Digitadore', 'digitada_por');
     }
+    
+    public function OtraRed(){
+        
+        return $this->Hasone('App\Models\OtraRed', 'viaje_id');
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -73,22 +78,21 @@ class Viaje extends Model
         return $this->belongsTo('App\Models\Digitador', 'creada_por');
     }
     
-    public function actividadesRealizadasInternos()
+     public function actividadesRealizadasInternos()
     {
-        return $this->belongsToMany('App\Models\Actividad_Realizada', 'actividades_realizadas_interno','viajes_id','actividades_realizadas_id');
+        return $this->belongsToMany('App\Models\Actividad_Realizada', 'actividades_realizadas_interno','viajes_id','actividades_realizadas_id')->withPivot('otro');
     }
 
     public function opcionesActividadesRealizadasInternos()
     {
-        return $this->belongsToMany('App\Models\Opcion_Actividad_Realizada_Interno', 'opciones_actividades_realizada_viajero','viaje_id','opciones_actividades_realizadas_interno_id');
+        return $this->belongsToMany('App\Models\Opcion_Actividad_Realizada_Interno', 'opciones_actividades_realizada_viajero','viaje_id','opciones_actividades_realizadas_interno_id')->withPivot('otro');
     }
 
 
     public function subOpcionesActividadesRealizadasInternos()
     {
-        return $this->belongsToMany('App\Models\Sub_Opcion_Actividad_Realizada_Interno', 'sub_opciones_act_realizadas_interno_viajes', 'viaje_id','sub_opciones_actividades_realizadas_interno_id');
+        return $this->belongsToMany('App\Models\Sub_Opcion_Actividad_Realizada_Interno', 'sub_opciones_act_realizadas_interno_viajes', 'viaje_id','sub_opciones_actividades_realizadas_interno_id')->withPivot('otro');
     }
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -108,9 +112,9 @@ class Viaje extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function persona()
+      public function hogare()
     {
-        return $this->belongsTo('App\Models\Persona', 'personas_id');
+        return $this->belongsTo('App\Models\Hogar', 'hogar_id');
     }
 
     /**

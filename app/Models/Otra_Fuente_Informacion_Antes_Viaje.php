@@ -18,6 +18,7 @@ class Otra_Fuente_Informacion_Antes_Viaje extends Model
      */
     protected $table = 'otras_fuente_informacion_antes_viaje';
     public $timestamps = false;
+
     /**
      * The primary key for the model.
      * 

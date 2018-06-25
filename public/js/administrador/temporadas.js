@@ -1,6 +1,6 @@
 var pp=angular.module('admin.temporadas', ['objectTable'])
 
-.controller('temporadasCtrl', ['$scope', '$http',function ($scope, $http) {
+.controller('temporadasCtrl', ['$scope','adminService',function ($scope,adminService) {
 
     $("body").attr("class", "cbp-spmenu-push charging");
     
@@ -18,14 +18,16 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
         }
     };
     
-    $http.get('/temporada/gettemporadas')
-        .success(function (data) {
-            $("body").attr("class", "cbp-spmenu-push");
+    adminService.GetTemporadas()
+        .then(function(data){
+             $("body").attr("class", "cbp-spmenu-push");
             $scope.temporadas = data.temporadas;
-        }).error(function () {
+        })
+        .catch(function(){
             $("body").attr("class", "cbp-spmenu-push");
             swal("Error", "Error en la carga, por favor recarga la pagina", "error");
-        })
+        });
+    
 
     $scope.pasarC = function () {
         $scope.temporada = {};
@@ -53,8 +55,8 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
         }
 
         $("body").attr("class", "cbp-spmenu-push charging");
-        $http.post('/temporada/guardartemporada', $scope.temporada)
-            .success(function (data) {
+        adminService.Guardartemporada($scope.temporada)
+            .then(function (data) {
                 $("body").attr("class", "cbp-spmenu-push");
                 if (data.success) {
                     swal("¡Realizado!", "Se ha creado satisfactoriamente la temporada.", "success");
@@ -67,7 +69,7 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
                     $scope.errores = data.errores;
                     swal("Error", "Verifique la información y vuelva a intentarlo.", "error");
                 }
-            }).error(function () {
+            }).catch(function () {
                 $("body").attr("class", "cbp-spmenu-push");
                 swal("Error", "Error en la carga, por favor recarga la página", "error");
             })
@@ -81,8 +83,8 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
         }
 
         $("body").attr("class", "cbp-spmenu-push charging");
-        $http.post('/temporada/guardartemporada', $scope.temporada)
-            .success(function (data) {
+       adminService.Guardartemporada($scope.temporada)
+            .then(function (data) {
                 $("body").attr("class", "cbp-spmenu-push");
                 if (data.success) {
                     swal("¡Realizado!", "Se ha modificado satisfactoriamente la temporada.", "success");
@@ -93,7 +95,7 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
                     $scope.errores = data.errores;
                     swal("Error", "Verifique la información y vuelva a intentarlo.", "error");
                 }
-            }).error(function () {
+            }).catch(function () {
                 $("body").attr("class", "cbp-spmenu-push");
                 swal("Error", "Error en la carga, por favor recarga la pagina", "error");
             })
@@ -121,8 +123,8 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
         },
         function () {
             $("body").attr("class", "cbp-spmenu-push charging");
-            $http.post('/temporada/cambiarestado', obj)
-                .success(function (data) {
+            adminService.CambiarEstado(obj)
+                .then(function (data) {
                     $("body").attr("class", "cbp-spmenu-push");
                     if (data.success) {
                         obj.Estado = data.estado;
@@ -131,37 +133,29 @@ var pp=angular.module('admin.temporadas', ['objectTable'])
                         $scope.errores = data.errores;
                         swal("Error", "Verifique la información y vuelva a intentarlo.", "error");
                     }
-                }).error(function () {
+                }).catch(function () {
                     $("body").attr("class", "cbp-spmenu-push");
                     swal("Error", "Error en la carga, por favor recarga la pagina", "error");
                 })
         });
 
     }
-
-    function validarFechas(fechaNuevaInicial, fechaNuevaFinal, fechaViejaInicial, fechaViejaFinal) {
-        if ((fechaNuevaInicial >= fechaViejaInicial && fechaNuevaInicial <= fechaViejaFinal) || (fechaNuevaFinal >= fechaViejaInicial && fechaNuevaFinal <= fechaViejaFinal) || (fechaNuevaInicial < fechaViejaInicial && fechaNuevaFinal > fechaViejaFinal)) {
-            return false;
-        }
-        return true;
-    }
-
 }])
 
-.controller('verTemporadaCtrl', ['$scope', '$http', function ($scope, $http) {
+.controller('verTemporadaCtrl', ['$scope','adminService', function ($scope,adminService) {
 
     $scope.$watch('id', function () {
         $("body").attr("class", "cbp-spmenu-push charging");
-        $http.get('/temporada/cargardatos/' + $scope.id)
-            .success(function (data) {
+        adminService.DatosTemporada($scope.id)
+            .then(function (data) {
                 $scope.temporada = data.temporada;
                 $scope.temporada.Personas=data.hogares
                 $("body").attr("class", "cbp-spmenu-push");
-            }).error(function () {
+            }).catch(function () {
                 $("body").attr("class", "cbp-spmenu-push");
                 swal("Error", "Error en la carga, por favor recarga la pagina", "error");
-            })
-    })
+            });
+    });
 
     
 }])

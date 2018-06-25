@@ -132,6 +132,21 @@ angular.module('receptor.gasto', ['ui.select'])
         }
         
     }
+    $scope.verificarOtro = function () {
+        
+        var i = $scope.encuestaReceptor.Financiadores.indexOf(11)
+        if ($scope.encuestaReceptor.Otro != null && $scope.encuestaReceptor.Otro != '') {
+            if (i == -1) {
+                $scope.encuestaReceptor.Financiadores.push(11);
+                $scope.bandera = true;
+            }
+        } else {
+            if (i != -1) {
+                $scope.encuestaReceptor.Financiadores.splice(i, 1);
+                $scope.bandera = false;
+            }
+        }
+    }
     
     $scope.guardar = function(){
         
