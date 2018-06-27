@@ -4,7 +4,7 @@
 @section('estilos')
     <style>
         .title-section {
-            background-color: #16469e !important;
+            background-color: #108238 !important;
         }
 
         .table > thead > tr > th {

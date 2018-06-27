@@ -246,7 +246,8 @@
        
     <script src="<?php echo e(asset('/js/administrador/administrador.js')); ?>" type="text/javascript"></script> 
     <script src="<?php echo e(asset('/js/administrador/temporadas.js')); ?>" type="text/javascript"></script> 
-    <script src="<?php echo e(asset('/js/administrador/services.js')); ?>" type="text/javascript"></script> 
+    <script src="<?php echo e(asset('/js/administrador/services.js')); ?>" type="text/javascript"></script>
+    <script src="<?php echo e(asset('/js/administrador/exportaciones.js')); ?>" type="text/javascript"></script> 
     
     <script src="<?php echo e(asset('/js/sweetalert.min.js')); ?>"></script>
     <script src="<?php echo e(asset('/js/dir-pagination.js')); ?>"></script>
