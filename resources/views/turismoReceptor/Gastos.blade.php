@@ -434,8 +434,6 @@
                                             </td>
                                             <td style="width:55%;">
                                                 <div class="row">
-<<<<<<< HEAD
-=======
                                                     <!--<div class="col-xs-12 col-md-6">
                                                         
                                                         <h5 style="margin-bottom: 0;"><b>Fuera del Cesar</b></h5>
@@ -474,7 +472,6 @@
                                                             </div>
                                                         </div>
                                                     </div>-->
->>>>>>> 7e3edb6a920c933696a3acd85d5c4a1d658d74e3
                                                     <div class="col-xs-12 col-md-12">
                                                         <!--P9Col2Title2. En el Magdalena-->
                                                         

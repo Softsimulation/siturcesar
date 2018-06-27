@@ -1,13 +1,13 @@
 
 @extends('layout._encuestaInternoLayout')
 
-@section('Title','Transporte utilizado - Encuesta interno y emisor :: SITUR Atlántico')
+@section('Title','Transporte utilizado - Encuesta interno y emisor :: SITUR Cesar')
 
 
 @section('estilos')
     <style>
         .title-section {
-            background-color: #16469e !important;
+            background-color: #108238 !important;
         }
     </style>
     <style>
@@ -89,7 +89,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Qué tipo de transporte utilizó para recorrer-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Tipo de transporte más utilizado para desplazarse durante su estancia en el departamento del Atlantico </b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Tipo de transporte más utilizado para desplazarse durante su estancia en el departamento del Cesar </b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección única</b></div>
             <div class="panel-body">
