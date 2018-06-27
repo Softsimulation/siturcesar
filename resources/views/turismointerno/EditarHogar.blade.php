@@ -6,7 +6,7 @@
 @section('estilos')
     <style>
         .title-section {
-            background-color: #16469e !important;
+            background-color: #108238 !important;
         }
     </style>
     <style>
@@ -50,7 +50,6 @@
 <div>
     <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
     
-<<<<<<< HEAD
     @if(\Session::get('mensaje')!=null)
     
     <div class="alert alert-danger" >
@@ -66,8 +65,6 @@
     
     
     
-=======
->>>>>>> 7e3edb6a920c933696a3acd85d5c4a1d658d74e3
     <div class="alert alert-danger" ng-if="errores != null">
         <label><b>Corrige los errores:</b></label>
         <br />

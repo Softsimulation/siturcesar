@@ -3,7 +3,7 @@
 <?php $__env->startSection('estilos'); ?>
     <style>
         .title-section {
-            background-color: #16469e !important;
+            background-color: #108238 !important;
         }
     </style>
     <style>
