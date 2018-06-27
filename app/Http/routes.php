@@ -29,6 +29,12 @@ Route::controller('/turismoreceptor','TurismoReceptorController');
 Route::controller('/grupoviaje','GrupoViajeController');
 Route::controller('/exportacion','ExportacionController');
 
+Route::controller('/administrarpaises', 'AdministrarPaisesController');
+
+Route::controller('/administrardepartamentos', 'AdministrarDepartamentosController');
+
+Route::controller('/administrarmunicipios', 'AdministrarMunicipiosController');
+
 
 Route::group(['middleware' => 'cors'], function(){
  
