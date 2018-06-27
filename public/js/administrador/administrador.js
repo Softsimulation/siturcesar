@@ -1,4 +1,4 @@
-var situr = angular.module("situr_admin", ['ngSanitize','ADM-dateTimePicker', 'angularUtils.directives.dirPagination', 'checklist-model', 'angular-repeat-n', 'admin.temporadas','adminservice','admin.exportaciones']);
+var situr = angular.module("situr_admin", ['ngSanitize','ADM-dateTimePicker', 'angularUtils.directives.dirPagination', 'checklist-model', 'angular-repeat-n', 'admin.temporadas','adminservice','admin.exportaciones','admin.usuario']);
 
 situr.controller('listadoEncuestasCtrl', ['$scope','adminService', function ($scope,receptorServi) {
     $scope.prop = {
