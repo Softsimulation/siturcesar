@@ -29,7 +29,7 @@ class TurismoInterno
             $principal = Ciudad_Visitada::join("municipios","municipios.id","=","municipio_id")
             ->join("departamentos","departamentos.id","=","municipios.departamento_id")
             ->where('viajes_id', $viaje->id)->where("destino_principal",true)
-            ->where("departamentos.id",1396)->first();
+            ->where("departamentos.id",1403)->first();
             if($principal == null){
                 $sw = 0;
             }

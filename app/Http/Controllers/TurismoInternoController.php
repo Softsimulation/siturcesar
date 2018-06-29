@@ -102,7 +102,7 @@ class TurismoInternoController extends Controller
     
     public function getDatoshogar(){
         
-        $municipios=Municipio::where('departamento_id',1396)->get();
+        $municipios=Municipio::where('departamento_id',1403)->get();
         $niveles=Nivel_Educacion::get();
         $motivos=Motivo_No_Viaje::get();
         $estratos=Estrato::get();
@@ -1442,7 +1442,7 @@ class TurismoInternoController extends Controller
          $principal = Ciudad_Visitada::join("municipios","municipios.id","=","municipio_id")
             ->join("departamentos","departamentos.id","=","municipios.departamento_id")
             ->where('viajes_id', $viaje->id)->where("destino_principal",true)
-            ->where("departamentos.id",1396)->first();
+            ->where("departamentos.id",1403)->first();
             if($principal == null){
                 Atraccion_Visitada_Interno::where('viajes_id', $viaje->id)->delete();
     		    Lugar_Visitado_Interno::where('viajes_id', $viaje->id)->delete();
@@ -1682,7 +1682,7 @@ class TurismoInternoController extends Controller
          $principal = Ciudad_Visitada::join("municipios","municipios.id","=","municipio_id")
             ->join("departamentos","departamentos.id","=","municipios.departamento_id")
             ->where('viajes_id', $viaje->id)->where("destino_principal",true)
-            ->where("departamentos.id",1396)->first();
+            ->where("departamentos.id",1403)->first();
             if($principal == null){
                 $sw = 0;
                 Atraccion_Visitada_Interno::where('viajes_id', $viaje->id)->delete();

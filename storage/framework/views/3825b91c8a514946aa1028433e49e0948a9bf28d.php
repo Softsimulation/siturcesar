@@ -4,7 +4,7 @@
 <?php $__env->startSection('estilos'); ?>
     <style>
         .title-section {
-            background-color: #16469e !important;
+            background-color: #108238 !important;
         }
 
         .carga {
@@ -316,7 +316,7 @@
         
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Ya para terminar, le solicito su autorización para que SITUR ATLÁNTICO comparta sus respuestas con las entidades que contrataron el proyecto, ¿Está usted de acuerdo?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Ya para terminar, le solicito su autorización para que SITUR Cesar comparta sus respuestas con las entidades que contrataron el proyecto, ¿Está usted de acuerdo?</b></h3>
             </div>
             <div class="panel-footer"><b>Respuesta única</b></div>
             <div class="panel-body">
