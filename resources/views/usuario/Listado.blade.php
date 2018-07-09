@@ -53,7 +53,7 @@
     
 
 <div class="container">
-    <h1 class="title1">Listado de encuestas</h1>
+    <h1 class="title1">Listado de usuarios</h1>
     <br />
     <div class="blank-page widget-shadow scroll" id="style-2 div1">
         <div class="row">
@@ -91,7 +91,7 @@
                         <tbody ng-init="currentPageUsuarios = 1">
                             <tr dir-paginate="usuario in usuarios|filter:search|itemsPerPage: 10" current-page="currentPageUsuarios" ng-click="verDetalleUsuario($event, usuario)">
                                 <td>@{{($index + 1) + (currentPageUsuarios - 1) * 10}}</td>
-                                <td>@{{usuario.username}}</td>
+                                <td>@{{usuario.nombre}}</td>
                                 <td>@{{usuario.email}}</td>
                                 <td><span ng-repeat="rol in usuario.roles">@{{rol.display_name}}<span ng-if="!$last">,</span></span></td>
                                 <td ng-if="usuario.estado == true">Activo</td>
