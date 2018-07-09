@@ -276,6 +276,9 @@
 										 <li id="menu-academico" ><a href="{{asset('usuario/listadousuarios')}}"><i class="fa fa-file-text-o"></i> <span>Administrar usuarios</span></a>
 											
 										 </li>
+										 <li id="menu-academico" ><a href="{{asset('exportacion')}}"><i class="fa fa-file-text-o"></i> <span>Exportación</span></a>
+											
+										 </li>
 								
 									<li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Administrar paises</span> </span></a>
 										  <ul id="menu-academico-sub" >
