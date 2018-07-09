@@ -59,7 +59,7 @@
         }
     </style>
 @endsection
-@section('app','ng-app="situr_admin"')
+@section('app','ng-app="admin.temporadas"')
 @section('content')
 
 <div class="main-page" ng-controller="verTemporadaCtrl">
@@ -273,4 +273,10 @@
     </div>
 
 </div>
+@endsection
+@section('javascript')
+<script src="{{asset('/js/dir-pagination.js')}}"></script>
+<script src="{{asset('/js/ADM-dateTimePicker.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/js/administrador/temporada/temporadas.js')}}"></script>
+<script src="{{asset('/js/administrador/temporada/services.js')}}"></script>
 @endsection

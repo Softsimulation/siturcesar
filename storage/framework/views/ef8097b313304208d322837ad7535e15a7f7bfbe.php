@@ -46,7 +46,7 @@
 
 <?php $__env->startSection('NumSeccion', '0%'); ?>
 
-<?php $__env->startSection('app','ng-app="situr_admin"'); ?>
+<?php $__env->startSection('app','ng-app="receptor"'); ?>
 
 <?php $__env->startSection('controller','ng-controller="listadoEncuestasCtrl"'); ?>
 
@@ -131,6 +131,11 @@
 
 <?php $__env->stopSection(); ?>
 
+<?php $__env->startSection('javascript'); ?>
+<script src="<?php echo e(asset('/js/dir-pagination.js')); ?>"></script>
+<script src="<?php echo e(asset('/js/administrador/listadoreceptor/services.js')); ?>" type="text/javascript"></script>
+<script src="<?php echo e(asset('/js/administrador/listadoreceptor/listadoreceptor.js')); ?>" type="text/javascript"></script>
+<?php $__env->stopSection(); ?>
 
 
 <?php echo $__env->make('layout._AdminLayout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
