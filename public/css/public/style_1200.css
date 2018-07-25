@@ -1,0 +1,11 @@
+#nav-menu-main nav>ul>li>a{
+    
+    padding: 1.5rem 2.125rem;
+    font-size: 0.875rem;
+}
+#nav-menu-main nav>ul>li:not(:last-child)>a{
+    padding-right: 1.875rem;
+}
+#nav-menu-main nav>ul>li>a:before{
+    width: 1.5rem;
+}

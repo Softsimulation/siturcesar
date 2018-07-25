@@ -1,0 +1,60 @@
+#nav-menu-main nav>ul>li>a{
+    
+    padding: 1.5rem;
+    font-size: 0.875rem;
+    box-shadow: 3px 1px 3px 0px rgba(0,0,0,.3);
+}
+#nav-menu-main nav>ul>li:not(:last-child)>a{
+    padding-right: .5rem;
+}
+#nav-menu-main nav>ul>li:not(:first-child){
+    margin-left: -5px;
+}
+.brand{
+    position:relative;
+}
+#nav-menu-main nav>ul>li>a:before, .brand:before{
+    content: "";
+    position:absolute;
+    left: 100%;
+    top: 0;
+    height: 100%;
+    width: 1rem;
+    z-index: 10;
+    background-color: inherit;
+    -webkit-mask: url(../../img/border-curve.svg) no-repeat 100% 100%;
+    mask: url(../../img/border-curve.svg);
+}
+.brand:before{
+    height: calc(100% - 35px);
+    top: auto;
+    bottom: 0;
+    width: 1.325rem;
+}
+.brand img {
+    margin: .5rem 8%;
+}
+.tile.inline-tile .tile-body>p {
+    display:none;
+}
+.tile.inline-tile {
+   align-items:center;
+   padding: .5rem 1rem;
+}
+
+.tile.inline-tile .tile-img {
+    height: 140px;
+    width:30%;
+    vertical-align: top;
+    display:inline-block;
+}
+.tile.inline-tile .tile-img img {
+    height: 100%;    
+    width: auto;
+}
+.tile.inline-tile .tile-body {
+    width: calc(70% - 1rem);
+    padding: .5rem 0 .5rem 1rem;
+    display: inline-block;
+
+}
