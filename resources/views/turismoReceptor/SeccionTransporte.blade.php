@@ -5,7 +5,7 @@
 @section('estilos')
     <style>
         .title-section {
-            background-color: #4caf50 !important;
+            background-color: #16469e !important;
         }
          .carga {
             display: none;
@@ -26,7 +26,12 @@
             body.charging .carga {
                 display: block;
             }
-
+        .input-text-radio {
+            position: static!important;
+            display: inline-block!important;
+            margin-left: .5rem;
+            width: auto;
+        }
     </style>
 @endsection
 
@@ -40,106 +45,108 @@
 
 @section('content')
 <div class="main-page">
-    <input type="hidden" ng-model="id" ng-init="" />
+    <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
     
-    <div class="alert alert-danger" ng-if="errores != null">
-        <label><b>@Resource.EncuestaMsgError:</b></label>
-        <br />
-        <div ng-repeat="error in errores" ng-if="error.errores.length>0">
-            -@{{error.errores[0].ErrorMessage}}
-        </div>
+    <div class="alert alert-danger" role="alert" ng-if="errores" ng-repeat="error in errores">
+       @{{error[0]}}
     </div>
     <form role="form" name="transForm" novalidate>
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Qué tipo de transporte utilizó para llegar al departamento del Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> @Resource.EncuestaTransporteP1</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>C1. ¿Qué tipo de transporte utilizó para llegar al departamento del Cesar?</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgSeleccionUnica</b></div>
+            <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="radio" ng-repeat="item in transportes" ng-if="item.Id != 10">
+                        <div class="radio" ng-repeat="item in transportes">
                             <label>
-                                <input type="radio" name="llegar" ng-value="item.Id" ng-model="transporte.Llegar" ng-required="true"> @{{item.Nombre}}
-                                <i ng-if="item.Id==6" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left" title="@Resource.AyudaTipoTransporte"
+                                <input type="radio" name="llegar" ng-value="item.id" ng-model="transporte.Llegar" ng-required="true"> @{{item.tipos_transporte_con_idiomas[0].nombre}}
+                                <i ng-if="item.id==6" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left" title="@Resource.AyudaTipoTransporte"
                                    style="text-align:right;">
                                 </i>
                             </label>
-                            
+                            <div class="form-group input-text-radio"  ng-if="item.id==11 && transporte.Llegar==11">
+                                <label style="padding:0;" for="otroLlegar" class="sr-only">Ingrese el otro transporte</label>
+                                <input type="text" class="input-text-radio form-control" name="otroLlegar" style="display:inline-block;" id="otroLlegar" placeholder="Escriba su otra opción" ng-model="transporte.otroLlegar"  ng-required="transporte.Llegar==11" />    
+                            </div>
                         </div>
                         
                     </div>
                 </div>
                 <span  ng-show="transForm.$submitted || transForm.llegar.$touched">
                     <span class="label label-danger" ng-show="transForm.llegar.$error.required">* El campo es requerido.</span>
+                    <span class="label label-danger" ng-show="transForm.otroLlegar.$error.required">* El campo otro es requerido.</span>
                 </span>
             </div>
         </div>
-        <div class="panel panel-success" ng-if="transporte.Llegar == 6">
-            <div class="panel-heading">
-                <!-- ¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizado desde una ciudad de Colombia al Magdalena?-->
-                <h3 class="panel-title"><b> @Resource.EncuestaTransporteP2</b></h3>
-            </div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="text" name="empresa" ng-minlength="1" ng-maxlength="150" class="form-control" ng-model="transporte.Empresa" placeholder="@Resource.EncuestaTransporteP2Input1"/>
-                    </div>
-                </div>
-                <span  ng-show="transForm.$submitted || transForm.empresa.$touched">
-                    <span class="label label-danger" ng-show="transForm.empresa.$error.maxlength">* El campo no debe superar los 150 caracteres.</span>
-                </span>
-            </div>
-        </div>
+        
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- ¿Cuál fue el transporte utilizado la mayor parte del tiempo para desplazarse por el departamento?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> @Resource.EncuestaTransporteP3</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>C2.  ¿Cuál fue el transporte utilizado la mayor parte del tiempo para desplazarse por el departamento?</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgSeleccionUnica</b></div>
+            <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="radio" ng-repeat="item in transportes" ng-if="item.Id != 9">
                             <label>
-                                <input type="radio" name="mover" ng-value="item.Id" ng-model="transporte.Mover" ng-required="true"> @{{item.Nombre}}
+                                <input type="radio" name="mover" ng-value="item.id" ng-model="transporte.Mover" ng-required="true"> @{{item.tipos_transporte_con_idiomas[0].nombre}}
                                 <i ng-if="item.Id==6" class="glyphicon glyphicon-question-sign" data-toggle="tooltip" data-placement="left" title="@Resource.AyudaTipoTransporte"
                                    style="text-align:right;">
                                 </i>
                             </label>
-
+                            <div class="form-group input-text-radio"  ng-if="item.id==11 && transporte.Mover==11">
+                                <label style="padding:0;" for="otroMover" class="sr-only">Ingrese el otro transporte</label>
+                                <input type="text" class="input-text-radio form-control" name="otroMover" style="display:inline-block;" id="otroMover" placeholder="Escriba su otra opción" ng-model="transporte.otroMover" ng-required="transporte.Mover==11" />    
+                            </div>
                         </div>
                     </div>
                 </div>
                 <span  ng-show="transForm.$submitted || transForm.mover.$touched">
                     <span class="label label-danger" ng-show="transForm.mover.$error.required">* El campo es requerido.</span>
+                    <span class="label label-danger" ng-show="transForm.otroMover.$error.required">* El campo otro es requerido.</span>
                 </span>
             </div>
         </div>
-        <div class="panel panel-success" ng-if="transporte.Mover ==5">
+        <div class="panel panel-success">
             <div class="panel-heading">
-                <!-- >El alquiler de vehículo fue realizado en:-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> @Resource.EncuestaTransporteP4</b></h3>
+                <!-- Experiencia de viaje-->
+                <h3 class="panel-title"><b>C3. Sostenibilidad</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgSeleccionUnica</b></div>
+            <div class="panel-footer"><b>En una escala de 1 a 10, donde 1 es Ninguna dificultad y 10 Mucha dificultad. ¿Qué tanta dificultad tuvo para llegar a Cesar ?</b></div>
             <div class="panel-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="radio" ng-repeat="item in lugares">
-                            <label>
-                                <input type="radio" name="alquiler" ng-value="item.Id" ng-model="transporte.Alquiler"> @{{item.Nombre}}
-                            </label>
-
-                        </div>
+                    <div class="col-md-12" style="overflow-x: auto;">
+                        <table  align="center" name="tabla_calificacion" class="table table-striped">
+                            
+                            <tbody>
+                                <tr>
+                                    @for ($i = 1; $i <= 10; $i++)
+                                        <td>
+                                            <div class="radio radio-primary">
+                                                <label>
+                                                    <input type="radio" name="experiencia_@{{it.Id}}" ng-model="transporte.Calificacion" value="{{$i}}">
+                                                    {{$i}}
+                                                </label>
+                                            </div>
+                                        </td>
+                                    @endfor
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
+
             </div>
+
         </div>
         
         <div class="row" style="text-align:center">
-            <a href="/EncuestaReceptor/SeccionEstanciayvisitados/@ViewBag.id" class="btn btn-raised btn-default">@Resource.EncuestaBtnAnterior</a>
-            <input type="submit" class="btn btn-raised btn-success" value="@Resource.EncuestaBtnSiguiente" ng-click="guardar()">
+            <a href="/turismoreceptor/seccionestancia/{{$id}}" class="btn btn-raised btn-default">Anterior</a>
+            <input type="submit" class="btn btn-raised btn-success" value="Siguiente" ng-click="guardar()">
         </div>
         <br />
     </form>

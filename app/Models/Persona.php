@@ -35,7 +35,12 @@ class Persona extends Model
      */
     public function hogare()
     {
-        return $this->belongsTo('App\Hogare', 'hogar_id');
+        return $this->belongsTo('App\Models\Hogar', 'hogar_id');
+    }
+    
+    public function otraocupacion()
+    {
+        return $this->hasOne('App\Models\OcupacionPersona', 'persona_id');
     }
 
     /**
@@ -59,7 +64,7 @@ class Persona extends Model
      */
     public function viajes()
     {
-        return $this->hasMany('App\Viaje', 'personas_id');
+        return $this->hasMany('App\Models\Viaje', 'personas_id');
     }
     
     

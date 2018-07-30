@@ -11,13 +11,36 @@
 |
 */
 
+
+
 Route::get('/', function () {
-    return view('welcome');
+    
+    return view('home.index');
+    
+    
 });
 
-
+Route::controller('/temporada','TemporadaController');
 Route::controller('/turismointerno','TurismoInternoController');
 
 Route::controller('/turismoreceptor','TurismoReceptorController');
 
-Route::get('/actividades', 'TurismoReceptorController@actividades');
+Route::controller('/grupoviaje','GrupoViajeController');
+Route::controller('/exportacion','ExportacionController');
+
+Route::controller('/administrarpaises', 'AdministrarPaisesController');
+
+Route::controller('/administrardepartamentos', 'AdministrarDepartamentosController');
+
+Route::controller('/administrarmunicipios', 'AdministrarMunicipiosController');
+
+
+Route::group(['middleware' => 'cors'], function(){
+ 
+   Route::controller('/turismointernoapi','TurismoInternoCorsController');
+   
+   Route::controller('/turismoreceptoroapi','TurismoReceptorCorsController');
+  
+});
+Route::controller('/usuario','UsuarioController');
+

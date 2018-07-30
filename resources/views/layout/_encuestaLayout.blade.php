@@ -5,10 +5,10 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Sistema de Información Turistica del Magdalena">
-        <meta name="author" content="SITUR Magdalena">
+        <meta name="description" content="Sistema de Información Turistica del Cesar">
+        <meta name="author" content="SITUR Cesar">
         <title>@yield('title')</title>
-        <link rel="icon" type="image/ico" href="~/Content/icons/favicon-96x96.png" />
+        <link rel="icon" type="image/ico" href="{{asset('/Content/icons/favicon-96x96.png')}}" />
         <!--<link href="@Url.Content("/Content/mdl/bootstrap_mdl/css/bootstrap.min.css")" rel="stylesheet" type="text/css" />-->
         <!--<link href="@Url.Content("~/Content/mdl/material.min.css")" rel="stylesheet" type="text/css" />-->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
@@ -17,8 +17,10 @@
         <link href="{{asset('/Content/bootstrap_material/dist/css/bootstrap-material-design.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/Content/bootstrap_material/dist/css/ripples.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('/Content/sweetalert.css')}}" rel='stylesheet' type='text/css' />
+        <link href="{{asset('/css/select.min.css')}}" rel='stylesheet' type='text/css' />
         <link href="{{asset('/Content/ionicons/css/ionicons.min.css')}}" rel='stylesheet' type='text/css' />
         <link href="{{asset('/Content/styleLoading.css')}}" rel='stylesheet' type='text/css' />
+        <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel="stylesheet" type="text/css" />
         @yield('estilos')
         <style>
             html {
@@ -72,9 +74,9 @@
             .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
                 vertical-align: middle;
             }
-            .dropdown-menu {
-                left: -85%;
-            }
+            /*.dropdown-menu {*/
+            /*    left: -85%;*/
+            /*}*/
             .fixed {
                 position: fixed;
                 top: 0;
@@ -105,12 +107,7 @@
             .radio label, label.radio-inline {
                 padding-left: 1.8em;
             }
-            footer {
-                width: 100%;
-                background-color: rgba(0,0,0,.35);
-                padding: 1em;
-                text-align: right;
-            }
+            
             #log form {
                 float: none!important;
                 
@@ -130,6 +127,13 @@
             .tooltip-inner {
                 text-align:left !important;
             }
+            .ADMdtp-box footer .timeSelectIcon, .ADMdtp-box footer .today, .ADMdtp-box footer .calTypeContainer p{
+                fill: darkorange;
+                color: darkorange;
+            }
+            .ADMdtp-box footer .calTypeContainer p{
+                display: none;
+            }
         </style>
         
     </head>
@@ -137,8 +141,8 @@
         <div id="preloader">
             <div>
                 <div class="loader"></div>
-                <h1>@Resource.LabelPreloader</h1>
-                <h4>@Resource.LabelPorFavorEspere</h4>
+                <h1>Cargando</h1>
+                <h4>Por favor espere</h4>
                 <img src="/Content/image/logo.min.png" width="200" />
             </div>
         </div>
@@ -153,7 +157,15 @@
                         <div class="col-xs-12 col-md-9">
                             <h1 style="margin-top: 0.8em; font-size: 2em"><strong>Encuesta de turismo receptor</strong></h1>
                         </div>
-                        
+                        <div class="col-xs-12 col-md-1">
+                            <div class="btn-group">
+                                <a href="bootstrap-elements.html" data-target="#" class="btn dropdown-toggle" data-toggle="dropdown"><i class="material-icons">menu</i></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/turismoreceptor/listadoencuestas">Volver</a></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
@@ -181,9 +193,13 @@
             $.material.init();
         </script>
         <script src="{{asset('/js/plugins/checklist-model.js')}}"></script>
-        <script src="{{asset('js/plugins/angular-filter.js')}}"></script>
+        <script src="{{asset('/js/plugins/select.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('/js/plugins/angular-filter.js')}}"></script>
         <script src="{{asset('/js/plugins/angular-repeat-n.min.js')}}"></script>
+        
         <script src="{{asset('/js/sweetalert.min.js')}}"></script>
+        <script src="{{asset('/js/dir-pagination.js')}}"></script>
+        <script src="{{asset('/js/ADM-dateTimePicker.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('/js/encuestas/turismoReceptor/encuesta.js')}}"></script>
         <script src="{{asset('/js/encuestas/turismoReceptor/datos_encuestado.js')}}"></script>
         <script src="{{asset('/js/encuestas/turismoReceptor/estanciayvisitados.js')}}"></script>
@@ -194,6 +210,7 @@
         <script src="{{asset('/js/encuestas/turismoReceptor/enteran.js')}}"></script>
         
         <script src="{{asset('/js/encuestas/turismoReceptor/services/receptorServices.js')}}"></script>
+        <script src="{{asset('/js/encuestas/turismoReceptor/services/grupoViajeServices.js')}}"></script>
         
         <script>
             $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });

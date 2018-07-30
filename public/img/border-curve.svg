@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   
+   viewBox="0 0 210 297"
+   preserveAspectRatio="none"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="dibujo.svg">
+  <defs>
+    <filter id="dropshadow" x="0" y="0" width="200%" height="200%">
+      <feOffset result="offOut" in="SourceAlpha" dx="4" dy="9"/>
+  	  <feGaussianBlur result="blurOut" in="offOut" stdDeviation="6" flood-color="#000000"/>
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+      
+      <feComponentTransfer>
+    	<feFuncA type="linear" slope="0.6"/>
+  	  </feComponentTransfer>
+       
+      <feMerge> 
+    	<feMergeNode/>
+    	<feMergeNode in="SourceGraphic"/> 
+  	  </feMerge>
+      
+      
+    </filter>
+    
+  </defs>
+  
+  
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#ffffff;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0"
+       d="M 0.00208804,5.8086991e-4 0.00835217,296.99165 C 196.77694,250.67412 -17.999644,11.941334 209.9991,0.00154325 Z"
+       id="path3713"
+       class="border-curve"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" filter="url(#dropshadow)"/>
+  </g>
+</svg>
