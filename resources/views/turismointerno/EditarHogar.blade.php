@@ -3,6 +3,8 @@
 
 @section('Title','Caracterización del hogar - Turísmo interno y emisor :: SITUR')
 
+
+
 @section('estilos')
     <style>
         .title-section {
@@ -50,21 +52,7 @@
 <div>
     <input type="hidden" ng-model="id" ng-init="id={{$id}}" />
     
-    @if(\Session::get('mensaje')!=null)
-    
-    <div class="alert alert-danger" >
-        <label><b>Corrige los errores:</b></label>
-        <br />
-        <div>
-            -{{\Session::get('mensaje')}}
-        </div>
 
-    </div>
-    
-    @endif
-    
-    
-    
     <div class="alert alert-danger" ng-if="errores != null">
         <label><b>Corrige los errores:</b></label>
         <br />

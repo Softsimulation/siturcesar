@@ -164,6 +164,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         
+
         //models generator
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
