@@ -217,9 +217,9 @@
 				     <div class="title-section">
             <h3 style="margin-top: 0.5em;"><strong><?php echo $__env->yieldContent('TitleSection'); ?></strong></h3>
         </div>
-       
+       <div class='container'>
         <?php echo $__env->yieldContent('content'); ?>
-    
+    </div>
   
 									<!--/charts-inner-->
 									</div>
@@ -254,7 +254,7 @@
 			<div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
 			<!--/down-->
 							<div class="down">	
-									  <a href="#"><img src="images/admin.jpg"></a>
+									  <a href="#"><img src="<?php echo e(asset('Content/image/user.png')); ?>"></a>
 									  <a href="#"><span class=" name-caret">Usuario</span></a>
 									 <p>Rol</p>
 									<ul>
