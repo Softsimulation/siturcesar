@@ -1,4 +1,4 @@
-var pp=angular.module('admin.exportaciones', [])
+var pp=angular.module('admin.exportaciones', ['adminservice','ADM-dateTimePicker'])
 
 .controller('ExportacionCtrl', ['$scope', 'adminService',function ($scope, adminService) {
 
@@ -42,7 +42,28 @@ var pp=angular.module('admin.exportaciones', [])
                 $("body").attr("class", "cbp-spmenu-push");
                 if(data.success){
                     
-                    swal("Realizado","Exportacion iniciada exitosamente","success");
+                    
+                    swal({
+                          title: "Realizado",
+                          text: "Exportación realizada exitosamente",
+                          type: "success",
+                          showCancelButton: true,
+                          confirmButtonColor: "#8CD4F5",
+                          confirmButtonText: "Descargar",
+                          closeOnConfirm: true,
+                          html: false
+                        }, function(){
+                            
+                            var link = document.createElement("a");
+                             //link.download = 'Exportacion.xlsx';
+                             link.href = data.url;
+                             document.body.appendChild(link);
+                             link.click();
+                             document.body.removeChild(link);
+                            
+                          
+                        });
+                    
                     
                 }else{
                     $scope.errores=data.errores;

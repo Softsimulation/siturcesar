@@ -1,4 +1,4 @@
-var pp=angular.module('admin.temporadas', ['objectTable'])
+var pp=angular.module('admin.temporadas', ['adminservice','ADM-dateTimePicker','angularUtils.directives.dirPagination'])
 
 .controller('temporadasCtrl', ['$scope','adminService',function ($scope,adminService) {
 

@@ -1,5 +1,4 @@
-/* global angular */
-/* global swal */
+
 angular.module('paises.pais', [])
 
 .controller('paisesController', function ($scope, paisServi) {
