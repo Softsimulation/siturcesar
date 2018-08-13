@@ -44,3 +44,5 @@ Route::group(['middleware' => 'cors'], function(){
 });
 Route::controller('/usuario','UsuarioController');
 
+Route::controller('/sostenibilidadpst', 'SostenibilidadPstController');
+
