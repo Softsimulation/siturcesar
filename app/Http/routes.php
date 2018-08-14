@@ -34,7 +34,7 @@ Route::controller('/administrarpaises', 'AdministrarPaisesController');
 Route::controller('/administrardepartamentos', 'AdministrarDepartamentosController');
 
 Route::controller('/administrarmunicipios', 'AdministrarMunicipiosController');
-
+Route::controller('/ofertaempleo','OfertaEmpleoController');
 
 Route::group(['middleware' => 'cors'], function(){
  

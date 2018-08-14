@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Models\Viaje;
 use App\Models\Ciudad_Visitada;
-use App\Models\Hogar;
+use App\Models\Persona;
 
 class TurismoInterno
 {
@@ -44,10 +44,10 @@ class TurismoInterno
         
         if(strlen(strstr($request->path(),'turismointerno/viajesrealizados'))>0){
             
-            $hogar=Hogar::find($request->one);
+            
             $sw = 1;
         
-            $persona=$hogar->personas->where('es_viajero',true)->where('es_residente',true)->first();
+            $persona=Persona::where('es_viajero',true)->where('es_residente',true)->where('id',$request->one)->first();
             
             if($persona == null){
                 $sw = 0;

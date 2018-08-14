@@ -112,9 +112,9 @@ class Viaje extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-      public function hogare()
+      public function persona()
     {
-        return $this->belongsTo('App\Models\Hogar', 'hogar_id');
+        return $this->belongsTo('App\Models\Persona', 'persona_id');
     }
 
     /**
@@ -275,8 +275,9 @@ class Viaje extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-public function financiadoresViajes()
+    public function financiadoresViajes()
     {
+        //return $this->belongsToMany('App\Models\Financiador_Viaje', 'viajes_financiadores', "viaje_id", 'financiadores_id')->withPivot('otro');
         return $this->belongsToMany('App\Models\Financiador_Viaje', 'viajes_financiadores', "viaje_id", 'financiadores_id');
     }
 
