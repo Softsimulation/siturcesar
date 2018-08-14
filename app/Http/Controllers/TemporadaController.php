@@ -37,13 +37,19 @@ class TemporadaController extends Controller
                   
         $temporada->Hogares=Hogar::whereHas('edificacione',function($q)use($temporada){
             $q->where('temporada_id',$temporada->id);
-        })->with('edificacione.barrio')->with('edificacione.estrato')->with('digitadore.aspNetUser')->get();
+        })->with('edificacione.barrio')->with('edificacione.estrato')->with('digitadore.user')->get();
         
-        //$encuestas=Viaje::where('es_principal',true)->with('hogare')->orderby('id');
+        $encuestas=Persona::whereHas('hogare.edificacione',function($q)use($temporada){
+            
+            $q->where('temporada_id',$temporada->id);
+            
+        })->whereHas('viajes',function($t){
+            
+            $t->where('es_principal',true);
+            
+        })->with('hogare.edificacione.barrio')->with('hogare.edificacione.estrato')->with('hogare.digitadore.user')->with('viajes')->get();
         
-        
-        
-        return ['temporada'=>$temporada];
+        return ['temporada'=>$temporada,'encuestas'=>$encuestas];
         
     }
     
