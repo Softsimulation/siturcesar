@@ -15,8 +15,7 @@
 
 Route::get('/', function () {
     
-    $date = new Carbon\Carbon('2018-04-02 00:00:00', 'Europe/London');  
-    return  $date->format('h:i:s');
+    return view('home.index');
     
     
 });
@@ -44,4 +43,8 @@ Route::group(['middleware' => 'cors'], function(){
   
 });
 Route::controller('/usuario','UsuarioController');
+
+Route::controller('/sostenibilidadpst', 'SostenibilidadPstController');
+
+Route::controller('/sostenibilidadhogares','SostenibilidadHogaresController');
 

@@ -1,0 +1,453 @@
+body, html{
+	font-size: 16px;
+	font-family: 'Futura', sans-serif;
+	font-weight: 400;
+	background-color: white;
+}
+
+h1, h2, h3, h4, h5{
+	font-family: 'Futura', sans-serif;
+	font-weight: 700;
+}
+
+/*Transición suave para movimiento de elementos y evitar que el usuario copie el contenido del elemento*/
+.toolbar, #nav-menu-main {
+    transition: all .16s ease-in-out;
+    -webkit-transition: all .16s ease-in-out;
+    -moz-transition: all .16s ease-in-out;
+     
+}
+header {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+}
+/*Sombra nivel 1*/
+#socialNetworks-fixed, .tile:hover{
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,.4);
+    -webkit-box-shadow: 0px 1px 3px 0px rgba(0,0,0,.4);
+    -moz-box-shadow: 0px 1px 3px 0px rgba(0,0,0,.4);
+    
+}
+
+/*Sombra nivel 2*/
+#processing, .errores .alert.alert-danger, #socialNetworks-fixed:hover {
+    box-shadow: 0px 8px 15px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0px 8px 15px rgba(0,0,0,.3);
+    -moz-box-shadow: 0px 8px 15px rgba(0,0,0,.3);
+}
+/*Flexbox*/
+
+.nav-bar, .nav-bar>.brand a, div#socialNetworks-fixed{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: wrap;
+    flex-flow: wrap;
+}
+
+
+.stats {
+    background-image: url(../../img/icons/sprite-stats.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.stats-emisor {
+    width: 64px;
+    height: 64px;
+    background-position: -5px -5px;
+}
+
+.stats-empleo {
+    width: 64px;
+    height: 64px;
+    background-position: -5px -79px;
+}
+
+.stats-interno {
+    width: 64px;
+    height: 64px;
+    background-position: -5px -153px;
+}
+
+.stats-oferta {
+    width: 64px;
+    height: 64px;
+    background-position: -5px -227px;
+}
+
+.stats-receptor {
+    width: 64px;
+    height: 64px;
+    background-position: -5px -301px;
+}
+
+.stats-sostenible {
+    width: 64px;
+    height: 64px;
+    background-position: -5px -375px;
+}
+footer{
+	margin-top: 2%;
+}
+
+/*Navbar*/
+#nav-menu-main>.brand, #nav-menu-main>nav{
+    width: auto;
+}
+#nav-menu-main>nav{
+    width: 100%;
+}
+#nav-menu-main>.brand a{
+    align-items: center;
+    text-align:center;
+    justify-content: center;
+}
+#nav-menu-main{
+    background-color: transparent;
+    /*border-bottom: 2px solid #c08e2d;*/
+    color: white;
+    align-items: center;
+    /*padding: 6px 2%;*/
+    font-family: Futura, sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+#nav-menu-main a{
+    color: white;
+}
+#nav-menu-main>.brand{
+    width: 80%;
+}
+#nav-menu-main nav ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+#nav-menu-main nav>ul ul{
+    background-color: white;
+    z-index: 30;
+}
+#nav-menu-main nav>ul>li ul, #nav-menu-main nav > ul > li.in > ul > li > ul{
+    display: none;
+}
+#nav-menu-main nav>ul>li.in ul, #nav-menu-main nav > ul > li.in > ul > li.second-in > ul{
+    display: block;
+}
+
+/*#nav-menu-main nav>ul>li:not(:last-child){*/
+/*    border-bottom: 1px solid #415B91;*/
+/*}*/
+#nav-menu-main nav > ul > li.in > ul > li.second-in > ul{
+    border-bottom: 1px solid lightgrey;
+    border-top: 1px solid lightgrey;
+}
+
+#nav-menu-main nav > ul li > a, #nav-menu-main nav > ul li ul a {
+    display:block;
+    width: 100%;
+    text-align:center;
+    padding: .5rem 1rem;
+}
+
+#nav-menu-main nav>ul li>a{
+    position:relative;
+    background-color: #004A87;
+    
+}
+/*Propio de SITUR Cesar*/
+
+
+#nav-menu-main nav>ul li>a[href="/"]{
+    background-color: #f29123;
+}
+#nav-menu-main nav>ul li>a[href="#menu-visitarAlCesar"]{
+    background-color: #018037;
+}
+#nav-menu-main nav>ul li>a[href="#menu-estadisticas"]{
+    background-color: #1576bb;
+}
+#nav-menu-main nav>ul li>a[href="#menu-publicaciones"]{
+    background-color: #e42728;
+}
+#nav-menu-main nav>ul li>a#menu-contacto{
+    background-color: #8bbe44;
+}
+#nav-menu-main nav>ul li ul a{
+    background-color: white;
+    color: #333;
+    text-transform: initial;
+    font-weight: 400;
+}
+#nav-menu-main nav>ul li a:hover{
+    text-decoration: none;
+    /*background-color: #415B91;*/
+    
+}
+#nav-menu-main nav>ul li ul li a:hover{
+    color: white;
+    background-color: #c08e2d;
+}
+#nav-menu-main nav>ul li.second-in>a {
+    background-color: lightgray;
+}
+#nav-menu-main nav>ul>li ul li:not(:last-child){
+    border-bottom: 1px solid #eee;
+}
+#nav-menu-main{
+    display:none;
+}
+#nav-menu-main.show{
+    display:block;
+}
+#navbar-mobile{
+    width: 100%;
+}
+#navbar-mobile button{
+    font-size: 2rem;
+    border-radius: 0;
+}
+.brand img {
+    margin: .5rem;
+}
+
+.brand {
+    text-align: center;
+    background-color: white;
+}
+
+#socialNetworks-fixed {
+    position: fixed;
+    right: 0;
+    top: 50%;
+    z-index: 60;
+    flex-direction: column;
+    font-size: 1.5rem;
+    align-items: center;
+    max-width: 50px;
+}
+#socialNetworks-fixed a {
+    padding: .5rem .75rem;
+    background-color: green;
+    color:white;
+    flex-grow: 1;
+    width: 100%;
+    text-align: center;
+}
+#socialNetworks-fixed a:nth-child(1){
+    background-color: dodgerblue;
+}
+/*#socialNetworks-fixed a:nth-child(2){*/
+/*    background-color: #4267b2;*/
+/*}*/
+#socialNetworks-fixed a:nth-child(2){
+    background: -webkit-radial-gradient(70% 70%,ellipse,#ee583f 8%,#d92d77 42%,#bd3381 58%);
+    background: radial-gradient(ellipse at 70% 70%,#ee583f 8%,#d92d77 42%,#bd3381 58%);
+}
+#searchMainTBox, #toolbar-main select {
+    border: 0;
+    border-bottom: 1px solid #eee;
+}
+#searchMainTBox:focus, #searchMainTBox:visited, #toolbar-main select:focus {
+    box-shadow: none;
+    outline: 0;
+    border-bottom-color: #ddd;
+}
+#searchMainTBox + button{
+    border: 0;
+    background-color: transparent;
+    cursor:pointer;
+}
+#searchMainTBox:focus + button{
+    background-color: #eee;
+}
+#toolbar-main{
+    padding: 4px .5rem;
+    background-color:white;
+}
+#toolbar-main>form, #toolbar-main>a{
+    margin: 0 .5rem;
+    color:#333;
+}
+
+.card{
+	margin-bottom:1rem;
+}
+.card-body, .card-footer {
+    padding: .5rem;
+}
+.card-footer{
+	padding: .5rem;
+}
+.carousel-caption.d-md-block {
+    display: flex!important;
+}
+.carousel-caption {
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    vertical-align: middle;
+    padding: 2% 4%;
+    background: rgba(0,0,0,0.35);
+	
+}
+.carousel-caption h3{
+    text-transform: uppercase;
+	text-shadow: 0px 1px 2px rgba(0,0,0,.85);
+	line-height: 1.4;
+}
+.carousel-caption h3 small{
+    text-transform: initial;
+}
+
+.links {
+    background-image: url(../../img/icons/sprite-links.png);
+    background-repeat: no-repeat;
+    display: block;
+    margin: 0 auto;
+}
+
+.links-libro {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -5px;
+}
+
+.links-eventos {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -47px;
+}
+
+.links-biblioteca {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -89px;
+}
+
+.links-noticias {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -131px;
+}
+
+.links-bolsaEmpleo {
+    width: 32px;
+    height: 32px;
+    background-position: -5px -173px;
+}
+.tile.inline-tile, #events .tile.inline-tile .tile-img{
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -moz-flex;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: wrap;
+    flex-flow: wrap;
+}
+.tile.inline-tile .tile-img {
+    background-color: #eee;
+    color: #333;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+    min-height: 130px;
+    width: 100%;
+    overflow: hidden;
+    position:relative;
+}
+.title.inline-tile {
+    padding-left: 1rem;
+}
+.tile.inline-tile .tile-img img {
+    width: 100%;
+    height: auto;
+}
+.tile .tile-caption h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #00294B;
+    margin: .5rem 0;
+    line-height: 1.3;
+}
+.tile .tile-body {
+    padding: 1rem 4% 2rem;
+    width: 100%;
+}
+.tile .date, .tile .tile-caption .date, .tile h3 small {
+    font-size: .875rem;
+    margin-bottom: .5rem;
+}
+.tile .tile-caption+.buttons, .tile .tile-caption+a, .tile .tile-caption+p+a {
+    display: inline-block;
+    float: right;
+}
+.tile.inline-tile .tile-img span {
+    display: block;
+    flex-grow: 1;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 0px 1px 2px rgba(0,0,0,.5);
+    color: white;
+    font-weight: 500;
+}
+.tile.inline-tile .tile-img span.day {
+    font-weight: 700;
+    font-size: 2.325rem;
+    line-height: 2.25rem;
+}
+#logosFooter{
+    background: white;
+    padding: 1rem;
+    border-radius: 4px;
+    box-shadow: 0px 1px 3px 0px rgba(0,0,0,.4);
+}
+footer{
+			background-color: green;
+			color: white;
+			padding: 1rem 0;
+		}
+
+/*Fonts*/
+@font-face {
+    font-family: 'Futura';
+    font-weight: 400;
+    font-style: normal;
+    src: url('../../fonts/FuturaStdMedium.eot');
+    src: local('Futura'),
+         url('../../fonts/FuturaStdMedium.eot') format('embedded-opentype'),
+         url('../../fonts/FuturaStdMedium.woff') format('woff'),
+         url('../../fonts/FuturaStdMedium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Futura';
+    font-weight: 500;
+    font-style: normal;
+    src: url('../../fonts/FuturaMedium.eot');
+    src: local('Futura Medium'),
+         url('../../fonts/FuturaMedium.eot') format('embedded-opentype'),
+         url('../../fonts/FuturaMedium.woff') format('woff'),
+         url('../../fonts/FuturaMedium.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Futura';
+    font-weight: 700;
+    font-style: normal;
+    src: url('../../fonts/FuturaStdBold.eot');
+    src: local('Futura Bold'),
+         url('../../fonts/FuturaStdBold.eot') format('embedded-opentype'),
+         url('../../fonts/FuturaStdBold.woff') format('woff'),
+         url('../../fonts/FuturaStdBold.ttf') format('truetype');
+}

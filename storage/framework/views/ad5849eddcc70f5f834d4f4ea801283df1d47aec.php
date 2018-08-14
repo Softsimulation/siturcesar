@@ -169,7 +169,7 @@
                                 <!--P4P10Select1. Seleccione un Encuestador-->
                                 <select class="form-control" id="inputDepartamentoResidencia" name="encuestador" ng-model="encuesta.Encuestador" ng-required="true">
                                     <option value="" disabled>Seleccione un encuestador</option>
-                                    <option ng-repeat="item in encuestadores" value="{{item.id}}">{{item.asp_net_user.username}}</option>
+                                    <option ng-repeat="item in encuestadores" value="{{item.id}}">{{item.user.username}}</option>
                                 </select>
                                 <!--P4P10Alert1. El campo Barrio de residencia es requerido-->
                                 <span ng-show="DatosForm.$submitted || DatosForm.barrio.$touched">

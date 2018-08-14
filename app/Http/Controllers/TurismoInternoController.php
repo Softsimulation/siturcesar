@@ -106,7 +106,7 @@ class TurismoInternoController extends Controller
         $niveles=Nivel_Educacion::get();
         $motivos=Motivo_No_Viaje::get();
         $estratos=Estrato::get();
-        $encuestadores = Digitador::with([ 'aspNetUser'=>function($q){$q->select('id','username');} ])->get();
+        $encuestadores = Digitador::with([ 'user'=>function($q){$q->select('id','username');} ])->get();
         $estados=EstadosCiviles::get();
         $ocupaciones=Ocupacion::get();
         
