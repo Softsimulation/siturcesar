@@ -149,7 +149,7 @@ var pp=angular.module('admin.temporadas', ['adminservice','ADM-dateTimePicker','
         adminService.DatosTemporada($scope.id)
             .then(function (data) {
                 $scope.temporada = data.temporada;
-                $scope.temporada.Personas=data.hogares
+                $scope.temporada.Personas=data.encuestas
                 $("body").attr("class", "cbp-spmenu-push");
             }).catch(function () {
                 $("body").attr("class", "cbp-spmenu-push");

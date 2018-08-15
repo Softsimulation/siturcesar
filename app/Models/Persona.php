@@ -64,7 +64,7 @@ class Persona extends Model
      */
     public function viajes()
     {
-        return $this->hasMany('App\Models\Viaje', 'personas_id');
+        return $this->hasMany('App\Models\Viaje', 'persona_id');
     }
     
     
