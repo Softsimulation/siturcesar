@@ -258,6 +258,9 @@
 @endsection
 
 @section('javascript')
+<script src="{{asset('/js/plugins/select.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/js/plugins/angular-sanitize.js')}}" type="text/javascript"></script>
+<script src="{{asset('/js/dir-pagination.js')}}"></script>
 <script src="{{asset('/js/administrador/departamentos/departamentosController.js')}}"></script>
 <script src="{{asset('/js/administrador/departamentos/services.js')}}"></script>
 <script src="{{asset('/js/administrador/departamentos/app.js')}}"></script>

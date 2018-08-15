@@ -49,7 +49,7 @@
 
 @section('NumSeccion', '0%')
 
-@section('app','ng-app="situr_admin"')
+@section('app','ng-app="receptor"')
 
 @section('controller','ng-controller="listadoEncuestasCtrl"')
 
@@ -134,4 +134,9 @@
 
 @endsection
 
+@section('javascript')
+<script src="{{asset('/js/dir-pagination.js')}}"></script>
+<script src="{{asset('/js/administrador/listadoreceptor/services.js')}}" type="text/javascript"></script>
+<script src="{{asset('/js/administrador/listadoreceptor/listadoreceptor.js')}}" type="text/javascript"></script>
+@endsection
 

@@ -11,10 +11,23 @@ use App\Models\Idioma;
 use App\Models\Pais_Con_Idioma;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdministrarPaisesController extends Controller
 {
-    //
+    public function __construct()
+    {
+        
+        $this->middleware('auth');
+        $this->middleware('role:Admin');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+        
+        
+        
+    }
     public function getIndex(){
         return view('administrarpaises.Index');
     }
@@ -63,8 +76,8 @@ class AdministrarPaisesController extends Controller
         $pais = new Pais();
         $pais->created_at = Carbon::now();
         $pais->updated_at = Carbon::now();
-        $pais->user_create = "Situr";
-        $pais->user_update = "Situr";
+        $pais->user_create = $this->user->username;
+        $pais->user_update = $this->user->username;
         $pais->estado = true;
         
         $pais->save();
@@ -192,8 +205,8 @@ class AdministrarPaisesController extends Controller
                         $pais = new Pais();
                         $pais->created_at = Carbon::now();
                         $pais->updated_at = Carbon::now();
-                        $pais->user_create = "Situr";
-                        $pais->user_update = "Situr";
+                        $pais->user_create = $this->user->username;
+                        $pais->user_update = $this->user->username;
                         $pais->estado = true;
                         
                         $pais->save();

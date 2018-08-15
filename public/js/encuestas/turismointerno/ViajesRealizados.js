@@ -97,7 +97,6 @@ angular.module('interno.viajesrealizados', [])
 
     }
 
-
     $scope.quitar = function (es) {
         if (es.Municipio == $scope.encuesta.Principal) {
 
@@ -110,8 +109,6 @@ angular.module('interno.viajesrealizados', [])
         $scope.EstanciaForm.$submitted=false;
     }
 
-
-
     $scope.cambioselectpais= function (es) {
 
         es.Departamento = null;
@@ -120,7 +117,6 @@ angular.module('interno.viajesrealizados', [])
 
     }
 
-
     $scope.cambioselectdepartamento = function (es) {
 
 
@@ -128,8 +124,6 @@ angular.module('interno.viajesrealizados', [])
    
 
     }
-
-
 
     $scope.cambioselectmunicipio = function (es) {
 
@@ -144,9 +138,6 @@ angular.module('interno.viajesrealizados', [])
         }
     }
 
-
-
-
     $scope.cambionoches = function (es) {
 
         if (es.Noches == 0) {
@@ -154,7 +145,6 @@ angular.module('interno.viajesrealizados', [])
 
         }
     }
-
 
     $scope.cambioselectalojamiento = function (es) {
 
@@ -168,7 +158,6 @@ angular.module('interno.viajesrealizados', [])
             }
         }
     }
-
 
     $scope.verifica = function () {
         $scope.Total = $scope.encuesta.Numero - 1
@@ -322,7 +311,6 @@ angular.module('interno.viajesrealizados', [])
  
     }
 
-
     $scope.eliminar = function (es) {
 
 
@@ -362,7 +350,6 @@ angular.module('interno.viajesrealizados', [])
 
     }
 
-
     $scope.cancelar = function () {
             $scope.ver = false;
             $scope.encuesta = {};
@@ -374,7 +361,6 @@ angular.module('interno.viajesrealizados', [])
                                 
     }
 
-
     $scope.clearForm = function () {
         $scope.errores = null;
         $scope.error = null;
@@ -384,7 +370,7 @@ angular.module('interno.viajesrealizados', [])
 
     }
 
-  $scope.siguiente = function () {
+    $scope.siguiente = function () {
 
         $scope.error = null
         if ($scope.PrincipalViaje.id == null) {
@@ -404,9 +390,9 @@ angular.module('interno.viajesrealizados', [])
         $scope.env.id = $scope.id; 
         $scope.env.principal = $scope.PrincipalViaje.id;
 
+        
 
-
-          serviInterno.siguienteviaje($scope.env).then(function (data) {
+        serviInterno.siguienteviaje($scope.env).then(function (data) {
                 $("body").attr("class", "cbp-spmenu-push");
                 if (data.success == true) {
                                           swal({
@@ -467,7 +453,7 @@ angular.module('interno.viajesrealizados', [])
               $("body").attr("class", "cbp-spmenu-push charging");
         serviInterno.getDatoViajePrincipal($scope.id).then(function (data) {
               $("body").attr("class", "cbp-spmenu-push");
-                    $scope.Datos = data.Enlaces;
+                   $scope.Datos = data.Enlaces;
                    $scope.encuesta = data.encuesta;
                    $scope.encuesta.Id = $scope.id;
                    if (data.encuesta.Numero != null) {
@@ -534,7 +520,6 @@ angular.module('interno.viajesrealizados', [])
         }
     }
 
-
     $scope.cambionoches = function (es) {
 
         if (es.Noches == 0) {
@@ -542,7 +527,6 @@ angular.module('interno.viajesrealizados', [])
 
         }
     }
-
 
     $scope.cambioselectalojamiento = function (es) {
 
@@ -556,7 +540,6 @@ angular.module('interno.viajesrealizados', [])
             }
         }
     }
-
 
     $scope.verifica = function () {
         $scope.Total = $scope.encuesta.Numero - 1
@@ -646,7 +629,8 @@ angular.module('interno.viajesrealizados', [])
 
          $scope.errores = null
          $("body").attr("class", "cbp-spmenu-push charging");
-     
+        
+       
           serviInterno.guardarviajePrincipal($scope.encuesta).then(function (data) {
                 $("body").attr("class", "cbp-spmenu-push");
                 if (data.success == true) {

@@ -1,7 +1,7 @@
 @extends('layout._AdminLayout')
 
 @section('Title','Administrador de Exportaciones :: SITUR Atlántico')
-@section('app','ng-app="situr_admin"')
+@section('app','ng-app="admin.exportaciones"')
 @section ('estilos')
     <style>
         .panel-body {
@@ -73,6 +73,7 @@
                 <input type="button" ng-click="exportar()" class="btn btn-primary" value="Generar Exportacion" />
             </div>
         </div>
+        <!--
         <div class="row">
             <div class="col-xs-12" style="overflow-x: auto;">
                 <table class="table table-hover" ng-show="exportaciones.length > 0">
@@ -110,6 +111,7 @@
                 <dir-pagination-controls></dir-pagination-controls>
             </div>
         </div>
+        -->
     </div>
 
     <!-- Modal crear exportacion-->
@@ -179,4 +181,9 @@
    
 
 </div>
+@endsection
+@section('javascript')
+<script src="{{asset('/js/ADM-dateTimePicker.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('/js/administrador/exportacion/services.js')}}"></script>
+<script src="{{asset('/js/administrador/exportacion/exportaciones.js')}}"></script>
 @endsection
