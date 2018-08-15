@@ -47,4 +47,5 @@ Route::controller('/usuario','UsuarioController');
 Route::controller('/sostenibilidadpst', 'SostenibilidadPstController');
 
 Route::controller('/sostenibilidadhogares','SostenibilidadHogaresController');
+Route::controller('/login','LoginController');
 

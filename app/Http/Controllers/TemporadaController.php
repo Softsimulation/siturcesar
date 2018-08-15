@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Http\Requests;
 use App\Models\Temporada;
 use App\Models\Hogar;
@@ -12,6 +13,18 @@ use App\Models\Viaje;
 
 class TemporadaController extends Controller
 {
+    public function __construct()
+    {
+        
+        $this->middleware('auth');
+        $this->middleware('role:Admin');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+        
+        
+        
+    }
     public function getIndex(){
         
         return view('temporada.Index');
@@ -153,8 +166,8 @@ class TemporadaController extends Controller
         $temporada->name = $request->Name;
         $temporada->fecha_ini = $request->Fecha_ini;
         $temporada->fecha_fin = $request->Fecha_fin;
-        $temporada->user_create = "Situr";
-        $temporada->user_update = "Situr";
+        $temporada->user_create = $this->user->username;
+        $temporada->user_update = $this->user->username;
         $temporada->save();
         
         return ['success' => true, 'temporada' => $temporada ];

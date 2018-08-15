@@ -11,8 +11,23 @@ use App\Models\Tipo_Viaje;
 use App\Models\Grupo_Viaje;
 use App\Models\Visitante;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+
 class GrupoViajeController extends Controller
 {
+    public function __construct()
+    {
+        
+        $this->middleware('auth');
+        $this->middleware('role:Admin');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+        
+        
+        
+    }
     public function getGrupoviaje(){
         return view('grupoViaje.CrearGrupoViaje');
     }
@@ -28,7 +43,7 @@ class GrupoViajeController extends Controller
                 $q->with('aspNetUser');
             },'visitantes'=>function($q){
                 $q->select("grupo_viaje_id","nombre");
-            }])->where('digitador_id',1)->get();
+            }])->where('digitador_id',$this->user->digitador->id)->get();
             
         return $grupos;    
     }
@@ -124,7 +139,7 @@ class GrupoViajeController extends Controller
         
 
         $grupo = new Grupo_Viaje();
-        $grupo->digitador_id = 1;
+        $grupo->digitador_id = $this->user->digitador->id;
         $grupo->fecha_aplicacion = $request->Fecha;
         $grupo->lugar_aplicacion_id = $request->Sitio;
         $grupo->tipo_viaje_id = $request->Tipo;
@@ -136,8 +151,8 @@ class GrupoViajeController extends Controller
         $grupo->personas_encuestadas = $request->PersonasEncuestadas;
         $grupo->created_at = Carbon::now();
         $grupo->updated_at = Carbon::now();
-        $grupo->user_create = "Situr";
-        $grupo->user_update = "Situr";
+        $grupo->user_create = $this->user->username;
+        $grupo->user_update = $this->user->username;
         $grupo->estado = true;
         
         //return $request->all();
@@ -465,7 +480,7 @@ class GrupoViajeController extends Controller
         $grupo->mayores_quince_no_presentes = $request->Mayores15No;
         $grupo->personas_magdalena = $request->PersonasMag;
         $grupo->personas_encuestadas = $request->PersonasEncuestadas;
-        $grupo->user_update = "Situr";
+        $grupo->user_update = $this->user->username;
         $grupo->estado = true;
         
         //return $request->all();
