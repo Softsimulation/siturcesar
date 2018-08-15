@@ -205,7 +205,6 @@
                                     <th>IdPersona</th>
                                     <th>IdHogar</th>
                                     <th>Nombre</th>
-                                    <th>Correo</th>
                                     <th>Dirección</th>
                                     <th>Estrato</th>
                                     <th>Encuestador</th>
@@ -219,7 +218,6 @@
                                     <td>@{{item.id}}</td>
                                     <td>@{{item.hogare.id}}</td>
                                     <td>@{{item.nombre}}</td>
-                                    <td>@{{item.email}}</td>
                                     <td>@{{item.hogare.edificacione.direccion}}</td>
                                     <td>@{{item.hogare.edificacione.estrato.nombre}}</td>
                                     <td>@{{item.hogare.digitadore.user.username}}</td>
