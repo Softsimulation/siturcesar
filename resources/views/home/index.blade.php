@@ -1,6 +1,17 @@
 @extends('layout._publicLayout')
 
 @section('Title','')
+@section('estilos')
+<style>
+	.tiles .tile{
+		margin: 0;
+	}
+	.tile .tile-body {
+	    padding: 1rem 4% 2rem;
+	    width: 100%;
+	}
+</style>
+@endsection
 @section('content')
 <section id="slider">
 	        

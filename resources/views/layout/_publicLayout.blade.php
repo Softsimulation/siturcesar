@@ -146,13 +146,13 @@
                             <a role="menuitem" href="#menu-visitarAlCesar" aria-haspopup="true" aria-expanded="false">Visita al Cesar</a>
                             <ul role="menu" id="menu-visitarAlCesar" aria-label="Visita al Cesar">
                                 <li role="none">
-                                    <a role="menuitem" href="#">Qué hacer</a>
+                                    <a role="menuitem" href="/QueHacer">Qué hacer</a>
                                 </li>
                                 <li role="none">
-                                    <a role="menuitem" href="#">Experiencias</a>
+                                    <a role="menuitem" href="/Experiencias">Experiencias</a>
                                 </li>
                                 <li role="none">
-                                    <a role="menuitem" href="#">Proveedores de Servicios Turísticos</a>
+                                    <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
                                 </li>
                             </ul>
                         </li>
@@ -243,6 +243,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     
     <script src="/js/public/script-main.js"></script>
+    @yield('javascript')
     <script type="text/javascript">
         if ('serviceWorker' in navigator) {
             console.log('CLIENT: service worker situr Cesar registration in progress.');
