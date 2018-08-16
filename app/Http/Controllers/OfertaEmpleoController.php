@@ -1951,7 +1951,9 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
 	        'fecha_cambio' => Carbon::now()
 	    ]);
 		
-		return ["success" => true];
+       $encuesta = Encuesta::find($request->id);
+        
+        return [ "success"=>true, "ruta"=>"/ofertaempleo/encuestas/" . $encuesta->sitios_para_encuestas_id ];
     }
     
     
@@ -2764,6 +2766,7 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
         }*/
         
         $transporte = Transporte::where('encuestas_id',$request->id)->where('tipos_transporte_oferta_id',1)->first();
+        
         if($transporte == null){
             $transporte = new Transporte();
             $transporte->tipos_transporte_oferta_id = 1;
