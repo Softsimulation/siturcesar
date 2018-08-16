@@ -15,6 +15,19 @@ app.factory("OfertaEmpleoServi", ["$http", "$q", function ($http, $q) {
             })
             return promise;
         },
+        Guardaralojamiento: function (data) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http.post('/ofertaempleo/guardaralojamiento', data ).success(function (data) {
+                defered.resolve(data);
+            }).error(function (err) {
+                defered.reject(err);
+            })
+            return promise;
+        },
+       
+        /*
         guardarCaracterizacionAlojamiento: function (data) {
             var defered = $q.defer();
             var promise = defered.promise;
@@ -37,7 +50,7 @@ app.factory("OfertaEmpleoServi", ["$http", "$q", function ($http, $q) {
             })
             return promise;
         },
-        
+        */
         
     }
 }]);

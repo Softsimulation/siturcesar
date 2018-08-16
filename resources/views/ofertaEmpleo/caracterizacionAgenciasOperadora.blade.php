@@ -90,17 +90,17 @@
     
             <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> De las siguientes actividades deportivas, ¿Cuáles ofrece su empresa?</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Cuáles actividades deportivas ofrece la empresa?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
                 <div class="panel panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="checkbox" ng-repeat="actividad in actividades">
+                            <div class="checkbox" ng-repeat="actividad in actividades| orderBy: 'id'">
                                 <label>
                                     <input type="checkbox" name="actividad" checklist-model="agencia.actividades" checklist-value="actividad.id"> @{{actividad.nombre}}
                                 </label>
-                                <span ng-if="actividad.id==15"><input type="text" name="otraD" style="display: inline-block;" class="form-control"  placeholder="Escriba su otra actividad deportiva" ng-model="agencia.otraD" ng-change="validarOtro(0)" ng-required="agencia.actividades.indexOf(15) != -1"/></span>
+                                <span ng-if="actividad.id==11"><input type="text" name="otraD" style="display: inline-block;" class="form-control"  placeholder="Escriba su otra actividad deportiva" ng-model="agencia.otraD" ng-change="validarOtro(0)" ng-required="agencia.actividades.indexOf(11) != -1"/></span>
                             </div>
                             
                         </div>
@@ -125,29 +125,29 @@
                 </div>
             </div>
     
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Mencione por favor, qué tours o recorridos ofrece su compañía</b></h3>
-                </div>
-                <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
-                <div class="panel panel-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="checkbox" ng-repeat="tour in toures">
-                                <label>
-                                    <input type="checkbox" name="tour" checklist-model="agencia.toures" checklist-value="tour.id"> @{{tour.nombre}}
-                                </label>
-                                <span ng-if="tour.id==14"><input type="text" name="otroT" style="display: inline-block;" class="form-control" placeholder="Escriba el otro tour" ng-model="agencia.otroT" ng-change="validarOtro(1)" ng-required="agencia.toures.indexOf(14) != -1" /></span>
-                            </div>
+            <!--<div class="panel panel-success">-->
+            <!--    <div class="panel-heading">-->
+            <!--        <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Mencione por favor, qué tours o recorridos ofrece su compañía</b></h3>-->
+            <!--    </div>-->
+            <!--    <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>-->
+            <!--    <div class="panel panel-body">-->
+            <!--        <div class="row">-->
+            <!--            <div class="col-md-12">-->
+            <!--                <div class="checkbox" ng-repeat="tour in toures">-->
+            <!--                    <label>-->
+            <!--                        <input type="checkbox" name="tour" checklist-model="agencia.toures" checklist-value="tour.id"> @{{tour.nombre}}-->
+            <!--                    </label>-->
+            <!--                    <span ng-if="tour.id==14"><input type="text" name="otroT" style="display: inline-block;" class="form-control" placeholder="Escriba el otro tour" ng-model="agencia.otroT" ng-change="validarOtro(1)" ng-required="agencia.toures.indexOf(14) != -1" /></span>-->
+            <!--                </div>-->
     
-                        </div>
-                        <span ng-show="carForm.$submitted || carForm.tour.$touched || carForm.otroT.$touched">
-                            <span class="label label-danger" ng-show="agencia.toures.length == 0">* El campo es requerido.</span>
-                            <span class="label label-danger" ng-show="carForm.otroT.$error.required">* Debe escribir cuál es el otro tour.</span>
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <!--            </div>-->
+            <!--            <span ng-show="carForm.$submitted || carForm.tour.$touched || carForm.otroT.$touched">-->
+            <!--                <span class="label label-danger" ng-show="agencia.toures.length == 0">* El campo es requerido.</span>-->
+            <!--                <span class="label label-danger" ng-show="carForm.otroT.$error.required">* Debe escribir cuál es el otro tour.</span>-->
+            <!--            </span>-->
+            <!--        </div>-->
+            <!--    </div>-->
+            <!--</div>-->
     
             <div class="row" style="text-align:center">
                 <input type="submit" ng-click="guardar()" class="btn btn-raised btn-success" value="Siguiente" />

@@ -11,7 +11,7 @@ situr.controller('caracterizacionAgenciaViajesCtrl', ['$scope','agenciaViajeServ
             agenciaViajeServi.getAgencia($scope.encuesta.id).then(function (data) {
                 if (data.Id > 0) {
                     var arrayAux = [];
-                    if(data.TipoServicios.length > 0){
+                    if(data.TipoServicios != null){
                         if(data.TipoServicios.servicios_agencias.length > 0){
                             for(var i=0; i<data.TipoServicios.servicios_agencias.length;i++){
                                 arrayAux.push(data.TipoServicios.servicios_agencias[i].id);
@@ -60,8 +60,12 @@ situr.controller('caracterizacionAgenciaViajesCtrl', ['$scope','agenciaViajeServ
                     });
                     setTimeout(function () {
     
-    
-                        window.location = "/ofertaempleo/ofertaagenciaviajes/"+$scope.encuesta.id;
+                        if(data.redireccion == true){
+                            window.location = "/ofertaempleo/ofertaagenciaviajes/"+$scope.encuesta.id;
+                        }else{
+                            window.location = "/ofertaempleo/encuestas/"+data.sitio;
+                        }
+                        
     
     
                     }, 1000);
@@ -91,13 +95,14 @@ situr.controller('caracterizacionAgenciaViajesCtrl', ['$scope','agenciaViajeServ
 situr.controller('ofertaAgenciaViajesCtrl', ['$scope','agenciaViajeServi', function ($scope,agenciaViajeServi) {
     $scope.encuesta = {};
     $scope.encuesta.personas = {};
-    
+    $scope.encuesta.ventaPlanes = false;
     $scope.$watch('encuesta.id', function () {
         
         if ($scope.encuesta.id != null) {
             $("body").attr("class", "charging");
             agenciaViajeServi.getOfertaAgencia($scope.encuesta.id).then(function (data) {
                 if (data.id > 0) {
+                    $scope.encuesta.ofrecePlanesConDestino = data.ofreceplanes;
                     if(data.personas_destino_con_viajes_turismos.length > 0){
                         $scope.encuesta.personas = data.personas_destino_con_viajes_turismos;
                         for(var i=0; i<$scope.encuesta.personas.length; i++){
@@ -112,6 +117,13 @@ situr.controller('ofertaAgenciaViajesCtrl', ['$scope','agenciaViajeServi', funct
                         $scope.encuesta.magdalena=parseInt(data.planes_santamarta.residentes)
                         $scope.encuesta.nacional=parseInt(data.planes_santamarta.noresidentes)
                         $scope.encuesta.internacional=parseInt(data.planes_santamarta.extrajeros)
+                    }
+                    
+                    for(var i=0; i<data.servicios_agencias.length; i++){
+                        if(data.servicios_agencias[i].id == 1){
+                            $scope.encuesta.ventaPlanes = true;
+                            break;
+                        }
                     }
                     
                 }
@@ -145,19 +157,24 @@ situr.controller('ofertaAgenciaViajesCtrl', ['$scope','agenciaViajeServi', funct
                 if (data.success) {
     
                     swal({
-                        title: "Realizado",
-                        text: "Sección guardada exitosamente",
-                        type: "success",
-                        timer: 1000,
-                        showConfirmButton: false
+                      title: "Realizado",
+                      text: "Se ha guardado satisfactoriamente la sección.",
+                      type: "success",
+                      showCancelButton: true,
+                      confirmButtonClass: "btn-info",
+                      cancelButtonClass: "btn-info",
+                      confirmButtonText: "Empleo",
+                      cancelButtonText: "Listado de encuestas",
+                      closeOnConfirm: false,
+                      closeOnCancel: false
+                    },
+                    function(isConfirm) {
+                      if (isConfirm) {
+                        window.location.href = '/ofertaempleo/empleomensual/'+$scope.id;
+                      } else {
+                        window.location.href = data.ruta;
+                      }
                     });
-                    setTimeout(function () {
-    
-    
-                        window.location = "/ofertaempleo/empleomensual/"+$scope.encuesta.id;
-    
-    
-                    }, 1000);
     
     
     

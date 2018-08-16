@@ -279,6 +279,9 @@
 										 <li id="menu-academico" ><a href="<?php echo e(asset('exportacion')); ?>"><i class="fa fa-file-text-o"></i> <span>Exportación</span></a>
 											
 										 </li>
+										 	 <li id="menu-academico" ><a href="<?php echo e(asset('ofertaempleo/listadoproveedores')); ?>"><i class="fa fa-table"></i> <span> Oferta y empleo</span></span></a>
+										  
+										</li>
 								
 									<li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Administrar paises</span> </span></a>
 										  <ul id="menu-academico-sub" >

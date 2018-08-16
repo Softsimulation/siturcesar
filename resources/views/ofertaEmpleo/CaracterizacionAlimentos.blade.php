@@ -68,17 +68,21 @@
             <div class="panel-heading">
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Especialidad del establecimiento:</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgSeleccionOpcion</b></div>
+            <div class="panel-footer"><b>Seleccione la opción</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
                         <select id="especialidad" name="especialidad" class="form-control" ng-options="especialidad.id as especialidad.nombre for especialidad in especialidades" ng-model="alimentos.especialidad" ng-required="true">
                             <option value="" disabled>Seleccione una especialidad</option>
                         </select>
+                        <input ng-show="alimentos.especialidad == 13" type="text" class="form-control" name="otro" ng-model="alimentos.especialidadOtra" ng-required="alimentos.especialidad == 13" placeholder="Ingrese otra especialidad"/> 
                     </div>
                 </div>
                 <span ng-show="carAlim.$submitted || carAlim.especialidad.$touched">
                     <span class="label label-danger" ng-show="carAlim.especialidad.$error.required">* El campo es requerido.</span>
+                </span>
+                <span ng-show="carAlim.$submitted || carAlim.otro.$touched">
+                    <span class="label label-danger" ng-show="carAlim.otro.$error.required">* El campo es requerido.</span>
                 </span>
             </div>
         </div>
@@ -89,7 +93,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿En el restaurante se sirven principalmente platos de comida o unidades de comida?</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgSeleccionOpcion</b></div>
+            <div class="panel-footer"><b>Seleccione la opción</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -108,7 +112,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Número de mesas disponibles</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgCompleteInformacion</b></div>
+            <div class="panel-footer"><b>Complete la información</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -127,7 +131,7 @@
             <div class="panel-heading">
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Número de asientos disponibles</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgCompleteInformacion</b></div>
+            <div class="panel-footer"><b>Complete la información</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
