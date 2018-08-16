@@ -137,6 +137,7 @@
                                     <select name="nombre" class="form-control" ng-model="exportacion.nombre" required>
                                         <option value="">--Seleccione--</option>
                                         <option value="receptor">Turismo Receptor</option>
+                                        <option value="interno">Turismo Interno</option>
                                     </select>
                                     <span class="messages" ng-show="addForm.$submitted || addForm.nombre.$touched">
                                         <span ng-show="addForm.nombre.$error.required">* El campo es requerido.</span>
