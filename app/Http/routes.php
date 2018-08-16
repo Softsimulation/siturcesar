@@ -20,6 +20,11 @@ Route::get('/', function () {
     
 });
 
+
+Route::get('/QueHacer','HomeController@viewQueHacer');
+Route::get('/Experiencias','HomeController@viewExperiencias');
+Route::get('/PST','HomeController@viewPST');
+
 Route::controller('/temporada','TemporadaController');
 Route::controller('/turismointerno','TurismoInternoController');
 
@@ -47,4 +52,5 @@ Route::controller('/usuario','UsuarioController');
 Route::controller('/sostenibilidadpst', 'SostenibilidadPstController');
 
 Route::controller('/sostenibilidadhogares','SostenibilidadHogaresController');
+Route::controller('/login','LoginController');
 

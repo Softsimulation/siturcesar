@@ -11,7 +11,7 @@ h1, h2, h3, h4, h5{
 }
 
 /*Transición suave para movimiento de elementos y evitar que el usuario copie el contenido del elemento*/
-.toolbar, #nav-menu-main {
+.toolbar, #nav-menu-main, .tile {
     transition: all .16s ease-in-out;
     -webkit-transition: all .16s ease-in-out;
     -moz-transition: all .16s ease-in-out;
@@ -39,7 +39,7 @@ header {
 }
 /*Flexbox*/
 
-.nav-bar, .nav-bar>.brand a, div#socialNetworks-fixed{
+.nav-bar, .nav-bar>.brand a, div#socialNetworks-fixed, .tiles{
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -345,6 +345,170 @@ footer{
     height: 32px;
     background-position: -5px -173px;
 }
+
+.tiles.wrap{
+    flex-wrap: wrap;
+}
+.tiles:before, .tiles:after{
+    display: table;
+    content: " ";
+}
+.tiles:after{
+    clear: both;
+}
+.tiles .tile{
+    display: inline-block;
+    float: left;
+    width: 100%;
+    margin: 0 .5rem;
+    margin-bottom: 1rem;
+    background-color: white;
+}
+.tiles .tile:hover{
+    position:relative;
+    z-index: 2;
+}
+.tiles .tile .tile-img{
+    height: 160px;
+}
+
+.tiles .tile.tile-lg .tile-img{
+    height: 180px;
+}
+.tile {
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: .5rem;
+    background-color: rgba(0,0,0,.5);
+}
+.tile .tile-img, .tile.inline-tile .tile-img {
+    width: 100%;
+    overflow: hidden;
+    position:relative;
+    background-color: #eee;
+}
+.tile .tile-img img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+}
+.tile .tile-img img, .tile.inline-tile .tile-img img{
+    max-width: 100%;
+}
+.tile .tile-img.overlap{
+    height: 100%;
+}
+.tile .tile-img .text-overlap{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0,0,0,.35);
+    color:white;
+    padding: .5rem;
+    z-index: 2;
+    background: rgba(248,80,50,0.05);
+    background: -moz-linear-gradient(top, rgba(248,80,50,0.05) 0%, rgba(0,0,0,0.8) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(248,80,50,0.05)), color-stop(100%, rgba(0,0,0,0.8)));
+    background: -webkit-linear-gradient(top, rgba(248,80,50,0.05) 0%, rgba(0,0,0,0.8) 100%);
+    background: -o-linear-gradient(top, rgba(248,80,50,0.05) 0%, rgba(0,0,0,0.8) 100%);
+    background: -ms-linear-gradient(top, rgba(248,80,50,0.05) 0%, rgba(0,0,0,0.8) 100%);
+    background: linear-gradient(to bottom, rgba(248,80,50,0.05) 0%, rgba(0,0,0,0.8) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#000000', GradientType=0 );
+    overflow: auto;
+}
+.tile .tile-img .text-overlap:hover{
+    background: rgba(0,0,0,0.07);
+    background: -moz-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+    background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(248,80,50,0.1)), color-stop(100%, rgba(0,0,0,0.85)));
+    background: -webkit-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+    background: -o-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+    background: -ms-linear-gradient(top, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.85) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f85032', endColorstr='#000000', GradientType=0 );
+}
+.tile .tile-img .text-overlap p, .tile .tile-img .text-overlap h3{
+    position:absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: .5rem;
+    font-family: 'Futura', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-shadow: 0px 1px 2px rgba(0,0,0,.65);
+    margin: 0;
+}
+.tile .tile-img .text-overlap p a, .tile .tile-img .text-overlap h3 a{
+    color:white;
+}
+.tile .tile-img .text-overlap p a:hover, .tile .tile-img .text-overlap h3 a:hover{
+    text-decoration: underline;
+    text-decoration-style: solid 
+}
+.tile .tile-body {
+    padding: .5rem 4%;
+    width: 100%;
+}
+.tile .tile-caption p{
+    margin: 0;
+    
+}
+.tile .tile-caption p a, .tile .tile-caption p{
+    color: #004a87;
+}
+.tile .tile-caption h3 {
+    font-size: 1.125rem;
+    margin: .5rem 0;
+    line-height: 1.375rem;
+}
+.tile .tile-caption h3 a{
+    font-weight: 700;
+    color: #1c4185;
+}
+
+.tile .tile-caption .date, .tile .date {
+    font-size: 0.875rem;
+}
+.tile .tile-caption + a, .tile .tile-caption + p + a, .tile .tile-caption + .buttons {
+    display:inline-block;
+    float:right;    
+}
+.tile .tile-buttons{
+    text-align: right;
+    padding: .325rem .5rem;
+    background-color: transparent;
+}
+.tile .tile-buttons button{
+    border: 0;
+    background-color: inherit;
+    padding: 2px 6px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.tile .tile-buttons button:hover{
+    background-color: rgba(0,0,0,.1);
+}
+.tile .tile-buttons .inline-buttons:before, .tile .tile-buttons .inline-buttons:after{
+    content: " ";
+    display: table;
+}
+.tile .tile-buttons .inline-buttons:before{
+    clear: both;
+}
+.tile .tile-buttons .inline-buttons button, .tile .tile-buttons .inline-buttons a{
+    float: left;
+    padding: 2px 3px;
+}
+.inline-buttons{
+    display:inline-block;
+    vertical-align: top;
+}
+
 .tile.inline-tile, #events .tile.inline-tile .tile-img{
     display: -moz-box;
     display: -ms-flexbox;
@@ -380,10 +544,7 @@ footer{
     margin: .5rem 0;
     line-height: 1.3;
 }
-.tile .tile-body {
-    padding: 1rem 4% 2rem;
-    width: 100%;
-}
+
 .tile .date, .tile .tile-caption .date, .tile h3 small {
     font-size: .875rem;
     margin-bottom: .5rem;
@@ -408,6 +569,7 @@ footer{
     font-size: 2.325rem;
     line-height: 2.25rem;
 }
+
 #logosFooter{
     background: white;
     padding: 1rem;
@@ -415,10 +577,10 @@ footer{
     box-shadow: 0px 1px 3px 0px rgba(0,0,0,.4);
 }
 footer{
-			background-color: green;
-			color: white;
-			padding: 1rem 0;
-		}
+	background-color: green;
+	color: white;
+	padding: 1rem 0;
+}
 
 /*Fonts*/
 @font-face {

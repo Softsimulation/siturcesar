@@ -186,7 +186,7 @@
                                 <!--P4P10Select1. Seleccione un Encuestador-->
                                 <select class="form-control" id="inputDepartamentoResidencia" name="encuestador" ng-model="encuesta.Encuestador" ng-required="true">
                                     <option value="" disabled>Seleccione un encuestador</option>
-                                    <option ng-repeat="item in encuestadores" value="{{item.id}}">{{item.asp_net_user.username}}</option>
+                                    <option ng-repeat="item in encuestadores" value="{{item.id}}">{{item.user.username}}</option>
                                 </select>
                                 <!--P4P10Alert1. El campo Barrio de residencia es requerido-->
                                 <span ng-show="DatosForm.$submitted || DatosForm.barrio.$touched">
@@ -229,6 +229,7 @@
                                 </div>
                             </td>
                             <td style="text-align: right">
+                                <a href="/turismointerno/viajesrealizados/{{i.id}}" class="btn btn-success btn-sm" style="margin: 0;padding: 5px 10px;" ng-if="i.id != null && i.es_viajero && i.es_residente" title="Diligenciar encuesta"><i class="material-icons">content_paste</i></a>
                                 <button type="button" class="btn btn-warning btn-sm" style="margin: 0;padding: 5px 10px;" ng-click="nuevo($index)" title="Editar información de integrante"><i class="material-icons">mode_edit</i></button>
                                 <button type="button" class="btn btn-danger btn-sm" style="margin: 0;padding: 5px 10px;" ng-click="Eliminar($index)" title="Eliminar integrante"><i class="material-icons">delete</i></button>
 
@@ -303,7 +304,6 @@
 
         <div class="row" style="text-align:center">
             <input type="submit" class="btn btn-raised btn-success" ng-click="enviar()" value="Guardar" />
-            <a href="/turismointerno/viajesrealizados/<?php echo e($id); ?>" class="btn btn-success">Siguiente</a>
         </div>
 
         <div class='carga'>

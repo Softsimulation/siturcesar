@@ -1,0 +1,32 @@
+/*header{*/
+/*    position: static;*/
+/*    background-color: white;*/
+/*    margin-bottom: 1rem;*/
+/*}*/
+.nav-bar > .brand a img{
+    height: auto;
+}
+/*main{*/
+/*    padding: 2% 0;*/
+/*}*/
+.nav-bar > .brand a{
+    padding: 0;
+}
+.nav-bar > .brand a img{
+    background-color: white;
+    padding: .5rem 6px;
+}
+.nav-bar nav>ul>li>a:hover {
+    border-bottom: 2px solid white;
+}
+
+
+@media only screen and (min-width: 768px) {
+    
+}
+@media only screen and (min-width: 992px) {
+    
+}
+@media only screen and (min-width: 1200px) {
+    
+}

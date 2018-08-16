@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Grupo_Viaje;
 use App\Models\Digitador;
 use App\Models\Opcion_Lugar;
@@ -67,7 +68,18 @@ use App\Models\Lugar_Aplicacion_Encuesta;
 
 class TurismoReceptorCorsController extends Controller
 {
-
+    public function __construct()
+    {
+        
+        $this->middleware('auth');
+        $this->middleware('role:Admin');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+        
+        
+        
+    }
     
     public function getInformaciondatoscrear(){
         
@@ -209,7 +221,7 @@ class TurismoReceptorCorsController extends Controller
 		$visitante->telefono = isset($request->Telefono) ? $request->Telefono : null;
 		$visitante->celular = isset($request->Celular) ? $request->Celular : null;
 		$visitante->destino_principal = isset($request->Destino) ? $request->Destino : null;
-		$visitante->digitada = 1;
+		$visitante->digitada = $this->user->digitador->id;
 		$visitante->edad = $request->Edad;
 		$visitante->email = isset($request->Email) ? $request->Email : null;
 		$visitante->encuestador_creada = $request->Encuestador;
@@ -249,7 +261,7 @@ class TurismoReceptorCorsController extends Controller
             'estado_id' => $condicion == 1  ? 3 : 1,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => 'La encuesta ha sido creada',
-            'usuario_id' => 1
+            'usuario_id' => $this->user->id
         ]));
         
         
@@ -396,7 +408,7 @@ class TurismoReceptorCorsController extends Controller
 		$visitante->telefono = isset($request->Telefono) ? $request->Telefono : null;
 		$visitante->celular = isset($request->Celular) ? $request->Celular : null;
 		$visitante->destino_principal = isset($request->Destino) ? $request->Destino : null;
-		$visitante->digitada = 1;
+		$visitante->digitada = $this->user->digitador->id;
 		$visitante->edad = $request->Edad;
 		$visitante->email = isset($request->Email) ? $request->Email : null;
 		$visitante->encuestador_creada = $request->Encuestador;
@@ -436,7 +448,7 @@ class TurismoReceptorCorsController extends Controller
             'estado_id' => $condicion == 1 ? 3 : $visitante->ultima_sesion != 7 ? 2 : 3,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => 'Se ha modificado la sección de información general.',
-            'usuario_id' => 1
+            'usuario_id' => $this->user->id
         ]));
     	
     	$visitante->save();
@@ -666,7 +678,7 @@ class TurismoReceptorCorsController extends Controller
             'estado_id' => $visitante->ultima_sesion != 7 ? 2 : 3,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => $sw == 0 ? 'Se ha creado en la sección estancia y visitados' : 'Se ha editado la sección estancia y visitados',
-            'usuario_id' => 1
+            'usuario_id' => $this->user->id
         ]));
 		
 		$visitante->save();
@@ -781,7 +793,7 @@ class TurismoReceptorCorsController extends Controller
             'estado_id' => $visitante->ultima_sesion != 7 ? 2 : 3,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => $sw == 0 ? 'Se completó la sección de transporte' : 'Se editó la sección de transporte',
-            'usuario_id' => 1
+            'usuario_id' => $this->user->id
         ]));
 		
 		$visitante->save();
@@ -881,7 +893,7 @@ class TurismoReceptorCorsController extends Controller
             'estado_id' => $visitante->ultima_sesion != 7 ? 2 : 3,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => $sw == 0 ? 'Se completó la sección de viaje en grupo' : 'Se editó la sección de viaje en grupo',
-            'usuario_id' => 1
+            'usuario_id' => $this->user->id
         ]));
 		
 		$visitante->save();
@@ -1220,7 +1232,7 @@ class TurismoReceptorCorsController extends Controller
             'estado_id' => $visitante->ultima_sesion == 7?2:1,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => $visitante->ultima_sesion ==5?"Se ha creado la sección de gastos":"Se ha editado la sección de gastos",
-            'usuario_id' => 1
+            'usuario_id' => $this->user->id
         ]));
         $visitante->save();
         return ["success"=>true];
@@ -1425,7 +1437,7 @@ class TurismoReceptorCorsController extends Controller
             'estado_id' => $visitante->ultima_sesion != 7 ? 2 : 3,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => $sw == 0 ? 'Se completó la sección de fuente de percepción del visitante' : 'Se editó la sección de fuente de percepción del visitante',
-            'usuario_id' => 1
+            'usuario_id' => $this->user->id
         ]));
 		
 		$visitante->save();
@@ -1605,7 +1617,7 @@ class TurismoReceptorCorsController extends Controller
             'estado_id' =>3,
             'fecha_cambio' => date('Y-m-d H:i:s'), 
             'mensaje' => $sw == 0 ? 'Se completó la sección de fuente de información del visitante' : 'Se editó la sección de fuente de información del visitante',
-            'usuario_id' => 1
+            'usuario_id' => $this->user->id
         ]));
 		
         $visitante->save();

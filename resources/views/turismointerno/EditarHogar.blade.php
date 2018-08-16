@@ -231,6 +231,7 @@
                                 </div>
                             </td>
                             <td style="text-align: right">
+                                <a href="/turismointerno/viajesrealizados/@{{i.id}}" class="btn btn-success btn-sm" style="margin: 0;padding: 5px 10px;" ng-if="i.id != null && i.es_viajero && i.es_residente" title="Diligenciar encuesta"><i class="material-icons">content_paste</i></a>
                                 <button type="button" class="btn btn-warning btn-sm" style="margin: 0;padding: 5px 10px;" ng-click="nuevo($index)" title="Editar información de integrante"><i class="material-icons">mode_edit</i></button>
                                 <button type="button" class="btn btn-danger btn-sm" style="margin: 0;padding: 5px 10px;" ng-click="Eliminar($index)" title="Eliminar integrante"><i class="material-icons">delete</i></button>
 
@@ -305,7 +306,6 @@
 
         <div class="row" style="text-align:center">
             <input type="submit" class="btn btn-raised btn-success" ng-click="enviar()" value="Guardar" />
-            <a href="/turismointerno/viajesrealizados/{{$id}}" class="btn btn-success">Siguiente</a>
         </div>
 
         <div class='carga'>

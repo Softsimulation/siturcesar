@@ -101,7 +101,7 @@
         <div class="row">
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#hogares" aria-controls="hogares" role="tab" data-toggle="tab">Hogares</a></li>
-            <!--    <li role="presentation"><a href="#personas" aria-controls="personas" role="tab" data-toggle="tab">Personas</a></li> -->
+                <li role="presentation"><a href="#personas" aria-controls="personas" role="tab" data-toggle="tab">Personas</a></li>
             </ul>
         </div>
 
@@ -143,7 +143,7 @@
                                     <td>@{{item.edificacione.barrio.nombre}}</td>
                                     <td>@{{item.edificacione.direccion}}</td>
                                     <td>@{{item.edificacione.estrato.nombre}}</td>
-                                    <td>@{{item.digitadore.asp_net_user.username}}</td>
+                                    <td>@{{item.digitadore.user.username}}</td>
                                     <td>@{{item.edificacione.nombre_entrevistado}}</td>
                                     <td>@{{item.fecha_realizacion }}</td>
                                     <td>
@@ -180,7 +180,7 @@
 
                 </div>
             </div>
-<!--
+
             <div role="tabpanel" class="tab-pane fade" id="personas">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 col-md-6">
@@ -205,7 +205,6 @@
                                     <th>IdPersona</th>
                                     <th>IdHogar</th>
                                     <th>Nombre</th>
-                                    <th>Correo</th>
                                     <th>Dirección</th>
                                     <th>Estrato</th>
                                     <th>Encuestador</th>
@@ -219,10 +218,9 @@
                                     <td>@{{item.id}}</td>
                                     <td>@{{item.hogare.id}}</td>
                                     <td>@{{item.nombre}}</td>
-                                    <td>@{{item.email}}</td>
                                     <td>@{{item.hogare.edificacione.direccion}}</td>
-                                    <td>@{{item.hogare.edificacione.estrato}}</td>
-                                    <td>@{{item.hogare.digitadore.asp_net_user.username}}</td>
+                                    <td>@{{item.hogare.edificacione.estrato.nombre}}</td>
+                                    <td>@{{item.hogare.digitadore.user.username}}</td>
                                     <td>@{{item.viajes[0].fecha_inicio}}</td>
                                     <td>@{{item.viajes[0].ultima_sesion}}</td>
                                     <td>
@@ -259,7 +257,7 @@
 
                 </div>
             </div>
-            -->
+           
         </div>
 
 

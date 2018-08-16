@@ -6,10 +6,23 @@ use Illuminate\Http\Request;
 use App\Jobs\Exportarturismoreceptor;
 use App\Http\Requests;
 use App\Models\Exportacion;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class ExportacionController extends Controller
 {
-  
+    public function __construct()
+    {
+        
+        $this->middleware('auth');
+        $this->middleware('role:Admin');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+        
+        
+        
+    }
     
     public function getIndex(){
         
