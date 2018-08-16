@@ -273,24 +273,27 @@
 										 <li id="menu-academico" ><a href="{{asset('temporada')}}"><i class="fa fa-file-text-o"></i> <span>Turismo Interno y Emisor</span></a>
 											
 										 </li>
-										 <li id="menu-academico" ><a href="{{asset('usuario/listadousuarios')}}"><i class="fa fa-file-text-o"></i> <span>Administrar usuarios</span></a>
-											
+										 <li id="menu-academico" ><a href="{{asset('ofertaempleo/listadoproveedores')}}"><i class="fa fa-table"></i> <span> Oferta y empleo</span></span></a>
+										  
 										 </li>
+										 <li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Sostenibilidad</span> </span></a>
+    										  <ul id="menu-academico-sub" >
+    										    <li id="menu-academico-avaliacoes" ><a href="{{asset('sostenibilidadhogares/encuestas')}}">Hogares</a></li>
+    										  </ul>
+									     </li>
 										 <li id="menu-academico" ><a href="{{asset('exportacion')}}"><i class="fa fa-file-text-o"></i> <span>Exportación</span></a>
 											
 										 </li>
-										 	 <li id="menu-academico" ><a href="{{asset('ofertaempleo/listadoproveedores')}}"><i class="fa fa-table"></i> <span> Oferta y empleo</span></span></a>
-										  
-										</li>
 								
-									<li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Administrar paises</span> </span></a>
-										  <ul id="menu-academico-sub" >
-										    <li id="menu-academico-avaliacoes" ><a href="{{asset('administrarpaises')}}">Paises</a></li>
-										    <li id="menu-academico-boletim" ><a href="{{asset('administrardepartamentos')}}">Departamentos</a></li>
-											<li id="menu-academico-boletim" ><a href="{{asset('administrarmunicipios')}}">Municipios</a></li>
-											
-										  </ul>
-									 </li>
+    									 <li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Administrar paises</span> </span></a>
+    										  <ul id="menu-academico-sub" >
+    										    <li id="menu-academico-avaliacoes" ><a href="{{asset('administrarpaises')}}">Paises</a></li>
+    										    <li id="menu-academico-boletim" ><a href="{{asset('administrardepartamentos')}}">Departamentos</a></li>
+    											<li id="menu-academico-boletim" ><a href="{{asset('administrarmunicipios')}}">Municipios</a></li>
+    											
+    										  </ul>
+    									 </li>
+									 
 								
 									 <!--
 									 <li><a href="{{asset('MuestraMaestra/periodos')}}"><i class="lnr lnr-envelope"></i> <span>Muestra Maestra</span></a>
