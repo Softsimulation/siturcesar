@@ -29,16 +29,28 @@ angular.module('oferta.agenciasOperadoras', ["checklist-model","ofertaService"])
         ofertaServi.guardarOcupacionOperadora($scope.agencia).then(function (data) {
             $("body").attr("class", "cbp-spmenu-push")
             if (data.success) {
+                
+                
                 swal({
-                    title: "Realizado",
-                    text: "Se ha guardado satisfactoriamente la sección.",
-                    type: "success",
-                    timer: 1000,
-                    showConfirmButton: false
+                  title: "Realizado",
+                  text: "Se ha guardado satisfactoriamente la sección.",
+                  type: "success",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-info",
+                  cancelButtonClass: "btn-info",
+                  confirmButtonText: "Empleo",
+                  cancelButtonText: "Listado de encuestas",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+                },
+                function(isConfirm) {
+                  if (isConfirm) {
+                    window.location.href = '/ofertaempleo/empleomensual/'+$scope.id;
+                  } else {
+                    window.location.href = data.ruta;
+                  }
                 });
-                setTimeout(function () {
-                    window.location.href = "/ofertaempleo/empleomensual/" + $scope.id;
-                }, 1000);
+                
             } else {
                 $scope.errores = data.errores
                 swal("Error", "Verifique la información.", "error")
@@ -76,23 +88,24 @@ angular.module('oferta.agenciasOperadoras', ["checklist-model","ofertaService"])
     $scope.validarOtro = function (sw) {
         if (sw == 0) {
             if ($scope.agencia.otraD != '' && $scope.agencia.otraD != null) {
-                if ($scope.agencia.actividades.indexOf(15) == -1) {
-                    $scope.agencia.actividades.push(15)
+                if ($scope.agencia.actividades.indexOf(11) == -1) {
+                    $scope.agencia.actividades.push(11)
                 }
             }
-        } else {
-            if (sw == 1) {
-                if ($scope.agencia.otroT != '' && $scope.agencia.otroT != null) {
-                    if ($scope.agencia.toures.indexOf(14) == -1) {
-                        $scope.agencia.toures.push(14)
-                    }
-                }
-            }
-        }
+        } 
+        // else {
+        //     if (sw == 1) {
+        //         if ($scope.agencia.otroT != '' && $scope.agencia.otroT != null) {
+        //             if ($scope.agencia.toures.indexOf(14) == -1) {
+        //                 $scope.agencia.toures.push(14)
+        //             }
+        //         }
+        //     }
+        // }
     }
 
     $scope.guardar = function () {
-        if (!$scope.carForm.$valid || $scope.agencia.actividades.length == 0 || $scope.agencia.toures.length == 0) {
+        if (!$scope.carForm.$valid || $scope.agencia.actividades.length == 0 ) {
             return
         }
 

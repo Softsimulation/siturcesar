@@ -21,7 +21,7 @@ class Transporte extends Model
      */
     protected $fillable = ['encuestas_id', 'tipos_transporte_oferta_id', 'numero_vehiculos', 'personas'];
     public $timestamps = false;
-     public $incrementing = false;
+     //public $incrementing = false;
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

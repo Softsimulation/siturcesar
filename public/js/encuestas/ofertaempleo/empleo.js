@@ -22,6 +22,7 @@ angular.module('empleo.Empleo', [])
     });
 
 
+    
 
     $scope.cargo = function(tipo){
         if($scope.empleo.Sexo){
@@ -85,7 +86,29 @@ angular.module('empleo.Empleo', [])
 
         }   
 
+    $scope.totalfila = function(obj,tipo,sexo){
+        if(obj){
+                for(i = 0; i < obj.length ; i ++){
+                    
+                    if(obj[i].tipo_cargo_id == tipo && obj[i].sexo == sexo ){
+                        var suma = 0;
+                        for (item in obj[i]) {
+                        if(!(item == "id" || item == "sexo" || item == "tipo_cargo_id" || item == "encuestas_id" || item == "encuesta_id"))
+                                suma = suma + (obj[i][item] == null ? 0 : (obj[i][item] == undefined ? 0 :obj[i][item]));
+                              
+                            
+                        }
+                        return suma;
+                    }
+                    
+                }
+        
+        }
+        return 0;
 
+                
+    }
+    
 
     $scope.edadempleado = function(tipo,sexo){
         if($scope.empleo.Edad){
@@ -100,7 +123,7 @@ angular.module('empleo.Empleo', [])
         
         obj = {};
         obj.tipo_cargo_id = tipo;
-        obj.sexo = sexo;
+        obj.sexo = sexo == 1 ? true : false ;
 		obj.docea18 = 0;
 		obj.diecinuevea25 = 0;
 		obj.ventiseisa40 = 0;
@@ -127,7 +150,7 @@ angular.module('empleo.Empleo', [])
         
         obj = {};
         obj.tipo_cargo_id = tipo;
-        obj.sexo = sexo;
+        obj.sexo = sexo == 1 ? true : false;
 		obj.ninguno = 0;
 		obj.posgrado = 0;
 		obj.bachiller = 0;
@@ -155,7 +178,7 @@ angular.module('empleo.Empleo', [])
         
         obj = {};
         obj.tipo_cargo_id = tipo;
-        obj.sexo = sexo;
+        obj.sexo = sexo == 1 ? true : false ;
         obj.sabeningles = 0;
         $scope.empleo.ingles.push(obj);
         
@@ -177,10 +200,9 @@ angular.module('empleo.Empleo', [])
         }
         
         obj = {};
+        obj.sexo = sexo == 1 ? true : false ;
         obj.tipo_cargo_id = tipo;
-        obj.sexo = sexo;
-        obj.tipo_cargo_id = tipo;
-        obj.sexo = sexo;
+        obj.sexo = sexo == 1 ? true : false ;
 		obj.contrato_direto = 0;
 		obj.personal_permanente = 0;
 		obj.personal_agencia = 0;
@@ -209,7 +231,7 @@ angular.module('empleo.Empleo', [])
         
         obj = {};
         obj.tipo_cargo_id = tipo;
-        obj.sexo = sexo;
+        obj.sexo = sexo == 1 ? true : false ;
 		obj.tiempo_completo = 0;
 		obj.medio_tiempo = 0;
         $scope.empleo.Empleo.push(obj);
@@ -232,13 +254,27 @@ angular.module('empleo.Empleo', [])
         
         obj = {};
         obj.tipo_cargo_id = tipo;
-        obj.sexo = sexo;
+        obj.sexo = sexo == 1 ? true : false ;
 		obj.valor = 0;
         $scope.empleo.Remuneracion.push(obj);
         
         return obj;
 
         }        
+    }
+
+    $scope.promedio = function(){
+        
+        if( $scope.remuneracion(1,1) == null){
+            return 0;
+        }
+        var valor =  ($scope.remuneracion(1,1).valor*$scope.cargo(1).hombres) + ($scope.remuneracion(1,0).valor*$scope.cargo(1).mujeres) + ($scope.remuneracion(2,1).valor*$scope.cargo(2).hombres) + ($scope.remuneracion(2,0).valor*$scope.cargo(2).mujeres) + ($scope.remuneracion(3,1).valor*$scope.cargo(3).hombres) + ($scope.remuneracion(3,0).valor*$scope.cargo(3).mujeres) ; 
+        
+        var valor2 =  ( $scope.cargo(1).mujeres + $scope.cargo(1).hombres + $scope.cargo(2).mujeres + $scope.cargo(2).hombres + $scope.cargo(3).mujeres + $scope.cargo(3).hombres)
+        if (valor2 != 0){ 
+        return valor / valor2
+        }
+        return 0
     }
 
     $scope.validacion = function(){
@@ -405,32 +441,12 @@ $scope.$watch('id', function () {
             return true;
         }
         
-        if($scope.empleo.medios.length < 1 || $scope.empleo.medios.length >3 ){
-            
-            return true;
-        }
-       
-       if($scope.empleo.tipos.length < 1 || $scope.empleo.tipos.length >3 ){
-            
-            return true;
-        }
-        
-        if($scope.empleo.lineasadmin.length < 1 || $scope.empleo.lineasadmin.length >3 ){
-            
-            return true;
-        }
-        
-        if($scope.empleo.lineasopvt.length < 1 || $scope.empleo.lineasopvt.length >3 ){
-            
-            return true;
-        }
-        return false;
+    
     }
     
     
     $scope.guardar = function () {
         $scope.empleo.Encuesta = $scope.id;
-
 
         if ($scope.empleoForm.$valid || $scope.validar()) {
             $("body").attr("class", "cbp-spmenu-push charging")
@@ -445,7 +461,7 @@ $scope.$watch('id', function () {
                         showConfirmButton: false
                     });
                     setTimeout(function () {
-                          window.location.href = "/ofertaempleo/encuesta/" + data.idsitio;
+                          window.location.href = "/ofertaempleo/encuestas/" + data.idsitio;
                     }, 1000);
     
     

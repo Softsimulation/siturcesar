@@ -18,16 +18,8 @@ situr.controller('caracterizacionTransporteCtrl', ['$scope','transporteServi', f
                             $scope.transporte.Terrestre = data.transporte[i].tipos_transporte_oferta_id;
                             $scope.transporte.VehiculosTerrestre = data.transporte[i].numero_vehiculos;
                             $scope.transporte.PersonasVehiculosTerrestre = data.transporte[i].personas;
-                        }
-                        if (data.transporte[i].tipos_transporte_oferta_id == 2) {
-                            $scope.transporte.Aereo = data.transporte[i].tipos_transporte_oferta_id;
-                            $scope.transporte.VehiculosAereo = data.transporte[i].numero_vehiculos;
-                            $scope.transporte.PersonasVehiculosAereo = data.transporte[i].personas;
-                        }
-                        if (data.transporte[i].tipos_transporte_oferta_id == 3) {
-                            $scope.transporte.Maritimo = data.transporte[i].tipos_transporte_oferta_id;
-                            $scope.transporte.VehiculosMaritimo = data.transporte[i].numero_vehiculos;
-                            $scope.transporte.PersonasVehiculosMaritimo = data.transporte[i].personas;
+                            $scope.transporte.TotalTerrestre = parseInt(data.transporte[i].oferta_transportes[0].personas_total);
+                            $scope.transporte.TarifaTerrestre = parseInt(data.transporte[i].oferta_transportes[0].tarifa_promedio);
                         }
                     }
                     if (data.success == 1) {
@@ -48,8 +40,8 @@ situr.controller('caracterizacionTransporteCtrl', ['$scope','transporteServi', f
     })
 
     $scope.guardar = function () {
-        if (!$scope.caracterizacionForm.$valid) {
-            swal("Error", "Formulario incompleto corrige los errores", "error");
+        if (!$scope.caracterizacionForm.$valid || $scope.transporte.TotalTerrestre > $scope.transporte.PersonasVehiculosTerrestre) {
+            swal("Error", "Formulario presenta errores, favor corregirlos", "error");
             return;
         }
         $scope.transporte.id = $scope.id;
@@ -63,16 +55,27 @@ situr.controller('caracterizacionTransporteCtrl', ['$scope','transporteServi', f
         transporteServi.guardarCaracterizacionTransporte($scope.transporte).then(function (data) {
             if (data.success == true) {
                 $("body").attr("class", "cbp-spmenu-push")
+                
                 swal({
-                    title: "Realizado",
-                    text: "Se ha guardado satisfactoriamente la sección.",
-                    type: "success",
-                    timer: 1000,
-                    showConfirmButton: false
+                  title: "Realizado",
+                  text: "Se ha guardado satisfactoriamente la sección.",
+                  type: "success",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-info",
+                  cancelButtonClass: "btn-info",
+                  confirmButtonText: "Empleo",
+                  cancelButtonText: "Listado de encuestas",
+                  closeOnConfirm: false,
+                  closeOnCancel: false
+                },
+                function(isConfirm) {
+                  if (isConfirm) {
+                    window.location.href = '/ofertaempleo/empleomensual/'+$scope.id;
+                  } else {
+                    window.location.href = data.ruta;
+                  }
                 });
-                setTimeout(function () {
-                    window.location.href = "/ofertaempleo/ofertatransporte/" + $scope.id;
-                }, 1000);
+                
             } else {
                 $("body").attr("class", "cbp-spmenu-push")
                 $scope.errores = data.errores;
@@ -163,7 +166,7 @@ situr.controller('ofertaTransporteCtrl', ['$scope','transporteServi', function (
                     showConfirmButton: false
                 });
                 setTimeout(function () {
-                    window.location.href = "/ofertaempleo/empleomensual/" + $scope.id;
+                    window.location.href = data.ruta;
                 }, 1000);
             } else {
                 $("body").attr("class", "cbp-spmenu-push")

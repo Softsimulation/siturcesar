@@ -24,6 +24,9 @@
     background-color: inherit;
     -webkit-mask: url(../../img/border-curve.svg) no-repeat 100% 100%;
     mask: url(../../img/border-curve.svg);
+    mask-repeat: no-repeat;
+    mask-size: 100% 100%;
+    
 }
 .brand:before{
     height: calc(100% - 35px);
@@ -34,6 +37,20 @@
 .brand img {
     margin: .5rem 8%;
 }
+/*Otros elementos*/
+.tile .tile-img .text-overlap p, .tile .tile-img .text-overlap h3{
+    font-size: 0.8125rem;
+}
+.tiles .tile.tile-lg .tile-img{
+    height: 200px;
+}
+.tiles .tile:not(.inline-tile){
+    width: calc(33.3% - 1rem);
+}
+.tiles.tile-list .tile:not(.inline-tile){
+    width: calc(50% - 1rem);
+}
+
 .tile.inline-tile .tile-body>p {
     display:none;
 }

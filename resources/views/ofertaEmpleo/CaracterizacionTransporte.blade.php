@@ -43,9 +43,9 @@
 
 @section('TitleSection', 'Caracterización de transporte')
 
-@section('Progreso', '30%')
+@section('Progreso', '50%')
 
-@section('NumSeccion', '30%')
+@section('NumSeccion', '50%')
 @section('app','ng-app="ofertaempleo"')
 @section('controller','ng-controller="caracterizacionTransporteCtrl"')
 
@@ -61,7 +61,7 @@
         </div>
     </div>
     <form name="caracterizacionForm" novalidate>
-        <div class="panel panel-success">
+        <!--<div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿Con que tipo de transporte cuenta?</b></h3>
             </div>
@@ -95,18 +95,18 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
-        <div class="panel panel-success" ng-if="transporte.Terrestre">
+        <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Terrestre Municipal</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Servicio de transporte especial</b></h3>
             </div>
             <div class="panel-footer"><b>@Resource.EncuestaMsgCampoNumero</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label" for="vehiculosTerrestre">¿Con cuantos vehículos cuenta la empresa para el transporte de pasajeros?</label>
+                            <label class="control-label" for="vehiculosTerrestre">¿Cuántos vehículos estuvieron disponibles para el servicio de transporte de pasajeros en el mes anterior?</label>
                             <input class="form-control" type="number" id="vehiculosTerrestre" name="vehiculosTerrestre" ng-model="transporte.VehiculosTerrestre" ng-required="true" placeholder="Digite su respuesta">
                             <span ng-show="caracterizacionForm.$submitted || caracterizacionForm.vehiculosTerrestre.$touched">
                                 <span class="label label-danger" ng-show="caracterizacionForm.vehiculosTerrestre.$error.required">*El campo es requerido.</span>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label class="control-label" for="personasVehiculosTerrestre">¿Cuantas personas pueden transportar máximo su flota de vehículos?</label>
+                            <label class="control-label" for="personasVehiculosTerrestre">¿Cuál fue la capacidad para transportar pasajeros en el mes anterior?</label>
                             <input class="form-control" type="number" id="personasVehiculosTerrestre" name="personasVehiculosTerrestre" ng-model="transporte.PersonasVehiculosTerrestre" ng-required="true" placeholder="Digite su respuesta">
                             <span ng-show="caracterizacionForm.$submitted || caracterizacionForm.personasVehiculosTerrestre.$touched">
                                 <span class="label label-danger" ng-show="caracterizacionForm.personasVehiculosTerrestre.$error.required">*El campo es requerido.</span>
@@ -126,11 +126,34 @@
 
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="tarifaTerrestre">¿Cuál fue la tarifa promedio ($) del servicio del transporte en el mes anterior?</label>
+                            <input class="form-control" type="number" id="tarifaTerrestre" name="tarifaTerrestre" ng-model="transporte.TarifaTerrestre" min="1000" ng-required="true" placeholder="Digite su respuesta">
+                            <span ng-show="caracterizacionForm.$submitted || caracterizacionForm.tarifaTerrestre.$touched">
+                                <span class="label label-danger" ng-show="caracterizacionForm.tarifaTerrestre.$error.required">*El campo es requerido.</span>
+                                <span class="label label-danger" ng-show="caracterizacionForm.tarifaTerrestre.$error.number">*El campo debe ser un número.</span>
+                                <span class="label label-danger" ng-show="caracterizacionForm.tarifaTerrestre.$error.min">*El campo debe ser mayor a $1,000.</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label" for="totalTerrestre">¿Cuántos pasajeros movilizó en el mes anterior?</label>
+                            <input class="form-control" type="number" id="totalTerrestre" name="totalTerrestre" ng-model="transporte.TotalTerrestre" ng-required="true" placeholder="Digite su respuesta">
+                            <span ng-show="caracterizacionForm.$submitted || caracterizacionForm.totalTerrestre.$touched">
+                                <span class="label label-danger" ng-show="caracterizacionForm.totalTerrestre.$error.required">*El campo es requerido.</span>
+                                <span class="label label-danger" ng-show="caracterizacionForm.totalTerrestre.$error.number">*El campo debe ser un número.</span>
+                                <span class="label label-danger" ng-show="transporte.TotalTerrestre > transporte.PersonasVehiculosTerrestre">*No puede ser mayor a la capacidad para transportar.</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="panel panel-success" ng-if="transporte.Aereo">
+        <!--<div class="panel panel-success" ng-if="transporte.Aereo">
             <div class="panel-heading">
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Aéreo</b></h3>
             </div>
@@ -192,11 +215,11 @@
                 </div>
 
             </div>
-        </div>
+        </div>-->
 
         <div class="row" style="text-align:center">
            
-            <input type="submit" class="btn btn-raised btn-success" ng-click="guardar()" value="@Resource.EncuestaBtnSiguiente" ng-disabled="(transporte.Aereo == undefined || transporte.Aereo == false) && (transporte.Terrestre == undefined || transporte.Terrestre == false) && (transporte.Maritimo == undefined || transporte.Maritimo == false)"/>
+            <input type="submit" class="btn btn-raised btn-success" ng-click="guardar()" value="Siguiente"/>
         </div>
     </form>
     <div class='carga'>

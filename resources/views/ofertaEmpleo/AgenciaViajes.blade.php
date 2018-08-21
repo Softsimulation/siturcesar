@@ -97,7 +97,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿La Agencia ofrece planes turísticos con destino Santa Marta y/o Magdalena?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>¿La Agencia ofrece planes turísticos con destino Cesar?</b></h3>
             </div>
             <div class="panel-footer"><b>Selección única opción</b></div>
             <div class="panel-body">

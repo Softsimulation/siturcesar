@@ -62,4 +62,8 @@ class Provision_Alimento extends Model
     {
         return $this->hasOne('App\Models\Capacidad_Alimento', 'id_alimento');
     }
+    public function provisionesAlimentosOtros()
+    {
+        return $this->hasOne('App\Models\Provision_Alimento_Otro', 'provision_alimento_id');
+    }
 }

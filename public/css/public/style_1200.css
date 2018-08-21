@@ -9,3 +9,6 @@
 #nav-menu-main nav>ul>li>a:before{
     width: 1.5rem;
 }
+.tiles.tile-list .tile:not(.inline-tile){
+    width: calc(33.3% - 1rem);
+}
