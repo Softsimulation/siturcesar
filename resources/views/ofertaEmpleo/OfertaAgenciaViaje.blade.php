@@ -63,11 +63,11 @@
     </div>
     <input type="hidden" ng-model="encuesta.id" ng-init="encuesta.id={{$id}}" />
     <form role="form" name="DatosForm" novalidate>
-        <div class="panel panel-success">
+        <div class="panel panel-success" ng-show="encuesta.ventaPlanes == true">
             <div class="panel-heading">
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Personas que viajaron según destino</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgCompleteTabla</b></div>
+            <div class="panel-footer"><b>Complete la información de la tabla</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -75,8 +75,8 @@
                             <tr>
                                 <th></th>
                                 <th class="text-center">Número total de personas</th>
-                                <th class="text-center">¿Qué porcentaje fue comprado por residentes en el Magdalena? (%)</th>
-                                <th class="text-center">¿Qué porcentaje fue comprado por residentes en Colombia fuera del Magdalena? (%)</th>
+                                <th class="text-center">¿Qué porcentaje fue comprado por residentes en el Cesar? (%)</th>
+                                <th class="text-center">¿Qué porcentaje fue comprado por residentes en Colombia fuera del Cesar? (%)</th>
                             </tr> 
                             <tr ng-repeat="i in destinos">
 
@@ -84,13 +84,13 @@
                                 <input type="hidden" ng-model="encuesta.personas[$index].opciones_personas_destino_id" ng-init="encuesta.personas[$index].opciones_personas_destino_id=i.id" />
                                 </td>
                                 <td>   
-                                    <input type="number" class="form-control" min="0" name="numerototal@{{$index}}" ng-model="encuesta.personas[$index].numerototal" ng-required="true" placeholder="Solo números"/>
+                                    <input type="number" class="form-control" min="0" name="numerototal@{{$index}}" ng-model="encuesta.personas[$index].numerototal" ng-required="encuesta.ventaPlanes == true" placeholder="Solo números"/>
                                 </td>
                                 <td>                                    
-                                    <input type="number" class="form-control" min="0" max="100" name="nacional@{{$index}}" ng-model="encuesta.personas[$index].nacional" ng-required="true" placeholder="Solo números"/>
+                                    <input type="number" class="form-control" min="0" max="100" name="nacional@{{$index}}" ng-model="encuesta.personas[$index].nacional" ng-required="encuesta.ventaPlanes == true" placeholder="Solo números"/>
                                 </td>
                                 <td>                                    
-                                    <input type="number" class="form-control" min="0" max="100" name="internacional@{{$index}}" ng-model="encuesta.personas[$index].internacional" ng-required="true" placeholder="Solo números"/>
+                                    <input type="number" class="form-control" min="0" max="100" name="internacional@{{$index}}" ng-model="encuesta.personas[$index].internacional" ng-required="encuesta.ventaPlanes == true" placeholder="Solo números"/>
                                 </td>
 
                             </tr>                          
@@ -106,18 +106,18 @@
                         </div>
                         <div class="col-md-12">
                             <span ng-show="DatosForm.$submitted || DatosForm.nacional@{{$index}}.$touched">
-                                <span class="label label-danger" ng-show="DatosForm.nacional@{{$index}}.$error.required">*El porcentaje comprado por los residentes en el magdalena en la fila @{{$index+1}} es obligatorio</span>
-                                <span class="label label-danger" ng-show="DatosForm.nacional@{{$index}}.$error.number">*El porcentaje comprado por los residentes en el magdalena en la fila @{{$index+1}} debe ser un número</span>
-                                <span class="label label-danger" ng-show="DatosForm.nacional@{{$index}}.$error.max">*El porcentaje comprado por los residentes en el magdalena en la fila @{{$index+1}} debe ser menor o igual que 100</span>
-                                <span class="label label-danger" ng-show="DatosForm.nacional@{{$index}}.$error.min">*El porcentaje comprado por los residentes en el magdalena en la fila @{{$index+1}} debe ser mayor que 0</span>
+                                <span class="label label-danger" ng-show="DatosForm.nacional@{{$index}}.$error.required">*El porcentaje comprado por los residentes en el Cesar en la fila @{{$index+1}} es obligatorio</span>
+                                <span class="label label-danger" ng-show="DatosForm.nacional@{{$index}}.$error.number">*El porcentaje comprado por los residentes en el Cesar en la fila @{{$index+1}} debe ser un número</span>
+                                <span class="label label-danger" ng-show="DatosForm.nacional@{{$index}}.$error.max">*El porcentaje comprado por los residentes en el Cesar en la fila @{{$index+1}} debe ser menor o igual que 100</span>
+                                <span class="label label-danger" ng-show="DatosForm.nacional@{{$index}}.$error.min">*El porcentaje comprado por los residentes en el Cesar en la fila @{{$index+1}} debe ser mayor que 0</span>
                             </span>
                         </div>
                         <div class="col-md-12">
                             <span ng-show="DatosForm.$submitted || DatosForm.internacional@{{$index}}.$touched">
-                                <span class="label label-danger" ng-show="DatosForm.internacional@{{$index}}.$error.required">*El porcentaje comprado por los residentes fuera del magdalena en la fila @{{$index+1}} es obligatorio</span>
-                                <span class="label label-danger" ng-show="DatosForm.internacional@{{$index}}.$error.number">*El porcentaje comprado por los residentes fuera del magdalena en la fila @{{$index+1}} debe ser un número</span>
-                                <span class="label label-danger" ng-show="DatosForm.internacional@{{$index}}.$error.max">*El porcentaje comprado por los residentes fuera del magdalena en la fila @{{$index+1}} debe ser menor o igual que 100</span>
-                                <span class="label label-danger" ng-show="DatosForm.internacional@{{$index}}.$error.min">*El porcentaje comprado por los residentes fuera del magdalena en la fila @{{$index+1}} debe ser mayor que 0</span>
+                                <span class="label label-danger" ng-show="DatosForm.internacional@{{$index}}.$error.required">*El porcentaje comprado por los residentes fuera del Cesar en la fila @{{$index+1}} es obligatorio</span>
+                                <span class="label label-danger" ng-show="DatosForm.internacional@{{$index}}.$error.number">*El porcentaje comprado por los residentes fuera del Cesar en la fila @{{$index+1}} debe ser un número</span>
+                                <span class="label label-danger" ng-show="DatosForm.internacional@{{$index}}.$error.max">*El porcentaje comprado por los residentes fuera del Cesar en la fila @{{$index+1}} debe ser menor o igual que 100</span>
+                                <span class="label label-danger" ng-show="DatosForm.internacional@{{$index}}.$error.min">*El porcentaje comprado por los residentes fuera del Cesar en la fila @{{$index+1}} debe ser mayor que 0</span>
                             </span>
                         </div>
                    </div>
@@ -125,11 +125,11 @@
             </div>
         </div>
 
-        <div class="panel panel-success">
+        <div class="panel panel-success" ng-show="encuesta.ofrecePlanesConDestino == true">
             <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Personas que viajaron con planes, cuyo destino fue Santa Marta</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>Personas que viajaron con planes, cuyo destino fue Cesar</b></h3>
             </div>
-            <div class="panel-footer"><b>@Resource.EncuestaMsgCompleteTabla</b></div>
+            <div class="panel-footer"><b>Complete la información de la tabla</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
@@ -137,23 +137,23 @@
                             <tr>
                                 <th></th>
                                 <th class="text-center">Número total de personas</th>
-                                <th class="text-center">¿Qué porcentaje fue comprado por residentes en el Magdalena? (%)</th>
-                                <th class="text-center">¿Qué porcentaje fue comprado por residentes en Colombia fuera del Magdalena? (%)</th>
+                                <th class="text-center">¿Qué porcentaje fue comprado por residentes en el Cesar? (%)</th>
+                                <th class="text-center">¿Qué porcentaje fue comprado por residentes en Colombia fuera del Cesar? (%)</th>
                                 <th class="text-center">¿Qué porcentaje fue comprado por residentes en el extranjero? (%)</th>
                             </tr>
                             <tr>
-                                <td class="text-center">¿Cuántas personas viajaron con planes con destino Santa / Magdalena?</td>
+                                <td class="text-center">¿Cuántas personas viajaron con planes con destino Cesar?</td>
                                 <td>
-                                    <input type="number"  name="numero" ng-model="encuesta.numero" min="0" class="form-control" ng-required="true" placeholder="Solo números"/>
+                                    <input type="number"  name="numero" ng-model="encuesta.numero" min="0" class="form-control" ng-required="encuesta.ofrecePlanesConDestino == true" placeholder="Solo números"/>
                                 </td>
                                 <td>
-                                    <input type="number"  name="magdalena"  ng-model="encuesta.magdalena" min="0" max="100" class="form-control" ng-required="true" placeholder="Solo números"/>
+                                    <input type="number"  name="magdalena"  ng-model="encuesta.magdalena" min="0" max="100" class="form-control" ng-required="encuesta.ofrecePlanesConDestino == true" placeholder="Solo números"/>
                                 </td>
                                 <td>
-                                    <input type="number"  name="nacional" ng-model="encuesta.nacional" min="0" max="100" class="form-control" ng-required="true" placeholder="Solo números"/>
+                                    <input type="number"  name="nacional" ng-model="encuesta.nacional" min="0" max="100" class="form-control" ng-required="encuesta.ofrecePlanesConDestino == true" placeholder="Solo números"/>
                                 </td>
                                 <td>
-                                    <input type="number"  name="internacional" ng-model="encuesta.internacional" min="0" max="100" class="form-control" ng-required="true" placeholder="Solo números"/>
+                                    <input type="number"  name="internacional" ng-model="encuesta.internacional" min="0" max="100" class="form-control" ng-required="encuesta.ofrecePlanesConDestino == true" placeholder="Solo números"/>
                                 </td>
                             </tr>
                         </table>
@@ -169,18 +169,18 @@
                         </div>
                         <div class="col-md-12">
                             <span ng-show="DatosForm.$submitted || DatosForm.magdalena.$touched">
-                                <span class="label label-danger" ng-show="DatosForm.magdalena.$error.required">*El porcentaje comprado por residentes en el magdalena es obligatorio</span>
-                                <span class="label label-danger" ng-show="DatosForm.magdalena.$error.number">*El porcentaje comprado por residentes en el magdalena debe ser un número</span> 
-                                <span class="label label-danger" ng-show="DatosForm.magdalena.$error.max">*El porcentaje comprado por residentes en el magdalena debe ser menor o igual que 100</span>
-                                <span class="label label-danger" ng-show="DatosForm.magdalena.$error.min">*El porcentaje comprado por residentes en el magdalena debe ser mayor que 1</span>
+                                <span class="label label-danger" ng-show="DatosForm.magdalena.$error.required">*El porcentaje comprado por residentes en el Cesar es obligatorio</span>
+                                <span class="label label-danger" ng-show="DatosForm.magdalena.$error.number">*El porcentaje comprado por residentes en el Cesar debe ser un número</span> 
+                                <span class="label label-danger" ng-show="DatosForm.magdalena.$error.max">*El porcentaje comprado por residentes en el Cesar debe ser menor o igual que 100</span>
+                                <span class="label label-danger" ng-show="DatosForm.magdalena.$error.min">*El porcentaje comprado por residentes en el Cesar debe ser mayor que 1</span>
                             </span>
                         </div>
                         <div class="col-md-12">
                             <span ng-show="DatosForm.$submitted || DatosForm.nacional.$touched">
-                                <span class="label label-danger" ng-show="DatosForm.nacional.$error.required">*El porcentaje comprado por residentes fuera del magdalena es obligatorio</span>
-                                <span class="label label-danger" ng-show="DatosForm.nacional.$error.number">*El porcentaje comprado por residentes fuera del magdalena debe ser un número</span>
-                                <span class="label label-danger" ng-show="DatosForm.nacional.$error.max">*El porcentaje comprado por residentes fuera del magdalena debe ser menor o igual que 100</span>
-                                <span class="label label-danger" ng-show="DatosForm.nacional.$error.min">*El porcentaje comprado por residentes fuera del magdalena debe ser mayor que 1</span>
+                                <span class="label label-danger" ng-show="DatosForm.nacional.$error.required">*El porcentaje comprado por residentes fuera del Cesar es obligatorio</span>
+                                <span class="label label-danger" ng-show="DatosForm.nacional.$error.number">*El porcentaje comprado por residentes fuera del Cesar debe ser un número</span>
+                                <span class="label label-danger" ng-show="DatosForm.nacional.$error.max">*El porcentaje comprado por residentes fuera del Cesar debe ser menor o igual que 100</span>
+                                <span class="label label-danger" ng-show="DatosForm.nacional.$error.min">*El porcentaje comprado por residentes fuera del Cesar debe ser mayor que 1</span>
                             </span>
                         </div>
                         <div class="col-md-12">
@@ -200,8 +200,8 @@
        
 
         <div class="row" style="text-align:center">
-            <a href="/ofertaempleo/agenciaviajes/{{$id}}" class="btn btn-raised btn-default">@Resource.EncuestaBtnAnterior</a>
-            <input type="submit" class="btn btn-raised btn-success" ng-click="guardar()" value="@Resource.EncuestaBtnSiguiente" />
+            <a href="/ofertaempleo/agenciaviajes/{{$id}}" class="btn btn-raised btn-default">Anterior</a>
+            <input type="submit" class="btn btn-raised btn-success" ng-click="guardar()" value="Siguiente" />
         </div>
         <br />
 

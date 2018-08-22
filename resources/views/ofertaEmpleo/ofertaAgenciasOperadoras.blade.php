@@ -75,9 +75,9 @@
                             <tr>
                                 <th></th>
                                 <th>Número total de personas</th>
-                                <th>¿Qué porcentaje se prestó a residentes en Colombia excluyendo magdalenenses?</th>
+                                <th>¿Qué porcentaje se prestó a residentes en Colombia excluyendo Cesar?</th>
                                 <th>¿Qué porcentaje se prestó a residentes del extranjero?</th>
-                                <th>¿Qué porcentaje se prestó a residentes en el Magdalena?</th>
+                                <th>¿Qué porcentaje se prestó a residentes en el Cesar?</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -119,10 +119,10 @@
                         <span class="label label-danger" ng-show="ocupacionForm.porcentajeE.$error.max">* El campo porcentaje prestado a residentes en el extranjero recibe solo números iguales o mayores que 0 y menores o iguales que 100.</span>
                     </span>
                     <span ng-show="ocupacionForm.$submitted || ocupacionForm.porcentajeM.$touched">
-                        <span class="label label-danger" ng-show="ocupacionForm.porcentajeM.$error.required">* El campo porcentaje prestado a residentes en el Magdalena es requerido.</span>
-                        <span class="label label-danger" ng-show="ocupacionForm.porcentajeM.$error.number">* El campo porcentaje prestado a residentes en el Magdalena debe ser solo números.</span>
-                        <span class="label label-danger" ng-show="ocupacionForm.porcentajeM.$error.min">* El campo porcentaje prestado a residentes en el Magdalena recibe solo números iguales o mayores que 0.</span>
-                        <span class="label label-danger" ng-show="ocupacionForm.porcentajeM.$error.max">* El campo porcentaje prestado a residentes en el Magdalena recibe solo números iguales o mayores que 0 y menores o iguales que 100.</span>
+                        <span class="label label-danger" ng-show="ocupacionForm.porcentajeM.$error.required">* El campo porcentaje prestado a residentes en el Cesar es requerido.</span>
+                        <span class="label label-danger" ng-show="ocupacionForm.porcentajeM.$error.number">* El campo porcentaje prestado a residentes en el Cesar debe ser solo números.</span>
+                        <span class="label label-danger" ng-show="ocupacionForm.porcentajeM.$error.min">* El campo porcentaje prestado a residentes en el Cesar recibe solo números iguales o mayores que 0.</span>
+                        <span class="label label-danger" ng-show="ocupacionForm.porcentajeM.$error.max">* El campo porcentaje prestado a residentes en el Cesar recibe solo números iguales o mayores que 0 y menores o iguales que 100.</span>
                     </span>
                     <span ng-show="ocupacionForm.$submitted">
                         <span class="label label-danger" ng-show="(agencia.porcentajeC + agencia.porcentajeE + agencia.porcentajeM) != 100">* La suma de los valores porcentuales debe ser igual que 100.</span>

@@ -20,7 +20,6 @@ Route::get('/', function () {
     
 });
 
-
 Route::get('/QueHacer','HomeController@viewQueHacer');
 Route::get('/Experiencias','HomeController@viewExperiencias');
 Route::get('/PST','HomeController@viewPST');
