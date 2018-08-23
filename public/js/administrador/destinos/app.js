@@ -30,7 +30,6 @@ situr.filter('idiomaFilter', function() {
     if(condition === undefined || condition.length == 0){
       return items;
     }
-    console.log(condition);
     angular.forEach(items, function(item) {
         angular.forEach(condition, function(traduccion){
             if(traduccion.idioma.id != item.id){
