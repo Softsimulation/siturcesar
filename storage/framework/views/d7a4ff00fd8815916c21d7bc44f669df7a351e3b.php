@@ -273,14 +273,14 @@
 										 <li id="menu-academico" ><a href="<?php echo e(asset('temporada')); ?>"><i class="fa fa-file-text-o"></i> <span>Turismo Interno y Emisor</span></a>
 											
 										 </li>
+										 <li id="menu-academico" ><a href="<?php echo e(asset('ofertaempleo/listadoproveedores')); ?>"><i class="fa fa-table"></i> <span> Oferta y empleo</span></span></a>
+										  
+										 </li>
 										 <li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Sostenibilidad</span> </span></a>
     										  <ul id="menu-academico-sub" >
     										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('sostenibilidadhogares/encuestas')); ?>">Hogares</a></li>
     										  </ul>
 									     </li>
-										 <li id="menu-academico" ><a href="<?php echo e(asset('ofertaempleo/listadoproveedores')); ?>"><i class="fa fa-table"></i> <span> Oferta y empleo</span></span></a>
-										  
-										 </li>
 										 <li id="menu-academico" ><a href="<?php echo e(asset('exportacion')); ?>"><i class="fa fa-file-text-o"></i> <span>Exportación</span></a>
 											
 										 </li>
