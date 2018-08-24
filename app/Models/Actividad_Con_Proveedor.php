@@ -23,7 +23,7 @@ class Actividades_Con_Proveedor extends Model
     /**
      * @var array
      */
-    protected $fillable = ['actividad_id', 'proveedor_id'];
+    protected $fillable = ['actividad_id', 'proveedores_id'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

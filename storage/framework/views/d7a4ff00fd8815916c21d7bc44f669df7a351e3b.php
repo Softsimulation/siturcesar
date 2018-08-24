@@ -56,7 +56,7 @@
            left: 0;
            height: 100%;
            width: 100%;
-           background: rgba(0, 0, 0, 0.57) url(../../Content/Cargando.gif) 50% 50% no-repeat
+           background: rgba(0, 0, 0, 0.57) url(<?php echo e(asset('Content/Cargando.gif')); ?>) 50% 50% no-repeat
        }
        
         body.charging { overflow: hidden; }
