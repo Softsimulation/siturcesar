@@ -269,6 +269,17 @@
 							   <!--//down-->
                            <div class="menu">
 									<ul id="menu" >
+									    
+									    <li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Promoción</span> </span></a>
+									          <ul id="menu-academico-sub" >
+    										    <li id="menu-academico-avaliacoes" ><a href="{{asset('administradordestinos')}}">Administrar Destinos</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="{{asset('administradorproveedores')}}">Administrar Proveedores</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="{{asset('administradoratracciones')}}">Administrar Atracciones</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="{{asset('administradoractividades')}}">Administrar Actividades</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="{{asset('administradoreventos')}}">Administrar Eventos</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="{{asset('administradorrutas')}}">Administrar Rutas turisticas</a></li>
+    										  </ul>
+									     </li>
 										
 										 <li id="menu-academico" ><a href="{{asset('turismoreceptor/listadoencuestas')}}"><i class="fa fa-table"></i> <span> Turismo Receptor</span></span></a>
 										  
