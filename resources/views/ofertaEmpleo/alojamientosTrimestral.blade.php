@@ -3,7 +3,7 @@
 @section('title', 'Encuesta de oferta y empleo')
 @section('establecimeinto', 'establecimeinto')
 @section('app','ng-app="appEncuestaAlojamiento"')
-@section('controller','ng-controller="OfertaEmpleoAlojamientoCtrl"')
+@section('controller','ng-controller="AlojamientoTrimestralCtrl"')
 
 
 @section('estilos')
@@ -179,10 +179,9 @@
                                         <span ng-show="carForm.$submitted || carForm.HabitacionCol.$touched">
                                             <span class="label label-danger" ng-show="carForm.HabitacionCol.$error.required">*El campo es requerido.</span>
                                             <span class="label label-danger" ng-show="carForm.HabitacionCol.$error.number">*El campo debe ser un número.</span>
-                                            <span class="label label-danger" ng-show="carForm.HabitacionCol.$error.max">*Este campo no puede ser mayor al numero de personas que hicieron Check in o ingresaron.</span>
                                         </span>
                                     </td>
-                                    <td><input type="number" id="HabitacionCol" name="HabitacionCol" class="form-control" ng-model="alojamiento.habitaciones[0].viajeros_locales" max="@{{alojamiento.habitaciones[0].numero_personas}}" ng-required="true" placeholder="Solo números"/></td>
+                                    <td><input type="number" id="HabitacionCol" name="HabitacionCol" class="form-control" ng-model="alojamiento.habitaciones[0].viajeros_locales" ng-required="true" placeholder="Solo números"/></td>
                                 </tr>
                                 <tr>
                                     <td>¿Cuántas habitaciones se ocuparon durante el mes? (Es la suma de habitaciones vendidas cada noche del mes)
@@ -190,9 +189,10 @@
                                             <span class="label label-danger" ng-show="carForm.HabitacionOcupa.$error.required">*El campo es requerido.</span>
                                             <span class="label label-danger" ng-show="carForm.HabitacionOcupa.$error.number">*El campo debe ser un número.</span>
                                             <span class="label label-danger" ng-show="carForm.HabitacionOcupa.$error.min">*El campo debe ser mayor que 1</span>
+                                            <span class="label label-danger" ng-show="carForm.HabitacionOcupa.$error.max">*Este campo no puede ser mayor al número total de habitaciones por el número de días de actividad comercial.</span>
                                         </span>    
                                     </td>
-                                    <td><input type="number" name="HabitacionOcupa" id="HabitacionOcupa" class="form-control" ng-model="alojamiento.habitaciones[0].habitaciones_ocupadas" min="1" ng-required="true" placeholder="Solo números"/></td>
+                                    <td><input type="number" name="HabitacionOcupa" id="HabitacionOcupa" class="form-control" ng-model="alojamiento.habitaciones[0].habitaciones_ocupadas" min="1" max="@{{alojamiento.habitaciones[0].total*numero_dias}}" ng-required="true" placeholder="Solo números"/></td>
                                 </tr>
                                 <tr>
                                     <td>¿Total huéspedes durante noches del mes de anterior? (Es la sumatoria de los huéspedes que se encontraban registrados cada noche del mes)
@@ -278,7 +278,7 @@
                                             <span class="label label-danger" ng-show="carForm.ApartamentosCol.$error.max">*Este campo no puede ser mayor al numero de personas que hicieron Check in o ingresaron.</span>
                                         </span>
                                     </td>
-                                    <td><input type="number" id="ApartamentosCol" name="ApartamentosCol" class="form-control" ng-model="alojamiento.apartamentos[0].viajeros_colombianos" max="@{{alojamiento.apartamentos[0].viajeros}}" ng-required="true" placeholder="Solo números"/></td>
+                                    <td><input type="number" id="ApartamentosCol" name="ApartamentosCol" class="form-control" ng-model="alojamiento.apartamentos[0].viajeros_colombianos"  ng-required="true" placeholder="Solo números"/></td>
                                 </tr>
                                 <tr>
                                     <td>¿cuántas apartamentos se ocuparon durante el mes?  (Es la suma de apartamentos vendidos cada noche del mes) Si usted vendió el mismo apartamento por 15 días, entonces, el apartamento fue ocupado 15 veces.
@@ -286,9 +286,10 @@
                                             <span class="label label-danger" ng-show="carForm.ApartamentosCamas.$error.required">*El campo es requerido</span>
                                             <span class="label label-danger" ng-show="carForm.ApartamentosCamas.$error.number">*El campo debe ser un número.</span>
                                             <span class="label label-danger" ng-show="carForm.ApartamentosCamas.$error.min">*El campo debe ser mayor que 1.</span>
+                                            <span class="label label-danger" ng-show="carForm.ApartamentosCamas.$error.max">*Este campo no puede ser mayor al número total de apartamentos por el número de días de actividad comercial.</span>
                                         </span>    
                                     </td>
-                                    <td><input type="number" name="ApartamentosCamas" id="ApartamentosCamas" class="form-control" ng-model="alojamiento.apartamentos[0].capacidad_ocupada" min="1" ng-required="true" placeholder="Solo números"/></td>
+                                    <td><input type="number" name="ApartamentosCamas" id="ApartamentosCamas" class="form-control" ng-model="alojamiento.apartamentos[0].capacidad_ocupada" min="1" max="@{{alojamiento.apartamentos[0].total*numero_dias}}" ng-required="true" placeholder="Solo números"/></td>
                                 </tr>
                                 <tr>
                                     <td>¿Total huéspedes durante noches del mes de anterior? (Es la sumatoria de los huéspedes que se encontraban registrados cada noche del mes)
@@ -386,7 +387,7 @@
                                             <span class="label label-danger" ng-show="carForm.CasaCol.$error.max">*Este campo no puede ser mayor al numero de personas que hicieron Check in o ingresaron.</span>
                                         </span>    
                                     </td>
-                                    <td><input type="number" id="CasaCol" name="CasaCol" class="form-control" ng-model="alojamiento.casas[0].viajeros_colombia" max="@{{alojamiento.casas[0].viajeros}}" ng-required="true" placeholder="Solo números"/></td>
+                                    <td><input type="number" id="CasaCol" name="CasaCol" class="form-control" ng-model="alojamiento.casas[0].viajeros_colombia"  ng-required="true" placeholder="Solo números"/></td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -395,9 +396,10 @@
                                             <span class="label label-danger" ng-show="carForm.CasaCapacidad.$error.required">*El campo es requerido</span>
                                             <span class="label label-danger" ng-show="carForm.CasaCapacidad.$error.number">*El campo debe ser un número.</span>
                                             <span class="label label-danger" ng-show="carForm.CasaCapacidad.$error.min">*El campo debe ser mayor que 1.</span>
+                                            <span class="label label-danger" ng-show="carForm.CasaCapacidad.$error.max">*Este campo no puede ser mayor al número total de casas por el número de días de actividad comercial.</span>
                                         </span>
                                     </td>
-                                    <td><input type="number" name="CasaCapacidad" id="CasaCapacidad" class="form-control" ng-model="alojamiento.casas[0].capacidad_ocupadas" min="1" ng-required="true" placeholder="Solo números" /></td>
+                                    <td><input type="number" name="CasaCapacidad" id="CasaCapacidad" class="form-control" ng-model="alojamiento.casas[0].capacidad_ocupadas" min="1" max="@{{alojamiento.casas[0].total*numero_dias}}" ng-required="true" placeholder="Solo números" /></td>
                                 </tr>
                                 <tr>
                                     <td>¿Total huéspedes durante noches del mes de anterior? (Es la sumatoria de los huéspedes que se encontraban registrados cada noche del mes)
@@ -492,10 +494,9 @@
                                     <span ng-show="carForm.$submitted || carForm.CabCol.$touched">
                                         <span class="label label-danger" ng-show="carForm.CabCol.$error.required">*El campo es requerido.</span>
                                         <span class="label label-danger" ng-show="carForm.CabCol.$error.number">*El campo debe ser un número.</span>
-                                        <span class="label label-danger" ng-show="carForm.CabCol.$error.max">*Este campo no puede ser mayor al numero de personas que hicieron Check in o ingresaron.</span>
                                     </span>
                                 </td>
-                                <td><input type="number" id="CabCol" name="CabCol" class="form-control" ng-model="alojamiento.cabanas[0].viajeros_colombia" max="@{{alojamiento.cabanas[0].viajeros}}" ng-required="true" placeholder="Solo números"/></td>
+                                <td><input type="number" id="CabCol" name="CabCol" class="form-control" ng-model="alojamiento.cabanas[0].viajeros_colombia"  ng-required="true" placeholder="Solo números"/></td>
                             </tr>
                             <tr>
                                 <td>
@@ -504,9 +505,10 @@
                                         <span class="label label-danger" ng-show="carForm.CabaniaCapacidad.$error.required">*El campo es requerido</span>
                                         <span class="label label-danger" ng-show="carForm.CabaniaCapacidad.$error.number">*El campo debe ser un número.</span>
                                         <span class="label label-danger" ng-show="carForm.CabaniaCapacidad.$error.min">*El campo debe ser mayor que 1.</span>
+                                        <span class="label label-danger" ng-show="carForm.CabaniaCapacidad.$error.max">*Este campo no puede ser mayor al número total de cabañas por el número de días de actividad comercial.</span>
                                     </span>
                                 </td>
-                                <td><input type="number" name="CabaniaCapacidad" id="CabaniaCapacidad" class="form-control" ng-model="alojamiento.cabanas[0].capacidad_ocupada" min="1" ng-required="true" placeholder="Solo números" /></td>
+                                <td><input type="number" name="CabaniaCapacidad" id="CabaniaCapacidad" class="form-control" ng-model="alojamiento.cabanas[0].capacidad_ocupada" min="1" max="@{{alojamiento.cabanas[0].total*numero_dias}}" ng-required="true" placeholder="Solo números" /></td>
                             </tr>
                             <tr>
                                 <td>¿Total huéspedes durante noches del mes de anterior? (Es la sumatoria de los huéspedes que se encontraban registrados cada noche del mes)
@@ -601,10 +603,9 @@
                                     <span ng-show="carForm.$submitted || carForm.CamExtra.$touched">
                                         <span class="label label-danger" ng-show="carForm.CamExtra.$error.required">*El campo es requerido.</span>
                                         <span class="label label-danger" ng-show="carForm.CamExtra.$error.number">*El campo debe ser un número.</span>
-                                        <span class="label label-danger" ng-show="carForm.CamExtra.$error.max">*Este campo no puede ser mayor al numero de viajeros que se hospedaron.</span>
                                     </span>
                                 </td>
-                                <td><input type="number" id="CamExtra" name="CamExtra" class="form-control" ng-model="alojamiento.campings[0].viajeros_extranjeros" max="@{{alojamiento.campings[0].viajeros}}" ng-required="true" placeholder="Solo números"/></td>
+                                <td><input type="number" id="CamExtra" name="CamExtra" class="form-control" ng-model="alojamiento.campings[0].viajeros_extranjeros"  ng-required="true" placeholder="Solo números"/></td>
                             </tr>
                             <tr>
                                 <td>
@@ -613,9 +614,10 @@
                                         <span class="label label-danger" ng-show="carForm.CampingCapacidad.$error.required">*El campo es requerido</span>
                                         <span class="label label-danger" ng-show="carForm.CampingCapacidad.$error.number">*El campo debe ser un número.</span>
                                         <span class="label label-danger" ng-show="carForm.CampingCapacidad.$error.min">*El campo debe ser mayor que 1.</span>
+                                        <span class="label label-danger" ng-show="carForm.CampingCapacidad.$error.max">*Este campo no puede ser mayor al número total de parcelas por el número de días de actividad comercial.</span>
                                     </span>
                                 </td>
-                                <td><input type="number" name="CampingCapacidad" id="CampingCapacidad" class="form-control" ng-model="alojamiento.campings[0].capacidad_ocupada" min="1" ng-required="true" placeholder="Solo números" /></td>
+                                <td><input type="number" name="CampingCapacidad" id="CampingCapacidad" class="form-control" ng-model="alojamiento.campings[0].capacidad_ocupada" min="1" max="@{{alojamiento.campings[0].area*numero_dias}}" ng-required="true" placeholder="Solo números" /></td>
                             </tr>
                             <tr>
                                 <td>¿Total huéspedes durante noches del mes de anterior? (Es la sumatoria de los huéspedes que se encontraban registrados cada noche del mes)
