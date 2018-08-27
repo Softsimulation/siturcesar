@@ -186,6 +186,9 @@
             .ui-select-multiple.ui-select-bootstrap input.ui-select-search {
                 width: 100% !important;
             }
+            .sidebar-menu{
+                overflow: auto;
+            }
     </style>
 </head>
 <body @yield('app')  @yield('controller') >
@@ -329,9 +332,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{asset('/Content/bootstrap_material/dist/js/material.min.js')}}"></script>
     <script src="{{asset('/Content/bootstrap_material/dist/js/ripples.min.js')}}"></script>
-    <script>
-        $.material.init();
-    </script>
+   
     <script src="{{asset('/js/sweetalert.min.js')}}"></script>
     <script>
         $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });

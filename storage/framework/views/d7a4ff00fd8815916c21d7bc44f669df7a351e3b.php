@@ -186,6 +186,9 @@
             .ui-select-multiple.ui-select-bootstrap input.ui-select-search {
                 width: 100% !important;
             }
+            .sidebar-menu{
+                overflow: auto;
+            }
     </style>
 </head>
 <body <?php echo $__env->yieldContent('app'); ?>  <?php echo $__env->yieldContent('controller'); ?> >
@@ -269,6 +272,17 @@
 							   <!--//down-->
                            <div class="menu">
 									<ul id="menu" >
+									    
+									    <li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Promoción</span> </span></a>
+									          <ul id="menu-academico-sub" >
+    										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('administradordestinos')); ?>">Administrar Destinos</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('administradorproveedores')); ?>">Administrar Proveedores</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('administradoratracciones')); ?>">Administrar Atracciones</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('administradoractividades')); ?>">Administrar Actividades</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('administradoreventos')); ?>">Administrar Eventos</a></li>
+    										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('administradorrutas')); ?>">Administrar Rutas turisticas</a></li>
+    										  </ul>
+									     </li>
 										
 										 <li id="menu-academico" ><a href="<?php echo e(asset('turismoreceptor/listadoencuestas')); ?>"><i class="fa fa-table"></i> <span> Turismo Receptor</span></span></a>
 										  
@@ -318,9 +332,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="<?php echo e(asset('/Content/bootstrap_material/dist/js/material.min.js')); ?>"></script>
     <script src="<?php echo e(asset('/Content/bootstrap_material/dist/js/ripples.min.js')); ?>"></script>
-    <script>
-        $.material.init();
-    </script>
+   
     <script src="<?php echo e(asset('/js/sweetalert.min.js')); ?>"></script>
     <script>
         $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });
