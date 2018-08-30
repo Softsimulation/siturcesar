@@ -53,3 +53,5 @@ Route::controller('/sostenibilidadpst', 'SostenibilidadPstController');
 Route::controller('/sostenibilidadhogares','SostenibilidadHogaresController');
 Route::controller('/login','LoginController');
 
+
+Route::controller('/importarRnt','ImportacionRntController');

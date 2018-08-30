@@ -93,8 +93,8 @@
                             <th>Código de encuesta</th>
                             <th>Identificación encuesta</th>
                             <th>Fecha de digitación</th>
-                            <th>Fecha de llegada</th>
-                            <th>Fecha de salida</th>
+                            <th style="width: 140px;">Fecha de llegada</th>
+                            <th style="width: 120px;">Fecha de salida</th>
                             <th>Encuestador</th>
                             <th style="width: 150px;">Estado</th>
                             <th style="width: 110px;">Última sección</th>
