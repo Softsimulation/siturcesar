@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -15,6 +15,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Destino_Con_Idioma extends Model
 {
+    /**
+     * The timestamps.
+     * 
+     * @var bool
+     */   
+    public $timestamps = false;
     /**
      * The table associated with the model.
      * 
@@ -32,7 +38,7 @@ class Destino_Con_Idioma extends Model
      */
     public function destino()
     {
-        return $this->belongsTo('App\Destino');
+        return $this->belongsTo('App\Models\Destino');
     }
 
     /**
@@ -40,6 +46,6 @@ class Destino_Con_Idioma extends Model
      */
     public function idioma()
     {
-        return $this->belongsTo('App\Idioma', 'idiomas_id');
+        return $this->belongsTo('App\Models\Idioma', 'idiomas_id');
     }
 }
