@@ -249,7 +249,7 @@ angular.module('receptor.gasto', ['ui.select'])
     $scope.guardar = function () {
 
         if (!$scope.GastoForm.$valid) {
-            swal("Error", "Formulario incompleto corrige los errores", "error")
+            swal("Error", "Formulario incompleto corrige los errores.", "error");
             return;
         }
 
