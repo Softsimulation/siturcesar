@@ -5,11 +5,7 @@
 
 @section('estilos')
     <style>
-        .panel-body {
-            max-height: 400px;
-            color: white;
-        }
-
+        
         .image-preview-input {
             position: relative;
             overflow: hidden;
@@ -47,31 +43,6 @@
             border-color: #FA787E;
         }
 
-        .carga {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.57) url(../../Content/Cargando.gif) 50% 50% no-repeat
-        }
-        /* Cuando el body tiene la clase 'loading' ocultamos la barra de navegacion */
-        body.charging {
-            overflow: hidden;
-        }
-
-        /* Siempre que el body tenga la clase 'loading' mostramos el modal del loading */
-        body.charging .carga {
-            display: block;
-        }
-        .row {
-            margin: 1em 0 0;
-        }
-        .form-group {
-            margin: 0;
-        }
         .form-group label, .form-group .control-label, label {
             font-size: smaller;
         }
@@ -88,6 +59,7 @@
             white-space: nowrap;
             text-overflow: ellipsis;
         }
+        
     </style>
 @endsection
 
@@ -100,58 +72,55 @@
 @section('app', 'ng-app="destinosApp"')
 
 @section('controller','ng-controller="destinosIndexController"')
-
+@section('titulo','Lista de destinos')
+@section('subtitulo','El siguiente listado cuenta con @{{destinos.length}} registro(s)')
 @section('content')
 <div class="col-sm-12">
-    <h1 class="title1">Lista de destinos</h1>
-    <br />
     <div class="blank-page widget-shadow scroll" id="style-2 div1">
-        <div class="row" style="margin: 0;">
-            <div class="col-xs-12 col-sm-6 col-md-5">
-                <a href="/administradordestinos/crear" type="button" class="btn btn-primary" >
-                  Insertar destino
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
-                <input type="text" ng-model="prop.search" class="form-control" id="inputEmail3" placeholder="Búsqueda de destinos">
-            </div>
-            <div class="col-xs-12 col-sm-2 col-md-3" style="text-align: center;">
-                <span class="chip">@{{(destinos|filter:prop.search).length}} resultados</span>
+        <div class="flex-list">
+            <a href="/administradordestinos/crear" type="button" class="btn btn-lg btn-success" >
+              Insertar destino
+            </a> 
+            <div class="form-group has-feedback" style="display: inline-block;">
+                <label class="sr-only">Búsqueda de destinos</label>
+                <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="Buscar destino...">
+                <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+            </div>      
+        </div>
+        <div class="text-center" ng-if="(destinos | filter:prop.search).length > 0 && (prop.search != '' && prop.search != undefined)">
+            <p>Hay @{{(destinos | filter:prop.search).length}} registro(s) que coinciden con su búsqueda</p>
+        </div>
+        <div class="alert alert-info" ng-if="destinos.length == 0">
+            <p>No hay registros almacenados</p>
+        </div>
+        <div class="alert alert-warning" ng-if="(destinos | filter:prop.search).length == 0 && destinos.length > 0">
+            <p>No existen registros que coincidan con su búsqueda</p>
+        </div>
+        <div class="tiles">
+            <div class="tile inline-tile" dir-paginate="destino in destinos | filter:prop.search | itemsPerPage:10" pagination-id="pagination_destinos">
+                <div class="tile-img">
+                    <img src="@{{destino.multimedia_destinos.length > 0 ?  destino.multimedia_destinos[0].ruta : 'img/app/noimage.jpg'}}" alt="@{{destino.destino_con_idiomas[0].nombre}}"></img>
+                </div>
+                <div class="tile-body">
+                    <div class="tile-caption">
+                        <h3>@{{destino.destino_con_idiomas[0].nombre}}</h3>
+                    </div>
+                    <p>@{{destino.destino_con_idiomas[0].descripcion}}</p>
+                    <div class="inline-buttons">
+                        <a href="/administradordestinos/editar/@{{destino.id}}" class="btn btn-warning" title="Editar">Editar</a>
+                        <button class="btn btn-@{{destino.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(destino)">@{{destino.estado ? 'Desactivar' : 'Activar'}}</button>
+                        
+                        <a href="/administradordestinos/idioma/@{{destino.id}}/@{{traduccion.idioma.id}}" ng-repeat="traduccion in destino.destino_con_idiomas" class="btn btn-default" title="@{{traduccion.idioma.culture}}"> @{{traduccion.idioma.culture}}</a>
+                        <a href="javascript:void(0)" ng-click="modalIdioma(destino)" ng-if="destino.destino_con_idiomas.length < idiomas.length" class="btn btn-default" title="Agregar idioma"> <span class="glyphicon glyphicon-plus"></span><span class="sr-only">Agregar idioma</span></a>
+                        
+                    </div>  
+                    
+                </div>
             </div>
         </div>
-        <br/>
+        
         <div class="row">
-            <div class="col-xs-12">
-                <ul class="media-list">
-                    <li dir-paginate="destino in destinos | filter:prop.search | itemsPerPage:10" pagination-id="pagination_destinos" class="media">
-                        <div class="media-left">
-                            <a href="/administradordestinos/editar/@{{destino.id}}">
-                                <img class="media-object" style="width: 400px; height: 200px;" 
-                                src="@{{destino.multimedia_destinos.length > 0 ?  destino.multimedia_destinos[0].ruta : 'img/app/noimage.jpg'}}" 
-                                alt="@{{destino.destino_con_idiomas[0].nombre}}">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">@{{destino.destino_con_idiomas[0].nombre}}</h4>
-                            <p class="text-justify">
-                                @{{destino.destino_con_idiomas[0].descripcion | limitTo:400}}...
-                            </p>
-                            <br>
-                            <p class="text-left">
-                                <button class="btn btn-@{{destino.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(destino)">@{{destino.estado ? 'Desactivar' : 'Activar'}}</button>
-                                <a href="/administradordestinos/idioma/@{{destino.id}}/@{{traduccion.idioma.id}}" ng-repeat="traduccion in destino.destino_con_idiomas"> @{{traduccion.idioma.culture}}</a>
-                                <a href="javascript:void(0)" ng-click="modalIdioma(destino)" ng-if="destino.destino_con_idiomas.length < idiomas.length"> <span class="glyphicon glyphicon-plus"></span></a>
-                                <a href="/administradordestinos/editar/@{{destino.id}}"> <span class="glyphicon glyphicon-pencil"></span></a>
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-                <div class="alert alert-warning" role="alert" ng-show="destinos.length == 0 || (destinos|filter:prop.search).length == 0">No hay resultados disponibles <span ng-show="(destinos|filter:prop.search).length == 0">para la búsqueda '@{{prop.search}}'. <a href="#" ng-click="prop.search = ''">Presione aquí</a> para ver todos los resultados.</span></div>
-            </div>
-            
-        </div>
-        <div class="row">
-          <div class="col-6" style="text-align:center;">
+          <div class="col-xs-12 text-center">
           <dir-pagination-controls pagination-id="pagination_destinos"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
           </div>
         </div>
