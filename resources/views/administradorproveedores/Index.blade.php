@@ -100,65 +100,59 @@
 @section('app', 'ng-app="proveedoresApp"')
 
 @section('controller','ng-controller="proveedoresIndexController"')
-
+@section('titulo','Lista de proveedores')
+@section('subtitulo','El siguiente listado cuenta con @{{proveedores.length}} registro(s)')
 @section('content')
-<div class="container">
-    <h1 class="title1">Lista de proveedores</h1>
-    <br />
-    <div class="blank-page widget-shadow scroll" id="style-2 div1">
-        <div class="row" style="margin: 0;">
-            <div class="col-xs-12 col-sm-6 col-md-5">
-                <a href="/administradorproveedores/crear" type="button" class="btn btn-primary" >
-                  Insertar proveedor
-                </a>
-            </div>
-            <div class="col-xs-12 col-sm-4 col-md-4">
-                <input type="text" ng-model="prop.search" class="form-control" id="inputEmail3" placeholder="Búsqueda de proveedores">
-            </div>
-            <div class="col-xs-12 col-sm-2 col-md-3" style="text-align: center;">
-                <span class="chip">@{{(proveedores|filter:prop.search).length}} resultados</span>
-            </div>
+<div class="flex-list">
+    <a href="/administradorproveedores/crear" type="button" class="btn btn-lg btn-success" data-toggle="tooltip" data-placement="bottom" title="Esta acción permitirá publicar un proveedor que se encuentre almacenado en el sistema.">
+      Publicar proveedor
+    </a> 
+    <div class="form-group has-feedback" style="display: inline-block;">
+        <label class="sr-only">Búsqueda de proveedor</label>
+        <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="Buscar proveedor...">
+        <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+    </div>      
+</div>
+<div class="text-center" ng-if="(proveedores | filter:prop.search).length > 0 && (prop.search != '' && prop.search != undefined)">
+    <p>Hay @{{(proveedores | filter:prop.search).length}} registro(s) que coinciden con su búsqueda</p>
+</div>
+<div class="alert alert-info" ng-if="proveedores.length == 0">
+    <p>No hay registros almacenados</p>
+</div>
+<div class="alert alert-warning" ng-if="(proveedores | filter:prop.search).length == 0 && proveedores.length > 0">
+    <p>No existen registros que coincidan con su búsqueda</p>
+</div>
+
+<div class="tiles">
+    <div class="tile inline-tile" dir-paginate="proveedor in proveedores | filter:prop.search | itemsPerPage:10" pagination-id="pagination_proveedores">
+        <div class="tile-img">
+            <img ng-src="@{{proveedor.multimedia_proveedores.length > 0 ?  proveedor.multimedia_proveedores[0].ruta : 'img/app/noimage.jpg'}}" alt="@{{proveedor.proveedor_rnt.razon_social}}"/>
         </div>
-        <br/>
-        <div class="row">
-            <div class="col-xs-12">
-                <ul class="media-list">
-                    <li dir-paginate="proveedor in proveedores | filter:prop.search | itemsPerPage:10" pagination-id="pagination_proveedores" class="media">
-                        <div class="media-left">
-                            <a href="/administradorproveedores/editar/@{{proveedor.id}}">
-                                <img class="media-object" style="width: 400px; height: 200px;" 
-                                src="@{{proveedor.multimedia_proveedores.length > 0 ?  proveedor.multimedia_proveedores[0].ruta : 'img/app/noimage.jpg'}}" 
-                                alt="@{{proveedor.proveedor_rnt.razon_social}}">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <h4 class="media-heading">@{{proveedor.proveedor_rnt.razon_social}}</h4>
-                            <p class="text-justify">
-                                @{{proveedor.proveedor_rnt.proveedor_rnt_idioma[0].descripcion | limitTo:400}}...
-                            </p>
-                            <br>
-                            <p class="text-left">
-                                <button class="btn btn-@{{proveedor.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(proveedor)">@{{proveedor.estado ? 'Desactivar' : 'Activar'}}</button>
-                                <a href="/administradorproveedores/editar/@{{proveedor.id}}"> <span class="glyphicon glyphicon-pencil"></span></a>
-                            </p>
-                        </div>
-                    </li>
-                </ul>
-                <div class="alert alert-warning" role="alert" ng-show="proveedores.length == 0 || (proveedores|filter:prop.search).length == 0">No hay resultados disponibles <span ng-show="(proveedores|filter:prop.search).length == 0">para la búsqueda '@{{prop.search}}'. <a href="#" ng-click="prop.search = ''">Presione aquí</a> para ver todos los resultados.</span></div>
+        <div class="tile-body">
+            <div class="tile-caption">
+                <h3>@{{proveedor.proveedor_rnt.razon_social}}</h3>
             </div>
+            <p>@{{proveedor.proveedor_rnt.proveedor_rnt_idioma[0].descripcion}}</p>
+            <div class="inline-buttons">
+                <a href="/administradorproveedores/editar/@{{proveedor.id}}" class="btn btn-warning">Editar</a>
+                <button class="btn btn-@{{proveedor.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(proveedor)">@{{proveedor.estado ? 'Desactivar' : 'Activar'}}</button>
+                
+            </div>  
             
         </div>
-        <div class="row">
-          <div class="col-6" style="text-align:center;">
-          <dir-pagination-controls pagination-id="pagination_proveedores"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
-          </div>
-        </div>
     </div>
-    
+</div>
+
+
+    <div class="row">
+      <div class="col-xs-12 text-center">
+          <dir-pagination-controls pagination-id="pagination_proveedores"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+      </div>
+    </div>
+
     <div class='carga'>
 
     </div>
-</div>
 
 <!--<div class="modal fade" tabindex="-1" role="dialog" id="idiomaModal">-->
 <!--    <div class="modal-dialog" role="document">-->
@@ -201,4 +195,9 @@
 <script src="{{asset('/js/administrador/proveedores/services.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/app.js')}}"></script>
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>
+<script>
+    $(function () {
+      $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>
 @endsection

@@ -35,17 +35,6 @@
             color: #FA787E;
         }
 
-        form.ng-submitted input.ng-invalid {
-            border-color: #FA787E;
-        }
-
-        form input.ng-invalid.ng-touched {
-            border-color: #FA787E;
-        }
-
-        .form-group label, .form-group .control-label, label {
-            font-size: smaller;
-        }
         .input-group {
             display: flex;
         }
@@ -99,7 +88,7 @@
         <div class="tiles">
             <div class="tile inline-tile" dir-paginate="destino in destinos | filter:prop.search | itemsPerPage:10" pagination-id="pagination_destinos">
                 <div class="tile-img">
-                    <img src="@{{destino.multimedia_destinos.length > 0 ?  destino.multimedia_destinos[0].ruta : 'img/app/noimage.jpg'}}" alt="@{{destino.destino_con_idiomas[0].nombre}}"></img>
+                    <img ng-src="@{{destino.multimedia_destinos.length > 0 ?  destino.multimedia_destinos[0].ruta : 'img/app/noimage.jpg'}}" alt="@{{destino.destino_con_idiomas[0].nombre}}"/>
                 </div>
                 <div class="tile-body">
                     <div class="tile-caption">
