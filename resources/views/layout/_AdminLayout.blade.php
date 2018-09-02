@@ -181,10 +181,10 @@
                                     <a role="menuitem" href="{{asset('administradordestinos')}}">Administrar destinos</a>
                                 </li>
                                 <li role="none">
-                                    <a role="menuitem" href="{{asset('administradorproveedores')}}">Administrar Proveedores</a>
+                                    <a role="menuitem" href="{{asset('administradorproveedores')}}">Administrar proveedores</a>
                                 </li>
                                 <li role="none"><a role="menuitem" href="{{asset('administradoratracciones')}}">Administrar atracciones</a></li>
-        					    <li role="none"><a role="menuitem" href="{{asset('administradoractividades')}}">Administrar dctividades</a></li>
+        					    <li role="none"><a role="menuitem" href="{{asset('administradoractividades')}}">Administrar actividades</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradoreventos')}}">Administrar eventos</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradorrutas')}}">Administrar rutas turísticas</a></li>
                             </ul>

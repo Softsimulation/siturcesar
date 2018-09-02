@@ -43,15 +43,7 @@
         .input-group-addon {
             width: 3em;
         }
-        .text-error {
-            color: red;
-            font-style: italic;
-            font-size: .75em;
-            text-overflow: ellipsis;
-        }
-        .text-error.text-msg{
-            color: dimgrey;
-        }
+        
         .ui-select-container{
             width: 100%;
         }
@@ -94,7 +86,7 @@
                 
                 <form novalidate role="form" name="crearProveedorForm">
                     <fieldset>
-                        <legend>Información básica</legend>
+                        <legend>Información básica del proveedor</legend>
                         <div class="alert alert-info">
                             <p>Los campos marcados con asterisco (*) son obligatorios.</p>
                         </div>
@@ -187,7 +179,7 @@
                     </div>
                     <form novalidate role="form" name="multimediaForm">
                         <div class="row">
-                            <h4><span class="text-danger"><span class="glyphicon glyphicon-asterisk"></span></span> Imagen de portada</h4>
+                            <h4><span class="asterisk">*</span> Imagen de portada</h4>
                             <div class="col-sm-12">
                                 <file-input ng-model="portadaIMG" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="portadaIMG" label="Seleccione la imagen de portada."></file-input>
                             </div>
@@ -219,7 +211,6 @@
             
             <!--Información adicional-->
             <div id="adicional" class="tab-pane fade">
-                <h3></h3>
                 <fieldset>
                     <legend>Información adicional</legend>
                     <div class="alert alert-info">

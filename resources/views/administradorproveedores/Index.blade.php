@@ -5,75 +5,14 @@
 
 @section('estilos')
     <style>
-        .panel-body {
-            max-height: 400px;
-            color: white;
-        }
-
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
+        
 
         .messages {
             color: #FA787E;
         }
 
-        form.ng-submitted input.ng-invalid {
-            border-color: #FA787E;
-        }
-
-        form input.ng-invalid.ng-touched {
-            border-color: #FA787E;
-        }
-
-        .carga {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.57) url(../../Content/Cargando.gif) 50% 50% no-repeat
-        }
-        /* Cuando el body tiene la clase 'loading' ocultamos la barra de navegacion */
-        body.charging {
-            overflow: hidden;
-        }
-
-        /* Siempre que el body tenga la clase 'loading' mostramos el modal del loading */
-        body.charging .carga {
-            display: block;
-        }
         .row {
             margin: 1em 0 0;
-        }
-        .form-group {
-            margin: 0;
-        }
-        .form-group label, .form-group .control-label, label {
-            font-size: smaller;
         }
         .input-group {
             display: flex;
