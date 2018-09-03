@@ -20,13 +20,6 @@
         .input-group-addon {
             width: 3em;
         }
-        .text-error {
-            color: #a94442;
-            font-style: italic;
-            font-size: .7em;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
     </style>
 @endsection
 

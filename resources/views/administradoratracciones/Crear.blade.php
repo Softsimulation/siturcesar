@@ -57,10 +57,6 @@
 
 @section('TitleSection', 'Nueva atracción')
 
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
-
 @section('app', 'ng-app="atraccionesApp"')
 
 @section('controller','ng-controller="atraccionesCrearController"')
