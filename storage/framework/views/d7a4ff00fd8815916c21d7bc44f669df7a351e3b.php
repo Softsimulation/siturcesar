@@ -9,49 +9,29 @@
     <meta name="author" content="SITUR Magdalena">
     <title><?php echo $__env->yieldContent('Title'); ?></title>
     <link rel="icon" type="image/ico" href="<?php echo e(asset('Content/icons/favicon-96x96.png')); ?>" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Roboto:100,400,700" rel="stylesheet">
     <link href="<?php echo e(asset('/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
-    <!--<link href="<?php echo e(asset('/css/bootstrap-material-design.css')); ?>" rel="stylesheet" type="text/css" />-->
-    <link href="<?php echo e(asset('/css/ripples.css')); ?>" rel="stylesheet" type="text/css" />
+    <link href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <link href="<?php echo e(asset('/css/sweetalert.min.css')); ?>" rel='stylesheet' type='text/css' />
-    <link href="<?php echo e(asset('/css/ionicons.min.css')); ?>" rel='stylesheet' type='text/css' />
+    <!--<link href="<?php echo e(asset('/css/ionicons.min.css')); ?>" rel='stylesheet' type='text/css' />-->
     <link href="<?php echo e(asset('/css/styleLoading.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/object-table-style.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/ADM-dateTimePicker.min.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/select.min.css')); ?>" rel='stylesheet' type='text/css' />
     <link href="<?php echo e(asset('/css/select2.css')); ?>" rel='stylesheet' type='text/css' />
-   
-   
-<link href="<?php echo e(asset('css/dashboard/style.css')); ?>" rel='stylesheet' type='text/css' />
-<!-- Graph CSS -->
-<link href="<?php echo e(asset('css/dashboard/font-awesome.css')); ?>" rel="stylesheet"> 
-<!-- jQuery -->
-<link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css'>
-<!-- lined-icons -->
-<link rel="stylesheet" href="<?php echo e(asset('css/dashboard/icon-font.min.css')); ?>" type='text/css' />
-<!-- //lined-icons -->
-<script src="<?php echo e(asset('js/administrador/dashboard/jquery-1.10.2.min.js')); ?>"></script>
-<script src="<?php echo e(asset('js/administrador/dashboard/amcharts.js')); ?>"></script>	
-<script src="<?php echo e(asset('js/administrador/dashboard/serial.js')); ?>"></script>	
-<script src="<?php echo e(asset('js/administrador/dashboard/light.js')); ?>"></script>	
-<script src="<?php echo e(asset('js/administrador/dashboard/radar.js')); ?>"></script>	
-<link href="<?php echo e(asset('css/dashboard/barChart.css')); ?>" rel='stylesheet' type='text/css' />
-<link href="<?php echo e(asset('css/dashboard/fabochart.css')); ?>" rel='stylesheet' type='text/css' />
-<!--clock init-->
-<script src="<?php echo e(asset('js/administrador/dashboard/css3clock.js')); ?>"></script>
-<!--Easy Pie Chart-->
-<!--skycons-icons-->
-<script src="<?php echo e(asset('js/administrador/dashboard/skycons.js')); ?>"></script>
+    <link href="<?php echo e(asset('/css/layout/AdminLayoutStyle.css')); ?>" rel='stylesheet' type='text/css' />
+    <link href="<?php echo e(asset('/css/layout/AdminLayoutStyle_768.css')); ?>" rel="stylesheet" media="(min-width: 768px)">
+    <link href="<?php echo e(asset('/css/layout/AdminLayoutStyle_992.css')); ?>" rel="stylesheet" media="(min-width: 992px)">
+    <link href="<?php echo e(asset('/css/layout/AdminLayoutStyle_1024.css')); ?>" rel="stylesheet" media="(min-width: 1024px)">
+    <link href="<?php echo e(asset('/css/layout/AdminLayoutStyle_1200.css')); ?>" rel="stylesheet" media="(min-width: 1200px)">
+    <script src="<?php echo e(asset('/js/plugins/angular.min.js')); ?>"></script>
 
-<script src="<?php echo e(asset('js/administrador/dashboard/jquery.easydropdown.js')); ?>"></script>
-        
     <?php echo $__env->yieldContent('estilos'); ?>
     <style>
         .carga {
            display: none;
            position: fixed;
-           z-index: 1000;
+           z-index: 1060;
            top: 0;
            left: 0;
            height: 100%;
@@ -85,12 +65,6 @@
             text-align: center;
             /*margin-bottom: 1em;*/
         }
-
-        .asterik {
-            color: red;
-            font-size: 1em;
-        }
-
         .checkbox {
             margin-bottom: 0.5em;
         }
@@ -99,15 +73,6 @@
             color: dimgray;
         }
 
-        .form-group {
-            margin: 0;
-        }
-
-        .table > tbody > tr > td {
-            padding-bottom: 0;
-            font-weight: 400;
-            font-size: 16px;
-        }
 
         .table > thead > tr > th {
             text-align: center;
@@ -132,10 +97,7 @@
             z-index: 10;
         }
 
-        .control-label {
-            color: dimgrey !important;
-        }
-
+        
         .label-danger {
             font-size: 1em;
         }
@@ -173,18 +135,9 @@
                 box-shadow: none;
                 background-color: transparent;
             }
-            .ui-select-multiple.ui-select-bootstrap .ui-select-match-item{
-                font-size: 16px;
-            }
-             .ADMdtp-box footer .timeSelectIcon, .ADMdtp-box footer .today, .ADMdtp-box footer .calTypeContainer p{
-                fill: darkorange;
-                color: darkorange;
-            }
-            .ADMdtp-box footer .calTypeContainer p{
-                display: none;
-            }
-            .ui-select-multiple.ui-select-bootstrap input.ui-select-search {
-                width: 100% !important;
+            
+            
+            .sidebar-menu{
             }
     </style>
 </head>
@@ -195,149 +148,145 @@
             <div class="loader"></div>
             <h1><?php echo e(trans('resources.LabelPreloader')); ?></h1>
             <h4>Por favor espere</h4>
-            <img src="<?php echo e(asset('Content/image/logo.min.png')); ?>" width="200" />
+            <img src="<?php echo e(asset('/img/brand/72.png')); ?>" width="200" />
         </div>
     </div>
-    
-  
+    <div id="content-main">
+        <aside id="left-side-menu">
+            <div id="brand">
+                <a href="/">
+                    <img src="<?php echo e(asset('/img/brand/72.png')); ?>" alt="Logo de Situr Cesar"> 
+                    <h1 class="sr-only">Sistema de información turística del departamento del Cesar</h1>    
+                </a>
+                
+            </div>
+            <div id="optionsLoggedUser">
+                <p class="text-overflow text-center">usuario@correo.com</p>
+                <ul>
+    			    <li><a href="#" title="Tablero de usuario"><span class="sr-only">Perfil de usuario</span><i class="ion-person"></i></a></li>
+    				<li><a href="#" title="Configuración"><span class="sr-only">Configuración</span><i class="ion-gear-a"></i></a></li>
+    				<li><a href="/login/cerrarsesion" title="Cerrar sesión"><span class="sr-only">Cerrar sesión</span><i class="ion-log-out"></i></a></li>
+    			</ul>
+            </div>
+            <div id="navbar-mobile" class="text-center">
+                <button type="button" class="btn btn-block btn-primary" title="Menu de navegación"><span aria-hidden="true" class="ion-navicon-round"></span><span class="sr-only">Menú de navegación</span></button>
+            </div>
+            <div id="nav-menu-main">
+                <nav role="navigation">
+                    <ul role="menubar">
+                        <li>
+                            <a role="menuitem" href="#menuPromocion" aria-haspopup="true" aria-expanded="false">Promoción</a>
+                            <ul role="menu" id="menuPromocion" aria-label="Promoción">
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('administradordestinos')); ?>">Administrar destinos</a>
+                                </li>
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('administradorproveedores')); ?>">Administrar proveedores</a>
+                                </li>
+                                <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoratracciones')); ?>">Administrar atracciones</a></li>
+        					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoractividades')); ?>">Administrar actividades</a></li>
+        					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoreventos')); ?>">Administrar eventos</a></li>
+        					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradorrutas')); ?>">Administrar rutas turísticas</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="<?php echo e(asset('turismoreceptor/listadoencuestas')); ?>">Turismo receptor</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="<?php echo e(asset('temporada')); ?>">Turismo interno y emisor</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="<?php echo e(asset('ofertaempleo/listadoproveedores')); ?>">Oferta y empleo</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="<?php echo e(asset('turismoreceptor/listadoencuestas')); ?>">Turismo receptor</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="#menuSostenibilidad" aria-haspopup="true" aria-expanded="false">Sostenibilidad</a>
+                            <ul role="menu" id="menuSostenibilidad" aria-label="Sostenibilidad">
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('sostenibilidadhogares/encuestas')); ?>">Hogares</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="<?php echo e(asset('exportacion')); ?>">Exportación</a>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="#menuPaises" aria-haspopup="true" aria-expanded="false">Administrar países</a>
+                            <ul role="menu" id="menuPaises" aria-label="Administrar países">
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('administrarpaises')); ?>">Países</a>
+                                </li>
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('administrardepartamentos')); ?>">Departamentos</a>
+                                </li>
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('administrarmunicipios')); ?>">Municipios</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+        </aside>
         
-        
-        
-        
-        
-            <div class="page-container">
-   <!--/content-inner-->
-	<div class="left-content">
-	   <div class="inner-content">
-		<!-- header-starts -->
-			<div class="header-section">
-						<!--menu-right-->
-				
-						<!--//menu-right-->
-					<div class="clearfix"></div>
-				</div>
-					<!-- //header-ends -->
-				     <div class="title-section">
-            <h3 style="margin-top: 0.5em;"><strong><?php echo $__env->yieldContent('TitleSection'); ?></strong></h3>
-        </div>
-       <div class='container'>
-        <?php echo $__env->yieldContent('content'); ?>
+        <div id="content-page">
+            <div class="title-page">
+                <h2 class="container"><?php echo $__env->yieldContent('titulo'); ?></h2>  
+                <p><?php echo $__env->yieldContent('subtitulo'); ?></p>
+            </div>
+            
+            <div class="container">
+                <?php echo $__env->yieldContent('content'); ?>
+            </div>
+                
+        </div>    
     </div>
-  
-									<!--/charts-inner-->
-									</div>
-										<!--//outer-wp-->
-									</div>
-								
-								</div>
-								
-								
-								
         
-        
-   
-    <!--
-    if (ViewContext.HttpContext.User.IsInRole("Admin") || ViewContext.HttpContext.User.IsInRole("Digitador"))
-    {
-        <footer id="seccion" ng-controller="seccionCtrl">
-            <select class="selectLenguage" style="margin: 0" ng-options="seccion as seccion.nombre for seccion in secciones track by seccion.id" ng-model="seccionSelected">
-                <option value="" selected disabled>Ir a la sección</option>
-            </select>
-        </footer>
-    }
-    -->
 
-    
-    	<!--/sidebar-menu-->
-				<div class="sidebar-menu">
-					<header class="logo">
-		 <img  class="img-responsive" width="304" height="236" src="<?php echo e(asset('Content/image/logo.png')); ?>"> 
-			
-				</header>
-			<div style="border-top:1px solid rgba(69, 74, 84, 0.7)"></div>
-			<!--/down-->
-							<div class="down">	
-									  <a href="#"><img src="<?php echo e(asset('Content/image/user.png')); ?>"></a>
-									  <a href="#"><span class=" name-caret">Usuario</span></a>
-									 <p>Rol</p>
-									<ul>
-									<li><a class="tooltips" href=""><span>Profile</span><i class="lnr lnr-user"></i></a></li>
-										<li><a class="tooltips" href="#"><span>Settings</span><i class="lnr lnr-cog"></i></a></li>
-										<li><a class="tooltips" href="/login/cerrarsesion"><span>Log out</span><i class="lnr lnr-power-switch"></i></a></li>
-										</ul>
-									</div>
-							   <!--//down-->
-                           <div class="menu">
-									<ul id="menu" >
-										
-										 <li id="menu-academico" ><a href="<?php echo e(asset('turismoreceptor/listadoencuestas')); ?>"><i class="fa fa-table"></i> <span> Turismo Receptor</span></span></a>
-										  
-										</li>
-										 <li id="menu-academico" ><a href="<?php echo e(asset('temporada')); ?>"><i class="fa fa-file-text-o"></i> <span>Turismo Interno y Emisor</span></a>
-											
-										 </li>
-										 <li id="menu-academico" ><a href="<?php echo e(asset('ofertaempleo/listadoproveedores')); ?>"><i class="fa fa-table"></i> <span> Oferta y empleo</span></span></a>
-										  
-										 </li>
-										 <li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Sostenibilidad</span> </span></a>
-    										  <ul id="menu-academico-sub" >
-    										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('sostenibilidadhogares/encuestas')); ?>">Hogares</a></li>
-    										  </ul>
-									     </li>
-										 <li id="menu-academico" ><a href="<?php echo e(asset('exportacion')); ?>"><i class="fa fa-file-text-o"></i> <span>Exportación</span></a>
-											
-										 </li>
-								
-    									 <li id="menu-academico" ><a href="#"><i class="lnr lnr-book"></i> <span>Administrar paises</span> </span></a>
-    										  <ul id="menu-academico-sub" >
-    										    <li id="menu-academico-avaliacoes" ><a href="<?php echo e(asset('administrarpaises')); ?>">Paises</a></li>
-    										    <li id="menu-academico-boletim" ><a href="<?php echo e(asset('administrardepartamentos')); ?>">Departamentos</a></li>
-    											<li id="menu-academico-boletim" ><a href="<?php echo e(asset('administrarmunicipios')); ?>">Municipios</a></li>
-    											
-    										  </ul>
-    									 </li>
-									 
-								
-									 <!--
-									 <li><a href="<?php echo e(asset('MuestraMaestra/periodos')); ?>"><i class="lnr lnr-envelope"></i> <span>Muestra Maestra</span></a>
-									
-									</li>
-							        <li id="menu-academico" ><a href="<?php echo e(asset('encuesta/listado')); ?>"><i class="lnr lnr-layers"></i> <span>Encuetas ADHOC</span></a>
-							
-									 </li>
-								
-								
-								  </ul>
-								  -->
-								</div>
-							  </div>
-   
-    <script src="<?php echo e(asset('/js/plugins/angular.min.js')); ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="<?php echo e(asset('/Content/bootstrap_material/dist/js/material.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('/Content/bootstrap_material/dist/js/ripples.min.js')); ?>"></script>
-    <script>
-        $.material.init();
-    </script>
-    <script src="<?php echo e(asset('/js/sweetalert.min.js')); ?>"></script>
+   
+    <script src="<?php echo e(asset('/js/sweetalert.min.js')); ?>" async></script>
+    <script src="/js/public/script-main.js" async></script>
     <script>
         $(window).load(function () { $("#preloader").delay(1e3).fadeOut("slow") });
     </script>
     <script>
-            $(window).on('scroll', function () {
-                if (!$('.alert').hasClass('no-fixed')) {
-                    if ($(this).scrollTop() > 190) {
-                        $('.alert').addClass('alert-fixed');
-                    } else {
-                        $('.alert').removeClass('alert-fixed');
-                    }
-                }
-            });
+            // $(window).on('scroll', function () {
+            //     if (!$('.alert').hasClass('no-fixed')) {
+            //         if ($(this).scrollTop() > 190) {
+            //             $('.alert').addClass('alert-fixed');
+            //         } else {
+            //             $('.alert').removeClass('alert-fixed');
+            //         }
+            //     }
+            // });
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
             });
+            $(function() {
+              // whenever we hover over a menu item that has a submenu
+              $('#nav-menu-main nav>ul>li').on('mouseover', function() {
+                var $menuItem = $(this),
+                    $submenuWrapper = $('> ul', $menuItem);
+                
+                // grab the menu item's position relative to its positioned parent
+                var menuItemPos = $menuItem.position();
+                
+                // place the submenu in the correct position relevant to the menu item
+                $submenuWrapper.css({
+                  top: menuItemPos.top,
+                  left: menuItemPos.left + Math.round($menuItem.outerWidth() * 1)
+                });
+              });
+            });
+    </script>
+    <script>
+        $(".nav-tabs a[data-toggle=tab]").on("click", function(e) { if ($(this).parent().hasClass("disabled")) { e.preventDefault(); return false; } });
     </script>
     <?php echo $__env->yieldContent("javascript"); ?>
     <noscript>Su buscador no soporta Javascript!</noscript>
