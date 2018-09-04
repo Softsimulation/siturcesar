@@ -91,9 +91,9 @@ class ImportacionRntController extends Controller
 		$antiguos = $arreglo->whereIn('Numero del RNT',$rntproveedores)->toArray();
 		$nuevos = $this->compare($arreglo->toArray(),$antiguos);
 		
-		$estadosProveedor = Estado_proveedor::select(\DB::raw('upper(nombre) as nombre, id'))->get();
-		$subCategorias = Categoria_Proveedor_Con_Idioma::where('idiomas_id',1)->select(\DB::raw('upper(nombre) as nombre, categoria_proveedores_id as id'))->get();
-		$municipios = Municipio::where('departamento_id',1396)->select(\DB::raw('upper(nombre) as nombre, id'))->get();
+		$estadosProveedor = Estado_proveedor::select(\DB::raw('cambia_caracter(upper(nombre)) as nombre, id'))->get();
+		$subCategorias = Categoria_Proveedor_Con_Idioma::where('idiomas_id',1)->select(\DB::raw('cambia_caracter(upper(nombre)) as nombre, categoria_proveedores_id as id'))->get();
+		$municipios = Municipio::where('departamento_id',1403)->select(\DB::raw('cambia_caracter(upper(nombre)) as nombre, id'))->get();
 		
  		$nuevos_retornar = array();
 		foreach($nuevos as $registro){
@@ -217,17 +217,17 @@ class ImportacionRntController extends Controller
     		return ["success"=>false,"errores"=>$validator->errors()];
 		}
 		
-		$categoriaProveedor = Categoria_Proveedor_Con_Idioma::whereRaw('upper(nombre) = ? and idiomas_id = 1',[ $this->MayusculaTilde(utf8_encode(strtoupper($request["sub_categoria"]))) ])->first();
+		$categoriaProveedor = Categoria_Proveedor_Con_Idioma::whereRaw('cambia_caracter(upper(nombre)) = ? and idiomas_id = 1',[ $this->MayusculaTilde(utf8_encode(strtoupper($request["sub_categoria"]))) ])->first();
 		if($categoriaProveedor == null){
 			return ["success"=>false,"errores"=> [["La SubCategoría ingresada no se encuentra ingresada en el sistema."]] ];
 		}
 		
-		$municipio = Municipio::whereRaw('upper(nombre) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["municipio"])))])->first();
+		$municipio = Municipio::whereRaw('cambia_caracter(upper(nombre)) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["municipio"])))])->first();
 		if($municipio == null){
 			return ["success"=>false,"errores"=> [["El municipio ingresado no se encuentra ingresado en el sistema."]] ];
 		}
 		
-		$estado = Estado_proveedor::whereRaw('upper(nombre) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["estado"])))])->first();
+		$estado = Estado_proveedor::whereRaw('cambia_caracter(upper(nombre)) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["estado"])))])->first();
 		if($estado == null){
 			return ["success"=>false,"errores"=> [["El estado ingresado no se encuentra ingresado en el sistema."]] ];
 		}
@@ -358,17 +358,17 @@ class ImportacionRntController extends Controller
     		return ["success"=>false,"errores"=>$validator->errors()];
 		}
 		
-		$categoriaProveedor = Categoria_Proveedor_Con_Idioma::whereRaw('upper(nombre) = ? and idiomas_id = 1',[ $this->MayusculaTilde(utf8_encode(strtoupper($request["sub_categoria"]))) ])->first();
+		$categoriaProveedor = Categoria_Proveedor_Con_Idioma::whereRaw('cambia_caracter(upper(nombre)) = ? and idiomas_id = 1',[ $this->MayusculaTilde(utf8_encode(strtoupper($request["sub_categoria"]))) ])->first();
 		if($categoriaProveedor == null){
 			return ["success"=>false,"errores"=> [["La SubCategoría ingresada no se encuentra ingresada en el sistema."]] ];
 		}
 		
-		$municipio = Municipio::whereRaw('upper(nombre) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["municipio"])))])->first();
+		$municipio = Municipio::whereRaw('cambia_caracter(upper(nombre)) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["municipio"])))])->first();
 		if($municipio == null){
 			return ["success"=>false,"errores"=> [["El municipio ingresado no se encuentra ingresado en el sistema."]] ];
 		}
 		
-		$estado = Estado_proveedor::whereRaw('upper(nombre) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["estado"])))])->first();
+		$estado = Estado_proveedor::whereRaw('cambia_caracter(upper(nombre)) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["estado"])))])->first();
 		if($estado == null){
 			return ["success"=>false,"errores"=> [["El estado ingresado no se encuentra ingresado en el sistema."]] ];
 		}
@@ -470,17 +470,17 @@ class ImportacionRntController extends Controller
     		return ["success"=>false,"errores"=>$validator->errors()];
 		}
 		
-		$categoriaProveedor = Categoria_Proveedor_Con_Idioma::whereRaw('upper(nombre) = ? and idiomas_id = 1',[ $this->MayusculaTilde(utf8_encode(strtoupper($request["sub_categoria"]))) ])->first();
+		$categoriaProveedor = Categoria_Proveedor_Con_Idioma::whereRaw('cambia_caracter(upper(nombre)) = ? and idiomas_id = 1',[ $this->MayusculaTilde(utf8_encode(strtoupper($request["sub_categoria"]))) ])->first();
 		if($categoriaProveedor == null){
 			return ["success"=>false,"errores"=> [["La SubCategoría ingresada no se encuentra ingresada en el sistema."]] ];
 		}
 		
-		$municipio = Municipio::whereRaw('upper(nombre) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["municipio"])))])->first();
+		$municipio = Municipio::whereRaw('cambia_caracter(upper(nombre)) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["municipio"])))])->first();
 		if($municipio == null){
 			return ["success"=>false,"errores"=> [["El municipio ingresado no se encuentra ingresado en el sistema."]] ];
 		}
 		
-		$estado = Estado_proveedor::whereRaw('upper(nombre) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["estado"])))])->first();
+		$estado = Estado_proveedor::whereRaw('cambia_caracter(upper(nombre)) = ?',[$this->MayusculaTilde(utf8_encode(strtoupper($request["estado"])))])->first();
 		if($estado == null){
 			return ["success"=>false,"errores"=> [["El estado ingresado no se encuentra ingresado en el sistema."]] ];
 		}
@@ -724,11 +724,11 @@ class ImportacionRntController extends Controller
     }
  
     public static function MayusculaTilde($cadena){
-        $cadena = str_replace("á", "Á", $cadena); 
-		$cadena = str_replace("é", "É", $cadena); 
-		$cadena = str_replace("í", "Í", $cadena); 
-		$cadena = str_replace("ó", "Ó", $cadena); 
-		$cadena = str_replace("ú", "Ú", $cadena); 
+        $cadena = str_replace("Á", "A", $cadena); 
+		$cadena = str_replace("É", "E", $cadena); 
+		$cadena = str_replace("Í", "I", $cadena); 
+		$cadena = str_replace("Ó", "O", $cadena); 
+		$cadena = str_replace("Ú", "U", $cadena); 
         return trim($cadena);
     }
     
