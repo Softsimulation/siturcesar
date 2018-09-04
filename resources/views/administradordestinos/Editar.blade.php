@@ -73,7 +73,7 @@
         <p>Destino a modificar:</p>
         <h3 style="margin: 0">@{{destinoNombre}}</h3>
     </div>
-    <a href="{{asset('/administradordestinos')}}" class="btn btn-link">Volver al listado</a>
+    
 </div>
 <div class="alert alert-danger" ng-if="errores != null">
     <label><b>Errores:</b></label>
@@ -98,6 +98,9 @@
                         <legend>
                             Información básica
                         </legend>
+                        <div class="alert alert-info">
+                            <p>Los campos marcados con asterisco (*) son obligatorios.</p>
+                        </div>
                         <div class="row">
                             <div class="col-xs-12 col-sm-6 col-md-3">
                                 <div class="form-group">
@@ -137,6 +140,7 @@
                             </div>
                             <div class="col-sm-12 text-center">
                                 <button type="submit" ng-click="guardarDatosGenerales()" class="btn btn-lg btn-success">Guardar</button>
+                                <a href="{{asset('/administradordestinos')}}" class="btn btn-lg btn-default">Cancelar</a>
                             </div>
                         </div>
                     </fieldset>
@@ -178,6 +182,7 @@
                     <div class="row">
                         <div class="col-sm-12 text-center">
                             <button ng-click="guardarMultimedia()" type="submit" class="btn btn-lg btn-success" >Guardar</button>
+                            <a href="{{asset('/administradordestinos')}}" class="btn btn-lg btn-default">Cancelar</a>
                         </div>
                     </div>
                 </form>

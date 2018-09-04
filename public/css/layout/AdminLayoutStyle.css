@@ -83,6 +83,7 @@ fieldset{
 }
 .nav-tabs{
     border: 0;
+    margin-bottom: 1.5rem;
 }
 .form-control:focus {
     border-color: #333;
@@ -525,4 +526,13 @@ align-items-center{
 .ui-select-bootstrap>.ui-select-match>.btn{
     box-shadow: none;
     text-transform: initial;
+}
+.text-error {
+    color: red;
+    font-style: italic;
+    font-size: .75em;
+    text-overflow: ellipsis;
+}
+.text-error.text-msg{
+    color: dimgrey;
 }
