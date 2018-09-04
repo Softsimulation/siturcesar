@@ -536,3 +536,16 @@ align-items-center{
 .text-error.text-msg{
     color: dimgrey;
 }
+.ADMdtpInput input:focus {
+    border-color: #333;
+}
+.ADMdtpInput input {
+    border: 2px solid #ddd;
+    border-radius: 0;
+}
+.form-group.has-error .ADMdtpInput input{
+    border-color: red;
+}
+.ADMdtpInput input + .dtp-ig .calendarIcon, .ADMdtpInput input + .dtp-ig .removeIcon, .ADMdtpInput input + .dtp-ig .closeIcon{
+    border-radius: 0;
+}

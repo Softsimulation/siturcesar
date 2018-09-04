@@ -13,7 +13,7 @@
 @section('app', 'ng-app="actividadesApp"')
 
 @section('controller','ng-controller="actividadesIndexController"')
-@section('titulo','Lista de actividades')
+@section('titulo','Actividades')
 @section('subtitulo','El siguiente listado cuenta con @{{actividades.length}} registro(s)')
 @section('content')
 <div class="flex-list">
@@ -70,15 +70,14 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Nuevo idioma para la actividad</h4>
-                </div>
-                <div class="modal-body">
             </div>
+                
             <form>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="idioma">Seleccione un idioma</label>
-                        <select ng-model="idiomaEditSelected" ng-options="idioma.id as idioma.nombre for idioma in idiomas|idiomaFilter:actividadEdit.actividades_con_idiomas" class="form-control">
-                            <option value="">Seleccione un idioma</option>
+                        <select ng-model="idiomaEditSelected" ng-options="idioma.id as idioma.nombre for idioma in idiomas|idiomaFilter:actividadEdit.actividades_con_idiomas" class="form-control" required>
+                            <option value="" disabled>Seleccione un idioma</option>
                         </select>
                     </div>
                 </div>
