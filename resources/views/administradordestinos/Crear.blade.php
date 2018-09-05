@@ -67,9 +67,7 @@
 @section('titulo','Destinos')
 @section('subtitulo','Formulario para el registro de destinos')
 @section('content')
-<div class="text-center">
-    <a href="{{asset('/administradordestinos')}}" class="btn btn-link">Volver al listado</a>
-</div>
+
 
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#info">Información básica</a></li>
@@ -138,7 +136,9 @@
                         </div>
                     </div>
                     <div class="col-xs-12 text-center">
+                        <hr/>
                         <button type="submit" ng-click="guardarDatosGenerales()" ng-class="{'disabled': (destino.id != -1)}" class="btn btn-lg btn-success">Guardar</button>
+                        <a href="{{asset('/administradordestinos')}}" class="btn btn-lg btn-default">Cancelar</a>
                     </div>
                 </div>
             </fieldset>
@@ -165,7 +165,7 @@
                 </div>
             </div>
             <div>
-                <h4>Galería de imágenes (Max. 5 imágenes)</h4>
+                <h4>Galería de imágenes (Max. 5 imágenes)</h4> 
                 <div class="col-sm-12">
                     <file-input ng-model="imagenes" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="imagenes" label="Seleccione las imágenes de la atracción." multiple max-files="5"></file-input>
                 </div>
@@ -178,7 +178,9 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 text-center">
+                    <hr/>
                     <button ng-click="guardarMultimedia()" type="submit" ng-class="{'disabled': (destino.id == -1)}" class="btn btn-lg btn-success" >Guardar</button>
+                    <a href="{{asset('/administradordestinos')}}" class="btn btn-lg btn-default">Cancelar</a>
                 </div>
             </div>
         </form>

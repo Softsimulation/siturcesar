@@ -32,7 +32,7 @@
 @section('app', 'ng-app="atraccionesApp"')
 
 @section('controller','ng-controller="atraccionesIndexController"')
-@section('titulo','Lista de atracciones')
+@section('titulo','Atracciones')
 @section('subtitulo','El siguiente listado cuenta con @{{atracciones.length}} registro(s)')
 @section('content')
 <div class="flex-list">
@@ -93,8 +93,6 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Nuevo idioma para la atracción</h4>
                 </div>
-                <div class="modal-body">
-            </div>
             <form>
                 <div class="modal-body">
                     <div class="form-group">
@@ -106,7 +104,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" ng-click="nuevoIdioma()" class="btn btn-primary">Enviar</button>
+                    <button type="button" ng-click="nuevoIdioma()" class="btn btn-success">Enviar</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->

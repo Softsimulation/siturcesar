@@ -64,9 +64,7 @@
 @section('subtitulo','Formulario para el registro de atracciones')
 
 @section('content')
-<div class="alert alert-info">
-    <p>En la pestaña Información básica debe ingresar la información de la atracción seleccionado en <strong>idioma inglés.</strong></p>
-</div>
+
 <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#info">Información básica</a></li>
     <li ng-class="{'disabled': (atraccion.id == -1)}"><a data-toggle="tab" href="#multimedia">Multimedia</a></li>
