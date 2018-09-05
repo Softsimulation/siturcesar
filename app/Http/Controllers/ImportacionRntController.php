@@ -728,7 +728,14 @@ class ImportacionRntController extends Controller
 		$cadena = str_replace("É", "E", $cadena); 
 		$cadena = str_replace("Í", "I", $cadena); 
 		$cadena = str_replace("Ó", "O", $cadena); 
-		$cadena = str_replace("Ú", "U", $cadena); 
+		$cadena = str_replace("Ú", "U", $cadena);
+		
+		$cadena = str_replace("á", "A", $cadena); 
+		$cadena = str_replace("é", "E", $cadena); 
+		$cadena = str_replace("í", "I", $cadena); 
+		$cadena = str_replace("ó", "O", $cadena); 
+		$cadena = str_replace("ú", "U", $cadena); 
+		
         return trim($cadena);
     }
     
