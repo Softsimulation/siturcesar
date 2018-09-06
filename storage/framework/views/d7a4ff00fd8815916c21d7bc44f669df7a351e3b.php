@@ -136,9 +136,6 @@
                 background-color: transparent;
             }
             
-            
-            .sidebar-menu{
-            }
     </style>
 </head>
 <body <?php echo $__env->yieldContent('app'); ?>  <?php echo $__env->yieldContent('controller'); ?> >

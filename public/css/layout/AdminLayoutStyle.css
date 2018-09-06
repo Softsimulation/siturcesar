@@ -549,3 +549,6 @@ align-items-center{
 .ADMdtpInput input + .dtp-ig .calendarIcon, .ADMdtpInput input + .dtp-ig .removeIcon, .ADMdtpInput input + .dtp-ig .closeIcon{
     border-radius: 0;
 }
+.ionicons{
+    font-size: 1.5rem;
+}

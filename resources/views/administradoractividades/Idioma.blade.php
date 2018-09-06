@@ -40,10 +40,6 @@
 
 @section('TitleSection', 'Editar idioma de la actividad')
 
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
-
 @section('app', 'ng-app="actividadesApp"')
 
 @section('controller','ng-controller="actividadesIdiomaController"')
