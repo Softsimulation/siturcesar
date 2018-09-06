@@ -136,9 +136,6 @@
                 background-color: transparent;
             }
             
-            
-            .sidebar-menu{
-            }
     </style>
 </head>
 <body @yield('app')  @yield('controller') >

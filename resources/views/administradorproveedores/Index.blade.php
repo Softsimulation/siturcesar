@@ -5,8 +5,6 @@
 
 @section('estilos')
     <style>
-        
-
         .messages {
             color: #FA787E;
         }
