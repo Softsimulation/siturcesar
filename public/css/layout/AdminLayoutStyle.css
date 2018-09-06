@@ -552,3 +552,22 @@ align-items-center{
 .ionicons{
     font-size: 1.5rem;
 }
+.table-overflow {
+    overflow: auto;
+}
+.form-group label{
+    margin-bottom: 0;
+}
+.form-control+.text-input-alt {
+    background: #ddd;
+    display: block;
+    font-size: 0.75rem;
+    padding: 0 4px;
+}
+.form-control:focus+.text-input-alt{
+    font-size: 0.875rem;
+}
+.form-group.has-error .form-control+.text-input-alt {
+    background-color: red;
+    color: white;
+}

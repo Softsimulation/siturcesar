@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Sistema de Información Turistica del Magdalena y Santa Marta">
     <meta name="author" content="SITUR Magdalena">
-    <title><?php echo $__env->yieldContent('Title'); ?></title>
+    <title><?php echo $__env->yieldContent('title'); ?></title>
     <link rel="icon" type="image/ico" href="<?php echo e(asset('Content/icons/favicon-96x96.png')); ?>" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Roboto:100,400,700" rel="stylesheet">
     <link href="<?php echo e(asset('/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />
@@ -42,29 +42,7 @@
         body.charging { overflow: hidden; }
         body.charging .carga { display: block; }
     
-        .banner {
-            background-color: white;
-            padding-top: 1em;
-            padding-bottom: 1em;
-            color: dimgray;
-            text-align: center;
-            font-weight: 700;
-        }
-
-            .banner img {
-                height: 6em;
-            }
-
-        .title-section {
-            background-color: dodgerblue;
-            color: white;
-            width: 100%;
-            padding: 4%;
-            padding-top: .5em;
-            padding-bottom: .5em;
-            text-align: center;
-            /*margin-bottom: 1em;*/
-        }
+        
         .checkbox {
             margin-bottom: 0.5em;
         }
@@ -102,30 +80,11 @@
             font-size: 1em;
         }
 
-        .progress {
-            height: 1.4em;
-        }
-
-        .progress-bar {
-            font-size: 1.2em;
-            font-weight: 500;
-            line-height: 1.3em;
-        }
 
         .radio label, label.radio-inline {
             padding-left: 1.8em;
         }
-        #log form {
-            float: none !important;
-        }
-
-            #log form a {
-                text-decoration: none;
-                color: #333 !important;
-                font-size: 1em !important;
-                font-weight: 400;
-                padding: 3px 20px;
-            }
+        
             .tooltip-inner {
                 text-align:left !important;
             }
@@ -194,9 +153,6 @@
                         </li>
                         <li>
                             <a role="menuitem" href="<?php echo e(asset('ofertaempleo/listadoproveedores')); ?>">Oferta y empleo</a>
-                        </li>
-                        <li>
-                            <a role="menuitem" href="<?php echo e(asset('turismoreceptor/listadoencuestas')); ?>">Turismo receptor</a>
                         </li>
                         <li>
                             <a role="menuitem" href="#menuSostenibilidad" aria-haspopup="true" aria-expanded="false">Sostenibilidad</a>

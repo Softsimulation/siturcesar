@@ -76,38 +76,39 @@
 </div>
 
 
-            <div class="row" ng-show="(encuestas|filter:prop.searchAntiguo).length > 0 && encuestas.length > 0">
-                <div class="col-xs-12">
-                    <table class="table table-striped">
-                  <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Mes</th>
-                            <th>Año</th>
-                            <th>Estado</th>
-                            <th style="width: 90px;"></th>
-                        </tr>
-                    </thead>
-                     <tbody>
-                        <tr dir-paginate="item in encuestas|filter:prop.searchAntiguo|itemsPerPage:10 as results" pagination-id="paginacion_antiguos" >
-                            <td>@{{item.id}}</td>
-                            <td>@{{item.mes}}</td>
-                            <td>@{{item.anio}}</td>
-                            <td>@{{item.estado}}</td>
-                            <td>
-                                <a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad ==1 )" href="@{{ruta}}/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta oferta" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1"><span class="glyphicon glyphicon-edit"></span></a>
-                                <a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad == 1 )" href="/ofertaempleo/empleomensual/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta empleo" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1"><span class="glyphicon glyphicon-pencil"></span></a>  </td>
-                            </tr>
-                    </tbody>
-                    </table>
-                    
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12 text-center">
-              <dir-pagination-controls pagination-id="paginacion_antiguos"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
-              </div>
-            </div>
+<d iv class="row" ng-show="(encuestas|filter:prop.searchAntiguo).length > 0 && encuestas.length > 0">
+    <div class="col-xs-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Mes</th>
+                    <th>Año</th>
+                    <th>Estado</th>
+                    <th style="width: 90px;"></th>
+                </tr>
+            </thead>
+             <tbody>
+                <tr dir-paginate="item in encuestas|filter:prop.searchAntiguo|itemsPerPage:10 as results" pagination-id="paginacion_antiguos" >
+                    <td>@{{item.id}}</td>
+                    <td>@{{item.mes}}</td>
+                    <td>@{{item.anio}}</td>
+                    <td>@{{item.estado}}</td>
+                    <td>
+                        <a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad ==1 )" href="@{{ruta}}/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta oferta" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1"><span class="glyphicon glyphicon-edit"></span></a>
+                        <a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad == 1 )" href="/ofertaempleo/empleomensual/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta empleo" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1"><span class="glyphicon glyphicon-pencil"></span></a>  
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <dir-pagination-controls pagination-id="paginacion_antiguos"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+    </div>
+</div>
     <div class='carga'>
     </div>
 
