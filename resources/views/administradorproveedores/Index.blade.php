@@ -23,10 +23,6 @@
 
 @section('TitleSection', 'Listado de proveedores')
 
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
-
 @section('app', 'ng-app="proveedoresApp"')
 
 @section('controller','ng-controller="proveedoresIndexController"')

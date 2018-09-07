@@ -109,7 +109,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="inputNombre"><span style="color:red;">*</span> Exportacion a realizar</label>
                                     <select name="nombre" class="form-control" ng-model="exportacion.nombre" required>
-                                        <option value="">--Seleccione--</option>
+                                        <option value="" disabled>--Seleccione--</option>
                                         <option value="receptor">Turismo Receptor</option>
                                         <option value="interno">Turismo Interno</option>
                                     </select>
