@@ -205,6 +205,8 @@
             </div>
         </div>
         
+    
+    
         
     <!-- Modal editar registro-->
     <div class="modal fade bs-example-modal-lg" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="labelModalEditar">
@@ -513,7 +515,7 @@
           <!--              </div>-->
                         
                         <div class="row">
-                            <ng-map id="mapa" zoom="9" center="[11.24079, -74.19904]" map-type-control="true" map-type-control-options="{position:'BOTTOM_CENTER'}"  > 
+                            <ng-map id="mapa1" zoom="9" center="[11.24079, -74.19904]" map-type-control="true" map-type-control-options="{position:'BOTTOM_CENTER'}"  > 
                                 <marker ng-if="registro.latitud != undefined && registro.longitud != undefined" draggable="true" on-dragend="getCurrentLocation(registro)" position="[@{{registro.latitud}}, @{{registro.longitud}}]" title="registro.nombre_comercial"></marker>
                                 
                                 <drawing-manager ng-if="registro.latitud == undefined && registro.longitud == undefined"
@@ -855,7 +857,7 @@
           <!--              </div>-->
                         
                         <div class="row">
-                            <ng-map id="mapa" zoom="9" center="[11.24079, -74.19904]" map-type-control="true" map-type-control-options="{position:'BOTTOM_CENTER'}"  > 
+                            <ng-map id="mapa2" zoom="9" center="[11.24079, -74.19904]" map-type-control="true" map-type-control-options="{position:'BOTTOM_CENTER'}"  > 
                                 <marker ng-if="registro.latitud != undefined && registro.longitud != undefined" draggable="true" on-dragend="getCurrentLocation(registro)" position="[@{{registro.latitud}}, @{{registro.longitud}}]" title="registro.nombre_comercial"></marker>
                                 
                                 <drawing-manager ng-if="registro.latitud == undefined && registro.longitud == undefined"
@@ -1037,7 +1039,7 @@
     				
     				
     				<div class="row" ng-show="registro.latitud != undefined && registro.longitud != undefined">
-                        <ng-map id="mapa" zoom="9" center="[11.24079, -74.19904]" map-type-control="true" map-type-control-options="{position:'BOTTOM_CENTER'}"  > 
+                        <ng-map id="mapa3" zoom="9" center="[11.24079, -74.19904]" map-type-control="true" map-type-control-options="{position:'BOTTOM_CENTER'}"  > 
                             <marker ng-if="registro.latitud != undefined && registro.longitud != undefined"  position="[@{{registro.latitud}}, @{{registro.longitud}}]" title="registro.nombre_comercial"></marker>
                         </ng-map>
                     </div>
@@ -1113,7 +1115,7 @@
         });
 
     </script>
-    <script src="/js/plugins/tokml.js"></script>
+    <!--<script src="/js/plugins/tokml.js"></script>-->
     <script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
-    <script src="/js/plugins/ng-map.js"></script>
+    
 @endsection
