@@ -9,6 +9,7 @@ angular.module('receptor.estanciayvisitados', [])
 
     
     $scope.$watch('id', function () {
+        $("body").attr("class", "cbp-spmenu-push charging");
         receptorServi.getDatosEstancia($scope.id).then(function (data) {
             $scope.Datos = data.Enlaces;
             //$scope.transformarObjeto($scope.Datos);
@@ -19,7 +20,9 @@ angular.module('receptor.estanciayvisitados', [])
                 }
             }
             $scope.encuesta.Id = $scope.id;
+            $("body").attr("class", "");
         }).catch(function () {
+            $("body").attr("class", "");
             swal("Error", "No se realizo la solicitud, reinicie la página");
         })
     })
@@ -204,7 +207,7 @@ angular.module('receptor.estanciayvisitados', [])
         
         
         if (!$scope.EstanciaForm.$valid || $scope.Validar()) {
-            swal("Error", "corrija los errores", "error");
+            swal("Error", "Formulario incompleto corrige los errores.", "error");
             return
         }
 

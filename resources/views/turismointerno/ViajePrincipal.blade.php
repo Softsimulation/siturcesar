@@ -7,7 +7,7 @@
 @section('estilos')
     <style>
         .title-section {
-            background-color: #108238 !important;
+            background-color: #16469e !important;
         }
     </style>
     <style>
@@ -441,7 +441,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12" style="text-align: center; border-top: .5px solid lightgrey">
-            <a href="/turismointerno/viajesrealizados/{{$hogar}}" class="btn btn-raised btn-default" placeholder="Anterior">Anterior</a>
+            <a href="/turismointerno/viajesrealizados/{{$persona}}" class="btn btn-raised btn-default" placeholder="Anterior">Anterior</a>
             <input type="submit" class="btn btn-raised btn-success" value="Siguente" ng-click="siguiente()" ng-disabled="ver" placeholder="Siguiente">
         </div>
     </div>

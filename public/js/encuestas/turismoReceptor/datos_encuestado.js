@@ -32,6 +32,7 @@ angular.module('encuestas.datos_encuestado', [])
     }
     
     $scope.$watch('id', function () {
+        $("body").attr("class", "charging");
         receptorServi.informacionCrear().then(function (data) {
             $scope.grupos = data.grupos;
             $scope.encuestadores = data.encuestadores;
@@ -41,8 +42,10 @@ angular.module('encuestas.datos_encuestado', [])
             $scope.medicos = data.medicos;
             $scope.departamentos_colombia = data.departamentos;
             $scope.lugares_aplicacion = data.lugares_aplicacion;
+            $("body").attr("class", "");
         }).catch(function () {
             swal("Error", "No se realizo la solicitud, reinicie la página");
+            $("body").attr("class", "");
         });
     })
 
@@ -142,7 +145,7 @@ angular.module('encuestas.datos_encuestado', [])
                 swal("Error", "No se realizo la solicitud, reinicie la página", "error");
             })
         } else {
-            swal("Error", "Formulario incompleto corrige los errores", "error");
+            swal("Error", "Formulario incompleto corrige los errores.", "error");
         }
 
     }
@@ -219,7 +222,7 @@ angular.module('encuestas.datos_encuestado', [])
                 
             }).catch(function () {
                 $("body").attr("class", "cbp-spmenu-push");
-                swal("Error", "No se realizo la solicitud, reinicie la página");
+                swal("Error", "Formulario incompleto corrige los errores.", "error");
             });
         }
     })

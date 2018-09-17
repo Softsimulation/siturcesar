@@ -24,6 +24,7 @@ angular.module('receptor.grupo_viaje', ['checklist-model'])
     $scope.guardar = function () {
 
         if (!$scope.crearForm.$valid || $scope.total == 0 || $scope.grupo.PersonasEncuestadas > $scope.grupo.Mayores15) {
+            swal("Error", "Formulario incompleto corrige los errores.", "error");
             return;
         }
 

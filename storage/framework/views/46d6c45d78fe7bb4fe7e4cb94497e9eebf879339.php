@@ -167,6 +167,23 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <?php if(isset($saltoSeccion)): ?>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <select id="salto" name="salto" onchange="location = this.value;">
+                                    <option value="" selected disabled>Seleccione sección</option>
+                                    <option value="/turismoreceptor/seccionestancia/<?php echo e($saltoSeccion); ?>">Estancia y visitados</option>
+                                    <option value="/turismoreceptor/secciontransporte/<?php echo e($saltoSeccion); ?>">Transporte</option>
+                                    <option value="/turismoreceptor/secciongrupoviaje/<?php echo e($saltoSeccion); ?>">Viaje en grupo</option>
+                                    <option value="/turismoreceptor/secciongastos/<?php echo e($saltoSeccion); ?>">Gastos</option>
+                                    <option value="/turismoreceptor/seccionpercepcionviaje/<?php echo e($saltoSeccion); ?>">Percepcción del viaje</option>
+                                    <option value="/turismoreceptor/seccionfuentesinformacion/<?php echo e($saltoSeccion); ?>">Fuentes de información</option>
+                                </select>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    
                 </div>
                 
             </div>

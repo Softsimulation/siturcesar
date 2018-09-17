@@ -20,6 +20,10 @@ Route::get('/', function () {
     
 });
 
+Route::get('/QueHacer','HomeController@viewQueHacer');
+Route::get('/Experiencias','HomeController@viewExperiencias');
+Route::get('/PST','HomeController@viewPST');
+
 Route::controller('/temporada','TemporadaController');
 Route::controller('/turismointerno','TurismoInternoController');
 
@@ -33,14 +37,35 @@ Route::controller('/administrarpaises', 'AdministrarPaisesController');
 Route::controller('/administrardepartamentos', 'AdministrarDepartamentosController');
 
 Route::controller('/administrarmunicipios', 'AdministrarMunicipiosController');
+Route::controller('/ofertaempleo','OfertaEmpleoController');
 
+Route::controller('/administradorproveedores', 'AdministradorProveedoresController');
+
+Route::controller('/administradoreventos', 'AdministradorEventosController');
+
+Route::controller('/administradorrutas', 'AdministradorRutasController');
+
+Route::controller('/administradoratracciones', 'AdministradorAtraccionController');
+
+Route::controller('/administradoractividades', 'AdministradorActividadesController');
+
+Route::controller('/administradordestinos', 'AdministradorDestinosController');
 
 Route::group(['middleware' => 'cors'], function(){
- 
-   Route::controller('/turismointernoapi','TurismoInternoCorsController');
+    
+        Route::controller('/authapi', 'ApiAuthController');
+     //Route::group(['middleware'=> 'jwt.auth'], function () {
+        Route::controller('/turismointernoapi','TurismoInternoCorsController');
    
-   Route::controller('/turismoreceptoroapi','TurismoReceptorCorsController');
-  
+        Route::controller('/turismoreceptoroapi','TurismoReceptorCorsController');
+    //});
 });
 Route::controller('/usuario','UsuarioController');
 
+Route::controller('/sostenibilidadpst', 'SostenibilidadPstController');
+
+Route::controller('/sostenibilidadhogares','SostenibilidadHogaresController');
+Route::controller('/login','LoginController');
+
+
+Route::controller('/importarRnt','ImportacionRntController');
