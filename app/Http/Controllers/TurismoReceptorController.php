@@ -1477,39 +1477,39 @@ class TurismoReceptorController extends Controller
 		//---------------------------------------------------------------------------
 		
 		$sostenibilidad = Sostenibilidad_Visitante::find($request->Id);
-		    if($sostenibilidad == null){
-		        $sostenibilidad = new Sostenibilidad_Visitante;
-		        $sostenibilidad->visitante_id = $request->Id;
-		        $sostenibilidad->estado = true;
-		        $sostenibilidad->user_update = $this->user->username;
-		        $sostenibilidad->user_create = $this->user->username;
-		    }else{
-		        $sostenibilidad->actividadesSostenibilidad()->detach();
-		    }
-		    
-		    if(isset($request->Elementos)){
-		        foreach($request->Elementos as $el){
-		            
-		            if($el == 12){
-		                
-		                $sostenibilidad->actividadesSostenibilidad()->attach($el,['nombre'=>$request->OtroElementos]);
-		            }else{
-		                 $sostenibilidad->actividadesSostenibilidad()->attach($el);
-		            }
-		            
-		        }
-		        
-		    }
-		    
-		    if(isset($request->Flora)){
-		        $sostenibilidad->es_informado = $request->Flora != 0? true:false;
-		    }
-		    
-		    if(isset($request->Sostenibilidad)){
-		        $sostenibilidad->trato_turista = $request->Sostenibilidad;
-		    }
-		
-		    $sostenibilidad->save();
+	    if($sostenibilidad == null){
+	        $sostenibilidad = new Sostenibilidad_Visitante;
+	        $sostenibilidad->visitante_id = $request->Id;
+	        $sostenibilidad->estado = true;
+	        $sostenibilidad->user_update = $this->user->username;
+	        $sostenibilidad->user_create = $this->user->username;
+	    }else{
+	        $sostenibilidad->actividadesSostenibilidad()->detach();
+	    }
+	    
+	    if(isset($request->Flora)){
+	        $sostenibilidad->es_informado = $request->Flora != 0? true:false;
+	    }
+	    
+	    if(isset($request->Sostenibilidad)){
+	        $sostenibilidad->trato_turista = $request->Sostenibilidad;
+	    }
+	
+	    $sostenibilidad->save();
+	    
+	    if(isset($request->Elementos)){
+	        foreach($request->Elementos as $el){
+	            
+	            if($el == 12){
+	                
+	                $sostenibilidad->actividadesSostenibilidad()->attach($el,['nombre'=>$request->OtroElementos]);
+	            }else{
+	                 $sostenibilidad->actividadesSostenibilidad()->attach($el);
+	            }
+	            
+	        }
+	        
+	    }
 		
 	    /*$visitante->elementosRepresentativos()->attach($request->Elementos);
 	    if(in_array(11,$request->Elementos)){
