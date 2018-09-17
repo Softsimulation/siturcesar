@@ -170,7 +170,7 @@
                 </div>
                 <div class="col-xs-12">
                     <div class="form-group" ng-class="{'has-error': (informacionAdicionalForm.$submitted || informacionAdicionalForm.sitios.$touched) && informacionAdicionalForm.sitios.$error.required}">
-                        <label for="sitios"><h4><span class="text-danger"><span class="glyphicon glyphicon-asterisk"></span></span> Sitios <small>(Seleccione al menos un sitio)</small></h4></label>
+                        <label for="sitios"><span class="asterisk">*</span> Sitios <span class="text-error text-msg">(Seleccione al menos un sitio)</span></label>
                         <ui-select name="sitios" id="sitios" multiple ng-required="true" ng-model="actividad.adicional.sitios" theme="bootstrap" close-on-select="false" >
                             <ui-select-match placeholder="Seleccione uno o varios sitios.">
                                 <span ng-bind="$item.sitios_con_idiomas[0].nombre"></span>
@@ -181,45 +181,39 @@
                         </ui-select>
                     </div>
                 </div>
-                <div class="col-xs-12"></div>
-                <div class="col-xs-12"></div>
-            </fieldset>
-            <div class="row">
-                
-            </div>
-            <div class="row">
-                <div class="col-sm-12" ng-class="{'has-error': (informacionAdicionalForm.$submitted || informacionAdicionalForm.perfiles.$touched) && informacionAdicionalForm.perfiles.$error.required}">
-                    <label for="perfiles"><h4><span class="text-danger"><span class="glyphicon glyphicon-asterisk"></span></span> Perfiles del turista <small>(Seleccione al menos un perfil)</small></h4></label>
-                    <ui-select name="perfiles" id="perfiles" multiple ng-required="true" ng-model="actividad.adicional.perfiles" theme="bootstrap" close-on-select="false" >
-                        <ui-select-match placeholder="Seleccione uno o varios perfiles de usuario.">
-                            <span ng-bind="$item.perfiles_usuarios_con_idiomas[0].nombre"></span>
-                        </ui-select-match>
-                        <ui-select-choices repeat="perfil.id as perfil in (perfiles_turista| filter: $select.search)">
-                            <span ng-bind="perfil.perfiles_usuarios_con_idiomas[0].nombre" title="@{{perfil.perfiles_usuarios_con_idiomas[0].nombre}}"></span>
-                        </ui-select-choices>
-                    </ui-select>
+                <div class="col-xs-12">
+                    <div class="form-group" ng-class="{'has-error': (informacionAdicionalForm.$submitted || informacionAdicionalForm.perfiles.$touched) && informacionAdicionalForm.perfiles.$error.required}">
+                        <label for="perfiles"><span class="asterisk">*</span> Perfiles del turista <span class="text-error text-smg">(Seleccione al menos un perfil)</span></label>
+                        <ui-select name="perfiles" id="perfiles" multiple ng-required="true" ng-model="actividad.adicional.perfiles" theme="bootstrap" close-on-select="false" >
+                            <ui-select-match placeholder="Seleccione uno o varios perfiles de usuario.">
+                                <span ng-bind="$item.perfiles_usuarios_con_idiomas[0].nombre"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="perfil.id as perfil in (perfiles_turista| filter: $select.search)">
+                                <span ng-bind="perfil.perfiles_usuarios_con_idiomas[0].nombre" title="@{{perfil.perfiles_usuarios_con_idiomas[0].nombre}}"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12" ng-class="{'has-error': (informacionAdicionalForm.$submitted || informacionAdicionalForm.categorias.$touched) && informacionAdicionalForm.categorias.$error.required}">
-                    <label for="categorias"><h4><span class="text-danger"><span class="glyphicon glyphicon-asterisk"></span></span> Categorías de turismo <small>(Seleccione al menos una categoría)</small></h4></label>
-                    <ui-select name="categorias" id="categorias" multiple ng-required="true" ng-model="actividad.adicional.categorias" theme="bootstrap" close-on-select="false" >
-                        <ui-select-match placeholder="Seleccione una o varias categorías de turismo.">
-                            <span ng-bind="$item.categoria_turismo_con_idiomas[0].nombre"></span>
-                        </ui-select-match>
-                        <ui-select-choices repeat="categoria.id as categoria in (categorias_turismo| filter: $select.search)">
-                            <span ng-bind="categoria.categoria_turismo_con_idiomas[0].nombre" title="@{{categoria.categoria_turismo_con_idiomas[0].nombre}}"></span>
-                        </ui-select-choices>
-                    </ui-select>
+                <div class="col-xs-12">
+                    <div class="form-group" ng-class="{'has-error': (informacionAdicionalForm.$submitted || informacionAdicionalForm.categorias.$touched) && informacionAdicionalForm.categorias.$error.required}">
+                        <label for="categorias"><span class="asterisk">*</span> Categorías de turismo <span class="text-error text-msg">(Seleccione al menos una categoría)</span></label>
+                        <ui-select name="categorias" id="categorias" multiple ng-required="true" ng-model="actividad.adicional.categorias" theme="bootstrap" close-on-select="false" >
+                            <ui-select-match placeholder="Seleccione una o varias categorías de turismo.">
+                                <span ng-bind="$item.categoria_turismo_con_idiomas[0].nombre"></span>
+                            </ui-select-match>
+                            <ui-select-choices repeat="categoria.id as categoria in (categorias_turismo| filter: $select.search)">
+                                <span ng-bind="categoria.categoria_turismo_con_idiomas[0].nombre" title="@{{categoria.categoria_turismo_con_idiomas[0].nombre}}"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-sm-12 text-center">
                     <hr/>
                     <button type="submit"  class="btn btn-lg btn-success" ng-class="{'disabled': (actividad.id == -1)}" ng-click="guardarAdicional()">Guardar</button>
                     <a href="{{asset('/administradoractividades')}}" class="btn btn-lg btn-default">Cancelar</a>
                 </div>
-            </div>
+            </fieldset>
+            
         </form>
     </div>
 </div>

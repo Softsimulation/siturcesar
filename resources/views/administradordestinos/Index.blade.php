@@ -41,13 +41,6 @@
         .input-group-addon {
             width: 3em;
         }
-        .text-error {
-            color: #a94442;
-            font-style: italic;
-            font-size: .7em;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
         
     </style>
 @endsection
@@ -61,14 +54,14 @@
 @section('app', 'ng-app="destinosApp"')
 
 @section('controller','ng-controller="destinosIndexController"')
-@section('titulo','Lista de destinos')
+@section('titulo','Destinos')
 @section('subtitulo','El siguiente listado cuenta con @{{destinos.length}} registro(s)')
 @section('content')
 <div class="col-sm-12">
     <div class="blank-page widget-shadow scroll" id="style-2 div1">
         <div class="flex-list">
             <a href="/administradordestinos/crear" type="button" class="btn btn-lg btn-success" >
-              Insertar destino
+              Agregar destino
             </a> 
             <div class="form-group has-feedback" style="display: inline-block;">
                 <label class="sr-only">Búsqueda de destinos</label>
@@ -127,8 +120,6 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Nuevo idioma para el destino</h4>
                 </div>
-                <div class="modal-body">
-            </div>
             <form>
                 <div class="modal-body">
                     <div class="form-group">
@@ -139,8 +130,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    <button type="button" ng-click="nuevoIdioma()" class="btn btn-primary">Enviar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" ng-click="nuevoIdioma()" class="btn btn-success">Guardar</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->

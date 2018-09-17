@@ -4,11 +4,6 @@
 @section('app','ng-app="admin.exportaciones"')
 @section ('estilos')
     <style>
-        .panel-body {
-            max-height: 400px;
-            color: white;
-        }
-
         .image-preview-input {
             position: relative;
             overflow: hidden;
@@ -38,39 +33,18 @@
             color: #FA787E;
         }
 
-        .carga {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.57) url(../../Content/Cargando.gif) 50% 50% no-repeat;
-        }
-        /* Cuando el body tiene la clase 'loading' ocultamos la barra de navegacion */
-        body.charging {
-            overflow: hidden;
-        }
-
-        /* Siempre que el body tenga la clase 'loading' mostramos el modal del loading */
-        body.charging .carga {
-            display: block;
-        }
-        .row {
-            margin-top: 1em;
-        }
+        
     </style>
 @endsection
 @section('controller','ng-controller="ExportacionCtrl"')
+@section('titulo','Exportación')
+@section('subtitulo','')
 @section('content')
-<div class="main-page" >
-    <h1 class="title1"> Exportaciones</h1><br />
     <div class="blank-page widget-shadow scroll" id="style-2 div1">
         
         <div class="row">
-            <div class="col-xs-12">
-                <input type="button" ng-click="exportar()" class="btn btn-primary" value="Generar Exportacion" />
+            <div class="col-xs-12 text-center">
+                <input type="button" ng-click="exportar()" class="btn btn-lg btn-success" value="Generar exportación" />
             </div>
         </div>
         <!--
@@ -120,7 +94,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Generar exportacion/h4>
+                    <h4 class="modal-title" id="myModalLabel">Generar exportación</h4>
                 </div>
                 <form role="form" name="addForm" novalidate>
                         <div class="modal-body">
@@ -135,7 +109,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="inputNombre"><span style="color:red;">*</span> Exportacion a realizar</label>
                                     <select name="nombre" class="form-control" ng-model="exportacion.nombre" required>
-                                        <option value="">--Seleccione--</option>
+                                        <option value="" disabled>--Seleccione--</option>
                                         <option value="receptor">Turismo Receptor</option>
                                         <option value="interno">Turismo Interno</option>
                                     </select>
@@ -171,7 +145,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" ng-click="guardar()" class="btn btn-primary">Crear</button>
+                        <button type="submit" ng-click="guardar()" class="btn btn-success">Guardar</button>
                     </div>
                 </form>
                 
@@ -179,9 +153,6 @@
         </div>
     </div>
 
-   
-
-</div>
 @endsection
 @section('javascript')
 <script src="{{asset('/js/ADM-dateTimePicker.min.js')}}" type="text/javascript"></script>

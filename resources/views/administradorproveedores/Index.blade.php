@@ -5,8 +5,6 @@
 
 @section('estilos')
     <style>
-        
-
         .messages {
             color: #FA787E;
         }
@@ -25,14 +23,10 @@
 
 @section('TitleSection', 'Listado de proveedores')
 
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
-
 @section('app', 'ng-app="proveedoresApp"')
 
 @section('controller','ng-controller="proveedoresIndexController"')
-@section('titulo','Lista de proveedores')
+@section('titulo','Proveedores')
 @section('subtitulo','El siguiente listado cuenta con @{{proveedores.length}} registro(s)')
 @section('content')
 <div class="flex-list">
