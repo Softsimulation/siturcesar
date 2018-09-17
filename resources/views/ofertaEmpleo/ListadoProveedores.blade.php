@@ -99,6 +99,7 @@
                                 <td>@{{item.email}}</td>
                       
                                 <td style="text-align: center;">
+                                    
                                 <a href="/ofertaempleo/encuesta/@{{item.id}}" class="btn btn-default btn-xs" title="Encuesta sin realizar" role="button"><span class = "ionicons ion-document"></span><span class="sr-only">Encuestas sin realizar</span></a>
                                 <a href="/ofertaempleo/encuestas/@{{item.id}}" class="btn btn-default btn-xs" title="Encuesta realizadas" role="button"><span class="ionicons ion-clipboard"></span><span class="sr-only">Encuestas realizadas</span></a>
                                 

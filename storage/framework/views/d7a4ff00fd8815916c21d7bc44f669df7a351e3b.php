@@ -5,9 +5,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sistema de Información Turistica del Magdalena y Santa Marta">
-    <meta name="author" content="SITUR Magdalena">
-    <title><?php echo $__env->yieldContent('title'); ?></title>
+    <meta name="description" content="Sistema de Información Turistica del departamento del Cesar y Valledupar">
+    <meta name="author" content="SITUR Cesar">
+    <title><?php echo $__env->yieldContent('title'); ?> SITUR Cesar</title>
     <link rel="icon" type="image/ico" href="<?php echo e(asset('Content/icons/favicon-96x96.png')); ?>" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700,800|Roboto:100,400,700" rel="stylesheet">
     <link href="<?php echo e(asset('/css/bootstrap.min.css')); ?>" rel="stylesheet" type="text/css" />

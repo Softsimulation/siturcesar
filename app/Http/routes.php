@@ -67,3 +67,11 @@ Route::controller('/login','LoginController');
 
 
 Route::controller('/importarRnt','ImportacionRntController');
+
+Route::get('/detalle', function () {
+    
+    return view('publico.detalle.index');
+    
+    
+});
+
