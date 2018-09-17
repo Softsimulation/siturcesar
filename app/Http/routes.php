@@ -52,7 +52,8 @@ Route::controller('/administradoractividades', 'AdministradorActividadesControll
 Route::controller('/administradordestinos', 'AdministradorDestinosController');
 
 Route::group(['middleware' => 'cors'], function(){
-    Route::controller('/authapi', 'ApiAuthController');
+    
+        Route::controller('/authapi', 'ApiAuthController');
      //Route::group(['middleware'=> 'jwt.auth'], function () {
         Route::controller('/turismointernoapi','TurismoInternoCorsController');
    
