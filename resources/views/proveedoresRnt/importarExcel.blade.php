@@ -130,7 +130,7 @@
                                         <td>@{{item.estado}}</td>
                                         <td ng-if="item.es_correcto ==1">Correcto</td><td ng-if="item.es_correcto !=1">Incorrecto</td>
                                         <td style="text-align: center;">
-                                            <button type="button" ng-if="item.es_correcto != 1 || item.es_similar == 1 " title="Editar registro" ng-click="abrirModalCrear(item)" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-pencil"></span><span class="sr-only">Editar registro</span></button>
+                                            <button type="button" ng-if="item.es_correcto != 1 || item.es_similar == 1 " title="Agregar registro" ng-click="abrirModalCrear(item)" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-pencil"></span><span class="sr-only">Agregar registro</span></button>
                                             <button type="button" title="Ver registro" ng-click="abrirModalVer(item)" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-eye-open"></span><span class="sr-only">Ver registro</span></button>
                                         </td>
                                     </tr>

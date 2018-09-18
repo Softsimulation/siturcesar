@@ -25,15 +25,13 @@
 
 @section('TitleSection', 'Listado de atracciones')
 
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
-
 @section('app', 'ng-app="atraccionesApp"')
 
 @section('controller','ng-controller="atraccionesIndexController"')
+
 @section('titulo','Atracciones')
 @section('subtitulo','El siguiente listado cuenta con @{{atracciones.length}} registro(s)')
+
 @section('content')
 <div class="flex-list">
     <a href="/administradoratracciones/crear" type="button" class="btn btn-lg btn-success" data-toggle="tooltip" data-placement="bottom" title="Esta acción permitirá publicar un proveedor que se encuentre almacenado en el sistema.">

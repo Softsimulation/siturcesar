@@ -73,8 +73,6 @@
 <div class="tab-content">
     <!--Información básica-->
     <div id="info" class="tab-pane fade in active">
-        <h2>Datos de la actividad</h2>
-        
         <form novalidate role="form" name="crearActividadForm">
             <fieldset>
                 <legend>Información básica de la actividad</legend>
