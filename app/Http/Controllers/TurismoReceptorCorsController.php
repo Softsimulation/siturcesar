@@ -70,15 +70,7 @@ class TurismoReceptorCorsController extends Controller
 {
     public function __construct()
     {
-        
-        $this->middleware('auth');
-        $this->middleware('role:Admin');
-        if(Auth::user() != null){
-            $this->user = User::where('id',Auth::user()->id)->first(); 
-        }
-        
-        
-        
+        $this->user = User::resolveUser();
     }
     
     public function getInformaciondatoscrear(){
@@ -468,7 +460,7 @@ class TurismoReceptorCorsController extends Controller
     
     
     public function getCargardatosseccionestancia($id = null){
-        $municipios = Municipio::where('departamento_id', 1396)->select('id','nombre')->get();
+        $municipios = Municipio::where('departamento_id', 1403)->select('id','nombre')->get();
         
         $alojamientos = Tipo_Alojamiento::with(["tiposAlojamientoConIdiomas" => function($q){
             $q->whereHas('idioma', function($p){
