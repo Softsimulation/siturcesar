@@ -1280,6 +1280,7 @@ class TurismoReceptorCorsController extends Controller
         
         
         $otroElemento = null;
+        $respuestaElementos = array();
         if(in_array(12,$respuestaElementos)){
            $otroElemento= $sostenibilidad->actividadesSostenibilidad()->wherePivot('nombre','<>',null)->first()->pivot->nombre;
         }
@@ -1307,8 +1308,8 @@ class TurismoReceptorCorsController extends Controller
             'valoracion' => $valo,
             'otroElemento' => $otroElemento,
             'actividades'=>$actividades,
-            'flora'=>$flora,
-            'sost'=>$sost,
+            'flora'=> isset($flora) ? $flora : null,
+            'sost'=> isset($sost) ? $sost : null,
         ];
         
         return $retorno;
