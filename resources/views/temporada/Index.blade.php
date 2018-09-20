@@ -52,6 +52,7 @@
 @endsection
 @section('controller','ng-controller="temporadasCtrl"')
 @section('titulo','Temporadas')
+@section('subtitulo','El siguiente listado cuenta con @{{temporadas.length}} registro(s)')
 @section('content')
 <div class="main-page" >
     <div class="blank-page widget-shadow scroll" id="style-2 div1">

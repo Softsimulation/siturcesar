@@ -56,7 +56,7 @@
         <div class="row">
             <div class="col-md-6 col-xs-12 col-sm-12">
                 <div class="form-group form-group-lang">
-                    <label>Nombre en español</label> <button type="button" class="btn btn-xs btn-link" data-lang="en">Ver en idioma <span class="langToShow">Inglés</span></button>
+                    <label>Nombre en español</label> <!--<button type="button" class="btn btn-xs btn-link" data-lang="en">Ver en idioma <span class="langToShow">Inglés</span></button>-->
                     <p class="langSelected" data-lang="es">@{{temporada.Nombre}}</p>
                     <p class="langSelected hidden" data-lang="en">@{{temporada.Name}}</p>
                 </div>
@@ -109,7 +109,6 @@
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th></th>
                                     <th>Barrio</th>
                                     <th>Dirección</th>
                                     <th>Estrato</th>
@@ -121,7 +120,6 @@
                             </thead>
                             <tbody>
                                 <tr dir-paginate="item in temporada.Hogares|filter:prop.search1|itemsPerPage:10 as results" pagination-id="hogarP" style="border-bottom: .5px solid lightgray">
-                                    <td>@{{$index+1}}</td>
                                     <td>@{{item.edificacione.barrio.nombre}}</td>
                                     <td>@{{item.edificacione.direccion}}</td>
                                     <td>@{{item.edificacione.estrato.nombre}}</td>
@@ -129,7 +127,7 @@
                                     <td>@{{item.edificacione.nombre_entrevistado}}</td>
                                     <td>@{{item.fecha_realizacion }}</td>
                                     <td>
-                                        <a href="/turismointerno/editarhogar/@{{item.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="/turismointerno/editarhogar/@{{item.id}}" class="btn btn-xs btn-default" title="Editar registro"><span class="glyphicon glyphicon-pencil"></span><span class="sr-only">Editar</span></a>
                                     </td>
                                 </tr>
 
@@ -184,8 +182,8 @@
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th>IdPersona</th>
-                                    <th>IdHogar</th>
+                                    <th>ID persona</th>
+                                    <th>ID Hogar</th>
                                     <th>Nombre</th>
                                     <th>Dirección</th>
                                     <th>Estrato</th>
@@ -206,7 +204,7 @@
                                     <td>@{{item.viajes[0].fecha_inicio}}</td>
                                     <td>@{{item.viajes[0].ultima_sesion}}</td>
                                     <td>
-                                        <a href="/turismointerno/viajesrealizados/@{{item.id}}"><span class="glyphicon glyphicon-pencil"></span></a>
+                                        <a href="/turismointerno/viajesrealizados/@{{item.id}}" class="btn btn-xs btn-default" title="Editar registro"><span class="glyphicon glyphicon-pencil"></span><span class="sr-only">Editar</span></a>
                                     </td>
                                 </tr>
 

@@ -33,7 +33,10 @@
         .messages {
             color: #FA787E;
         }
-
+.table .dropdown-menu{
+            left: auto;
+            right: 0;
+        }
     </style>
 @endsection
 
@@ -95,8 +98,19 @@
                     <td>@{{item.anio}}</td>
                     <td>@{{item.estado}}</td>
                     <td>
-                        <a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad ==1 )" href="@{{ruta}}/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta oferta" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1"><span class="glyphicon glyphicon-edit"></span></a>
-                        <a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad == 1 )" href="/ofertaempleo/empleomensual/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta empleo" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1"><span class="glyphicon glyphicon-pencil"></span></a>  
+                        <div class="dropdown" style="display: inline-block;">
+                            <button class="btn btn-xs btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-pencil"></span> Editar...
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad ==1 )" href="@{{ruta}}/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta oferta" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1">Encuesta de oferta</a></li>
+                                <li><a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad == 1 )" href="/ofertaempleo/empleomensual/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta empleo" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1">Encuesta de empleo</a> </li>
+                                
+                            </ul>
+                        </div>
+                        
+                         
                     </td>
                 </tr>
             </tbody>

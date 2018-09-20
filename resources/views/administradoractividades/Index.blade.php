@@ -6,10 +6,6 @@
 
 @section('TitleSection', 'Listado de actividades')
 
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
-
 @section('app', 'ng-app="actividadesApp"')
 
 @section('controller','ng-controller="actividadesIndexController"')
@@ -21,8 +17,8 @@
       Agregar actividad
     </a> 
     <div class="form-group has-feedback" style="display: inline-block;">
-        <label class="sr-only">Búsqueda de proveedor</label>
-        <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="Buscar proveedor...">
+        <label class="sr-only">Búsqueda de actividad</label>
+        <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="Buscar actividad...">
         <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
     </div>      
 </div>
