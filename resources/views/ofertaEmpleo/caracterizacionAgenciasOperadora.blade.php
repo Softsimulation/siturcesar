@@ -100,7 +100,7 @@
                                 <label>
                                     <input type="checkbox" name="actividad" checklist-model="agencia.actividades" checklist-value="actividad.id"> @{{actividad.nombre}}
                                 </label>
-                                <span ng-if="actividad.id==11"><input type="text" name="otraD" style="display: inline-block;" class="form-control"  placeholder="Escriba su otra actividad deportiva" ng-model="agencia.otraD" ng-change="validarOtro(0)" ng-required="agencia.actividades.indexOf(11) != -1"/></span>
+                                <span ng-if="actividad.id==15"><input type="text" name="otraD" style="display: inline-block;" class="form-control"  placeholder="Escriba su otra actividad deportiva" ng-model="agencia.otraD" ng-change="validarOtro(0)" ng-required="agencia.actividades.indexOf(15) != -1"/></span>
                             </div>
                             
                         </div>
