@@ -205,11 +205,11 @@
 	</main>
 	<footer>
 	    <div id="logosFooter" class="container text-center">
-	        <img src="/img/brand/others/logo_mincit.png" alt="Logo de Ministerio de Comercio, Industria y Turismo">
-	        <img src="/img/brand/others/logo_fontur.png" alt="Logo de FONTUR">
 	        <img src="/img/brand/others/logo_gobierno.png" alt="Logo de Gobierno de Colombia">
-	        <img src="/img/brand/others/logo_camaraComercio.png" alt="Logo de la camara de comercio de Valledupar">
-	        <img src="/img/brand/others/logo_gobernacion.jpg" alt="Logo de la gobernación del Cesar">
+	        <img src="/img/brand/others/logo_mincit.png" alt="Logo de Ministerio de Comercio, Industria y Turismo">
+	        <img src="/img/brand/others/logo_fontur.png" alt="Logo de FONTUR" style="margin: 0 6px;">
+	        <img src="/img/brand/others/logo_camaraComercio.png" alt="Logo de la camara de comercio de Valledupar" style="margin: 0 6px;">
+	        <img src="/img/brand/others/logo_gobernacion.jpg" alt="Logo de la gobernación del Cesar" style="margin: 0 6px;">
 	    </div>
 	    <div class="container">
 	        <div class="row align-items-center">
