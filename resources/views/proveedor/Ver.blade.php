@@ -13,7 +13,7 @@
     </div>
     <div class="row">
         <div class="col-sm-12 col-md-12 col-xs-12 text-center">
-            Descripción: {{$proveedor->proveedorRnt->idiomas[1]->descripcion}}
+            Descripción: {{$proveedor->proveedorRnt->idiomas[0]->descripcion}}
         </div>
     </div>
     <div class="row">
@@ -35,7 +35,7 @@
     {{-- La posición  0 es la portada --}}
     <div class="row">
         Portada:
-        <img src="{{$proveedor->multimediaProveedores[0]->ruta}}"></img>
+        <img src="{{count($proveedor->multimediaProveedores) > 0 ? $proveedor->multimediaProveedores[0]->ruta:''}}"></img>
     </div>
     <div class="row">
         Imágenes:
