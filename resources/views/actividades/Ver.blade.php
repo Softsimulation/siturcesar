@@ -14,6 +14,12 @@ function parse_yturl($url)
 
 @section('TitleSection','Actividades')
 
+@section('meta_og')
+<meta property="og:title" content="{{$actividad->actividadesConIdiomas[0]->nombre}}" />
+<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:description" content="{{$actividad->actividadesConIdiomas[0]->descripcion}}"/>
+@endsection
+
 @section ('estilos')
     <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
     <link href="{{asset('/css/public/details.css')}}" rel="stylesheet">
@@ -111,7 +117,7 @@ function parse_yturl($url)
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-2">
-                                    <span class="ion-android-time" aria-hidden="true"></span> <span class="sr-only">Horario</span>
+                                    <span class="ion-cash" aria-hidden="true"></span> <span class="sr-only">Valor</span>
                                 </div>
                                 <div class="col">
                                     ${{number_format(intval($actividad->valor_min))}} - ${{number_format(intval($actividad->valor_max))}}
@@ -127,11 +133,11 @@ function parse_yturl($url)
     <section id="comentarios">
         <div class="container">
             <h3>Comentarios</h3>
-            <p class="text-center">Te invitamos a que compartas tu opinión acerca de Class aptent taciti massa nunc.</p>   
+            <p class="text-center">Te invitamos a que compartas tu opinión acerca de {{$actividad->actividadesConIdiomas[0]->nombre}}</p>   
             <div class="text-center">
-                <a href="#" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><span class="ion-social-facebook" aria-hidden="true"></span> Facebook</a>
-                <a href="#" class="btn btn-info" target="_blank" rel="noopener noreferrer"><span class="ion-social-twitter" aria-hidden="true"></span> Twitter</a>
-                <a href="#" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>
+                <a id="btn-share-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{\Request::url()}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><span class="ion-social-facebook" aria-hidden="true"></span> Facebook</a>
+                <a id="btn-share-twitter" href="https://twitter.com/intent/tweet?text=Realiza {{$actividad->actividadesConIdiomas[0]->nombre}} en el departamento del Cesar.&url={{\Request::url()}}&hashtags=SITURCesar" class="btn btn-info" target="_blank" rel="noopener noreferrer"><span class="ion-social-twitter" aria-hidden="true"></span> Twitter</a>
+                <a id="btn-share-googleplus" href="https://plus.google.com/share?url={{\Request::url()}}" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>
             </div>
             <div class="row" id="puntajes">
                 <div class="col-xs-12 col-md-4">
@@ -283,19 +289,43 @@ function parse_yturl($url)
 <script>
     
     function initMap() {
-      var sitiosConActividades = <?php print($actividad->sitiosConActividades); ?>;
-      console.log(sitiosConActividades);
-      var lat = 10.1287919, long = -75.366555;
-      var posInit = {lat: lat, lng: long};
-      // Initialize and add the map
-      var map = new google.maps.Map(
-          document.getElementById('map'), {zoom: 8, center: posInit});
-      for (i = 0; i < sitiosConActividades.length; i++) { 
-          var pos = {lat: parseFloat(sitiosConActividades[i].latitud), lng: parseFloat(sitiosConActividades[i].longitud)};
-          var marker = new google.maps.Marker({position: pos, map: map});
-      }
-        
-    }
+          var sitiosConActividades = <?php print($actividad->sitiosConActividades); ?>;
+          console.log(sitiosConActividades);
+          var lat = 10.1287919, long = -75.366555;
+          var posInit = {lat: lat, lng: long};
+          // Initialize and add the map
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 8, center: posInit});
+          for (i = 0; i < sitiosConActividades.length; i++) { 
+              var pos = {lat: parseFloat(sitiosConActividades[i].latitud), lng: parseFloat(sitiosConActividades[i].longitud)};
+              var marker = new google.maps.Marker({position: pos, map: map});
+          }
+            
+        }
+        function changeViewList(obj, idList, view){
+            var element, name, arr;
+            element = document.getElementById(idList);
+            name = view;
+            element.className = "tiles " + name;
+        } 
+        function showStars(input){
+            //var checksFacilLlegar = document.getElementsByName(input.name);
+            $("input[name='" + input.name + "']+label>.ionicons-inline").removeClass('ion-android-star');
+            $("input[name='" + input.name + "']+label>.ionicons-inline").addClass('ion-android-star-outline');
+            for(var i = 0; i < parseInt(input.value); i++){
+                $("label[for='" + input.name + "-" + (i+1) + "'] .ionicons-inline").removeClass('ion-android-star-outline');
+                $("label[for='" + input.name + "-" + (i+1) + "'] .ionicons-inline").addClass('ion-android-star');
+                //console.log(checksFacilLlegar[i].value);
+            }
+        }
 </script>
-
+<script>
+    $(document).ready(function(){
+        $('#modalComentario').on('hidden.bs.modal', function (e) {
+            $(this).find('form')[0].reset();
+            $(this).find('.checks .ionicons-inline').removeClass('ion-android-star');
+            $(this).find('.checks .ionicons-inline').addClass('ion-android-star-outline');
+        })
+    });
+</script>
 @endsection
