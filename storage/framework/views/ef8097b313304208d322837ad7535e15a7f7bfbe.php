@@ -14,7 +14,7 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="flex-list">
-    <a href="turismoreceptor/datosencuestados" class="btn btn-lg btn-success" role="button">
+    <a href="/turismoreceptor/datosencuestados" class="btn btn-lg btn-success" role="button">
       Crear encuesta
     </a> 
     
