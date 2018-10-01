@@ -1728,7 +1728,7 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
     		return ["success"=>false,"errores"=>$validator->errors()];
 		}
 		
-		if( (!isset($request->otraD)) && in_array(11,$request->actividades) ){
+		if( (!isset($request->otraD)) && in_array(15,$request->actividades) ){
 		    return ["success" => false, "errores" => [["El campo otra actividad deportiva es requerido."]] ];
 		}
 // 		if( (!isset($request->otroT)) && in_array(14,$request->toures) ){
@@ -1738,7 +1738,7 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
 		$encuesta = Encuesta::find($request->id);
 		$agencia = $encuesta->agenciasOperadoras->first();
 		if($agencia){
-		    if(!in_array(11,$request->actividades)){
+		    if(!in_array(15,$request->actividades)){
 		        $agencia->otraActividads()->delete();
 		    }
 		  //  if(!in_array(14,$request->toures)){
@@ -1755,7 +1755,7 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
 		$agencia->otras_actividades = $request->otraC;
 		$agencia->save();
 		
-		if(in_array(11,$request->actividades)){
+		if(in_array(15,$request->actividades)){
 		    $otraActividad = $agencia->otraActividads->first();
 		    if($otraActividad){
 		        $otraActividad->nombre = $request->otraD;
