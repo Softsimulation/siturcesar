@@ -88,8 +88,8 @@ angular.module('oferta.agenciasOperadoras', ["checklist-model","ofertaService"])
     $scope.validarOtro = function (sw) {
         if (sw == 0) {
             if ($scope.agencia.otraD != '' && $scope.agencia.otraD != null) {
-                if ($scope.agencia.actividades.indexOf(11) == -1) {
-                    $scope.agencia.actividades.push(11)
+                if ($scope.agencia.actividades.indexOf(15) == -1) {
+                    $scope.agencia.actividades.push(15)
                 }
             }
         } 

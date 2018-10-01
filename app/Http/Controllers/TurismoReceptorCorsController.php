@@ -106,6 +106,8 @@ class TurismoReceptorCorsController extends Controller
         $departamentos = Departamento::where('pais_id',47)->select('id','nombre')->orderBy('nombre')->get();
         
         $lugares_aplicacion = Lugar_Aplicacion_Encuesta::all();
+        $all_departamentos = Departamento::all();
+        $all_municipios = Municipio::all();
         
         $result = [ 
             //'grupos' => $grupos, 
@@ -115,7 +117,9 @@ class TurismoReceptorCorsController extends Controller
             'motivos' => $motivos,
             'medicos' => $medicos,
             'departamentos' => $departamentos,
-            'lugares_aplicacion' => $lugares_aplicacion
+            'lugares_aplicacion' => $lugares_aplicacion,
+            'all_departamentos' => $all_departamentos,
+            'all_municipios' => $all_municipios
         ];
         
         return $result;

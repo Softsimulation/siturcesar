@@ -1,6 +1,13 @@
 @extends('layout._publicLayout')
 
 @section('Title','')
+@section('meta_og')
+<meta property="og:title" content="SITUR Cesar" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.siturcesar.com" />
+<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:description" content="Sistema de Información Turística del Cesar y de Valledupar"/>
+@endsection
 @section('estilos')
 <style>
 	.tiles .tile{

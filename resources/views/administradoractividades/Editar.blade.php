@@ -55,7 +55,7 @@
 @section('content')
 <div class="text-center">
     <div class="alert alert-info">
-        <p>Atracción a modificar:</p>
+        <p>Actividad a modificar:</p>
         <h3 style="margin: 0">@{{actividadNombre}}</h3>
     </div>
     
