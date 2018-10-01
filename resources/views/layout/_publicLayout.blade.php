@@ -8,11 +8,9 @@
     <meta name="keywords" content="SITUR Cesar, Visita CESAR, Visit Cesar, Turismo en el Cesar, estadisticas Cesar, Cesar" />
     <meta name="author" content="Softsimulation S.A.S" />
     <meta name="copyright" content="SITUR Cesar, Softsimulation S.A.S" />
-    <meta property="og:title" content="SITUR Cesar" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.siturcesar.com" />
-    <meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
-    <meta property="og:description" content="Sistema de Información Turística del Cesar y de Valledupar"/>
+    <meta property="og:url" content="{{\Request::url()}}" />
+    @yield('meta_og')
     <title>@yield('Title') SITUR Cesar</title>
     <link rel='manifest' href='res/manifest.json'>
     <meta name='mobile-web-app-capable' content='yes'>

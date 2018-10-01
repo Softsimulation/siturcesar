@@ -774,10 +774,10 @@ class TurismoInternoController extends Controller
         $historial->estado_id=($viaje->ultima_sesion!=7)?2:3;
         $historial->digitador_id=$this->user->digitador->id;
         $historial->fecha_cambio=\Carbon\Carbon::now();
-        $historial->mensaje=($sw==0)?"Se completó la sección de fuentes de información del viajero":"Se editó la sección de fuentes de información del viajero";
+        $historial->mensaje=($sw==0)?"Se completó la sección de fuentes de información del viajero el codigo asignado a la encuestas es ".$viaje->codigo_encuesta:"Se editó la sección de fuentes de información del viajero el codigo asignado a la encuestas es ".$viaje->codigo_encuesta;
         $historial->save();
         
-        return ["success"=>true,'sw'=>$sw];
+        return ["success"=>true,'sw'=>$sw,'codigo'=>$viaje->codigo_encuesta];
         
         
     }

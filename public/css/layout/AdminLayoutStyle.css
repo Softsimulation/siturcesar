@@ -571,3 +571,10 @@ align-items-center{
     background-color: red;
     color: white;
 }
+.ui-select-multiple.ui-select-bootstrap .ui-select-match-item{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: normal;
+    max-width: 100%;
+    text-align: left;
+}
