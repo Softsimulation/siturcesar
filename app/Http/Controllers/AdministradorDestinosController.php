@@ -286,7 +286,7 @@ class AdministradorDestinosController extends Controller
             
             'id.required' => 'Se necesita el identificador del destino.',
             'id.exists' => 'El destino no se encuentra registrada en la base de datos.',
-            'id.numeric' => 'El identificador de la actividad debe ser un valor numérico.',
+            'id.numeric' => 'El identificador del destino debe ser un valor numérico.',
             
             'idIdioma.required' => 'Se necesita el identificador del idioma.',
             'idIdioma.numeric' => 'El identificador del idioma debe ser un valor numérico.',

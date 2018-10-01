@@ -65,9 +65,9 @@
 @section('titulo','Proveedores')
 @section('subtitulo','Formulario para el registro de proveedores')
 @section('content')
-<div class="alert alert-info">
+{{-- <div class="alert alert-info">
     <p>En la pestaña Información básica debe ingresar la información del proveedor seleccionado en <strong>idioma inglés.</strong></p>
-</div>
+</div> --}}
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#info">Información básica</a></li>
             <li ng-class="{'disabled': (proveedor.id == -1)}"><a data-toggle="tab" href="#multimedia">Multimedia</a></li>
@@ -105,6 +105,12 @@
                                     </ui-select>
                                     
                                 </div>        
+                            </div>
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group">
+                                    <label for="nombre">Nombre</label>
+                                    <input ng-model="proveedor.datosGenerales.nombre" type="text" name="horario" id="horario" class="form-control" placeholder="Máximo 255 caracteres."/>
+                                </div>
                             </div>
                             <!--<div class="col-xs-12 col-sm-6">-->
                             <!--    <div class="form-group col-sm-6">-->
@@ -284,7 +290,7 @@
 <script src="{{asset('/js/administrador/proveedores/indexController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/crearController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/editarController.js')}}"></script>
-<!--<script src="{{asset('/js/administrador/atracciones/idiomaController.js')}}"></script>-->
+<script src="{{asset('/js/administrador/proveedores/idiomaController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/services.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/app.js')}}"></script>
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>
