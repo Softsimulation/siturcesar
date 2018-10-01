@@ -182,7 +182,7 @@
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID persona</th>
+                                    <th>Cod. Encuesta</th>
                                     <th>ID Hogar</th>
                                     <th>Nombre</th>
                                     <th>Dirección</th>
@@ -195,7 +195,7 @@
                             </thead>
                             <tbody>
                                 <tr dir-paginate="item in temporada.Personas|filter:prop.search|itemsPerPage:10 as results" pagination-id="personaP" style="border-bottom: .5px solid lightgray">
-                                    <td>@{{item.id}}</td>
+                                    <td>@{{item.viajes[0].codigo_encuesta}}</td>
                                     <td>@{{item.hogare.id}}</td>
                                     <td>@{{item.nombre}}</td>
                                     <td>@{{item.hogare.edificacione.direccion}}</td>

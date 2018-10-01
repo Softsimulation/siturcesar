@@ -1,45 +1,63 @@
 <?php
-/*
-* Vista para listados del portal
-*/
 header("Access-Control-Allow-Origin: *");
+
+function parse_yturl($url) 
+{
+    $pattern = '#^(?:https?://)?(?:www\.)?(?:youtu\.be/|youtube\.com(?:/embed/|/v/|/watch\?v=|/watch\?.+&v=))([\w-]{11})(?:.+)?$#x';
+    preg_match($pattern, $url, $matches);
+    return (isset($matches[1])) ? $matches[1] : false;
+}
 ?>
 @extends('layout._publicLayout')
 
-@section('Title','Experiencias')
+@section('Title',$actividad->actividadesConIdiomas[0]->nombre)
+
+@section('TitleSection','Actividades')
+
+@section('meta_og')
+<meta property="og:title" content="{{$actividad->actividadesConIdiomas[0]->nombre}}" />
+<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:description" content="{{$actividad->actividadesConIdiomas[0]->descripcion}}"/>
+@endsection
+
 @section ('estilos')
     <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
     <link href="{{asset('/css/public/details.css')}}" rel="stylesheet">
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
     
 @endsection
-@section ('content')
+
+@section('content')
     <div id="carousel-main-page" class="carousel slide carousel-fade" data-ride="carousel">
       <ol class="carousel-indicators">
-        <li data-target="#carousel-main-page" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel-main-page" data-slide-to="1"></li>
+        @for($i = 0; $i < count($actividad->multimediasActividades); $i++)
+            <li data-target="#carousel-main-page" data-slide-to="{{$i}}" {{  $i === 0 ? 'class=active' : '' }}></li>
+        @endfor
       </ol>
       <div class="carousel-inner">
-        <div class="carousel-item active">
-          <img class="d-block" src="/img/slider/slide1.jpg" alt="First slide">
+      
+        @for($i = 0; $i < count($actividad->multimediasActividades); $i++)
+        <div class="carousel-item {{  $i === 0 ? 'active' : '' }}">
+          <img class="d-block" src="{{$actividad->multimediasActividades[$i]->ruta}}" alt="Imagen de presentación de {{$actividad->actividadesConIdiomas[0]->nombre}}">
           
         </div>
-        <div class="carousel-item">
-          <img class="d-block" src="/img/slider/slide2.jpg" alt="Second slide">
-          
-        </div>
+        @endfor
+        
         <div class="carousel-caption d-none d-md-block">
-		    <h2 class="text-center container">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae condimentum enim, vel pulvinar purus. Fusce dictum tellus sit amet erat massa nunc.
+		    <h2 class="text-center container">{{$actividad->actividadesConIdiomas[0]->nombre}}
 		        <small class="d-block">
-		            <span class="mdi mdi-star-outline"></span>
-		            <span class="mdi mdi-star-outline"></span>
-		            <span class="mdi mdi-star-outline"></span>
-		            <span class="mdi mdi-star-outline"></span>
-		            <span class="mdi mdi-star-outline"></span>
+		            <span class="{{ ($actividad->calificacion_legusto > 0.0) ? (($actividad->calificacion_legusto <= 0.9) ? 'ion-android-star-half' : 'ion-android-star') : 'ion-android-star-outline'}}" aria-hidden="true"></span>
+		            <span class="{{ ($actividad->calificacion_legusto > 1.0) ? (($actividad->calificacion_legusto <= 1.9) ? 'ion-android-star-half' : 'ion-android-star') : 'ion-android-star-outline'}}" aria-hidden="true"></span>
+		            <span class="{{ ($actividad->calificacion_legusto > 2.0) ? (($actividad->calificacion_legusto <= 2.9) ? 'ion-android-star-half' : 'ion-android-star') : 'ion-android-star-outline'}}" aria-hidden="true"></span>
+		            <span class="{{ ($actividad->calificacion_legusto > 3.0) ? (($actividad->calificacion_legusto <= 3.9) ? 'ion-android-star-half' : 'ion-android-star') : 'ion-android-star-outline'}}" aria-hidden="true"></span>
+		            <span class="{{ ($actividad->calificacion_legusto > 4.0) ? (($actividad->calificacion_legusto <= 5.0) ? 'ion-android-star-half' : 'ion-android-star') : 'ion-android-star-outline'}}" aria-hidden="true"></span>
+		            <span class="sr-only">Posee una calificación de {{$actividad->calificacion_legusto}}</span>
+		            
 		        </small>
 	        </h2>
 		  </div>
       </div>
+      
     </div>
     <div id="title-main-page">
     	<div class="container">
@@ -59,12 +77,6 @@ header("Access-Control-Allow-Origin: *");
     					</a>
     				</div>
     				<div class="col text-center">
-    					<a href="#paraTenerEnCuenta">
-    						<i class="ionicons ion-help-circled" aria-hidden="true"></i>
-    						¿Qué debo tener en cuenta?
-    					</a>
-    				</div>
-    				<div class="col text-center">
     					<a href="#comentarios">
     						<i class="ionicons ion-chatbubbles" aria-hidden="true"></i>
     						Comentarios
@@ -79,21 +91,21 @@ header("Access-Control-Allow-Origin: *");
     <section id="informacionGeneral">
         <div class="container">
             <h3>Información general</h3>
+            <h4 class="text-center">{{$actividad->actividadesConIdiomas[0]->nombre}}</h4>
             <div class="text-center">
                 <button type="button" class="btn btn-lg btn-link" id="btn-favorite">
                     <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>
                 </button>
             </div>
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>
-
-            <p class="text-center">Integer blandit risus semper libero molestie, at pulvinar ligula sodales. Sed ut nisl ac velit gravida tempus ut vitae augue. Nam feugiat posuere hendrerit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque dignissim nec odio eget varius. Class aptent taciti massa nunc.</p>    
+            
+            <p style="white-space: pre-line;">{{$actividad->actividadesConIdiomas[0]->descripcion}}</p>
         </div>
         
     </section>
     <section id="caracteristicas">
         <div class="container">
             <h3>Características</h3>
-            <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>
+            <!--<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>-->
             <div class="row">
                 <div class="col-xs-12 col-md-8">
                     <div id="map"></div>
@@ -101,46 +113,14 @@ header("Access-Control-Allow-Origin: *");
                 <div class="col-xs-12 col-md-4">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item active text-uppercase"><strong>Detalles</strong></li>
+                        
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-xs-2">
-                                    <span class="ion-android-pin" aria-hidden="true"></span> 
+                                    <span class="ion-cash" aria-hidden="true"></span> <span class="sr-only">Valor</span>
                                 </div>
                                 <div class="col">
-                                    Dapibus ac facilisis in
-                                </div>
-                            </div>
-                            
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <span class="ion-android-call" aria-hidden="true"></span> 
-                                </div>
-                                <div class="col">
-                                    (000) 000 000 0000
-                                </div>
-                            </div>
-                            
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <span class="ion-android-time" aria-hidden="true"></span> 
-                                </div>
-                                <div class="col">
-                                    Dapibus ac facilisis in
-                                </div>
-                            </div>
-                            
-                        </li>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <span class="ion-android-globe" aria-hidden="true"></span> 
-                                </div>
-                                <div class="col">
-                                    <a href="#">Ver sitio web</a>
+                                    ${{number_format(intval($actividad->valor_min))}} - ${{number_format(intval($actividad->valor_max))}}
                                 </div>
                             </div>
                             
@@ -150,116 +130,44 @@ header("Access-Control-Allow-Origin: *");
             </div>
         </div>
     </section>
-    <section id="paraTenerEnCuenta">
-        <div class="container">
-            <h3>¿Qué debo tener en cuenta?</h3>
-            <div class="row">
-                <div class="col-xs-12 col-md-4">
-                    <h4>Recomendaciones</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>        
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    <h4>Recomendaciones</h4>
-                    <p>Integer blandit risus semper libero molestie, at pulvinar ligula sodales. Sed ut nisl ac velit gravida tempus ut vitae augue. Nam feugiat posuere hendrerit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Pellentesque dignissim nec odio eget varius. Class aptent taciti massa nunc.</p>
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    <h4>Cómo llegar</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>
-                </div>
-            </div>
-            <hr/>
-            <div class="row">
-                <div class="col-12">
-                    <h4 class="text-center">Actividades que puedes realizar</h4>
-                    <div class="tiles justify-content-center">
-                        <div class="tile">
-                            <div class="tile-img">
-                                <img src="https://www.maravillastereo.com/wp-content/uploads/2017/05/8_procuraduria_reclama_medidas_urgentes_para_evitar_el_deterioro_del_rio_guatapuri.jpg" alt="" class="bg-img"/>
-                            </div>
-                            <div class="tile-body">
-                                <div class="tile-caption">
-                                    <h5><a href="#">Lorem ipsum dolor sit amet</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 text-center">
-                    <a href="" class="btn btn-lg btn-success">Ver más</a>
-                </div>
-            </div>
-            <hr/>
-            <div class="row">
-                <div class="col-12">
-                    <h4 class="text-center">Encuentra los proveedores de servicios turísticos que necesitas</h4>
-                    <div class="tiles justify-content-center">
-                        <div class="tile">
-                            <div class="tile-img">
-                                <img src="http://cesar.gov.co/d/images/boletines/2018/0000/0000-2018-imgtbp.jpg" alt="Logo de 1" class="bg-img"/>
-                            </div>
-                            <div class="tile-body">
-                                <div class="tile-caption">
-                                    <h5><a href="">Lorem ipsum dolor sit amet</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tile">
-                            <div class="tile-img">
-                                <img src="https://www.iqreventos.com/templates/rt_xenon/custom/images/comerciovalledupar.png" alt="Logo de 2" class="bg-img"/>
-                            </div>
-                            <div class="tile-body">
-                                <div class="tile-caption">
-                                    <h5><a href="#">Lorem ipsum dolor sit amet</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 text-center">
-                    <a href="" class="btn btn-lg btn-success">Ver más</a>
-                </div>
-            </div>
-        </div>
-        
-    </section>
     <section id="comentarios">
         <div class="container">
             <h3>Comentarios</h3>
-            <p class="text-center">Te invitamos a que compartas tu opinión acerca de Class aptent taciti massa nunc.</p>   
+            <p class="text-center">Te invitamos a que compartas tu opinión acerca de {{$actividad->actividadesConIdiomas[0]->nombre}}</p>   
             <div class="text-center">
-                <a href="#" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><span class="ion-social-facebook" aria-hidden="true"></span> Facebook</a>
-                <a href="#" class="btn btn-info" target="_blank" rel="noopener noreferrer"><span class="ion-social-twitter" aria-hidden="true"></span> Twitter</a>
-                <a href="#" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>
+                <a id="btn-share-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{\Request::url()}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><span class="ion-social-facebook" aria-hidden="true"></span> Facebook</a>
+                <a id="btn-share-twitter" href="https://twitter.com/intent/tweet?text=Realiza {{$actividad->actividadesConIdiomas[0]->nombre}} en el departamento del Cesar.&url={{\Request::url()}}&hashtags=SITURCesar" class="btn btn-info" target="_blank" rel="noopener noreferrer"><span class="ion-social-twitter" aria-hidden="true"></span> Twitter</a>
+                <a id="btn-share-googleplus" href="https://plus.google.com/share?url={{\Request::url()}}" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>
             </div>
             <div class="row" id="puntajes">
                 <div class="col-xs-12 col-md-4">
                     <p class="text-center">¿Fue fácil llegar?</p>
                     <small class="d-block text-center">
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
+    		            <span class="{{ ($actividad->calificacion_llegar > 0.0) ? (($actividad->calificacion_llegar <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_llegar > 1.0) ? (($actividad->calificacion_llegar <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_llegar > 2.0) ? (($actividad->calificacion_llegar <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_llegar > 3.0) ? (($actividad->calificacion_llegar <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_llegar > 4.0) ? (($actividad->calificacion_llegar <= 5.0) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
     		        </small>
                 </div>
                 <div class="col-xs-12 col-md-4">
                     <p class="text-center">¿Lo recomendaría?</p>
                     <small class="d-block text-center">
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
+    		            <span class="{{ ($actividad->calificacion_recomendar > 0.0) ? (($actividad->calificacion_recomendar <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_recomendar > 1.0) ? (($actividad->calificacion_recomendar <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_recomendar > 2.0) ? (($actividad->calificacion_recomendar <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_recomendar > 3.0) ? (($actividad->calificacion_recomendar <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_recomendar > 4.0) ? (($actividad->calificacion_recomendar <= 5.0) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
     		        </small>
                 </div>
                 <div class="col-xs-12 col-md-4">
                     <p class="text-center">¿Regresaría?</p>
                     <small class="d-block text-center">
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
-    		            <span class="ionicons-inline ion-android-star-outline"></span>
+    		            <span class="{{ ($actividad->calificacion_volveria > 0.0) ? (($actividad->calificacion_volveria <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_volveria > 1.0) ? (($actividad->calificacion_volveria <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_volveria > 2.0) ? (($actividad->calificacion_volveria <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_volveria > 3.0) ? (($actividad->calificacion_volveria <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+    		            <span class="{{ ($actividad->calificacion_volveria > 4.0) ? (($actividad->calificacion_volveria <= 5.0) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
     		        </small>
                 </div>
             </div>
@@ -375,34 +283,26 @@ header("Access-Control-Allow-Origin: *");
     </section>
 @endsection
 @section('javascript')
-<!--<script src="{{asset('/js/public/vibrant.js')}}"></script>-->
-<!--<script src="{{asset('/js/public/setProminentColorImg.js')}}"></script>-->
-<script>
-    // Initialize and add the map
-    function initMap() {
-      // The location of Uluru
-      var uluru = {lat: 9.270037, lng: -74.634567};
-      // The map, centered at Uluru
-      var map = new google.maps.Map(
-          document.getElementById('map'), {zoom: 8, center: uluru});
-      // The marker, positioned at Uluru
-      var marker = new google.maps.Marker({position: uluru, map: map});
-    }
-</script>
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNCXa64urvn7WPRdFSW29prR-SpZIHZPs&callback=initMap">
 </script>
 <script>
-    $(document).ready(function(){
-        $('#modalComentario').on('hidden.bs.modal', function (e) {
-            $(this).find('form')[0].reset();
-            $(this).find('.checks .ionicons-inline').removeClass('ion-android-star');
-            $(this).find('.checks .ionicons-inline').addClass('ion-android-star-outline');
-        })
-    });
-</script>
-<script>
-       function changeViewList(obj, idList, view){
+    
+    function initMap() {
+          var sitiosConActividades = <?php print($actividad->sitiosConActividades); ?>;
+          console.log(sitiosConActividades);
+          var lat = 10.1287919, long = -75.366555;
+          var posInit = {lat: lat, lng: long};
+          // Initialize and add the map
+          var map = new google.maps.Map(
+              document.getElementById('map'), {zoom: 8, center: posInit});
+          for (i = 0; i < sitiosConActividades.length; i++) { 
+              var pos = {lat: parseFloat(sitiosConActividades[i].latitud), lng: parseFloat(sitiosConActividades[i].longitud)};
+              var marker = new google.maps.Marker({position: pos, map: map});
+          }
+            
+        }
+        function changeViewList(obj, idList, view){
             var element, name, arr;
             element = document.getElementById(idList);
             name = view;
@@ -418,5 +318,14 @@ header("Access-Control-Allow-Origin: *");
                 //console.log(checksFacilLlegar[i].value);
             }
         }
+</script>
+<script>
+    $(document).ready(function(){
+        $('#modalComentario').on('hidden.bs.modal', function (e) {
+            $(this).find('form')[0].reset();
+            $(this).find('.checks .ionicons-inline').removeClass('ion-android-star');
+            $(this).find('.checks .ionicons-inline').addClass('ion-android-star-outline');
+        })
+    });
 </script>
 @endsection
