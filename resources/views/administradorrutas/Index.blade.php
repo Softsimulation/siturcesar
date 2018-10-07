@@ -5,60 +5,42 @@
 
 @section('estilos')
     <style>
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
-
+        
         .messages {
             color: #FA787E;
         }
 
+        .row {
+            margin: 1em 0 0;
+        }
         
+        .input-group {
+            display: flex;
+        }
+        .input-group-addon {
+            width: 3em;
+        }
     </style>
 @endsection
 
-@section('TitleSection', 'Listado de rutas')
+@section('TitleSection', 'Listado de rutas turísticas')
 
-@section('Progreso', '0%')
+@section('titulo','Rutas turísticas')
 
-@section('NumSeccion', '0%')
+@section('subtitulo','El siguiente listado cuenta con @{{rutas.length}} registro(s)')
 
 @section('app', 'ng-app="rutasApp"')
 
 @section('controller','ng-controller="rutasIndexController"')
 
-@section('titulo','Rutas turísticas')
-@section('subtitulo','El siguiente listado cuenta con @{{rutas.length}} registro(s)')
-
 @section('content')
 <div class="flex-list">
-    <a href="/administradorrutas/crear" type="button" class="btn btn-lg btn-success" data-toggle="tooltip" data-placement="bottom" title="Esta acción permitirá publicar un proveedor que se encuentre almacenado en el sistema.">
-      Agregar ruta
+    <a href="/administradorrutas/crear" role="button" class="btn btn-lg btn-success">
+      Agregar ruta turística
     </a> 
     <div class="form-group has-feedback" style="display: inline-block;">
-        <label class="sr-only">Búsqueda de rutas</label>
-        <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="Buscar ruta...">
+        <label class="sr-only">Búsqueda de rutas turísticas</label>
+        <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="Buscar ruta turística...">
         <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
     </div>      
 </div>
@@ -81,54 +63,52 @@
             <div class="tile-caption">
                 <h3>@{{ruta.rutas_con_idiomas[0].nombre}}</h3>
             </div>
-            <p>@{{ruta.rutas_con_idiomas[0].descripcion}}</p>
+            <p>@{{ruta.rutas_con_idiomas[0].descripcion | limitTo:255}}<span ng-if="ruta.rutas_con_idiomas[0].descripcion.length > 255">...</span></p>
             <div class="inline-buttons">
                 <a href="/administradorrutas/editar/@{{ruta.id}}" class="btn btn-warning">Editar</a>
                 <button class="btn btn-@{{ruta.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(ruta)">@{{ruta.estado ? 'Desactivar' : 'Activar'}}</button>
-                <a href="/administradorrutas/idioma/@{{ruta.id}}/@{{traduccion.idioma.id}}" ng-repeat="traduccion in ruta.rutas_con_idiomas" class="btn btn-default"> @{{traduccion.idioma.culture}}</a>
-                <button type="button" ng-click="modalIdioma(ruta)" ng-if="ruta.rutas_con_idiomas.length < idiomas.length" class="btn btn-default" title="Agregar idioma"> <span class="glyphicon glyphicon-plus"></span><span class="sr-only">Agregar idioma</span></a>
+                <a href="/administradorrutas/idioma/@{{ruta.id}}/@{{traduccion.idioma.id}}" class="btn btn-default" ng-repeat="traduccion in ruta.rutas_con_idiomas"> @{{traduccion.idioma.culture}}</a>
+                <button type="button" ng-click="modalIdioma(ruta)" class="btn btn-default" ng-if="ruta.rutas_con_idiomas.length < idiomas.length"> <span class="glyphicon glyphicon-plus"></span><span class="sr-only">Agregar idioma</span></button>
             </div>  
             
         </div>
     </div>
 </div>
 
-        
 <div class="row">
-    <div class="col-xs-12 text-center">
-        <dir-pagination-controls pagination-id="pagination_rutas"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
-    </div>
+  <div class="col-xs-12 text-center">
+      <dir-pagination-controls pagination-id="pagination_rutas"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+  </div>
 </div>
     
-    <div class='carga'>
+<div class='carga'>
 
-    </div>
+</div>
 
 <div class="modal fade" tabindex="-1" role="dialog" id="idiomaModal">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Nuevo idioma para la ruta</h4>
-                </div>
+                <h4 class="modal-title">Nuevo idioma para la atracción</h4>
+            </div>
             <form>
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="idioma">Elija un idioma</label>
-                        <select ng-model="idiomaEditSelected" ng-options="idioma.id as idioma.nombre for idioma in idiomas | idiomaFilter:rutaEdit.rutas_con_idiomas" class="form-control">
-                            <option value="" disabled>Seleccione un idioma</option>
+                        <select ng-model="idiomaEditSelected" ng-options="idioma.id as idioma.nombre for idioma in idiomas|idiomaFilter:rutaEdit.rutas_con_idiomas" class="form-control">
+                            <option value="">Seleccione un idioma</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                    <button type="button" ng-click="nuevoIdioma()" class="btn btn-success">Guardar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" ng-click="nuevoIdioma()" class="btn btn-success">Enviar</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 @endsection
 
 @section('javascript')
