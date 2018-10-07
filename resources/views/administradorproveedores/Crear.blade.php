@@ -1,7 +1,7 @@
 
 @extends('layout._AdminLayout')
 
-@section('title', 'Nuevo proveedor')
+@section('title', 'Formulario para el registro de proveedores')
 
 @section('estilos')
     <style>
@@ -52,12 +52,6 @@
         }
     </style>
 @endsection
-
-@section('TitleSection', 'Nuevo proveedor')
-
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
 
 @section('app', 'ng-app="proveedoresApp"')
 
