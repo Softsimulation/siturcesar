@@ -5,45 +5,6 @@
 
 @section('estilos')
     <style>
-        
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
-
-        .messages {
-            color: #FA787E;
-        }
-        .row {
-            margin: 1em 0 0;
-        }
-        .input-group {
-            display: flex;
-        }
-        .input-group-addon {
-            width: 3em;
-        }
-        
         .ui-select-container{
             width: 100%;
         }
@@ -56,8 +17,10 @@
 @section('app', 'ng-app="proveedoresApp"')
 
 @section('controller','ng-controller="proveedoresCrearController"')
+
 @section('titulo','Proveedores')
 @section('subtitulo','Formulario para el registro de proveedores')
+
 @section('content')
 {{-- <div class="alert alert-info">
     <p>En la pestaña Información básica debe ingresar la información del proveedor seleccionado en <strong>idioma inglés.</strong></p>
