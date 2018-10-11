@@ -1,49 +1,10 @@
 
 @extends('layout._AdminLayout')
 
-@section('title', 'Nuevo proveedor')
+@section('title', 'Formulario para el registro de proveedores')
 
 @section('estilos')
     <style>
-        
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
-
-        .messages {
-            color: #FA787E;
-        }
-        .row {
-            margin: 1em 0 0;
-        }
-        .input-group {
-            display: flex;
-        }
-        .input-group-addon {
-            width: 3em;
-        }
-        
         .ui-select-container{
             width: 100%;
         }
@@ -53,21 +14,17 @@
     </style>
 @endsection
 
-@section('TitleSection', 'Nuevo proveedor')
-
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
-
 @section('app', 'ng-app="proveedoresApp"')
 
 @section('controller','ng-controller="proveedoresCrearController"')
+
 @section('titulo','Proveedores')
 @section('subtitulo','Formulario para el registro de proveedores')
+
 @section('content')
-<div class="alert alert-info">
+{{-- <div class="alert alert-info">
     <p>En la pestaña Información básica debe ingresar la información del proveedor seleccionado en <strong>idioma inglés.</strong></p>
-</div>
+</div> --}}
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#info">Información básica</a></li>
             <li ng-class="{'disabled': (proveedor.id == -1)}"><a data-toggle="tab" href="#multimedia">Multimedia</a></li>
@@ -95,7 +52,7 @@
                                 <div class="form-group" ng-class="{'has-error': (crearProveedorForm.$submitted || crearProveedorForm.proveedor.$touched) && crearProveedorForm.proveedor.$error.required}">
                                     <label for="proveedor"><span class="asterisk">*</span> Proveedor</label>
                                     
-                                    <ui-select theme="bootstrap" ng-change="selectionChanged($select.selected)" ng-required="true" ng-model="proveedor.datosGenerales.proveedor_rnt_id" id="proveedor" name="proveedor">
+                                    <ui-select theme="bootstrap" ng-change="selectionChanged($select.selected); proveedor.datosGenerales.nombre = $select.selected.razon_social" ng-required="true" ng-model="proveedor.datosGenerales.proveedor_rnt_id" id="proveedor" name="proveedor">
                                        <ui-select-match placeholder="Nombre del proveedor.">
                                            <span ng-bind="$select.selected.razon_social"></span>
                                        </ui-select-match>
@@ -105,6 +62,12 @@
                                     </ui-select>
                                     
                                 </div>        
+                            </div>
+                            <div class="col-xs-12 col-sm-12">
+                                <div class="form-group" ng-class="{'has-error': (crearProveedorForm.$submitted || crearProveedorForm.nombre.$touched) && crearProveedorForm.nombre.$error.required}">
+                                    <label for="nombre"><span class="asterisk">*</span> Nombre</label>
+                                    <input max="255" required ng-model="proveedor.datosGenerales.nombre" type="text" name="nombre" id="nombre" class="form-control" placeholder="Máximo 255 caracteres."/>
+                                </div>
                             </div>
                             <!--<div class="col-xs-12 col-sm-6">-->
                             <!--    <div class="form-group col-sm-6">-->
@@ -284,7 +247,7 @@
 <script src="{{asset('/js/administrador/proveedores/indexController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/crearController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/editarController.js')}}"></script>
-<!--<script src="{{asset('/js/administrador/atracciones/idiomaController.js')}}"></script>-->
+<script src="{{asset('/js/administrador/proveedores/idiomaController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/services.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/app.js')}}"></script>
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>

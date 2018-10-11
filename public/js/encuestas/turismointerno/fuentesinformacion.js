@@ -120,9 +120,9 @@ angular.module('interno.fuentes', ["checklist-model"])
                     }
                     swal({
                         title: "Realizado",
-                        text: "Se ha " + msj + " satisfactoriamente la sección.",
+                        text: "Se ha " + msj + " satisfactoriamente la sección. con el codigo de encuesta "+ data.codigo,
                         type: "success",
-                        timer: 1000,
+                        timer: 3000,
                         showConfirmButton: false
                     });
                     setTimeout(function () {

@@ -571,3 +571,30 @@ align-items-center{
     background-color: red;
     color: white;
 }
+.ui-select-multiple.ui-select-bootstrap .ui-select-match-item{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: normal;
+    max-width: 100%;
+    text-align: left;
+}
+
+        /* width */
+#left-side-menu::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+#left-side-menu::-webkit-scrollbar-track {
+    background: #eee; 
+}
+ 
+/* Handle */
+#left-side-menu::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,.3); 
+}
+
+/* Handle on hover */
+#left-side-menu::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

@@ -17,7 +17,7 @@
       Agregar actividad
     </a> 
     <div class="form-group has-feedback" style="display: inline-block;">
-        <label class="sr-only">Búsqueda de actividad</label>
+        <label class="sr-only">Búsqueda de proveedor</label>
         <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="Buscar actividad...">
         <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
     </div>      
@@ -40,7 +40,7 @@
             <div class="tile-caption">
                 <h3>@{{actividad.actividades_con_idiomas[0].nombre}}</h3>
             </div>
-            <p>@{{actividad.actividades_con_idiomas[0].descripcion}}</p>
+            <p>@{{actividad.actividades_con_idiomas[0].descripcion | limitTo: 255}}<span ng-if="actividad.actividades_con_idiomas[0].descripcion.length > 255">...</span></p>
             <div class="inline-buttons">
                 <a href="/administradoractividades/editar/@{{actividad.id}}" class="btn btn-warning">Editar</a>
                 <button class="btn btn-@{{actividad.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(actividad)">@{{actividad.estado ? 'Desactivar' : 'Activar'}}</button>

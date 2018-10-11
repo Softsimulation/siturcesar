@@ -71,9 +71,10 @@ class TurismoReceptorController extends Controller
     public function __construct()
     {
         
-        // $this->middleware('auth');
-        // $this->middleware('role:Admin');
-        // $this->middleware('receptor',['only' =>  ['getSeccionestancia','getSecciontransporte','getSecciongrupoviaje','getSecciongastos','getSeccionpercepcionviaje','getSeccionfuentesinformacion'] ]);
+        $this->middleware('auth');
+        $this->middleware('role:Admin');
+        $this->middleware('receptor',['only' =>  ['getSeccionestancia','getSecciontransporte','getSecciongrupoviaje','getSecciongastos','getSeccionpercepcionviaje','getSeccionfuentesinformacion'] ]);
+        $this->user = \Auth::user();
         // if(Auth::user() != null){
         //     $this->user = User::where('id',Auth::user()->id)->first(); 
         // }
@@ -1372,6 +1373,7 @@ class TurismoReceptorController extends Controller
         
         
         $otroElemento = null;
+        $respuestaElementos = array();
         if(in_array(12,$respuestaElementos)){
            $otroElemento= $sostenibilidad->actividadesSostenibilidad()->wherePivot('nombre','<>',null)->first()->pivot->nombre;
         }
@@ -1399,8 +1401,8 @@ class TurismoReceptorController extends Controller
             'valoracion' => $valo,
             'otroElemento' => $otroElemento,
             'actividades'=>$actividades,
-            'flora'=>$flora,
-            'sost'=>$sost,
+            'flora'=> isset($flora) ? $flora : null,
+            'sost'=> isset($sost) ? $sost : null,
         ];
         
         return $retorno;
