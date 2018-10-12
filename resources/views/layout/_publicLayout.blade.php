@@ -8,11 +8,9 @@
     <meta name="keywords" content="SITUR Cesar, Visita CESAR, Visit Cesar, Turismo en el Cesar, estadisticas Cesar, Cesar" />
     <meta name="author" content="Softsimulation S.A.S" />
     <meta name="copyright" content="SITUR Cesar, Softsimulation S.A.S" />
-    <meta property="og:title" content="SITUR Cesar" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.siturcesar.com" />
-    <meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
-    <meta property="og:description" content="Sistema de Información Turística del Cesar y de Valledupar"/>
+    <meta property="og:url" content="{{\Request::url()}}" />
+    @yield('meta_og')
     <title>@yield('Title') SITUR Cesar</title>
     <link rel='manifest' href='res/manifest.json'>
     <meta name='mobile-web-app-capable' content='yes'>
@@ -98,146 +96,12 @@
     <![endif]-->
 </head>
 <body>
-	<header class="row no-gutters">
-		<div class="brand col-md-3">
-			<a href="/">
-				<img src="/img/brand/96.png" alt="Logo de SITUR Magdalena">
-				<h1 class="sr-only">SITUR Cesar</h1>
-			</a>
-			
-		</div>
-		<div id="nav-bar-main" class="col-md">
-			<div id="toolbar-main" class="row no-gutters justify-content-end align-items-center">
-			    <a href="#content-main" id="goto-top" class="sr-only">Ir al contenido</a>
-				<div id="socialNetworks-fixed">
-				    <a href="https://twitter.com/siturcesar?lang=es" target="_blank" rel="noreferrer noopener" title="Ir a twitter"><span class="ion-social-twitter" aria-hidden="true"></span> <span class="sr-only">Twitter</span></a>
-    				<!--<a href="#" target="_blank" rel="noreferrer noopener" title="Ir a Facebook"><span class="ion-social-facebook" aria-hidden="true"></span> <span class="sr-only">Facebook</span></a>-->
-    				<a href="https://www.instagram.com/siturcesar/" target="_blank" rel="noreferrer noopener" title="Ir a Instagram"><span class="ion-social-instagram" aria-hidden="true"></span> <span class="sr-only">Instagram</span></a>    
-				</div>
-				
-				<form name="searchMainForm" method="get" action="" class="form-inline">
-				    <div class="form-group">
-				        <label class="sr-only" for="searchMainTBox">Campo de búsqueda</label>
-    					<input type="text" id="searchMainTBox" name="search" maxlength="255" placeholder="¿Qué desea buscar?" required autocomplete="off"/>
-    					<button type="submit" title="Buscar"><span class="ion-search" aria-hidden="true"></span> <span class="sr-only">Buscar</span></button>    
-				    </div>
-					
-				</form>
-				<a href="#">Mapa del sitio</a>
-				<form name="langForm" method="get" action="">
-					<label class="sr-only" for="languange">Selección de idioma</label>
-					<select id="languange" name="lang" onchange="this.form.submit();">
-						<option value="es" selected>Español</option>
-						<option value="en">Inglés</option>
-					</select>
-				</form>
-				<a href="#"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
-			</div>
-			<div id="navbar-mobile" class="text-center">
-                <button type="button" class="btn btn-block btn-primary" title="Menu de navegación"><span aria-hidden="true" class="ion-navicon-round"></span><span class="sr-only">Menú de navegación</span></button>
-            </div>
-			<div id="nav-menu-main">
-				<nav role="navigation" id="nav-main">
-                    <ul role="menubar">
-                        <li>
-                            <a id="menu-inicio" role="menuitem" href="/">Inicio</a>
-                        </li>
-                        <li>
-                            <a role="menuitem" href="#menu-visitarAlCesar" aria-haspopup="true" aria-expanded="false">Visita al Cesar</a>
-                            <ul role="menu" id="menu-visitarAlCesar" aria-label="Visita al Cesar">
-                                <li role="none">
-                                    <a role="menuitem" href="/QueHacer">Qué hacer</a>
-                                </li>
-                                <li role="none">
-                                    <a role="menuitem" href="/Experiencias">Experiencias</a>
-                                </li>
-                                <li role="none">
-                                    <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a role="menuitem" href="#menu-estadisticas" aria-haspopup="true" aria-expanded="false">Estadísticas</a>
-                            <ul role="menu" id="menu-estadisticas" aria-label="Estadísticas">
-                                <li role="none">
-                                    <a role="menuitem" href="#">Turismo receptor</a>
-                                </li>
-                                <li role="none">
-                                    <a role="menuitem" href="#">Turismo interno</a>
-                                </li>
-                                <li role="none">
-                                    <a role="menuitem" href="#">Turismo emisor</a>
-                                </li>
-                                <li role="none">
-                                    <a role="menuitem" href="#">Oferta turística</a>
-                                </li>
-                                <li role="none">
-                                    <a role="menuitem" href="#">Empleo</a>
-                                </li>
-                                <li role="none">
-                                    <a role="menuitem" href="#">Turismo sostenible</a>
-                                </li>
-                            </ul>
-                        </li>
-                        
-                        <li>
-                            <a role="menuitem" href="#menu-publicaciones" aria-haspopup="true" aria-expanded="false">Publicaciones</a>
-                            <ul role="menu" id="menu-publicaciones" aria-label="Publicaciones">
-                                <li role="none">
-                                    <a role="menuitem" href="#">Noticias</a>
-                                </li>
-                                <li role="none">
-                                    <a role="menuitem" href="#">Eventos</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <a id="menu-contacto" role="menuitem" href="#">Contáctenos</a>
-                        </li>
-                    </ul>
-                </nav>
-			</div>
-		</div>
-	</header>
+	@include('layout.partial.headerPublic')
 	<main id="content-main" role="main">
 	    @yield('content')
 		
 	</main>
-	<footer>
-	    <div id="logosFooter" class="container text-center">
-	        <img src="/img/brand/others/logo_gobierno.png" alt="Logo de Gobierno de Colombia">
-	        <img src="/img/brand/others/logo_mincit.png" alt="Logo de Ministerio de Comercio, Industria y Turismo">
-	        <img src="/img/brand/others/logo_fontur.png" alt="Logo de FONTUR" style="margin: 0 6px;">
-	        <img src="/img/brand/others/logo_camaraComercio.png" alt="Logo de la camara de comercio de Valledupar" style="margin: 0 6px;">
-	        <img src="/img/brand/others/logo_gobernacion.jpg" alt="Logo de la gobernación del Cesar" style="margin: 0 6px;">
-	    </div>
-	    <div class="container">
-	        <div class="row align-items-center">
-	            <div class="col-12 col-md-4 text-center">
-	            	<div style="height: 150px; width: 150px; background:white; border-radius: 50%;overflow: hidden;margin: 1rem 0" class="d-inline-flex align-middle">
-	            		<img src="/img/brand/others/logo_cesar.png" alt="" role="presentation" style="width: 100%;">
-	            	</div>
-	                
-	            </div>
-	            <div class="col-12 col-md-8">
-	                <h3>Información de contacto</h3>
-	                
-	                <ul class="list-footer">
-                        <li><span class="glyphicon glyphicon-earphone"></span> Tel: +57 (5) 897868 - +57 (5) 845413 <br></li>
-                        <li><span class="glyphicon glyphicon-map-marker"></span> Calle 15 N 4 - 33 Sede Principal</li>
-                    </ul>
-	            </div>
-	        </div>
-	    </div>
-	    <div id="sign-footer">
-	        <div class="container text-center">
-	            Desarrollado por Softsimulation S.A.S - SITUR Cesar &copy; 2018
-	            <a href="#goto-top" class="sr-only">Volver al inicio</a>
-	        </div>
-	        
-	    </div>
-		
-	</footer>
+	@include('layout.partial.footerPublic')
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>

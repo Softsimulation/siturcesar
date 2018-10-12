@@ -34,7 +34,7 @@
 
 @section('content')
 <div class="flex-list">
-    <a href="/administradoratracciones/crear" type="button" class="btn btn-lg btn-success" data-toggle="tooltip" data-placement="bottom" title="Esta acción permitirá publicar un proveedor que se encuentre almacenado en el sistema.">
+    <a href="/administradoratracciones/crear" role="button" class="btn btn-lg btn-success">
       Agregar atracciones
     </a> 
     <div class="form-group has-feedback" style="display: inline-block;">
@@ -49,7 +49,7 @@
 <div class="alert alert-info" ng-if="atracciones.length == 0">
     <p>No hay registros almacenados</p>
 </div>
-<div class="alert alert-warning" ng-if="(atracciones | filter:prop.search).length == 0 && proveedores.length > 0">
+<div class="alert alert-warning" ng-if="(atracciones | filter:prop.search).length == 0 && atracciones.length > 0">
     <p>No existen registros que coincidan con su búsqueda</p>
 </div>
 
@@ -62,7 +62,7 @@
             <div class="tile-caption">
                 <h3>@{{atraccion.sitio.sitios_con_idiomas[0].nombre}}</h3>
             </div>
-            <p>@{{atraccion.sitio.sitios_con_idiomas[0].descripcion}}</p>
+            <p>@{{atraccion.sitio.sitios_con_idiomas[0].descripcion | limitTo:255}}<span ng-if="atraccion.sitio.sitios_con_idiomas[0].descripcion.length > 255">...</span></p>
             <div class="inline-buttons">
                 <a href="/administradoratracciones/editar/@{{atraccion.id}}" class="btn btn-warning">Editar</a>
                 <button class="btn btn-@{{atraccion.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(atraccion)">@{{atraccion.estado ? 'Desactivar' : 'Activar'}}</button>
@@ -90,7 +90,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Nuevo idioma para la atracción</h4>
-                </div>
+            </div>
             <form>
                 <div class="modal-body">
                     <div class="form-group">
@@ -125,4 +125,5 @@
 <script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
 <script src="{{asset('/js/plugins/gmaps.js')}}"></script>
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>
+<script src="/js/plugins/ng-map.js"></script>
 @endsection

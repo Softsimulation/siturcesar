@@ -859,7 +859,9 @@ module.exports = MMCQ.quantize
     };
 
     CanvasImage.prototype.getImageData = function() {
-      return this.context.getImageData(0, 0, this.width, this.height);
+      var imgWidth = this.width || this.naturalWidth;
+      var imgHeight = this.height || this.naturalHeight;
+      return this.context.getImageData(0, 0, imgWidth, imgHeight);
     };
 
     CanvasImage.prototype.removeCanvas = function() {

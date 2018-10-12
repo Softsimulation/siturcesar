@@ -56,12 +56,14 @@
         </div>
         <div class="tile-body">
             <div class="tile-caption">
-                <h3>@{{proveedor.proveedor_rnt.razon_social}}</h3>
+                <h3>@{{proveedor.proveedor_rnt.razon_social}} <small ng-if="proveedor.proveedor_rnt.idiomas[0].nombre">(@{{proveedor.proveedor_rnt.idiomas[0].nombre}})</small></h3>
             </div>
-            <p>@{{proveedor.proveedor_rnt.proveedor_rnt_idioma[0].descripcion}}</p>
+            <p>@{{proveedor.proveedor_rnt.idiomas[0].descripcion | limitTo:255}}<span ng-if="proveedor.proveedor_rnt.idiomas[0].descripcion.length > 255">...</span></p>
             <div class="inline-buttons">
                 <a href="/administradorproveedores/editar/@{{proveedor.id}}" class="btn btn-warning">Editar</a>
                 <button class="btn btn-@{{proveedor.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(proveedor)">@{{proveedor.estado ? 'Desactivar' : 'Activar'}}</button>
+                <a href="/administradorproveedores/idioma/@{{proveedor.id}}/@{{traduccion.idioma.id}}" ng-repeat="traduccion in proveedor.proveedor_rnt.idiomas" class="btn btn-default" title="@{{traduccion.idioma.culture}}"> @{{traduccion.idioma.culture}}</a>
+                <a href="javascript:void(0)" ng-click="modalIdioma(proveedor)" ng-if="proveedor.proveedor_rnt.idiomas.length < idiomas.length" class="btn btn-default" title="Agregar idioma"> <span class="glyphicon glyphicon-plus"></span><span class="sr-only">Agregar idioma</span></a>
                 
             </div>  
             
@@ -80,32 +82,30 @@
 
     </div>
 
-<!--<div class="modal fade" tabindex="-1" role="dialog" id="idiomaModal">-->
-<!--    <div class="modal-dialog" role="document">-->
-<!--        <div class="modal-content">-->
-<!--            <div class="modal-header">-->
-<!--                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
-<!--                <h4 class="modal-title">Nuevo idioma para la atracción</h4>-->
-<!--                </div>-->
-<!--                <div class="modal-body">-->
-<!--            </div>-->
-<!--            <form>-->
-<!--                <div class="modal-body">-->
-<!--                    <div class="form-group">-->
-<!--                        <label for="idioma">Elija un idioma</label>-->
-<!--                        <select ng-model="idiomaEditSelected" ng-options="idioma.id as idioma.nombre for idioma in idiomas|filter:{id: idioma.id}:true" class="form-control">-->
-<!--                            <option value="">Seleccione un idioma</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="modal-footer">-->
-<!--                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
-<!--                    <button type="button" ng-click="nuevoIdioma()" class="btn btn-primary">Enviar</button>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div><!-- /.modal-content -->
-<!--    </div><!-- /.modal-dialog -->
-<!--</div><!-- /.modal -->
+<div class="modal fade" tabindex="-1" role="dialog" id="idiomaModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Nuevo idioma para el proveedor</h4>
+                </div>
+            <form>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="idioma">Elija un idioma</label>
+                        <select ng-model="idiomaEditSelected" ng-options="idioma.id as idioma.nombre for idioma in idiomas|idiomaFilter:proveedorEdit.proveedor_rnt.idiomas" class="form-control">
+                            <option value="">Seleccione un idioma</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" ng-click="nuevoIdioma()" class="btn btn-success">Ir</button>
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 @endsection
 
@@ -117,7 +117,7 @@
 <script src="{{asset('/js/administrador/proveedores/indexController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/crearController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/editarController.js')}}"></script>
-<!--<script src="{{asset('/js/administrador/atracciones/idiomaController.js')}}"></script>-->
+<script src="{{asset('/js/administrador/proveedores/idiomaController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/services.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/app.js')}}"></script>
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>
