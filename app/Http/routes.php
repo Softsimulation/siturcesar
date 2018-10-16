@@ -90,3 +90,5 @@ Route::get('/detalle', function () {
     
 });
 
+Route::controller('/noticias','NoticiaController');
+Route::controller('/promocionNoticia','PublicoNoticiaController');
