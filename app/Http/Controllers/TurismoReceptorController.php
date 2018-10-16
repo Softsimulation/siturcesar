@@ -71,9 +71,10 @@ class TurismoReceptorController extends Controller
     public function __construct()
     {
         
-        // $this->middleware('auth');
-        // $this->middleware('role:Admin');
-        // $this->middleware('receptor',['only' =>  ['getSeccionestancia','getSecciontransporte','getSecciongrupoviaje','getSecciongastos','getSeccionpercepcionviaje','getSeccionfuentesinformacion'] ]);
+        $this->middleware('auth');
+        $this->middleware('role:Admin');
+        $this->middleware('receptor',['only' =>  ['getSeccionestancia','getSecciontransporte','getSecciongrupoviaje','getSecciongastos','getSeccionpercepcionviaje','getSeccionfuentesinformacion'] ]);
+        $this->user = \Auth::user();
         // if(Auth::user() != null){
         //     $this->user = User::where('id',Auth::user()->id)->first(); 
         // }
@@ -426,11 +427,11 @@ class TurismoReceptorController extends Controller
 		    return ["success"=>false,"errores"=> [ ["La fecha de llegada no debe ser mayor a la de salida."] ] ];
 		}
 		
+		
 		$visitante = Visitante::find($request->Id);
 		$visitante->telefono = isset($request->Telefono) ? $request->Telefono : null;
 		$visitante->celular = isset($request->Celular) ? $request->Celular : null;
 		$visitante->destino_principal = isset($request->Destino) ? $request->Destino : null;
-		$visitante->digitada = $this->user->digitador->id;
 		$visitante->edad = $request->Edad;
 		$visitante->email = isset($request->Email) ? $request->Email : null;
 		$visitante->encuestador_creada = $request->Encuestador;
@@ -445,6 +446,8 @@ class TurismoReceptorController extends Controller
 		$visitante->sexo = $request->Sexo;
 		$visitante->fecha_aplicacion = date('Y-m-d H:i',strtotime(str_replace("/","-",$request->fechaAplicacion)));
 		$visitante->lugar_aplicacion_id = $request->aplicacion;
+		
+
 		
 		$visitante->visitantesTransito()->delete();
 		$visitante->tiposAtencionSaluds()->detach();

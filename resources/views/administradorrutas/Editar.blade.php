@@ -1,39 +1,10 @@
 
 @extends('layout._AdminLayout')
 
-@section('title', 'Editar ruta')
+@section('title', 'Formulario para la modificación de rutas turísticas')
 
 @section('estilos')
     <style>
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
-
-        .messages {
-            color: #FA787E;
-        }
-
         
         .ui-select-container{
             width: 100%;
@@ -44,11 +15,6 @@
     </style>
 @endsection
 
-@section('TitleSection', 'Editar ruta')
-
-@section('Progreso', '0%')
-
-@section('NumSeccion', '0%')
 
 @section('app', 'ng-app="rutasApp"')
 
@@ -60,7 +26,7 @@
 @section('content')
 <div class="text-center">
     <div class="alert alert-info">
-        <p>Atracción a modificar:</p>
+        <p>Ruta a modificar:</p>
         <h3 style="margin: 0">@{{rutaNombre}}</h3>
     </div>
     
@@ -80,7 +46,7 @@
                     @include('layout.partial._recomendacionesSubidaImagenes')
                     <form novalidate role="form" name="multimediaForm">
                         <div class="row">
-                            <h4><span class="asterisk">*</span> Imagen de portada</h4>
+                            <label><span class="asterisk">*</span> Imagen de portada</label>
                             <div class="col-sm-12">
                                 <file-input ng-model="portadaIMG" preview="previewportadaIMG" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="portadaIMG" label="Seleccione la imagen de portada."></file-input>
                             </div>

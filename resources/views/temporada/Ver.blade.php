@@ -1,41 +1,12 @@
 @extends('layout._AdminLayout')
 
-@section('Title','Ver temporada')
+@section('Title','Detalle de la temporada')
 
-@section ('estilos')
-     <style>
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
-
-        .messages {
-            color: #FA787E;
-        }
-    </style>
-@endsection
 @section('app','ng-app="admin.temporadas"')
-@section('titulo','Detalle de la temporada')
+
+@section('titulo','Temporadas')
+@section('subtitulo','Detalle de la temporada')
+
 @section('content')
 
 <div class="main-page" ng-controller="verTemporadaCtrl">
@@ -89,20 +60,22 @@
 
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade in active" id="hogares">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <input type="text" style="margin-bottom: .5em;" ng-model="prop.search1" class="form-control" id="inputSearch" placeholder="Buscar hogar...">
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6" style="text-align: center;">
-                        <span class="chip" style="margin-bottom: .5em;">@{{(temporada.Hogares|filter:prop.search1).length}} resultados</span>
-                    </div>
+                <div class="flex-list" ng-show="temporada.Hogares.length > 0">
+                    <button type="button" ng-click="mostrarFiltro=!mostrarFiltro" class="btn btn-default" title="filtrar registros"><span class="glyphicon glyphicon-filter"></span> Filtrar resultados</button>
                 </div>
-                <div class="row" ng-show="prop.search1.length > 0 && (temporada.Hogares|filter:prop.search1).length != 0">
-                    <div class="col-xs-12">
-                        <div class="alert alert-success" role="alert" style="padding: .5em; margin-bottom: 0;">
-                            @{{(temporada.Hogares|filter:prop.search1).length}} hogares han sido encontradas para la búsqueda '@{{prop.search1}}'
-                        </div>
-                    </div>
+                
+                
+                <div class="text-center" ng-if="(temporada.Hogares | filter:search).length > 0 && (search != undefined)">
+                    <p>Hay @{{(temporada.Hogares | filter:search).length}} registro(s) que coinciden con su búsqueda</p>
+                </div>
+                <div class="alert alert-info" ng-if="temporada.Hogares.length == 0">
+                    <p>No hay registros almacenados</p>
+                </div>
+                <div class="alert alert-warning" ng-if="(temporada.Hogares | filter:search).length == 0 && temporada.Hogares.length > 0">
+                    <p>No existen registros que coincidan con su búsqueda</p>
+                </div>
+                <div class="alert alert-info" role="alert"  ng-show="mostrarFiltro == false && (search.edificacione.barrio.nombre.length > 0 || search.edificacione.direccion.length > 0 || search.edificacione.estrato.nombre.length > 0 || search.digitadore.user.username.length > 0 || search.edificacione.nombre_entrevistado.length > 0 || search.fecha_realizacion.length > 0)">
+                    Actualmente se encuentra algunos de los filtros en uso, para reiniciar el listado de las encuestas haga clic <span><a href="#" ng-click="search = ''">aquí</a></span>
                 </div>
                 <div class="row" ng-show="temporada.Hogares.length > 0">
                     <div class="col-xs-12" style="overflow-x: auto;">
@@ -117,9 +90,19 @@
                                     <th>Fecha aplicación</th>
                                     <th></th>
                                 </tr>
+                                <tr ng-show="mostrarFiltro == true">
+                                    
+                                    <td><input type="text" ng-model="search.edificacione.barrio.nombre" name="nombreBarrio" id="nombreBarrio" class="form-control input-sm" id="inputSearch" maxlength="150" autocomplete="off"></td>
+                                    <td><input type="text" ng-model="search.edificacione.direccion" name="direccion" id="direccion" class="form-control input-sm" id="inputSearch" maxlength="150" autocomplete="off"></td>
+                                    <td><input type="text" ng-model="search.edificacione.estrato.nombre" name="nombreEstrato" id="nombreEstrato" class="form-control input-sm" id="inputSearch" maxlength="150" autocomplete="off"></td>
+                                    <td><input type="text" ng-model="search.digitadore.user.username" name="nombreDigitador" id="nombreDigitador" class="form-control input-sm" maxlength="150" autocomplete="off"></td>
+                                    <td><input type="text" ng-model="search.edificacione.nombre_entrevistado" name="nombreEntrevistado" id="nombreEntrevistado" class="form-control input-sm" maxlength="150" autocomplete="off"></td>
+                                    <td><input type="text" ng-model="search.fecha_realizacion" name="fecha_realizacion" id="fecha_realizacion" class="form-control input-sm" maxlength="150" autocomplete="off"></td>
+                                    <td></td>
+                                </tr>
                             </thead>
                             <tbody>
-                                <tr dir-paginate="item in temporada.Hogares|filter:prop.search1|itemsPerPage:10 as results" pagination-id="hogarP" style="border-bottom: .5px solid lightgray">
+                                <tr dir-paginate="item in temporada.Hogares|filter:prop.search|itemsPerPage:10 as results" pagination-id="hogarP" style="border-bottom: .5px solid lightgray">
                                     <td>@{{item.edificacione.barrio.nombre}}</td>
                                     <td>@{{item.edificacione.direccion}}</td>
                                     <td>@{{item.edificacione.estrato.nombre}}</td>
@@ -135,18 +118,7 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-xs-12" ng-if="(temporada.Hogares|filter:prop.search1).length == 0 && temporada.Hogares.length != 0">
-                    <div class="alert alert-warning" role="alert">
-                        No hay resultados para la búsqueda '@{{prop.search1}}'. <a href="#" ng-click="prop.search1 = ''">Presione aquí</a> para volver a mostrar todos los resultados.
-                    </div>
-                </div>
-                <div class="row" ng-show="temporada.Hogares.length == 0">
-                    <div class="col-xs-12">
-                        <div class="alert alert-warning" role="alert">
-                            No hay hogares ingresados
-                        </div>
-                    </div>
-                </div>
+                
                 <div class="row">
 
                     <div class="col-xs-12 col-sm-12 col-md-12" style="text-align: center;">
@@ -162,27 +134,26 @@
             </div>
 
             <div role="tabpanel" class="tab-pane fade" id="personas">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6">
-                        <input type="text" style="margin-bottom: .5em;" ng-model="prop.search" class="form-control" id="inputSearch" placeholder="Buscar persona...">
-                    </div>
-                    <div class="col-xs-12 col-sm-6 col-md-6" style="text-align: center;">
-                        <span class="chip" style="margin-bottom: .5em;">@{{(temporada.Personas|filter:prop.search).length}} resultados</span>
-                    </div>
+                <div class="flex-list">
+                    <input type="text" style="margin-bottom: .5em;" ng-model="prop.searchPersona" class="form-control" id="inputSearch" placeholder="Buscar persona...">
                 </div>
-                <div class="row" ng-show="prop.search.length > 0 && (temporada.Personas|filter:prop.search).length != 0">
-                    <div class="col-xs-12">
-                        <div class="alert alert-success" role="alert" style="padding: .5em; margin-bottom: 0;">
-                            @{{(temporada.Personas|filter:prop.search).length}} personas han sido encontradas para la búsqueda '@{{prop.search}}'
-                        </div>
-                    </div>
+                
+                
+                <div class="text-center" ng-if="(temporada.Personas | filter:searchPersona).length > 0 && (searchPersona != undefined)">
+                    <p>Hay @{{(temporada.Personas | filter:searchPersona).length}} registro(s) que coinciden con su búsqueda</p>
+                </div>
+                <div class="alert alert-info" ng-if="temporada.Personas.length == 0">
+                    <p>No hay registros almacenados</p>
+                </div>
+                <div class="alert alert-warning" ng-if="(temporada.Personas | filter:searchPersona).length == 0 && temporada.Personas.length > 0">
+                    <p>No existen registros que coincidan con su búsqueda</p>
                 </div>
                 <div class="row" ng-show="temporada.Personas.length > 0">
                     <div class="col-xs-12" style="overflow-x: auto;">
                         <table class="table table-hover table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID persona</th>
+                                    <th>Cod. Encuesta</th>
                                     <th>ID Hogar</th>
                                     <th>Nombre</th>
                                     <th>Dirección</th>
@@ -194,8 +165,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr dir-paginate="item in temporada.Personas|filter:prop.search|itemsPerPage:10 as results" pagination-id="personaP" style="border-bottom: .5px solid lightgray">
-                                    <td>@{{item.id}}</td>
+                                <tr dir-paginate="item in temporada.Personas|filter:prop.searchPersona|itemsPerPage:10 as results" pagination-id="personaP" style="border-bottom: .5px solid lightgray">
+                                    <td>@{{item.viajes[0].codigo_encuesta}}</td>
                                     <td>@{{item.hogare.id}}</td>
                                     <td>@{{item.nombre}}</td>
                                     <td>@{{item.hogare.edificacione.direccion}}</td>
@@ -210,18 +181,6 @@
 
                             </tbody>
                         </table>
-                    </div>
-                </div>
-                <div class="col-xs-12" ng-if="(temporada.Personas|filter:prop.search).length == 0 && temporada.Personas.length != 0">
-                    <div class="alert alert-warning" role="alert">
-                        No hay resultados para la búsqueda '@{{prop.search}}'. <a href="#" ng-click="prop.search = ''">Presione aquí</a> para volver a mostrar todos los resultados.
-                    </div>
-                </div>
-                <div class="row" ng-show="temporada.Personas.length == 0">
-                    <div class="col-xs-12">
-                        <div class="alert alert-warning" role="alert">
-                            No hay personas encuestadas ingresados
-                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -239,10 +198,6 @@
             </div>
            
         </div>
-
-
-            
-
 
     </div>
 
