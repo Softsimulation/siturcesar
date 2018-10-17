@@ -60,11 +60,7 @@ situr.controller('caracterizacionAgenciaViajesCtrl', ['$scope','agenciaViajeServ
                     });
                     setTimeout(function () {
     
-                        if(data.redireccion == true){
-                            window.location = "/ofertaempleo/ofertaagenciaviajes/"+$scope.encuesta.id;
-                        }else{
-                            window.location = "/ofertaempleo/encuestas/"+data.sitio;
-                        }
+                        window.location = "/ofertaempleo/ofertaagenciaviajes/"+$scope.encuesta.id;
                         
     
     
