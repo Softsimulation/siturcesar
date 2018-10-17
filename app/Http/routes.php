@@ -90,3 +90,9 @@ Route::get('/detalle', function () {
     
 });
 
+Route::controller('/bolsaEmpleo','BolsaEmpleoController');
+
+Route::controller('/promocionBolsaEmpleo','PublicoBolsaEmpleoController');
+
+Route::controller('/postulado','PostuladoController');
+
