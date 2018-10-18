@@ -1,6 +1,6 @@
 @extends('layout._ofertaEmpleoLayaout')
 
-@section('title', 'Caracterización de transporte :: SITUR Magdalena')
+@section('title', 'Caracterización de transporte :: SITUR Cesar')
 
 @section('estilos')
     <style>

@@ -204,6 +204,7 @@ function parse_yturl($url)
         </div>
         
     </section>
+    @endif
     <section id="comentarios">
         <div class="container">
             <h3>Comentarios</h3>
@@ -357,7 +358,7 @@ function parse_yturl($url)
             </div>
         </div>
     </section>
-    @endif
+    
 @endsection
 @section('javascript')
 <!--<script src="{{asset('/js/public/vibrant.js')}}"></script>-->

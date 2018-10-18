@@ -1,43 +1,7 @@
 
 @extends('layout._AdminLayout')
 
-@section('title', 'Listado de departamentos')
-
-@section('estilos')
-    <style>
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
-
-        .messages {
-            color: #FA787E;
-        }
-
-    </style>
-@endsection
-
-@section('TitleSection', 'Listado de departamentos')
+@section('Title', 'Listado de departamentos')
 
 @section('app', 'ng-app="departamentosApp"')
 

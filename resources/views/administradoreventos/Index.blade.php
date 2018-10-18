@@ -1,28 +1,45 @@
 
 @extends('layout._AdminLayout')
 
-@section('title', 'Listado de atracciones')
+@section('title', 'Listado de eventos')
+
+@section('estilos')
+    <style>
+        
+        .messages {
+            color: #FA787E;
+        }
+
+        .row {
+            margin: 1em 0 0;
+        }
+        
+        .input-group {
+            display: flex;
+        }
+        .input-group-addon {
+            width: 3em;
+        }
+    </style>
+@endsection
 
 @section('TitleSection', 'Listado de eventos')
 
-@section('Progreso', '0%')
+@section('titulo','Eventos')
 
-@section('NumSeccion', '0%')
+@section('subtitulo','El siguiente listado cuenta con @{{eventos.length}} registro(s)')
 
 @section('app', 'ng-app="eventosApp"')
 
 @section('controller','ng-controller="eventosIndexController"')
 
-@section('titulo','Eventos')
-@section('subtitulo','El siguiente listado cuenta con @{{eventos.length}} registro(s)')
-
 @section('content')
 <div class="flex-list">
-    <a href="/administradoreventos/crear" type="button" class="btn btn-lg btn-success">
-      Agregar evento
+    <a href="/administradoreventos/crear" role="button" class="btn btn-lg btn-success">
+      Agregar eventos
     </a> 
     <div class="form-group has-feedback" style="display: inline-block;">
-        <label class="sr-only">Búsqueda de evento</label>
+        <label class="sr-only">Búsqueda de eventos</label>
         <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="Buscar evento...">
         <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
     </div>      
@@ -46,22 +63,24 @@
             <div class="tile-caption">
                 <h3>@{{evento.eventos_con_idiomas[0].nombre}}</h3>
             </div>
-            <p>@{{evento.eventos_con_idiomas[0].descripcion}}</p>
+            <p>@{{evento.eventos_con_idiomas[0].descripcion | limitTo:255}}<span ng-if="evento.eventos_con_idiomas[0].descripcion.length > 255">...</span></p>
             <div class="inline-buttons">
                 <a href="/administradoreventos/editar/@{{evento.id}}" class="btn btn-warning">Editar</a>
                 <button class="btn btn-@{{evento.estado ? 'danger' : 'success'}}" ng-click="desactivarActivar(evento)">@{{evento.estado ? 'Desactivar' : 'Activar'}}</button>
-                <a href="/administradoreventos/idioma/@{{evento.id}}/@{{traduccion.idioma.id}}" ng-repeat="traduccion in evento.eventos_con_idiomas" class="btn btn-default"> @{{traduccion.idioma.culture}}</a>
-                <button type="button" ng-click="modalIdioma(evento)" ng-if="evento.eventos_con_idiomas.length < idiomas.length" class="btn btn-default"> <span class="glyphicon glyphicon-plus"></span><span class="sr-only">Agregar idioma</span></button>
+                <a href="/administradoreventos/idioma/@{{evento.id}}/@{{traduccion.idioma.id}}" class="btn btn-default" ng-repeat="traduccion in evento.eventos_con_idiomas"> @{{traduccion.idioma.culture}}</a>
+                <button type="button" ng-click="modalIdioma(evento)" class="btn btn-default" ng-if="evento.eventos_con_idiomas.length < idiomas.length"> <span class="glyphicon glyphicon-plus"></span><span class="sr-only">Agregar idioma</span></button>
             </div>  
             
         </div>
     </div>
 </div>
+
 <div class="row">
-    <div class="col-6" style="text-align:center;">
-        <dir-pagination-controls pagination-id="pagination_eventos"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
-    </div>
+  <div class="col-xs-12 text-center">
+      <dir-pagination-controls pagination-id="pagination_eventos"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+  </div>
 </div>
+    
 <div class='carga'>
 
 </div>
@@ -71,26 +90,25 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Nuevo idioma para el evento</h4>
+                <h4 class="modal-title">Nuevo idioma para la atracción</h4>
             </div>
             <form>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="idioma">Seleccione un idioma</label>
-                        <select ng-model="idiomaEditSelected" ng-options="idioma.id as idioma.nombre for idioma in idiomas|idiomaFilter:eventoEdit.eventos_con_idiomas" class="form-control" required>
-                            <option value="" disabled>Seleccione un idioma</option>
+                        <label for="idioma">Elija un idioma</label>
+                        <select ng-model="idiomaEditSelected" ng-options="idioma.id as idioma.nombre for idioma in idiomas|idiomaFilter:eventoEdit.eventos_con_idiomas" class="form-control">
+                            <option value="">Seleccione un idioma</option>
                         </select>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                     <button type="button" ng-click="nuevoIdioma()" class="btn btn-success">Enviar</button>
                 </div>
             </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 @endsection
 
 @section('javascript')

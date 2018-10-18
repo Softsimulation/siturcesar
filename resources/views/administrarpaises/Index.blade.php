@@ -3,48 +3,13 @@
 
 @section('title', 'Listado de países')
 
-@section('estilos')
-    <style>
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
-
-        .messages {
-            color: #FA787E;
-        }
-
-        
-    </style>
-@endsection
-
 @section('TitleSection', 'Listado de países')
 
 @section('app', 'ng-app="paisesApp"')
 
 @section('controller','ng-controller="paisesController"')
 
-@section('titulo','PAÍSES')
+@section('titulo','Países')
 @section('subtitulo','El siguiente listado cuenta con @{{paises.length}} registro(s)')
 
 @section('content')
@@ -99,7 +64,7 @@
             <div class="col-xs-12">
                 <table class="table table-striped">
                     <tr>
-                        <th>Id</th>
+                        <th>ID</th>
                         <th>Nombres</th>
                         <th>Idiomas</th>
                         <th>Última modificación</th>
@@ -153,7 +118,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Agregar pais</h4>
         <div class="alert alert-danger" ng-if="errores != null">
             <label><b>Errores:</b></label>
             <br />
@@ -165,12 +130,12 @@
       <form novalidate role="form" name="paisForm">
           <div class="modal-body">
                 <input type="hidden" ng-model="pais.id" ng-require="">
-                <div class="form-group">
-                    <label for="nombre">Nombre</label>
-                    <input ng-disabled="sw == 3" required type="text" name="nombre" class="form-control" placeholder="Nombre del país" ng-model="pais.nombre"/>
+                <div class="form-group" ng-class="{'error': ((paisForm.$submitted || paisForm.nombre.$touched) && paisForm.nombre.$error.required) }">
+                    <label for="nombre"><span class="asterisk">*</span> Nombre</label>
+                    <input ng-disabled="sw == 3" required type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre del país" ng-model="pais.nombre"/>
                 </div>
                 <div class="form-group" ng-class="{'error': ((paisForm.$submitted || paisForm.idioma.$touched) && paisForm.idioma.$error.required) }">
-                    <label for="idioma">Idioma</label>
+                    <label for="idioma"><span class="asterisk">*</span> Idioma</label>
                     <select ng-disabled="sw == 2" name="idioma" required ng-model="pais.idioma" ng-change="verNombre(pais.idioma)" ng-options="idioma.id as idioma.nombre for idioma in idiomas" class="form-control">
                         <option value="">Seleccione un idioma</option>
                     </select>
