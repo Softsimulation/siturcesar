@@ -64,6 +64,8 @@ Route::controller('/eventos', 'EventosController');
 
 Route::controller('/proveedor', 'ProveedoresController');
 
+Route::controller('/quehacer', 'QueHacerController');
+
 Route::group(['middleware' => 'cors'], function(){
     
         Route::controller('/authapi', 'ApiAuthController');
