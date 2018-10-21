@@ -50,4 +50,12 @@ class Proveedores_rnt extends Model
         return $this->attributes['tipo_categoria'] = null;
     }
     
+    public function vacantes(){
+        return $this->hasMany( "App\Models\Oferta_Vacante", 'proveedores_rnt_id'); 
+    }
+    
+    public function proveedor(){
+        return $this->hasMany( "App\Models\Proveedor", 'proveedor_rnt_id'); 
+    }
+    
 }
