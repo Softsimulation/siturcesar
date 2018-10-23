@@ -15,7 +15,7 @@ class QueHacerController extends Controller
     }
     
     
-    /**La función pide como parámetro el idioma de la página.
+    /**La función queHacerData pide como parámetro el idioma de la página.
      * 
      * Los tipos de entidad son:
      * tipo: 1 -> Actividades
