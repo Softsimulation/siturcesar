@@ -20,7 +20,7 @@ Route::get('/', function () {
     
 });
 
-Route::get('/QueHacer','HomeController@viewQueHacer');
+// Route::get('/QueHacer','HomeController@viewQueHacer');
 Route::get('/Experiencias','HomeController@viewExperiencias');
 Route::get('/PST','HomeController@viewPST');
 
@@ -64,6 +64,8 @@ Route::controller('/eventos', 'EventosController');
 
 Route::controller('/proveedor', 'ProveedoresController');
 
+Route::controller('/quehacer', 'QueHacerController');
+
 Route::group(['middleware' => 'cors'], function(){
     
         Route::controller('/authapi', 'ApiAuthController');
@@ -89,4 +91,15 @@ Route::get('/detalle', function () {
     
     
 });
+
+
+Route::controller('/bolsaEmpleo','BolsaEmpleoController');
+
+Route::controller('/promocionBolsaEmpleo','PublicoBolsaEmpleoController');
+
+Route::controller('/postulado','PostuladoController');
+
+
+Route::controller('/noticias','NoticiaController');
+Route::controller('/promocionNoticia','PublicoNoticiaController');
 

@@ -46,7 +46,7 @@
                         <a role="menuitem" href="#menu-visitarAlCesar" aria-haspopup="true" aria-expanded="false">Visita al Cesar</a>
                         <ul role="menu" id="menu-visitarAlCesar" aria-label="Visita al Cesar">
                             <li role="none">
-                                <a role="menuitem" href="/QueHacer">Qué hacer</a>
+                                <a role="menuitem" href="/quehacer">Qué hacer</a>
                             </li>
                             <li role="none">
                                 <a role="menuitem" href="/Experiencias">Experiencias</a>

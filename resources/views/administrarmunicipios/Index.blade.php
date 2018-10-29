@@ -1,44 +1,7 @@
 
 @extends('layout._AdminLayout')
 
-@section('title', 'Listado de municipios')
-
-@section('estilos')
-    <style>
-        .image-preview-input {
-            position: relative;
-            overflow: hidden;
-            margin: 0px;
-            color: #333;
-            background-color: #fff;
-            border-color: #ccc;
-        }
-
-        .image-preview-input input[type=file] {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: 0;
-            padding: 0;
-            font-size: 20px;
-            cursor: pointer;
-            opacity: 0;
-            filter: alpha(opacity=0);
-        }
-
-        .image-preview-input-title {
-            margin-left: 2px;
-        }
-
-        .messages {
-            color: #FA787E;
-        }
-
-        
-    </style>
-@endsection
-
-@section('TitleSection', 'Listado de municipios')
+@section('Title', 'Listado de municipios')
 
 @section('app', 'ng-app="municipiosApp"')
 
@@ -98,44 +61,49 @@
         <div class="row">
             <div class="col-xs-12">
                 <table class="table table-striped">
-                    <tr>
-                        <th>Id</th>
-                        <th>Nombre</th>
-                        <th>Departamento, País</th>
-                        <th>Última modificación</th>
-                        <th>Usuario</th>
-                        <th style="text-align: center;">Opciones</th>
-                    </tr>
-                    <tr dir-paginate="municipio in municipios | filter:prop.search | itemsPerPage:10" pagination-id="pagination_municipios" >
-                        <td>
-                            @{{municipio.id}}
-                        </td>
-                        <td>
-                            @{{municipio.nombre}}
-                        </td>
-                        
-                        <td>
-                            @{{imprimirNombre(municipio.departamento_id)}}
-                        </td>
-                        <td>@{{municipio.updated_at | date:'dd-MM-yyyy'}}</td>
-                        <td>@{{municipio.user_update}}</td>
-                        <td style="text-align: center;">
-                            <button type="button" class="btn btn-xs btn-default" ng-click="verMunicipioModal(municipio)">
-                                <span class="glyphicon glyphicon-eye-open" title="Ver municipio"></span><span class="sr-only">Ver municipio</span>
-                            </button> 
-                            <!--<a ng-repeat="idioma in pais.paises_con_idiomas" ng-click="editarPaisModal(pais, idioma.idioma.id)" title="Editar @{{idioma.idioma.nombre}}" href="javascript:void(0)">-->
-                            <!--    @{{idioma.idioma.culture | uppercase}} -->
-                            <!--</a>-->
-                            <!--<a ng-click="agregarNombre(pais)" href="javascript:void(0)" ng-if="pais.paises_con_idiomas.length != idiomas.length" title="Agregar nombre en otro idioma">-->
-                            <!--    <span class="glyphicon glyphicon-plus">-->
-                                    
-                            <!--    </span>-->
-                            <!--</a>-->
-                            <button type="button" class="btn btn-xs btn-default" ng-click="editarMunicipioModal(municipio)">
-                                <span class="glyphicon glyphicon-pencil" title="Editar municipio"></span><span class="sr-only">Ver municipio</span>
-                            </button> 
-                        </td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre</th>
+                            <th>Departamento, País</th>
+                            <th>Última modificación</th>
+                            <th>Usuario</th>
+                            <th style="text-align: center;">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr dir-paginate="municipio in municipios | filter:prop.search | itemsPerPage:10" pagination-id="pagination_municipios" >
+                            <td>
+                                @{{municipio.id}}
+                            </td>
+                            <td>
+                                @{{municipio.nombre}}
+                            </td>
+                            
+                            <td>
+                                @{{imprimirNombre(municipio.departamento_id)}}
+                            </td>
+                            <td>@{{municipio.updated_at | date:'dd-MM-yyyy'}}</td>
+                            <td>@{{municipio.user_update}}</td>
+                            <td style="text-align: center;">
+                                <button type="button" class="btn btn-xs btn-default" ng-click="verMunicipioModal(municipio)">
+                                    <span class="glyphicon glyphicon-eye-open" title="Ver municipio"></span><span class="sr-only">Ver municipio</span>
+                                </button> 
+                                <!--<a ng-repeat="idioma in pais.paises_con_idiomas" ng-click="editarPaisModal(pais, idioma.idioma.id)" title="Editar @{{idioma.idioma.nombre}}" href="javascript:void(0)">-->
+                                <!--    @{{idioma.idioma.culture | uppercase}} -->
+                                <!--</a>-->
+                                <!--<a ng-click="agregarNombre(pais)" href="javascript:void(0)" ng-if="pais.paises_con_idiomas.length != idiomas.length" title="Agregar nombre en otro idioma">-->
+                                <!--    <span class="glyphicon glyphicon-plus">-->
+                                        
+                                <!--    </span>-->
+                                <!--</a>-->
+                                <button type="button" class="btn btn-xs btn-default" ng-click="editarMunicipioModal(municipio)">
+                                    <span class="glyphicon glyphicon-pencil" title="Editar municipio"></span><span class="sr-only">Ver municipio</span>
+                                </button> 
+                            </td>
+                        </tr>
+                    </tbody>
+                    
                 </table>
                
             </div>

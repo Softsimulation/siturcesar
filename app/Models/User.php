@@ -51,4 +51,9 @@ class User extends Authenticatable
         return $user;
     }
     
+    public function datosAdicionales(){
+        return $this->hasOne('App\Models\Datos_Adicional_Usuario','users_id');
+        
+    }
+    
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Storage;
 use File;
+use DB;
 
 use App\Models\Sitio;
 use App\Models\Perfil_Usuario;
@@ -14,14 +15,102 @@ use App\Models\Actividad_Con_Idioma;
 use App\Models\Actividad;
 use App\Models\Multimedia_Actividad;
 use App\Models\Idioma;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 use Carbon\Carbon;
 
 class AdministradorActividadesController extends Controller
 {
-    //
+    public function __construct()
+    {
+       
+        $this->middleware('auth');
+        
+        //$this->middleware('role:Admin');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }/*
+        $this->middleware('permissions:list-actividad',['only' => ['getIndex','getDatos'] ]);
+        $this->middleware('permissions:create-actividad',['only' => ['getCrear','getDatoscrear','getIdioma','getDatoscrearnoticias','postGuardarnoticia',
+        'postGuardarmultimedianoticia','postGuardartextoalternativo','postEliminarmultimedia'] ]);
+        $this->middleware('permissions:read-actividad',['only' => ['getVernoticia','getDatosver','getListadonoticias','getNoticias'] ]);
+        $this->middleware('permissions:edit-actividad',['only' => ['getListadonoticias','getNoticias','getNuevoidioma','postGuardarnoticia','postGuardarmultimedianoticia',
+        'postGuardartextoalternativo','postEliminarmultimedia','getVistaeditar','getDatoseditar','postModificarnoticia' ] ]);
+        $this->middleware('permissions:estado-actividad',['only' => ['getListadonoticias','getNoticias','postCambiarestado'] ]);*/
+    }
     public function getIndex(){
         return view('administradoractividades.Index');
+    }
+    
+    
+    public function getQuehacer ($idIdioma){
+        if (Idioma::find($idIdioma) == null){
+            return ['success' => false, 'msg' => 'El idioma especificado no se encuentra registrado en la base de datos.'];
+        }
+        
+        $query = DB::select("(SELECT actividades.id AS id,  
+                 actividades.calificacion_legusto AS calificacion_legusto, 
+                 1 AS tipo, 
+                 NOW() AS fecha_inicio, 
+                 NOW() AS fecha_fin, 
+                 actividades_con_idiomas.nombre AS nombre,
+                 multimedias_actividades.ruta AS portada 
+             FROM actividades INNER JOIN actividades_con_idiomas ON actividades_con_idiomas.actividades_id = actividades.id AND actividades_con_idiomas.idiomas = ?
+                 INNER JOIN multimedias_actividades ON actividades.id = multimedias_actividades.actividades_id AND multimedias_actividades.portada = true 
+             WHERE actividades.estado = true) UNION 
+             (SELECT atracciones.id AS id,  
+                 atracciones.calificacion_legusto AS calificacion_legusto, 
+                 2 AS tipo, 
+                 NOW() AS fecha_inicio, 
+                 NOW() AS fecha_fin, 
+                 sitios_con_idiomas.nombre AS nombre,
+                 multimedia_sitios.ruta AS portada 
+             FROM atracciones INNER JOIN sitios ON sitios.id = atracciones.sitios_id 
+                 INNER JOIN sitios_con_idiomas ON sitios.id = sitios_con_idiomas.sitios_id AND sitios_con_idiomas.idiomas_id = ?
+                 INNER JOIN multimedia_sitios ON sitios.id = multimedia_sitios.sitios_id AND multimedia_sitios.portada = true 
+             WHERE atracciones.estado = true) UNION 
+             (SELECT destino.id AS id,  
+                 destino.calificacion_legusto AS calificacion_legusto, 
+                 3 AS tipo, 
+                 NOW() AS fecha_inicio, 
+                 NOW() AS fecha_fin, 
+                 destino_con_idiomas.nombre AS nombre, 
+                 multimedia_destino.ruta AS portada 
+             FROM destino INNER JOIN destino_con_idiomas ON destino.id = destino_con_idiomas.destino_id AND destino_con_idiomas.idiomas_id = ? 
+                 INNER JOIN multimedia_destino ON destino.id = multimedia_destino.destino_id AND multimedia_destino.portada = true 
+             WHERE destino.estado = true) UNION 
+             (SELECT eventos.id AS id,  
+                 null AS calificacion_legusto, 
+                 4 AS tipo, 
+                 eventos.fecha_in AS fecha_inicio, 
+                 eventos.fecha_fin AS fecha_fin, 
+                 eventos_con_idiomas.nombre AS nombre,
+                 multimedia_evento.ruta AS portada 
+             FROM eventos INNER JOIN eventos_con_idiomas ON eventos.id = eventos_con_idiomas.eventos_id AND eventos_con_idiomas.idiomas_id = ? 
+                 INNER JOIN multimedia_evento ON eventos.id = multimedia_evento.eventos_id AND multimedia_evento.portada = true 
+             WHERE eventos.estado = true) UNION 
+             (SELECT rutas.id AS id,  
+                 null AS calificacion_legusto, 
+                 5 AS tipo, 
+                 NOW() AS fecha_inicio, 
+                 NOW() AS fecha_fin, 
+                 rutas_con_idiomas.nombre AS nombre,
+                 rutas.portada AS portada 
+             FROM rutas INNER JOIN rutas_con_idiomas ON rutas.id = rutas_con_idiomas.ruta_id AND rutas_con_idiomas.idioma_id = ?  
+             WHERE rutas.estado = true) ORDER BY tipo", [$idIdioma, $idIdioma, $idIdioma, $idIdioma, $idIdioma]);
+             
+        /*$query = DB::select("SELECT rutas.id AS id,  
+                 null AS calificacion_legusto, 
+                 5 AS tipo, 
+                 NOW() AS fecha_inicio, 
+                 NOW() AS fecha_fin, 
+                 rutas_con_idiomas.nombre AS nombre,
+                 rutas.portada AS portada 
+             FROM rutas INNER JOIN rutas_con_idiomas ON rutas.id = rutas_con_idiomas.ruta_id AND rutas_con_idiomas.idioma_id = ?  
+             WHERE rutas.estado = true", [$idIdioma]);*/
+                             
+        return ['query' => $query];
     }
     
     public function getCrear(){

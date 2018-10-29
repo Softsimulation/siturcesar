@@ -75,7 +75,6 @@
     <div class="alert alert-info">
         <p>Proveedor a modificar:</p>
         <h3 style="margin: 0">@{{proveedorNombre}}</h3>
-        <p>En la pestaña Información básica debe ingresar la información del proveedor seleccionado en <strong>idioma inglés.</strong></p>
     </div>
     
 </div>
@@ -121,13 +120,13 @@
                                         
                             <!--    </div>-->
                             <!--</div>-->
-                            <div class="col-xs-12 col-sm-12">
-                                <div class="form-group" ng-class="{'has-error': (editarProveedorForm.$submitted || editarProveedorForm.descripcion.$touched) && editarProveedorForm.descripcion.$error.required}">
-                                    <label for="descripcion"><span class="asterisk">*</span> Descripción</label>
-                                    <textarea style="resize: none;" ng-model="proveedor.datosGenerales.descripcion" rows="5" required name="descripcion" id="descripcion" class="form-control" placeholder="Descripción del proveedor (De 100 a 1,000 caracteres)" aria-describedby="basic-addon1"></textarea>
+                            <!--<div class="col-xs-12 col-sm-12">-->
+                            <!--    <div class="form-group" ng-class="{'has-error': (editarProveedorForm.$submitted || editarProveedorForm.descripcion.$touched) && editarProveedorForm.descripcion.$error.required}">-->
+                            <!--        <label for="descripcion"><span class="asterisk">*</span> Descripción</label>-->
+                            <!--        <textarea style="resize: none;" ng-model="proveedor.datosGenerales.descripcion" rows="5" required name="descripcion" id="descripcion" class="form-control" placeholder="Descripción del proveedor (De 100 a 1,000 caracteres)" aria-describedby="basic-addon1"></textarea>-->
                                         
-                                </div>
-                            </div>
+                            <!--    </div>-->
+                            <!--</div>-->
                             <div class="col-xs-12 col-sm-6">
                                 <div class="form-group" ng-class="{'has-error': (editarProveedorForm.$submitted || editarProveedorForm.valor_minimo.$touched) && (editarProveedorForm.valor_minimo.$error.required || editarProveedorForm.valor_minimo.$error.min)}">
                                     <label for="valor_minimo"><span class="asterisk">*</span> Valor mínimo ($)</label>
@@ -142,13 +141,13 @@
                                     
                                 </div>
                             </div>
-                            <div class="col-xs-12 col-sm-4">
-                                <div class="form-group">
-                                    <label for="horario">Horario</label>
-                                    <input ng-model="proveedor.datosGenerales.horario" type="text" name="horario" id="horario" class="form-control" placeholder="Máximo 255 caracteres."/>
-                                </div>
-                            </div>
-                            <div class="col-xs-12 col-sm-4">
+                            <!--<div class="col-xs-12 col-sm-4">-->
+                            <!--    <div class="form-group">-->
+                            <!--        <label for="horario">Horario</label>-->
+                            <!--        <input ng-model="proveedor.datosGenerales.horario" type="text" name="horario" id="horario" class="form-control" placeholder="Máximo 255 caracteres."/>-->
+                            <!--    </div>-->
+                            <!--</div>-->
+                            <div class="col-xs-12 col-sm-8">
                                 <div class="form-group">
                                     <label for="pagina_web">Página web</label>
                                     <input ng-model="proveedor.datosGenerales.pagina_web" type="url" name="pagina_web" id="pagina_web" class="form-control" placeholder="Máximo 255 caracteres."/>
@@ -290,7 +289,7 @@
 <script src="{{asset('/js/administrador/proveedores/indexController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/crearController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/editarController.js')}}"></script>
-<!--<script src="{{asset('/js/administrador/atracciones/idiomaController.js')}}"></script>-->
+<script src="{{asset('/js/administrador/proveedores/idiomaController.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/services.js')}}"></script>
 <script src="{{asset('/js/administrador/proveedores/app.js')}}"></script>
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>
