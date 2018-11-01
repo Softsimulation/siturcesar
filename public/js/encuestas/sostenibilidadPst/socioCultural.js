@@ -34,10 +34,10 @@ angular.module('sostenibilidadPst.socioCultural', [])
     
     $scope.validarOtro = function (sw) {
         if (sw == 1) {
-            var i = $scope.encuesta.accionesCulturales.indexOf(8);
+            var i = $scope.encuesta.accionesCulturales.indexOf(17);
             if ($scope.encuesta.otroCultural != null && $scope.encuesta.otroCultural != '') {
                 if (i == -1) {
-                    $scope.encuesta.accionesCulturales.push(8);
+                    $scope.encuesta.accionesCulturales.push(17);
                 }
             }
         } else if (sw == 2){
@@ -67,6 +67,7 @@ angular.module('sostenibilidadPst.socioCultural', [])
     $scope.guardar = function(){
         
         if(!$scope.datosForm.$valid || $scope.encuesta.accionesCulturales.length == 0 || ($scope.encuesta.motivosResponsabilidad.length == 0 && $scope.encuesta.responsabilidad_social == 1) || $scope.encuesta.esquemasAccesibles.length == 0 || ($scope.encuesta.beneficiosEsquema.length == 0 && $scope.encuesta.esquemasAccesibles.indexOf(7) == -1 ) ){
+            swal("Error", "Formulario incompleto corrige los errores.", "error");
             return;
         }
         
@@ -89,7 +90,7 @@ angular.module('sostenibilidadPst.socioCultural', [])
                 });
                 setTimeout(function () {
                     window.location = "/sostenibilidadpst/ambiental/"+$scope.id;
-                }, 1000);
+                }, 500);
             } else {
                 swal("Error", "Hay errores en el formulario corrigelos", "error");
                 $scope.errores = data.errores;

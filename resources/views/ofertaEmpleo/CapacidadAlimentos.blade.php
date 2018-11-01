@@ -1,7 +1,7 @@
 
 @extends('layout._ofertaEmpleoLayaout')
 
-@section('title', 'Capacidad de alimentos :: SITUR Magdalena')
+@section('title', 'Capacidad de alimentos :: SITUR Cesar')
 
 @section('estilos')
     <style>
@@ -181,7 +181,7 @@
             </div>
         </div>
         
-        <div class="panel panel-success">
+        <!--<div class="panel panel-success">
             <div class="panel-heading">
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> Atención a visitantes no residentes en Cesar</b></h3>
             </div>
@@ -211,7 +211,7 @@
                 </div>
                 
             </div>
-        </div>
+        </div>-->
         
         <div class="row" style="text-align:center">
             <a href="/ofertaempleo/caracterizacionalimentos/@{{id}}" class="btn btn-raised btn-default">Anterior</a>

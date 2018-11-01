@@ -5,11 +5,6 @@
 
 @section('estilos')
     <style>
-        .panel-body {
-            max-height: 400px;
-            color: white;
-        }
-
         .image-preview-input {
             position: relative;
             overflow: hidden;
@@ -38,53 +33,9 @@
         .messages {
             color: #FA787E;
         }
-
-        form.ng-submitted input.ng-invalid {
-            border-color: #FA787E;
-        }
-
-        form input.ng-invalid.ng-touched {
-            border-color: #FA787E;
-        }
-
-        .carga {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.57) url(../../Content/Cargando.gif) 50% 50% no-repeat
-        }
-        /* Cuando el body tiene la clase 'loading' ocultamos la barra de navegacion */
-        body.charging {
-            overflow: hidden;
-        }
-
-        /* Siempre que el body tenga la clase 'loading' mostramos el modal del loading */
-        body.charging .carga {
-            display: block;
-        }
-        .row {
-            margin: 1em 0 0;
-        }
-        .form-group {
-            margin: 0;
-        }
-        .form-group label, .form-group .control-label, label {
-            font-size: smaller;
-        }
-        
-        .input-group-addon {
-            width: 3em;
-        }
-        .text-error {
-            color: #a94442;
-            font-style: italic;
-            font-size: .7em;
-            white-space: nowrap;
-            text-overflow: ellipsis;
+.table .dropdown-menu{
+            left: auto;
+            right: 0;
         }
     </style>
 @endsection
@@ -94,6 +45,9 @@
 @section('app','ng-app="proveedoresoferta"')
 
 @section('controller','ng-controller="listadoecuesta"')
+
+@section('titulo','Encuestas')
+@section('subtitulo','El siguiente listado cuenta con @{{encuestas.length}} registro(s)')
 
 @section('content')
 
@@ -107,55 +61,70 @@
     </div>
 
 </div>    
+<div class="flex-list">
+    <div class="form-group has-feedback" style="display: inline-block;">
+        <label class="sr-only">Búsqueda de encuestas</label>
+        <input type="text" ng-model="prop.searchAntiguo" class="form-control input-lg" id="inputEmail3" placeholder="Buscar encuesta...">
+        <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+    </div>      
+</div>
+<div class="text-center" ng-if="(encuestas|filter:prop.searchAntiguo).length > 0 && (prop.searchAntiguo != '' && prop.searchAntiguo != undefined)">
+    <p>Hay @{{(encuestas|filter:prop.searchAntiguo).length}} registro(s) que coinciden con su búsqueda</p>
+</div>
+<div class="alert alert-info" ng-if="encuestas.length == 0">
+    <p>No hay registros almacenados</p>
+</div>
+<div class="alert alert-warning" ng-if="(encuestas|filter:prop.searchAntiguo).length == 0 && encuestas.length > 0">
+    <p>No existen registros que coincidan con su búsqueda</p>
+</div>
 
-<div class="container">
-       <div class="row">
-            <h1 class="title1">Encuestas</h1>
-            <br>
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-lg-3 col-md-3">
-                    <input type="text" style="margin-bottom: .5em;" ng-model="prop.searchAntiguo" class="form-control" id="inputSearch" placeholder="Buscar registro...">
-                </div>
-                <div class="col-xs-12 col-sm-12 col-lg-2 col-md-12" style="text-align: center;">
-                    <span class="chip" style="margin-bottom: .5em;">@{{(encuestas|filter:prop.searchAntiguo).length}} resultados</span>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <table class="table table-striped">
-                  <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Mes</th>
-                            <th>Año</th>
-                            <th>Estado</th>
-                            <th style="width: 80px;"></th>
-                        </tr>
-                    </thead>
-                     <tbody>
-                        <tr dir-paginate="item in encuestas|filter:prop.searchAntiguo|itemsPerPage:10 as results" pagination-id="paginacion_antiguos" >
-                            <td>@{{item.id}}</td>
-                            <td>@{{item.mes}}</td>
-                            <td>@{{item.anio}}</td>
-                            <td>@{{item.estado}}</td>
-                            <td><a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad ==1 )" href="@{{ruta}}/@{{item.id}}" class="btn btn-default btn-sm" title="Editar encuesta oferta" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1"><span class="glyphicon glyphicon-edit"></span></a>
-                              <a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad == 1 )" href="/ofertaempleo/empleomensual/@{{item.id}}" class="btn btn-default btn-sm" title="Editar encuesta empleo" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1"><span class="glyphicon glyphicon-pencil"></span></a>  </td>
+
+<d iv class="row" ng-show="(encuestas|filter:prop.searchAntiguo).length > 0 && encuestas.length > 0">
+    <div class="col-xs-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Mes</th>
+                    <th>Año</th>
+                    <th>Estado</th>
+                    <th style="width: 90px;"></th>
+                </tr>
+            </thead>
+             <tbody>
+                <tr dir-paginate="item in encuestas|filter:prop.searchAntiguo|itemsPerPage:10 as results" pagination-id="paginacion_antiguos" >
+                    <td>@{{item.id}}</td>
+                    <td>@{{item.mes}}</td>
+                    <td>@{{item.anio}}</td>
+                    <td>@{{item.estado}}</td>
+                    <td>
+                        <div class="dropdown" style="display: inline-block;">
+                            <button class="btn btn-xs btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="glyphicon glyphicon-pencil"></span> Editar...
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad ==1 )" href="@{{ruta}}/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta oferta" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1">Encuesta de oferta</a></li>
+                                <li><a ng-if="((item.estado!='Cerrada' || item.estado!='Cerrada Calculada' || item.estado!='Cerrada sin calcular')&& item.actividad == 1 )" href="/ofertaempleo/empleomensual/@{{item.id}}" class="btn btn-default btn-xs" title="Editar encuesta empleo" ng-if="(item.estado_id != 7 || item.estado_id != 8 || item.estado_id != 4)&& item.actividad==1">Encuesta de empleo</a> </li>
+                                
+                            </ul>
+                        </div>
                         
-                        </tr>
-                    </tbody>
-                    </table>
-                    <div class="alert alert-warning" role="alert" ng-show="encuestas.length == 0 || (encuestas|filter:prop.searchAntiguo).length == 0">No hay resultados disponibles <span ng-show="(encuestas|filter:prop.searchAntiguo).length == 0">para la búsqueda '@{{prop.searchAntiguo}}'. <a href="#" ng-click="prop.searchAntiguo = ''">Presione aquí</a> para ver todos los resultados.</span></div>
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-6" style="text-align:center;">
-              <dir-pagination-controls pagination-id="paginacion_antiguos"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
-              </div>
-            </div>
-        </div>
-    <div class='carga'>
+                         
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-12 text-center">
+        <dir-pagination-controls pagination-id="paginacion_antiguos"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
+    </div>
+</div>
+    <div class='carga'>
+    </div>
 
 @endsection
 

@@ -1,113 +1,87 @@
 <?php $__env->startSection('title', 'Listado de encuestas'); ?>
 
 <?php $__env->startSection('estilos'); ?>
-    <style>
-        .row {
-            margin: 1em 0 0;
-        }
-        .blank-page {
-            padding: 1em;
-        }
-        .carga {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.57) url(../../Content/Cargando.gif) 50% 50% no-repeat;
-        }
-        .carga>.text{
-            position: absolute;
-            display:block;
-            text-align:center;
-            width: 100%;
-            top: 40%;
-            color: white;
-            font-size: 1.5em;
-            font-weight: bold;
-        }
-        /* Cuando el body tiene la clase 'loading' ocultamos la barra de navegacion */
-        body.charging {
-            overflow: hidden;
-        }
-
-        /* Siempre que el body tenga la clase 'loading' mostramos el modal del loading */
-        body.charging .carga {
-            display: block;
-        }
-    </style>
+    
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('TitleSection', 'Listado encuestas'); ?>
-
-<?php $__env->startSection('Progreso', '0%'); ?>
-
-<?php $__env->startSection('NumSeccion', '0%'); ?>
-
 <?php $__env->startSection('app','ng-app="receptor"'); ?>
 
 <?php $__env->startSection('controller','ng-controller="listadoEncuestasCtrl"'); ?>
 
-<?php $__env->startSection('content'); ?>
-    
+<?php $__env->startSection('titulo','Encuestas'); ?>
+<?php $__env->startSection('subtitulo','El siguiente listado cuenta con {{encuestas.length}} registro(s)'); ?>
 
-<div class="container">
-    <h1 class="title1">Listado de encuestas</h1>
-    <br />
-    <div class="blank-page widget-shadow scroll" id="style-2 div1">
-        <div class="row">
-            <div class="col-xs-12 col-sm-4 col-lg-2 col-md-3">
-                <a href="/turismoreceptor/datosencuestados" class="btn btn-primary">Crear encuesta</a>
-            </div>
-            <div class="col-xs-12 col-sm-8 col-lg-2 col-md-3">
-                <select class="form-control" ng-model="filtroEstadoEncuesta" ng-init="filtroEstadoEncuesta = ''">
-                    <option value="" selected>Todas las encuestas</option>
-                    <option value="calculadas">Calculadas</option>
-                    <option value="sincalcular">Sin calcular</option>
-                </select>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-lg-3 col-md-3">
-                <select class="form-control" ng-model="campoSelected">
-                    <option value="" selected>Cualquier campo</option>
-                    <option value="fecha">Fecha de aplicación</option>
-                    <option value="fechallegada">Fecha de llegada</option>
-                </select>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-lg-3 col-md-3">
-                <input type="text" style="margin-bottom: .5em;" ng-model="prop.search" class="form-control" id="inputSearch" placeholder="Buscar encuesta...">
-            </div>
-            <div class="col-xs-12 col-sm-12 col-lg-2 col-md-12" style="text-align: center;">
-                <span class="chip" style="margin-bottom: .5em;">{{(encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search).length}} resultados</span>
-            </div>
+<?php $__env->startSection('content'); ?>
+<div class="flex-list">
+    <a href="/turismoreceptor/datosencuestados" class="btn btn-lg btn-success" role="button">
+      Crear encuesta
+    </a> 
+    
+    <div class="form-group has-feedback" style="display: inline-block;">
+        <label class="sr-only">Búsqueda de encuesta </label>
+        <input type="text" ng-model="prop.search" class="form-control input-lg" id="inputEmail3" placeholder="{{(campoSelected != undefined && campoSelected != '') ? 'YYYY-MM-DD' : 'Buscar encuesta...'}}">
+        <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+    </div> 
+    <button type="button" class="btn btn-lg btn-default" data-toggle="collapse" data-target="#filtrosEncuestas" aria-expanded="false" aria-controls="filtrosEncuestas" title="Filtros de búsqueda">
+        <span class="glyphicon glyphicon-filter" aria-hidden="true"></span><span class="sr-only">Filtros de búsqueda</span>
+    </button>
+</div>
+<div class="collapse" id="filtrosEncuestas">
+  <div class="well">
+    <div class="flex-list">
+        <div class="form-group" style="display: inline-block;">
+            <label class="sr-only" for="tipoEncuesta">Tipo de encuesta</label>
+            <select class="form-control input-lg" id="tipoEncuesta" ng-model="filtroEstadoEncuesta" ng-init="filtroEstadoEncuesta = ''">
+                <option value="" selected>Todas las encuestas</option>
+                <option value="calculadas">Calculadas</option>
+                <option value="sincalcular">Sin calcular</option>
+            </select>
         </div>
-        <br/>
-        <div class="row">
+        <div class="form-group" style="display: inline-block;">
+            <label class="sr-only" for="campoDeBusqueda">Campo de búsqueda</label>
+            <select class="form-control input-lg" id="campoDeBusqueda" ng-model="campoSelected">
+                <option value="" selected>Cualquier campo</option>
+                <option value="fecha">Fecha de aplicación</option>
+                <option value="fechallegada">Fecha de llegada</option>
+            </select>
+        </div>
+    </div>
+  </div>
+</div>
+<div class="text-center" ng-if="(encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search).length > 0 && (prop.search != '' && prop.search != undefined)">
+    <p>Hay {{(encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search).length}} registro(s) que coinciden con su búsqueda</p>
+</div>
+<div class="alert alert-info" ng-if="encuestas.length == 0">
+    <p>No hay registros almacenados</p>
+</div>
+<div class="alert alert-warning" ng-if="(encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search).length == 0 && encuestas.length > 0">
+    <p>No existen registros que coincidan con su búsqueda</p>
+</div>
+
+        <div class="row"  ng-show="encuestas.length > 0 && (encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search).length > 0">
             <div class="col-xs-12">
                 <table class="table table-striped">
                     <tr>
-                        <th style="width: 50px;"></th>
-
-                            
-                            <th>Código de encuesta</th>
-                            <th>Identificación encuesta</th>
-                            <th>Fecha de digitación</th>
-                            <th>Fecha de llegada</th>
-                            <th>Fecha de salida</th>
+                         
+                            <th>Cód. de encuesta</th>
+                            <th>ID de encuesta</th>
+                            <th style="width: 120px;">Fecha de digitación</th>
+                            <th style="width: 120px;">Fecha de llegada</th>
+                            <th style="width: 120px;">Fecha de salida</th>
                             <th>Encuestador</th>
                             <th style="width: 150px;">Estado</th>
                             <th style="width: 110px;">Última sección</th>
-                            <th style="width: 135px;"></th>
+                            <th style="width: 170px;"></th>
                         
                     </tr>
                     <tr dir-paginate="item in encuestas|filter:filtrarEncuesta|filter:filtrarCampo|filter:prop.search |itemsPerPage:10 as results" pagination-id="paginacion_encuestas" >
-                        <td>{{$index+1}}</td>
+                        
                             <td>{{item.codigoencuesta}}</td>
                             <td>{{item.codigogrupo}}</td>
-                            <td>{{item.fechadigitacion | date:'dd-MM-yyyy'}}</td>
-                            <td>{{item.fechallegada | date:'dd-MM-yyyy'}}</td>
-                            <td>{{item.fechasalida | date:'dd-MM-yyyy'}}</td>
+                            <td>{{item.fechadigitacion | date:'dd/MM/yyyy'}}</td>
+                            <td>{{item.fechallegada | date:'dd/MM/yyyy'}}</td>
+                            <td>{{item.fechasalida | date:'dd/MM/yyyy'}}</td>
                             <td>{{item.username}}</td>
                             <td>{{item.estado}}</td>
                             <td style="text-align: center;">{{item.ultima}}</td>
@@ -130,20 +104,18 @@
                             </td>
                     </tr>
                 </table>
-                <div class="alert alert-warning" role="alert" ng-show="encuestas.length == 0 || (encuestas|filter:prop.search).length == 0">No hay resultados disponibles <span ng-show="(encuestas|filter:prop.search).length == 0">para la búsqueda '{{prop.search}}'. <a href="#" ng-click="prop.search = ''">Presione aquí</a> para ver todos los resultados.</span></div>
+                
             </div>
             
         </div>
         <div class="row">
-          <div class="col-6" style="text-align:center;">
+          <div class="col-xs-12 text-center">
           <dir-pagination-controls pagination-id="paginacion_encuestas"  max-size="5" direction-links="true" boundary-links="true"></dir-pagination-controls>
           </div>
         </div>
-    </div>
     <div class='carga'>
 
     </div>
-</div>
 
 <?php $__env->stopSection(); ?>
 

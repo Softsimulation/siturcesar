@@ -145,7 +145,7 @@ angular.module('encuestas.datos_encuestado', [])
                 swal("Error", "No se realizo la solicitud, reinicie la página", "error");
             })
         } else {
-            swal("Error", "Formulario incompleto corrige los errores", "error");
+            swal("Error", "Formulario incompleto corrige los errores.", "error");
         }
 
     }
@@ -222,7 +222,7 @@ angular.module('encuestas.datos_encuestado', [])
                 
             }).catch(function () {
                 $("body").attr("class", "cbp-spmenu-push");
-                swal("Error", "No se realizo la solicitud, reinicie la página");
+                swal("Error", "Formulario incompleto corrige los errores.", "error");
             });
         }
     })

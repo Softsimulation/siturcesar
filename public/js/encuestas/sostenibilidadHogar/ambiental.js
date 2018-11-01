@@ -63,7 +63,7 @@ angular.module('ambiental', [])
     $scope.guardar = function(){
         
         if(!$scope.ambientalForm.$valid){
-            swal("Error","Corrija los errores","error");
+            swal("Error", "Formulario incompleto corrige los errores.", "error");
             return;
         }
         
@@ -78,7 +78,7 @@ angular.module('ambiental', [])
         sostenibilidadHogarServi.postGuardarAmbiental($scope.ambiental).then(function(data){
              $("body").attr("class", "cbp-spmenu-push");
             if(data.success){
-                swal("Éxito","Se ha guardado con exito","success");
+                
                 swal({
                      title: "Realizado",
                      text: "Se ha guardado satisfactoriamente la sección.",
@@ -88,7 +88,7 @@ angular.module('ambiental', [])
                   });
                   setTimeout(function () {
                       window.location.href = "/sostenibilidadhogares/economico/" + $scope.id;
-                    }, 1000);
+                    }, 500);
             }else{
                 $scope.errores = data.errores;
                 swal("Error","Corrija los errores","error")

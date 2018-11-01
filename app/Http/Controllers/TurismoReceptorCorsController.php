@@ -70,22 +70,14 @@ class TurismoReceptorCorsController extends Controller
 {
     public function __construct()
     {
-        
-        $this->middleware('auth');
-        $this->middleware('role:Admin');
-        if(Auth::user() != null){
-            $this->user = User::where('id',Auth::user()->id)->first(); 
-        }
-        
-        
-        
+        $this->user = User::resolveUser();
     }
     
     public function getInformaciondatoscrear(){
         
         //$grupos = Grupo_Viaje::orderBy('id')->get()->pluck('id');
         
-        $encuestadores = Digitador::with([ 'aspNetUser'=>function($q){$q->select('id','username');} ])->get();
+        $encuestadores = Digitador::with([ 'user'=>function($q){$q->select('id','username');} ])->get();
         
         $lugar_nacimiento = Opcion_Lugar::with(["opcionesLugaresConIdiomas" => function($q){
             $q->whereHas('idioma', function($p){
@@ -114,6 +106,8 @@ class TurismoReceptorCorsController extends Controller
         $departamentos = Departamento::where('pais_id',47)->select('id','nombre')->orderBy('nombre')->get();
         
         $lugares_aplicacion = Lugar_Aplicacion_Encuesta::all();
+        $all_departamentos = Departamento::all();
+        $all_municipios = Municipio::all();
         
         $result = [ 
             //'grupos' => $grupos, 
@@ -123,7 +117,9 @@ class TurismoReceptorCorsController extends Controller
             'motivos' => $motivos,
             'medicos' => $medicos,
             'departamentos' => $departamentos,
-            'lugares_aplicacion' => $lugares_aplicacion
+            'lugares_aplicacion' => $lugares_aplicacion,
+            'all_departamentos' => $all_departamentos,
+            'all_municipios' => $all_municipios
         ];
         
         return $result;
@@ -285,7 +281,7 @@ class TurismoReceptorCorsController extends Controller
             $visitante['codigo_grupo'] = $visitanteCargar->codigo_grupo;
             //$visitante['Grupo'] = $visitanteCargar->grupo_viaje_id;
             $visitante['Encuestador'] = $visitanteCargar->encuestador_creada;
-            $visitante['Encuestador_nombre'] = $visitanteCargar->digitadoreDigitada->aspNetUser->username;
+            $visitante['Encuestador_nombre'] = $visitanteCargar->digitadoreDigitada->user->username;
             $visitante['Llegada'] = $visitanteCargar->fecha_llegada;
             $visitante['Salida'] = $visitanteCargar->fecha_salida;
             $visitante['fechaAplicacion'] = $visitanteCargar->fecha_aplicacion;
@@ -468,7 +464,7 @@ class TurismoReceptorCorsController extends Controller
     
     
     public function getCargardatosseccionestancia($id = null){
-        $municipios = Municipio::where('departamento_id', 1396)->select('id','nombre')->get();
+        $municipios = Municipio::where('departamento_id', 1403)->select('id','nombre')->get();
         
         $alojamientos = Tipo_Alojamiento::with(["tiposAlojamientoConIdiomas" => function($q){
             $q->whereHas('idioma', function($p){
@@ -1288,6 +1284,7 @@ class TurismoReceptorCorsController extends Controller
         
         
         $otroElemento = null;
+        $respuestaElementos = array();
         if(in_array(12,$respuestaElementos)){
            $otroElemento= $sostenibilidad->actividadesSostenibilidad()->wherePivot('nombre','<>',null)->first()->pivot->nombre;
         }
@@ -1315,8 +1312,8 @@ class TurismoReceptorCorsController extends Controller
             'valoracion' => $valo,
             'otroElemento' => $otroElemento,
             'actividades'=>$actividades,
-            'flora'=>$flora,
-            'sost'=>$sost,
+            'flora'=> isset($flora) ? $flora : null,
+            'sost'=> isset($sost) ? $sost : null,
         ];
         
         return $retorno;
@@ -1338,7 +1335,7 @@ class TurismoReceptorCorsController extends Controller
 			'Recomienda' => 'required|exists:volveria_visitar,id',
 			'VecesVisitadas' => 'required',
 			'OtroElementos' => 'max:100',
-			'Evaluacion' => 'required',
+			'Evaluacion' => 'array',
     	],[
        		'Id.required' => 'Debe seleccionar el visitante a realizar la encuesta.',
        		'Id.exists' => 'El visitante seleccionado no se encuentra seleccionado en el sistema.',
@@ -1386,40 +1383,40 @@ class TurismoReceptorCorsController extends Controller
 		    }
 		
 		$sostenibilidad = Sostenibilidad_Visitante::find($request->Id);
-		    if($sostenibilidad == null){
-		        $sostenibilidad = new Sostenibilidad_Visitante;
-		        $sostenibilidad->visitante_id = $request->Id;
-		        $sostenibilidad->estado = true;
-		        $sostenibilidad->user_update = "Jhon";
-		        $sostenibilidad->user_create = "Jhon";
-		    }else{
-		        $sostenibilidad->actividadesSostenibilidad()->detach();
-		    }
+	    if($sostenibilidad == null){
+	        $sostenibilidad = new Sostenibilidad_Visitante;
+	        $sostenibilidad->visitante_id = $request->Id;
+	        $sostenibilidad->estado = true;
+	        $sostenibilidad->user_update = "Jhon";
+	        $sostenibilidad->user_create = "Jhon";
+	    }else{
+	        $sostenibilidad->actividadesSostenibilidad()->detach();
+	    }
+	    
+	    if(isset($request->Flora)){
+	        $sostenibilidad->es_informado = $request->Flora != 0? true:false;
+	    }
+	    
+	    if(isset($request->Sostenibilidad)){
+	        $sostenibilidad->trato_turista = $request->Sostenibilidad;
+	    }
+	
+	    $sostenibilidad->save();
+	    
+	    if(isset($request->Elementos)){
+	        foreach($request->Elementos as $el){
+	            
+	            if($el == 12){
+	                
+	                $sostenibilidad->actividadesSostenibilidad()->attach($el,['nombre'=>$request->OtroElementos]);
+	            }else{
+	                 $sostenibilidad->actividadesSostenibilidad()->attach($el);
+	            }
+	            
+	        }
+	        
+	    }
 		    
-		    if(isset($request->Elementos)){
-		        foreach($request->Elementos as $el){
-		            
-		            if($el == 12){
-		                
-		                $sostenibilidad->actividadesSostenibilidad()->attach($el,['nombre'=>$request->OtroElementos]);
-		            }else{
-		                 $sostenibilidad->actividadesSostenibilidad()->attach($el);
-		            }
-		            
-		        }
-		        
-		    }
-		    
-		    if(isset($request->Flora)){
-		        $sostenibilidad->es_informado = $request->Flora != 0? true:false;
-		    }
-		    
-		    if(isset($request->Sostenibilidad)){
-		        $sostenibilidad->trato_turista = $request->Sostenibilidad;
-		    }
-		
-		    $sostenibilidad->save();
-		
 	    /*$visitante->elementosRepresentativos()->attach($request->Elementos);
 	    if(in_array(11,$request->Elementos)){
 	        $visitante->otrosElementosRepresentativo()->save(new Otro_Elemento_Representativo(['nombre'=>$request->OtroElementos]));

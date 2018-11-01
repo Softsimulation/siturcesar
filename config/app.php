@@ -167,6 +167,12 @@ return [
         //models generator
         Krlove\EloquentModelGenerator\Provider\GeneratorServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        
+        //token auth
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+        
+        Chumper\Zipper\ZipperServiceProvider::class
+
     ],
 
     /*
@@ -221,6 +227,13 @@ return [
         
         'CsvReader' => Wilgucki\Csv\Facades\Reader::class,
         'CsvWriter' => Wilgucki\Csv\Facades\Writer::class,
+        
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+        
+        'Zipper' => Chumper\Zipper\Zipper::class
+
+
     ],
 
 ];

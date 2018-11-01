@@ -5,10 +5,7 @@
 @section ('estilos')
     <link href="{{asset('/css/ADM-dateTimePicker.min.css')}}" rel='stylesheet' type='text/css' />
     <style>
-        .panel-body {
-            max-height: 400px;
-            color: white;
-        }
+        
 
         .image-preview-input {
             position: relative;
@@ -39,16 +36,6 @@
             color: #FA787E;
         }
 
-        .carga {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.57) url(../../Content/Cargando.gif) 50% 50% no-repeat;
-        }
         /* Cuando el body tiene la clase 'loading' ocultamos la barra de navegacion */
         body.charging {
             overflow: hidden;
@@ -58,25 +45,24 @@
         body.charging .carga {
             display: block;
         }
-        .row {
-            margin-top: 1em;
-        }
         .ADMdtp-box.ADMdtp-calendar-container{
                 z-index: 1060!important;
         }
     </style>
 @endsection
 @section('controller','ng-controller="temporadasCtrl"')
+@section('titulo','Temporadas')
+@section('subtitulo','El siguiente listado cuenta con @{{temporadas.length}} registro(s)')
 @section('content')
 <div class="main-page" >
-    <h1 class="title1">Temporadas</h1><br />
     <div class="blank-page widget-shadow scroll" id="style-2 div1">
         
         <div class="row">
-            <div class="col-xs-12">
-                <input type="button" ng-click="pasarC()" class="btn btn-primary" value="Crear temporada" />
+            <div class="col-xs-12 text-center">
+                <input type="button" ng-click="pasarC()" class="btn btn-lg btn-success" value="Crear temporada" />
             </div>
         </div>
+        <br/>
         <div class="row">
             <div class="col-xs-12" style="overflow-x: auto;">
                 <table class="table table-hover" ng-show="temporadas.length > 0">
@@ -101,16 +87,16 @@
                                 <label ng-if="!item.Estado" >Desactivado</label>
                             </td>
                             <td style="width: 130px;">
-                                <button class="btn btn-default btn-sm" ng-click="pasarE(item)">
-                                    <span class="glyphicon glyphicon-pencil" title="Editar"></span>
+                                <button class="btn btn-default btn-xs" ng-click="pasarE(item)" title="Editar">
+                                    <span class="glyphicon glyphicon-pencil"></span>
                                 </button>
-                                <button class="btn btn-default btn-sm" ng-if="!item.Estado" ng-click="cambiarEstado(item)">
-                                    <span class="glyphicon glyphicon-ok" title="Activar"></span>
+                                <button class="btn btn-default btn-xs" ng-if="!item.Estado" ng-click="cambiarEstado(item)" title="Activar">
+                                    <span class="glyphicon glyphicon-ok"></span>
                                 </button>
-                                <button class="btn btn-default btn-sm" ng-if="item.Estado" ng-click="cambiarEstado(item)">
-                                    <span class="glyphicon glyphicon-remove" title="Desactivar"></span>
+                                <button class="btn btn-default btn-xs" ng-if="item.Estado" ng-click="cambiarEstado(item)" title="Desactivar">
+                                    <span class="glyphicon glyphicon-remove"></span>
                                 </button>
-                                <a ng-if="item.Estado" href="/temporada/ver/@{{item.id}}" title="Ver" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-eye-open"></span></a>
+                                <a ng-if="item.Estado" href="/temporada/ver/@{{item.id}}" title="Ver" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span></a>
                             </td>
                         </tr>
                     </tbody>
@@ -127,46 +113,45 @@
     </div>
 
     <!-- Modal crear temporada-->
-    <div class="modal fade" id="crearTemporada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="crearTemporada" tabindex="-1" role="dialog" aria-labelledby="labelModalCrearTemporada">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Agregar temporada</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="labelModalCrearTemporada">Agregar temporada</h4>
                 </div>
                 <form role="form" name="addForm" novalidate>
+                        
                         <div class="modal-body">
                             <div class="alert alert-danger" ng-if="errores != null">
                                 <p ng-repeat="error in errores" >
                                     -@{{error[0]}}
                                 </p>
                             </div>
-                
+                        <div class="alert alert-info">
+                            <p>Todos los campos en este formulario son requeridos.</p>
+                        </div>
                         <div class="row">
                             <div class="col-md-12 col-xs-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label" for="inputNombre"><span style="color:red;">*</span> Nombre en español de la temporada</label>
+                                <div class="form-group" ng-class="{'has-error':((addForm.$submitted || addForm.nombre.$touched) && addForm.nombre.$error.required)}">
+                                    <label class="control-label" for="inputNombre">Nombre en español de la temporada</label>
                                     <input type="text" class="form-control" name="nombre" id="inputNombre" placeholder="Ingrese nombre en español de la temporada" ng-model="temporada.Nombre" ng-required="true" />
-                                    <span class="messages" ng-show="addForm.$submitted || addForm.nombre.$touched">
-                                        <span ng-show="addForm.nombre.$error.required">* El campo es requerido.</span>
-                                    </span>
+                                    
                                 </div>
                             </div>
 
                             <div class="col-md-12 col-xs-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label" for="inputName"><span style="color:red;">*</span> Nombre en inglés de la temporada</label>
+                                <div class="form-group" ng-class="{'has-error':((addForm.$submitted || addForm.name.$touched) && addForm.name.$error.required)}">
+                                    <label class="control-label" for="inputName">Nombre en inglés de la temporada</label>
                                     <input type="text" class="form-control" name="name" id="inputName" placeholder="Ingrese nombre en inglés de la temporada" ng-model="temporada.Name" ng-required="true" />
-                                    <span class="messages" ng-show="addForm.$submitted || addForm.name.$touched">
-                                        <span ng-show="addForm.name.$error.required">* El campo es requerido.</span>
-                                    </span>
+                                    
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12 col-sm-12">
                                 <div class="form-group">
                                     
-                                        <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha inicial</label>
+                                        <label class="control-label" for="inputNombre">Fecha inicial</label>
                                         <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model="temporada.Fecha_ini" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha inicial"></adm-dtp>
                                 </div>
                             </div>
@@ -174,7 +159,7 @@
                             <div class="col-md-6 col-xs-12 col-sm-12">
                                 <div class="form-group">
                                    
-                                        <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha final</label>
+                                        <label class="control-label" for="inputNombre">Fecha final</label>
                                         <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model="temporada.Fecha_fin" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha final"></adm-dtp>
                                     
                                 </div>
@@ -184,7 +169,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" ng-click="guardar()" class="btn btn-primary">Crear</button>
+                        <button type="submit" ng-click="guardar()" class="btn btn-success">Guardar</button>
                     </div>
                 </form>
                 
@@ -193,12 +178,12 @@
     </div>
 
     <!-- Modal editar temporada-->
-    <div class="modal fade" id="editarTemporada" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="editarTemporada" tabindex="-1" role="dialog" aria-labelledby="labelModalEditarTemporada">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Agregar temporada</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="labelModalEditarTemporada">Editar temporada</h4>
                 </div>
                 <form role="form" name="editForm" novalidate>
                     <div class="modal-body">
@@ -207,31 +192,30 @@
                                     -@{{error[0]}}
                                 </p>
                         </div>
+                        <div class="alert alert-info">
+                            <p>Todos los campos en este formulario son requeridos.</p>
+                        </div>
                         <div class="row">
                             <div class="col-md-12 col-xs-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label" for="inputNombre"><span style="color:red;">*</span> Nombre de la temporada</label>
+                                <div class="form-group" ng-class="{'has-error':((editForm.$submitted || editForm.nombre.$touched) && editForm.nombre.$error.required)}">
+                                    <label class="control-label" for="inputNombre">Nombre de la temporada</label>
                                     <input type="text" ng-model="temporada.Nombre" class="form-control" name="nombre" id="inputNombre" placeholder="Ingrese nombre de la temporada" ng-model="temporada.Nombre" ng-required="true" />
-                                    <span class="messages" ng-show="editForm.$submitted || editForm.nombre.$touched">
-                                        <span ng-show="editForm.nombre.$error.required">* El campo es requerido.</span>
-                                    </span>
+                                    
                                 </div>
                             </div>
 
                             <div class="col-md-12 col-xs-12 col-sm-12">
-                                <div class="form-group">
-                                    <label class="control-label" for="inputName"><span style="color:red;">*</span> Nombre en inglés de la temporada</label>
+                                <div class="form-group" ng-class="{'has-error':((editForm.$submitted || editForm.name.$touched) && editForm.name.$error.required)}">
+                                    <label class="control-label" for="inputName">Nombre en inglés de la temporada</label>
                                     <input type="text" class="form-control" name="name" id="inputName" placeholder="Ingrese nombre en inglés de la temporada" ng-model="temporada.Name" ng-required="true" />
-                                    <span class="messages" ng-show="editForm.$submitted || editForm.name.$touched">
-                                        <span ng-show="editForm.name.$error.required">* El campo es requerido.</span>
-                                    </span>
+                                    
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12 col-sm-12">
                                 <div class="form-group">
                                     
-                                        <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha inicial</label>
+                                        <label class="control-label" for="inputNombre">Fecha inicial</label>
                                         <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model="temporada.Fecha_ini" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha inicial"></adm-dtp>
                                 </div>
                             </div>
@@ -239,7 +223,7 @@
                             <div class="col-md-6 col-xs-12 col-sm-12">
                                 <div class="form-group">
                                    
-                                        <label class="control-label" for="inputNombre"><span style="color:red;">*</span>Fecha final</label>
+                                        <label class="control-label" for="inputNombre">Fecha final</label>
                                         <adm-dtp name="fechaAplicacion" id="fechaAplicacion" ng-model="temporada.Fecha_fin" maxdate="'{{\Carbon\Carbon::now()->format('Y-m-d')}}'" options="optionFecha" placeholder="Ingrese fecha final"></adm-dtp>
                                     
                                 </div>
@@ -249,7 +233,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-                        <button type="submit" ng-click="editar()" class="btn btn-primary">Guardar cambio</button>
+                        <button type="submit" ng-click="editar()" class="btn btn-success">Guardar cambio</button>
                     </div>
                 </form>
 

@@ -56,6 +56,7 @@ angular.module('sostenibilidadPst.economico', [])
     $scope.guardar = function(){
         
         if( !$scope.datosForm.$valid || $scope.encuesta.clasificacionesProveedor.length == 0 || $scope.encuesta.aspectosSeleccion.length != 2 || $scope.encuesta.beneficiosEconomicos.length != 3 ){
+            swal("Error", "Formulario incompleto corrige los errores.", "error");
             return;
         }
         
@@ -76,7 +77,7 @@ angular.module('sostenibilidadPst.economico', [])
                 });
                 setTimeout(function () {
                     window.location = "/sostenibilidadpst/encuestas";
-                }, 1000);
+                }, 500);
             } else {
                 swal("Error", "Hay errores en el formulario corrigelos", "error");
                 $scope.errores = data.errores;

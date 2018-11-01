@@ -131,16 +131,13 @@ angular.module('destinos.crear', [])
         }
         fd.append('id', $scope.destino.id);
         fd.append('video', $("#video").val());
-        $("body").attr("class", "cbp-spmenu-push charging");
         destinosServi.postGuardarmultimedia(fd).then(function (data){
-            $("body").attr("class", "cbp-spmenu-push");
             if (data.success){
                 swal('¡Éxito!', 'Multimedia agregada con éxito.', 'success');
             }else{
                 $scope.errores = data.errores;
             }
         }).catch(function (){
-            $("body").attr("class", "cbp-spmenu-push");
             swal('Error', 'Error al ingresar los datos. Por favor, recargue la página.', 'error');
         });
     }

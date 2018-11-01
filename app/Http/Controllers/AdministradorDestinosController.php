@@ -234,20 +234,22 @@ class AdministradorDestinosController extends Controller
         
         if ($request->image != null){
             foreach($request->image as $key => $file){
-                $nombre = "imagen-".$key.".".pathinfo($file->getClientOriginalName())['extension'];
-                $multimedia_sitio = new Multimedia_Destino();
-                $multimedia_sitio->destino_id = $request->id;
-                $multimedia_sitio->ruta = "/multimedia/destinos/destino-".$request->id."/".$nombre;
-                $multimedia_sitio->tipo = false;
-                $multimedia_sitio->portada = false;
-                $multimedia_sitio->estado = true;
-                $multimedia_sitio->user_create = "Situr";
-                $multimedia_sitio->user_update = "Situr";
-                $multimedia_sitio->created_at = Carbon::now();
-                $multimedia_sitio->updated_at = Carbon::now();
-                $multimedia_sitio->save();
-                
-                Storage::disk('multimedia-destino')->put('destino-'.$request->id.'/'.$nombre, File::get($file));
+                if (!is_string($file)){
+                    $nombre = "imagen-".$key.".".pathinfo($file->getClientOriginalName())['extension'];
+                    $multimedia_sitio = new Multimedia_Destino();
+                    $multimedia_sitio->destino_id = $request->id;
+                    $multimedia_sitio->ruta = "/multimedia/destinos/destino-".$request->id."/".$nombre;
+                    $multimedia_sitio->tipo = false;
+                    $multimedia_sitio->portada = false;
+                    $multimedia_sitio->estado = true;
+                    $multimedia_sitio->user_create = "Situr";
+                    $multimedia_sitio->user_update = "Situr";
+                    $multimedia_sitio->created_at = Carbon::now();
+                    $multimedia_sitio->updated_at = Carbon::now();
+                    $multimedia_sitio->save();
+                    
+                    Storage::disk('multimedia-destino')->put('destino-'.$request->id.'/'.$nombre, File::get($file));
+                }
             }
         }
         
@@ -286,7 +288,7 @@ class AdministradorDestinosController extends Controller
             
             'id.required' => 'Se necesita el identificador del destino.',
             'id.exists' => 'El destino no se encuentra registrada en la base de datos.',
-            'id.numeric' => 'El identificador de la actividad debe ser un valor numérico.',
+            'id.numeric' => 'El identificador del destino debe ser un valor numérico.',
             
             'idIdioma.required' => 'Se necesita el identificador del idioma.',
             'idIdioma.numeric' => 'El identificador del idioma debe ser un valor numérico.',
@@ -326,7 +328,7 @@ class AdministradorDestinosController extends Controller
     
     public function postEditardatosgenerales (Request $request){
         $validator = \Validator::make($request->all(), [
-            'id' => 'required|exists:actividades|numeric',
+            'id' => 'required|exists:destinos|numeric',
             'tipo' => 'required|numeric|exists:tipo_destino,id',
             'pos' => 'required'
         ],[
