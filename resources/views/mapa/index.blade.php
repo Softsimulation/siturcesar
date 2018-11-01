@@ -22,15 +22,18 @@
             top:auto!important;
             bottom: 30px!important;
         }
+        header{
+            position:static;
+        }
     </style>
-
+<script src="{{asset('/js/plugins/angular.min.js')}}"></script>
 @endsection
 
 @section('content')
 
-  <div ng-app="AppMapa"  ng-controller="mapa"class="container-fluid" style="margin-top:10px; padding-left: 0; padding-right: 0;" >
-        <div class="row">
-            <div class="col-xs-12">
+    <div ng-app="AppMapa"  ng-controller="mapa"class="container-fluid" style="margin-top:10px; padding-left: 0; padding-right: 0;" >
+        <div class="row no-gutters">
+            <div class="col-12">
                 <div class="content-map">
                     <div class="st-filter-pane" ng-show="!showInfoEntidad">
                         <div class="panel-group" style="margin-bottom: 0;" id="accordion" role="tablist" aria-multiselectable="true">
@@ -104,7 +107,7 @@
                             <a href="@{{detalle.url}}" target="_blank" class="btn st-btn-detail-map">Ver más</a>
                         </div>
                     </div> 
-                    <ng-map zoom="8" center="[10.4113014,-74.4056612]" styles="[{featureType:'poi.school',elementType:'labels',stylers:[{visibility:'off'}]} , {featureType:'poi.business',elementType:'labels',stylers:[{visibility:'off'}]} , {featureType:'poi.attraction',elementType:'labels',stylers:[{visibility:'off'}]} ]" style="height: 700px" map-type-control="false" street-view-control="true" on-zoom_changed="zoomChanged()">
+                    <ng-map zoom="8" center="[10.4113014,-74.4056612]" styles="[{featureType:'poi.school',elementType:'labels',stylers:[{visibility:'off'}]} , {featureType:'poi.business',elementType:'labels',stylers:[{visibility:'off'}]} , {featureType:'poi.attraction',elementType:'labels',stylers:[{visibility:'off'}]} ]" style="height: 700px;width: 100%;" map-type-control="false" street-view-control="true" on-zoom_changed="zoomChanged()">
                         
                         <!--................................Marcadores..............................-->
                         <marker ng-repeat="dest in destinos | limitTo : limiteDest"
@@ -141,7 +144,7 @@
 
 
 @section('javascript')
-    <script src="{{asset('/js/plugins/angular.min.js')}}"></script>
+    
     <script src="{{asset('/js/plugins/angular-sanitize.js')}}"></script>
     <script src="{{asset('/js/plugins/select.min.js')}}"></script>
     <script src="{{asset('/js/plugins/checklist-model.js')}}"></script>
