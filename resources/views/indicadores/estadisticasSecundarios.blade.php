@@ -69,38 +69,45 @@
         <div class="panel-heading">
             <form name="form" >
                 <div class="row filtros" >
-                    <div class="col-xs-12 col-sm-6 col-md-5" >
-                        <div class="input-group">
-                            <label class="input-group-addon">Período </label>
-                            <select class="form-control" ng-model="filtro.year" ng-change="filtrarDatos()" ng-options="y.id as y.anio for y in periodos" requerid >
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-5">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputPeriodo">Período</span>
+                          </div>
+                          <select class="form-control" ng-model="filtro.year" id="inputPeriodo" ng-change="filtrarDatos()" ng-options="y.id as y.anio for y in periodos" required >
+                              <option value="" selected disabled>Seleccione un período</option>
                             </select>
                         </div>
+                        
                     </div>
                     
                     
-                    <div class="col-xs-12 col-sm-6 col-md-5" >
-                        <div class="input-group" id="selectGrafica" >
-                            <label class="input-group-addon">Gráfica </label>
-                            <div class="btn-group" style="width: 100%;">
-                                <button type="button" class="btn btn-default btn-select" style="height:34px;" >
-                                   <i class="material-icons">@{{graficaSelect.icono}}</i> @{{graficaSelect.nombre || " "}}
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-5">
+                        
+                        <div class="input-group mb-3" id="selectGrafica">
+                             <div class="input-group-prepend">
+                                <span class="input-group-text">Gráfica</span>
+                             </div>
+                             <p class="form-control d-flex align-items-middle"><i class="material-icons">@{{graficaSelect.icono}}</i> @{{graficaSelect.nombre || " "}}</p>
+                             <!--<input type="text" class="form-control" aria-label="Gráfica" readonly>-->
+                              <div class="input-group-append">
+                                <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  <span class="sr-only">Seleccionar gráfica</span>
                                 </button>
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <span class="caret "></span>
-                                </button>
-                                <ul class="dropdown-menu menuTipoGrafica" role="menu">
-                                    <li ng-repeat="item in indicador.graficas" ng-click="changeTipoGrafica(item)"  >
-                                        <a> <i class="material-icons">@{{item.icono}}</i> @{{item.nombre}}</a>
-                                    </li>
-                                </ul>
-                            </div>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                  <button type="button" class="dropdown-item d-flex align-items-middle" ng-repeat="item in indicador.graficas" ng-click="changeTipoGrafica(item)"><i class="material-icons">@{{item.icono}}</i> @{{item.nombre}}</button>
+                                  <button type="button" class="dropdown-item" ng-if="indicador.graficas.length == 0">No hay tipos de gráfica disponible</button>
+                                </div>
+                              </div>
                         </div>
+                        
+                        
                     </div> 
                     
-                    <div class="col-xs-12 col-md-2 menu-descraga" >
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-2 menu-descraga d-flex justify-content-center text-center" >
                     
                         <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                          <button class="btn btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown">
                               <i class="material-icons">cloud_download</i> Descargar
                           </button>
                           <ul class="dropdown-menu dropdown-menu-right">
