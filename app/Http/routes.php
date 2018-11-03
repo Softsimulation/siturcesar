@@ -20,6 +20,21 @@ Route::get('/', function () {
     
 });
 
+
+Route::get('/Mapa', 'MapaCtrl@getIndex');
+Route::get('/Mapa/getData', 'MapaCtrl@getData');
+
+Route::controller('/EstadisticasSecundarias','EstadisticasSecundariasCtrl');
+Route::controller('/MuestraMaestra','MuestraMaestraCtrl');
+
+Route::controller('/indicadores','IndicadoresCtrl');
+
+
+Route::get('/encuestaAdHoc/{encuesta}/registro', 'EncuestaDinamicaCtrl@getRegistrodeusuarios' );
+Route::get('/encuestaAdHoc/{encuesta}', 'EncuestaDinamicaCtrl@encuesta' );
+Route::get('/llenarEncuestaAdHoc/{idEncuesta}', 'EncuestaDinamicaCtrl@anonimos' );
+Route::controller('/encuesta','EncuestaDinamicaCtrl');
+
 Route::get('/QueHacer','HomeController@viewQueHacer');
 Route::get('/Experiencias','HomeController@viewExperiencias');
 Route::get('/PST','HomeController@viewPST');
@@ -63,6 +78,8 @@ Route::controller('/rutas', 'RutasTuristicasController');
 Route::controller('/eventos', 'EventosController');
 
 Route::controller('/proveedor', 'ProveedoresController');
+
+Route::controller('/quehacer', 'QueHacerController');
 
 Route::group(['middleware' => 'cors'], function(){
     
@@ -108,3 +125,14 @@ Route::group(['prefix' => 'publicaciones','middleware'=>'auth'], function () {
     Route::post('/EstadoPublicacion', 'PublicacionController@EstadoPublicacion' );
     
 });
+
+Route::controller('/bolsaEmpleo','BolsaEmpleoController');
+
+Route::controller('/promocionBolsaEmpleo','PublicoBolsaEmpleoController');
+
+Route::controller('/postulado','PostuladoController');
+
+
+Route::controller('/noticias','NoticiaController');
+Route::controller('/promocionNoticia','PublicoNoticiaController');
+
