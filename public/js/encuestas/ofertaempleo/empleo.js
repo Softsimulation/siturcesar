@@ -277,7 +277,26 @@ angular.module('empleo.Empleo', [])
         return 0
     }
 
-    $scope.validacion = function(){
+    $scope.vacantesSi = function(){
+        var vacante  = ( $scope.empleo.VacanteOperativo == null ? 0 : ($scope.empleo.VacanteOperativo  == undefined ? 0 :$scope.empleo.VacanteOperativo ));
+         var vacante2  = ( $scope.empleo.VacanteAdministrativo == null ? 0 : ($scope.empleo.VacanteAdministrativo  == undefined ? 0 :$scope.empleo.VacanteAdministrativo ));
+        var vacante3  = ( $scope.empleo.VacanteGerencial == null ? 0 : ($scope.empleo.VacanteGerencial  == undefined ? 0 :$scope.empleo.VacanteGerencial ));
+       
+        
+        if((  vacante +  vacante2  + vacante3   ) > 0){
+        return true;
+        }else{
+            if($scope.empleo != null){
+                $scope.empleo.Razon = {};
+                $scope.empleo.Razon.apertura = 0;
+                $scope.empleo.Razon.crecimiento = 0;
+                $scope.empleo.Razon.remplazo = 0;
+            }
+            return false;
+        }
+    }
+    
+     $scope.validacion = function(){
         
         
         return true;
@@ -301,7 +320,7 @@ angular.module('empleo.Empleo', [])
                         showConfirmButton: false
                     });
                     setTimeout(function () {
-                          window.location.href = "/ofertaempleo/empleadoscaracterizacion/" + $scope.id;;
+                         window.location.href = "/ofertaempleo/empleadoscaracterizacion/" + $scope.id;
                     }, 1000);
     
     
@@ -477,4 +496,115 @@ $scope.$watch('id', function () {
             swal("Error", "Formulario incompleto corrige los errores", "error")
         }
     }
+}])
+
+.controller('empleo', ['$scope', 'ofertaServi',function ($scope, ofertaServi){
+    $scope.empleo = {};
+    $scope.url = "";
+    $scope.dataTable = "<th>M</th> <th>F</th>"; 
+
+    $scope.$watch('id', function () {
+        $("body").attr("class", "cbp-spmenu-push charging")
+         ofertaServi.cargarDatosEmplomensual($scope.id).then(function (data) {
+                 $("body").attr("class", "cbp-spmenu-push")
+                $scope.empleo = data.empleo;
+                
+                $scope.url = data.url;
+                  
+        }).catch(function () {
+              $("body").attr("class", "cbp-spmenu-push")
+            swal("Error", "No se realizo la solicitud, reinicie la página");
+        })
+       
+        
+    });
+
+
+    
+
+    $scope.cargo = function(tipo){
+        if($scope.empleo.Sexo){
+        for(i = 0; i < $scope.empleo.Sexo.length ; i ++){
+            
+            if($scope.empleo.Sexo[i].tipo_cargo_id == tipo ){
+                
+                return $scope.empleo.Sexo[i];
+            }
+            
+        }
+        
+        obj = {};
+        obj.tipo_cargo_id = tipo;
+        obj.hombres = 0;
+        obj.mujeres = 0;
+        
+        $scope.empleo.Sexo.push(obj);
+        
+        return obj;
+
+        }        
+    }
+
+        $scope.vacantesSi = function(){
+        var vacante  = ( $scope.empleo.VacanteOperativo == null ? 0 : ($scope.empleo.VacanteOperativo  == undefined ? 0 :$scope.empleo.VacanteOperativo ));
+         var vacante2  = ( $scope.empleo.VacanteAdministrativo == null ? 0 : ($scope.empleo.VacanteAdministrativo  == undefined ? 0 :$scope.empleo.VacanteAdministrativo ));
+        var vacante3  = ( $scope.empleo.VacanteGerencial == null ? 0 : ($scope.empleo.VacanteGerencial  == undefined ? 0 :$scope.empleo.VacanteGerencial ));
+       
+        
+        if((  vacante +  vacante2  + vacante3   ) > 0){
+        return true;
+        }else{
+            if($scope.empleo != null){
+                $scope.empleo.Razon = {};
+                $scope.empleo.Razon.apertura = 0;
+                $scope.empleo.Razon.crecimiento = 0;
+                $scope.empleo.Razon.remplazo = 0;
+            }
+            return false;
+        }
+    }
+
+     $scope.validacion = function(){
+        
+        
+        return true;
+    }
+    
+        
+    $scope.guardar = function () {
+        $scope.empleo.Encuesta = $scope.id;
+        if ($scope.empleoForm.$valid && $scope.validacion()) {
+            
+            $("body").attr("class", "cbp-spmenu-push charging")
+            
+               ofertaServi.guardarEmpleo($scope.empleo).then(function (data) {
+                $("body").attr("class", "cbp-spmenu-push");
+                if (data.success == true) {
+                    swal({
+                        title: "Realizado",
+                        text: "Se ha guardado satisfactoriamente la sección.",
+                        type: "success",
+                        timer: 1000,
+                        showConfirmButton: false
+                    });
+                    setTimeout(function () {
+                          window.location.href = data.ruta;
+                    }, 1000);
+    
+    
+                } else {
+                    swal("Error", "Por favor corrija los errores", "error");
+                    $scope.errores = data.errores;
+                }
+            }).catch(function () {
+                $("body").attr("class", "cbp-spmenu-push");
+                swal("Error", "No se realizo la solicitud, reinicie la página");
+            })
+            
+            
+        } else {
+            swal("Error", "Formulario incompleto corrige los errores", "error")
+        }
+    }
+
 }])
