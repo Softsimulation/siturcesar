@@ -232,7 +232,7 @@
                                 <td><input type="number" class="form-control" ng-model="grupo.Menores15No" ng-change="calcular()" /></td>
                             </tr>
                             <tr style="border-bottom: .5px solid lightgray">
-                                <td>Personas del Magdalena</td>
+                                <td>Personas del Cesar</td>
                                 <td><input type="number" class="form-control" ng-model="grupo.PersonasMag" ng-change="calcular()" /></td>
                             </tr>
                             <tr style="border-bottom: .5px solid lightgray">

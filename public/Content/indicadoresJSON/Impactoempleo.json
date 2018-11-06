@@ -243,7 +243,7 @@
         "periodos": [
             {
               "nombre": "2016",
-              "descripcion" :  "En general el sector turístico del departamento del Magdalena presentó una tasa de permanencia del 87%. Se observa una caída importante en el mes de julio, debido a la disminución en la contratación de alojamiento en este mes. En general el sector brinda oportunidades de empleo que son  muy  estables  aunque  con  salarios  relativamente  bajos,  dado  el  nivel  de  educación  exigido,  pero  a  medida  que  los  niveles  de  educación  aumentan  en  el  tipo  de  cargo,  los  salarios  se  comportarán de la misma forma.",
+              "descripcion" :  "En general el sector turístico del departamento del Cesar presentó una tasa de permanencia del 87%. Se observa una caída importante en el mes de julio, debido a la disminución en la contratación de alojamiento en este mes. En general el sector brinda oportunidades de empleo que son  muy  estables  aunque  con  salarios  relativamente  bajos,  dado  el  nivel  de  educación  exigido,  pero  a  medida  que  los  niveles  de  educación  aumentan  en  el  tipo  de  cargo,  los  salarios  se  comportarán de la misma forma.",
                 "datos": {
 	               "cols":[ {"label":"Series","type":"string"},
 					        {"label":"Número de vacantes","type":"number"}
