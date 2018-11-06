@@ -54,7 +54,7 @@
         
         <div class="panel panel-success">
             <div class="panel-heading p3">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> P.21 ¿Cree que el turismo contribuirá, a largo plazo, a mejorar la situación económica de los habitantes de Cesar?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> P.21 ¿Cree que el turismo contribuirá, a largo plazo, a mejorar la situación económica de los habitantes del Cesar?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única</b></div>
             <div class="panel-body">
@@ -182,7 +182,7 @@
         
         <div class="panel panel-success">
             <div class="panel-heading p3">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> P.23 De los siguientes beneficios económicos que se generan por el turismo, ¿Cuáles cree que han mejorado o desmejorado en Cesar?</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> P.23 De los siguientes beneficios económicos que se generan por el turismo, ¿Cuáles cree que han mejorado o desmejorado en el Cesar?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta con selección única para la calificación</b></div>
             <div class="panel-body">
