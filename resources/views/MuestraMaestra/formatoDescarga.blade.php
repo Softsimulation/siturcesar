@@ -19,7 +19,7 @@
        </tr>
        <tr>
            <td colspan="4" >DEPARTAMENTO:</td>
-           <td colspan="4" >Magdalena</td>
+           <td colspan="4" >Cesar</td>
        </tr>
        <tr>
            <td colspan="4" >MUNICIPIO:</td>
