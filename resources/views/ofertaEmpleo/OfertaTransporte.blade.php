@@ -1,6 +1,6 @@
 @extends('layout._ofertaEmpleoLayaout')
 
-@section('title', 'Oferta de transporte :: SITUR Magdalena')
+@section('title', 'Oferta de transporte :: SITUR Cesar')
 
 @section('estilos')
     <style>

@@ -1,7 +1,7 @@
 <header class="row no-gutters">
 	<div class="brand col-md-3">
 		<a href="/">
-			<img src="/img/brand/96.png" alt="Logo de SITUR Magdalena">
+			<img src="/img/brand/96.png" alt="Logo de SITUR Cesar">
 			<h1 class="sr-only">SITUR Cesar</h1>
 		</a>
 		

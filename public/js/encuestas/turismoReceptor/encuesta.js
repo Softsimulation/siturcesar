@@ -9,9 +9,9 @@ app.controller('seccionCtrl', ['$http', '$scope', function ($http, $scope) {
         { id: 2, url: 'SeccionEstanciayvisitados', nombre: 'Duración de la estancia y lugares visitados' },
         { id: 3, url: 'SeccionTransporte', nombre: 'Transporte utilizado' },
         { id: 4, url: 'SeccionViajeGrupo', nombre: 'Viaje en grupo' },
-        { id: 5, url: 'Gastos', nombre: 'Gastos de viaje antes y durante el viaje al departamento del Atlántico' },
-        { id: 6, url: 'percepcionviaje', nombre: 'Percepción del viaje al departamento del Atlántico' },
-        { id: 7, url: 'FuentesInformacionVisitante', nombre: 'Como se enteran los visitantes sobre el departamento del Atlántico' }
+        { id: 5, url: 'Gastos', nombre: 'Gastos de viaje antes y durante el viaje al departamento del Cesar' },
+        { id: 6, url: 'percepcionviaje', nombre: 'Percepción del viaje al departamento del Cesar' },
+        { id: 7, url: 'FuentesInformacionVisitante', nombre: 'Como se enteran los visitantes sobre el departamento del Cesar' }
     ];
     var idSeccion = window.location.href.substr(window.location.href.lastIndexOf('/') + 1);
     if (idSeccion != "DatosEncuestados") {

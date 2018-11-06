@@ -136,7 +136,7 @@
         <div ng-if="transporte.Mover == 6" class="panel panel-success">
             <div class="panel-heading">
                 <!-- Nombre de la empresa de transporte
-                <h3 class="panel-title"><b> ¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizados desde una ciudad de Colombia al Atlántico?</b></h3>
+                <h3 class="panel-title"><b> ¿Cuál es el nombre de la empresa de transporte terrestre de pasajeros utilizados desde una ciudad de Colombia al Cesar?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta abierta</b></div>
             <div class="panel-body">
