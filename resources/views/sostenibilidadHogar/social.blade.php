@@ -55,7 +55,7 @@
         <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b>P1. ¿Le agrada la llegada de turistas a Cesar?</b></h3>
+                    <h3 class="panel-title"><b>P1. ¿Le agrada la llegada de turistas al Cesar?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Pregunta con selección única</b></div>
                 <div class="panel-body">
@@ -86,7 +86,7 @@
             
         <div class="panel panel-success">
             <div class="panel-heading p3">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> P.2 En una escala de 1 a 10, donde 1 es Muy Malo y 10 Excelente. ¿Cómo califica el trato entre los habitantes de Cesar y los turistas? </b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> P.2 En una escala de 1 a 10, donde 1 es Muy Malo y 10 Excelente. ¿Cómo califica el trato entre los habitantes del Cesar y los turistas? </b></h3>
             </div>
             <div class="panel-footer"><b>Respuesta única</b></div>
             <div class="panel-body">
@@ -117,7 +117,7 @@
         <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P3. Califique como alto, medio y bajo su nivel de conocimiento de los servicios, productos y atractivos culturales que ofrece Cesar</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P3. Califique como alto, medio y bajo su nivel de conocimiento de los servicios, productos y atractivos culturales que ofrece el departamento del Cesar</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta única</b></div>
                 <div class="panel-body">
@@ -140,7 +140,7 @@
         <div class="panel panel-success" ng-show="social.criterios_calificacion_id!=4 && social.criterios_calificacion_id != undefined">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.3.1. ¿Ofrece información a los visitantes sobre los servicios, productos, atractivos turísticos y culturales que hay en Cesar?</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.3.1. ¿Ofrece información a los visitantes sobre los servicios, productos, atractivos turísticos y culturales que hay en el Cesar?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta única</b></div>
                 <div class="panel-body">
@@ -169,7 +169,7 @@
         <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.4 ¿Ha sido parte de alguna asociación o gremio que ofrezca servicios turísticos en Cesar?</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.4 ¿Ha sido parte de alguna asociación o gremio que ofrezca servicios turísticos en el Cesar?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta única</b></div>
                 <div class="panel-body">
@@ -221,7 +221,7 @@
          
          <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.6 De las siguientes situaciones en función del turismo sostenible, ¿Cuáles considera que representan  un riesgo  alto, medio  o bajo en  Cesar?</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.6 De las siguientes situaciones en función del turismo sostenible, ¿Cuáles considera que representan  un riesgo  alto, medio  o bajo en el Cesar?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta múltiple</b></div>
                 <div class="panel-body">
@@ -289,7 +289,7 @@
         <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b>P8. ¿Cree que la llegada de turistas ha incidido en la calidad de vida de Cesar?</b></h3>
+                    <h3 class="panel-title"><b>P8. ¿Cree que la llegada de turistas ha incidido en la calidad de vida del Cesar?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta  única </b></div>
                 <div class="panel-body">
@@ -320,7 +320,7 @@
         
         <div class="panel panel-success" ng-show="social.cambian_turistas==  true">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.8.1 De los siguientes factores de calidad de vida, ¿Cuáles cree que han mejorado, desmejorado o permanecen igual en Cesar, como consecuencia del turismo?</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.8.1 De los siguientes factores de calidad de vida, ¿Cuáles cree que han mejorado, desmejorado o permanecen igual en el Cesar, como consecuencia del turismo?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta múltiple</b></div>
                 <div class="panel-body">
@@ -395,7 +395,7 @@
             
             <div class="panel panel-success" ng-show="social.conservacion_patrimonio_id== true">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.9.1 De las siguientes situaciones en función del turismo sostenible, ¿Cuáles considera que representan  un riesgo  alto, medio  o bajo en  Cesar</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.9.1 De las siguientes situaciones en función del turismo sostenible, ¿Cuáles considera que representan  un riesgo  alto, medio  o bajo en el Cesar</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta múltiple</b></div>
                 <div class="panel-body">
@@ -440,7 +440,7 @@
          <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.10 ¿Posee viviendas, distintas a la vivienda donde reside, que estén siendo destinadas para turismo en  Cesar?</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.10 ¿Posee viviendas, distintas a la vivienda donde reside, que estén siendo destinadas para turismo en el Cesar?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta única</b></div>
                 <div class="panel-body">
@@ -542,7 +542,7 @@
          
         <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b>P.11 De los siguientes factores de identidad cultural, ¿En cuáles percibe que el turismo ha tenido un efecto positivo o negativo en Cesar</b></h3>
+                    <h3 class="panel-title"><b>P.11 De los siguientes factores de identidad cultural, ¿En cuáles percibe que el turismo ha tenido un efecto positivo o negativo en el Cesar</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta múltiple</b></div>
                 <div class="panel-body">
@@ -595,7 +595,7 @@
          <div class="panel panel-success">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.11.1 Califique como positivo o negativo el efecto que ha tenido el turismo en las costumbres y tradiciones en Cesar</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.11.1 Califique como positivo o negativo el efecto que ha tenido el turismo en las costumbres y tradiciones en el Cesar</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta única</b></div>
                 <div class="panel-body">
@@ -623,7 +623,7 @@
          
         <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.12 De los siguientes beneficios socioculturales que se generan por el turismo, ¿Cuáles cree que han mejorado, desmejorado o permanecen igual en Cesar</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.12 De los siguientes beneficios socioculturales que se generan por el turismo, ¿Cuáles cree que han mejorado, desmejorado o permanecen igual en el Cesar</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta múltiple</b></div>
                 <div class="panel-body">
