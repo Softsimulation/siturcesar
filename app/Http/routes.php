@@ -20,7 +20,8 @@ Route::get('/', function () {
     
 });
 
-
+Route::controller('/promocionInforme','PublicoInformeController');
+Route::controller('/informes','InformesCtrl');
 Route::get('/Mapa', 'MapaCtrl@getIndex');
 Route::get('/Mapa/getData', 'MapaCtrl@getData');
 
