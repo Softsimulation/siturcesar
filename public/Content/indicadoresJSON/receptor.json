@@ -11,7 +11,7 @@
         "periodos":[
               {
                  "nombre": "2016",
-                 "descripcion": "La duración promedio de la estancia en el departamento del Magdalena, oscila entre las 4 y 5 noches.",
+                 "descripcion": "La duración promedio de la estancia en el departamento del Cesar, oscila entre las 4 y 5 noches.",
                  "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Duración media de la estancia","type":"number"} 
@@ -109,7 +109,7 @@
               },
                {
                 "nombre": "Marzo : 2016",
-                "descripcion": "En el periodo de Febrero - Marzo del 2016, se evidencia que la mayoría de turistas llegaron al Magdalena por medio de transporte aéreo con un 37,4% del total de encuestados, seguido del 28,1% por transporte terrestre de pasajeros,  y el 16,5% por vehículo propio. Aproximadamente el 18% del total de encuestados usó el vehículo de amigos o familiares o, alquiler de vehículo, transporte marítimo, transporte terrestre de excursiones u otro tipo de transporte.",
+                "descripcion": "En el periodo de Febrero - Marzo del 2016, se evidencia que la mayoría de turistas llegaron al Cesar por medio de transporte aéreo con un 37,4% del total de encuestados, seguido del 28,1% por transporte terrestre de pasajeros,  y el 16,5% por vehículo propio. Aproximadamente el 18% del total de encuestados usó el vehículo de amigos o familiares o, alquiler de vehículo, transporte marítimo, transporte terrestre de excursiones u otro tipo de transporte.",
                  "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Medio de transporte","type":"number"} 
@@ -189,7 +189,7 @@
               },
                {
                 "nombre": "Julio : 2016",
-                "descripcion": "Durante el periodo de Julio de 2016, el medio de transporte más utilizado por los viajeros receptores al Magdalena fue el transporte aéreo, con una participación del 49,6%; seguido del 27,1% que  tomaron transporte terrestre de pasajeros y el 10,8%  que usó vehículo propio. El 15% aproximadamente, utilizaron  vehículo de familiares, transporte marítimo, alquiler de vehículo u otro tipo de transporte. ",
+                "descripcion": "Durante el periodo de Julio de 2016, el medio de transporte más utilizado por los viajeros receptores al Cesar fue el transporte aéreo, con una participación del 49,6%; seguido del 27,1% que  tomaron transporte terrestre de pasajeros y el 10,8%  que usó vehículo propio. El 15% aproximadamente, utilizaron  vehículo de familiares, transporte marítimo, alquiler de vehículo u otro tipo de transporte. ",
                  "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Medio de transporte","type":"number"} 
@@ -239,9 +239,9 @@
 										{"c": [{ "v": "Artista de espectáculo (concierto, obra de teatro, danza, etc,.)"},{"v":0.13} ]},					
 										{"c": [{ "v": "Competir en actividad deportiva"},{"v":0.09} ]},					
 										{"c": [{ "v": "Investigación académica o científica"},{"v":0.04} ]},					
-										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Magdalena o como independiente"},{"v":0.04} ]},					
-										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Magdalena o como independiente"},{"v":0.58} ]},					
-										{"c": [{ "v": "Empleado en una empresa ubicada en el Magdalena"},{"v":0.00} ]},					
+										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Cesar o como independiente"},{"v":0.04} ]},					
+										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Cesar o como independiente"},{"v":0.58} ]},					
+										{"c": [{ "v": "Empleado en una empresa ubicada en el Cesar"},{"v":0.00} ]},					
 										{"c": [{ "v": "Otro"},{"v":0.27} ]}				    
 								   ]
 						} 
@@ -268,9 +268,9 @@
 										{"c": [{ "v": "Artista de espectáculo (concierto, obra de teatro, danza, etc,.)"},{"v":0.00} ]},					
 										{"c": [{ "v": "Competir en actividad deportiva"},{"v":0.00} ]},					
 										{"c": [{ "v": "Investigación académica o científica"},{"v":0.00} ]},					
-										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Magdalena o como independiente"},{"v":0.07} ]},					
-										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Magdalena o como independiente"},{"v":0.88} ]},					
-										{"c": [{ "v": "Empleado en una empresa ubicada en el Magdalena"},{"v":0.00} ]},					
+										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Cesar o como independiente"},{"v":0.07} ]},					
+										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Cesar o como independiente"},{"v":0.88} ]},					
+										{"c": [{ "v": "Empleado en una empresa ubicada en el Cesar"},{"v":0.00} ]},					
 										{"c": [{ "v": "Otro"},{"v":0.88} ]}									    
 								   ]
 						} 
@@ -297,9 +297,9 @@
 										{"c": [{ "v": "Artista de espectáculo (concierto, obra de teatro, danza, etc,.)"},{"v":0.00} ]},					
 										{"c": [{ "v": "Competir en actividad deportiva"},{"v":0.04} ]},					
 										{"c": [{ "v": "Investigación académica o científica"},{"v":0.00} ]},					
-										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Magdalena o como independiente"},{"v":0.13} ]},					
-										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Magdalena o como independiente"},{"v":0.55} ]},					
-										{"c": [{ "v": "Empleado en una empresa ubicada en el Magdalena"},{"v":0.00} ]},					
+										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Cesar o como independiente"},{"v":0.13} ]},					
+										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Cesar o como independiente"},{"v":0.55} ]},					
+										{"c": [{ "v": "Empleado en una empresa ubicada en el Cesar"},{"v":0.00} ]},					
 										{"c": [{ "v": "Otro"},{"v":0.34} ]}	    
 								   ]
 						} 
@@ -326,9 +326,9 @@
 										{"c": [{ "v": "Artista de espectáculo (concierto, obra de teatro, danza, etc,.)"},{"v":0.25} ]},					
 										{"c": [{ "v": "Competir en actividad deportiva"},{"v":0.00} ]},					
 										{"c": [{ "v": "Investigación académica o científica"},{"v":0.25} ]},					
-										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Magdalena o como independiente"},{"v":0.00} ]},					
-										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Magdalena o como independiente"},{"v":1.36} ]},					
-										{"c": [{ "v": "Empleado en una empresa ubicada en el Magdalena"},{"v":0.00} ]},					
+										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Cesar o como independiente"},{"v":0.00} ]},					
+										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Cesar o como independiente"},{"v":1.36} ]},					
+										{"c": [{ "v": "Empleado en una empresa ubicada en el Cesar"},{"v":0.00} ]},					
 										{"c": [{ "v": "Otro"},{"v":0.00} ]}		    
 								   ]
 						} 
@@ -384,9 +384,9 @@
 										{"c": [{ "v": "Artista de espectáculo (concierto, obra de teatro, danza, etc,.)"},{"v":0.00} ]},					
 										{"c": [{ "v": "Competir en actividad deportiva"},{"v":0.00} ]},					
 										{"c": [{ "v": "Investigación académica o científica"},{"v":0.00} ]},					
-										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Magdalena o como independiente"},{"v":0.00} ]},					
+										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Cesar o como independiente"},{"v":0.00} ]},					
 										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Magdalena o como independiente"},{"v":1.07} ]},					
-										{"c": [{ "v": "Empleado en una empresa ubicada en el Magdalena"},{"v":0.00} ]},					
+										{"c": [{ "v": "Empleado en una empresa ubicada en el Cesar"},{"v":0.00} ]},					
 										{"c": [{ "v": "Otro"},{"v":0.00} ]}	    
 								   ]
 						} 
@@ -413,9 +413,9 @@
 										{"c": [{ "v": "Artista de espectáculo (concierto, obra de teatro, danza, etc,.)"},{"v":0.26} ]},					
 										{"c": [{ "v": "Competir en actividad deportiva"},{"v":0.05} ]},					
 										{"c": [{ "v": "Investigación académica o científica"},{"v":0.00} ]},					
-										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Magdalena o como independiente"},{"v":0.05} ]},					
-										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Magdalena o como independiente"},{"v":1.15} ]},					
-										{"c": [{ "v": "Empleado en una empresa ubicada en el Magdalena"},{"v":0.00} ]},					
+										{"c": [{ "v": "Comprar bienes o servicios para una empresa que no es del Cesar o como independiente"},{"v":0.05} ]},					
+										{"c": [{ "v": "Vender bienes o prestar servicios como representante de empresa que no es del Cesar o como independiente"},{"v":1.15} ]},					
+										{"c": [{ "v": "Empleado en una empresa ubicada en el Cesar"},{"v":0.00} ]},					
 										{"c": [{ "v": "Otro"},{"v":0.52} ]}    
 								   ]
 						} 
@@ -434,7 +434,7 @@
          "periodos":[
               {
                 "nombre": "2016",
-                "descripcion":  "Muestra la evolución del tamaño medio del grupo de viaje de los turistas que visitaron el Magdalena, asumiendo que en gran parte el comportamiento obedece a la composición del grupo familiar.",
+                "descripcion":  "Muestra la evolución del tamaño medio del grupo de viaje de los turistas que visitaron el Cesar, asumiendo que en gran parte el comportamiento obedece a la composición del grupo familiar.",
                  "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Tamaño medio de los grupos de viaje","type":"number"} 

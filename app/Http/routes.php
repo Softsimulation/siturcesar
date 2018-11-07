@@ -108,6 +108,24 @@ Route::get('/detalle', function () {
     
 });
 
+Route::group(['prefix' => 'publicaciones','middleware'=>'auth'], function () {
+    
+    Route::get('/listadonuevas', 'PublicacionController@publicaciones');
+    Route::get('/crear', 'PublicacionController@CrearPublicacion');
+    Route::get('/editar/{id}', 'PublicacionController@EditarPublicacion');
+    Route::get('/listado', 'PublicacionController@ListadoPublicaciones');
+    Route::get('/listadoadmin', 'PublicacionController@ListadoPublicacionesAdmin');
+    Route::get('/getPublicacion', 'PublicacionController@getPublicacion');
+    Route::get('/getListadoPublico', 'PublicacionController@getListadoPublico');
+    Route::get('/getListado', 'PublicacionController@getListado');
+    Route::post('/guardarPublicacion', 'PublicacionController@guardarPublicacion' );
+    Route::post('/editPublicacion', 'PublicacionController@editPublicacion' );
+    Route::post('/eliminarPublicacion', 'PublicacionController@eliminarPublicacion' );
+    Route::post('/cambiarEstadoPublicacion', 'PublicacionController@cambiarEstadoPublicacion' );
+    Route::get('/getPublicacionEdit/{id}', 'PublicacionController@getPublicacionEdit');
+    Route::post('/EstadoPublicacion', 'PublicacionController@EstadoPublicacion' );
+    
+});
 
 Route::controller('/bolsaEmpleo','BolsaEmpleoController');
 

@@ -1,7 +1,7 @@
 
 @extends('layout._encuestaInternoLayout')
 
-@section('Title','Duración de la estancia y lugares visitados - Encuesta interno y emisor :: SITUR Atlántico')
+@section('Title','Duración de la estancia y lugares visitados - Encuesta interno y emisor :: SITUR Cesar')
 
 
 @section('estilos')
@@ -67,8 +67,8 @@
 
               <div class="panel panel-success">
             <div class="panel-heading">
-                <!-- P2. ¿Que actividades realizó en el Magdalena?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Que actividades realizó en el Atlántico?</b></h3>
+                <!-- P2. ¿Que actividades realizó en el Cesar?-->
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> ¿Que actividades realizó en el Cesar?</b></h3>
             </div>
             <div class="panel-footer"><b>Pregunta de selección múltiple</b></div>
             <div class="panel-body">

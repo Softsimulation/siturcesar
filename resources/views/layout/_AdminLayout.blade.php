@@ -145,14 +145,34 @@
         					    <li role="none"><a role="menuitem" href="{{asset('administradorrutas')}}">Administrar rutas turísticas</a></li>
                             </ul>
                         </li>
+                           <li>
+                            <a role="menuitem" href="{{asset('bolsaEmpleo/vacantes')}}">Bolsa de empleo</a>
+                        </li>
                         <li>
                             <a role="menuitem" href="{{asset('turismoreceptor/listadoencuestas')}}">Turismo receptor</a>
                         </li>
                         <li>
                             <a role="menuitem" href="{{asset('temporada')}}">Turismo interno y emisor</a>
                         </li>
-                        <li>
-                            <a role="menuitem" href="{{asset('ofertaempleo/listadoproveedores')}}">Oferta y empleo</a>
+                       
+                       
+                           <li>
+                            <a role="menuitem" href="#menuSostenibilidad" aria-haspopup="true" aria-expanded="false">Oferta y empleo</a>
+                            <ul role="menu" id="menuSostenibilidad" aria-label="Sostenibilidad">
+                                <li role="none">
+                                    <a role="menuitem" href="{{asset('ofertaempleo/listadoproveedores')}}">Listado de proveedores</a>
+                                </li>
+                                <li role="none">
+                                    <a role="menuitem" href="{{asset('ofertaempleo/listadoproveedoresrnt')}}">Activar proveedores</a>
+                                </li>
+                                  <li role="none">
+                                    <a role="menuitem" href="{{asset('importarRnt')}}">Importar RNT</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                          <li>
+                            <a role="menuitem" href="{{asset('MuestraMaestra/periodos')}}">Muestra Maestra</a>
                         </li>
                         <li>
                             <a role="menuitem" href="#menuSostenibilidad" aria-haspopup="true" aria-expanded="false">Sostenibilidad</a>
@@ -160,8 +180,24 @@
                                 <li role="none">
                                     <a role="menuitem" href="{{asset('sostenibilidadhogares/encuestas')}}">Hogares</a>
                                 </li>
+                                <li role="none">
+                                    <a role="menuitem" href="{{asset('sostenibilidadpst/encuestas')}}">PST</a>
+                                </li>
                             </ul>
                         </li>
+                         <li>
+                            <a role="menuitem" href="{{asset('encuesta/listado')}}">Encuestas personalizadas</a>
+                        </li>
+                          <li>
+                            <a role="menuitem" href="{{asset('publicaciones/listadoadmin')}}">Biblioteca Digital</a>
+                        </li>
+                          <li>
+                            <a role="menuitem" href="{{asset('noticias/listadonoticias')}}">Noticias</a>
+                        </li>
+                          <li>
+                            <a role="menuitem" href="{{asset('EstadisticasSecundarias/configuracion')}}">Estadísticas secundarias</a>
+                        </li>
+                        
                         <li>
                             <a role="menuitem" href="{{asset('exportacion')}}">Exportación</a>
                         </li>
