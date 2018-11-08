@@ -1,6 +1,6 @@
  @extends('layout._ofertaEmpleoLayaout')
 
-@section('Title','Empleo Mensual :: SITUR Magdalena')
+@section('Title','Empleo Mensual :: SITUR Cesar')
 
 
 @section('estilos')

@@ -11,7 +11,7 @@
          "periodos":[
               {
                  "nombre": "2016",
-                 "descripcion" : "Según el registro nacional de Turismo RNT, estas son las cantidades de prestadores de servicios turísticos del departamento del Magdalena, desglosado por categoría de actividad económica.",
+                 "descripcion" : "Según el registro nacional de Turismo RNT, estas son las cantidades de prestadores de servicios turísticos del departamento del Cesar, desglosado por categoría de actividad económica.",
                  "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Número de establecimientos alojamiento","type":"number"} 
@@ -44,7 +44,7 @@
 							"rows":[
 									  {"c": [{ "v": "A residentes en Colombia excluyendo Magdalenenses"},{"v":52.5} ]},
 									  {"c": [{ "v": "A residentes en el extranjero"},{"v":44.2} ]},
-									  {"c": [{ "v": "A residentes del Magdalena"},{"v":3.3} ]}
+									  {"c": [{ "v": "A residentes del Cesar"},{"v":3.3} ]}
 									]
 						} 
               },
@@ -58,7 +58,7 @@
 							"rows":[
 									  {"c": [{ "v": "Sevicios prestados a residentes en Colombia excluyendo Magdalenenses"},{"v":52.9} ]},
 									  {"c": [{ "v": "Servicios prestados a residentes en el extranjero"},{"v":43.7} ]},
-									  {"c": [{ "v": "Servicios prestados a residentes del Magdalena"},{"v":3.4} ]}
+									  {"c": [{ "v": "Servicios prestados a residentes del Cesar"},{"v":3.4} ]}
 									]
 						} 
               },
@@ -72,7 +72,7 @@
 							"rows":[
 									  {"c": [{ "v": "Sevicios prestados a residentes en Colombia excluyendo Magdalenenses"},{"v":53.2} ]},
 									  {"c": [{ "v": "Servicios prestados a residentes en el extranjero"},{"v":43.1} ]},
-									  {"c": [{ "v": "Servicios prestados a residentes del Magdalena"},{"v":3.7} ]}
+									  {"c": [{ "v": "Servicios prestados a residentes del Cesar"},{"v":3.7} ]}
 									]
 						} 
               },
@@ -86,7 +86,7 @@
 							"rows":[
 									  {"c": [{ "v": "Sevicios prestados a residentes en Colombia excluyendo Magdalenenses"},{"v":55} ]},
 									  {"c": [{ "v": "Servicios prestados a residentes en el extranjero"},{"v":41} ]},
-									  {"c": [{ "v": "Servicios prestados a residentes del Magdalena"},{"v":4} ]}
+									  {"c": [{ "v": "Servicios prestados a residentes del Cesar"},{"v":4} ]}
 									]
 						} 
               },
@@ -100,7 +100,7 @@
 							"rows":[
 									  {"c": [{ "v": "Sevicios prestados a residentes en Colombia excluyendo Magdalenenses"},{"v":55.3} ]},
 									  {"c": [{ "v": "Servicios prestados a residentes en el extranjero"},{"v":40.4} ]},
-									  {"c": [{ "v": "Servicios prestados a residentes del Magdalena"},{"v":4.3} ]}
+									  {"c": [{ "v": "Servicios prestados a residentes del Cesar"},{"v":4.3} ]}
 									]
 						} 
               }
@@ -176,7 +176,7 @@
                 "descripcion" : "Se observa que el porcentaje de Magdalenenses que viajan con planes turísticos dentro de su propio departamento es pequeño, en comparación con el porcentaje de Magdalenenses que viajan con plan hacia otros destinos nacionales e internacionales; esto se explica claramente en la necesidad clara de un interventor al momento de ingresar a un territorio diferente, que posee costumbres, idiomas y lugares nuevos. Lo anterior, rescata la importancia de las agencias de viaje como una herramienta clara de captación de turismo internacional.",
                  "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
-								      {"label":"Viajes emisores con plan turístico realizados por residentes en Magdalena","type":"number"} 
+								      {"label":"Viajes emisores con plan turístico realizados por residentes en Cesar","type":"number"} 
 								   ],
 							"rows":[
 									  {"c": [{ "v": "Enero"},{"v":16.8} ]},
@@ -204,7 +204,7 @@
                 "descripcion" : "Se observa que el porcentaje de Magdalenenses que viajan con planes turísticos dentro de su propio departamento es pequeño, en comparación con el porcentaje de Magdalenenses que viajan con plan hacia otros destinos nacionales e internacionales; esto se explica claramente en la necesidad clara de un interventor al momento de ingresar a un territorio diferente, que posee costumbres, idiomas y lugares nuevos. Lo anterior, rescata la importancia de las agencias de viaje como una herramienta clara de captación de turismo internacional.",
                  "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
-								      {"label":"Viajes internos con plan turístico realizados por residentes en Magdalena","type":"number"} 
+								      {"label":"Viajes internos con plan turístico realizados por residentes en Cesar","type":"number"} 
 								   ],
 							"rows":[
 									  {"c": [{ "v": "Enero"},{"v":7.6} ]},

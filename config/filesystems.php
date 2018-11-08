@@ -53,7 +53,11 @@ return [
             'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
-        
+        'multimedia-informes' => [
+            'driver' => 'local',
+            'root' => public_path().'/multimedia/informes',
+            'visibility' => 'public',
+        ],
         'multimedia-atraccion' => [
             'driver' => 'local',
             'root' => public_path().'/multimedia/atracciones',
@@ -102,6 +106,7 @@ return [
             'root' => public_path().'/HojasDeVida',
             'visibility' => 'public',
         ],
+
 
         's3' => [
             'driver' => 's3',
