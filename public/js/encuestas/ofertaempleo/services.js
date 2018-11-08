@@ -3,7 +3,28 @@ var app = angular.module("ofertaService", []);
 app.factory("ofertaServi", ["$http", "$q", function ($http, $q) {
 
     return {
-  
+        guardarEmpleo: function (data) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http.post('/ofertaempleo/guardarempleo',data).success(function (data) {
+                  defered.resolve(data);
+            }).error(function (err) {
+                defered.reject(err);
+            })
+            return promise;
+        },
+        cargarDatosEmplomensual: function (id) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http.get('/ofertaempleo/cargardatosempleo/'+id).success(function (data) {
+                  defered.resolve(data);
+            }).error(function (err) {
+                defered.reject(err);
+            })
+            return promise;
+        },
         guardarNumeroEmp: function (data) {
             var defered = $q.defer();
             var promise = defered.promise;

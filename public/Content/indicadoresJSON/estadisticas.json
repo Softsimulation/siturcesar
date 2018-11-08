@@ -72,7 +72,7 @@
          "periodos": [
              {
               "nombre": "2015",
-		         "descripcion": "Número de cruceristas que arriban a la ciudad de Santa Marta",
+		         "descripcion": "Número de cruceristas que arriban a la ciudad de Valledupar",
 		         "datos": {
 			             "cols":[ {"label":"Series","type":"string"},
 							      {"label":"Número de pasajeros cruceristas","type":"number"}
@@ -88,7 +88,7 @@
 			  },
 			  {
                 "nombre": "2016",
-		         "descripcion": "Número de cruceristas que arriban a la ciudad de Santa Marta",
+		         "descripcion": "Número de cruceristas que arriban a la ciudad de Valledupar",
 		         "datos": {
 			             "cols":[ {"label":"Series","type":"string"},
 							      {"label":"Número de pasajeros cruceristas","type":"number"}
@@ -112,10 +112,10 @@
          "periodos": [
               {
                 "nombre": "2016",
-		         "descripcion": "El número de extranjeros que por los 38 PCM (según Migración Colombia), reportan como ciudad de intención de hospedaje a Santa Marta.",
+		         "descripcion": "El número de extranjeros que por los 38 PCM (según Migración Colombia), reportan como ciudad de intención de hospedaje a Valledupar.",
 		        "datos": {
 			             "cols":[ {"label":"Series","type":"string"},
-							      {"label":"Intención de hospedaje por 38 PCM que reportan Santa Marta","type":"number"}
+							      {"label":"Intención de hospedaje por 38 PCM que reportan Valledupar","type":"number"}
 							   ],
 						"rows":[
 								 {"c": [{ "v": "Enero"},{"v":2516} ]},
@@ -137,7 +137,7 @@
          "periodos": [
               {
                 "nombre": "2016",
-                "descripcion": "Reporte de visitantes registrados en los Puntos de Información Turística (PIT) de la Bahía y Terminal de Transportes de Santa Marta.",
+                "descripcion": "Reporte de visitantes registrados en los Puntos de Información Turística (PIT) de la Bahía y Terminal de Transportes de Valledupar.",
 		         "datos": {
 			             "cols":[ {"label":"Series","type":"string"},
 							      {"label":"Registros de turistas que visitan los Puntos de Información Turística","type":"number"}

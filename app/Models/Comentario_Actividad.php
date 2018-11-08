@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,7 +37,7 @@ class Comentario_Actividad extends Model
      */
     public function aspNetUser()
     {
-        return $this->belongsTo('App\AspNetUser', 'user_id', '"Id"');
+        return $this->belongsTo('App\Models\AspNetUser', 'user_id', '"Id"');
     }
 
     /**
@@ -45,6 +45,6 @@ class Comentario_Actividad extends Model
      */
     public function actividade()
     {
-        return $this->belongsTo('App\Actividade', 'actividad_id');
+        return $this->belongsTo('App\Models\Actividade', 'actividad_id');
     }
 }

@@ -229,7 +229,7 @@
          "periodos":[
                 {
 		          "nombre": "Diciembre 2015 - Enero 2016",
-		          "descripcion": "Del total de viajes realizados en la temporada Diciembre del de 2015 y Enero del 2016 dentro del departamento del Magdalena, el 95% fueron viajes turísticos.",
+		          "descripcion": "Del total de viajes realizados en la temporada Diciembre del de 2015 y Enero del 2016 dentro del departamento del Cesar, el 95% fueron viajes turísticos.",
 		          "datos": {
 					  "cols": [
 					        {"label":"Topping","type":"string"},
@@ -243,7 +243,7 @@
 				},
 				{
 		          "nombre": "Semana Santa : 2016",
-		          "descripcion": "Del total de viajes realizados en la temporada de Semana Santa 2016 dentro del departamento del Magdalena, el 100% fueron viajes turísticos.",
+		          "descripcion": "Del total de viajes realizados en la temporada de Semana Santa 2016 dentro del departamento del Cesar, el 100% fueron viajes turísticos.",
 		          "datos": {
 					  "cols": [
 					        {"label":"Topping","type":"string"},
