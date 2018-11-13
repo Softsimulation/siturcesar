@@ -31,7 +31,7 @@
 					<option value="en">Inglés</option>
 				</select>
 			</form>
-			<a href="#"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
+			<a href="/login/logi"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
 		</div>
 		<div id="navbar-mobile" class="text-center">
             <button type="button" class="btn btn-block btn-primary" title="Menu de navegación"><span aria-hidden="true" class="ion-navicon-round"></span><span class="sr-only">Menú de navegación</span></button>
@@ -46,6 +46,12 @@
                         <a role="menuitem" href="#menu-visitarAlCesar" aria-haspopup="true" aria-expanded="false">Visita al Cesar</a>
                         <ul role="menu" id="menu-visitarAlCesar" aria-label="Visita al Cesar">
                             <li role="none">
+                                <a role="menuitem" href="/Mapa">Acerca del departamento</a>
+                            </li>
+                               <li role="none">
+                                <a role="menuitem" href="/Mapa">Requisitos de viaje</a>
+                            </li>
+                            <li role="none">
                                 <a role="menuitem" href="/quehacer">Qué hacer</a>
                             </li>
                             <li role="none">
@@ -53,6 +59,9 @@
                             </li>
                             <li role="none">
                                 <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Mapa">Mapa del departamento</a>
                             </li>
                         </ul>
                     </li>
@@ -75,7 +84,11 @@
                                 <a role="menuitem" href="#">Empleo</a>
                             </li>
                             <li role="none">
+                                
                                 <a role="menuitem" href="#">Turismo sostenible</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/indicadores/secundarios">Indicadores secundarios</a>
                             </li>
                         </ul>
                     </li>
@@ -84,10 +97,16 @@
                         <a role="menuitem" href="#menu-publicaciones" aria-haspopup="true" aria-expanded="false">Publicaciones</a>
                         <ul role="menu" id="menu-publicaciones" aria-label="Publicaciones">
                             <li role="none">
-                                <a role="menuitem" href="#">Noticias</a>
+                                <a role="menuitem" href="/promocionNoticia/listado">Noticias</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Eventos</a>
+                                <a role="menuitem" href="/quehacer?tipo=4">Eventos</a>
+                            </li>
+                              <li role="none">
+                                <a role="menuitem" href="/promocionPublicacion/listado">Biblioteca Digital</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/promocionInforme/listado">Informes</a>
                             </li>
                         </ul>
                     </li>
