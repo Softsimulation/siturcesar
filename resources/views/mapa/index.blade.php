@@ -32,7 +32,7 @@
 @section('content')
 
     <div ng-app="AppMapa"  ng-controller="mapa"class="container-fluid" style="margin-top:10px; padding-left: 0; padding-right: 0;" >
-        <div class="row no-gutters">
+        <div class="row no-gutters ">
             <div class="col-12">
                 <div class="content-map">
                     <div class="st-filter-pane" ng-show="!showInfoEntidad">
@@ -114,21 +114,21 @@
                                 position="@{{dest.latitud}},@{{dest.longitud}}"
                                 icon="/Content/icons/maps/destino.png"
                                 id="@{{dest.id}}"
-                                on-click="showInfo(event, dest.id,dest.destino_con_idiomas[0].nombre, dest.multimedia_destinos[0].ruta, '/Atraccion/Ver/' + dest.id )"
+                                on-click="showInfo(event, dest.id,dest.destino_con_idiomas[0].nombre, dest.multimedia_destinos[0].ruta, '/destinos/ver/' + dest.id )"
                                 title="Destino: @{{dest.destino_con_idiomas[0].nombre}}"></marker>
 
                         <marker ng-repeat="atr in atracciones|filter:filterAtracciones| limitTo : limiteAtr"
                                 position="@{{atr.sitio.latitud}},@{{atr.sitio.longitud}}"
                                 icon="@{{atr.icono}}"
                                 id="@{{atr.id}}"
-                                on-click="showInfo(event, atr.id,atr.sitio.sitios_con_idiomas[0].nombre,atr.sitio.multimedia_sitios[0].ruta,'/Destino/Ver/' + atr.id)"
+                                on-click="showInfo(event, atr.id,atr.sitio.sitios_con_idiomas[0].nombre,atr.sitio.multimedia_sitios[0].ruta,'/atracciones/ver/' + atr.id)"
                                 title="Atraccion: @{{atr.sitio.sitios_con_idiomas[0].nombre}}"></marker>
 
                         <marker ng-repeat="prov in proveedores|filter:filterProveedores | limitTo : limiteProv"
                                 position="@{{prov.latitud}},@{{prov.longitud}}"
                                 icon="@{{prov.icono}}"
                                 id="@{{prov.id}}"
-                                on-click="showInfo(event, prov.id, prov.razon_social,prov.proveedor[0].multimedia_proveedores[0].ruta,'/Proveedor/Ver/' + prov.id)"
+                                on-click="showInfo(event, prov.id, prov.razon_social,prov.proveedor[0].multimedia_proveedores[0].ruta,'/Proveedor/ver/' + prov.id)"
                                 title="Proveedor: @{{prov.razon_social}}"></marker>
                                 
                     </ng-map>
