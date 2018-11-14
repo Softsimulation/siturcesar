@@ -20,10 +20,20 @@ use App\Models\Sitio;
 use App\Models\Sitio_Con_Idioma;
 use App\Models\Atraccion_Con_Idioma;
 use App\Models\Multimedia_Sitio;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdministradorAtraccionController extends Controller
 {
-    //
+    public function __construct()
+    {
+       
+        $this->middleware('auth');
+        $this->middleware('role:Admin|Promocion');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+    }
     
     public function getIndex(){
         return view('administradoratracciones.Index');
@@ -251,8 +261,8 @@ class AdministradorAtraccionController extends Controller
         $sitio->estado = true;
         $sitio->created_at = Carbon::now();
         $sitio->updated_at = Carbon::now();
-        $sitio->user_create = "Situr";
-        $sitio->user_update = "Situr";
+        $sitio->user_create = $this->user->username;
+        $sitio->user_update = $this->user->username;
         $sitio->save();
         
         $sitio_con_idioma = new Sitio_Con_Idioma();
@@ -269,8 +279,8 @@ class AdministradorAtraccionController extends Controller
         $atraccion->valor_min = $request->valor_minimo;
         $atraccion->valor_max = $request->valor_maximo;
         $atraccion->estado = true;
-        $atraccion->user_create = "Situr";
-        $atraccion->user_update = "Situr";
+        $atraccion->user_create = $this->user->username;
+        $atraccion->user_update = $this->user->username;
         $atraccion->created_at = Carbon::now();
         $atraccion->updated_at = Carbon::now();
         $atraccion->save();
@@ -313,7 +323,7 @@ class AdministradorAtraccionController extends Controller
         }
         
         $atraccion = Atracciones::find($request->id);
-        $atraccion->user_update = "Situr";
+        $atraccion->user_update = $this->user->username;
         $atraccion->updated_at = Carbon::now();
         
         $portadaNombre = "portada.".pathinfo($request->portadaIMG->getClientOriginalName(), PATHINFO_EXTENSION);
@@ -328,8 +338,8 @@ class AdministradorAtraccionController extends Controller
         $multimedia_sitio->tipo = false;
         $multimedia_sitio->portada = true;
         $multimedia_sitio->estado = true;
-        $multimedia_sitio->user_create = "Situr";
-        $multimedia_sitio->user_update = "Situr";
+        $multimedia_sitio->user_create = $this->user->username;
+        $multimedia_sitio->user_update = $this->user->username;
         $multimedia_sitio->created_at = Carbon::now();
         $multimedia_sitio->updated_at = Carbon::now();
         $multimedia_sitio->save();
@@ -344,8 +354,8 @@ class AdministradorAtraccionController extends Controller
             $multimedia_sitio->tipo = true;
             $multimedia_sitio->portada = false;
             $multimedia_sitio->estado = true;
-            $multimedia_sitio->user_create = "Situr";
-            $multimedia_sitio->user_update = "Situr";
+            $multimedia_sitio->user_create = $this->user->username;
+            $multimedia_sitio->user_update = $this->user->username;
             $multimedia_sitio->created_at = Carbon::now();
             $multimedia_sitio->updated_at = Carbon::now();
             $multimedia_sitio->save();
@@ -369,8 +379,8 @@ class AdministradorAtraccionController extends Controller
                     $multimedia_sitio->tipo = false;
                     $multimedia_sitio->portada = false;
                     $multimedia_sitio->estado = true;
-                    $multimedia_sitio->user_create = "Situr";
-                    $multimedia_sitio->user_update = "Situr";
+                    $multimedia_sitio->user_create = $this->user->username;
+                    $multimedia_sitio->user_update = $this->user->username;
                     $multimedia_sitio->created_at = Carbon::now();
                     $multimedia_sitio->updated_at = Carbon::now();
                     $multimedia_sitio->save();
@@ -422,12 +432,12 @@ class AdministradorAtraccionController extends Controller
             $sitio = Sitio::find($atraccion->sitios_id);
             $sitio->sitiosConActividades()->detach();
             $sitio->sitiosConActividades()->attach($request->actividades);
-            $sitio->user_update = "Situr";
+            $sitio->user_update = $this->user->username;
             $sitio->updated_at = Carbon::now();
             $sitio->save();
         }
         
-        $atraccion->user_update = "Situr";
+        $atraccion->user_update = $this->user->username;
         $atraccion->updated_at = Carbon::now();
         $atraccion->save();
         
@@ -574,7 +584,7 @@ class AdministradorAtraccionController extends Controller
         $atraccion->valor_min = $request->valor_minimo;
         $atraccion->telefono = $request->telefono;
         $atraccion->sitio_web = $request->sitio_web;
-        $atraccion->user_update = "Situr";
+        $atraccion->user_update = $this->user->username;
         $atraccion->updated_at = Carbon::now();
         $atraccion->save();
         
@@ -583,7 +593,7 @@ class AdministradorAtraccionController extends Controller
         $sitio->longitud = $request->pos['lng'];
         $sitio->sectores_id = $request->sector_id;
         $sitio->direccion = $request->direccion;
-        $sitio->user_update = "Situr";
+        $sitio->user_update = $this->user->username;
         $sitio->updated_at = Carbon::now();
         $sitio->save();
         

@@ -20,10 +20,20 @@ use App\Models\Proveedores_rnt;
 use App\Models\Proveedores_rnt_idioma;
 use App\Models\Multimedia_Proveedor;
 use App\Models\Idioma;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdministradorProveedoresController extends Controller
 {
-    //
+    public function __construct()
+    {
+       
+        $this->middleware('auth');
+        $this->middleware('role:Admin|Promocion');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+    }
     
     public function getCrear(){
         return view('administradorproveedores.Crear');
@@ -229,8 +239,8 @@ class AdministradorProveedoresController extends Controller
         $proveedor->estado = true;
         $proveedor->created_at = Carbon::now();
         $proveedor->updated_at = Carbon::now();
-        $proveedor->user_create = "Situr";
-        $proveedor->user_update = "Situr";
+        $proveedor->user_create = $this->user->username;
+        $proveedor->user_update = $this->user->username;
         $proveedor->save();
         
         $proveedor_con_idioma = new Proveedor_Con_Idioma();
@@ -292,8 +302,8 @@ class AdministradorProveedoresController extends Controller
         $multimedia_proveedor->tipo = false;
         $multimedia_proveedor->portada = true;
         $multimedia_proveedor->estado = true;
-        $multimedia_proveedor->user_create = "Situr";
-        $multimedia_proveedor->user_update = "Situr";
+        $multimedia_proveedor->user_create = $this->user->username;
+        $multimedia_proveedor->user_update = $this->user->username;
         $multimedia_proveedor->created_at = Carbon::now();
         $multimedia_proveedor->updated_at = Carbon::now();
         $multimedia_proveedor->save();
@@ -307,8 +317,8 @@ class AdministradorProveedoresController extends Controller
             $multimedia_proveedor->tipo = true;
             $multimedia_proveedor->portada = false;
             $multimedia_proveedor->estado = true;
-            $multimedia_proveedor->user_create = "Situr";
-            $multimedia_proveedor->user_update = "Situr";
+            $multimedia_proveedor->user_create = $this->user->username;
+            $multimedia_proveedor->user_update = $this->user->username;
             $multimedia_proveedor->created_at = Carbon::now();
             $multimedia_proveedor->updated_at = Carbon::now();
             $multimedia_proveedor->save();
@@ -331,8 +341,8 @@ class AdministradorProveedoresController extends Controller
                     $multimedia_proveedor->tipo = false;
                     $multimedia_proveedor->portada = false;
                     $multimedia_proveedor->estado = true;
-                    $multimedia_proveedor->user_create = "Situr";
-                    $multimedia_proveedor->user_update = "Situr";
+                    $multimedia_proveedor->user_create = $this->user->username;
+                    $multimedia_proveedor->user_update = $this->user->username;
                     $multimedia_proveedor->created_at = Carbon::now();
                     $multimedia_proveedor->updated_at = Carbon::now();
                     $multimedia_proveedor->save();
@@ -472,8 +482,8 @@ class AdministradorProveedoresController extends Controller
         $proveedor->estado = true;
         $proveedor->created_at = Carbon::now();
         $proveedor->updated_at = Carbon::now();
-        $proveedor->user_create = "Situr";
-        $proveedor->user_update = "Situr";
+        $proveedor->user_create = $this->user->username;
+        $proveedor->user_update = $this->user->username;
         $proveedor->save();
         
         // $proveedor_con_idioma = Proveedor_Con_Idioma::where('proveedores_id', $request->id)->where('idiomas_id', 2)->first();

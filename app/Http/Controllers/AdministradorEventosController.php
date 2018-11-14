@@ -14,6 +14,8 @@ use App\Models\Evento;
 use App\Models\Evento_Con_Idioma;
 use App\Models\Multimedia_Evento;
 use App\Models\Idioma;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 use Carbon\Carbon;
 use Storage;
@@ -21,7 +23,15 @@ use File;
 
 class AdministradorEventosController extends Controller
 {
-    //
+    public function __construct()
+    {
+       
+        $this->middleware('auth');
+        $this->middleware('role:Admin|Promocion');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+    }
     public function getCrear(){
         return view('administradoreventos.Crear');
     }
@@ -175,8 +185,8 @@ class AdministradorEventosController extends Controller
         $evento->estado = true;
         $evento->created_at = Carbon::now();
         $evento->updated_at = Carbon::now();
-        $evento->user_create = "Situr";
-        $evento->user_update = "Situr";
+        $evento->user_create = $this->user->username;
+        $evento->user_update = $this->user->username;
         $evento->save();
         
         $evento_con_idioma = new Evento_Con_Idioma();
@@ -226,8 +236,8 @@ class AdministradorEventosController extends Controller
         $multimedia_evento->tipo = false;
         $multimedia_evento->portada = true;
         $multimedia_evento->estado = true;
-        $multimedia_evento->user_create = "Situr";
-        $multimedia_evento->user_update = "Situr";
+        $multimedia_evento->user_create = $this->user->username;
+        $multimedia_evento->user_update = $this->user->username;
         $multimedia_evento->created_at = Carbon::now();
         $multimedia_evento->updated_at = Carbon::now();
         $multimedia_evento->save();
@@ -242,8 +252,8 @@ class AdministradorEventosController extends Controller
             $multimedia_evento->tipo = true;
             $multimedia_evento->portada = false;
             $multimedia_evento->estado = true;
-            $multimedia_evento->user_create = "Situr";
-            $multimedia_evento->user_update = "Situr";
+            $multimedia_evento->user_create = $this->user->username;
+            $multimedia_evento->user_update = $this->user->username;
             $multimedia_evento->created_at = Carbon::now();
             $multimedia_evento->updated_at = Carbon::now();
             $multimedia_evento->save();
@@ -267,8 +277,8 @@ class AdministradorEventosController extends Controller
                     $multimedia_evento->tipo = false;
                     $multimedia_evento->portada = false;
                     $multimedia_evento->estado = true;
-                    $multimedia_evento->user_create = "Situr";
-                    $multimedia_evento->user_update = "Situr";
+                    $multimedia_evento->user_create = $this->user->username;
+                    $multimedia_evento->user_update = $this->user->username;
                     $multimedia_evento->created_at = Carbon::now();
                     $multimedia_evento->updated_at = Carbon::now();
                     $multimedia_evento->save();
@@ -313,7 +323,7 @@ class AdministradorEventosController extends Controller
         $evento->sitiosConEventos()->detach();
         $evento->sitiosConEventos()->attach($request->sitios);
         
-        $evento->user_update = "Situr";
+        $evento->user_update = $this->user->username;
         $evento->updated_at = Carbon::now();
         $evento->save();
         
@@ -336,7 +346,7 @@ class AdministradorEventosController extends Controller
         $evento = Evento::find($request->id);
         $evento->estado = !$evento->estado;
         $evento->updated_at = Carbon::now();
-        $evento->user_update = "Situr";
+        $evento->user_update = $this->user->username;
         $evento->save();
         
         return ['success' => true];
@@ -486,7 +496,7 @@ class AdministradorEventosController extends Controller
         $evento->web = $request->pagina_web;
         $evento->fecha_in = $request->fecha_inicio;
         $evento->fecha_fin = $request->fecha_final;
-        $evento->user_update = "Situr";
+        $evento->user_update = $this->user->username;
         $evento->updated_at = Carbon::now();
         $evento->save();
         

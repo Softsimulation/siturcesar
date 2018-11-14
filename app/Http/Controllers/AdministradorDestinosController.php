@@ -16,10 +16,20 @@ use App\Models\Multimedia_Destino;
 use App\Models\Idioma;
 use App\Models\Sector;
 use App\Models\Sector_Con_Idioma;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class AdministradorDestinosController extends Controller
 {
-    //
+    public function __construct()
+    {
+       
+        $this->middleware('auth');
+        $this->middleware('role:Admin|Promocion');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+    }
     public function getIndex (){
         return view('administradordestinos.Index');
     }
@@ -146,8 +156,8 @@ class AdministradorDestinosController extends Controller
         $destino = new Destino();
         $destino->tipo_destino_id = $request->tipo;
         $destino->estado = true;
-        $destino->user_create = "Situr";
-        $destino->user_update = "Situr";
+        $destino->user_create = $this->user->username;
+        $destino->user_update = $this->user->username;
         $destino->latitud = $request->pos['lat'];
         $destino->longitud = $request->pos['lng'];
         $destino->created_at = Carbon::now();
@@ -200,8 +210,8 @@ class AdministradorDestinosController extends Controller
         $multimedia_destino->tipo = false;
         $multimedia_destino->portada = true;
         $multimedia_destino->estado = true;
-        $multimedia_destino->user_create = "Situr";
-        $multimedia_destino->user_update = "Situr";
+        $multimedia_destino->user_create = $this->user->username;
+        $multimedia_destino->user_update = $this->user->username;
         $multimedia_destino->created_at = Carbon::now();
         $multimedia_destino->updated_at = Carbon::now();
         $multimedia_destino->save();
@@ -218,8 +228,8 @@ class AdministradorDestinosController extends Controller
             $multimedia_sitio->tipo = true;
             $multimedia_sitio->portada = false;
             $multimedia_sitio->estado = true;
-            $multimedia_sitio->user_create = "Situr";
-            $multimedia_sitio->user_update = "Situr";
+            $multimedia_sitio->user_create = $this->user->username;
+            $multimedia_sitio->user_update = $this->user->username;
             $multimedia_sitio->created_at = Carbon::now();
             $multimedia_sitio->updated_at = Carbon::now();
             $multimedia_sitio->save();
@@ -242,8 +252,8 @@ class AdministradorDestinosController extends Controller
                     $multimedia_sitio->tipo = false;
                     $multimedia_sitio->portada = false;
                     $multimedia_sitio->estado = true;
-                    $multimedia_sitio->user_create = "Situr";
-                    $multimedia_sitio->user_update = "Situr";
+                    $multimedia_sitio->user_create = $this->user->username;
+                    $multimedia_sitio->user_update = $this->user->username;
                     $multimedia_sitio->created_at = Carbon::now();
                     $multimedia_sitio->updated_at = Carbon::now();
                     $multimedia_sitio->save();
@@ -397,8 +407,8 @@ class AdministradorDestinosController extends Controller
         $sector->destino_id = $request->destino_id;
         $sector->es_urbano = $request->es_urbano;
         $sector->estado = true;
-        $sector->user_create = "Situr";
-        $sector->user_update = "Situr";
+        $sector->user_create = $this->user->username;
+        $sector->user_update = $this->user->username;
         $sector->created_at = Carbon::now();
         $sector->updated_at = Carbon::now();
         $sector->save();
