@@ -1259,7 +1259,7 @@ class TurismoInternoController extends Controller
         return ["encuesta"=>$encuesta,"Enlaces" => $enlaces];
     }
     
-       public function postCreateviaje(Request $request){
+     public function postCreateviaje(Request $request){
             $validator = \Validator::make($request->all(), [
       'Id' => 'required|exists:personas,id',
 	  'Inicio' => 'required|date|before:tomorrow',
