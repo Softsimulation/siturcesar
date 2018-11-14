@@ -136,4 +136,7 @@ Route::controller('/postulado','PostuladoController');
 
 Route::controller('/noticias','NoticiaController');
 Route::controller('/promocionNoticia','PublicoNoticiaController');
-
+Route::controller('/promocionInforme','PublicoInformeController');
+Route::controller('/promocionPublicacion','PublicoPublicacionController');
+Route::controller('/sliders','SliderController');
+Route::controller('/suscriptores','SuscriptoreController');
