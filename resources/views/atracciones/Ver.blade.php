@@ -28,6 +28,19 @@ function parse_yturl($url)
     
 @endsection
 @section('content')
+
+@if (session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
     <div id="carousel-main-page" class="carousel slide carousel-fade" data-ride="carousel">
       <ol class="carousel-indicators">
         @for($i = 0; $i < count($atraccion->sitio->multimediaSitios); $i++)
@@ -252,8 +265,16 @@ function parse_yturl($url)
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComentario">Comentar</button>
             </div>
         </div>
+        
+         <ul class="list-group list-group-flush">
+                    @foreach ($atraccion->comentariosAtracciones as $comentario)
+                         <li>{{$comentario->user->username}} {{$comentario->comentario}}</li>
+                    @endforeach
+                      
+        </ul>
+        
         <!-- Modal -->
-        <div class="modal fade" id="modalComentario" tabindex="-1" role="dialog" aria-labelledby="labelModalComentario" aria-hidden="true">
+         <div class="modal fade" id="modalComentario" tabindex="-1" role="dialog" aria-labelledby="labelModalComentario" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -262,8 +283,35 @@ function parse_yturl($url)
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form id="formEnviarComentario" name="formEnviarComentario" method="post" action="#">
+                    <form id="formEnviarComentario" name="formEnviarComentario" method="post" action="/atracciones/guardarcomentario">
                         <div class="modal-body">
+                            <input type="hidden" name="id" value="{{$atraccion->id}}" />
+                            <div class="form-group text-center">
+                                <label class="control-label" for="calificacionLeGusto">¿Le gustó?</label>
+                                <div class="checks">
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="calificacionLeGusto" id="calificacionLeGusto-1" value="1" required onclick="showStars(this)">
+                                        <label class="form-check-label" for="calificacionLeGusto-1"><span class="ionicons-inline ion-android-star-outline"></span><span class="sr-only">1</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="calificacionLeGusto" id="calificacionLeGusto-2" value="2" required onclick="showStars(this)">
+                                        <label class="form-check-label" for="calificacionLeGusto-2"><span class="ionicons-inline ion-android-star-outline"></span><span class="sr-only">2</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="calificacionLeGusto" id="calificacionLeGusto-3" value="3" required onclick="showStars(this)">
+                                        <label class="form-check-label" for="calificacionLeGusto-3"><span class="ionicons-inline ion-android-star-outline"></span><span class="sr-only">3</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="calificacionLeGusto" id="calificacionLeGusto-4" value="4" required onclick="showStars(this)">
+                                        <label class="form-check-label" for="calificacionLeGusto-4"><span class="ionicons-inline ion-android-star-outline"></span><span class="sr-only">4</span></label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="calificacionLeGusto" id="calificacionLeGusto-5" value="5" required onclick="showStars(this)">
+                                        <label class="form-check-label" for="calificacionLeGusto-5"><span class="ionicons-inline ion-android-star-outline"></span><span class="sr-only">5</span></label>
+                                    </div>
+                                </div>
+                                
+                            </div>
                             <div class="form-group text-center">
                                 <label class="control-label" for="calificacionFueFacilLlegar">¿Fue fácil llegar?</label>
                                 <div class="checks">
@@ -342,6 +390,7 @@ function parse_yturl($url)
                                 </div>
                                 
                             </div>
+                            
                             <div class="form-group">
                                 <label class="control-label" for="comentario"><span class="asterisk">*</span> Comentario</label>
                                 <textarea class="form-control" id="comentario" name="comentario" rows="5" maxlength="1000" placeholder="Ingrese su comentario. Máx. 1000 caracteres" style="resize:none;" required></textarea>    
@@ -357,7 +406,7 @@ function parse_yturl($url)
                 </div>
             </div>
         </div>
-    </section>
+           </section>
     
 @endsection
 @section('javascript')

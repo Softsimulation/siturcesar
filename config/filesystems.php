@@ -89,21 +89,11 @@ return [
             'root' => public_path().'/multimedia/proveedores',
             'visibility' => 'public',
         ],
-
         'Publicaciones' => [
                'driver' => 'local',
                'root' => public_path().'/Publicaciones',
                'visibility' => 'public',
            ],
-
-        
-        'HojasDeVida' => [
-            'driver' => 'local',
-            'root' => public_path().'/HojasDeVida',
-            'visibility' => 'public',
-        ],
-
->>>>>>> 3c3f933e9465206cbb45d9f4b4a8f82b44bb5ecd
         's3' => [
             'driver' => 's3',
             'key' => 'your-key',
