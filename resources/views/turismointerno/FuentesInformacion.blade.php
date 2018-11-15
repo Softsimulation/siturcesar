@@ -135,7 +135,7 @@
 
         <div class="panel panel-success">
             <div class="panel-heading">
-                <!-- ¿Le gustaría que le enviáramos información sobre el Magdalena a su correo electrónico?-->
+                <!-- ¿Le gustaría que le enviáramos información sobre el Cesar a su correo electrónico?-->
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>{{trans('resources.EncuestaFuenteInfoP4')}}</b></h3>
             </div>
             <div class="panel-footer"><b>{{trans('resources.EncuestaMsgSeleccionUnica')}}</b></div>
@@ -164,7 +164,7 @@
 
         <div class="panel panel-success">
             <div class="panel-heading">
-                <!-- ¿Le gustaría que le enviáramos una invitación por redes sociales para seguir al Magdalena?-->
+                <!-- ¿Le gustaría que le enviáramos una invitación por redes sociales para seguir al Cesar?-->
                 <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span> {{trans('resources.EncuestaFuenteInfoP5')}}</b></h3>
             </div>
             <div class="panel-footer"><b>{{trans('resources.EncuestaMsgSeleccionUnica')}}</b></div>

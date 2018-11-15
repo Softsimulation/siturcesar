@@ -21,7 +21,7 @@ class AdministrarMunicipiosController extends Controller
     {
         
         $this->middleware('auth');
-        $this->middleware('role:Admin');
+        $this->middleware('role:Admin|Estadistico');
         if(Auth::user() != null){
             $this->user = User::where('id',Auth::user()->id)->first(); 
         }

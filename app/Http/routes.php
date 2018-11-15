@@ -20,7 +20,8 @@ Route::get('/', function () {
     
 });
 
-
+Route::controller('/promocionInforme','PublicoInformeController');
+Route::controller('/informes','InformesCtrl');
 Route::get('/Mapa', 'MapaCtrl@getIndex');
 Route::get('/Mapa/getData', 'MapaCtrl@getData');
 
@@ -135,4 +136,7 @@ Route::controller('/postulado','PostuladoController');
 
 Route::controller('/noticias','NoticiaController');
 Route::controller('/promocionNoticia','PublicoNoticiaController');
-
+Route::controller('/promocionInforme','PublicoInformeController');
+Route::controller('/promocionPublicacion','PublicoPublicacionController');
+Route::controller('/sliders','SliderController');
+Route::controller('/suscriptores','SuscriptoreController');

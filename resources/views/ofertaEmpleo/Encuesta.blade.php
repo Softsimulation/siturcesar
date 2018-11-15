@@ -1,7 +1,7 @@
 
 @extends('layout._ofertaEmpleoLayaout')
 
-@section('title', 'Encuesta :: SITUR Magdalena')
+@section('title', 'Encuesta :: SITUR Cesar')
 
 @section('estilos')
 

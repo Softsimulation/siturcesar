@@ -40,7 +40,7 @@ class EncuestaDinamicaCtrl extends Controller
     {
         
         $this->middleware('auth')->except([ 'anonimos','getRegistrodeusuarios', 'postRegistrousuarioencuesta', 'encuesta', 'postGuardarencuestausuarios', 'postDataseccionencuestausuarios']);
-        $this->middleware('role:Admin')->except([ 'anonimos','getRegistrodeusuarios', 'postRegistrousuarioencuesta', 'encuesta', 'postGuardarencuestausuarios', 'postDataseccionencuestausuarios']);
+        $this->middleware('role:Admin|Estadistico')->except([ 'anonimos','getRegistrodeusuarios', 'postRegistrousuarioencuesta', 'encuesta', 'postGuardarencuestausuarios', 'postDataseccionencuestausuarios']);
         if(Auth::user() != null){
             $this->user = User::where('id',Auth::user()->id)->first(); 
         }

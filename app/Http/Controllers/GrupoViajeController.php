@@ -20,7 +20,7 @@ class GrupoViajeController extends Controller
     {
         
         $this->middleware('auth');
-        $this->middleware('role:Admin');
+        $this->middleware('role:Admin|Estadistico');
         if(Auth::user() != null){
             $this->user = User::where('id',Auth::user()->id)->first(); 
         }
@@ -100,9 +100,9 @@ class GrupoViajeController extends Controller
        		'Menores15No.numeric' => 'El número de las personas no presentes menores de 15 años debe ser un valor numérico.',
        		'Menores15No.between' => 'El número de las personas no presentes menores de 15 años debe ser un valor numérico mayor o igual a 0.',
        		
-       		'PersonasMag.required' => 'El número de las personas del Magdalena debe ser un valor numérico.',
-       		'PersonasMag.numeric' => 'El número de las personas del Magdalena debe ser un valor numérico.',
-       		'PersonasMag.between' => 'El número de las personas del Magdalena debe ser un valor numérico mayor o igual a 0.',
+       		'PersonasMag.required' => 'El número de las personas del Cesar debe ser un valor numérico.',
+       		'PersonasMag.numeric' => 'El número de las personas del Cesar debe ser un valor numérico.',
+       		'PersonasMag.between' => 'El número de las personas del Cesar debe ser un valor numérico mayor o igual a 0.',
        		
        		'Tipo.required' => 'El tipo de viaje es requerido.',
        		'Tipo.exists' => 'El tipo de viaje seleccionado no se encuentra en la DB.',
@@ -422,9 +422,9 @@ class GrupoViajeController extends Controller
        		'Menores15No.numeric' => 'El número de las personas no presentes menores de 15 años debe ser un valor numérico.',
        		'Menores15No.between' => 'El número de las personas no presentes menores de 15 años debe ser un valor numérico mayor o igual a 0.',
        		
-       		'PersonasMag.required' => 'El número de las personas del Magdalena debe ser un valor numérico.',
-       		'PersonasMag.numeric' => 'El número de las personas del Magdalena debe ser un valor numérico.',
-       		'PersonasMag.between' => 'El número de las personas del Magdalena debe ser un valor numérico mayor o igual a 0.',
+       		'PersonasMag.required' => 'El número de las personas del Cesar debe ser un valor numérico.',
+       		'PersonasMag.numeric' => 'El número de las personas del Cesar debe ser un valor numérico.',
+       		'PersonasMag.between' => 'El número de las personas del Cesar debe ser un valor numérico mayor o igual a 0.',
        		
        		'Tipo.required' => 'El tipo de viaje es requerido.',
        		'Tipo.exists' => 'El tipo de viaje seleccionado no se encuentra en la DB.',

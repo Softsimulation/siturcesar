@@ -16,6 +16,7 @@ use App\Models\Publicacion_tema;
 use App\Models\Publicacion_autor;
 use App\Models\TipoPublicacion;
 use Carbon\Carbon;
+use App\Models\Suscriptore;
 
 
 class PublicacionController extends Controller
@@ -23,7 +24,7 @@ class PublicacionController extends Controller
     public function __construct()
 	{
 	    $this->middleware('auth');
-	    $this->middleware('role:Admin');
+	    $this->middleware('role:Admin|Promocion');
 	    $this->user = Auth::user();
         
 	}
@@ -275,8 +276,6 @@ class PublicacionController extends Controller
 
          $publicacion->temas()->detach();
 	     $publicacion->temas()->attach($request->temas);
-	 
-	   
 
 	   return [ "success"=>true];
         

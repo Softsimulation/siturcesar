@@ -340,7 +340,7 @@
 
     <div id="contentPage">
         <div id="cont-filtros" ng-show="!pantallaCompleta">
-            <img id="logoSitur" src="{{asset('Content/image/logo.min.png')}}" alt="Logo SITUR Magdalena" class="img-responsive"/>
+            <img id="logoSitur" src="{{asset('Content/image/logo.min.png')}}" alt="Logo SITUR Cesar" class="img-responsive"/>
             <h1 id="tituloMuestraMaestra">Muestra maestra</h1>
             <h2>
                 {{$periodo->nombre}}  

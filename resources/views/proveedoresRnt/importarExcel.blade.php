@@ -554,7 +554,7 @@
         			                <span class="text-input-alt" ng-if="registro.es_similar == 1">@{{registro.estado2}}</span>
         			            </div>
         			        </div>
-        			        <div class="col-xs-12 col-sm-3" ng-class="{'bg-info': (registro.nit == registro.nit2 && registro.nit == 1) }">
+        			        <div class="col-xs-12 col-sm-3" ng-class="{'bg-info': (registro.nit == registro.nit2 && registro.es_similar == 1) }">
         			            <div class="form-group" ng-class="{'has-error': (addForm.$submitted || addForm.nit.$touched) && addForm.nit.$error.required}">
         			                <label class="control-label" for="addForm-nit"><span class="asterisk">*</span> NIT</label>
         			                <input type="text" class="form-control" ng-model="registro.nit" name="nit" id="addForm-id" required>
@@ -631,7 +631,7 @@
         			                <span class="text-input-alt" ng-if="registro.es_similar == 1">@{{registro.correo2}}</span>
         			            </div>
         			        </div>
-        			        <div class="col-xs-12 col-sm-3" ng-class="{'bg-info': (registro.digito_verificacion == registro.digito_verificacion2 && registro.es_similar == 1) }">
+        			        <div class="col-xs-12 col-sm-3">
         			            <div class="form-group" ng-class="{'has-error': (addForm.$submitted || addForm.digito_verificacion.$touched) && addForm.digito_verificacion.$error.required}">
         			                <label class="control-label" for="addForm-digito_verificacion"><span class="asterisk">*</span> Dígito de verificación</label>
         			                <input type="text" class="form-control" ng-model="registro.digito_verificacion" name="digito_verificacion" id="addForm-digito_verificacion" required>

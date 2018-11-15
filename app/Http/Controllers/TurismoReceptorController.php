@@ -72,12 +72,12 @@ class TurismoReceptorController extends Controller
     {
         
         $this->middleware('auth');
-        $this->middleware('role:Admin');
+        $this->middleware('role:Admin|Estadistico');
         $this->middleware('receptor',['only' =>  ['getSeccionestancia','getSecciontransporte','getSecciongrupoviaje','getSecciongastos','getSeccionpercepcionviaje','getSeccionfuentesinformacion'] ]);
-        $this->user = \Auth::user();
-        // if(Auth::user() != null){
-        //     $this->user = User::where('id',Auth::user()->id)->first(); 
-        // }
+        //$this->user = \Auth::user();
+        if(Auth::user() != null){
+           $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
         
         
         
@@ -1462,15 +1462,6 @@ class TurismoReceptorController extends Controller
 		    $visitante->ultima_sesion = 6;
 		}
 		
-		if(isset($request->Evaluacion)){
-		   foreach($request->Evaluacion as $evaluacion){
-		        $visitante->calificacions()->save(new Calificacion([
-	                'item_evaluar_id' => $evaluacion['Id'],
-	                'calificacion' => $evaluacion['Valor']
-	            ]));
-		    } 
-		}
-		
 		//---------------------------------------------------------------------------
 		
 		$visitante->elementosRepresentativos()->detach();
@@ -1479,6 +1470,15 @@ class TurismoReceptorController extends Controller
         if($visitante->otrosElementosRepresentativo!=null){$visitante->otrosElementosRepresentativo()->delete();}
 		
 		//---------------------------------------------------------------------------
+		
+		if(isset($request->Evaluacion)){
+		   foreach($request->Evaluacion as $evaluacion){
+		        $visitante->calificacions()->save(new Calificacion([
+	                'item_evaluar_id' => $evaluacion['Id'],
+	                'calificacion' => $evaluacion['Valor']
+	            ]));
+		    } 
+		}
 		
 		$sostenibilidad = Sostenibilidad_Visitante::find($request->Id);
 	    if($sostenibilidad == null){

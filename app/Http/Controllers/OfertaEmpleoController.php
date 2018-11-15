@@ -74,7 +74,7 @@ class OfertaEmpleoController extends Controller
                                     'getCaracterizacionagenciasoperadoras','getAlojamientotrimestral','getEmpleo','getOcupacionagenciasoperadoras','getCaracterizacionalquilervehiculo','getCaracterizacion','getCaracterizacion','getEmpleomensual','getNumeroempleados']]);
     
         $this->middleware('auth');
-        $this->middleware('role:Admin');
+        $this->middleware('role:Admin|Estadistico');
         if(Auth::user() != null){
             $this->user = User::where('id',Auth::user()->id)->first(); 
         }
@@ -2051,12 +2051,12 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
        		'id.exists' => 'La encuesta seleccionada no se encuentra registrada en el sistema.',
        		'totalP.required' => 'El número total es requerido.',
        		'totalP.min' => 'El número de total debe ser mayor que 0.',
-       		'porcentajeC.required' => 'El porcentaje de residentes en Colombia excepto magdalenenses es requerido.',
-       		'porcentajeC.min' => 'El porcentaje de residentes en Colombia excepto magdalenenses debe ser mayor que 0.',
+       		'porcentajeC.required' => 'El porcentaje de residentes en Colombia excepto personas del cesar es requerido.',
+       		'porcentajeC.min' => 'El porcentaje de residentes en Colombia excepto personas del cesar debe ser mayor que 0.',
        		'porcentajeE.required' => 'El porcentaje de extranjeros es requerido.',
        		'porcentajeE.min' => 'El porcentaje de extranjeros debe ser mayor que 0.',
-       		'porcentajeM.required' => 'El porcentaje de residentes en el Magdalena es requerido.',
-       		'porcentajeM.min' => 'El residentes en el Magdalena debe ser mayor que 0.',
+       		'porcentajeM.required' => 'El porcentaje de residentes en el Cesar es requerido.',
+       		'porcentajeM.min' => 'El residentes en el Cesar debe ser mayor que 0.',
     	]);
        
     	if($validator->fails()){

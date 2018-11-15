@@ -25,7 +25,13 @@ class LoginController extends Controller
             if(\Hash::check($request->password,$user->password)){
             
                 Auth::login($user);
-                return redirect()->intended('usuario/listadousuarios');    
+                if(Auth::user()->hasRole("Admin")){
+                    return redirect()->intended('usuario/listadousuarios'); 
+                }else if(Auth::user()->hasRole("Promocion")){
+                    return redirect()->intended('noticias/listadonoticias'); 
+                }else{
+                    return redirect()->intended('ofertaempleo/listadoproveedores'); 
+                }   
             }
              
             return redirect()->intended('login/login')->with('message', 'Credenciales no válidas');

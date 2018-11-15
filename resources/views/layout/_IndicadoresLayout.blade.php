@@ -5,21 +5,21 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Sistema de Información Turística del Magdalena y de Santa Marta D.T.C.H">
-        <meta name="keywords" content="SITUR Magdalena, Visita Magdalena, Visit Magdalena, Turismo en el Magdalena, estadisticas Magdalena, Magdalena" />
+        <meta name="description" content="Sistema de Información Turística del Cesar y de Valledupar">
+        <meta name="keywords" content="SITUR Cesar, Visita Cesar, Visit Cesar, Turismo en el Cesar, estadisticas Cesar, Cesar" />
         <meta name="author" content="Softsimulation S.A.S" />
-        <meta name="copyright" content="SITUR Capítulo Magdalena, Softsimulation S.A.S" />
+        <meta name="copyright" content="SITUR Capítulo Cesar, Softsimulation S.A.S" />
         
         <meta property="og:type" content="website" />
         <meta property="og:url" content="{{\Request::url()}}" />
         @yield('meta_og')
-        <title>@yield('title') SITUR Magdalena</title>
+        <title>@yield('title') SITUR Cesar</title>
         <link rel='manifest' href='{{asset("/manifest.json")}}'>
         <meta name='mobile-web-app-capable' content='yes'>
         <meta name='apple-mobile-web-app-capable' content='yes'>
-        <meta name='application-name' content='SITUR Magdalena'>
+        <meta name='application-name' content='SITUR Cesar'>
         <meta name='apple-mobile-web-app-status-bar-style' content='blue'>
-        <meta name='apple-mobile-web-app-title' content='SITUR Magdalena'>
+        <meta name='apple-mobile-web-app-title' content='SITUR Cesar'>
         <link rel='icon' sizes='192x192' href='{{asset("/img/brand/192.png")}}'>
         <link rel='apple-touch-icon' href='{{asset("/img/brand/192.png")}}'>
         <meta name='msapplication-TileImage' content='{{asset("/img/brand/144.png")}}'>
@@ -37,7 +37,7 @@
         <link href="{{asset('/css/public/style_992.css')}}" rel="stylesheet" media="(min-width: 992px)">
         <link href="{{asset('/css/public/style_1200.css')}}" rel="stylesheet" media="(min-width: 1200px)">
         <link href="{{asset('/css/public/style_1600.css')}}" rel="stylesheet" media="(min-width: 1600px)">
-        <script src="{{secure_asset('/js/plugins/angular.min.js')}}"></script>
+        <script src="{{asset('/js/plugins/angular.min.js')}}"></script>
         @yield('estilos')
         
     </head>
@@ -56,19 +56,19 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="{{asset('/js/public/script-main.js')}}"></script>
         
-        <script src="{{secure_asset('/js/sweetalert.min.js')}}" async></script>
+        <script src="{{asset('/js/sweetalert.min.js')}}" async></script>
         
         
         <script type="text/javascript" defer>
             if ('serviceWorker' in navigator) {
-                console.log('CLIENT: service worker situr Magdalena registration in progress.');
+                console.log('CLIENT: service worker situr Cesar registration in progress.');
                 navigator.serviceWorker.register('/service-worker.js', { scope: '/' }).then(function () {
-                    console.log('CLIENT: service worker situr Magdalena registration complete.');
+                    console.log('CLIENT: service worker situr Cesar registration complete.');
                 }, function () {
-                    console.log('CLIENT: service worker situr Magdalena registration failure.');
+                    console.log('CLIENT: service worker situr Cesar registration failure.');
                 });
             } else {
-                console.log('CLIENT: service worker situr Magdalena is not supported.');
+                console.log('CLIENT: service worker situr Cesar is not supported.');
                 document.getElementsByTagName("html")[0].setAttribute("manifest", "/cache.appcache");
             }
         </script>
