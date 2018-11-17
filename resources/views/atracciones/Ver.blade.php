@@ -70,7 +70,21 @@ function parse_yturl($url)
 	        </h2>
 		  </div>
       </div>
-      
+      <div class="text-center">
+        @if(Auth::check())
+            <form role="form" action="/atracciones/favorito" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="atraccion_id" value="{{$atraccion->id}}" />
+                <button type="submit" class="btn btn-lg btn-circled btn-favorite">
+                  <span class="ion-android-favorite" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+                </button>    
+            </form>
+        @else
+            <button type="button" class="btn btn-lg btn-circled" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
+              <span class="ion-android-favorite-outline" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+            </button>
+        @endif
+      </div>
     </div>
     <div id="title-main-page">
     	<div class="container">
@@ -113,6 +127,9 @@ function parse_yturl($url)
         <div class="container">
             <h3>Información general</h3>
             <h4 class="text-center">{{$atraccion->sitio->sitiosConIdiomas[0]->nombre}}</h4>
+            @if(Session::has('message'))
+                <div class="alert alert-info" role="alert" style="text-align: center;">{{Session::get('message')}}</div>
+            @endif
             <div class="text-center">
                 <button type="button" class="btn btn-lg btn-link" id="btn-favorite">
                     <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>
