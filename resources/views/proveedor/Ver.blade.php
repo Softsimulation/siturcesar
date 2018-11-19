@@ -51,7 +51,7 @@ function parse_yturl($url)
       
         @for($i = 0; $i < count($proveedor->multimediaProveedores); $i++)
         <div class="carousel-item {{  $i === 0 ? 'active' : '' }}">
-          <img class="d-block" src="{{$proveedor->multimediaProveedores[$i]->ruta}}" alt="Imagen de presentación de {{$atraccion->sitio->sitiosConIdiomas[0]->nombre}}">
+          <img class="d-block" src="{{$proveedor->multimediaProveedores[$i]->ruta}}" alt="Imagen de presentación de {{$proveedor->proveedorRnt->razon_social}}">
           
         </div>
         @endfor
@@ -109,15 +109,31 @@ function parse_yturl($url)
     	</div>
     	
     </div>
+    
+    <div class="text-center">
+        @if(Auth::check())
+            <form role="form" action="/proveedor/favorito" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="proveedor_id" value="{{$proveedor->id}}" />
+                <button type="submit" class="btn btn-lg btn-circled btn-favorite">
+                  <span class="ion-android-favorite" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+                </button>    
+            </form>
+        @else
+            <button type="button" class="btn btn-lg btn-circled" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
+              <span class="ion-android-favorite-outline" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+            </button>
+        @endif
+      </div>
+    
     <section id="informacionGeneral">
         <div class="container">
             <h3>Información general</h3>
             <h4 class="text-center">{{$proveedor->proveedorRnt->razon_social}}</h4>
-            <div class="text-center">
-                <button type="button" class="btn btn-lg btn-link" id="btn-favorite">
-                    <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>
-                </button>
-            </div>
+            @if(Session::has('message'))
+                <div class="alert alert-info" role="alert" style="text-align: center;">{{Session::get('message')}}</div>
+            @endif
+            
             @if($video_promocional != null)
             <iframe src="https://www.youtube.com/embed/{{print(parse_yturl($video_promocional))}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif

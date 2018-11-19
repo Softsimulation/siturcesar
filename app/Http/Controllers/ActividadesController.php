@@ -10,13 +10,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Comentario_Actividad;
+use App\Models\Actividad_Favorita;
+
 class ActividadesController extends Controller
 {
 
     public function __construct()
-	{
-	    $this->user = Auth::user();
-	}
+    {
+        
+        $this->middleware('auth',["only"=>["postFavorito","postFavoritoclient"]]);
+        $this->user = \Auth::user();
+    }
+
 
     //
     public function getVer($id){
@@ -103,4 +108,48 @@ class ActividadesController extends Controller
         $comentario->save();
         return redirect('actividades/ver/'.$request->id)->with('success','Comentario guardado correctamente');
     }
+    
+    
+    public function postFavorito(Request $request){
+        $this->user = \Auth::user();
+        $actividad = Actividad::find($request->actividad_id);
+        if(!$actividad){
+            return response('Not found.', 404);
+        }else{
+            if(Actividad_Favorita::where('usuario_id',$this->user->id)->where('actividades_id',$actividad->id)->first() == null){
+                Actividad_Favorita::create([
+                    'usuario_id' => $this->user->id,
+                    'actividades_id' => $actividad->id
+                ]);
+                return \Redirect::to('/actividades/ver/'.$actividad->id)
+                        ->with('message', 'Se ha añadido la actividad a tus favoritos.')
+                        ->withInput(); 
+            }else{
+                Actividad_Favorita::where('usuario_id',$this->user->id)->where('actividades_id',$actividad->id)->delete();
+                return \Redirect::to('/actividades/ver/'.$actividad->id)
+                        ->with('message', 'Se ha quitado la actividad de tus favoritos.')
+                        ->withInput(); 
+            }
+        }
+    }
+    
+    public function postFavoritoclient(Request $request){
+        $this->user = \Auth::user();
+        $actividad = Actividad::find($request->actividad_id);
+        if(!$actividad){
+            return ["success" => false, "errores" => [["La actividad seleccionada no se encuentra en el sistema."]] ];
+        }else{
+            if(Actividad_Favorita::where('usuario_id',$this->user->id)->where('actividades_id',$actividad->id)->first() == null){
+                Actividad_Favorita::create([
+                    'usuario_id' => $this->user->id,
+                    'actividades_id' => $actividad->id
+                ]);
+                return ["success" => true];
+            }else{
+                Actividad_Favorita::where('usuario_id',$this->user->id)->where('actividades_id',$actividad->id)->delete();
+                return ["success" => true];
+            }
+        }
+    }
+    
 }
