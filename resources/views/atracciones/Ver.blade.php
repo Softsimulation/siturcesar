@@ -130,11 +130,7 @@ function parse_yturl($url)
             @if(Session::has('message'))
                 <div class="alert alert-info" role="alert" style="text-align: center;">{{Session::get('message')}}</div>
             @endif
-            <div class="text-center">
-                <button type="button" class="btn btn-lg btn-link" id="btn-favorite">
-                    <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>
-                </button>
-            </div>
+            
             @if($video_promocional != null)
             <iframe src="https://www.youtube.com/embed/{{print(parse_yturl($video_promocional))}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif

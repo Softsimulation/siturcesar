@@ -122,11 +122,7 @@ function parse_yturl($url)
             @if(Session::has('message'))
                 <div class="alert alert-info" role="alert" style="text-align: center;">{{Session::get('message')}}</div>
             @endif
-            <div class="text-center">
-                <button type="button" class="btn btn-lg btn-link" id="btn-favorite">
-                    <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>
-                </button>
-            </div>
+            
             
             <p style="white-space: pre-line;">{{$actividad->actividadesConIdiomas[0]->descripcion}}</p>
         </div>
