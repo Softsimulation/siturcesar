@@ -127,34 +127,7 @@ $countItems = ($tipoItem) ? $countItems : count($query) > 0;
         .input-group>.input-group-prepend:not(:first-child)>.input-group-text {
             padding: 0;
         }
-        .header-list{
-            background-color: rgba(221,221,221,.3);
-            min-height: 250px;
-            display: flex;
-            align-items: flex-end;
-            vertical-align: bottom;
-            position: relative;
-            
-        }
-        .header-list:before{
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url(/img/bg_header.png);
-            opacity: 0.1;
-            z-index: 0;
-        }
-        .header-list .title-section{
-            text-transform: uppercase;
-            position: relative;
-            z-index: 2;
-            color: green;
-            text-shadow: 0px 1px 3px rgba(0,0,0,.4);
-            text-align: center;
-        }
+        
         .card-header {
             padding: 2px .5rem;
         }
