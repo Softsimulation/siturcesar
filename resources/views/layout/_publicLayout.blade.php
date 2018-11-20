@@ -87,6 +87,44 @@
 		#events .tile.inline-tile:nth-child(even) .tile-img{
 			background-color: #8bbe44;
 		}
+		/*Google traductor*/
+            .goog-te-gadget img {
+                display: none!important;
+            }
+            .goog-te-gadget-simple {
+                background: transparent!important;
+                color: white!important;
+                border: 0!important;
+            }
+            .goog-te-gadget-simple .goog-te-menu-value span {
+                color: #333!important;
+                font-size: 1rem!important;
+                padding-right: .5rem!important;
+                font-family: Futura, sans-serif!important;
+            }
+            .goog-te-banner {
+                background: black!important;
+                color: tton button {
+                color: #333!important;
+            }
+            .goog-te-button div {
+                background: transparent!important;
+                border: 0!important;
+            }
+            .goog-te-button button {
+                color: #333!important;
+                border: 0!important;
+                background-color: transparent!important;
+                font-family: Futura, sans-serif!important;
+            }
+            .goog-te-button {
+                border: 0!important;
+            }
+            .goog-te-menu-value span {
+                color: tton button {
+                color: #333!important;
+                font-family: Futura, sans-serif!important;
+            }
 		
     </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
