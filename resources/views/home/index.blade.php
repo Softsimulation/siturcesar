@@ -55,25 +55,25 @@
 		    		<div class="col-12 col-md-9 row align-items-center d-flex justify-content-center">
 		    			
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionNoticia/listado">
 		    						<i class="links links-noticias" aria-hidden="true"></i>
 		    						Noticias
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/quehacer?tipo=4">
 		    						<i class="links links-eventos" aria-hidden="true"></i>
 		    						Eventos
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionBolsaEmpleo/vacantes">
 		    						<i class="links links-bolsaEmpleo" aria-hidden="true"></i>
 		    						Bolsa de empleo
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionPublicacion/listado">
 		    						<i class="links links-biblioteca" aria-hidden="true"></i>
 		    						Biblioteca digital
 		    					</a>

@@ -10,8 +10,8 @@ use App\Models\Idioma;
 
 class QueHacerController extends Controller
 {
-    public function getIndex(){
-        return view('quehacer.Index', $this->queHacerData(1));
+    public function getIndex(Request $request){
+        return view('quehacer.Index', $this->queHacerData(1, $request));
     }
     
     
@@ -27,10 +27,8 @@ class QueHacerController extends Controller
      * La fecha inicial y final solo aplica para el tipo 4 (Eventos)
      * para el resto de tipos las fechas tienen por default 'NOW()'
      * */
-    private function queHacerData ($idIdioma){
-        if (Idioma::find($idIdioma) == null){
-            return ['success' => false, 'msg' => 'El idioma especificado no se encuentra registrado en la base de datos.'];
-        }
+    private function queHacerData (){
+        $idIdioma = \Config::get('app.locale') == 'es' ? 1 : 2;
         
         $query = DB::select("(SELECT actividades.id AS id,  
                  actividades.calificacion_legusto AS calificacion_legusto, 

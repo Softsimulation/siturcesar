@@ -12,18 +12,10 @@
 */
 
 
-
 Route::get('/PlanificaTuViaje','InformacionDepartamentoCtrl@PlanificaTuViaje');
 Route::get('/Departamento/AcercaDe','InformacionDepartamentoCtrl@AcercaDe');
 Route::get('/Departamento/Requisitos','InformacionDepartamentoCtrl@Requisitos');
 Route::controller('/InformacionDepartamento','InformacionDepartamentoCtrl');
-
-Route::get('/', function () {
-    
-    return view('home.index');
-    
-    
-});
 
 Route::controller('/promocionInforme','PublicoInformeController');
 Route::controller('/informes','InformesCtrl');
@@ -106,12 +98,6 @@ Route::controller('/login','LoginController');
 
 Route::controller('/importarRnt','ImportacionRntController');
 
-Route::get('/detalle', function () {
-    
-    return view('publico.detalle.index');
-    
-    
-});
 
 Route::group(['prefix' => 'publicaciones','middleware'=>'auth'], function () {
     
@@ -147,3 +133,5 @@ Route::controller('/sliders','SliderController');
 Route::controller('/suscriptores','SuscriptoreController');
 
 Route::controller('/visitante', 'VisitanteController');
+
+Route::controller('/', 'HomeController');

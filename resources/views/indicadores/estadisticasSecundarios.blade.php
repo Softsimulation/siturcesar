@@ -113,12 +113,16 @@
         <div class="panel-heading">
             <form name="form" >
                 <div class="row filtros" >
-                    <div class="col-xs-12 col-sm-6 col-md-5" >
-                        <div class="input-group">
-                            <label class="input-group-addon">Período </label>
-                            <select class="form-control" ng-model="filtro.year" ng-change="filtrarDatos()" ng-options="y.id as y.anio for y in periodos" requerid >
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-5">
+                        <div class="input-group mb-3">
+                          <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputPeriodo">Período</span>
+                          </div>
+                          <select class="form-control" ng-model="filtro.year" id="inputPeriodo" ng-change="filtrarDatos()" ng-options="y.id as y.anio for y in periodos" required >
+                              <option value="" selected disabled>Seleccione un período</option>
                             </select>
                         </div>
+                        
                     </div>
                     
                     
@@ -139,12 +143,14 @@
                                 </ul>
                             </div>
                         </div>
+                        
+                        
                     </div> 
                     
-                    <div class="col-xs-12 col-md-2 menu-descraga" >
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-2 menu-descraga d-flex justify-content-center text-center" >
                     
                         <div class="dropdown">
-                          <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                          <button class="btn btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown">
                               <i class="material-icons">cloud_download</i> Descargar
                           </button>
                           <ul class="dropdown-menu dropdown-menu-right">
