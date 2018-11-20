@@ -21,8 +21,10 @@ class BolsaEmpleoController extends Controller
     {
         
         $this->middleware('auth');
-        $this->middleware('role:Admin');
-        $this->user = \Auth::user();
+        $this->middleware('role:Admin|Promocion');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
     }
     
     public function getCrear(){

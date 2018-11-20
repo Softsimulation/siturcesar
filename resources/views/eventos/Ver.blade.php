@@ -54,7 +54,21 @@ function parse_yturl($url)
 	        <p class="w-100">Del {{date('d/m/Y', strtotime($evento->fecha_in))}} al {{date('d/m/Y', strtotime($evento->fecha_fin))}}</p>
 		  </div>
       </div>
-      
+      <div class="text-center">
+        @if(Auth::check())
+            <form role="form" action="/eventos/favorito" method="post">
+                {{ csrf_field() }}
+                <input type="hidden" name="evento_id" value="{{$evento->id}}" />
+                <button type="submit" class="btn btn-lg btn-circled btn-favorite">
+                  <span class="ion-android-favorite" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+                </button>    
+            </form>
+        @else
+            <button type="button" class="btn btn-lg btn-circled" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
+              <span class="ion-android-favorite-outline" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+            </button>
+        @endif
+      </div>
     </div>
     
     <div id="title-main-page">
@@ -91,7 +105,9 @@ function parse_yturl($url)
 		        </small>
 	            @endif
             </h4>
-            
+            @if(Session::has('message'))
+                <div class="alert alert-info" role="alert" style="text-align: center;">{{Session::get('message')}}</div>
+            @endif
             @if($video_promocional != null)
             <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional) ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif

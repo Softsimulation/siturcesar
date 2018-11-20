@@ -6,10 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Destino;
+use App\Models\Comentario_Destino;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Http\FormRequest;
 
 class DestinosController extends Controller
 {
     //
+    
+       public function __construct()
+	{
+	    $this->user = Auth::user();
+	}
+    
     public function getVer($id){
         if ($id == null){
             return response('Bad request.', 400);
@@ -17,7 +26,10 @@ class DestinosController extends Controller
             return response('Not found.', 404);
         }
         
-        $destino = Destino::where('id', $id)->with(['tipoDestino' => function ($queryTipoDestino){
+        $destino = Destino::where('id', $id)->with(['comentariosDestinos'=> function ($queryComentario){
+            $queryComentario->orderBy('fecha', 'DESC')->with(['user']);
+        }
+            ,'tipoDestino' => function ($queryTipoDestino){
             $queryTipoDestino->with(['tipoDestinoConIdiomas' => function($queryTipoDestinoConIdiomas){
                 $queryTipoDestinoConIdiomas->orderBy('idiomas_id')->select('idiomas_id', 'tipo_destino_id', 'nombre');
             }])->select('id');
@@ -44,4 +56,57 @@ class DestinosController extends Controller
         //return ['destino' => $destino, 'video_promocional' => $video_promocional];
         return view('destinos.Ver', ['destino' => $destino, 'video_promocional' => $video_promocional]);
     }
+    
+        public function postGuardarcomentario(Request $request){
+	   
+	   $validator = \Validator::make($request->all(), [
+            'id' => 'required|exists:destino,id',
+            'calificacionFueFacilLlegar' => 'required|numeric|min:1|max:5',
+            'calificacionLeGusto' => 'required|numeric|min:1|max:5',
+            'calificacionRegresaria' => 'required|numeric|min:1|max:5',
+            'calificacionRecomendaria' => 'required|numeric|min:1|max:5',
+            'comentario' => 'required|string',
+        ],[
+            'comentario.string' => 'El comentario  debe ser de tipo string.',
+            'id.exists' => 'No se encontro la actividad',
+            'calificacionFueFacilLlegar.min' => 'la calificacion fue facil llegar debe ser mínimo de 1.',
+            'calificacionFueFacilLlegar.max' => 'la calificacion fue facil llegar debe ser maximo de 5.',
+            'calificacionRegresaria.min' => 'la calificacion regresaria debe ser mínimo de 1.',
+            'calificacionRegresaria.max' => 'la calificacion regresaria debe ser maximo de 5.',
+            'calificacionRecomendaria.min' => 'la calificacion recomendaria debe ser mínimo de 1.',
+            'calificacionRecomendaria.max' => 'la calificacion recomendaria debe ser maximo de 5.',
+            ]
+        );
+        
+           if($validator->fails()){
+           return redirect('destinos/ver/'.$request->id)->with('error','No se pudo guardar el comentario');
+            
+        }
+        
+        if($this->user == null){
+            return redirect('destinos/ver/'.$request->id)->with('error','No se pudo guardar el comentario');
+            
+        }
+        $comentario = new Comentario_Destino();
+        $comentario->destinos_id = $request->id;
+        $comentario->user_id = $this->user->id;
+        $comentario->comentario = $request->comentario;
+        $comentario->llegar = $request->calificacionFueFacilLlegar;
+        $comentario->recomendar = $request->calificacionRecomendaria;
+        $comentario->volveria = $request->calificacionRegresaria;
+        $comentario->le_gusto = $request->calificacionLeGusto;
+        $comentario->fecha = date("Y/m/d-H:i:s");
+        
+        
+        $destino = Destino::where('id',$request->id)->first();
+        $destino->calificacion_legusto = Comentario_Destino::where('destinos_id',$request->id)->avg('le_gusto');
+        $destino->calificacion_llegar = Comentario_Destino::where('destinos_id',$request->id)->avg('llegar'); 
+        $destino->calificacion_recomendar = Comentario_Destino::where('destinos_id',$request->id)->avg('recomendar'); 
+        $destino->calificacion_volveria = Comentario_Destino::where('destinos_id',$request->id)->avg('volveria'); 
+        $destino->save();
+        $comentario->save();
+        return redirect('destinos/ver/'.$request->id)->with('success','Comentario guardado correctamente');
+    }
+    
+    
 }
