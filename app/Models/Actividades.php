@@ -47,7 +47,7 @@ class Actividades extends Model
      */
     public function comentariosActividads()
     {
-        return $this->hasMany('App\ComentariosActividad', 'actividad_id');
+        return $this->hasMany('App\Models\Comentario_Actividad', 'actividad_id');
     }
 
     /**

@@ -22,15 +22,18 @@
             top:auto!important;
             bottom: 30px!important;
         }
+        header{
+            position:static;
+        }
     </style>
-
+<script src="{{asset('/js/plugins/angular.min.js')}}"></script>
 @endsection
 
 @section('content')
 
-  <div ng-app="AppMapa"  ng-controller="mapa"class="container-fluid" style="margin-top:10px; padding-left: 0; padding-right: 0;" >
-        <div class="row">
-            <div class="col-xs-12">
+    <div ng-app="AppMapa"  ng-controller="mapa"class="container-fluid" style="margin-top:10px; padding-left: 0; padding-right: 0;" >
+        <div class="row no-gutters ">
+            <div class="col-12">
                 <div class="content-map">
                     <div class="st-filter-pane" ng-show="!showInfoEntidad">
                         <div class="panel-group" style="margin-bottom: 0;" id="accordion" role="tablist" aria-multiselectable="true">
@@ -104,28 +107,28 @@
                             <a href="@{{detalle.url}}" target="_blank" class="btn st-btn-detail-map">Ver más</a>
                         </div>
                     </div> 
-                    <ng-map zoom="8" center="[10.4113014,-74.4056612]" styles="[{featureType:'poi.school',elementType:'labels',stylers:[{visibility:'off'}]} , {featureType:'poi.business',elementType:'labels',stylers:[{visibility:'off'}]} , {featureType:'poi.attraction',elementType:'labels',stylers:[{visibility:'off'}]} ]" style="height: 700px" map-type-control="false" street-view-control="true" on-zoom_changed="zoomChanged()">
+                    <ng-map zoom="8" center="[10.4113014,-74.4056612]" styles="[{featureType:'poi.school',elementType:'labels',stylers:[{visibility:'off'}]} , {featureType:'poi.business',elementType:'labels',stylers:[{visibility:'off'}]} , {featureType:'poi.attraction',elementType:'labels',stylers:[{visibility:'off'}]} ]" style="height: 700px;width: 100%;" map-type-control="false" street-view-control="true" on-zoom_changed="zoomChanged()">
                         
                         <!--................................Marcadores..............................-->
                         <marker ng-repeat="dest in destinos | limitTo : limiteDest"
                                 position="@{{dest.latitud}},@{{dest.longitud}}"
                                 icon="/Content/icons/maps/destino.png"
                                 id="@{{dest.id}}"
-                                on-click="showInfo(event, dest.id,dest.destino_con_idiomas[0].nombre, dest.multimedia_destinos[0].ruta, '/Atraccion/Ver/' + dest.id )"
+                                on-click="showInfo(event, dest.id,dest.destino_con_idiomas[0].nombre, dest.multimedia_destinos[0].ruta, '/destinos/ver/' + dest.id )"
                                 title="Destino: @{{dest.destino_con_idiomas[0].nombre}}"></marker>
 
                         <marker ng-repeat="atr in atracciones|filter:filterAtracciones| limitTo : limiteAtr"
                                 position="@{{atr.sitio.latitud}},@{{atr.sitio.longitud}}"
                                 icon="@{{atr.icono}}"
                                 id="@{{atr.id}}"
-                                on-click="showInfo(event, atr.id,atr.sitio.sitios_con_idiomas[0].nombre,atr.sitio.multimedia_sitios[0].ruta,'/Destino/Ver/' + atr.id)"
+                                on-click="showInfo(event, atr.id,atr.sitio.sitios_con_idiomas[0].nombre,atr.sitio.multimedia_sitios[0].ruta,'/atracciones/ver/' + atr.id)"
                                 title="Atraccion: @{{atr.sitio.sitios_con_idiomas[0].nombre}}"></marker>
 
                         <marker ng-repeat="prov in proveedores|filter:filterProveedores | limitTo : limiteProv"
                                 position="@{{prov.latitud}},@{{prov.longitud}}"
                                 icon="@{{prov.icono}}"
                                 id="@{{prov.id}}"
-                                on-click="showInfo(event, prov.id, prov.razon_social,prov.proveedor[0].multimedia_proveedores[0].ruta,'/Proveedor/Ver/' + prov.id)"
+                                on-click="showInfo(event, prov.id, prov.razon_social,prov.proveedor[0].multimedia_proveedores[0].ruta,'/Proveedor/ver/' + prov.id)"
                                 title="Proveedor: @{{prov.razon_social}}"></marker>
                                 
                     </ng-map>
@@ -141,7 +144,7 @@
 
 
 @section('javascript')
-    <script src="{{asset('/js/plugins/angular.min.js')}}"></script>
+    
     <script src="{{asset('/js/plugins/angular-sanitize.js')}}"></script>
     <script src="{{asset('/js/plugins/select.min.js')}}"></script>
     <script src="{{asset('/js/plugins/checklist-model.js')}}"></script>

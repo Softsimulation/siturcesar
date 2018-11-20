@@ -90,9 +90,20 @@
                     <div class="col-xs-12">
                         <div class="form-group" ng-class="{'has-error': (crearActividadForm.$submitted || crearActividadForm.descripcion.$touched) && crearActividadForm.descripcion.$error.required}">
                             <label for="descripcion"><span class="asterisk">*</span> Descripción</label>
-                            <textarea style="resize: none;" ng-model="actividad.datosGenerales.descripcion" rows="5" required name="descripcion" id="descripcion" class="form-control" placeholder="Descripción de la actividad (De 100 a 1,000 caracteres)"></textarea>
-                            
+                            <ng-ckeditor  
+                                      ng-model="actividad.datosGenerales.descripcion"
+                                      id="descripcion" 
+                                      skin="moono" 
+                                      remove-buttons="Image" 
+                                      remove-plugins="iframe,flash,smiley"
+                                      name="descripcion"
+                                      required
+                                      >
+                            </ng-ckeditor>
                         </div>
+                        <span class="messages" ng-show="crearActividadForm.$submitted || crearActividadForm.descripcion.$touched">
+                            <span ng-show="crearActividadForm.descripcion.$error.required" class="text-error">* El campo es obligatorio.</span>
+                        </span>
                     </div>
                     <div class="col-xs-12 col-sm-6">
                         <div class="form-group" ng-class="{'has-error': (crearActividadForm.$submitted || crearActividadForm.valor_minimo.$touched) && (crearActividadForm.valor_minimo.$error.required || crearActividadForm.valor_minimo.$error.min)}">
@@ -228,4 +239,6 @@
 <script src="{{asset('/js/administrador/actividades/services.js')}}"></script>
 <script src="{{asset('/js/administrador/actividades/app.js')}}"></script>
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>
+<script src="{{asset('/js/plugins/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('/js/plugins/ckeditor/ngCkeditor-v2.0.1.js')}}"></script>
 @endsection
