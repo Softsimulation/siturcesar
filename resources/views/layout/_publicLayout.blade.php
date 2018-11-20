@@ -78,9 +78,9 @@
 		#publicaciones{
 			padding: 2% 0;
 		}
-		.tiles .tile:not(:last-child) {
-		    border-bottom: 1px solid #eee;
-		}
+		/*.tiles .tile:not(:last-child) {*/
+		/*    border-bottom: 1px solid #eee;*/
+		/*}*/
 		#events .tile.inline-tile:nth-child(odd) .tile-img{
 			background-color: green;
 		}
