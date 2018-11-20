@@ -21,8 +21,10 @@ class BolsaEmpleoController extends Controller
     {
         
         $this->middleware('auth');
-        $this->middleware('role:Admin');
-        $this->user = \Auth::user();
+        $this->middleware('role:Admin|Promocion');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
     }
     
     public function getCrear(){
@@ -61,7 +63,7 @@ class BolsaEmpleoController extends Controller
 		}
 		
 		if(isset($request->fecha_vencimiento)){
-		    if($request->fecha_vencimiento < date('d-m-Y') ){
+		    if( date('Y-m-d',strtotime(str_replace("/","-",$request->fecha_vencimiento))) < date('Y-m-d') ){
     		    return ["success"=>false,"errores"=> [ ["La fecha de vencimiento no puede ser menor a la fecha actual."] ] ];
     		}
 		}
@@ -142,7 +144,7 @@ class BolsaEmpleoController extends Controller
 		}
 		
 		if(isset($request->fecha_vencimiento)){
-		    if($request->fecha_vencimiento < date('d-m-Y') ){
+		    if( date('Y-m-d',strtotime(str_replace("/","-",$request->fecha_vencimiento))) < date('Y-m-d') ){
     		    return ["success"=>false,"errores"=> [ ["La fecha de vencimiento no puede ser menor a la fecha actual."] ] ];
     		}
 		}
@@ -178,7 +180,7 @@ class BolsaEmpleoController extends Controller
     }
     
     public function getCargarvacantes(){
-        $vacantes = Oferta_Vacante::with(['proveedoresRnt','municipio','nivelEducacion','tiposCargosVacante'])->get();
+        $vacantes = Oferta_Vacante::with(['proveedoresRnt','municipio','nivelEducacion','tiposCargosVacante','postulaciones'])->get();
         return ['vacantes' => $vacantes];
     }
     

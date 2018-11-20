@@ -158,7 +158,7 @@
                         <td>@{{grupo.menores_quince_no_presentes}}</td>
                     </tr>
                     <tr>
-                        <td>Personas del Magdalena</td>
+                        <td>Personas del Cesar</td>
                         <td>@{{grupo.personas_magdalena}}</td>
                     </tr>
                     <tr>

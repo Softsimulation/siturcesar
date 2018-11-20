@@ -509,7 +509,7 @@
                 <!-- Experiencia de viaje-->
                 <h3 class="panel-title"><b>F9. Sostenibilidad</b></h3>
             </div>
-            <div class="panel-footer"><b>En una escala de 1 a 10, donde 1 es Mal trato y 10 Trato excelente. ¿Cómo califica el trato que reciben los turistas en Barranquilla? Respuesta única.</b></div>
+            <div class="panel-footer"><b>En una escala de 1 a 10, donde 1 es Mal trato y 10 Trato excelente. ¿Cómo califica el trato que reciben los turistas en Valledupar? Respuesta única.</b></div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12" style="overflow-x: auto;">

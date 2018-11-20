@@ -11,7 +11,7 @@
          "periodos":[
               {
                  "nombre": "Diciembre 2015 - Enero 2016",
-                 "descripcion": "La duración media de la estancia fuera del departamento del Magdalena para los integrantes de los hogares encuestados que realizaron viajes en Diciembre del 2015 y Enero del 2016 fue de seis (6) noches.",
+                 "descripcion": "La duración media de la estancia fuera del departamento del Cesar para los integrantes de los hogares encuestados que realizaron viajes en Diciembre del 2015 y Enero del 2016 fue de seis (6) noches.",
                  "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								          {"label":"Duración media de la estancia de establecimiento comercial","type":"number"} 
@@ -29,7 +29,7 @@
               },
               {
                 "nombre": "Semana Santa : 2016",
-                "descripcion": "La duración media de la estancia fuera del departamento del Magdalena para los integrantes de los hogares encuestados que realizaron viajes en la temporada de Semana Santa 2016 fue de 5 noches.",
+                "descripcion": "La duración media de la estancia fuera del departamento del Cesar para los integrantes de los hogares encuestados que realizaron viajes en la temporada de Semana Santa 2016 fue de 5 noches.",
                   "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Duración media de la estancia de establecimiento comercial","type":"number"}
@@ -78,7 +78,7 @@
               },
               {
                 "nombre": "Semana Santa : 2016",
-                "descripcion": "El medio de transporte empleado por los viajeros en la temporada de Semana Santa 2016 para desplazarse fuera del departamento de Magdalena  fue:  Tansporte aéreo, con un 26%.",
+                "descripcion": "El medio de transporte empleado por los viajeros en la temporada de Semana Santa 2016 para desplazarse fuera del departamento de Cesar  fue:  Tansporte aéreo, con un 26%.",
                   "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Medio de transporte","type":"number"}
@@ -109,7 +109,7 @@
          "periodos":[
               {
                 "nombre": "Diciembre 2015 - Enero 2016",
-                 "descripcion": "El motivo principal de los viajes realizados fuera del departamento del Magdalena durante la temporada de Diciembre del 2015 y Enero del 2016, fue la visita a familiares y amigos, con un 55%.",
+                 "descripcion": "El motivo principal de los viajes realizados fuera del departamento del Cesar durante la temporada de Diciembre del 2015 y Enero del 2016, fue la visita a familiares y amigos, con un 55%.",
                   "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Motivo de viaje/Motivos personales","type":"number"} 
@@ -126,7 +126,7 @@
               },
               {
                 "nombre": "Semana Santa : 2016",
-                "descripcion": "El motivo principal de los viajes realizados fuera del departamento del Magdalena durante  la temporada de Semana Santa 2016, fue Vacaciones, Recreo y Ocio con el 60%.",
+                "descripcion": "El motivo principal de los viajes realizados fuera del departamento del Cesar durante  la temporada de Semana Santa 2016, fue Vacaciones, Recreo y Ocio con el 60%.",
                   "datos": {
 						     "cols":[ {"label":"Series","type":"string"},
 								      {"label":"Motivo de viaje/Motivos personales","type":"number"} 	
@@ -199,7 +199,7 @@
          "periodos":[
                 {
 		          "nombre": "Diciembre 2015 - Enero 2016",
-		          "descripcion": "Para los viajes realizados en la temporada Diciembre del 2015 y Enero del 2016, fuera del departamento del Magdalena el tipo de alojamiento utilizado por los viajeros fueron las casas de familiares y amigos, con un 78%.",
+		          "descripcion": "Para los viajes realizados en la temporada Diciembre del 2015 y Enero del 2016, fuera del departamento del Cesar el tipo de alojamiento utilizado por los viajeros fueron las casas de familiares y amigos, con un 78%.",
 		          "datos": {
 					  "cols": [
 					        {"label":"Topping","type":"string"},
@@ -217,7 +217,7 @@
 				},
 				{
 		          "nombre": "Semana Santa : 2016",
-		          "descripcion": "Para los viajes realizados en la temporada de Semana Santa 2016, fuera del departamento del Magdalena el tipo de alojamiento utilizado por los viajeros fueron las casas de familiares y amigos, con un 63%.",
+		          "descripcion": "Para los viajes realizados en la temporada de Semana Santa 2016, fuera del departamento del Cesar el tipo de alojamiento utilizado por los viajeros fueron las casas de familiares y amigos, con un 63%.",
 		          "datos": {
 					  "cols": [
 					        {"label":"Topping","type":"string"},
@@ -245,7 +245,7 @@
          "periodos":[
                 {
 		          "nombre": "Diciembre 2015 - Enero 2016",
-		          "descripcion": "Del total de viajes realizados en la temporada Diciembre del 2015 y Enero del 2016  dentro del departamento del Magdalena, el 99% fueron viajes turísticos.",
+		          "descripcion": "Del total de viajes realizados en la temporada Diciembre del 2015 y Enero del 2016  dentro del departamento del Cesar, el 99% fueron viajes turísticos.",
 		          "datos": {
 					  "cols": [
 					        {"label":"Topping","type":"string"},
@@ -259,7 +259,7 @@
 				},
 				{
 		          "nombre": "Semana Santa : 2016",
-		          "descripcion": "Del total de viajes realizados en la temporada de Semana Santa 2016 dentro del departamento del Magdalena, el 94% fueron viajes turísticos.",
+		          "descripcion": "Del total de viajes realizados en la temporada de Semana Santa 2016 dentro del departamento del Cesar, el 94% fueron viajes turísticos.",
 		          "datos": {
 					  "cols": [
 					        {"label":"Topping","type":"string"},

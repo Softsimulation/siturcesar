@@ -53,7 +53,7 @@
         
        <div class="panel panel-success">
             <div class="panel-heading">
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.14 ¿Cuáles áreas protegidas identifica en Cesar? </b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.14 ¿Cuáles áreas protegidas identifica en el Cesar? </b></h3>
             </div>
             <div class="panel-footer"><b>Respuesta abierta</b></div>
             <div class="panel-body">
@@ -94,7 +94,7 @@
          <div class="panel panel-success" ng-show="ambiental.criterios_calificacion_id!=4 && ambiental.criterios_calificacion_id != undefined">
                 <div class="panel-heading">
                     <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.15.1. ¿Sabe si en Cesar existe una guía que caracterice la flora, fauna y especies en vía de extinción para la conservación de los mismos?</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.15.1. ¿Sabe si en el Cesar existe una guía que caracterice la flora, fauna y especies en vía de extinción para la conservación de los mismos?</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta única</b></div>
                 <div class="panel-body">
@@ -130,7 +130,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             
-                            <div class="checkbox" ng-repeat="ite in actividades">
+                            <div class="checkbox" ng-repeat="ite in actividades | orderBy:'id'">
                                 <label>
                                     <input type="checkbox" ng-disabled="bandera==false && ite.id==6" checklist-model="ambiental.actividades" name ="actividad" checklist-value="ite.id" > @{{ite.nombre}}
                                 </label>
@@ -193,7 +193,7 @@
         
                  <div class="panel panel-success">
                 <div class="panel-heading">
-                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.19 De las siguientes situaciones en función del turismo sostenible, ¿Cuáles considera que representan  un riesgo  alto, medio  o bajo en  Cesar</b></h3>
+                    <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.19 De las siguientes situaciones en función del turismo sostenible, ¿Cuáles considera que representan  un riesgo  alto, medio  o bajo en  el Cesar</b></h3>
                 </div>
                 <div class="panel-footer"><b>Respuesta múltiple</b></div>
                 <div class="panel-body">
@@ -231,7 +231,7 @@
         <div class="panel panel-success">
             <div class="panel-heading">
                 <!-- P2. ¿El viaje al departamento hizo parte de un paquete/plan turístico o excursión?-->
-                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.20 Califique como positivo o negativo el efecto que ha tenido el turismo en el medio ambiente en Cesar</b></h3>
+                <h3 class="panel-title"><b><span class="asterik glyphicon glyphicon-asterisk"></span>P.20 Califique como positivo o negativo el efecto que ha tenido el turismo en el medio ambiente en el Cesar</b></h3>
             </div>
             <div class="panel-footer"><b>Respuesta única</b></div>
             <div class="panel-body">

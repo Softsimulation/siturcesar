@@ -1,7 +1,7 @@
 
 @extends('layout._ofertaEmpleoLayaout')
 
-@section('Title','Caracterización de empleados :: SITUR Magdalena')
+@section('Title','Caracterización de empleados :: SITUR Cesar')
 
 
 @section('estilos')

@@ -143,16 +143,40 @@
         					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoractividades')); ?>">Administrar actividades</a></li>
         					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoreventos')); ?>">Administrar eventos</a></li>
         					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradorrutas')); ?>">Administrar rutas turísticas</a></li>
+        					      <li><a role="menuitem" href="<?php echo e(asset('/InformacionDepartamento/configuracionacercade')); ?>">Acerca del departamento</a></li>
+        					        <li><a role="menuitem" href="<?php echo e(asset('/InformacionDepartamento/configuracionrequisitos')); ?>">Requisitos del viaje</a></li>
+        					    <li><a role="menuitem" href="<?php echo e(asset('/bolsaEmpleo/vacantes')); ?>">Bolsa de empleo</a></li>
+        					    <li><a role="menuitem" href="<?php echo e(asset('/publicaciones/listadoadmin')); ?>">Biblioteca Digital</a></li>
+        					    <li><a role="menuitem" href="<?php echo e(asset('/noticias/listadonoticias')); ?>">Noticias</a></li>
+        					    <li><a role="menuitem" href="<?php echo e(asset('/informes/configuracion')); ?>">Informes</a></li>
                             </ul>
                         </li>
+                          
                         <li>
                             <a role="menuitem" href="<?php echo e(asset('turismoreceptor/listadoencuestas')); ?>">Turismo receptor</a>
                         </li>
                         <li>
                             <a role="menuitem" href="<?php echo e(asset('temporada')); ?>">Turismo interno y emisor</a>
                         </li>
-                        <li>
-                            <a role="menuitem" href="<?php echo e(asset('ofertaempleo/listadoproveedores')); ?>">Oferta y empleo</a>
+                       
+                       
+                           <li>
+                            <a role="menuitem" href="#menuSostenibilidad" aria-haspopup="true" aria-expanded="false">Oferta y empleo</a>
+                            <ul role="menu" id="menuSostenibilidad" aria-label="Sostenibilidad">
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('ofertaempleo/listadoproveedores')); ?>">Listado de proveedores</a>
+                                </li>
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('ofertaempleo/listadoproveedoresrnt')); ?>">Activar proveedores</a>
+                                </li>
+                                  <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('importarRnt')); ?>">Importar RNT</a>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                          <li>
+                            <a role="menuitem" href="<?php echo e(asset('MuestraMaestra/periodos')); ?>">Muestra Maestra</a>
                         </li>
                         <li>
                             <a role="menuitem" href="#menuSostenibilidad" aria-haspopup="true" aria-expanded="false">Sostenibilidad</a>
@@ -160,8 +184,19 @@
                                 <li role="none">
                                     <a role="menuitem" href="<?php echo e(asset('sostenibilidadhogares/encuestas')); ?>">Hogares</a>
                                 </li>
+                                <li role="none">
+                                    <a role="menuitem" href="<?php echo e(asset('sostenibilidadpst/encuestas')); ?>">PST</a>
+                                </li>
                             </ul>
                         </li>
+                         <li>
+                            <a role="menuitem" href="<?php echo e(asset('encuesta/listado')); ?>">Encuestas personalizadas</a>
+                        </li>
+                        
+                          <li>
+                            <a role="menuitem" href="<?php echo e(asset('EstadisticasSecundarias/configuracion')); ?>">Estadísticas secundarias</a>
+                        </li>
+                        
                         <li>
                             <a role="menuitem" href="<?php echo e(asset('exportacion')); ?>">Exportación</a>
                         </li>

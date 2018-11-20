@@ -31,13 +31,13 @@
                 <div class="carousel-item active">
                   <img class="d-block w-100" src="/img/slider/slide1.jpg" alt="First slide">
                   <div class="carousel-caption d-none d-md-block">
-				    <h3 class="text-center text-lg-left col-12 col-lg-6">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h3>
+				    <h3 class="text-center text-lg-left col-12 col-lg-6">ASISTIR A UNA REUNIÓN DE NEGOCIOS O REALIZAR UNA INVERSIÓN <small class="d-block">es el principal motivo de viaje para visitar el departamento en mayo de 2018</small></h3>
 				  </div>
                 </div>
                 <div class="carousel-item">
                   <img class="d-block w-100" src="/img/slider/slide2.jpg" alt="Second slide">
                   <div class="carousel-caption d-none d-md-block">
-				    <h3 class="text-center col-12">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h23>
+				    <h3 class="text-center col-12">EL TRANSPORTE TERRESTRE DE PASAJEROS (BUS, AUTOMÓVIL, TAXI) <small class="d-block">fue el medio de transporte más utilizado</small></h23>
 				  </div>
                 </div>
               </div>
@@ -55,27 +55,27 @@
 		    		<div class="col-12 col-md-9 row align-items-center d-flex justify-content-center">
 		    			
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionNoticia/listado">
 		    						<i class="links links-noticias" aria-hidden="true"></i>
 		    						Noticias
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/quehacer?tipo=4">
 		    						<i class="links links-eventos" aria-hidden="true"></i>
 		    						Eventos
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionBolsaEmpleo/vacantes">
 		    						<i class="links links-bolsaEmpleo" aria-hidden="true"></i>
 		    						Bolsa de empleo
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionInforme/listado">
 		    						<i class="links links-biblioteca" aria-hidden="true"></i>
-		    						Biblioteca digital
+		    				Informes
 		    					</a>
 		    				</div>
 		    		</div>

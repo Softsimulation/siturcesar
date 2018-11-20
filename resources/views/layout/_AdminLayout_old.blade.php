@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Sistema de Información Turistica del Magdalena y Santa Marta">
-    <meta name="author" content="SITUR Magdalena">
+    <meta name="description" content="Sistema de Información Turistica del CESAR y Valledupar">
+    <meta name="author" content="SITUR CESAR">
     <title>@yield('Title')</title>
     <link rel="icon" type="image/ico" href="{{asset('Content/icons/favicon-96x96.png')}}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">

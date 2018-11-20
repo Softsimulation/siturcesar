@@ -170,7 +170,9 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
         
         //token auth
-        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider'
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
+        
+        Chumper\Zipper\ZipperServiceProvider::class
 
     ],
 
@@ -228,7 +230,9 @@ return [
         'CsvWriter' => Wilgucki\Csv\Facades\Writer::class,
         
         'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
-        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory'
+        'JWTFactory' => 'Tymon\JWTAuth\Facades\JWTFactory',
+        
+        'Zipper' => Chumper\Zipper\Zipper::class
 
 
     ],
