@@ -12,6 +12,11 @@
 */
 
 
+Route::get('/PlanificaTuViaje','InformacionDepartamentoCtrl@PlanificaTuViaje');
+Route::get('/Departamento/AcercaDe','InformacionDepartamentoCtrl@AcercaDe');
+Route::get('/Departamento/Requisitos','InformacionDepartamentoCtrl@Requisitos');
+Route::controller('/InformacionDepartamento','InformacionDepartamentoCtrl');
+
 Route::controller('/promocionInforme','PublicoInformeController');
 Route::controller('/informes','InformesCtrl');
 Route::get('/Mapa', 'MapaCtrl@getIndex');
