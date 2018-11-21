@@ -73,6 +73,7 @@
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
+		    					<a href="/promocionPublicacion/listado">
 		    					<a href="/promocionInforme/listado">
 		    						<i class="links links-biblioteca" aria-hidden="true"></i>
 		    				Informes
@@ -100,7 +101,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/receptor" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -112,7 +113,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/interno" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -124,7 +125,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/emisor" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -136,7 +137,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/oferta" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -148,7 +149,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/empleo" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -160,7 +161,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/sostenibilidad" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -191,6 +192,7 @@
 				<div class="row">
 					<div class="col-12 col-md-6">
 						<h2>Noticias <small><a href="#" class="btn btn-link">Ver todo</a></small></h2>
+						{{$noticias}}
 						<div class="tiles">
 							<section class="tile inline-tile">
 	                            <div class="tile-img">
