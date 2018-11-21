@@ -184,20 +184,6 @@
                 @endforeach
               </div>
             </div>
-            <!--<div class="dropdown text-center" ng-init="indicadorSelect={{$indicadores[0]['id']}}">-->
-            <!--  <button type="button" class="btn btn-outline-primary text-uppercase dropdown-toggle"id="dropdownMenuIndicadores" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
-            <!--      Ver más estadísticas <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>-->
-            <!--  </button>-->
-              
-            <!--  <ul class="dropdown-menu" aria-labelledby="dropdownMenuIndicadores" ng-init="buscarData( {{$indicadores[0]['id']}} )">-->
-            <!--    @foreach ($indicadores as $indicador)-->
-            <!--        <li ng-class="{'active': (indicadorSelect=={{$indicador['id']}}) }">-->
-            <!--          <button type="button" ng-click="changeIndicador({{$indicador['id']}})">{{$indicador["idiomas"][0]['nombre']}}</button>-->
-            <!--        </li>-->
-            <!--    @endforeach-->
-                
-            <!--  </ul>-->
-            <!--</div>-->
         </div>
     </div>
     
@@ -239,7 +225,7 @@
                     <div class="panel-heading pl-3 pr-3">
                         <form name="form" >
                             <div class="row filtros" >
-                                <div class="col-12 col-md-3" >
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" >
                                     <label for="yearSelect" class="sr-only">Periodo</label>
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
@@ -257,7 +243,7 @@
                                     <!--</div>-->
                                 </div>
                                 
-                                <div class="col-12 col-md-3" ng-show="yearSelect.mes" >
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-show="yearSelect.mes" >
                                     <label for="mesSelect" class="sr-only">Mes</label>
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
@@ -275,7 +261,7 @@
                                     <!--</div>-->
                                 </div>
                                 
-                                <div class="col-12 col-md-3" ng-show="yearSelect.meses" >
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-show="yearSelect.meses" >
                                     <label for="filtro-mes" class="sr-only">Meses</label>
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
@@ -293,7 +279,7 @@
                                     <!--</div>-->
                                 </div>
                                 
-                                <div class="col-12 col-md-3" ng-show="yearSelect.temporadas" >
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-show="yearSelect.temporadas" >
                                     <label for="filtro-temporada" class="sr-only">Temporada</label>
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
@@ -311,7 +297,7 @@
                                     <!--</div>-->
                                 </div>
                                 
-                                <div class="col-12 col-md-4" ng-if="indicadorSelect==5 || indicadorSelect==13 || indicadorSelect==19">
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-if="indicadorSelect==5 || indicadorSelect==13 || indicadorSelect==19">
                                     
                                     <label for="SelectTipoGasto" class="sr-only">Gasto promedio</label>
                                     <div class="input-group mb-3">
@@ -334,7 +320,7 @@
                                     <!--</div>-->
                                 </div>
                                 
-                                <div class="col-12 col-md-3" >
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" >
                                     
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
@@ -370,10 +356,10 @@
                                     <!--</div>-->
                                 </div> 
                                 
-                                <div class="col-xs-12 col-md-2 menu-descraga" >
+                                <div class="col-xs-12 col-sm-12 col-lg-2 menu-descraga" >
                                 
                                     <div class="dropdown">
-                                      <button class="btn btn-outline-primary dropdown-toggle w-100" type="button" data-toggle="dropdown">
+                                      <button class="btn btn-outline-primary dropdown-toggle w-100" id="dropdownMenuButton" type="button" data-toggle="dropdown">
                                           <i class="ion-android-download"></i> Descargar
                                       </button>
                                       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -397,10 +383,13 @@
                         <canvas id="base" class="chart-base" chart-type="graficaSelect.codigo" fill="black" style="background: white;"
                           chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colors="colores" chart-dataset-override="override" >
                         </canvas>
+                        <div class="container text-right">
+                            <a class="item-footer" href="http://www.citur.gov.co/" target="_blank" title="Ir a CITUR">
+                                <img src="/Content/image/presentacion_CITUR-01.png" width="65">
+                                <span class="sr-only">Ir a CITUR</span>
+                            </a>
+                        </div>
                         
-                        <a class="item-footer" style="float:right;margin-right: 10px;" href="http://www.citur.gov.co/" target="_blank"  >
-                            <img src="/Content/image/presentacion_CITUR-01.png" width="65">
-                        </a>
                         
                     </div>
                 </div>
@@ -412,11 +401,11 @@
                
                
                 <div class="panel panel-default" ng-show="data.length>0" >
-                        <div class="panel-heading">
-                            <i class="material-icons">table_chart</i> <span id="tituloIndicadorGrafica" > @{{tituloIndicadorGrafica}} </span>
-                            <a href id="descargarTABLA" >
-                                 <img src="/Content/graficas/excel.png" class="icono" ></img>
-                            </a>
+                        <div class="panel-heading pr-3 pl-3 d-flex justify-content-between align-items-center">
+                            <legend id="tituloIndicadorGrafica"><i class="ion-ios-grid-view-outline"></i>  @{{tituloIndicadorGrafica}} </legend>
+                            <button type="button" href id="descargarTABLA" class="btn btn-outline-success">
+                                 <img src="/Content/graficas/excel.png" class="icono" ></img> <span class="d-none d-sm-inline-block">Decargar tabla</span>
+                            </button>
                         </div>
                         <div class="panel-body" id="customers" style="overflow-x: auto;width: 100%;margin-right: 0;" >
                             
@@ -460,14 +449,15 @@
                     </div>
         
           </div>
-          <div id="tab2" class="tab-pane fade">
+          <div id="tab2" class="tab-pane fade p-3">
               
-                <a href id="descargarPivotTable" >
+                <button type="button" id="descargarPivotTable" class="btn btn-outline-success">
                      <img src="/Content/graficas/excel.png" class="icono" ></img>
-                </a>
+                     Descargar en formato Excel
+                </button>
               
                 <div class="row" >
-                    <div class="table-responsive col-lg-12 col-md-12 col-sm-12" style="max-height:490px">
+                    <div class="table-responsive col-12" style="max-height:490px">
                         <div id="tablaDinamica" style="min-height:430px;"></div>
                     </div>
                 </div>

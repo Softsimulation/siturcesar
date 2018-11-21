@@ -12,11 +12,6 @@ function parse_yturl($url)
 
 @section ('estilos')
     <style>
-        header{
-            position: static;
-            background-color: black;
-            margin-bottom: 1rem;
-        }
         .nav-bar > .brand a img{
             height: auto;
         }
@@ -26,10 +21,21 @@ function parse_yturl($url)
     </style>
 @endsection
 
+@section('meta_og')
+<meta property="og:title" content="{{$informacion->titulo}}. Miralo en SITUR Cesar" />
+<meta property="og:image" content="{{asset('/img/brand/96.png')}}" />
+@endsection
 
 @section('content')
+<div class="header-list without-options">
+        <div class="container">
+            <h2 class="title-section"><small class="d-block">Información del departamento</small> {{$informacion->titulo}}</h2>
+            
+        </div>
+        
+    </div>
+
     <div class="container">
-        <h2 class="text-danger text-center">{{$informacion->titulo}}</h2>
     
         @if(count($informacion->imagenes) > 0)
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
@@ -77,6 +83,22 @@ function parse_yturl($url)
         
     </div>
     
+    
+    <div id="shareButtons" class="text-center">
+        <p>Comparte esta información</p>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{\Request::url()}}" role="button" class="btn btn-primary" title="Compartir en Facebook" target="_blank" rel="noopener noreferrer">
+            <span class="ion-social-facebook" aria-hidden="true"></span>
+            <span class="d-none d-sm-inline-block">Facebook</span>
+        </a>
+        <a href="https://twitter.com/home?status= {{$informacion->titulo}} por SITUR Cesar. Lee más en {{\Request::url()}}" role="button" class="btn btn-info" title="Compartir en Twitter" target="_blank" rel="noopener noreferrer">
+            <span class="ion-social-twitter" aria-hidden="true"></span>
+            <span class="d-none d-sm-inline-block">Twitter</span>
+        </a>
+        <a href="https://plus.google.com/share?url={{\Request::url()}}" role="button" class="btn btn-danger" title="Compartir en Google +" target="_blank" rel="noopener noreferrer">
+            <span class="ion-social-googleplus" aria-hidden="true"></span>
+            <span class="d-none d-sm-inline-block">Google +</span>
+        </a>
+    </div>
     </div>
     
     

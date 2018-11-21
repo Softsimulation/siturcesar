@@ -195,9 +195,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-md-6">
-						<h2>Noticias <small><a href="#" class="btn btn-link">Ver todo</a></small></h2>
-						{{$noticias}}
+						<h2>Noticias <small><a href="/promocionNoticia/listado" class="btn btn-outline-primary">Ver todas</a></small></h2>
+						
 						<div class="tiles">
+							@foreach($noticias as $noticia)
 							<section class="tile inline-tile">
 	                            <div class="tile-img">
 	                            
@@ -205,53 +206,54 @@
 		                        <div class="tile-body">
 		                            <div class="tile-caption">
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc euismod justo nec urna consequat elementum. Vivamus maximus pharetra laoreet. Nulla facilisis aliquam risus a egestas. Suspendisse nullam.</h3>
+		                                <a href="/promocionNoticia/ver/{{$noticia->idNoticia}}">
+		                                    <h3>{{$noticia->tituloNoticia}}</h3>
 		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
+		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el {{date('d/m/Y h:m A', strtotime($noticia->fecha))}}</p>
 		                            </div>
 		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
+		                                <a class="btn btn-xs btn-link" href="/promocionNoticia/ver/{{$noticia->idNoticia}}">Ver más</a>
 		                            </div>
 		                            
 		                        </div>
 	                        </section>
-	                        <section class="tile inline-tile">
-	                            <div class="tile-img">
+	                        @endforeach
+	                        <!--<section class="tile inline-tile">-->
+	                        <!--    <div class="tile-img">-->
 	                            
-		                        </div>
-		                        <div class="tile-body">
-		                            <div class="tile-caption">
+		                       <!-- </div>-->
+		                       <!-- <div class="tile-body">-->
+		                       <!--     <div class="tile-caption">-->
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
-		                            </div>
-		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
-		                            </div>
+		                       <!--         <a href="#">-->
+		                       <!--             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>-->
+		                       <!--         </a>-->
+		                       <!--         <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>-->
+		                       <!--     </div>-->
+		                       <!--     <div class="buttons">-->
+		                       <!--         <a class="btn btn-xs btn-link" href="#">Ver más</a>-->
+		                       <!--     </div>-->
 		                            
-		                        </div>
-	                        </section>
-	                        <section class="tile inline-tile">
-	                            <div class="tile-img">
+		                       <!-- </div>-->
+	                        <!--</section>-->
+	                        <!--<section class="tile inline-tile">-->
+	                        <!--    <div class="tile-img">-->
 	                            
-		                        </div>
-		                        <div class="tile-body">
-		                            <div class="tile-caption">
+		                       <!-- </div>-->
+		                       <!-- <div class="tile-body">-->
+		                       <!--     <div class="tile-caption">-->
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
-		                            </div>
-		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
-		                            </div>
+		                       <!--         <a href="#">-->
+		                       <!--             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>-->
+		                       <!--         </a>-->
+		                       <!--         <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>-->
+		                       <!--     </div>-->
+		                       <!--     <div class="buttons">-->
+		                       <!--         <a class="btn btn-xs btn-link" href="#">Ver más</a>-->
+		                       <!--     </div>-->
 		                            
-		                        </div>
-	                        </section>
+		                       <!-- </div>-->
+	                        <!--</section>-->
 						</div>
 						
 					</div>
