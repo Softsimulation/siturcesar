@@ -55,25 +55,25 @@
 		    		<div class="col-12 col-md-9 row align-items-center d-flex justify-content-center">
 		    			
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionNoticia/listado">
 		    						<i class="links links-noticias" aria-hidden="true"></i>
 		    						Noticias
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/quehacer?tipo=4">
 		    						<i class="links links-eventos" aria-hidden="true"></i>
 		    						Eventos
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionBolsaEmpleo/vacantes">
 		    						<i class="links links-bolsaEmpleo" aria-hidden="true"></i>
 		    						Bolsa de empleo
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionPublicacion/listado">
 		    						<i class="links links-biblioteca" aria-hidden="true"></i>
 		    						Biblioteca digital
 		    					</a>
@@ -100,7 +100,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/receptor" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -112,7 +112,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/interno" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -124,7 +124,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/emisor" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -136,7 +136,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/oferta" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -148,7 +148,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/empleo" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -160,7 +160,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/sostenibilidad" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -190,8 +190,10 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-md-6">
-						<h2>Noticias <small><a href="#" class="btn btn-link">Ver todo</a></small></h2>
+						<h2>Noticias <small><a href="/promocionNoticia/listado" class="btn btn-outline-primary">Ver todas</a></small></h2>
+						
 						<div class="tiles">
+							@foreach($noticias as $noticia)
 							<section class="tile inline-tile">
 	                            <div class="tile-img">
 	                            
@@ -199,53 +201,54 @@
 		                        <div class="tile-body">
 		                            <div class="tile-caption">
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc euismod justo nec urna consequat elementum. Vivamus maximus pharetra laoreet. Nulla facilisis aliquam risus a egestas. Suspendisse nullam.</h3>
+		                                <a href="/promocionNoticia/ver/{{$noticia->idNoticia}}">
+		                                    <h3>{{$noticia->tituloNoticia}}</h3>
 		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
+		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el {{date('d/m/Y h:m A', strtotime($noticia->fecha))}}</p>
 		                            </div>
 		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
+		                                <a class="btn btn-xs btn-link" href="/promocionNoticia/ver/{{$noticia->idNoticia}}">Ver más</a>
 		                            </div>
 		                            
 		                        </div>
 	                        </section>
-	                        <section class="tile inline-tile">
-	                            <div class="tile-img">
+	                        @endforeach
+	                        <!--<section class="tile inline-tile">-->
+	                        <!--    <div class="tile-img">-->
 	                            
-		                        </div>
-		                        <div class="tile-body">
-		                            <div class="tile-caption">
+		                       <!-- </div>-->
+		                       <!-- <div class="tile-body">-->
+		                       <!--     <div class="tile-caption">-->
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
-		                            </div>
-		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
-		                            </div>
+		                       <!--         <a href="#">-->
+		                       <!--             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>-->
+		                       <!--         </a>-->
+		                       <!--         <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>-->
+		                       <!--     </div>-->
+		                       <!--     <div class="buttons">-->
+		                       <!--         <a class="btn btn-xs btn-link" href="#">Ver más</a>-->
+		                       <!--     </div>-->
 		                            
-		                        </div>
-	                        </section>
-	                        <section class="tile inline-tile">
-	                            <div class="tile-img">
+		                       <!-- </div>-->
+	                        <!--</section>-->
+	                        <!--<section class="tile inline-tile">-->
+	                        <!--    <div class="tile-img">-->
 	                            
-		                        </div>
-		                        <div class="tile-body">
-		                            <div class="tile-caption">
+		                       <!-- </div>-->
+		                       <!-- <div class="tile-body">-->
+		                       <!--     <div class="tile-caption">-->
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
-		                            </div>
-		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
-		                            </div>
+		                       <!--         <a href="#">-->
+		                       <!--             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>-->
+		                       <!--         </a>-->
+		                       <!--         <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>-->
+		                       <!--     </div>-->
+		                       <!--     <div class="buttons">-->
+		                       <!--         <a class="btn btn-xs btn-link" href="#">Ver más</a>-->
+		                       <!--     </div>-->
 		                            
-		                        </div>
-	                        </section>
+		                       <!-- </div>-->
+	                        <!--</section>-->
 						</div>
 						
 					</div>

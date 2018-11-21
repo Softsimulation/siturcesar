@@ -1,3 +1,11 @@
+<div class="loadingContent text-center" aria-hidden="true">
+    <div class="loader">
+        
+        <img src="/img/brand/96.png" alt="Logo de SITUR Cesar" class="d-block">
+        <img src="/spinner-200px.gif" alt="" role="presentation" class="d-block">
+    </div>
+    <span>Cargando</span>
+</div>
 <header class="row no-gutters">
 	<div class="brand col-md-3">
 		<a href="/">
@@ -24,13 +32,18 @@
 				
 			</form>
 			<a href="#">Mapa del sitio</a>
-			<form name="langForm" method="get" action="">
-				<label class="sr-only" for="languange">Selección de idioma</label>
-				<select id="languange" name="lang" onchange="this.form.submit();">
-					<option value="es" selected>Español</option>
-					<option value="en">Inglés</option>
-				</select>
-			</form>
+			<div id="google_translate_element"></div><script type="text/javascript">
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'de,en,es,fr,it,ja,pt,sv,tr,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+            }
+            </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+			<!--<form name="langForm" method="get" action="">-->
+			<!--	<label class="sr-only" for="languange">Selección de idioma</label>-->
+			<!--	<select id="languange" name="lang" onchange="this.form.submit();">-->
+			<!--		<option value="es" selected>Español</option>-->
+			<!--		<option value="en">Inglés</option>-->
+			<!--	</select>-->
+			<!--</form>-->
 			<a href="#"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
 		</div>
 		<div id="navbar-mobile" class="text-center">
@@ -46,13 +59,31 @@
                         <a role="menuitem" href="#menu-visitarAlCesar" aria-haspopup="true" aria-expanded="false">Visita al Cesar</a>
                         <ul role="menu" id="menu-visitarAlCesar" aria-label="Visita al Cesar">
                             <li role="none">
-                                <a role="menuitem" href="/quehacer">Qué hacer</a>
+                                <a role="menuitem" href="/quehacer/?tipo=3">Destinos</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/Experiencias">Experiencias</a>
+                                <a role="menuitem" href="/quehacer/?tipo=4">Eventos</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/quehacer/?tipo=1">Actividades</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/quehacer/?tipo=2">Atracciones</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/quehacer/?tipo=5">Rutas turísticas</a>
                             </li>
                             <li role="none">
                                 <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Mapa">Mapa del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>
                             </li>
                         </ul>
                     </li>
@@ -60,23 +91,23 @@
                         <a role="menuitem" href="#menu-estadisticas" aria-haspopup="true" aria-expanded="false">Estadísticas</a>
                         <ul role="menu" id="menu-estadisticas" aria-label="Estadísticas">
                             <li role="none">
-                                <a role="menuitem" href="#">Turismo receptor</a>
+                                <a role="menuitem" href="/indicadores/receptor">Turismo receptor</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Turismo interno</a>
+                                <a role="menuitem" href="/indicadores/interno">Turismo interno</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Turismo emisor</a>
+                                <a role="menuitem" href="/indicadores/emisor">Turismo emisor</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Oferta turística</a>
+                                <a role="menuitem" href="/indicadores/oferta">Oferta turística</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Empleo</a>
+                                <a role="menuitem" href="/indicadores/empleo">Empleo</a>
                             </li>
-                            <li role="none">
-                                <a role="menuitem" href="#">Turismo sostenible</a>
-                            </li>
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
+                            <!--</li>-->
                         </ul>
                     </li>
                     
@@ -84,10 +115,13 @@
                         <a role="menuitem" href="#menu-publicaciones" aria-haspopup="true" aria-expanded="false">Publicaciones</a>
                         <ul role="menu" id="menu-publicaciones" aria-label="Publicaciones">
                             <li role="none">
-                                <a role="menuitem" href="#">Noticias</a>
+                                <a role="menuitem" href="/promocionNoticia/listado">Noticias</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Eventos</a>
+                                <a role="menuitem" href="/quehacer?tipo=4">Eventos</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/promocionBolsaEmpleo/vacantes">Bolsa de empleo</a>
                             </li>
                         </ul>
                     </li>
