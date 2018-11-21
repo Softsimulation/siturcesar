@@ -1,7 +1,8 @@
-<div class="loadingContent" aria-hidden="true">
+<div class="loadingContent text-center" aria-hidden="true">
     <div class="loader">
-        <img src="/res/loading.gif" alt="" role="presentation">
-        <img src="/img/brand/96.png" alt="Logo de SITUR Cesar">
+        
+        <img src="/img/brand/96.png" alt="Logo de SITUR Cesar" class="d-block">
+        <img src="/spinner-200px.gif" alt="" role="presentation" class="d-block">
     </div>
     <span>Cargando</span>
 </div>
@@ -75,6 +76,9 @@
                             <li role="none">
                                 <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
                             </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Mapa">Mapa del departamento</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -95,9 +99,9 @@
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/empleo">Empleo</a>
                             </li>
-                            <li role="none">
-                                <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>
-                            </li>
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
+                            <!--</li>-->
                         </ul>
                     </li>
                     
