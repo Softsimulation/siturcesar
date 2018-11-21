@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -26,7 +26,7 @@ class Comentario_Destino extends Model
      * @var string
      */
     protected $table = 'comentarios_destinos';
-
+     public $timestamps=false;
     /**
      * @var array
      */
@@ -35,9 +35,9 @@ class Comentario_Destino extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function aspNetUser()
+    public function user()
     {
-        return $this->belongsTo('App\AspNetUser', 'user_id', '"Id"');
+         return $this->belongsTo('App\Models\User', 'user_id', 'id');
     }
 
     /**

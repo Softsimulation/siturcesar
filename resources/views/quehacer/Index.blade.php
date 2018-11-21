@@ -5,31 +5,50 @@
 $colorTipo = ['bg-primary','bg-success','bg-danger', 'bg-info', 'bg-warning'];
 
 function getItemType($type){
-    $path = ""; $name = "";
+    $path = ""; $name = ""; $title = "";
     switch($type){
         case(1):
+            $title = "Actividades";
             $name = "Actividad";
             $path = "/actividades/ver/";
             break;
         case(2):
+            $title = "Atracciones";
             $name = "Atracción";
             $path = "/atracciones/ver/";
             break;
         case(3):
+            $title = "Destinos";
             $name = "Destino";
             $path = "/destinos/ver/";
             break;
         case(4):
+            $title = "Eventos";
             $name = "Evento";
             $path = "/eventos/ver/";
             break; 
         case(5):
+            $title = "Rutas turísticas";
             $name = "Ruta turística";
             $path = "/rutas/ver/";
             break;
     }
-    return (object)array('name'=>$name, 'path'=>$path);
+    return (object)array('name'=>$name, 'path'=>$path, 'title' => $title);
 }
+
+$tipoItem = (isset($_GET['tipo'])) ? $_GET['tipo'] : 0 ;
+
+$tituloPagina = ($tipoItem) ? getItemType($tipoItem)->title : "Qué hacer";
+
+$countItems = false;
+
+for($i = 0; $i < count($query); $i++){
+    if($tipoItem && $query[$i]->tipo == $tipoItem){
+        $countItems = true;
+        break;
+    }
+}
+$countItems = ($tipoItem) ? $countItems : count($query) > 0;
 ?>
 @extends('layout._publicLayout')
 
@@ -38,9 +57,9 @@ function getItemType($type){
 @section('TitleSection','Actividades')
 
 @section('meta_og')
-<meta property="og:title" content="Qué hacer" />
+<meta property="og:title" content="{{$tituloPagina}}" />
 <meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
-<meta property="og:description" content="¿Qué hacer?"/>
+<meta property="og:description" content="{{$tituloPagina}}"/>
 @endsection
 
 @section ('estilos')
@@ -108,34 +127,7 @@ function getItemType($type){
         .input-group>.input-group-prepend:not(:first-child)>.input-group-text {
             padding: 0;
         }
-        .header-list{
-            background-color: rgba(221,221,221,.3);
-            min-height: 250px;
-            display: flex;
-            align-items: flex-end;
-            vertical-align: bottom;
-            position: relative;
-            
-        }
-        .header-list:before{
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url(/img/bg_header.png);
-            opacity: 0.1;
-            z-index: 0;
-        }
-        .header-list .title-section{
-            text-transform: uppercase;
-            position: relative;
-            z-index: 2;
-            color: green;
-            text-shadow: 0px 1px 3px rgba(0,0,0,.4);
-            text-align: center;
-        }
+        
         .card-header {
             padding: 2px .5rem;
         }
@@ -174,7 +166,7 @@ function getItemType($type){
 @section('content')
     <div class="header-list">
         <div class="container">
-            <h2 class="title-section">Qué hacer</h2>
+            <h2 class="title-section">{{$tituloPagina}}</h2>
             <div id="opciones">
                 <button type="button" class="btn btn-default d-none d-sm-inline-block" onclick="changeViewList(this,'listado','tile-list')" title="Vista de lista"><span class="mdi mdi-view-sequential" aria-hidden="true"></span><span class="sr-only">Vista de lista</span></button>
                 <button type="button" class="btn btn-default d-none d-sm-inline-block" onclick="changeViewList(this,'listado','')" title="Vista de mosaico"><span class="mdi mdi-view-grid" aria-hidden="true"></span><span class="sr-only">Vista de mosaico</span></button>
@@ -192,7 +184,7 @@ function getItemType($type){
                       </div>
                     </div>
                 </form>
-                <button type="button" class="btn btn-default"><span class="mdi mdi-filter" aria-hidden="true" title="Filtrar resultados" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"></span><span class="sr-only">Filtrar resultados</span></button>
+                <!--<button type="button" class="btn btn-default"><span class="mdi mdi-filter" aria-hidden="true" title="Filtrar resultados" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"></span><span class="sr-only">Filtrar resultados</span></button>-->
             </div>
         </div>
         
@@ -201,29 +193,30 @@ function getItemType($type){
     <div class="container">
         <br/>
         <div id="listado" class="tiles">
-            @foreach ($query as $lugar)
+            @for($i = 0; $i < count($query); $i++)
+            @if(!$tipoItem || ($tipoItem && $query[$i]->tipo == $tipoItem))
             <div class="tile tile-overlap">
                 <div class="tile-img">
-                    @if($lugar->portada != "")
-                    <img src="{{ $lugar->portada }}" alt="Imagen de presentación de {{ $lugar->nombre }}"/>
+                    @if($query[$i]->portada != "")
+                    <img src="{{ $query[$i]->portada }}" alt="Imagen de presentación de {{ $query[$i]->nombre }}"/>
                     @endif
                 </div>
                 <div class="tile-body">
                     <div class="tile-caption">
-                        <h3><a href="{{getItemType($lugar->tipo)->path}}{{ $lugar->id }}">{{ $lugar->nombre }}</a></h3>
-                        <span class="label {{$colorTipo[$lugar->tipo - 1]}}">{{getItemType($lugar->tipo)->name}}</span>
-                        @if($lugar->tipo == 4)
-                        <p class="label tile-date">Del {{date('d/m/Y', strtotime($lugar->fecha_inicio))}} al {{date('d/m/Y', strtotime($lugar->fecha_fin))}}</p>
+                        <h3><a href="{{getItemType($query[$i]->tipo)->path}}{{ $query[$i]->id }}">{{ $query[$i]->nombre }}</a></h3>
+                        <span class="label {{$colorTipo[$query[$i]->tipo - 1]}}">{{getItemType($query[$i]->tipo)->name}}</span>
+                        @if($query[$i]->tipo == 4)
+                        <p class="label tile-date">Del {{date('d/m/Y', strtotime($query[$i]->fecha_inicio))}} al {{date('d/m/Y', strtotime($query[$i]->fecha_fin))}}</p>
                         @endif
                     </div>
                     <!--<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>-->
                     <div class="tile-buttons">
                         <div class="inline-buttons">
-                            <button type="button" title="{{$lugar->calificacion_legusto}}"><span class="{{ ($lugar->calificacion_legusto > 0.0) ? (($lugar->calificacion_legusto <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">1</span></button>
-                            <button type="button" title="{{$lugar->calificacion_legusto}}"><span class="{{ ($lugar->calificacion_legusto > 1.0) ? (($lugar->calificacion_legusto <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">2</span></button>
-                            <button type="button" title="{{$lugar->calificacion_legusto}}"><span class="{{ ($lugar->calificacion_legusto > 2.0) ? (($lugar->calificacion_legusto <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">3</span></button>
-                            <button type="button" title="{{$lugar->calificacion_legusto}}"><span class="{{ ($lugar->calificacion_legusto > 3.0) ? (($lugar->calificacion_legusto <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">4</span></button>
-                            <button type="button" title="{{$lugar->calificacion_legusto}}"><span class="{{ ($lugar->calificacion_legusto > 4.0) ? (($lugar->calificacion_legusto <= 4.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">5</span></button>
+                            <button type="button" title="{{$query[$i]->calificacion_legusto}}"><span class="{{ ($query[$i]->calificacion_legusto > 0.0) ? (($query[$i]->calificacion_legusto <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">1</span></button>
+                            <button type="button" title="{{$query[$i]->calificacion_legusto}}"><span class="{{ ($query[$i]->calificacion_legusto > 1.0) ? (($query[$i]->calificacion_legusto <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">2</span></button>
+                            <button type="button" title="{{$query[$i]->calificacion_legusto}}"><span class="{{ ($query[$i]->calificacion_legusto > 2.0) ? (($query[$i]->calificacion_legusto <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">3</span></button>
+                            <button type="button" title="{{$query[$i]->calificacion_legusto}}"><span class="{{ ($query[$i]->calificacion_legusto > 3.0) ? (($query[$i]->calificacion_legusto <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">4</span></button>
+                            <button type="button" title="{{$query[$i]->calificacion_legusto}}"><span class="{{ ($query[$i]->calificacion_legusto > 4.0) ? (($query[$i]->calificacion_legusto <= 4.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">5</span></button>
                             
                         </div>
                         
@@ -231,7 +224,8 @@ function getItemType($type){
                     </div>
                 </div>
             </div>
-            @endforeach
+            @endif
+            @endfor
             <!--<div class="tile tile-overlap">
                 <div class="tile-img">
                     <img src="http://www.valledupar.com/sistema-noticias/data/upimages/valledupar_poporos2.jpg" alt=""/>

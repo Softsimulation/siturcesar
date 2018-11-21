@@ -42,7 +42,16 @@ return [
     */
 
     'disks' => [
-
+        'Noticias' => [
+            'driver' => 'local',
+            'root' => public_path().'/Noticias',
+            'visibility' => 'public',
+        ],
+        'Sliders' => [
+            'driver' => 'local',
+            'root' => public_path().'/Sliders',
+            'visibility' => 'public',
+        ],
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -53,7 +62,11 @@ return [
             'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
-        
+        'multimedia-informes' => [
+            'driver' => 'local',
+            'root' => public_path().'/multimedia/informes',
+            'visibility' => 'public',
+        ],
         'multimedia-atraccion' => [
             'driver' => 'local',
             'root' => public_path().'/multimedia/atracciones',
@@ -89,12 +102,12 @@ return [
             'root' => public_path().'/multimedia/proveedores',
             'visibility' => 'public',
         ],
-
         'Publicaciones' => [
                'driver' => 'local',
                'root' => public_path().'/Publicaciones',
                'visibility' => 'public',
            ],
+
 
         
         'HojasDeVida' => [
