@@ -160,5 +160,12 @@
             document.getElementsByTagName("html")[0].setAttribute("manifest", "/cache.appcache");
         }
     </script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            
+            $('.loadingContent').delay(500).fadeOut("fast");
+            
+        });
+    </script>
 </body>
 </html>

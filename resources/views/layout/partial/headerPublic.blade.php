@@ -1,3 +1,10 @@
+<div class="loadingContent" aria-hidden="true">
+    <div class="loader">
+        <img src="/res/loading.gif" alt="" role="presentation">
+        <img src="/img/brand/96.png" alt="Logo de SITUR Cesar">
+    </div>
+    <span>Cargando</span>
+</div>
 <header class="row no-gutters">
 	<div class="brand col-md-3">
 		<a href="/">
