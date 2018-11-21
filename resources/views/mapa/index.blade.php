@@ -22,25 +22,22 @@
             top:auto!important;
             bottom: 30px!important;
         }
-        header{
-            position:static;
-        }
     </style>
 <script src="{{asset('/js/plugins/angular.min.js')}}"></script>
 @endsection
 
 @section('content')
 
-    <div ng-app="AppMapa"  ng-controller="mapa"class="container-fluid" style="margin-top:10px; padding-left: 0; padding-right: 0;" >
+<div ng-app="AppMapa"  ng-controller="mapa" class="container-fluid p-0 pt-md-4" >
         <div class="row no-gutters ">
             <div class="col-12">
                 <div class="content-map">
-                    <div class="st-filter-pane" ng-show="!showInfoEntidad">
+                    <div class="st-filter-pane" ng-show="!showInfoEntidad" style="max-height: 500px;overflow-y: auto; overflow-x:hidden;">
                         <div class="panel-group" style="margin-bottom: 0;" id="accordion" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">
                                 <div class="panel-heading" style="padding: 0; background-color: transparent;" role="tab" id="headingOne">
                                     <div class="st-filter-title-pane" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                        <div class="row">
+                                        <div class="row pl-3 pr-3">
                                             <div class="col-xs-9"><span class="ion-funnel"></span> <strong> Atracciones</strong></div>
                                             <div class="col-xs-3"><span class="glyphicon glyphicon glyphicon-menu-down"></span></div>
                                         </div>
@@ -53,7 +50,7 @@
                                     <button class="st-btn-clean-radio" ng-click="filtro.tipoAtraciones=[]" ng-class="{true:'selected',false:'unselected'}[filtro.tipoAtraciones.length==0]" ng-show="filtro.tipoAtraciones.length>0">
                                         <i style="font-size: 1.1em;" class="ion-android-cancel"></i>  Limpiar Filtro
                                     </button>
-                                    <div class="panel-body" style="max-height: 100%; color: black;padding: 0; max-height: 400px; overflow-y: auto;">
+                                    <div class="panel-body" style="max-height: 100%; color: black;padding: 0; max-height: 370px; overflow-y: auto;">
                                         
                                         <div class="checkbox" ng-repeat="tipo in tipoAtracciones|filter:buscarFiltroAtracciones" >
                                            <label>  
@@ -67,14 +64,14 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading" style="padding: 0; background-color: transparent;" role="tab" id="headingTwo">
                                     <div class="st-filter-title-pane" role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                        <div class="row">
+                                        <div class="row pl-3 pr-3">
                                             <div class="col-xs-9"><span class="ion-funnel"></span> <strong>Proveedores</strong></div>
                                             <div class="col-xs-3"><span class="glyphicon glyphicon glyphicon-menu-down"></span></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                                    <div class="panel-body" style="max-height: 100%; color: black;padding: 0; max-height: 400px;overflow-y: auto;">
+                                    <div class="panel-body" style="max-height: 100%; color: black;padding: 0; max-height: 370px;overflow-y: auto;">
                                         <div class="checkbox" ng-repeat="tipo in tipoProveedores" >
                                            <label>  
                                                   <input type="checkbox" checklist-model="filtro.tipoProveedor" checklist-value="tipo.id" checklist-change="changeIcons()" > 

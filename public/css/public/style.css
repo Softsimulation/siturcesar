@@ -37,6 +37,40 @@ header {
     -webkit-box-shadow: 0px 8px 15px rgba(0,0,0,.3);
     -moz-box-shadow: 0px 8px 15px rgba(0,0,0,.3);
 }
+/*Barra de carga*/
+.loadingContent {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding-top: 20%;
+    background-color: white;
+    text-align: center;
+    z-index: 100000;
+}
+.loadingContent .loader {
+    position: relative;
+    /*top: 37.3%;*/
+    left: 0;
+    width: 100%;
+    text-align: center;
+    clear: both;
+}
+.loadingContent .loader img{
+    display:block;
+    margin: 0 auto;
+}
+
+.loadingContent span {
+    position: relative;
+    /*top: 63%;*/
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 1.5em;
+    font-family: Futura,sans-serif;
+    color: dimgray;
+}
+
 /*Flexbox*/
 
 .nav-bar, .nav-bar>.brand a, div#socialNetworks-fixed, .tiles{
@@ -592,7 +626,8 @@ footer{
     
 }
 .header-list.without-options{
-    min-height: 200px;
+    min-height: 220px;
+    padding-bottom: 1rem;
 }
 .header-list:before{
     content: "";

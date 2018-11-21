@@ -7,6 +7,25 @@
 @section('estilos')
 
 <style type="text/css">
+    #opciones{
+        text-align:right;
+        background-color: white;
+        padding: 4px .5rem;
+        margin-top: 1rem;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position:relative;
+        z-index: 2;
+        box-shadow: 0px -1px 5px -2px rgba(0,0,0,.3);
+    }
+    #opciones>button, #opciones form{
+        display:inline-block;
+        border: 0;
+        margin: 0 2px;
+    }
     #selectGrafica .btn-select{
         display: inline-flex;
         align-items: center;
@@ -47,188 +66,220 @@
         padding:0!important;
         padding-top:20px !important;
     }
-    .icono{
-        height: 22px;
-        margin-right: 5px;
+    .header-list:before{
+        background-image: url(/img/bg_banner_indicadores_black.png);
+        background-size: auto 200%;
     }
-    .btn-outline-primary{
-        background-color: white;
-        color: #004A87;
-        border-color: #004A87;
-        border-radius: 6px;
+    .nav .nav-link:not(.active):hover {
+        background-color: whitesmoke;
+        border-bottom: 2px solid #eee;
     }
-    .btn-outline-primary:hover{
-        background-color: #004A87;
-        color: white;
+    .nav .nav-link.active {
+        border-bottom: 2px solid #ddd;
+        font-weight: bold;
+        background-color: whitesmoke;
     }
-    .dropdown-menu{
-        width: 100%;
-        text-align:center;
+    .nav {
+        justify-content: center;
+        margin-bottom: 1rem;
     }
-    .dropdown-menu>li>button:hover {
-        background-color: #eee;
-    }
-    .dropdown-menu>li>button {
-        display: block;
-        font-weight: 400;
-        line-height: 1.42857143;
-        color: #333;
+    .dropdown-item{
+        padding: .25rem 1rem;
         white-space: normal;
-        font-size: 1rem;
-        width: 100%;
-        border: 0;
-        background-color: inherit;
-        padding: .5rem 1rem;
+        cursor: pointer;
     }
 </style>
 
 @endsection
 
-
 @section('content')
-<h2 class="text-center"><small class="btn-block">Estadísticas secundarias</small> @{{indicador.nombre}}</h2>
-<hr>
-
-<div class="dropdown text-center" ng-init="indicadorSelect={{$indicadores[0]['id']}}">
-  <button type="button" class="btn btn-outline-primary text-uppercase dropdown-toggle"id="dropdownMenuIndicadores" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ver más estadísticas <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></button>
-  
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuIndicadores" ng-init="buscarData( {{$indicadores[0]['id']}} )">
-    @foreach ($indicadores as $indicador)
-        <li ng-class="{'active': (indicadorSelect=={{$indicador['id']}}) }">
-          <button type="button" ng-click="changeIndicador({{$indicador['id']}})">{{$indicador["nombre"]}}</button>
-        </li>
-    @endforeach
-    
-  </ul>
-</div>
-<br>
-
-<div ng-if="indicador == undefined" class="text-center">
-    <img src="/res/spinner-200px.gif" alt="" role="presentation" style="display:inline-block; margin: 0 auto;">    
-</div>
-<div class="card" ng-init="indicadorSelect={{$indicadores[0]['id']}}" ng-show="indicador != undefined">
-    
-    
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <form name="form" >
-                <div class="row filtros" >
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-5">
-                        <div class="input-group mb-3">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputPeriodo">Período</span>
-                          </div>
-                          <select class="form-control" ng-model="filtro.year" id="inputPeriodo" ng-change="filtrarDatos()" ng-options="y.id as y.anio for y in periodos" required >
-                              <option value="" selected disabled>Seleccione un período</option>
-                            </select>
-                        </div>
-                        
-                    </div>
-                    
-                    
-                    <div class="col-xs-12 col-sm-6 col-md-5" >
-                        <div class="input-group" id="selectGrafica" >
-                            <label class="input-group-addon">Gráfica </label>
-                            <div class="btn-group" style="width: 100%;">
-                                <button type="button" class="btn btn-default btn-select">
-                                   <img src="@{{graficaSelect.icono}}" class="icono" ></img> @{{graficaSelect.nombre || " "}}
-                                </button>
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                    <span class="caret "></span>
-                                </button>
-                                <ul class="dropdown-menu menuTipoGrafica" role="menu">
-                                    <li ng-repeat="item in indicador.graficas" ng-click="changeTipoGrafica(item)"  >
-                                        <a> <img src="@{{item.icono}}" class="icono" ></img> @{{item.nombre}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        
-                        
-                    </div> 
-                    
-                    <div class="col-12 col-sm-12 col-md-12 col-lg-2 menu-descraga d-flex justify-content-center text-center" >
-                    
-                        <div class="dropdown">
-                          <button class="btn btn-outline-success dropdown-toggle" type="button" data-toggle="dropdown">
-                              <i class="material-icons">cloud_download</i> Descargar
-                          </button>
-                          <ul class="dropdown-menu dropdown-menu-right">
-                            <li><a href id="descargarPNG" >Descargar grafica : PNG</a></li>
-                           <!-- <li><a href id="descargarJPG" >Download JPG image</a></li> -->
-                            <li><a href id="descargarPDF" >Descargar grafica : PDF</a></li>
-                            <li><a href id="descargarGraficaTabla" >Descargar grafica y tabla de datos : PDF</a></li>
-                          </ul>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-            </form>
-        </div>
-        <div class="panel-body">
-            <canvas id="base" class="chart-base" chart-type="graficaSelect.codigo" fill="black" style="background: white;"
-              chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colors="colores" chart-dataset-override="override" >
-            </canvas>
-            
-            <a class="item-footer" style="float:right;margin-right: 10px;" href="http://www.citur.gov.co/" target="_blank"  >
-                <img src="/Content/image/presentacion_CITUR-01.png" width="65">
-            </a>
-            
+<div class="header-list">
+    <div class="container">
+        <h2 class="title-section"><small class="d-block">Estadisticas secundarias</small> @{{indicador.nombre}}</h2>
+        <div id="opciones">
+            <div class="dropdown text-center" ng-init="buscarData( {{$indicadores[0]['id']}} )">
+              <button type="button" class="btn btn-outline-primary text-uppercase dropdown-toggle"id="dropdownMenuIndicadores" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Ver más estadísticas <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuIndicadores">
+                @foreach ($indicadores as $indicador)
+                <button type="button" class="dropdown-item" ng-class="{'active': (indicadorSelect=={{$indicador['id']}}) }" ng-click="changeIndicador({{$indicador['id']}})">{{$indicador["idiomas"][0]['nombre']}}</button>
+                @endforeach
+              </div>
+            </div>
         </div>
     </div>
     
-    
-    <div class="panel panel-default" ng-show="data.length>0" >
-            <div class="panel-heading">
-                <i class="material-icons">table_chart</i> <span id="tituloIndicadorGrafica" > @{{tituloIndicadorGrafica}} </span>
-                <a href id="descargarTABLA" >
-                     <img src="/Content/graficas/excel.png" class="icono" ></img>
-                </a>
+</div>
+<div class="container pt-3">
+
+    <div class="card pt-3" ng-init="indicadorSelect={{$indicadores[0]['id']}}" >
+        
+        <!--<ul class="list-group" ng-init="buscarData( {{$indicadores[0]['id']}} )" >-->
+        <!--    @foreach ($indicadores as $indicador)-->
+        <!--        <li class="list-group-item" ng-click="changeIndicador({{$indicador['id']}})" ng-class="{'active': (indicadorSelect=={{$indicador['id']}}) }" role="button">-->
+        <!--          {{$indicador["nombre"]}}-->
+        <!--        </li>-->
+        <!--    @endforeach-->
+        <!--</ul>-->
+        
+        
+        <div class="panel panel-default">
+            <div class="panel-heading pl-3 pr-3">
+                <form name="form" >
+                    <div class="row filtros" >
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-5">
+                            <div class="input-group mb-3">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputPeriodo">Período</span>
+                              </div>
+                              <select class="form-control" ng-model="filtro.year" id="inputPeriodo" ng-change="filtrarDatos()" ng-options="y.id as y.anio for y in periodos" required >
+                                  <option value="" selected disabled>Seleccione un período</option>
+                                </select>
+                            </div>
+                            
+                        </div>
+                        
+                        
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-5">
+                            
+                            <div class="input-group mb-3" id="selectGrafica">
+                                 <div class="input-group-prepend">
+                                    <span class="input-group-text">Gráfica</span>
+                                 </div>
+                                 <p class="form-control d-flex align-items-middle"><i class="material-icons">@{{graficaSelect.icono}}</i> @{{graficaSelect.nombre || " "}}</p>
+                                 <!--<input type="text" class="form-control" aria-label="Gráfica" readonly>-->
+                                  <div class="input-group-append">
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <span class="sr-only">Seleccionar gráfica</span>
+                                    </button>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                      <button type="button" class="dropdown-item d-flex align-items-middle" ng-repeat="item in indicador.graficas" ng-click="changeTipoGrafica(item)"><i class="material-icons">@{{item.icono}}</i> @{{item.nombre}}</button>
+                                      <button type="button" class="dropdown-item" ng-if="indicador.graficas.length == 0">No hay tipos de gráfica disponible</button>
+                                    </div>
+                                  </div>
+                            </div>
+                            
+                            
+                        </div> 
+                        
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-2 menu-descraga d-flex justify-content-center text-center" >
+                        
+                            <div class="dropdown">
+                              <button class="btn btn-outline-primary dropdown-toggle" id="dropdownMenuButton" type="button" data-toggle="dropdown">
+                                  <i class="ion-android-download"></i> Descargar
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <button type="button" class="dropdown-item" id="descargarPNG">Descargar gráfica: PNG</button>
+                                <button type="button" class="dropdown-item" id="descargarPDF">Descargar gráfica: PDF</button>
+                                <button type="button" class="dropdown-item" id="descargarGraficaTabla">Descargar gráfica y tabla de datos: PDF</button>
+                              </div>
+                              
+                              <!--<ul class="dropdown-menu dropdown-menu-right">-->
+                              <!--  <li><a href id="descargarPNG" >Descargar grafica : PNG</a></li>-->
+                               <!-- <li><a href id="descargarJPG" >Download JPG image</a></li> -->
+                              <!--  <li><a href id="descargarPDF" >Descargar grafica : PDF</a></li>-->
+                              <!--  <li><a href id="descargarGraficaTabla" >Descargar grafica y tabla de datos : PDF</a></li>-->
+                              <!--</ul>-->
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </form>
             </div>
-            <div class="panel-body" id="customers" style="overflow-x: auto;width: 100%;margin-right: 0;" >
+            <div class="panel-body">
+                <canvas id="base" class="chart-base" chart-type="graficaSelect.codigo" fill="black" style="background: white;"
+                  chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colors="colores" chart-dataset-override="override" >
+                </canvas>
                 
-                <table class="table table-striped" ng-if="!series" >
-                    <thead>
-                      <tr>
-                        <th>@{{indicador.idiomas[0].eje_x}} </th>
-                        <th>Cantidad</th>
-                        <th ng-if="dataExtra" >Media</th>
-                        <th ng-if="dataExtra" >Mediana</th>
-                        <th ng-if="dataExtra" >Moda</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr  ng-repeat="label in labels" >
-                        <td>@{{label}}</td>
-                        <td>@{{data[$index]}}</td>
-                        <td ng-if="dataExtra" >@{{dataExtra.media[$index]}}</td>
-                        <td ng-if="dataExtra" >@{{dataExtra.mediana[$index]}}</td>
-                        <td ng-if="dataExtra" >@{{dataExtra.moda[$index]}}</td>
-                      </tr>
-                    </tbody>
-                </table>
-                
-                <table class="table table-striped" ng-if="series" >
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th ng-repeat="item in labels" >@{{item}}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr ng-repeat="datos in data track by $index" >
-                        <td>@{{series[$index]}}</td>
-                        <td ng-repeat="d in datos track by $index">@{{d}}</td>
-                      </tr>
-                    </tbody>
-                </table>
+                <!--
+                <a class="item-footer" style="float:left;margin-bottom:-20px;" href data-toggle="modal" data-target="#modalData"  >
+                    <i class="material-icons">table_chart</i> Tabla de datos
+                </a>
+                -->
+                <div class="container text-right">
+                    <a class="item-footer" href="http://www.citur.gov.co/" target="_blank" title="Ir a CITUR">
+                        <img src="/Content/image/presentacion_CITUR-01.png" width="65">
+                        <span class="sr-only">Ir a CITUR</span>
+                    </a>
+                </div>
                 
             </div>
         </div>
-    
+        
+        
+        <div class="panel panel-default" ng-show="data.length>0" >
+                <div class="panel-heading pr-3 pl-3 d-flex justify-content-between align-items-center">
+                    <legend id="tituloIndicadorGrafica"><i class="ion-ios-grid-view-outline"></i>  @{{tituloIndicadorGrafica}} </legend>
+                    <button type="button" href id="descargarTABLA" class="btn btn-outline-success">
+                         <img src="/Content/graficas/excel.png" class="icono" style="height: 22px;"></img> <span class="d-none d-sm-inline-block">Decargar tabla</span>
+                    </button>
+                </div>
+                <div class="panel-body" id="customers" style="overflow-x: auto;width: 100%;margin-right: 0;">
+                    
+                    <table class="table table-striped" ng-if="!series"   >
+                        <thead>
+                          <tr>
+                            <th>@{{indicador.idiomas[0].eje_x}} </th>
+                            <th>Cantidad</th>
+                            <th ng-if="dataExtra" >Media</th>
+                            <th ng-if="dataExtra" >Mediana</th>
+                            <th ng-if="dataExtra" >Moda</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr  ng-repeat="label in labels" >
+                            <td>@{{label}}</td>
+                            <td>@{{data[$index]}}</td>
+                            <td ng-if="dataExtra" >@{{dataExtra.media[$index]}}</td>
+                            <td ng-if="dataExtra" >@{{dataExtra.mediana[$index]}}</td>
+                            <td ng-if="dataExtra" >@{{dataExtra.moda[$index]}}</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    
+                    <table class="table table-striped" ng-if="series" >
+                        <thead>
+                          <tr>
+                            <th></th>
+                            <th ng-repeat="item in labels" >@{{item}}</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr ng-repeat="datos in data track by $index" >
+                            <td>@{{series[$index]}}</td>
+                            <td ng-repeat="d in datos track by $index">@{{d}}</td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    
+                </div>
+            </div>
+        
+    </div>
 </div>
-
+<!--
+<div class="modal" tabindex="-1" role="dialog" id="modalData" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> @{{indicador.idiomas[0].nombre}} </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+-->
 
 @endsection
 
@@ -240,10 +291,9 @@
     <script src="{{asset('/js/plugins/jspdf.min.js')}}"></script>
     <script src="{{asset('/js/plugins/Chart.min.js')}}"></script>
     <script src="{{asset('/js/plugins/angular-chart.min.js')}}"></script>
-    <script src="{{asset('/js/plugins/chartsjs-plugin-data-labels.js')}}"></script>
-    <script src="{{asset('/js/plugins/angular-filter.js')}}"></script>
+   
     <script src="{{asset('/js/indicadores/appIndicadores.js')}}"></script>
-    <script src="{{asset('/js/indicadores/servicios.js')}}"></script>   
+    <script src="{{asset('/js/indicadores/servicios.js')}}"></script> 
     
     <script>
     
@@ -277,23 +327,6 @@
         
         $("#descargarTABLA").on("click", function(){ 
             
-            var htmls = "";
-            var uri = 'data:application/vnd.ms-excel;base64,';
-            var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'; 
-            var base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) };
-            var format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }); };
-
-            htmls = $("#customers").html()
-
-            var ctx = { worksheet : 'Worksheet', table : htmls };
-
-            var link = document.createElement("a");
-            link.download = "datos.xls";
-            link.href = uri + base64(format(template, ctx));
-            link.click();
-
-            
-            /*
             var pdf = new jsPDF('l', 'pt', 'letter');
             pdf.text(20, 20, $("#tituloIndicadorGrafica").html() );
 
@@ -309,7 +342,7 @@
                 },
                 margins
             );
-            */
+            
         });
         
         $("#descargarGraficaTabla").on("click", function(){ 
