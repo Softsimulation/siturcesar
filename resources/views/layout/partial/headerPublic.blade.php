@@ -79,6 +79,12 @@
                             <li role="none">
                                 <a role="menuitem" href="/Mapa">Mapa del departamento</a>
                             </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -109,10 +115,13 @@
                         <a role="menuitem" href="#menu-publicaciones" aria-haspopup="true" aria-expanded="false">Publicaciones</a>
                         <ul role="menu" id="menu-publicaciones" aria-label="Publicaciones">
                             <li role="none">
-                                <a role="menuitem" href="#">Noticias</a>
+                                <a role="menuitem" href="/promocionNoticia/listado">Noticias</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Eventos</a>
+                                <a role="menuitem" href="/quehacer?tipo=4">Eventos</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/promocionBolsaEmpleo/vacantes">Bolsa de empleo</a>
                             </li>
                         </ul>
                     </li>

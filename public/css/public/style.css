@@ -626,7 +626,8 @@ footer{
     
 }
 .header-list.without-options{
-    min-height: 200px;
+    min-height: 220px;
+    padding-bottom: 1rem;
 }
 .header-list:before{
     content: "";
