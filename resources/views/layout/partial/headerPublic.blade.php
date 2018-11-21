@@ -1,3 +1,11 @@
+<div class="loadingContent text-center" aria-hidden="true">
+    <div class="loader">
+        
+        <img src="/img/brand/96.png" alt="Logo de SITUR Cesar" class="d-block">
+        <img src="/spinner-200px.gif" alt="" role="presentation" class="d-block">
+    </div>
+    <span>Cargando</span>
+</div>
 <header class="row no-gutters">
 	<div class="brand col-md-3">
 		<a href="/">
@@ -68,6 +76,15 @@
                             <li role="none">
                                 <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
                             </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Mapa">Mapa del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -88,9 +105,9 @@
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/empleo">Empleo</a>
                             </li>
-                            <li role="none">
-                                <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>
-                            </li>
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
+                            <!--</li>-->
                         </ul>
                     </li>
                     
@@ -98,10 +115,13 @@
                         <a role="menuitem" href="#menu-publicaciones" aria-haspopup="true" aria-expanded="false">Publicaciones</a>
                         <ul role="menu" id="menu-publicaciones" aria-label="Publicaciones">
                             <li role="none">
-                                <a role="menuitem" href="#">Noticias</a>
+                                <a role="menuitem" href="/promocionNoticia/listado">Noticias</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Eventos</a>
+                                <a role="menuitem" href="/quehacer?tipo=4">Eventos</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/promocionBolsaEmpleo/vacantes">Bolsa de empleo</a>
                             </li>
                         </ul>
                     </li>
