@@ -81,18 +81,18 @@
                             <li role="none">
                                 <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
                             </li>
-                            <li role="none">
-                                <a role="menuitem" href="/Mapa">Mapa del departamento</a>
-                            </li>
-                            <li role="none">
-                                <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>
-                            </li>
-                            <li role="none">
-                                <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>
-                            </li>
-                            <li role="none">
-                                <a role="menuitem" href="/PlanificaTuViaje">Planifica tu viaje</a>
-                            </li>
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/Mapa">Mapa del departamento</a>-->
+                            <!--</li>-->
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>-->
+                            <!--</li>-->
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>-->
+                            <!--</li>-->
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/PlanificaTuViaje">Planifica tu viaje</a>-->
+                            <!--</li>-->
                         </ul>
                     </li>
                     <li>
@@ -141,7 +141,23 @@
                         </ul>
                     </li>
                     <li>
-                        <a id="menu-contacto" role="menuitem" href="#">Contáctenos</a>
+                        <!--<a id="menu-contacto" role="menuitem" href="#">Prepara tu viaje</a>-->
+                        
+                        <a role="menuitem" href="#menu-preparaTuViaje" aria-haspopup="true" aria-expanded="false">Prepare su viaje</a>
+                        <ul role="menu" id="menu-preparaTuViaje" aria-label="Prepara tu viaje">
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Mapa">Mapa del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/PlanificaTuViaje">Planifica tu viaje</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>
