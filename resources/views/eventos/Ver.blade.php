@@ -12,11 +12,10 @@ function parse_yturl($url)
 
 @section('Title',$evento->eventosConIdiomas[0]->nombre)
 
-@section('TitleSection',$evento->eventosConIdiomas[0]->nombre)
 
 @section('meta_og')
 <meta property="og:title" content="{{$evento->eventosConIdiomas[0]->nombre}} se realizará en el departamento del Cesar" />
-<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:image" content="{{asset('/img/brand/128.png')}}" />
 <meta property="og:description" content="{{$evento->eventosConIdiomas[0]->descripcion}}"/>
 @endsection
 

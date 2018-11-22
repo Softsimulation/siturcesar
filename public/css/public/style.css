@@ -42,7 +42,7 @@ header {
     position: fixed;
     height: 100%;
     width: 100%;
-    padding-top: 20%;
+    padding-top: 10%;
     background-color: white;
     text-align: center;
     z-index: 100000;
@@ -211,7 +211,7 @@ footer{
 #nav-menu-main nav>ul li>a[href="#menu-publicaciones"]{
     background-color: #e42728;
 }
-#nav-menu-main nav>ul li>a#menu-contacto{
+#nav-menu-main nav>ul li>a#menu-contacto, #nav-menu-main nav>ul li>a[href="#menu-preparaTuViaje"]{
     background-color: #8bbe44;
 }
 #nav-menu-main nav>ul li ul a{
