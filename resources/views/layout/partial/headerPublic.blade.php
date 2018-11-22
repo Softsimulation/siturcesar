@@ -44,15 +44,9 @@
 			<!--		<option value="en">Inglés</option>-->
 			<!--	</select>-->
 			<!--</form>-->
-			<a href="#"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
-			<form name="langForm" method="get" action="">
-				<label class="sr-only" for="languange">Selección de idioma</label>
-				<select id="languange" name="lang" onchange="this.form.submit();">
-					<option value="es" selected>Español</option>
-					<option value="en">Inglés</option>
-				</select>
-			</form>
-			<a href="/login/logi"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
+			<a href="/login/login"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
+		
+			
 		</div>
 		<div id="navbar-mobile" class="text-center">
             <button type="button" class="btn btn-block btn-primary" title="Menu de navegación"><span aria-hidden="true" class="ion-navicon-round"></span><span class="sr-only">Menú de navegación</span></button>
