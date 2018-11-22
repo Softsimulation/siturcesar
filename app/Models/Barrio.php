@@ -28,7 +28,7 @@ class Barrio extends Model
      */
     public function municipio()
     {
-        return $this->belongsTo('App\Municipio');
+        return $this->belongsTo('App\Models\Municipio');
     }
 
     /**
@@ -36,6 +36,6 @@ class Barrio extends Model
      */
     public function edificaciones()
     {
-        return $this->hasMany('App\Edificacione');
+        return $this->hasMany('App\Models\Edificacione');
     }
 }
