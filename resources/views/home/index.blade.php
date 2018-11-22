@@ -1,7 +1,46 @@
+<?php
+$colorTipo = ['primary','success','danger', 'info', 'warning'];
+function getItemType($type){
+    $path = ""; $name = ""; $title = "";
+    switch($type){
+        case(1):
+            $title = "Actividades";
+            $name = "Actividad";
+            $path = "/actividades/ver/";
+            break;
+        case(2):
+            $title = "Atracciones";
+            $name = "Atracción";
+            $path = "/atracciones/ver/";
+            break;
+        case(3):
+            $title = "Destinos";
+            $name = "Destino";
+            $path = "/destinos/ver/";
+            break;
+        case(4):
+            $title = "Eventos";
+            $name = "Evento";
+            $path = "/eventos/ver/";
+            break; 
+        case(5):
+            $title = "Rutas turísticas";
+            $name = "Ruta turística";
+            $path = "/rutas/ver/";
+            break;
+    }
+    return (object)array('name'=>$name, 'path'=>$path, 'title' => $title);
+}
+?>
 @extends('layout._publicLayout')
 
 @section('Title','')
 @section('meta_og')
+<!-- BEGIN JIVOSITE CODE {literal} -->
+<script type='text/javascript'>
+(function(){ var widget_id = 'sRKW0ukuOe';var d=document;var w=window;function l(){var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;s.src = '//code.jivosite.com/script/widget/'+widget_id; var ss = document.getElementsByTagName('script')[0]; ss.parentNode.insertBefore(s, ss);}if(d.readyState=='complete'){l();}else{if(w.attachEvent){w.attachEvent('onload',l);}else{w.addEventListener('load',l,false);}}})();
+</script>
+<!-- {/literal} END JIVOSITE CODE -->
 <meta property="og:title" content="SITUR Cesar" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://www.siturcesar.com" />
@@ -55,25 +94,25 @@
 		    		<div class="col-12 col-md-9 row align-items-center d-flex justify-content-center">
 		    			
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionNoticia/listado">
 		    						<i class="links links-noticias" aria-hidden="true"></i>
 		    						Noticias
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/quehacer?tipo=4">
 		    						<i class="links links-eventos" aria-hidden="true"></i>
 		    						Eventos
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionBolsaEmpleo/vacantes">
 		    						<i class="links links-bolsaEmpleo" aria-hidden="true"></i>
 		    						Bolsa de empleo
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
-		    					<a href="#">
+		    					<a href="/promocionPublicacion/listado">
 		    						<i class="links links-biblioteca" aria-hidden="true"></i>
 		    						Biblioteca digital
 		    					</a>
@@ -100,7 +139,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/receptor" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -112,7 +151,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/interno" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -124,7 +163,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/emisor" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -136,7 +175,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/oferta" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -148,7 +187,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/empleo" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -160,7 +199,7 @@
 						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						    
 						</div>
-						<div class="card-footer bg-success text-white"><a href="#" class="text-white">Ir al indicador</a></div>
+						<div class="card-footer bg-success text-white"><a href="/indicadores/sostenibilidad" class="text-white">Ir al indicador</a></div>
 					</div>
 					
 				</div>
@@ -190,109 +229,129 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-12 col-md-6">
-						<h2>Noticias <small><a href="#" class="btn btn-link">Ver todo</a></small></h2>
+						<h2>Noticias <small><a href="/promocionNoticia/listado" class="btn btn-outline-primary">Ver todas</a></small></h2>
+						
 						<div class="tiles">
+							@foreach($noticias as $noticia)
 							<section class="tile inline-tile">
 	                            <div class="tile-img">
-	                            
+	                            	@if($noticia->portada)
+	                            	<img src="{{$noticia->portada}}" alt="">
+	                            	@endif
 		                        </div>
 		                        <div class="tile-body">
 		                            <div class="tile-caption">
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc euismod justo nec urna consequat elementum. Vivamus maximus pharetra laoreet. Nulla facilisis aliquam risus a egestas. Suspendisse nullam.</h3>
+		                                <a href="/promocionNoticia/ver/{{$noticia->idNoticia}}">
+		                                    <h3>{{$noticia->tituloNoticia}}</h3>
 		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
+		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el {{date('d/m/Y h:m A', strtotime($noticia->fecha))}}</p>
 		                            </div>
 		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
+		                                <a class="btn btn-sm btn-outline-success" href="/promocionNoticia/ver/{{$noticia->idNoticia}}">Ver más</a>
 		                            </div>
 		                            
 		                        </div>
 	                        </section>
-	                        <section class="tile inline-tile">
-	                            <div class="tile-img">
+	                        @endforeach
+	                        <!--<section class="tile inline-tile">-->
+	                        <!--    <div class="tile-img">-->
 	                            
-		                        </div>
-		                        <div class="tile-body">
-		                            <div class="tile-caption">
+		                       <!-- </div>-->
+		                       <!-- <div class="tile-body">-->
+		                       <!--     <div class="tile-caption">-->
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
-		                            </div>
-		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
-		                            </div>
+		                       <!--         <a href="#">-->
+		                       <!--             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>-->
+		                       <!--         </a>-->
+		                       <!--         <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>-->
+		                       <!--     </div>-->
+		                       <!--     <div class="buttons">-->
+		                       <!--         <a class="btn btn-xs btn-link" href="#">Ver más</a>-->
+		                       <!--     </div>-->
 		                            
-		                        </div>
-	                        </section>
-	                        <section class="tile inline-tile">
-	                            <div class="tile-img">
+		                       <!-- </div>-->
+	                        <!--</section>-->
+	                        <!--<section class="tile inline-tile">-->
+	                        <!--    <div class="tile-img">-->
 	                            
-		                        </div>
-		                        <div class="tile-body">
-		                            <div class="tile-caption">
+		                       <!-- </div>-->
+		                       <!-- <div class="tile-body">-->
+		                       <!--     <div class="tile-caption">-->
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>
-		                            </div>
-		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
-		                            </div>
+		                       <!--         <a href="#">-->
+		                       <!--             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>-->
+		                       <!--         </a>-->
+		                       <!--         <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el 01/01/2018 00:01 AM</p>-->
+		                       <!--     </div>-->
+		                       <!--     <div class="buttons">-->
+		                       <!--         <a class="btn btn-xs btn-link" href="#">Ver más</a>-->
+		                       <!--     </div>-->
 		                            
-		                        </div>
-	                        </section>
+		                       <!-- </div>-->
+	                        <!--</section>-->
 						</div>
 						
 					</div>
 					<div class="col-12 col-md-6">
-						<h2>Eventos <small><a href="#" class="btn btn-link">Ver todo</a></small></h2>
-						<div id="events" class="tiles">
-							
+						<h2>Sugeridos <small><a href="/quehacer" class="btn btn-outline-primary">Ver todo</a></small></h2>
+						
+						<div id="sugeridos" class="tiles">
+							@foreach($sugeridos as $sugerido)
 	                        <section class="tile inline-tile">
 	                        	<div class="tile-img">
-                                    <span class="day">10</span>
-                                    <span class="month">diciembre de 2018</span>
-                                    <span class="hour">08:30 AM</span>
+                                    <!--<span class="day">10</span>-->
+                                    <!--<span class="month">diciembre de 2018</span>-->
+                                    <!--<span class="hour">08:30 AM</span>-->
+                                    @if($sugerido->portada)
+                                    <img src="{{$sugerido->portada}}" alt="">
+                                    @endif
                                 </div>
 		                        <div class="tile-body">
 		                            <div class="tile-caption">
-		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-android-pin" aria-hidden="true"></span> Lorem ipsum dolor sit amet</p>
+		                                   <h3><a href="{{getItemType($sugerido->tipo)->path}}{{$sugerido->id}}">
+		                                    {{$sugerido->nombre}}
+		                                </a></h3> 
+		                                <span class="badge badge-{{$colorTipo[$sugerido->tipo - 1]}}">{{getItemType($sugerido->tipo)->name}}</span>
+		                                <div class="inline-buttons mt-1">
+				                            <span class="{{ ($sugerido->calificacion_legusto > 0.0) ? (($sugerido->calificacion_legusto <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">1</span>
+				                            <span class="{{ ($sugerido->calificacion_legusto > 1.0) ? (($sugerido->calificacion_legusto <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">2</span>
+				                            <span class="{{ ($sugerido->calificacion_legusto > 2.0) ? (($sugerido->calificacion_legusto <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">3</span>
+				                            <span class="{{ ($sugerido->calificacion_legusto > 3.0) ? (($sugerido->calificacion_legusto <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">4</span>
+				                            <span class="{{ ($sugerido->calificacion_legusto > 4.0) ? (($sugerido->calificacion_legusto <= 4.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">5</span>
+				                            
+				                        </div>
+		                                @if($sugerido->tipo == 4)
+		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Del {{date('d/m/Y', strtotime($sugerido->fecha_inicio))}} al {{date('d/m/Y', strtotime($sugerido->fecha_fin))}} </p>
+		                                @endif
 		                            </div>
 		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
+		                                <a class="btn btn-sm btn-outline-success" href="{{getItemType($sugerido->tipo)->path}}{{$sugerido->id}}">Ver más</a>
 		                            </div>
 		                            
 		                        </div>
 	                        </section>
-	                        <section class="tile inline-tile">
-	                            <div class="tile-img">
-	                            	<span class="day">11</span>
-                                    <span class="month">septiembre de 2001</span>
-                                    <span class="hour">08:30 AM</span>
-		                        </div>
-		                        <div class="tile-body">
-		                            <div class="tile-caption">
+	                        @endforeach
+	                        <!--<section class="tile inline-tile">-->
+	                        <!--    <div class="tile-img">-->
+	                        <!--    	<span class="day">11</span>-->
+                         <!--           <span class="month">septiembre de 2001</span>-->
+                         <!--           <span class="hour">08:30 AM</span>-->
+		                       <!-- </div>-->
+		                       <!-- <div class="tile-body">-->
+		                       <!--     <div class="tile-caption">-->
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-android-pin" aria-hidden="true"></span> Lorem ipsum dolor sit amet</p>
-		                            </div>
-		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
-		                            </div>
+		                       <!--         <a href="#">-->
+		                       <!--             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>-->
+		                       <!--         </a>-->
+		                       <!--         <p class="date"><span class="ion-android-pin" aria-hidden="true"></span> Lorem ipsum dolor sit amet</p>-->
+		                       <!--     </div>-->
+		                       <!--     <div class="buttons">-->
+		                       <!--         <a class="btn btn-xs btn-link" href="#">Ver más</a>-->
+		                       <!--     </div>-->
 		                            
-		                        </div>
-	                        </section>
+		                       <!-- </div>-->
+	                        <!--</section>-->
 						</div>
 					</div>
 				</div>

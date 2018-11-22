@@ -12,21 +12,21 @@
     <meta property="og:url" content="{{\Request::url()}}" />
     @yield('meta_og')
     <title>@yield('Title') SITUR Cesar</title>
-    <link rel='manifest' href='res/manifest.json'>
+    <link rel='manifest' href='/manifest.json'>
     <meta name='mobile-web-app-capable' content='yes'>
     <meta name='apple-mobile-web-app-capable' content='yes'>
     <meta name='application-name' content='SITUR Cesar'>
     <meta name='apple-mobile-web-app-status-bar-style' content='blue'>
     <meta name='apple-mobile-web-app-title' content='SITUR Cesar'>
-    <link rel='icon' sizes='192x192' href='res/img/brand/192.png'>
-    <link rel='apple-touch-icon' href='res/img/brand/192.png'>
-    <meta name='msapplication-TileImage' content='res/img/brand/144.png'>
+    <link rel='icon' sizes='192x192' href='/img/brand/192.png'>
+    <link rel='apple-touch-icon' href='/img/brand/192.png'>
+    <meta name='msapplication-TileImage' content='/img/brand/144.png'>
     <meta name='msapplication-TileColor' content='#004A87'>
     <meta name="theme-color" content="#004A87" />
     <meta http-equiv="cache-Control" content="max-age=21600" />
     <meta http-equiv="cache-control" content="no-cache" />
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Roboto:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="{{asset('/css/public/style.css')}}" type="text/css" />
@@ -34,6 +34,7 @@
     <link href="{{asset('/css/public/style_992.css')}}" rel="stylesheet" media="(min-width: 992px)">
     <link href="{{asset('/css/public/style_1200.css')}}" rel="stylesheet" media="(min-width: 1200px)">
     <link href="{{asset('/css/public/style_1600.css')}}" rel="stylesheet" media="(min-width: 1600px)">
+    <link rel="stylesheet" href="{{asset('/css/public/print.css')}}" media="print"/>
     @yield('estilos')
     <style>
         #introduce p, #introduce ul{
@@ -78,15 +79,54 @@
 		#publicaciones{
 			padding: 2% 0;
 		}
-		.tiles .tile:not(:last-child) {
-		    border-bottom: 1px solid #eee;
-		}
+		/*.tiles .tile:not(:last-child) {*/
+		/*    border-bottom: 1px solid #eee;*/
+		/*}*/
 		#events .tile.inline-tile:nth-child(odd) .tile-img{
 			background-color: green;
 		}
 		#events .tile.inline-tile:nth-child(even) .tile-img{
 			background-color: #8bbe44;
 		}
+		/*Google traductor*/
+            .goog-te-gadget img {
+                display: none!important;
+            }
+            .goog-te-gadget-simple {
+                background: transparent!important;
+                color: white!important;
+                border: 0!important;
+            }
+            .goog-te-gadget-simple .goog-te-menu-value span {
+                color: #333!important;
+                font-size: 1rem!important;
+                padding-right: .5rem!important;
+                font-family: Futura, sans-serif!important;
+            }
+            .goog-te-banner {
+                background: black!important;
+                color: tton button {
+                color: #333!important;
+            }
+            .goog-te-button div {
+                background: transparent!important;
+                border: 0!important;
+            }
+            .goog-te-button button {
+                color: #333!important;
+                border: 0!important;
+                background-color: transparent!important;
+                font-family: Futura, sans-serif!important;
+            }
+            .goog-te-button {
+                border: 0!important;
+            }
+            .goog-te-menu-value span {
+                color: tton button {
+                color: #333!important;
+                font-family: Futura, sans-serif!important;
+            }
+		
     </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -102,9 +142,12 @@
 		
 	</main>
 	@include('layout.partial.footerPublic')
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     
     <script src="/js/public/script-main.js"></script>
     @yield('javascript')
@@ -120,6 +163,13 @@
             console.log('CLIENT: service worker situr Cesar is not supported.');
             document.getElementsByTagName("html")[0].setAttribute("manifest", "/cache.appcache");
         }
+    </script>
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function (event) {
+            
+            $('.loadingContent').delay(500).fadeOut("fast");
+            
+        });
     </script>
 </body>
 </html>

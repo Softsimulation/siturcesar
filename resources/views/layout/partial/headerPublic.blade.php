@@ -1,3 +1,11 @@
+<div class="loadingContent text-center" aria-hidden="true">
+    <div class="loader">
+        
+        <img src="/img/brand/96.png" alt="Logo de SITUR Cesar" class="d-block">
+        <img src="/spinner-200px.gif" alt="" role="presentation" class="d-block">
+    </div>
+    <span>Cargando</span>
+</div>
 <header class="row no-gutters">
 	<div class="brand col-md-3">
 		<a href="/">
@@ -24,14 +32,24 @@
 				
 			</form>
 			<a href="#">Mapa del sitio</a>
-			<form name="langForm" method="get" action="">
-				<label class="sr-only" for="languange">Selección de idioma</label>
-				<select id="languange" name="lang" onchange="this.form.submit();">
-					<option value="es" selected>Español</option>
-					<option value="en">Inglés</option>
-				</select>
-			</form>
-			<a href="#"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
+			<div id="google_translate_element"></div><script type="text/javascript">
+            function googleTranslateElementInit() {
+              new google.translate.TranslateElement({pageLanguage: 'es', includedLanguages: 'de,en,es,fr,it,ja,pt,sv,tr,zh-CN,zh-TW', layout: google.translate.TranslateElement.InlineLayout.SIMPLE}, 'google_translate_element');
+            }
+            </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+			<!--<form name="langForm" method="get" action="">-->
+			<!--	<label class="sr-only" for="languange">Selección de idioma</label>-->
+			<!--	<select id="languange" name="lang" onchange="this.form.submit();">-->
+			<!--		<option value="es" selected>Español</option>-->
+			<!--		<option value="en">Inglés</option>-->
+			<!--	</select>-->
+			<!--</form>-->
+			@if(Auth::check())
+		    	<a href="/login/cerrarsesion" title="Cerrar sesión"><span class="ion-log-out" aria-hidden="true"></span> <span class="d-none d-md-inline">Cerrar sesión</span></a>
+		    	<a href="/visitante/misfavoritos" title="Mis favoritos"><span class="ion-heart" aria-hidden="true"></span> <span class="sr-only">Mis favoritos</span></a>
+			@else
+			    <a href="/login/login"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
+			@endif
 		</div>
 		<div id="navbar-mobile" class="text-center">
             <button type="button" class="btn btn-block btn-primary" title="Menu de navegación"><span aria-hidden="true" class="ion-navicon-round"></span><span class="sr-only">Menú de navegación</span></button>
@@ -46,37 +64,65 @@
                         <a role="menuitem" href="#menu-visitarAlCesar" aria-haspopup="true" aria-expanded="false">Visita al Cesar</a>
                         <ul role="menu" id="menu-visitarAlCesar" aria-label="Visita al Cesar">
                             <li role="none">
-                                <a role="menuitem" href="/quehacer">Qué hacer</a>
+                                <a role="menuitem" href="/quehacer/?tipo=3">Destinos</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/Experiencias">Experiencias</a>
+                                <a role="menuitem" href="/quehacer/?tipo=4">Eventos</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
+                                <a role="menuitem" href="/quehacer/?tipo=1">Actividades</a>
                             </li>
+                            <li role="none">
+                                <a role="menuitem" href="/quehacer/?tipo=2">Atracciones</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/quehacer/?tipo=5">Rutas turísticas</a>
+                            </li>
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>-->
+                            <!--</li>-->
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/Mapa">Mapa del departamento</a>-->
+                            <!--</li>-->
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>-->
+                            <!--</li>-->
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>-->
+                            <!--</li>-->
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/PlanificaTuViaje">Planifica tu viaje</a>-->
+                            <!--</li>-->
                         </ul>
                     </li>
                     <li>
                         <a role="menuitem" href="#menu-estadisticas" aria-haspopup="true" aria-expanded="false">Estadísticas</a>
                         <ul role="menu" id="menu-estadisticas" aria-label="Estadísticas">
                             <li role="none">
-                                <a role="menuitem" href="#">Turismo receptor</a>
+                                <a role="menuitem" href="/indicadores/receptor">Turismo receptor</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Turismo interno</a>
+                                <a role="menuitem" href="/indicadores/interno">Turismo interno</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Turismo emisor</a>
+                                <a role="menuitem" href="/indicadores/emisor">Turismo emisor</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Oferta turística</a>
+                                <a role="menuitem" href="/indicadores/oferta">Oferta turística</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Empleo</a>
+                                <a role="menuitem" href="/indicadores/empleo">Empleo</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Turismo sostenible</a>
+                                <a role="menuitem" href="/indicadores/secundarios">Estadisticas secundarias</a>
                             </li>
+                            <li role="none">
+                                <a role="menuitem" href="/MuestraMaestra/detalles">Verificación de proveedores RNT</a>
+                            </li>
+                           
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
+                            <!--</li>-->
                         </ul>
                     </li>
                     
@@ -84,15 +130,37 @@
                         <a role="menuitem" href="#menu-publicaciones" aria-haspopup="true" aria-expanded="false">Publicaciones</a>
                         <ul role="menu" id="menu-publicaciones" aria-label="Publicaciones">
                             <li role="none">
-                                <a role="menuitem" href="#">Noticias</a>
+                                <a role="menuitem" href="/promocionNoticia/listado">Noticias</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="#">Eventos</a>
+                                <a role="menuitem" href="/promocionInforme/listado">Informes</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/promocionBolsaEmpleo/vacantes">Bolsa de empleo</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/promocionPublicacion/listado">Biblioteca digital</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a id="menu-contacto" role="menuitem" href="#">Contáctenos</a>
+                        <!--<a id="menu-contacto" role="menuitem" href="#">Prepara tu viaje</a>-->
+                        
+                        <a role="menuitem" href="#menu-preparaTuViaje" aria-haspopup="true" aria-expanded="false">Prepare su viaje</a>
+                        <ul role="menu" id="menu-preparaTuViaje" aria-label="Prepara tu viaje">
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Mapa">Mapa del departamento</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/PlanificaTuViaje">Planifica tu viaje</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
             </nav>

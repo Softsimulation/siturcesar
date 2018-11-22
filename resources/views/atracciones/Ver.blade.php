@@ -17,7 +17,7 @@ function parse_yturl($url)
 
 @section('meta_og')
 <meta property="og:title" content="Realiza {{$atraccion->sitio->sitiosConIdiomas[0]->nombre}} en el departamento del Cesar" />
-<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:image" content="{{asset('/img/brand/128.png')}}" />
 <meta property="og:description" content="{{$atraccion->sitio->sitiosConIdiomas[0]->descripcion}}"/>
 @endsection
 
@@ -25,7 +25,18 @@ function parse_yturl($url)
     <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
     <link href="{{asset('/css/public/details.css')}}" rel="stylesheet">
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
-    
+    <style>
+        .btn.btn-lg.btn-circled{
+                font-size: 1.825rem;
+                color: red;
+                background: whitesmoke;
+                height: 50px;
+                width: 50px;
+                padding: 0;
+                border-radius: 50%;
+                margin-bottom: 2rem;
+            }
+    </style>
 @endsection
 @section('content')
 
@@ -56,7 +67,7 @@ function parse_yturl($url)
         </div>
         @endfor
         
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-flex align-items-start flex-column justify-content-end flex-wrap">
 		    <h2 class="text-center container">{{$atraccion->sitio->sitiosConIdiomas[0]->nombre}}
 		        <small class="d-block">
 		            <span class="{{ ($atraccion->calificacion_legusto > 0.0) ? (($atraccion->calificacion_legusto <= 0.9) ? 'mdi mdi-star-half' : 'mdi mdi-star') : 'mdi mdi-star-outline'}}" aria-hidden="true"></span>
@@ -68,6 +79,21 @@ function parse_yturl($url)
 		            
 		        </small>
 	        </h2>
+	        <div class="text-center">
+            @if(Auth::check())
+                <form role="form" action="/atracciones/favorito" method="post">
+                    {{ csrf_field() }}
+                    <input type="hidden" name="atraccion_id" value="{{$atraccion->id}}" />
+                    <button type="submit" class="btn btn-lg btn-circled btn-favorite">
+                      <span class="ion-android-favorite" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+                    </button>    
+                </form>
+            @else
+                <button type="button" class="btn btn-lg btn-circled" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
+                  <span class="ion-android-favorite-outline" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+                </button>
+            @endif
+          </div>
 		  </div>
       </div>
       
@@ -113,15 +139,18 @@ function parse_yturl($url)
         <div class="container">
             <h3>Información general</h3>
             <h4 class="text-center">{{$atraccion->sitio->sitiosConIdiomas[0]->nombre}}</h4>
+            @if(Session::has('message'))
+                <div class="alert alert-info" role="alert" style="text-align: center;">{{Session::get('message')}}</div>
+            @endif
             <div class="text-center">
                 <button type="button" class="btn btn-lg btn-link" id="btn-favorite">
                     <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>
                 </button>
             </div>
             @if($video_promocional != null)
-            <iframe src="https://www.youtube.com/embed/{{print(parse_yturl($video_promocional))}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
+            <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional) ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
-            <p style="white-space: pre-line;">{{$atraccion->sitio->sitiosConIdiomas[0]->descripcion}}</p>
+            <p style="white-space: pre-line;" class="mt-3">{{$atraccion->sitio->sitiosConIdiomas[0]->descripcion}}</p>
         </div>
         
     </section>
@@ -264,14 +293,24 @@ function parse_yturl($url)
             <div class="text-center">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComentario">Comentar</button>
             </div>
-        </div>
-        
-         <ul class="list-group list-group-flush">
+            @if(count($atraccion->comentariosAtracciones) > 0)
+                 <ul class="list-group list-group-flush no-list-style">
                     @foreach ($atraccion->comentariosAtracciones as $comentario)
-                         <li>{{$comentario->user->username}} {{$comentario->comentario}}</li>
+                         <li class="list-group-item">
+                             <p class="text-muted m-0"><i class="ion-person"></i> {{$comentario->user->username}} - <i class="ion-calendar"></i> {{date("j/m/y", strtotime($comentario->fecha))}}</p>
+        
+                            <blockquote>
+                            {{$comentario->comentario}}
+                            </blockquote>
+                        </li>
                     @endforeach
                       
-        </ul>
+                               
+                </ul>
+            
+            @endif
+        </div>
+        
         
         <!-- Modal -->
          <div class="modal fade" id="modalComentario" tabindex="-1" role="dialog" aria-labelledby="labelModalComentario" aria-hidden="true">
