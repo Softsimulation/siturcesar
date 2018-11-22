@@ -24,7 +24,18 @@ function parse_yturl($url)
     <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
     <link href="{{asset('/css/public/details.css')}}" rel="stylesheet">
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
-    
+    <style>
+        .btn.btn-lg.btn-circled{
+                font-size: 1.825rem;
+                color: red;
+                background: whitesmoke;
+                height: 50px;
+                width: 50px;
+                padding: 0;
+                border-radius: 50%;
+                margin-bottom: 2rem;
+            }
+    </style>
 @endsection
 
 @section('content')
@@ -56,7 +67,7 @@ function parse_yturl($url)
         </div>
         @endfor
         
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-flex align-items-start flex-column justify-content-end flex-wrap">
 		    <h2 class="text-center container">{{$destino->destinoConIdiomas[0]->nombre}}
 		    {{--Tipo de destino: {{$destino->tipoDestino->tipoDestinoConIdiomas[0]->nombre}} --}}
 		        <small class="d-block">
@@ -106,16 +117,16 @@ function parse_yturl($url)
         <div class="container">
             <h3>Información general</h3>
             <h4 class="text-center">{{$destino->destinoConIdiomas[0]->nombre}}</h4>
-            <div class="text-center">
-                <button type="button" class="btn btn-lg btn-link" id="btn-favorite">
-                    <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>
-                </button>
-            </div>
+            <!--<div class="text-center">-->
+            <!--    <button type="button" class="btn btn-lg btn-link" id="btn-favorite">-->
+            <!--        <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>-->
+            <!--    </button>-->
+            <!--</div>-->
             @if($video_promocional != null)
-            <iframe src="https://www.youtube.com/embed/{{print(parse_yturl($video_promocional))}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
+            <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional)?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
             
-            <p style="white-space: pre-line;">{{$destino->destinoConIdiomas[0]->descripcion}}</p>
+            <p style="white-space: pre-line;" class="mt-3">{{$destino->destinoConIdiomas[0]->descripcion}}</p>
         </div>
         
     </section>
@@ -124,9 +135,10 @@ function parse_yturl($url)
             <h3>Características</h3>
             <!--<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>-->
             <div class="row">
-                <div class="col-xs-12 col-md-8">
+                <div class="col-xs-12 @if(count($destino->sectores) > 0) col-md-8 @else col-md-12 @endif">
                     <div id="map"></div>
                 </div>
+                @if(count($destino->sectores) > 0)
                 <div class="col-xs-12 col-md-4">
                     <div class="row">
                         <h4>Sectores</h4>
@@ -137,6 +149,7 @@ function parse_yturl($url)
                         @endforeach
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>
@@ -184,14 +197,24 @@ function parse_yturl($url)
             <div class="text-center">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComentario">Comentar</button>
             </div>
+            @if(count($destino->comentariosDestinos) > 0)
+            
+             <ul class="list-group list-group-flush no-list-style mt-3">
+                @foreach ($destino->comentariosDestinos as $comentario)
+                     <li class="list-group-item">
+                         <p class="text-muted m-0"><i class="ion-person"></i> {{$comentario->user->username}} - <i class="ion-calendar"></i> {{date("j/m/y", strtotime($comentario->fecha))}}</p>
+
+                        <blockquote>
+                        {{$comentario->comentario}}
+                        </blockquote>
+                    </li>
+                @endforeach
+                  
+                           
+            </ul>
+            @endif
         </div>
-                        <ul class="list-group list-group-flush">
-                    @foreach ($destino->comentariosDestinos as $comentario)
-                         <li>{{$comentario->user->username}} {{$comentario->comentario}}</li>
-                    @endforeach
-                      
-                               
-                </ul>
+                  
         <!-- Modal -->
            <div class="modal fade" id="modalComentario" tabindex="-1" role="dialog" aria-labelledby="labelModalComentario" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -284,7 +307,7 @@ function parse_yturl($url)
                                 
                             </div>
                             <div class="form-group text-center">
-                                <label class="control-label" for="calificacionRegresaria">¿Rgresaría?</label>
+                                <label class="control-label" for="calificacionRegresaria">¿Regresaría?</label>
                                 <div class="checks">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="calificacionRegresaria" id="calificacionRegresaria-1" value="1" required onclick="showStars(this)">

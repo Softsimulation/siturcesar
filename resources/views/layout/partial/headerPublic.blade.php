@@ -86,7 +86,7 @@
                                 <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/Departamento/PlanificaTuViaje">Planifica tu viaje</a>
+                                <a role="menuitem" href="/PlanificaTuViaje">Planifica tu viaje</a>
                             </li>
                         </ul>
                     </li>
@@ -108,6 +108,13 @@
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/empleo">Empleo</a>
                             </li>
+                            <li role="none">
+                                <a role="menuitem" href="/indicadores/secundarios">Estadisticas secundarias</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/MuestraMaestra/detalles">Verificación de proveedores RNT</a>
+                            </li>
+                           
                             <!--<li role="none">-->
                             <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
                             <!--</li>-->
@@ -121,7 +128,7 @@
                                 <a role="menuitem" href="/promocionNoticia/listado">Noticias</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/quehacer?tipo=4">Eventos</a>
+                                <a role="menuitem" href="/promocionInforme/listado">Informes</a>
                             </li>
                             <li role="none">
                                 <a role="menuitem" href="/promocionBolsaEmpleo/vacantes">Bolsa de empleo</a>

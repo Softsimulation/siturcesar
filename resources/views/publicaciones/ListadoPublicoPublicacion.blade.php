@@ -6,73 +6,116 @@
 
 @section('estilos')
 <style>
-header{
-        position: static;
-        background-color: black;
-    }
-    .row{
-        width: calc(100% + 30px);
-    }
-    .tile .tile-img.no-img{
+
+    #opciones{
+        text-align:right;
         background-color: white;
+        padding: 4px .5rem;
+        margin-top: 1rem;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position:relative;
+        z-index: 2;
+        box-shadow: 0px -1px 5px -2px rgba(0,0,0,.3);
     }
-    .tile .tile-img.no-img img{
-        height: 100px;
+    #opciones>button, #opciones form{
+        display:inline-block;
+        border: 0;
+        margin: 0 2px;
     }
-    .tiles .tile .tile-img.no-img {
-        height: 100px;
-    }
-    .content-head {
-        padding-top: 1rem;
-        background-color: whitesmoke;
-        box-shadow: 0px 2px 4px -2px rgba(0,0,0,.35);
+    .header-list:before{
+        background-image: url(/img/bg_banner_noticias.png);
+        background-size: auto 150%;
     }
     
 </style>
 @endsection
 
 @section('content')
-<div class="content-head">
-    <div class="container">
-        <h2 class="text-uppercase">Publicaciones</h2>
-        <hr/>
-        <form method="GET" action="/promocionPublicacion/listado">
-            <div class="row">
-                
-                
-                <div class="col-xs-12 col-md-6 col-lg-6">
-                    <div class="form-group has-feedback">
-                            <label class="sr-only" for="buscar">Búsqueda</label>
-                            <input type="text" name="buscar" class="form-control" id="buscar" placeholder="¿Qué desea buscar?" @if(isset($_GET['buscar'])) value="{{$_GET['buscar']}}" @endif maxlength="255" autocomplete="off">
-                            <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+<div class="header-list">
+        <div class="container">
+            <h2 class="title-section">Biblioteca digital</h2>
+            <div id="opciones">
+                <form method="GET" action="/promocionPublicacion/listado" class="w-100">
+                <div class="row">
+                    
+                    <div class="col-12 col-md-6 col-lg-5">
+                        
+                        
+                            <div class="form-group mb-1 mb-lg-0">
+                                <label for="tipoPublicacion" class="control-label sr-only">Tipo de publicación</label>
+                                <select class="form-control" id="tipoPublicacion" name="tipoPublicacion" onchange="this.form.submit()">
+                                    <option value="" selected @if((isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] == "") || !isset($_GET['tipoPublicacion'])) disabled @endif>@if(isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] != "") Ver todos los registros @else - Seleccione el tipo de publicación -  @endif</option>
+                                    @foreach($tipos as $tipo)
+                                        <option value="{{$tipo->id}}" @if(isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] == $tipo->id) selected @endif>{{$tipo->nombre}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            
                         
                     </div>
-                </div>
-                <div class="col-xs-12 col-md-3 col-lg-4">
-                    
-                    
-                        <div class="form-group">
-                            <label for="tipoPublicacion" class="control-label sr-only">Tipo de publicación</label>
-                            <select class="form-control" id="tipoPublicacion" name="tipoPublicacion" onchange="this.form.submit()">
-                                <option value="" selected @if((isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] == "") || !isset($_GET['tipoPublicacion'])) disabled @endif>@if(isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] != "") Ver todos los registros @else - Seleccione el tipo de publicación -  @endif</option>
-                                @foreach($tipos as $tipo)
-                                    <option value="{{$tipo->id}}" @if(isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] == $tipo->id) selected @endif>{{$tipo->nombre}}</option>
-                                @endforeach
-                            </select>
-                           
+                    <div class="col-12 col-md-6 col-lg-5">
+                        <div class="form-group mb-1 mb-lg-0">
+                                <label class="sr-only">Búsqueda</label>
+                                <input type="text" name="buscar" class="form-control input-lg" id="buscar" placeholder="¿Qué desea buscar?" @if(isset($_GET['buscar'])) value="{{$_GET['buscar']}}" @endif>
+                                <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
+                            
                         </div>
+                    </div>
+                    <div class="col-xs-12 col-md-12 col-lg-2">
+            			<button type="submit" class="btn btn-success w-100"><span class="ion-search"></span> Buscar</button>
+            		</div>
+                </div>
+            </form>
+            </div>
+        </div>
+        
+    </div>
+
+<!--<div class="content-head">-->
+<!--    <div class="container">-->
+<!--        <h2 class="text-uppercase">Publicaciones</h2>-->
+<!--        <hr/>-->
+<!--        <form method="GET" action="/promocionPublicacion/listado">-->
+<!--            <div class="row">-->
+                
+                
+<!--                <div class="col-xs-12 col-md-6 col-lg-6">-->
+<!--                    <div class="form-group has-feedback">-->
+<!--                            <label class="sr-only" for="buscar">Búsqueda</label>-->
+<!--                            <input type="text" name="buscar" class="form-control" id="buscar" placeholder="¿Qué desea buscar?" @if(isset($_GET['buscar'])) value="{{$_GET['buscar']}}" @endif maxlength="255" autocomplete="off">-->
+<!--                            <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>-->
+                        
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-xs-12 col-md-3 col-lg-4">-->
+                    
+                    
+<!--                        <div class="form-group">-->
+<!--                            <label for="tipoPublicacion" class="control-label sr-only">Tipo de publicación</label>-->
+<!--                            <select class="form-control" id="tipoPublicacion" name="tipoPublicacion" onchange="this.form.submit()">-->
+<!--                                <option value="" selected @if((isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] == "") || !isset($_GET['tipoPublicacion'])) disabled @endif>@if(isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] != "") Ver todos los registros @else - Seleccione el tipo de publicación -  @endif</option>-->
+<!--                                @foreach($tipos as $tipo)-->
+<!--                                    <option value="{{$tipo->id}}" @if(isset($_GET['tipoPublicacion']) && $_GET['tipoPublicacion'] == $tipo->id) selected @endif>{{$tipo->nombre}}</option>-->
+<!--                                @endforeach-->
+<!--                            </select>-->
+                           
+<!--                        </div>-->
                         
                     
-                </div>
-                <div class="col-xs-12 col-md-3 col-lg-2">
-        			<button type="submit" class="btn btn-block btn-success" title="Buscar"><span class="glyphicon glyphicon-search"></span> Buscar</button>
-        		</div>
-            </div>
-        </form>
-    </div>
-</div>
+<!--                </div>-->
+<!--                <div class="col-xs-12 col-md-3 col-lg-2">-->
+<!--        			<button type="submit" class="btn btn-block btn-success" title="Buscar"><span class="glyphicon glyphicon-search"></span> Buscar</button>-->
+<!--        		</div>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
 
-<div class="container">
+<div class="container mt-3">
     @if(isset($_GET['buscar']) || isset($_GET['tipoPublicacion']))
     <div class="text-center">
         <a href="/promocionPublicacion/listado" class="btn btn-default">Limpiar filtros</a>

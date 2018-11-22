@@ -38,6 +38,7 @@ function parse_yturl($url)
     <div class="container">
     
         @if(count($informacion->imagenes) > 0)
+
         <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
           <!-- Indicators -->
           <ol class="carousel-indicators">
@@ -49,20 +50,20 @@ function parse_yturl($url)
           <!-- Wrapper for slides -->
           <div class="carousel-inner" role="listbox">
             @for ($i = 0; $i < count($informacion->imagenes); $i++)
-            <div class="item @if($i == 0) active @endif">
-              <img src="{{$informacion->imagenes[$i]->ruta}}" alt="" role="presentation">
+            <div class="carousel-item @if($i == 0) active @endif">
+              <img src="{{$informacion->imagenes[$i]->ruta}}" alt="" role="presentation" class="d-block w-100">
             </div>
             @endfor
           </div>
         
           <!-- Controls -->
-          <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
+          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
           </a>
-          <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Siguiente</span>
+          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
           </a>
         </div>
         <br>
