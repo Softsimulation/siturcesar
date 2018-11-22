@@ -78,9 +78,9 @@
                             <li role="none">
                                 <a role="menuitem" href="/quehacer/?tipo=5">Rutas turísticas</a>
                             </li>
-                            <li role="none">
-                                <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>
-                            </li>
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>-->
+                            <!--</li>-->
                             <!--<li role="none">-->
                             <!--    <a role="menuitem" href="/Mapa">Mapa del departamento</a>-->
                             <!--</li>-->
