@@ -2,7 +2,7 @@
     $hasFilter = isset($_GET['tipoNoticia']) || isset($_GET['buscar']);
 ?>
 @extends('layout._publicLayout')
-@section('title', 'Noticias')
+@section('Title', 'Noticias :: SITUR Cesar')
 
 @section('estilos')
 <style>

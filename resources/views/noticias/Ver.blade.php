@@ -1,5 +1,5 @@
 @extends('layout._publicLayout')
-@section('title', '')
+@section('Title', $noticia->nombreTipoNoticia :: SITUR Cesar)
 
 @section('meta_og')
 <meta property="og:title" content="{{$noticia->nombreTipoNoticia}}. Miralo en SITUR Cesar" />

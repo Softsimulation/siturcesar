@@ -1,12 +1,11 @@
 @extends('layout._publicLayout')
 
-@section('title', 'Mi planificador')
+@section('Title', 'Mi planificador')
 
 @section('estilos')
     <style>
     header{
         position: static;
-        background-color: black;
     }
     
     

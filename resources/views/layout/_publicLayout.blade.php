@@ -12,15 +12,15 @@
     <meta property="og:url" content="{{\Request::url()}}" />
     @yield('meta_og')
     <title>@yield('Title') SITUR Cesar</title>
-    <link rel='manifest' href='res/manifest.json'>
+    <link rel='manifest' href='/manifest.json'>
     <meta name='mobile-web-app-capable' content='yes'>
     <meta name='apple-mobile-web-app-capable' content='yes'>
     <meta name='application-name' content='SITUR Cesar'>
     <meta name='apple-mobile-web-app-status-bar-style' content='blue'>
     <meta name='apple-mobile-web-app-title' content='SITUR Cesar'>
-    <link rel='icon' sizes='192x192' href='res/img/brand/192.png'>
-    <link rel='apple-touch-icon' href='res/img/brand/192.png'>
-    <meta name='msapplication-TileImage' content='res/img/brand/144.png'>
+    <link rel='icon' sizes='192x192' href='/img/brand/192.png'>
+    <link rel='apple-touch-icon' href='/img/brand/192.png'>
+    <meta name='msapplication-TileImage' content='/img/brand/144.png'>
     <meta name='msapplication-TileColor' content='#004A87'>
     <meta name="theme-color" content="#004A87" />
     <meta http-equiv="cache-Control" content="max-age=21600" />

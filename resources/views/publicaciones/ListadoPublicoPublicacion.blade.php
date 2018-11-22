@@ -2,7 +2,7 @@
     use Illuminate\Support\Facades\Input;
 ?>
 @extends('layout._publicLayout')
-@section('title', 'Publicaciones')
+@section('Title', 'Biblioteca digital :: SITUR Cesar')
 
 @section('estilos')
 <style>
@@ -133,7 +133,7 @@
                     <img src="/img/news.png" alt="" role="presentation">
                     @endif
                     <div class="text-overlap">
-                        <a href="/promocionPublicacion/listado/?tipoNoticia={{$publicacion->tipopublicacion->idiomas[0]->nombre}}"><span class="label label-info">{{$publicacion->tipopublicacion->idiomas[0]->nombre}}</span></a>
+                        <span class="badge badge-info">{{$publicacion->tipopublicacion->idiomas[0]->nombre}}</span>
                     </div>
                 </div>
                 <div class="tile-body">
@@ -144,7 +144,7 @@
                     
                     <p>{{$publicacion->resumen}}</p>
                     <div class="text-right">
-                        <a href="/promocionPublicacion/ver/{{$publicacion->id}}" class="btn btn-xs btn-link">Ver más</a>
+                        <a href="/promocionPublicacion/ver/{{$publicacion->id}}" class="btn btn-sm btn-outline-success">Ver más</a>
                     </div>
                 
                     

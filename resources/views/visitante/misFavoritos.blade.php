@@ -1,6 +1,6 @@
 @extends('layout._publicLayout')
 
-@section('title', 'Mis favoritos')
+@section('Title', 'Mis favoritos')
 
 @section('estilos')
     <style>
@@ -59,9 +59,6 @@
     <link href="{{asset('/css/favoritos.css')}}" rel="stylesheet" type="text/css" />  
     <script src="{{asset('/js/plugins/angular.min.js')}}"></script>
 @endsection
-
-@section('TitleSection', 'Mis favoritos')
-
 
 
 @section('content')

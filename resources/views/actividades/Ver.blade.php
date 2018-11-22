@@ -16,7 +16,7 @@ function parse_yturl($url)
 
 @section('meta_og')
 <meta property="og:title" content="{{$actividad->actividadesConIdiomas[0]->nombre}}" />
-<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:image" content="{{asset('/img/brand/128.png')}}" />
 <meta property="og:description" content="{{$actividad->actividadesConIdiomas[0]->descripcion}}"/>
 @endsection
 
