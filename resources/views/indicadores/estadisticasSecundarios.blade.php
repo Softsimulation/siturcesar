@@ -288,6 +288,7 @@
 
 
 @section('javascript')
+    <script src="{{asset('/js/plugins/angular.min.js')}}"></script>
     <script src="{{asset('/js/plugins/jspdf.min.js')}}"></script>
     <script src="{{asset('/js/plugins/Chart.min.js')}}"></script>
     <script src="{{asset('/js/plugins/angular-chart.min.js')}}"></script>
