@@ -189,7 +189,7 @@ class OfertaEmpleoController extends Controller
               $ruta = "/ofertaempleo/alojamientomensual";
               }else{
                   
-                    if($tipo->proveedor->categoria->id == 15){
+                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13){
                          $ruta = "/ofertaempleo/agenciaviajes";
                     }
                      if($tipo->proveedor->categoria->id == 14){
@@ -387,7 +387,7 @@ class OfertaEmpleoController extends Controller
               $ruta = "/ofertaempleo/alojamientomensual";
               }else{
                   
-                    if($tipo->proveedor->categoria->id == 15){
+                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13){
                          $ruta = "/ofertaempleo/agenciaviajes";
                     }
                      if($tipo->proveedor->categoria->id == 14){
@@ -698,7 +698,7 @@ class OfertaEmpleoController extends Controller
                 Historial_Encuesta_Oferta::create([
                    'encuesta_id' => $request->Encuesta, 
                    'user_id' => $this->user->id,
-                   'estado_encuesta_id' => 2,
+                   'estado_encuesta_id' => 3,
                    'fecha_cambio' => Carbon::now()
                ]);
             }else{
@@ -1138,12 +1138,22 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
         $vacBuscado->operativo = $request->VacanteOperativo;
         $vacBuscado->save();
     }
-    Historial_Encuesta_Oferta::create([
-           'encuesta_id' => $request->Encuesta,
-           'user_id' => $this->user->id,
-           'estado_encuesta_id' => 2,
-           'fecha_cambio' => Carbon::now()
-       ]);
+             $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".  $request->Encuesta));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->Encuesta, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' =>  $request->Encuesta, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
 	
 
         return ["success" => true];
@@ -1383,12 +1393,25 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
         }
 
 		
-		        Historial_Encuesta_Oferta::create([
-               'encuesta_id' => $encuesta->id,
-               'user_id' => $this->user->id,
-               'estado_encuesta_id' => 2,
-               'fecha_cambio' => Carbon::now()
-           ]);
+            $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =". $encuesta->id));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $encuesta->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $encuesta->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
+		
+		
+		
 		
 
         return ["success" => true];
@@ -1605,27 +1628,30 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             $validator = \Validator::make($request->all(),[
         
                 'id' => 'required|exists:encuestas,id',
-                'numero' => 'double|required',
-                'magdalena' => 'double|required|between:0,100',
-                'nacional' => 'double|required|between:0,100',
-                'internacional' => 'double|required|between:0,100',
+                'numero' => 'numeric|required',
+                'magdalena' => 'numeric|required|between:0,100',
+                'nacional' => 'numeric|required|between:0,100',
+                'internacional' => 'numeric|required|between:0,100',
                 
             ],[
                 'id.required' => 'Tuvo primero que haber creado una encuesta.',
                 'id.exists' => 'Tuvo primero que haber creado una encuesta.',
                 'numero.required' => 'El número total de personas que viajaron con planes a Cesar es requerido.',
-                'numero.double' => 'El número total de personas que viajaron con planes a Cesar debe ser de valor numérico.',
+                'numero.numeric' => 'El número total de personas que viajaron con planes a Cesar debe ser de valor numérico.',
                 'magdalena.required' => 'El porcentaje comprado por residentes en el Cesar es requerido.',
-                'magdalena.double' => 'El porcentaje comprado por residentes en el Cesar debe ser de valor numérico.',
+                'magdalena.numeric' => 'El porcentaje comprado por residentes en el Cesar debe ser de valor numérico.',
                 'magdalena.between' => 'El porcentaje comprado por residentes en el Cesar debe ser menor o igual a 100.',
                 'nacional.required' => 'El porcentaje comprado por residentes fuera del Cesar es requerido.',
-                'nacional.double' => 'El porcentaje comprado por residentes fuera del Cesar debe ser de valor numérico.',
+                'nacional.numeric' => 'El porcentaje comprado por residentes fuera del Cesar debe ser de valor numérico.',
                 'nacional.between' => 'El porcentaje comprado por residentes fuera del Cesar debe ser menor o igual a 100.',
                 'internacional.required' => 'El porcentaje comprado por residentes en el extranjero es requerido.',
-                'internacional.double' => 'El porcentaje comprado por residentes en el extranjero debe ser de valor numérico.',
+                'internacional.numeric' => 'El porcentaje comprado por residentes en el extranjero debe ser de valor numérico.',
                 'internacional.between' => 'El porcentaje comprado por residentes en el extramjero debe ser menor o igual a 100.',
                 ]
-            ); 
+            );
+            if($validator->fails()){
+                return ["success"=>false,"errores"=>$validator->errors()];
+            }
             $errores = [];
             //return $request->personas;
             if($request->personas != null){
@@ -1723,13 +1749,24 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
                 
 
             }
-            Historial_Encuesta_Oferta::create([
-               'encuesta_id' => $request->id, 
-               'user_id' => 1,
-               'estado_encuesta_id' => 2,
-               'fecha_cambio' => Carbon::now()
-           ]);
+            
             $encuesta = Encuesta::where('id',$request->id)->first();
+            $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".$request->id));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
             return ["success"=>true,"ruta"=>"/ofertaempleo/encuestas/" . $encuesta->sitios_para_encuestas_id];
     }
         
@@ -1851,13 +1888,22 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             }
             
 
-            $historial = new Historial_Encuesta_Oferta();
-            $historial->encuesta_id = $encuesta->id;
-            $historial->estado_encuesta_id = 2;
-            $historial->fecha_cambio = Carbon::now();
-            $historial->user_id = $this->user->id;
-            
-            $historial->save();
+            $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".$request->id));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $encuesta->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $encuesta->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
             
             return ["success"=>true];
             
@@ -2007,12 +2053,22 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
 		$agencia->actividadesDeportivas()->attach($request->actividades);
 		//$agencia->tours()->attach($request->toures);
 		
-		Historial_Encuesta_Oferta::create([
-	        'encuesta_id' => $encuesta->id,
-	        'user_id' => $this->user->id,
-	        'estado_encuesta_id' => 2,
-	        'fecha_cambio' => Carbon::now()
-	    ]);
+        $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".  $request->id));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' =>  $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
 		
         return ["success" => true];
     }
@@ -2081,12 +2137,22 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
 		$prestamo->personas_magdalena = $request->porcentajeM;
 		$prestamo->save();
 		
-		Historial_Encuesta_Oferta::create([
-	        'encuesta_id' => $encuesta->id,
-	        'user_id' => $this->user->id,
-	        'estado_encuesta_id' => 2,
-	        'fecha_cambio' => Carbon::now()
-	    ]);
+        $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".  $request->id));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' =>  $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
 	    
 	    
         
@@ -2167,13 +2233,22 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
 		$alquiler->tarifa_promedio = $request->Tarifa;
 		$alquiler->save();
 		
-		Historial_Encuesta_Oferta::create([
-	        'encuesta_id' => $encuesta->id,
-	        'user_id' => $this->user->id,
-	        'estado_encuesta_id' => 2,
-	        'fecha_cambio' => Carbon::now()
-	    ]);
-		
+             $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".  $request->id));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' =>  $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
        $encuesta = Encuesta::find($request->id);
         
         return [ "success"=>true, "ruta"=>"/ofertaempleo/encuestas/" . $encuesta->sitios_para_encuestas_id ];
@@ -2428,12 +2503,22 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             if($cabana){ $cabana->delete(); }
         }
         
-        Historial_Encuesta_Oferta::create([
-           'encuesta_id' => $request->encuesta,
-           'user_id' => $this->user->id,
-           'estado_encuesta_id' => 2,
-           'fecha_cambio' => Carbon::now()
-        ]);
+             $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".  $request->encuesta));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->encuesta, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' =>  $request->encuesta, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
         
         
         $encuesta = Encuesta::find($request->encuesta);
@@ -2587,12 +2672,25 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             if($cabana){ $cabana->delete(); }
         }
         
-        Historial_Encuesta_Oferta::create([
-           'encuesta_id' => $request->encuesta,
-           'user_id' => 1,
-           'estado_encuesta_id' => 2,
-           'fecha_cambio' => Carbon::now()
-        ]);
+             $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".  $request->encuesta));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->encuesta, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' =>  $request->encuesta, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
+	
+        
+
         
         
         $encuesta = Encuesta::find($request->encuesta);
@@ -2739,6 +2837,22 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             $historial->save();
             
             $encuesta = Encuesta::find($request->id);
+            $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".$request->id));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
         
             return [ "success"=>true, "ruta"=>"/ofertaempleo/encuestas/" . $encuesta->sitios_para_encuestas_id ];
         }
@@ -2899,15 +3013,25 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
         $ofertaTransporte->tarifa_promedio = $request->TarifaTerrestre;
         $ofertaTransporte->personas_total = $request->TotalTerrestre;
         $ofertaTransporte->save();
-            
-        $historial = new Historial_Encuesta_Oferta();
-        $historial->encuesta_id = $request->id;
-        $historial->estado_encuesta_id = 2;
-        $historial->fecha_cambio = Carbon::now();
-        $historial->user_id = $this->user->id;
-        $historial->save();
+        
         
         $encuesta = Encuesta::find($request->id);
+        $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".$request->id));
+        if($data[0]->estado_id < 3){
+            Historial_Encuesta_Oferta::create([
+               'encuesta_id' => $request->id, 
+               'user_id' => $this->user->id,
+               'estado_encuesta_id' => 2,
+               'fecha_cambio' => Carbon::now()
+           ]);
+        }else{
+            Historial_Encuesta_Oferta::create([
+               'encuesta_id' => $request->id, 
+               'user_id' => $this->user->id,
+               'estado_encuesta_id' => $data[0]->estado_id,
+               'fecha_cambio' => Carbon::now()
+           ]);
+        }
         
         return [ "success"=>true, "ruta"=>"/ofertaempleo/encuestas/" . $encuesta->sitios_para_encuestas_id ];
             
@@ -3040,15 +3164,23 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
                 $ofertaTransporte->personas_total = $request->TotalMaritimo;
                 $ofertaTransporte->save();
         }
-            
-        $historial = new Historial_Encuesta_Oferta();
-        $historial->encuesta_id = $request->id;
-        $historial->estado_encuesta_id = 2;
-        $historial->fecha_cambio = Carbon::now();
-        $historial->user_id = $this->user->id;
-        $historial->save();
-        
            $encuesta = Encuesta::find($request->id);
+           $data =  new Collection(DB::select("SELECT *from listado_encuesta_oferta where id =".$request->id));
+            if($data[0]->estado_id < 3){
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => 2,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }else{
+                Historial_Encuesta_Oferta::create([
+                   'encuesta_id' => $request->id, 
+                   'user_id' => $this->user->id,
+                   'estado_encuesta_id' => $data[0]->estado_id,
+                   'fecha_cambio' => Carbon::now()
+               ]);
+            }
         
         return [ "success"=>true, "ruta"=>"/ofertaempleo/encuestas/" . $encuesta->sitios_para_encuestas_id ];
         
