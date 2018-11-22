@@ -147,14 +147,14 @@
                                  <div class="input-group-prepend">
                                     <span class="input-group-text">Gráfica</span>
                                  </div>
-                                 <p class="form-control d-flex align-items-middle"><i class="material-icons">@{{graficaSelect.icono}}</i> @{{graficaSelect.nombre || " "}}</p>
+                                 <p class="form-control d-flex align-items-middle"><img src="@{{graficaSelect.icono}}" alt=""> @{{graficaSelect.nombre || " "}}</p>
                                  <!--<input type="text" class="form-control" aria-label="Gráfica" readonly>-->
                                   <div class="input-group-append">
                                     <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                       <span class="sr-only">Seleccionar gráfica</span>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                      <button type="button" class="dropdown-item d-flex align-items-middle" ng-repeat="item in indicador.graficas" ng-click="changeTipoGrafica(item)"><i class="material-icons">@{{item.icono}}</i> @{{item.nombre}}</button>
+                                      <button type="button" class="dropdown-item d-flex align-items-middle" ng-repeat="item in indicador.graficas" ng-click="changeTipoGrafica(item)"><img src="@{{item.icono}}" alt=""> @{{item.nombre}}</button>
                                       <button type="button" class="dropdown-item" ng-if="indicador.graficas.length == 0">No hay tipos de gráfica disponible</button>
                                     </div>
                                   </div>
@@ -291,7 +291,8 @@
     <script src="{{asset('/js/plugins/jspdf.min.js')}}"></script>
     <script src="{{asset('/js/plugins/Chart.min.js')}}"></script>
     <script src="{{asset('/js/plugins/angular-chart.min.js')}}"></script>
-   
+    <script src="{{asset('/js/plugins/chartsjs-plugin-data-labels.js')}}"></script>
+    <script src="{{asset('/js/plugins/angular-filter.js')}}"></script>
     <script src="{{asset('/js/indicadores/appIndicadores.js')}}"></script>
     <script src="{{asset('/js/indicadores/servicios.js')}}"></script> 
     

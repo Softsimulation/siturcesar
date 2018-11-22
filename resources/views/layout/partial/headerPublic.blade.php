@@ -93,6 +93,9 @@
                             <li role="none">
                                 <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>
                             </li>
+                            <li role="none">
+                                <a role="menuitem" href="/Departamento/PlanificaTuViaje">Planifica tu viaje</a>
+                            </li>
                         </ul>
                     </li>
                     <li>

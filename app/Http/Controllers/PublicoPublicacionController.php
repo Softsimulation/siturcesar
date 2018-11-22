@@ -33,8 +33,20 @@ class PublicoPublicacionController extends Controller
                "publicaciones"=> Publicacion::
                 where( $where )->orderBy('id')->paginate(10),
                    
-               "tipos"=> TipoPublicacion::join("idiomas_has_tipos_publicaciones_obras","idiomas_has_tipos_publicaciones_obras.tipos_publicaciones_obras_id","=","tipos_publicaciones_obras.id")->where("idiomas_has_tipos_publicaciones_obras.idiomas_id","=",1)->select("idiomas_has_tipos_publicaciones_obras.nombre as nombre ","tipos_publicaciones_obras.id as id")->get()    
+               "tipos"=> TipoPublicacion::join("idiomas_has_tipos_publicaciones_obras","idiomas_has_tipos_publicaciones_obras.tipos_publicaciones_obras_id","=","tipos_publicaciones_obras.id")->where("idiomas_has_tipos_publicaciones_obras.idiomas_id","=",1)->
+               select("idiomas_has_tipos_publicaciones_obras.nombre as nombre ","tipos_publicaciones_obras.id as id")->get()    
                 ));
        
     }
+    
+ function getVer($id){
+     //publicaciones_idioma::where("publicaciones_id",">",1)->delete();
+     //Publicacione::where("estado",true)->delete();
+     //return Publicacion::with(["personas","temas"=>function($q){$q->with(['idiomas'=>function($r){$r->where('idiomas_id',$this->idioma_id);}]);},"palabras"])->where("id","=",$id)->first();;
+     return view('publicaciones.VerPublicacionPublico', array(
+            "publicacion"=> Publicacion::with(["personas","temas"=>function($q){$q->with(['idiomas'=>function($r){$r->where('idiomas_id',1);}]);},"palabras"])->where("id","=",$id)->first()
+                
+         ));
+    
+ }
 }
