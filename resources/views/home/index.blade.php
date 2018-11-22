@@ -1,3 +1,37 @@
+<?php
+$colorTipo = ['primary','success','danger', 'info', 'warning'];
+function getItemType($type){
+    $path = ""; $name = ""; $title = "";
+    switch($type){
+        case(1):
+            $title = "Actividades";
+            $name = "Actividad";
+            $path = "/actividades/ver/";
+            break;
+        case(2):
+            $title = "Atracciones";
+            $name = "Atracción";
+            $path = "/atracciones/ver/";
+            break;
+        case(3):
+            $title = "Destinos";
+            $name = "Destino";
+            $path = "/destinos/ver/";
+            break;
+        case(4):
+            $title = "Eventos";
+            $name = "Evento";
+            $path = "/eventos/ver/";
+            break; 
+        case(5):
+            $title = "Rutas turísticas";
+            $name = "Ruta turística";
+            $path = "/rutas/ver/";
+            break;
+    }
+    return (object)array('name'=>$name, 'path'=>$path, 'title' => $title);
+}
+?>
 @extends('layout._publicLayout')
 
 @section('Title','')
@@ -201,7 +235,9 @@
 							@foreach($noticias as $noticia)
 							<section class="tile inline-tile">
 	                            <div class="tile-img">
-	                            
+	                            	@if($noticia->portada)
+	                            	<img src="{{$noticia->portada}}" alt="">
+	                            	@endif
 		                        </div>
 		                        <div class="tile-body">
 		                            <div class="tile-caption">
@@ -212,7 +248,7 @@
 		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el {{date('d/m/Y h:m A', strtotime($noticia->fecha))}}</p>
 		                            </div>
 		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="/promocionNoticia/ver/{{$noticia->idNoticia}}">Ver más</a>
+		                                <a class="btn btn-sm btn-outline-success" href="/promocionNoticia/ver/{{$noticia->idNoticia}}">Ver más</a>
 		                            </div>
 		                            
 		                        </div>
@@ -258,49 +294,64 @@
 						
 					</div>
 					<div class="col-12 col-md-6">
-						<h2>Eventos <small><a href="#" class="btn btn-link">Ver todo</a></small></h2>
-						<div id="events" class="tiles">
-							
+						<h2>Sugeridos <small><a href="/quehacer" class="btn btn-outline-primary">Ver todo</a></small></h2>
+						
+						<div id="sugeridos" class="tiles">
+							@foreach($sugeridos as $sugerido)
 	                        <section class="tile inline-tile">
 	                        	<div class="tile-img">
-                                    <span class="day">10</span>
-                                    <span class="month">diciembre de 2018</span>
-                                    <span class="hour">08:30 AM</span>
+                                    <!--<span class="day">10</span>-->
+                                    <!--<span class="month">diciembre de 2018</span>-->
+                                    <!--<span class="hour">08:30 AM</span>-->
+                                    @if($sugerido->portada)
+                                    <img src="{{$sugerido->portada}}" alt="">
+                                    @endif
                                 </div>
 		                        <div class="tile-body">
 		                            <div class="tile-caption">
-		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-android-pin" aria-hidden="true"></span> Lorem ipsum dolor sit amet</p>
+		                                   <h3><a href="{{getItemType($sugerido->tipo)->path}}{{$sugerido->id}}">
+		                                    {{$sugerido->nombre}}
+		                                </a></h3> 
+		                                <span class="badge badge-{{$colorTipo[$sugerido->tipo - 1]}}">{{getItemType($sugerido->tipo)->name}}</span>
+		                                <div class="inline-buttons mt-1">
+				                            <span class="{{ ($sugerido->calificacion_legusto > 0.0) ? (($sugerido->calificacion_legusto <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">1</span>
+				                            <span class="{{ ($sugerido->calificacion_legusto > 1.0) ? (($sugerido->calificacion_legusto <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">2</span>
+				                            <span class="{{ ($sugerido->calificacion_legusto > 2.0) ? (($sugerido->calificacion_legusto <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">3</span>
+				                            <span class="{{ ($sugerido->calificacion_legusto > 3.0) ? (($sugerido->calificacion_legusto <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">4</span>
+				                            <span class="{{ ($sugerido->calificacion_legusto > 4.0) ? (($sugerido->calificacion_legusto <= 4.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span><span class="sr-only">5</span>
+				                            
+				                        </div>
+		                                @if($sugerido->tipo == 4)
+		                                <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Del {{date('d/m/Y', strtotime($sugerido->fecha_inicio))}} al {{date('d/m/Y', strtotime($sugerido->fecha_fin))}} </p>
+		                                @endif
 		                            </div>
 		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
+		                                <a class="btn btn-sm btn-outline-success" href="{{getItemType($sugerido->tipo)->path}}{{$sugerido->id}}">Ver más</a>
 		                            </div>
 		                            
 		                        </div>
 	                        </section>
-	                        <section class="tile inline-tile">
-	                            <div class="tile-img">
-	                            	<span class="day">11</span>
-                                    <span class="month">septiembre de 2001</span>
-                                    <span class="hour">08:30 AM</span>
-		                        </div>
-		                        <div class="tile-body">
-		                            <div class="tile-caption">
+	                        @endforeach
+	                        <!--<section class="tile inline-tile">-->
+	                        <!--    <div class="tile-img">-->
+	                        <!--    	<span class="day">11</span>-->
+                         <!--           <span class="month">septiembre de 2001</span>-->
+                         <!--           <span class="hour">08:30 AM</span>-->
+		                       <!-- </div>-->
+		                       <!-- <div class="tile-body">-->
+		                       <!--     <div class="tile-caption">-->
 		                                    
-		                                <a href="#">
-		                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>
-		                                </a>
-		                                <p class="date"><span class="ion-android-pin" aria-hidden="true"></span> Lorem ipsum dolor sit amet</p>
-		                            </div>
-		                            <div class="buttons">
-		                                <a class="btn btn-xs btn-link" href="#">Ver más</a>
-		                            </div>
+		                       <!--         <a href="#">-->
+		                       <!--             <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed quam vitae augue tempor consequat. Integer ut aliquet orci. Donec ipsum massa nullam.</h3>-->
+		                       <!--         </a>-->
+		                       <!--         <p class="date"><span class="ion-android-pin" aria-hidden="true"></span> Lorem ipsum dolor sit amet</p>-->
+		                       <!--     </div>-->
+		                       <!--     <div class="buttons">-->
+		                       <!--         <a class="btn btn-xs btn-link" href="#">Ver más</a>-->
+		                       <!--     </div>-->
 		                            
-		                        </div>
-	                        </section>
+		                       <!-- </div>-->
+	                        <!--</section>-->
 						</div>
 					</div>
 				</div>

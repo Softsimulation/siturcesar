@@ -4,11 +4,6 @@
 
 @section('estilos')
     <style>
-    header{
-        position: static;
-        background-color: black;
-        margin: 0;
-    }
     
     
     .ADMdtp-box footer {
@@ -70,13 +65,18 @@
 
 
 @section('content')
-<div class="main-page" ng-app="visitanteApp" ng-controller="misFavoritosCtrl">
-    <div class="header-bg-fixed parallax">
-        <h2>Mis favoritos</h2>
-        <p>Guarda como favorito los destinos, atracciones y actividades y demás elementos que SITUR Atlántico te ofrece y planifica los viajes que realices al departamento.</p>
+<div class="header-list without-options">
+        <div class="container">
+            <h2 class="title-section">Mis favoritos</h2>
+            
+        </div>
+        
     </div>
+
+
+<div class="main-page" ng-app="visitanteApp" ng-controller="misFavoritosCtrl">
     
-    <div class="container">
+    <div class="container pt-3">
         <div class="row" ng-if="intrucciones.ver">
             <div class="col-xs-12 col-md-6">
                 <!--Para guardar tus favoritos-->

@@ -44,7 +44,12 @@
 			<!--		<option value="en">Inglés</option>-->
 			<!--	</select>-->
 			<!--</form>-->
-			<a href="#"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
+			@if(Auth::check())
+		    	<a href="/login/cerrarsesion" title="Cerrar sesión"><span class="ion-log-out" aria-hidden="true"></span> <span class="d-none d-md-inline">Cerrar sesión</span></a>
+		    	<a href="/visitante/misfavoritos" title="Mis favoritos"><span class="ion-heart" aria-hidden="true"></span> <span class="sr-only">Mis favoritos</span></a>
+			@else
+			    <a href="/login/login"><span class="ion-person" aria-hidden="true"></span> <span class="d-none d-sm-inline">Iniciar sesión</span></a>
+			@endif
 		</div>
 		<div id="navbar-mobile" class="text-center">
             <button type="button" class="btn btn-block btn-primary" title="Menu de navegación"><span aria-hidden="true" class="ion-navicon-round"></span><span class="sr-only">Menú de navegación</span></button>
