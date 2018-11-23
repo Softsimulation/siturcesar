@@ -22,6 +22,7 @@ use App\Models\Educacion_Empleado;
 use App\Models\Historial_Encuesta_Oferta;
 use App\Models\Remuneracion_Promedio;
 use App\Models\Razon_Vacante;
+use App\Models\Categoria_Proveedor_Con_Idioma;
 use App\Models\Capacitacion_Empleo;
 use App\Models\Tematica_Capacitacion;
 use App\Models\Linea_Tematica;
@@ -60,7 +61,8 @@ use App\Models\Anio;
 use App\Models\Mes_Anio;
 use App\Models\Sitio_Para_Encuesta;
 use App\Models\Medio_Actualizacion;
-
+use App\Models\Proveedores_rnt_idioma;
+use App\Models\Proveedores_rnt;
 
 class OfertaEmpleoController extends Controller
 {
@@ -159,10 +161,55 @@ class OfertaEmpleoController extends Controller
     }
     
     public function getListadornt(){
-     $provedores = new Collection(DB::select("SELECT *from listado_proveedores_rnt"));
-      return ["success" => true, "proveedores"=> $provedores];
+      $provedores = new Collection(DB::select("SELECT *from listado_proveedores_rnt"));
+      $categorias = Categoria_Proveedor_Con_Idioma::where("idiomas_id",1)->select("categoria_proveedores_id AS id","nombre")->get();
+      return ["success" => true, "proveedores"=> $provedores,"categorias"=>$categorias];
     }
     
+    
+      public function postGuardarproveedorrnt(Request $request)
+    {
+        $validator = \Validator::make($request->all(),[
+        
+            'id' => 'required|exists:proveedores_rnt,id',
+        	'nombre' => 'required|max:455',
+            'idcategoria' => 'required|exists:categoria_proveedores,id',
+    	    'direccion' => 'required|max:455',
+            
+        ],[
+            'id.required' => 'No existe el proveedor.',
+            'id.exists' => 'No existe el proveedor.',
+            'idcategoria.required' => 'No existe categoria del proveedor.',
+            'idcategoria.exists' => 'No existe categoria del proveedor.',
+          
+            ]
+        );
+        if($validator->fails()){
+            return ["success"=>false,"errores"=>$validator->errors()];
+        }
+        
+    	$proveedor = Proveedores_rnt::find($request->id);
+		$proveedor->categoria_proveedores_id = $request->idcategoria;
+		$proveedor->direccion = $request->direccion;
+		$proveedor->save();
+        	
+		$proveedorIdioma = $proveedor->idiomas->where('idioma_id',1)->first();
+		if($proveedorIdioma){
+			$proveedorIdioma->nombre = $request->nombre;
+			$proveedorIdioma->save();
+		}else{
+			Proveedores_rnt_idioma::create([
+    			'idioma_id' => 1,
+    			'proveedor_rnt_id' => $proveedor->id,
+    			'nombre' => $request->nombre
+    		]);
+		}
+       
+        $provedores = new Collection(DB::select("SELECT *from listado_proveedores_rnt where id =".$request->id));
+       
+       return ["success"=>true,"proveedor" => $provedores];
+            
+    }
     
     public function getListadoproveedores(){
         return view('ofertaEmpleo.ListadoProveedores');
@@ -189,7 +236,7 @@ class OfertaEmpleoController extends Controller
               $ruta = "/ofertaempleo/alojamientomensual";
               }else{
                   
-                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13){
+                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13 || $tipo->proveedor->categoria->id == 24 ){
                          $ruta = "/ofertaempleo/agenciaviajes";
                     }
                      if($tipo->proveedor->categoria->id == 14){
@@ -387,7 +434,7 @@ class OfertaEmpleoController extends Controller
               $ruta = "/ofertaempleo/alojamientomensual";
               }else{
                   
-                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13){
+                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13 || $tipo->proveedor->categoria->id == 24){
                          $ruta = "/ofertaempleo/agenciaviajes";
                     }
                      if($tipo->proveedor->categoria->id == 14){
@@ -508,7 +555,7 @@ class OfertaEmpleoController extends Controller
               $ruta = "/ofertaempleo/alojamientomensual";
               }else{
                   
-                    if($tipo->proveedor->categoria->id == 15){
+                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13 || $tipo->proveedor->categoria->id == 24){
                          $ruta = "/ofertaempleo/agenciaviajes";
                     }
                      if($tipo->proveedor->categoria->id == 14){
@@ -1628,10 +1675,10 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             $validator = \Validator::make($request->all(),[
         
                 'id' => 'required|exists:encuestas,id',
-                'numero' => 'numeric|required',
-                'magdalena' => 'numeric|required|between:0,100',
-                'nacional' => 'numeric|required|between:0,100',
-                'internacional' => 'numeric|required|between:0,100',
+                'numero' => 'numeric',
+                'magdalena' => 'numeric|between:0,100',
+                'nacional' => 'numeric|between:0,100',
+                'internacional' => 'numeric|between:0,100',
                 
             ],[
                 'id.required' => 'Tuvo primero que haber creado una encuesta.',
@@ -1652,6 +1699,7 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             if($validator->fails()){
                 return ["success"=>false,"errores"=>$validator->errors()];
             }
+            
             $errores = [];
             //return $request->personas;
             if($request->personas != null){
@@ -1701,6 +1749,10 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
                 }
                 if($request->ofrecePlanesConDestino == true){
                     $planSantaMarta = Plan_Santamarta::where('viajes_turismos_id',$agencia->id)->first();
+                    if($planSantaMarta == null){
+                        $planSantaMarta = new Plan_Santamarta();
+                        $planSantaMarta->viajes_turismos_id = $agencia->id;
+                    }
                     $planSantaMarta->numero = $request->numero;
                     $planSantaMarta->residentes = $request->magdalena;
                     $planSantaMarta->noresidentes = $request->nacional;
