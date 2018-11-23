@@ -1,8 +1,8 @@
 @extends('layout._publicLayout')
-@section('Title', $noticia->nombreTipoNoticia :: SITUR Cesar)
+@section('Title', $noticia->tituloNoticia :: SITUR Cesar)
 
 @section('meta_og')
-<meta property="og:title" content="{{$noticia->nombreTipoNoticia}}. Miralo en SITUR Cesar" />
+<meta property="og:title" content="{{$noticia->tituloNoticia}}. Miralo en SITUR Cesar" />
 <meta property="og:image" content="@if($portada->ruta){{$portada->ruta}}@else{{asset('/img/brand/96.png')}}@endif" />
 <meta property="og:description" content="@if($portada->ruta){{$portada->ruta}}@else{{asset('/img/brand/96.png')}}@endif" />
 @endsection
@@ -37,7 +37,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb bg-white justify-content-center">
         <li class="breadcrumb-item"><a href="/promocionNoticia/listado">Noticias</a></li>
-        <li class="breadcrumb-item active text-truncate" aria-current="page">{{$noticia->nombreTipoNoticia}}</li>
+        <li class="breadcrumb-item active text-truncate" aria-current="page">{{$noticia->tituloNoticia}}</li>
       </ol>
     </nav>
     <h2 class="text-center">{{$noticia->tituloNoticia}} <small class="d-block text-muted">{{$noticia->nombreTipoNoticia}}</small></h2>

@@ -60,7 +60,17 @@ app.factory("proveedorServi", ["$http", "$q", function ($http, $q) {
             })
             return promise;
         },     
-        
+         EditarProveedor: function (data) {
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http.post('/ofertaempleo/guardarproveedorrnt',data).success(function (data) {
+                  defered.resolve(data);
+            }).error(function (err) {
+                defered.reject(err);
+            })
+            return promise;
+        },
         
     }
 }]);
