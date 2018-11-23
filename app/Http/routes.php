@@ -12,13 +12,10 @@
 */
 
 
-
-Route::get('/', function () {
-    
-    return view('home.index');
-    
-    
-});
+Route::get('/PlanificaTuViaje','InformacionDepartamentoCtrl@PlanificaTuViaje');
+Route::get('/Departamento/AcercaDe','InformacionDepartamentoCtrl@AcercaDe');
+Route::get('/Departamento/Requisitos','InformacionDepartamentoCtrl@Requisitos');
+Route::controller('/InformacionDepartamento','InformacionDepartamentoCtrl');
 
 Route::controller('/promocionInforme','PublicoInformeController');
 Route::controller('/informes','InformesCtrl');
@@ -85,9 +82,10 @@ Route::controller('/quehacer', 'QueHacerController');
 Route::group(['middleware' => 'cors'], function(){
     
         Route::controller('/authapi', 'ApiAuthController');
+         Route::controller('/turismointernoapi','TurismoInternoCorsController');
         Route::group(['middleware'=> 'jwt.auth'], function () {
-            Route::controller('/turismointernoapi','TurismoInternoCorsController');
-       
+           
+     
             Route::controller('/turismoreceptoroapi','TurismoReceptorCorsController');
         });
 });
@@ -101,12 +99,6 @@ Route::controller('/login','LoginController');
 
 Route::controller('/importarRnt','ImportacionRntController');
 
-Route::get('/detalle', function () {
-    
-    return view('publico.detalle.index');
-    
-    
-});
 
 Route::group(['prefix' => 'publicaciones','middleware'=>'auth'], function () {
     
@@ -142,3 +134,5 @@ Route::controller('/sliders','SliderController');
 Route::controller('/suscriptores','SuscriptoreController');
 
 Route::controller('/visitante', 'VisitanteController');
+
+Route::controller('/', 'HomeController');

@@ -62,6 +62,11 @@ return [
             'root' => storage_path('app/public'),
             'visibility' => 'public',
         ],
+         'multimedia-informacion-departamento' => [
+            'driver' => 'local',
+            'root' => public_path().'/multimedia/informacion-departamento',
+            'visibility' => 'public',
+        ],
         'multimedia-informes' => [
             'driver' => 'local',
             'root' => public_path().'/multimedia/informes',

@@ -552,6 +552,7 @@ class SliderController extends Controller
         if($validator->fails()){
             return ["success"=>false,"errores"=>$validator->errors()];
         }
+        $errores=[];
 	    $slider = Slider::find($request->id);
 	    if($slider->prioridad == 1){
 	        $errores["Prioridad1"][0] = "El slider posee la máxima prioridad.";
@@ -613,6 +614,7 @@ class SliderController extends Controller
         if($validator->fails()){
             return ["success"=>false,"errores"=>$validator->errors()];
         }
+        $errores=[];
 	    $slider = Slider::find($request->id);
 	    if($slider->prioridad == 8){
 	        $errores["Prioridad1"][0] = "El slider posee la mínima prioridad.";
@@ -676,6 +678,7 @@ class SliderController extends Controller
         if($validator->fails()){
             return ["success"=>false,"errores"=>$validator->errors()];
         }
+        $errores = [];
         if (($request->prioridadSliderActivar < 1 || $request->prioridadSliderActivar > 8) && $request->bandera==1) {
             $errores["Prioridad"][0] = "La prioridad debe estar entre 1 y 8.";
         }
@@ -745,6 +748,7 @@ class SliderController extends Controller
         if($validator->fails()){
             return ["success"=>false,"errores"=>$validator->errors()];
         }
+        $errores = [];
         $slider = Slider::find($request->id);
         $slidersActivos = Slider::where('prioridad','<>',0)->get();
         if($slider->prioridad != 8){

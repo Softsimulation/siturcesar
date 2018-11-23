@@ -65,7 +65,7 @@ class OfertaEmpleo
             if($data[0]->mes_id%3 != 0){
                         return redirect('/ofertaempleo/empleo/'.$request->one);
             }
-            if($encuesta->sitiosParaEncuesta->proveedor->categoria->id == 15 || $encuesta->sitiosParaEncuesta->proveedor->categoria->id == 13){
+            if($encuesta->sitiosParaEncuesta->proveedor->categoria->id == 15 || $encuesta->sitiosParaEncuesta->proveedor->categoria->id == 13 || $encuesta->sitiosParaEncuesta->proveedor->categoria->id == 24 ){
                             
                 
                          return $next($request);
@@ -84,7 +84,7 @@ class OfertaEmpleo
                     return redirect('/ofertaempleo/empleo/'.$request->one);
             }
          
-            if($encuesta->sitiosParaEncuesta->proveedor->categoria->id == 15 || $encuesta->sitiosParaEncuesta->proveedor->categoria->id == 13){
+            if($encuesta->sitiosParaEncuesta->proveedor->categoria->id == 15 || $encuesta->sitiosParaEncuesta->proveedor->categoria->id == 13 || $encuesta->sitiosParaEncuesta->proveedor->categoria->id == 24){
                          return $next($request);
             }else{
                 \Session::flash('mensaje','No puede acceder a dicha ruta no concuerdan el tipo de proveedor');
