@@ -1,10 +1,10 @@
 @extends('layout._publicLayout')
-@section('Title', $noticia->tituloNoticia :: SITUR Cesar)
+@section('Title', $noticia->tituloNoticia)
 
 @section('meta_og')
 <meta property="og:title" content="{{$noticia->tituloNoticia}}. Miralo en SITUR Cesar" />
-<meta property="og:image" content="@if($portada->ruta){{$portada->ruta}}@else{{asset('/img/brand/96.png')}}@endif" />
-<meta property="og:description" content="@if($portada->ruta){{$portada->ruta}}@else{{asset('/img/brand/96.png')}}@endif" />
+<meta property="og:image" content="@if(isset($portada)){{$portada->ruta}}@else{{asset('/img/brand/96.png')}}@endif" />
+<meta property="og:description" content="{{$noticia->resumenNoticia}}" />
 @endsection
 
 @section('estilos')
@@ -45,22 +45,24 @@
     <blockquote class="blockquote">
     <p class="m-0" style="white-space:pre-line;">{{$noticia->resumenNoticia}}</p>
     </blockquote>
-    @if ($multimedias != null || count($multimedias) > 0)
-    <div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
-      <ol class="carousel-indicators">
-        @for ($i = 0; $i < count($multimedias); $i++)
-        <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}" @if($multimedias[$i]->portada) class="active" @endif></li>
-        @endfor
-      </ol>
-      <div class="carousel-inner">
-        @for ($i = 0; $i < count($multimedias); $i++)
-        <div class="carousel-item @if($multimedias[$i]->portada) active @endif">
-          <img class="d-block w-100" src="{{$multimedias[$i]->ruta}}" alt="{{$multimedias[$i]->texto}}">
+    @if (isset($multimedias))
+        @if ($multimedias != null && count($multimedias) > 0)
+        <div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
+          <ol class="carousel-indicators">
+            @for ($i = 0; $i < count($multimedias); $i++)
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{$i}}" @if($multimedias[$i]->portada) class="active" @endif></li>
+            @endfor
+          </ol>
+          <div class="carousel-inner">
+            @for ($i = 0; $i < count($multimedias); $i++)
+            <div class="carousel-item @if($multimedias[$i]->portada) active @endif">
+              <img class="d-block w-100" src="{{$multimedias[$i]->ruta}}" alt="{{$multimedias[$i]->texto}}">
+            </div>
+            @endfor
+          </div>
+          
         </div>
-        @endfor
-      </div>
-      
-    </div>
+        @endif
     @endif
     <div>
         {!!$noticia->texto!!}

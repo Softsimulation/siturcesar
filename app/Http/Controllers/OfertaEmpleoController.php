@@ -1675,10 +1675,10 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             $validator = \Validator::make($request->all(),[
         
                 'id' => 'required|exists:encuestas,id',
-                'numero' => 'numeric|required',
-                'magdalena' => 'numeric|required|between:0,100',
-                'nacional' => 'numeric|required|between:0,100',
-                'internacional' => 'numeric|required|between:0,100',
+                'numero' => 'numeric',
+                'magdalena' => 'numeric|between:0,100',
+                'nacional' => 'numeric|between:0,100',
+                'internacional' => 'numeric|between:0,100',
                 
             ],[
                 'id.required' => 'Tuvo primero que haber creado una encuesta.',
@@ -1699,6 +1699,7 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
             if($validator->fails()){
                 return ["success"=>false,"errores"=>$validator->errors()];
             }
+            
             $errores = [];
             //return $request->personas;
             if($request->personas != null){
@@ -1748,6 +1749,10 @@ $vacRazon = Razon_Vacante::where("encuesta_id",$request->Encuesta)->first();
                 }
                 if($request->ofrecePlanesConDestino == true){
                     $planSantaMarta = Plan_Santamarta::where('viajes_turismos_id',$agencia->id)->first();
+                    if($planSantaMarta == null){
+                        $planSantaMarta = new Plan_Santamarta();
+                        $planSantaMarta->viajes_turismos_id = $agencia->id;
+                    }
                     $planSantaMarta->numero = $request->numero;
                     $planSantaMarta->residentes = $request->magdalena;
                     $planSantaMarta->noresidentes = $request->nacional;
