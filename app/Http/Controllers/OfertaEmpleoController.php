@@ -236,7 +236,7 @@ class OfertaEmpleoController extends Controller
               $ruta = "/ofertaempleo/alojamientomensual";
               }else{
                   
-                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13){
+                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13 || $tipo->proveedor->categoria->id == 24 ){
                          $ruta = "/ofertaempleo/agenciaviajes";
                     }
                      if($tipo->proveedor->categoria->id == 14){
@@ -434,7 +434,7 @@ class OfertaEmpleoController extends Controller
               $ruta = "/ofertaempleo/alojamientomensual";
               }else{
                   
-                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13){
+                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13 || $tipo->proveedor->categoria->id == 24){
                          $ruta = "/ofertaempleo/agenciaviajes";
                     }
                      if($tipo->proveedor->categoria->id == 14){
@@ -555,7 +555,7 @@ class OfertaEmpleoController extends Controller
               $ruta = "/ofertaempleo/alojamientomensual";
               }else{
                   
-                    if($tipo->proveedor->categoria->id == 15){
+                    if($tipo->proveedor->categoria->id == 15 || $tipo->proveedor->categoria->id == 13 || $tipo->proveedor->categoria->id == 24){
                          $ruta = "/ofertaempleo/agenciaviajes";
                     }
                      if($tipo->proveedor->categoria->id == 14){
