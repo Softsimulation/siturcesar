@@ -20,20 +20,10 @@ use App\Models\Proveedores_rnt;
 use App\Models\Proveedores_rnt_idioma;
 use App\Models\Multimedia_Proveedor;
 use App\Models\Idioma;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class AdministradorProveedoresController extends Controller
 {
-    public function __construct()
-    {
-       
-        $this->middleware('auth');
-        $this->middleware('role:Admin|Promocion');
-        if(Auth::user() != null){
-            $this->user = User::where('id',Auth::user()->id)->first(); 
-        }
-    }
+    //
     
     public function getCrear(){
         return view('administradorproveedores.Crear');
@@ -107,8 +97,8 @@ class AdministradorProveedoresController extends Controller
             $queryProveedorRnt->select('id', 'razon_social');
         }])->select('id', 'proveedor_rnt_id', 'telefono', 'sitio_web', 'valor_min', 'valor_max')->where('id', $id)->first();
         
-        $portadaIMG = Multimedia_Proveedor::where('portada', true)->where('proveedor_id', $id)->pluck('ruta')->first();
-        $imagenes = Multimedia_Proveedor::where('portada', false)->where('tipo', false)->where('proveedor_id', $id)->pluck('ruta')->toArray();
+        $portadaIMG = Multimedia_Proveedor::where('portada', true)->where('proveedor_id', $id)->select('ruta', 'texto_alternativo')->first();
+        $imagenes = Multimedia_Proveedor::where('portada', false)->where('tipo', false)->where('proveedor_id', $id)->select('ruta', 'texto_alternativo')->get();
         $video = Multimedia_Proveedor::where('portada', false)->where('tipo', true)->where('proveedor_id', $id)->pluck('ruta')->first();
         
         $perfiles_usuarios = Proveedor::find($id)->perfilesUsuariosConProveedores()->pluck('perfiles_usuarios_id')->toArray();
@@ -239,8 +229,8 @@ class AdministradorProveedoresController extends Controller
         $proveedor->estado = true;
         $proveedor->created_at = Carbon::now();
         $proveedor->updated_at = Carbon::now();
-        $proveedor->user_create = $this->user->username;
-        $proveedor->user_update = $this->user->username;
+        $proveedor->user_create = "Situr";
+        $proveedor->user_update = "Situr";
         $proveedor->save();
         
         $proveedor_con_idioma = new Proveedor_Con_Idioma();
@@ -268,21 +258,34 @@ class AdministradorProveedoresController extends Controller
     public function postGuardarmultimedia (Request $request){
         $validator = \Validator::make($request->all(), [
             'portadaIMG' => 'required|max:2097152',
+            'portadaIMGText' => 'required',
             'id' => 'required|exists:proveedores|numeric',
-            'image' => 'array|max:5',
-            'video_promocional' => 'url'
+            'image' => 'array|max:20',
+            'imageText' => 'array|max:20',
+            'video_promocional' => 'url',
+            'image.*' => 'max:2097152',
+            'imageText.*' => 'required'
         ],[
             'portadaIMG.required' => 'Se necesita una imagen de portada.',
             'portadaIMG.max' => 'La imagen de portada no puede ser mayor a 2MB.',
+            
+            'portadaIMGText.required' => 'Se necesita el texto de la imagen de portada.',
             
             'id.required' => 'Se necesita un identificador para el proveedor.',
             'id.exists' => 'El identificador del proveedor no se encuentra registrado en la base de datos.',
             'id.numeric' => 'El identificador del proveedor debe ser un valor numérico.',
             
             'image.array' => 'Error al enviar los datos. Recargue la página.',
-            'image.max' => 'Máximo se pueden subir 5 imágenes para la atracción.',
+            'image.max' => 'Máximo se pueden subir 20 imágenes para el proveedor.',
             
-            'video_promocional.url' => 'La estructura del video promocional debe ser un enlace.'
+            'imageText.array' => 'Error al enviar los datos. Recargue la página.',
+            'imageText.max' => 'Máximo se pueden subir 20 imágenes para el proveedor.',
+            
+            'video_promocional.url' => 'La estructura del video promocional debe ser un enlace.',
+            
+            'image.*.max' => 'El peso máximo por imagen es de 2MB. Por favor verifique si se cumple esta condición.',
+            
+            'imageText.*.required' => 'Una de las imágenes que se quiere subir no tiene texto alternativo.'
         ]);
         
         if($validator->fails()){
@@ -299,11 +302,12 @@ class AdministradorProveedoresController extends Controller
         $multimedia_proveedor = new Multimedia_Proveedor();
         $multimedia_proveedor->proveedor_id = $request->id;
         $multimedia_proveedor->ruta = "/multimedia/proveedores/proveedor-".$request->id."/".$portadaNombre;
+        $multimedia_proveedor->texto_alternativo = $request->portadaIMGText;
         $multimedia_proveedor->tipo = false;
         $multimedia_proveedor->portada = true;
         $multimedia_proveedor->estado = true;
-        $multimedia_proveedor->user_create = $this->user->username;
-        $multimedia_proveedor->user_update = $this->user->username;
+        $multimedia_proveedor->user_create = "Situr";
+        $multimedia_proveedor->user_update = "Situr";
         $multimedia_proveedor->created_at = Carbon::now();
         $multimedia_proveedor->updated_at = Carbon::now();
         $multimedia_proveedor->save();
@@ -317,8 +321,8 @@ class AdministradorProveedoresController extends Controller
             $multimedia_proveedor->tipo = true;
             $multimedia_proveedor->portada = false;
             $multimedia_proveedor->estado = true;
-            $multimedia_proveedor->user_create = $this->user->username;
-            $multimedia_proveedor->user_update = $this->user->username;
+            $multimedia_proveedor->user_create = "Situr";
+            $multimedia_proveedor->user_update = "Situr";
             $multimedia_proveedor->created_at = Carbon::now();
             $multimedia_proveedor->updated_at = Carbon::now();
             $multimedia_proveedor->save();
@@ -338,11 +342,12 @@ class AdministradorProveedoresController extends Controller
                     $multimedia_proveedor = new Multimedia_Proveedor();
                     $multimedia_proveedor->proveedor_id = $request->id;
                     $multimedia_proveedor->ruta = "/multimedia/proveedores/proveedor-".$request->id."/".$nombre;
+                    $multimedia_proveedor->texto_alternativo = $request->imageText[$key];
                     $multimedia_proveedor->tipo = false;
                     $multimedia_proveedor->portada = false;
                     $multimedia_proveedor->estado = true;
-                    $multimedia_proveedor->user_create = $this->user->username;
-                    $multimedia_proveedor->user_update = $this->user->username;
+                    $multimedia_proveedor->user_create = "Situr";
+                    $multimedia_proveedor->user_update = "Situr";
                     $multimedia_proveedor->created_at = Carbon::now();
                     $multimedia_proveedor->updated_at = Carbon::now();
                     $multimedia_proveedor->save();
@@ -502,8 +507,8 @@ class AdministradorProveedoresController extends Controller
         $proveedor->estado = true;
         $proveedor->created_at = Carbon::now();
         $proveedor->updated_at = Carbon::now();
-        $proveedor->user_create = $this->user->username;
-        $proveedor->user_update = $this->user->username;
+        $proveedor->user_create = "Situr";
+        $proveedor->user_update = "Situr";
         $proveedor->save();
         
         // $proveedor_con_idioma = Proveedor_Con_Idioma::where('proveedores_id', $request->id)->where('idiomas_id', 2)->first();
