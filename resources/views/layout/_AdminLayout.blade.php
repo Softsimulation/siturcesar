@@ -143,6 +143,7 @@
         					    <li role="none"><a role="menuitem" href="{{asset('administradoractividades')}}">Administrar actividades</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradoreventos')}}">Administrar eventos</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradorrutas')}}">Administrar rutas turísticas</a></li>
+        					    <li role="none"><a role="menuitem" href="{{asset('sliders/listadosliders')}}">Galería de imágenes</a></li>
                             </ul>
                         </li>
                            <li>
