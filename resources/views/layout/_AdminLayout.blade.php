@@ -143,6 +143,7 @@
         					    <li role="none"><a role="menuitem" href="{{asset('administradoractividades')}}">Administrar actividades</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradoreventos')}}">Administrar eventos</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradorrutas')}}">Administrar rutas turísticas</a></li>
+        					    <li role="none"><a role="menuitem" href="{{asset('sliders/listadosliders')}}">Galería de imágenes</a></li>
         					      <li><a role="menuitem" href="{{asset('/InformacionDepartamento/configuracionacercade')}}">Acerca del departamento</a></li>
         					        <li><a role="menuitem" href="{{asset('/InformacionDepartamento/configuracionrequisitos')}}">Requisitos del viaje</a></li>
         					    <li><a role="menuitem" href="{{asset('/bolsaEmpleo/vacantes')}}">Bolsa de empleo</a></li>

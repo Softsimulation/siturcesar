@@ -20,19 +20,9 @@ use App\Models\Sitio;
 use App\Models\Sitio_Con_Idioma;
 use App\Models\Atraccion_Con_Idioma;
 use App\Models\Multimedia_Sitio;
-use App\Models\User;
 
 class AdministradorAtraccionController extends Controller
 {
-    public function __construct()
-    {
-       
-        $this->middleware('auth');
-        $this->middleware('role:Admin|Promocion');
-        if(Auth::user() != null){
-            $this->user = User::where('id',Auth::user()->id)->first(); 
-        }
-    }
     
     public function getIndex(){
         return view('administradoratracciones.Index');
@@ -79,8 +69,8 @@ class AdministradorAtraccionController extends Controller
         $categorias_turismo = Atracciones::find($id)->categoriaTurismoConAtracciones()->pluck('categoria_turismo_id')->toArray();
         $actividades = Sitio::find($atraccion->sitios_id)->sitiosConActividades()->pluck('actividades_id')->toArray();
         
-        $portadaIMG = Multimedia_Sitio::where('portada', true)->where('sitios_id', $atraccion->sitios_id)->pluck('ruta')->first();
-        $imagenes = Multimedia_Sitio::where('portada', false)->where('tipo', false)->where('sitios_id', $atraccion->sitios_id)->pluck('ruta')->toArray();
+        $portadaIMG = Multimedia_Sitio::where('portada', true)->where('sitios_id', $atraccion->sitios_id)->select('ruta', 'texto_alternativo')->first();
+        $imagenes = Multimedia_Sitio::where('portada', false)->where('tipo', false)->where('sitios_id', $atraccion->sitios_id)->select('ruta', 'texto_alternativo')->get();
         $video = Multimedia_Sitio::where('portada', false)->where('tipo', true)->where('sitios_id', $atraccion->sitios_id)->pluck('ruta')->first();
         
         return ['atraccion' => $atraccion,
@@ -260,8 +250,8 @@ class AdministradorAtraccionController extends Controller
         $sitio->estado = true;
         $sitio->created_at = Carbon::now();
         $sitio->updated_at = Carbon::now();
-        $sitio->user_create = $this->user->username;
-        $sitio->user_update = $this->user->username;
+        $sitio->user_create = "Situr";
+        $sitio->user_update = "Situr";
         $sitio->save();
         
         $sitio_con_idioma = new Sitio_Con_Idioma();
@@ -278,8 +268,8 @@ class AdministradorAtraccionController extends Controller
         $atraccion->valor_min = $request->valor_minimo;
         $atraccion->valor_max = $request->valor_maximo;
         $atraccion->estado = true;
-        $atraccion->user_create = $this->user->username;
-        $atraccion->user_update = $this->user->username;
+        $atraccion->user_create = "Situr";
+        $atraccion->user_update = "Situr";
         $atraccion->created_at = Carbon::now();
         $atraccion->updated_at = Carbon::now();
         $atraccion->save();
@@ -300,24 +290,34 @@ class AdministradorAtraccionController extends Controller
     public function postGuardarmultimedia (Request $request){
         $validator = \Validator::make($request->all(), [
             'portadaIMG' => 'required|max:2097152',
+            'portadaIMGText' => 'required',
             'id' => 'required|exists:atracciones|numeric',
             'image' => 'array|max:20',
+            'imageText' => 'array|max:20',
             'video_promocional' => 'url',
-            'image.*' => 'max:2097152'
+            'image.*' => 'max:2097152',
+            'imageText.*' => 'required'
         ],[
             'portadaIMG.required' => 'Se necesita una imagen de portada.',
             'portadaIMG.max' => 'La imagen de portada no puede ser mayor a 2MB.',
+            
+            'portadaIMGText.required' => 'Se necesita el texto de la imagen de portada.',
             
             'id.required' => 'Se necesita un identificador para la atracción.',
             'id.exists' => 'El identificador de la atracción no se encuentra registrado en la base de datos.',
             'id.numeric' => 'El identificador de la atracción debe ser un valor numérico.',
             
             'image.array' => 'Error al enviar los datos. Recargue la página.',
-            'image.max' => 'Máximo se pueden subir 5 imágenes para la atracción.',
+            'image.max' => 'Máximo se pueden subir 20 imágenes para la atracción.',
+            
+            'imageText.array' => 'Error al enviar los datos. Recargue la página.',
+            'imageText.max' => 'Máximo se pueden subir 20 imágenes para la atracción.',
             
             'video_promocional.url' => 'El video promocional no tiene la estructura de enlace.',
             
-            'image.*.max' => 'El peso máximo por imagen es de 2MB. Por favor verifique si se cumple esta condición.'
+            'image.*.max' => 'El peso máximo por imagen es de 2MB. Por favor verifique si se cumple esta condición.',
+            
+            'imageText.*.required' => 'Una de las imágenes que se quiere subir no tiene texto alternativo.'
         ]);
         
         if($validator->fails()){
@@ -325,7 +325,7 @@ class AdministradorAtraccionController extends Controller
         }
         
         $atraccion = Atracciones::find($request->id);
-        $atraccion->user_update = $this->user->username;
+        $atraccion->user_update = "Situr";
         $atraccion->updated_at = Carbon::now();
         
         $portadaNombre = "portada.".pathinfo($request->portadaIMG->getClientOriginalName(), PATHINFO_EXTENSION);
@@ -337,11 +337,12 @@ class AdministradorAtraccionController extends Controller
         $multimedia_sitio = new Multimedia_Sitio();
         $multimedia_sitio->sitios_id = $atraccion->sitios_id;
         $multimedia_sitio->ruta = "/multimedia/atracciones/atraccion-".$request->id."/".$portadaNombre;
+        $multimedia_sitio->texto_alternativo = $request->portadaIMGText;
         $multimedia_sitio->tipo = false;
         $multimedia_sitio->portada = true;
         $multimedia_sitio->estado = true;
-        $multimedia_sitio->user_create = $this->user->username;
-        $multimedia_sitio->user_update = $this->user->username;
+        $multimedia_sitio->user_create = "Situr";
+        $multimedia_sitio->user_update = "Situr";
         $multimedia_sitio->created_at = Carbon::now();
         $multimedia_sitio->updated_at = Carbon::now();
         $multimedia_sitio->save();
@@ -356,8 +357,8 @@ class AdministradorAtraccionController extends Controller
             $multimedia_sitio->tipo = true;
             $multimedia_sitio->portada = false;
             $multimedia_sitio->estado = true;
-            $multimedia_sitio->user_create = $this->user->username;
-            $multimedia_sitio->user_update = $this->user->username;
+            $multimedia_sitio->user_create = "Situr";
+            $multimedia_sitio->user_update = "Situr";
             $multimedia_sitio->created_at = Carbon::now();
             $multimedia_sitio->updated_at = Carbon::now();
             $multimedia_sitio->save();
@@ -371,6 +372,8 @@ class AdministradorAtraccionController extends Controller
             }
         }
         
+        //return ['success' => false, 'files' => $request->image[0]];
+        
         if ($request->image != null){
             foreach($request->image as $key => $file){
                 if (!is_string($file)){
@@ -378,11 +381,12 @@ class AdministradorAtraccionController extends Controller
                     $multimedia_sitio = new Multimedia_Sitio();
                     $multimedia_sitio->sitios_id = $atraccion->sitios_id;
                     $multimedia_sitio->ruta = "/multimedia/atracciones/atraccion-".$request->id."/".$nombre;
+                    $multimedia_sitio->texto_alternativo = $request->imageText[$key];
                     $multimedia_sitio->tipo = false;
                     $multimedia_sitio->portada = false;
                     $multimedia_sitio->estado = true;
-                    $multimedia_sitio->user_create = $this->user->username;
-                    $multimedia_sitio->user_update = $this->user->username;
+                    $multimedia_sitio->user_create = "Situr";
+                    $multimedia_sitio->user_update = "Situr";
                     $multimedia_sitio->created_at = Carbon::now();
                     $multimedia_sitio->updated_at = Carbon::now();
                     $multimedia_sitio->save();
@@ -434,12 +438,12 @@ class AdministradorAtraccionController extends Controller
             $sitio = Sitio::find($atraccion->sitios_id);
             $sitio->sitiosConActividades()->detach();
             $sitio->sitiosConActividades()->attach($request->actividades);
-            $sitio->user_update = $this->user->username;
+            $sitio->user_update = "Situr";
             $sitio->updated_at = Carbon::now();
             $sitio->save();
         }
         
-        $atraccion->user_update = $this->user->username;
+        $atraccion->user_update = "Situr";
         $atraccion->updated_at = Carbon::now();
         $atraccion->save();
         
@@ -606,7 +610,7 @@ class AdministradorAtraccionController extends Controller
         $atraccion->valor_min = $request->valor_minimo;
         $atraccion->telefono = $request->telefono;
         $atraccion->sitio_web = $request->sitio_web;
-        $atraccion->user_update = $this->user->username;
+        $atraccion->user_update = "Situr";
         $atraccion->updated_at = Carbon::now();
         $atraccion->save();
         
@@ -615,7 +619,7 @@ class AdministradorAtraccionController extends Controller
         $sitio->longitud = $request->pos['lng'];
         $sitio->sectores_id = $request->sector_id;
         $sitio->direccion = $request->direccion;
-        $sitio->user_update = $this->user->username;
+        $sitio->user_update = "Situr";
         $sitio->updated_at = Carbon::now();
         $sitio->save();
         
