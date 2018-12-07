@@ -140,6 +140,7 @@ function parse_yturl($url)
             <!--    </button>-->
             <!--</div>-->
             
+            
             <p style="white-space: pre-line;">{{$actividad->actividadesConIdiomas[0]->descripcion}}</p>
         </div>
         
