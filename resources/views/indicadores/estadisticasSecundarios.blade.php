@@ -103,7 +103,7 @@
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuIndicadores">
                 @foreach ($indicadores as $indicador)
-                <button type="button" class="dropdown-item" ng-class="{'active': (indicadorSelect=={{$indicador['id']}}) }" ng-click="changeIndicador({{$indicador['id']}})">{{$indicador["idiomas"][0]['nombre']}}</button>
+                <button type="button" class="dropdown-item" ng-class="{'active': (indicadorSelect=={{$indicador['id']}}) }" ng-click="changeIndicador({{$indicador['id']}})">{{$indicador['nombre']}}</button>
                 @endforeach
               </div>
             </div>
@@ -329,22 +329,20 @@
         
         $("#descargarTABLA").on("click", function(){ 
             
-            var pdf = new jsPDF('l', 'pt', 'letter');
-            pdf.text(20, 20, $("#tituloIndicadorGrafica").html() );
+            var htmls = "";
+            var uri = 'data:application/vnd.ms-excel;base64,';
+            var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'; 
+            var base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) };
+            var format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }); };
 
-            var margins = { top: 50, bottom: 20, left: 20, width: 522 };
-    
-            pdf.fromHTML( $('#customers')[0], margins.left, margins.top,
-                { 
-                    'width': margins.width, // max width of content on PDF
-                    'elementHandlers': { '#bypassme': function (element, renderer) { return true; } }
-                },
-                function (dispose) { 
-                    pdf.save('datos.pdf');
-                },
-                margins
-            );
-            
+            htmls = $("#customers").html()
+
+            var ctx = { worksheet : 'Worksheet', table : htmls };
+
+            var link = document.createElement("a");
+            link.download = "datos.xls";
+            link.href = uri + base64(format(template, ctx));
+            link.click();
         });
         
         $("#descargarGraficaTabla").on("click", function(){ 
@@ -371,6 +369,25 @@
                 margins
             );
             
+        });
+        
+        
+        $("#descargarPivotTable").on("click", function(){ 
+            
+            var htmls = "";
+            var uri = 'data:application/vnd.ms-excel;base64,';
+            var template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'; 
+            var base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) };
+            var format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }); };
+
+            htmls = $(".pvtRendererArea").html();
+
+            var ctx = { worksheet : 'Worksheet', table : htmls };
+
+            var link = document.createElement("a");
+            link.download = "datos.xls";
+            link.href = uri + base64(format(template, ctx));
+            link.click();
         });
         
     </script>
