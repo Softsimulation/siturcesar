@@ -216,7 +216,7 @@
                             </ul>
                         </li>
                         <li>
-                            <a role="menuitem" href="{{asset('usuario/listadousuarios')}}">Exportación</a>
+                            <a role="menuitem" href="{{asset('usuario/listadousuarios')}}">Administración de Usuario</a>
                         </li>
                     </ul>
                 </nav>
