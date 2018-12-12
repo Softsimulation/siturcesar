@@ -31,7 +31,19 @@ app.factory("serviceIndicador", ["$http", "$q", function ($http, $q) {
             
             return promise;
         },
+        recalcular: function (data) {
             
+            var defered = $q.defer();
+            var promise = defered.promise;
+
+            $http.post('/calcularindicadores/recalcularindicador',data).success(function (data) {
+             defered.resolve(data);
+            }).error(function (err) {
+                defered.reject(err);
+            })
+            
+            return promise;
+        },
         
         
     }
