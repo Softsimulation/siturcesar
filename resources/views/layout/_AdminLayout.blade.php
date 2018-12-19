@@ -143,11 +143,16 @@
         					    <li role="none"><a role="menuitem" href="{{asset('administradoractividades')}}">Administrar actividades</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradoreventos')}}">Administrar eventos</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradorrutas')}}">Administrar rutas turísticas</a></li>
+        					    <li role="none"><a role="menuitem" href="{{asset('sliders/listadosliders')}}">Galería de imágenes</a></li>
+        					      <li><a role="menuitem" href="{{asset('/InformacionDepartamento/configuracionacercade')}}">Acerca del departamento</a></li>
+        					        <li><a role="menuitem" href="{{asset('/InformacionDepartamento/configuracionrequisitos')}}">Requisitos del viaje</a></li>
+        					    <li><a role="menuitem" href="{{asset('/bolsaEmpleo/vacantes')}}">Bolsa de empleo</a></li>
+        					    <li><a role="menuitem" href="{{asset('/publicaciones/listadoadmin')}}">Biblioteca Digital</a></li>
+        					    <li><a role="menuitem" href="{{asset('/noticias/listadonoticias')}}">Noticias</a></li>
+        					    <li><a role="menuitem" href="{{asset('/informes/configuracion')}}">Informes</a></li>
                             </ul>
                         </li>
-                           <li>
-                            <a role="menuitem" href="{{asset('bolsaEmpleo/vacantes')}}">Bolsa de empleo</a>
-                        </li>
+                          
                         <li>
                             <a role="menuitem" href="{{asset('turismoreceptor/listadoencuestas')}}">Turismo receptor</a>
                         </li>
@@ -188,12 +193,7 @@
                          <li>
                             <a role="menuitem" href="{{asset('encuesta/listado')}}">Encuestas personalizadas</a>
                         </li>
-                          <li>
-                            <a role="menuitem" href="{{asset('publicaciones/listadoadmin')}}">Biblioteca Digital</a>
-                        </li>
-                          <li>
-                            <a role="menuitem" href="{{asset('noticias/listadonoticias')}}">Noticias</a>
-                        </li>
+                        
                           <li>
                             <a role="menuitem" href="{{asset('EstadisticasSecundarias/configuracion')}}">Estadísticas secundarias</a>
                         </li>
@@ -214,6 +214,9 @@
                                     <a role="menuitem" href="{{asset('administrarmunicipios')}}">Municipios</a>
                                 </li>
                             </ul>
+                        </li>
+                        <li>
+                            <a role="menuitem" href="{{asset('usuario/listadousuarios')}}">Administración de Usuario</a>
                         </li>
                     </ul>
                 </nav>

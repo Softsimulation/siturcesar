@@ -52,13 +52,12 @@ $countItems = ($tipoItem) ? $countItems : count($query) > 0;
 ?>
 @extends('layout._publicLayout')
 
-@section('Title', '¿Qué hacer?')
+@section('Title', '¿Qué hacer en el departamento del Cesar?')
 
-@section('TitleSection','Actividades')
 
 @section('meta_og')
 <meta property="og:title" content="{{$tituloPagina}}" />
-<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:image" content="{{asset('/img/brand/128.png')}}" />
 <meta property="og:description" content="{{$tituloPagina}}"/>
 @endsection
 

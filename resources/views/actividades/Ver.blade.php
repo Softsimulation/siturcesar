@@ -16,7 +16,7 @@ function parse_yturl($url)
 
 @section('meta_og')
 <meta property="og:title" content="{{$actividad->actividadesConIdiomas[0]->nombre}}" />
-<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:image" content="{{asset('/img/brand/128.png')}}" />
 <meta property="og:description" content="{{$actividad->actividadesConIdiomas[0]->descripcion}}"/>
 @endsection
 
@@ -24,7 +24,18 @@ function parse_yturl($url)
     <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
     <link href="{{asset('/css/public/details.css')}}" rel="stylesheet">
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
-    
+    <style>
+        .btn.btn-lg.btn-circled{
+                font-size: 1.825rem;
+                color: red;
+                background: whitesmoke;
+                height: 50px;
+                width: 50px;
+                padding: 0;
+                border-radius: 50%;
+                margin-bottom: 2rem;
+            }
+    </style>
 @endsection
 
 @section('content')
@@ -56,7 +67,7 @@ function parse_yturl($url)
         </div>
         @endfor
         
-        <div class="carousel-caption d-none d-md-block">
+        <div class="carousel-caption d-flex align-items-start flex-column justify-content-end flex-wrap">
 		    <h2 class="text-center container">{{$actividad->actividadesConIdiomas[0]->nombre}}
 		        <small class="d-block">
 		            <span class="{{ ($actividad->calificacion_legusto > 0.0) ? (($actividad->calificacion_legusto <= 0.9) ? 'ion-android-star-half' : 'ion-android-star') : 'ion-android-star-outline'}}" aria-hidden="true"></span>
@@ -68,23 +79,24 @@ function parse_yturl($url)
 		            
 		        </small>
 	        </h2>
+	        <div class="text-center w-100">
+                @if(Auth::check())
+                    <form role="form" action="/actividades/favorito" method="post">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="actividad_id" value="{{$actividad->id}}" />
+                        <button type="submit" class="btn btn-lg btn-circled btn-favorite">
+                          <span class="ion-android-favorite" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+                        </button>    
+                    </form>
+                @else
+                    <button type="button" class="btn btn-lg btn-circled" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
+                      <span class="ion-android-favorite-outline" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
+                    </button>
+                @endif
+              </div>
 		  </div>
       </div>
-      <div class="text-center">
-        @if(Auth::check())
-            <form role="form" action="/actividades/favorito" method="post">
-                {{ csrf_field() }}
-                <input type="hidden" name="actividad_id" value="{{$actividad->id}}" />
-                <button type="submit" class="btn btn-lg btn-circled btn-favorite">
-                  <span class="ion-android-favorite" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
-                </button>    
-            </form>
-        @else
-            <button type="button" class="btn btn-lg btn-circled" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
-              <span class="ion-android-favorite-outline" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
-            </button>
-        @endif
-      </div>
+      
     </div>
     <div id="title-main-page">
     	<div class="container">
@@ -122,11 +134,12 @@ function parse_yturl($url)
             @if(Session::has('message'))
                 <div class="alert alert-info" role="alert" style="text-align: center;">{{Session::get('message')}}</div>
             @endif
-            <div class="text-center">
-                <button type="button" class="btn btn-lg btn-link" id="btn-favorite">
-                    <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>
-                </button>
-            </div>
+            <!--<div class="text-center">-->
+            <!--    <button type="button" class="btn btn-lg btn-link" id="btn-favorite">-->
+            <!--        <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>-->
+            <!--    </button>-->
+            <!--</div>-->
+            
             
             <p style="white-space: pre-line;">{{$actividad->actividadesConIdiomas[0]->descripcion}}</p>
         </div>
@@ -209,14 +222,23 @@ function parse_yturl($url)
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComentario">Comentar</button>
             </div>
             
-                    
-                 <ul class="list-group list-group-flush">
-                    @foreach ($actividad->comentariosActividads as $comentario)
-                         <li>{{$comentario->user->username}} {{$comentario->comentario}}</li>
-                    @endforeach
-                      
-                               
-                </ul>
+            
+            @if(count($actividad->comentariosActividads) > 0)
+            
+             <ul class="list-group list-group-flush no-list-style mt-3">
+                @foreach ($actividad->comentariosActividads as $comentario)
+                     <li class="list-group-item">
+                         <p class="text-muted m-0"><i class="ion-person"></i> {{$comentario->user->username}} - <i class="ion-calendar"></i> {{date("j/m/y", strtotime($comentario->fecha))}}</p>
+
+                        <blockquote class="blockquote text-muted">
+                        {{$comentario->comentario}}
+                        </blockquote>
+                    </li>
+                @endforeach
+                  
+                           
+            </ul>
+            @endif
         </div>
         <!-- Modal -->
         <div class="modal fade" id="modalComentario" tabindex="-1" role="dialog" aria-labelledby="labelModalComentario" aria-hidden="true">
@@ -310,7 +332,7 @@ function parse_yturl($url)
                                 
                             </div>
                             <div class="form-group text-center">
-                                <label class="control-label" for="calificacionRegresaria">¿Rgresaría?</label>
+                                <label class="control-label" for="calificacionRegresaria">¿Regresaría?</label>
                                 <div class="checks">
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="calificacionRegresaria" id="calificacionRegresaria-1" value="1" required onclick="showStars(this)">
@@ -351,6 +373,7 @@ function parse_yturl($url)
                 </div>
             </div>
         </div>
+        
     </section>
 @endsection
 @section('javascript')

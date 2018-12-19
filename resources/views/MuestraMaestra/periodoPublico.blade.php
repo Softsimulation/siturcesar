@@ -168,6 +168,9 @@
             display: block;
             width: 100%;
         }
+        #contentMap {
+            height: 500px;
+        }
         #cont-filtros{
             z-index: 1;
             background-color: white;
@@ -212,7 +215,7 @@
         #filtros-buttons{
             position:absolute;
             left: 0;
-            top: 4%;
+            top: calc(115px + 4%);
             z-index: 20;
             background-color: white;
             display: flex;
@@ -290,9 +293,9 @@
             }
             #cont-filtros{
                 position:fixed;
-                top: 0;
+                top: calc(115px - 1rem);
                 left: 0;
-                height: 100%;
+                height: calc(100% - 115px + 1rem);
                 width: 350px;
             }
         }
@@ -330,11 +333,11 @@
    
     <input type="hidden" id="periodo" value="{{$periodo->id}}" />
     
-    <div id="contentPage">
+    <div id="contentPage" class="pt-sm-4">
         <div id="cont-filtros" ng-show="!pantallaCompleta">
-            <a href="/" class="btn-block text-center">
-                <img id="logoSitur" src="{{asset('Content/image/logo.min.png')}}" alt="Logo SITUR Magdalena" class="img-responsive" style="margin: 0 auto;"/>
-            </a>
+            <!--<a href="/" class="btn-block text-center">-->
+            <!--    <img id="logoSitur" src="{{asset('Content/image/logo.min.png')}}" alt="Logo SITUR Magdalena" class="img-responsive" style="margin: 0 auto;"/>-->
+            <!--</a>-->
             
             <h1 id="tituloMuestraMaestra">Muestra maestra</h1>
             <h2>

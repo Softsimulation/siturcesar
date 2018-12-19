@@ -82,9 +82,10 @@ Route::controller('/quehacer', 'QueHacerController');
 Route::group(['middleware' => 'cors'], function(){
     
         Route::controller('/authapi', 'ApiAuthController');
+         Route::controller('/turismointernoapi','TurismoInternoCorsController');
         Route::group(['middleware'=> 'jwt.auth'], function () {
-            Route::controller('/turismointernoapi','TurismoInternoCorsController');
-       
+           
+     
             Route::controller('/turismoreceptoroapi','TurismoReceptorCorsController');
         });
 });
@@ -131,6 +132,8 @@ Route::controller('/promocionInforme','PublicoInformeController');
 Route::controller('/promocionPublicacion','PublicoPublicacionController');
 Route::controller('/sliders','SliderController');
 Route::controller('/suscriptores','SuscriptoreController');
+
+Route::controller('/calcularindicadores', 'IndicadorAdministradorController');
 
 Route::controller('/visitante', 'VisitanteController');
 

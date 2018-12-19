@@ -135,7 +135,7 @@ function parse_yturl($url)
             @endif
             
             @if($video_promocional != null)
-            <iframe src="https://www.youtube.com/embed/{{print(parse_yturl($video_promocional))}}" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
+            <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional)?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
             <p style="white-space: pre-line;">{{$proveedor->proveedorRnt->idiomas[0]->descripcion}}</p>
         </div>
@@ -236,13 +236,25 @@ function parse_yturl($url)
             <div class="text-center">
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modalComentario">Comentar</button>
             </div>
-        </div>
-          <ul class="list-group list-group-flush">
+            @if(count($proveedor->comentariosProveedores) > 0)
+            <div class="mt-3">
+                 <ul class="list-group list-group-flush no-list-style">
                     @foreach ($proveedor->comentariosProveedores as $comentario)
-                         <li>{{$comentario->user->username}} {{$comentario->comentario}}</li>
+                         <li class="list-group-item">
+                             <p class="text-muted m-0"><i class="ion-person"></i> {{$comentario->user->username}} - <i class="ion-calendar"></i> {{date("j/m/y", strtotime($comentario->fecha))}}</p>
+        
+                            <blockquote>
+                            {{$comentario->comentario}}
+                            </blockquote>
+                        </li>
                     @endforeach
                       
-        </ul>
+                               
+                </ul>
+            </div>
+            
+            @endif
+        </div>
         
         <!-- Modal -->
          <div class="modal fade" id="modalComentario" tabindex="-1" role="dialog" aria-labelledby="labelModalComentario" aria-hidden="true">

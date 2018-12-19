@@ -1,5 +1,8 @@
+<?php 
+    $hasFilter = isset($_GET['tipoNoticia']) || isset($_GET['buscar']);
+?>
 @extends('layout._publicLayout')
-@section('title', 'Noticias')
+@section('Title', 'Noticias :: SITUR Cesar')
 
 @section('estilos')
 <style>
@@ -43,9 +46,9 @@
                             <div class="form-group mb-1 mb-lg-0">
                                 <label for="tipoNoticia" class="control-label sr-only">Tipo de noticia</label>
                                 <select class="form-control" id="tipoNoticia" name="tipoNoticia">
-                                    <option value="" selected disable>Seleccione tipo de noticia</option>
+                                    <option value=""  selected disable>Seleccione un tipo de noticia</option>
                                     @foreach($tiposNoticias as $tipo)
-                                        <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+                                        <option value="{{$tipo->id}}" @if(isset($_GET['tipoNoticia']) && $_GET['tipoNoticia'] == $tipo->id) selected @endif>{{$tipo->nombre}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -55,13 +58,13 @@
                     <div class="col-12 col-md-6 col-lg-5">
                         <div class="form-group mb-1 mb-lg-0">
                                 <label class="sr-only">Búsqueda</label>
-                                <input type="text" name="buscar" class="form-control input-lg" id="buscar" placeholder="¿Qué desea buscar?">
+                                <input type="text" name="buscar" class="form-control input-lg" id="buscar" placeholder="¿Qué desea buscar?" @if(isset($_GET['buscar'])) value="{{$_GET['buscar']}}" @endif>
                                 <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
                             
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-12 col-lg-2">
-            			<button type="submit" class="btn btn-primary w-100"><span class="ion-search"></span> Buscar</button>
+            			<button type="submit" class="btn btn-success w-100"><span class="ion-search"></span> Buscar</button>
             		</div>
                 </div>
             </form>
@@ -70,15 +73,19 @@
         
     </div>
 
-<div class="container">
-    
+<div class="container pt-3">
+    @if($hasFilter)
+    <div class="text-center mb-3">
+        <a role="button" href="/promocionNoticia/listado" class="btn btn-outline-secondary">Quitar filtros</a>
+    </div>
+    @endif
     @if ($noticias != null && count($noticias) > 0)
     {{$noticias}}
-    <div class="tiles mt-3">
+    <div class="tiles">
 		@foreach($noticias as $noticia)
 		<section class="tile inline-tile">
             <div class="tile-img">
-            
+                <img src="{{$noticia->portada}}">
             </div>
             <div class="tile-body">
                 <div class="tile-caption">
@@ -87,10 +94,10 @@
                         <h3>{{$noticia->tituloNoticia}}</h3>
                     </a>
                     <p class="date"><span class="ion-calendar" aria-hidden="true"></span> Publicado el {{date('d/m/Y h:m A', strtotime($noticia->fecha))}}</p>
-                    <p class="text-muted">{{$noticia->resumen}}</p>
+                    <p class="text-muted mb-1">{{$noticia->resumen}}</p>
                 </div>
                 <div class="buttons">
-                    <a class="btn btn-xs btn-link" href="/promocionNoticia/ver/{{$noticia->idNoticia}}">Ver más</a>
+                    <a class="btn btn-sm btn-outline-primary" href="/promocionNoticia/ver/{{$noticia->idNoticia}}">Ver más</a>
                 </div>
                 
             </div>
@@ -110,7 +117,7 @@
         <!--    <br>-->
         <!--@endforeach-->
     @else
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-info mb-3" role="alert">
         No hay registro para mostrar en este momento
     </div>
     @endif

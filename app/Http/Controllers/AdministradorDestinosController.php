@@ -16,20 +16,10 @@ use App\Models\Multimedia_Destino;
 use App\Models\Idioma;
 use App\Models\Sector;
 use App\Models\Sector_Con_Idioma;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 class AdministradorDestinosController extends Controller
 {
-    public function __construct()
-    {
-       
-        $this->middleware('auth');
-        $this->middleware('role:Admin|Promocion');
-        if(Auth::user() != null){
-            $this->user = User::where('id',Auth::user()->id)->first(); 
-        }
-    }
+    //
     public function getIndex (){
         return view('administradordestinos.Index');
     }
@@ -114,8 +104,8 @@ class AdministradorDestinosController extends Controller
             }])->select('id', 'destino_id', 'es_urbano');
         }])->where('id', $id)->select('id', 'tipo_destino_id', 'latitud', 'longitud')->first();
         
-        $portadaIMG = Multimedia_Destino::where('portada', true)->where('destino_id', $id)->pluck('ruta')->first();
-        $imagenes = Multimedia_Destino::where('portada', false)->where('tipo', false)->where('destino_id', $id)->pluck('ruta')->toArray();
+        $portadaIMG = Multimedia_Destino::where('portada', true)->where('destino_id', $id)->select('ruta', 'texto_alternativo')->first();
+        $imagenes = Multimedia_Destino::where('portada', false)->where('tipo', false)->where('destino_id', $id)->select('ruta', 'texto_alternativo')->get();
         $video = Multimedia_Destino::where('tipo', true)->where('destino_id', $id)->pluck('ruta')->first();
         
         $idiomas = Idioma::where('estado', true)->select('id', 'culture', 'nombre')->get();
@@ -156,8 +146,8 @@ class AdministradorDestinosController extends Controller
         $destino = new Destino();
         $destino->tipo_destino_id = $request->tipo;
         $destino->estado = true;
-        $destino->user_create = $this->user->username;
-        $destino->user_update = $this->user->username;
+        $destino->user_create = "Situr";
+        $destino->user_update = "Situr";
         $destino->latitud = $request->pos['lat'];
         $destino->longitud = $request->pos['lng'];
         $destino->created_at = Carbon::now();
@@ -177,12 +167,18 @@ class AdministradorDestinosController extends Controller
     public function postGuardarmultimedia (Request $request){
         $validator = \Validator::make($request->all(), [
             'portadaIMG' => 'required|max:2097152',
+            'portadaIMGText' => 'required',
             'id' => 'required|exists:destino|numeric',
             'image' => 'array|max:5',
-            'video' => 'url'
+            'video' => 'url',
+            'imageText' => 'array|max:20',
+            'image.*' => 'max:2097152',
+            'imageText.*' => 'required'
         ],[
             'portadaIMG.required' => 'Se necesita una imagen de portada.',
             'portadaIMG.max' => 'La portada debe tener máximo 2MB',
+            
+            'portadaIMGText.required' => 'Se necesita el texto de la imagen de portada.',
             
             'id.required' => 'Se necesita un identificador para el destino.',
             'id.exists' => 'El identificador del destino no se encuentra registrado en la base de datos.',
@@ -191,27 +187,37 @@ class AdministradorDestinosController extends Controller
             'image.array' => 'Error al enviar los datos. Recargue la página.',
             'image.max' => 'Máximo se pueden subir 5 imágenes para el destino.',
             
-            'video.url' => 'El video debe tener la estructura de un enlace.'
+            'imageText.array' => 'Error al enviar los datos. Recargue la página.',
+            'imageText.max' => 'Máximo se pueden subir 20 imágenes para el destino.',
+            
+            'video.url' => 'El video debe tener la estructura de un enlace.',
+            
+            'image.*.max' => 'El peso máximo por imagen es de 2MB. Por favor verifique si se cumple esta condición.',
+            
+            'imageText.*.required' => 'Una de las imágenes que se quiere subir no tiene texto alternativo.'
         ]);
         
         if($validator->fails()){
             return ["success"=>false,'errores'=>$validator->errors()];
         }
         
+        Multimedia_Destino::where('destino_id', $request->id)->where('portada', true)->delete();
+        Storage::disk('multimedia-destino')->deleteDirectory('destino-'.$request->id);
         $portadaNombre = "portada.".pathinfo($request->portadaIMG->getClientOriginalName())['extension'];
-        if (Storage::disk('multimedia-destino')->exists('destino-'.$request->id.'/'.$portadaNombre)){
-            Multimedia_Destino::where('destino_id', $request->id)->where('portada', true)->delete();
-            Storage::disk('multimedia-destino')->deleteDirectory('destino-'.$request->id);
-        }
+        // if (Storage::disk('multimedia-destino')->exists('destino-'.$request->id.'/'.$portadaNombre)){
+        //     Multimedia_Destino::where('destino_id', $request->id)->where('portada', true)->delete();
+        //     Storage::disk('multimedia-destino')->deleteDirectory('destino-'.$request->id);
+        // }
         
         $multimedia_destino = new Multimedia_Destino();
         $multimedia_destino->destino_id = $request->id;
         $multimedia_destino->ruta = "/multimedia/destinos/destino-".$request->id."/".$portadaNombre;
+        $multimedia_destino->texto_alternativo = $request->portadaIMGText;
         $multimedia_destino->tipo = false;
         $multimedia_destino->portada = true;
         $multimedia_destino->estado = true;
-        $multimedia_destino->user_create = $this->user->username;
-        $multimedia_destino->user_update = $this->user->username;
+        $multimedia_destino->user_create = "Situr";
+        $multimedia_destino->user_update = "Situr";
         $multimedia_destino->created_at = Carbon::now();
         $multimedia_destino->updated_at = Carbon::now();
         $multimedia_destino->save();
@@ -228,19 +234,19 @@ class AdministradorDestinosController extends Controller
             $multimedia_sitio->tipo = true;
             $multimedia_sitio->portada = false;
             $multimedia_sitio->estado = true;
-            $multimedia_sitio->user_create = $this->user->username;
-            $multimedia_sitio->user_update = $this->user->username;
+            $multimedia_sitio->user_create = "Situr";
+            $multimedia_sitio->user_update = "Situr";
             $multimedia_sitio->created_at = Carbon::now();
             $multimedia_sitio->updated_at = Carbon::now();
             $multimedia_sitio->save();
         }
         
-        for ($i = 0; $i < 5; $i++){
-            $nombre = "imagen-".$i.".*";
-            if (Storage::disk('multimedia-destino')->exists('destino-'.$request->id.'/'.$nombre)){
-                Storage::disk('multimedia-destino')->delete('destino-'.$request->id.'/'.$nombre);
-            }
-        }
+        // for ($i = 0; $i < 20; $i++){
+        //     $nombre = "imagen-".$i.".*";
+        //     if (Storage::disk('multimedia-destino')->exists('destino-'.$request->id.'/'.$nombre)){
+        //         Storage::disk('multimedia-destino')->delete('destino-'.$request->id.'/'.$nombre);
+        //     }
+        // }
         
         if ($request->image != null){
             foreach($request->image as $key => $file){
@@ -249,11 +255,12 @@ class AdministradorDestinosController extends Controller
                     $multimedia_sitio = new Multimedia_Destino();
                     $multimedia_sitio->destino_id = $request->id;
                     $multimedia_sitio->ruta = "/multimedia/destinos/destino-".$request->id."/".$nombre;
+                    $multimedia_sitio->texto_alternativo = $request->imageText[$key];
                     $multimedia_sitio->tipo = false;
                     $multimedia_sitio->portada = false;
                     $multimedia_sitio->estado = true;
-                    $multimedia_sitio->user_create = $this->user->username;
-                    $multimedia_sitio->user_update = $this->user->username;
+                    $multimedia_sitio->user_create = "Situr";
+                    $multimedia_sitio->user_update = "Situr";
                     $multimedia_sitio->created_at = Carbon::now();
                     $multimedia_sitio->updated_at = Carbon::now();
                     $multimedia_sitio->save();
@@ -358,7 +365,7 @@ class AdministradorDestinosController extends Controller
     
     public function postEditardatosgenerales (Request $request){
         $validator = \Validator::make($request->all(), [
-            'id' => 'required|exists:destinos|numeric',
+            'id' => 'required|exists:destino|numeric',
             'tipo' => 'required|numeric|exists:tipo_destino,id',
             'pos' => 'required'
         ],[
@@ -427,8 +434,8 @@ class AdministradorDestinosController extends Controller
         $sector->destino_id = $request->destino_id;
         $sector->es_urbano = $request->es_urbano;
         $sector->estado = true;
-        $sector->user_create = $this->user->username;
-        $sector->user_update = $this->user->username;
+        $sector->user_create = "Situr";
+        $sector->user_update = "Situr";
         $sector->created_at = Carbon::now();
         $sector->updated_at = Carbon::now();
         $sector->save();
