@@ -447,7 +447,7 @@ class SostenibilidadHogaresController extends Controller
 		}
 		
 		
-		$eliminarR = Riesgo_Turismo::where('casas_sostenibilidad_id',$request->id)->where('categorias_riesgo_id',1)->get();
+		$eliminarR = Riesgo_Turismo::where('casas_sostenibilidad_id',$request->id)->whereHas('tiposRiesgo',function($q){$q->where('categorias_riesgo_id',1);})->get();
 			
 		foreach($eliminarR as $el){
 			$el->delete();
@@ -460,7 +460,7 @@ class SostenibilidadHogaresController extends Controller
 				$riesgo->criterios_calificacion_id = $ris["calificacion"];
 				$riesgo->casas_sostenibilidad_id = $request->id;
 				if($ris["id"]==8){
-					$riesgo->otro = $ris["otroRiesgo"];
+					$riesgo->otro = isset($ris["otroRiesgo"]) ? $ris["otroRiesgo"] : null;
 				}
 				
 				$riesgo->save();
@@ -680,7 +680,7 @@ class SostenibilidadHogaresController extends Controller
 		}
 		
 		
-		$eliminarR = Riesgo_Turismo::where('casas_sostenibilidad_id',$request->id)->where('categorias_riesgo_id',2)->get();
+		$eliminarR = Riesgo_Turismo::where('casas_sostenibilidad_id',$request->id)->whereHas('tiposRiesgo',function($q){$q->where('categorias_riesgo_id',2);})->get();
 			
 		foreach($eliminarR as $el){
 			$el->delete();
@@ -693,7 +693,7 @@ class SostenibilidadHogaresController extends Controller
 				$riesgo->criterios_calificacion_id = $ris["calificacion"];
 				$riesgo->casas_sostenibilidad_id = $request->id;
 				if($ris["id"]==21){
-					$riesgo->otro = $ris["otroRiesgo"];
+					$riesgo->otro = isset($ris["otroRiesgo"]) ? $ris["otroRiesgo"] : null;
 				}
 				
 				$riesgo->save();
