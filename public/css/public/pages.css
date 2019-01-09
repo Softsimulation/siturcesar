@@ -59,3 +59,13 @@
         height: 600px;
     }
 }
+@media only screen and (min-width: 1600px) {
+    .carousel-inner>.carousel-item {
+        height: 650px;
+    }
+}
+@media only screen and (min-width: 1900px) {
+    .carousel-inner>.carousel-item {
+        height: 720px;
+    }
+}

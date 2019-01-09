@@ -144,16 +144,8 @@
                             <li role="none">
                                 <a role="menuitem" href="/promocionBolsaEmpleo/vacantes">Bolsa de empleo</a>
                             </li>
-<<<<<<< HEAD
                             <li role="none">
                                 <a role="menuitem" href="/promocionPublicacion/listado">Biblioteca digital</a>
-=======
-                              <li role="none">
-                                <a role="menuitem" href="/promocionPublicacion/listado">Biblioteca Digital</a>
-                            </li>
-                            <li role="none">
-                                <a role="menuitem" href="/promocionInforme/listado">Informes</a>
->>>>>>> a40809135100675e82571f83aa3aa368b90fd668
                             </li>
                         </ul>
                     </li>

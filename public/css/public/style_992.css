@@ -75,3 +75,7 @@
     display: inline-block;
 
 }
+
+.carousel-inner>.carousel-item {
+        height: 500px;
+    }
