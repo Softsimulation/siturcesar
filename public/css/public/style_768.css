@@ -218,3 +218,6 @@ header{
 .tiles.tile-list .tile.tile-overlap{
     min-height: 50px;
 }
+.carousel-inner>.carousel-item {
+    height: 450px;
+}
