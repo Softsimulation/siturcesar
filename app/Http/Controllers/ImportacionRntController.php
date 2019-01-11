@@ -724,17 +724,21 @@ class ImportacionRntController extends Controller
     }
  
     public static function MayusculaTilde($cadena){
-        $cadena = str_replace("Á", "A", $cadena); 
-		$cadena = str_replace("É", "E", $cadena); 
-		$cadena = str_replace("Í", "I", $cadena); 
-		$cadena = str_replace("Ó", "O", $cadena); 
-		$cadena = str_replace("Ú", "U", $cadena);
+		//$cadena = str_replace("á", "Á", $cadena); 
+		// $cadena = str_replace("é", "É", $cadena); 
+		// $cadena = str_replace("í", "Í", $cadena); 
+		// $cadena = str_replace("ó", "Ó", $cadena); 
+		// $cadena = str_replace("ú", "Ú", $cadena); 
 		
-		$cadena = str_replace("á", "A", $cadena); 
-		$cadena = str_replace("é", "E", $cadena); 
-		$cadena = str_replace("í", "I", $cadena); 
-		$cadena = str_replace("ó", "O", $cadena); 
-		$cadena = str_replace("ú", "U", $cadena); 
+		// $cadena = str_replace("á", "A", $cadena); 
+		// $cadena = str_replace("é", "E", $cadena); 
+		// $cadena = str_replace("í", "I", $cadena); 
+		// $cadena = str_replace("ó", "O", $cadena); 
+		// $cadena = str_replace("ú", "U", $cadena);
+		
+		$search  = array('Á', 'É', 'Í', 'ó', 'Ú');
+		$replace = array('A', 'E', 'I', 'O', 'U');
+		$cadena = str_replace($search, $replace, $cadena);
 		
         return trim($cadena);
     }

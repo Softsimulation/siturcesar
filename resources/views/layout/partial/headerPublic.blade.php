@@ -144,11 +144,8 @@
                             <li role="none">
                                 <a role="menuitem" href="/promocionBolsaEmpleo/vacantes">Bolsa de empleo</a>
                             </li>
-                              <li role="none">
-                                <a role="menuitem" href="/promocionPublicacion/listado">Biblioteca Digital</a>
-                            </li>
                             <li role="none">
-                                <a role="menuitem" href="/promocionInforme/listado">Informes</a>
+                                <a role="menuitem" href="/promocionPublicacion/listado">Biblioteca digital</a>
                             </li>
                         </ul>
                     </li>

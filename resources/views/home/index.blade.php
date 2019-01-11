@@ -117,30 +117,58 @@ function getItemType($type){
 			width: calc(16.6% - 1rem);
 		}
 	}
+	
 </style>
 @endsection
 @section('content')
 <section id="slider">
 	        
             <div id="carousel-main-page" class="carousel slide carousel-fade" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="#carousel-main-page" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-main-page" data-slide-to="1"></li>
-              </ol>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img class="d-block w-100" src="/img/slider/slide1.jpg" alt="First slide">
-                  <div class="carousel-caption d-none d-md-block">
-				    <h3 class="text-center text-lg-left col-12 col-lg-6">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h3>
-				  </div>
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="/img/slider/slide2.jpg" alt="Second slide">
-                  <div class="carousel-caption d-none d-md-block">
-				    <h3 class="text-center col-12">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h23>
-				  </div>
-                </div>
-              </div>
+            	<ol class="carousel-indicators">
+			        @for($i = 0; $i < count($sliders); $i++)
+			        <li data-target="#carousel-main-page" data-slide-to="{{$i}}" @if($i == 0) class="active" @endif></li>
+			        @endfor
+			      </ol>
+			    
+			      <!-- Wrapper for slides -->
+			      <div class="carousel-inner" role="listbox">
+			        @for($i = 0; $i < count($sliders); $i++)
+			        <div class="carousel-item @if($i == 0) active @endif">
+			          <img class="d-block w-100" src="{{$sliders[$i]->rutaSlider}}" alt="{{$sliders[$i]->textoAlternativoSlider}}">
+			          @if($sliders[$i]->tituloSlider != null && $sliders[$i]->tituloSlider != "")
+			          <div class="carousel-caption d-none d-md-block">
+			            <p class="h3" class="text-center col-12">{{$sliders[$i]->tituloSlider}} @if($sliders[$i]->descripcionSlider != null && $sliders[$i]->descripcionSlider != "")<small>{{$sliders[$i]->descripcionSlider}}</small>@endif</p>
+			          </div>
+			          @endif
+			        </div>
+			        @endfor
+			        <!--<div class="item">-->
+			        <!--  <img src="{{asset('img/slider/slide3.jpg')}}" alt="" role="presentation">-->
+			        <!--  <div class="carousel-caption">-->
+			        <!--    <h2>Hotel <small>fue el tipo de alojamiento más utilizado en el 2017</small></h2>-->
+			        <!--  </div>-->
+			        <!--</div>-->
+			      </div>
+            	
+            	
+      <!--        <ol class="carousel-indicators">-->
+      <!--          <li data-target="#carousel-main-page" data-slide-to="0" class="active"></li>-->
+      <!--          <li data-target="#carousel-main-page" data-slide-to="1"></li>-->
+      <!--        </ol>-->
+      <!--        <div class="carousel-inner">-->
+      <!--          <div class="carousel-item active">-->
+      <!--            <img class="d-block w-100" src="/img/slider/slide1.jpg" alt="First slide">-->
+      <!--            <div class="carousel-caption d-none d-md-block">-->
+				  <!--  <h3 class="text-center text-lg-left col-12 col-lg-6">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h3>-->
+				  <!--</div>-->
+      <!--          </div>-->
+      <!--          <div class="carousel-item">-->
+      <!--            <img class="d-block w-100" src="/img/slider/slide2.jpg" alt="Second slide">-->
+      <!--            <div class="carousel-caption d-none d-md-block">-->
+				  <!--  <h3 class="text-center col-12">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h23>-->
+				  <!--</div>-->
+      <!--          </div>-->
+      <!--        </div>-->
             </div>
             
             
@@ -156,25 +184,25 @@ function getItemType($type){
 		    			
 		    				<div class="col text-center">
 		    					<a href="/promocionNoticia/listado">
-		    						<i class="links links-noticias" aria-hidden="true"></i>
+		    						<span class="links links-noticias" aria-hidden="true"></span>
 		    						Noticias
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
 		    					<a href="/quehacer?tipo=4">
-		    						<i class="links links-eventos" aria-hidden="true"></i>
+		    						<span class="links links-eventos" aria-hidden="true"></span>
 		    						Eventos
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
 		    					<a href="/promocionBolsaEmpleo/vacantes">
-		    						<i class="links links-bolsaEmpleo" aria-hidden="true"></i>
+		    						<span class="links links-bolsaEmpleo" aria-hidden="true"></span>
 		    						Bolsa de empleo
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
 		    					<a href="/promocionPublicacion/listado">
-		    						<i class="links links-biblioteca" aria-hidden="true"></i>
+		    						<span class="links links-biblioteca" aria-hidden="true"></span>
 		    						Biblioteca digital
 		    					</a>
 		    				</div>
@@ -336,7 +364,7 @@ function getItemType($type){
 					</div>
 					<div class="tile-body">
 						<div class="tile-caption">
-							<h3>Empleo</h3>
+							<h3>Generación de empleo</h3>
 						</div>
 						<p class="text-muted">
 							Mide el impacto de la industria turística en la generación de empleo en el Cesar, con recolección de datos trimestrales.

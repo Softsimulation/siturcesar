@@ -40,7 +40,7 @@
                             <td>@{{item.fecha_carga |date: "dd/MM/yyyy HH:mm:ss"}}</td>
                             <td>@{{item.fecha_finalizacion |date: "dd/MM/yyyy HH:mm:ss"}}</td>
                             <td style="width: 130px;">
-                                <button class="btn btn-default btn-xs" ng-click="" title="recalcular">
+                                <button class="btn btn-default btn-xs" ng-click="recalcular(item.id)" title="recalcular">
                                     <span class="glyphicon glyphicon-refresh"></span>
                                 </button>                            
                             </td>
