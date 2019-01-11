@@ -36,23 +36,34 @@ class IndicadorAdministradorController extends Controller
     public function postRecalcularindicador(Request $request){
         
         $validator = \Validator::make($request->all(), [
-            'indicador' => 'required|numeric|exists:indicadores,id',
-            'mes' => 'required|numeric|exists:mes_indicador,id',
-            'anio' => 'required|numeric|exists:anios,id',
+            'indicador' => 'required|numeric|exists:indicadores,id'
         ],[
             'indicador_id.required' => 'Se necesita un indicador para calcular.',
-            'mes.required' => 'Se necesita un mes para calcular.',
-            'anio.required' => 'Se necesita un año para calcular.',
-            
-            'indicador_id.exists' => 'El indicador debe existir.',
-            'mes.exists' => 'El mes debe existir.',
-            'anio.exists' => 'El año debe existir.'
+            'indicador_id.exists' => 'El indicador debe existir.'
         ]);
         
         if($validator->fails()){
             return ["success"=>false,'errores'=>$validator->errors()];
         }
         
+        $indicador = Indicador::find($request->indicador);
+        $tiempo = Tiempo_Indicador::find($indicador->tiempo_indicador_id);
+         
+        $mes = Mes_Indicador::find($tiempo->mes_indicador_id);
+        $anio = Anio::find($tiempo['años_id']);
+        
+        $d_tiempo = D_Tiempo::where("anios",$anio->anio)->where("meses",$mes->nombre)->first();
+        
+        $importar = DB::select("SELECT *from eliminar_datos_receptor (?,?)",array($indicador->indicador_medicion_id,$d_tiempo->id));
+        $fecha_inicio = $anio->anio."-".$mes->id."-".$mes->dia_inicio;
+        $fecha_final = $anio->anio."-".$mes->id."-".$mes->dia_final;
+        $respuesta = $this->calcularReceptor($indicador->indicador_medicion_id,$d_tiempo->id,$fecha_inicio,$fecha_final,$indicador->id);
+        
+        if(!$respuesta["success"]){
+            return $respuesta;
+        }
+        $indicadoresMedicion = new Collection(DB::select("SELECT *from indicadores_calculados "));
+        return ["success"=>true,"indicadoresMedicion"=>$indicadoresMedicion];
     }
     
     public function postCalcularindicador(Request $request){
@@ -121,7 +132,12 @@ class IndicadorAdministradorController extends Controller
         $fecha_inicio = $anio->anio."-".$mes->id."-".$mes->dia_inicio;
         $fecha_final = $anio->anio."-".$mes->id."-".$mes->dia_final;
         
-        $this->calcularReceptor($request->indicador_id,$d_tiempo->id,$fecha_inicio,$fecha_final,$indicador->id);
+        $respuesta = $this->calcularReceptor($request->indicador_id,$d_tiempo->id,$fecha_inicio,$fecha_final,$indicador->id);
+        
+       
+        if(!$respuesta["success"]){
+            return $respuesta;
+        }
         
         $indicadoresMedicion = new Collection(DB::select("SELECT *from indicadores_calculados "));
         return ["success"=>true,"indicadoresMedicion"=>$indicadoresMedicion];
@@ -163,6 +179,7 @@ class IndicadorAdministradorController extends Controller
             $indicador->estado_indicador_id = 2;
             $indicador->fecha_finalizacion=date('Y-m-d H:i:s');
             $indicador->save();
+            return ["success"=>true];
         }catch(Exception $ex){
         
             $indicador->estado_indicador_id = 3;

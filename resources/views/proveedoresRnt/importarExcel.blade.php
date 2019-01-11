@@ -485,7 +485,7 @@
     						<!--</div>-->
           <!--              </div>-->
                         
-                        <div class="row">
+                        <div class="row" style="display:block; height: 300px;">
                             <ng-map id="mapa1" zoom="9" center="[11.24079, -74.19904]" map-type-control="true" map-type-control-options="{position:'BOTTOM_CENTER'}"  > 
                                 <marker ng-if="registro.latitud != undefined && registro.longitud != undefined" draggable="true" on-dragend="getCurrentLocation(registro)" position="[@{{registro.latitud}}, @{{registro.longitud}}]" title="registro.nombre_comercial"></marker>
                                 
@@ -827,7 +827,7 @@
     						<!--</div>-->
           <!--              </div>-->
                         
-                        <div class="row">
+                        <div class="row" style="display:block; height: 300px;">
                             <ng-map id="mapa2" zoom="9" center="[11.24079, -74.19904]" map-type-control="true" map-type-control-options="{position:'BOTTOM_CENTER'}"  > 
                                 <marker ng-if="registro.latitud != undefined && registro.longitud != undefined" draggable="true" on-dragend="getCurrentLocation(registro)" position="[@{{registro.latitud}}, @{{registro.longitud}}]" title="registro.nombre_comercial"></marker>
                                 
