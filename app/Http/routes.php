@@ -131,6 +131,8 @@ Route::controller('/promocionPublicacion','PublicoPublicacionController');
 Route::controller('/sliders','SliderController');
 Route::controller('/suscriptores','SuscriptoreController');
 
+Route::controller('/calcularindicadores', 'IndicadorAdministradorController');
+
 Route::controller('/visitante', 'VisitanteController');
 
 Route::controller('/', 'HomeController');
