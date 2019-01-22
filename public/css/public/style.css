@@ -649,6 +649,31 @@ footer{
     text-align: center;
 }
 
+
+/*Carousel*/
+.nav-bar nav>ul>li>a:hover {
+    border-bottom: 2px solid white;
+}
+.carousel-inner>.carousel-item {
+    height: 320px;
+}
+.carousel-inner>.carousel-item>img{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%) translateX(-50%);
+    transform: translateY(-50%) translateX(-50%);
+    
+    min-height: 100%;
+    min-width: 100%;
+    height: auto;
+    max-height: none;
+    max-width: none;
+}
+
+
+
+
 /*Fonts*/
 @font-face {
     font-family: 'Futura';

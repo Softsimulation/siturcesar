@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Sector;
 use App\Models\Perfil_Usuario;
 use App\Models\Tipo_Evento;
@@ -14,8 +16,6 @@ use App\Models\Evento;
 use App\Models\Evento_Con_Idioma;
 use App\Models\Multimedia_Evento;
 use App\Models\Idioma;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 use Carbon\Carbon;
 use Storage;
@@ -185,8 +185,8 @@ class AdministradorEventosController extends Controller
         $evento->estado = true;
         $evento->created_at = Carbon::now();
         $evento->updated_at = Carbon::now();
-        $evento->user_create = $this->user->username;
-        $evento->user_update = $this->user->username;
+        $evento->user_create = "Situr";
+        $evento->user_update = "Situr";
         $evento->save();
         
         $evento_con_idioma = new Evento_Con_Idioma();
@@ -203,21 +203,34 @@ class AdministradorEventosController extends Controller
     
     public function postGuardarmultimedia (Request $request){
         $validator = \Validator::make($request->all(), [
-            'portadaIMG' => 'required',
+            'portadaIMG' => 'required|max:2097152',
+            'portadaIMGText' => 'required',
             'id' => 'required|exists:eventos|numeric',
-            'image' => 'array|max:5',
-            'video_promocional' => 'url'
+            'image' => 'array|max:20',
+            'imageText' => 'array|max:20',
+            'video_promocional' => 'url',
+            'image.*' => 'max:2097152',
+            'imageText.*' => 'required'
         ],[
             'portadaIMG.required' => 'Se necesita una imagen de portada.',
+            
+            'portadaIMGText.required' => 'Se necesita el texto de la imagen de portada.',
             
             'id.required' => 'Se necesita un identificador para el evento.',
             'id.exists' => 'El identificador del evento no se encuentra registrado en la base de datos.',
             'id.numeric' => 'El identificador del evento debe ser un valor numérico.',
             
             'image.array' => 'Error al enviar los datos. Recargue la página.',
-            'image.max' => 'Máximo se pueden subir 5 imágenes para la atracción.',
+            'image.max' => 'Máximo se pueden subir 20 imágenes para el evento.',
             
-            'video_promocional.url' => 'El video promocional debe tener la estructura de enlace.'
+            'imageText.array' => 'Error al enviar los datos. Recargue la página.',
+            'imageText.max' => 'Máximo se pueden subir 20 imágenes para el evento.',
+            
+            'video_promocional.url' => 'El video promocional debe tener la estructura de enlace.',
+            
+            'image.*.max' => 'El peso máximo por imagen es de 2MB. Por favor verifique si se cumple esta condición.',
+            
+            'imageText.*.required' => 'Una de las imágenes que se quiere subir no tiene texto alternativo.'
         ]);
         
         if($validator->fails()){
@@ -225,19 +238,21 @@ class AdministradorEventosController extends Controller
         }
         
         Multimedia_Evento::where('eventos_id', $request->id)->where('portada', true)->delete();
+        Storage::disk('multimedia-evento')->deleteDirectory('evento-'.$request->id);
         $portadaNombre = "portada.".pathinfo($request->portadaIMG->getClientOriginalName(), PATHINFO_EXTENSION);
-        if (Storage::disk('multimedia-evento')->exists('/evento-'.$request->id.'/'.$portadaNombre)){
-            Storage::disk('multimedia-evento')->deleteDirectory('evento-'.$request->id);
-        }
+        // if (Storage::disk('multimedia-evento')->exists('/evento-'.$request->id.'/'.$portadaNombre)){
+        //     Storage::disk('multimedia-evento')->deleteDirectory('evento-'.$request->id);
+        // }
         
         $multimedia_evento = new Multimedia_Evento();
         $multimedia_evento->eventos_id = $request->id;
         $multimedia_evento->ruta = "/multimedia/eventos/evento-".$request->id."/".$portadaNombre;
+        $multimedia_evento->texto_alternativo = $request->portadaIMGText;
         $multimedia_evento->tipo = false;
         $multimedia_evento->portada = true;
         $multimedia_evento->estado = true;
-        $multimedia_evento->user_create = $this->user->username;
-        $multimedia_evento->user_update = $this->user->username;
+        $multimedia_evento->user_create = "Situr";
+        $multimedia_evento->user_update = "Situr";
         $multimedia_evento->created_at = Carbon::now();
         $multimedia_evento->updated_at = Carbon::now();
         $multimedia_evento->save();
@@ -252,20 +267,20 @@ class AdministradorEventosController extends Controller
             $multimedia_evento->tipo = true;
             $multimedia_evento->portada = false;
             $multimedia_evento->estado = true;
-            $multimedia_evento->user_create = $this->user->username;
-            $multimedia_evento->user_update = $this->user->username;
+            $multimedia_evento->user_create = "Situr";
+            $multimedia_evento->user_update = "Situr";
             $multimedia_evento->created_at = Carbon::now();
             $multimedia_evento->updated_at = Carbon::now();
             $multimedia_evento->save();
         }
         
         Multimedia_Evento::where('eventos_id', $request->id)->where('tipo', false)->where('portada', false)->delete();
-        for ($i = 0; $i < 5; $i++){
-            $nombre = "imagen-".$i.".*";
-            if (Storage::disk('multimedia-evento')->exists('evento-'.$request->id.'/'.$nombre)){
-                Storage::disk('multimedia-evento')->delete('evento-'.$request->id.'/'.$nombre);
-            }
-        }
+        // for ($i = 0; $i < 5; $i++){
+        //     $nombre = "imagen-".$i.".*";
+        //     if (Storage::disk('multimedia-evento')->exists('evento-'.$request->id.'/'.$nombre)){
+        //         Storage::disk('multimedia-evento')->delete('evento-'.$request->id.'/'.$nombre);
+        //     }
+        // }
         
         if ($request->image != null){
             foreach($request->image as $key => $file){
@@ -274,11 +289,12 @@ class AdministradorEventosController extends Controller
                     $multimedia_evento = new Multimedia_Evento();
                     $multimedia_evento->eventos_id = $request->id;
                     $multimedia_evento->ruta = "/multimedia/eventos/evento-".$request->id."/".$nombre;
+                    $multimedia_evento->texto_alternativo = $request->imageText[$key];
                     $multimedia_evento->tipo = false;
                     $multimedia_evento->portada = false;
                     $multimedia_evento->estado = true;
-                    $multimedia_evento->user_create = $this->user->username;
-                    $multimedia_evento->user_update = $this->user->username;
+                    $multimedia_evento->user_create = "Situr";
+                    $multimedia_evento->user_update = "Situr";
                     $multimedia_evento->created_at = Carbon::now();
                     $multimedia_evento->updated_at = Carbon::now();
                     $multimedia_evento->save();
@@ -323,7 +339,7 @@ class AdministradorEventosController extends Controller
         $evento->sitiosConEventos()->detach();
         $evento->sitiosConEventos()->attach($request->sitios);
         
-        $evento->user_update = $this->user->username;
+        $evento->user_update = "Situr";
         $evento->updated_at = Carbon::now();
         $evento->save();
         
@@ -346,7 +362,7 @@ class AdministradorEventosController extends Controller
         $evento = Evento::find($request->id);
         $evento->estado = !$evento->estado;
         $evento->updated_at = Carbon::now();
-        $evento->user_update = $this->user->username;
+        $evento->user_update = "Situr";
         $evento->save();
         
         return ['success' => true];
@@ -455,8 +471,8 @@ class AdministradorEventosController extends Controller
         $sitios = Evento::find($id)->sitiosConEventos()->pluck('sitios_id')->toArray();
         $categorias_turismo = Evento::find($id)->categoriaTurismoConEventos()->pluck('categoria_turismo_id')->toArray();
         
-        $portadaIMG = Multimedia_Evento::where('portada', true)->where('eventos_id', $id)->pluck('ruta')->first();
-        $imagenes = Multimedia_Evento::where('portada', false)->where('tipo', false)->where('eventos_id', $id)->pluck('ruta')->toArray();
+        $portadaIMG = Multimedia_Evento::where('portada', true)->where('eventos_id', $id)->select('ruta', 'texto_alternativo')->first();
+        $imagenes = Multimedia_Evento::where('portada', false)->where('tipo', false)->where('eventos_id', $id)->select('ruta', 'texto_alternativo')->get();
         $video = Multimedia_Evento::where('portada', false)->where('tipo', true)->where('eventos_id', $id)->pluck('ruta')->first();
         
         return ['evento' => $evento,
@@ -518,7 +534,7 @@ class AdministradorEventosController extends Controller
         $evento->web = $request->pagina_web;
         $evento->fecha_in = $request->fecha_inicio;
         $evento->fecha_fin = $request->fecha_final;
-        $evento->user_update = $this->user->username;
+        $evento->user_update = "Situr";
         $evento->updated_at = Carbon::now();
         $evento->save();
         

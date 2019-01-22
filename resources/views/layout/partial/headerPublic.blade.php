@@ -123,6 +123,12 @@
                             <!--<li role="none">-->
                             <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
                             <!--</li>-->
+                            <li role="none">
+                                <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/indicadores/secundarios">Indicadores secundarios</a>
+                            </li>
                         </ul>
                     </li>
                     

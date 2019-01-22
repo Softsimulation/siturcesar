@@ -56,30 +56,119 @@ function getItemType($type){
 	    padding: 1rem 4% 2rem;
 	    width: 100%;
 	}
+	#linksStats.tiles .tile{
+		margin: 0 .5rem;
+		margin-bottom: 1rem;
+		width: 100%;
+	}
+	#linksStats.tiles .tile .tile-caption h3{
+		font-weight: 500;
+	}
+	#linksStats.tiles .tile .tile-buttons{
+		position: absolute;
+	    bottom: 0;
+	    left: 0;
+	    width: 100%;
+	}
+	#linksStats.tiles .tile .tile-img {
+	    height: 100px;
+	    padding: 1rem;
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	}
+	#linksStats.tiles .tile .tile-buttons .btn{
+		border: 0;
+	}
+	#linkStat-receptor .tile-img, #linkStat-receptor .tile-buttons .btn{
+		background-color: orange!important;
+	}
+	#linkStat-interno .tile-img, #linkStat-interno .tile-buttons .btn{
+		background-color: green!important;
+	}
+	#linkStat-emisor .tile-img, #linkStat-emisor .tile-buttons .btn{
+		background-color: #1576bb!important;
+	}
+	#linkStat-oferta .tile-img, #linkStat-oferta .tile-buttons .btn{
+		background-color: red!important;
+	}
+	#linkStat-empleo .tile-img, #linkStat-empleo .tile-buttons .btn{
+		background-color: yellowgreen!important;
+	}
+	#linkStat-sostenible .tile-img, #linkStat-sostenible .tile-buttons .btn{
+		background-color: cadetblue!important;
+	}
+	.stats {
+    	background-image: url(../../img/icons/sprite-stats-white.png);
+	}
+	
+	@media only screen and (min-width: 768px) {
+		#linksStats.tiles .tile{
+			width: calc(33.3% - 1rem);
+		}
+	}
+	@media only screen and (min-width: 992px) {
+		#linksStats.tiles .tile{
+			width: calc(33.3% - 1rem);
+		}
+	}
+	@media only screen and (min-width: 1024px) {
+		#linksStats.tiles .tile{
+			width: calc(16.6% - 1rem);
+		}
+	}
+	
 </style>
 @endsection
 @section('content')
 <section id="slider">
 	        
             <div id="carousel-main-page" class="carousel slide carousel-fade" data-ride="carousel">
-              <ol class="carousel-indicators">
-                <li data-target="#carousel-main-page" data-slide-to="0" class="active"></li>
-                <li data-target="#carousel-main-page" data-slide-to="1"></li>
-              </ol>
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img class="d-block w-100" src="/img/slider/slide1.jpg" alt="First slide">
-                  <div class="carousel-caption d-none d-md-block">
-				    <h3 class="text-center text-lg-left col-12 col-lg-6">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h3>
-				  </div>
-                </div>
-                <div class="carousel-item">
-                  <img class="d-block w-100" src="/img/slider/slide2.jpg" alt="Second slide">
-                  <div class="carousel-caption d-none d-md-block">
-				    <h3 class="text-center col-12">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h23>
-				  </div>
-                </div>
-              </div>
+            	<ol class="carousel-indicators">
+			        @for($i = 0; $i < count($sliders); $i++)
+			        <li data-target="#carousel-main-page" data-slide-to="{{$i}}" @if($i == 0) class="active" @endif></li>
+			        @endfor
+			      </ol>
+			    
+			      <!-- Wrapper for slides -->
+			      <div class="carousel-inner" role="listbox">
+			        @for($i = 0; $i < count($sliders); $i++)
+			        <div class="carousel-item @if($i == 0) active @endif">
+			          <img class="d-block w-100" src="{{$sliders[$i]->rutaSlider}}" alt="{{$sliders[$i]->textoAlternativoSlider}}">
+			          @if($sliders[$i]->tituloSlider != null && $sliders[$i]->tituloSlider != "")
+			          <div class="carousel-caption d-none d-md-block">
+			            <p class="h3" class="text-center col-12">{{$sliders[$i]->tituloSlider}} @if($sliders[$i]->descripcionSlider != null && $sliders[$i]->descripcionSlider != "")<small>{{$sliders[$i]->descripcionSlider}}</small>@endif</p>
+			          </div>
+			          @endif
+			        </div>
+			        @endfor
+			        <!--<div class="item">-->
+			        <!--  <img src="{{asset('img/slider/slide3.jpg')}}" alt="" role="presentation">-->
+			        <!--  <div class="carousel-caption">-->
+			        <!--    <h2>Hotel <small>fue el tipo de alojamiento más utilizado en el 2017</small></h2>-->
+			        <!--  </div>-->
+			        <!--</div>-->
+			      </div>
+            	
+            	
+      <!--        <ol class="carousel-indicators">-->
+      <!--          <li data-target="#carousel-main-page" data-slide-to="0" class="active"></li>-->
+      <!--          <li data-target="#carousel-main-page" data-slide-to="1"></li>-->
+      <!--        </ol>-->
+      <!--        <div class="carousel-inner">-->
+      <!--          <div class="carousel-item active">-->
+      <!--            <img class="d-block w-100" src="/img/slider/slide1.jpg" alt="First slide">-->
+      <!--            <div class="carousel-caption d-none d-md-block">-->
+				  <!--  <h3 class="text-center text-lg-left col-12 col-lg-6">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h3>-->
+				  <!--</div>-->
+      <!--          </div>-->
+      <!--          <div class="carousel-item">-->
+      <!--            <img class="d-block w-100" src="/img/slider/slide2.jpg" alt="Second slide">-->
+      <!--            <div class="carousel-caption d-none d-md-block">-->
+				  <!--  <h3 class="text-center col-12">Vacaciones recreo y ocio <small class="d-block">es el principal motivo de viaje para visitar el departamento en el 2017</small></h23>-->
+				  <!--</div>-->
+      <!--          </div>-->
+      <!--        </div>-->
             </div>
             
             
@@ -95,25 +184,25 @@ function getItemType($type){
 		    			
 		    				<div class="col text-center">
 		    					<a href="/promocionNoticia/listado">
-		    						<i class="links links-noticias" aria-hidden="true"></i>
+		    						<span class="links links-noticias" aria-hidden="true"></span>
 		    						Noticias
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
 		    					<a href="/quehacer?tipo=4">
-		    						<i class="links links-eventos" aria-hidden="true"></i>
+		    						<span class="links links-eventos" aria-hidden="true"></span>
 		    						Eventos
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
 		    					<a href="/promocionBolsaEmpleo/vacantes">
-		    						<i class="links links-bolsaEmpleo" aria-hidden="true"></i>
+		    						<span class="links links-bolsaEmpleo" aria-hidden="true"></span>
 		    						Bolsa de empleo
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
 		    					<a href="/promocionPublicacion/listado">
-		    						<i class="links links-biblioteca" aria-hidden="true"></i>
+		    						<span class="links links-biblioteca" aria-hidden="true"></span>
 		    						Biblioteca digital
 		    					</a>
 		    				</div>
@@ -129,79 +218,177 @@ function getItemType($type){
 			gubernamentales, gremios, empresarios e inversionistas, para mejorar los servicios turísticos ofrecidos.</p>
 			
 			<p>Las estadísticas ofrecidas por SITUR Cesar son:</p>
-			<div class="row">
+			<!--<div class="row">-->
 				
-				<div class="col-12 col-sm-6 col-md-3 col-lg-2">
-					<div class="card">
-						<div class="card-body">
-							<span class="stats stats-receptor d-inline-block" aria-hidden="true"></span>
-						    <h5 class="card-title">Turismo receptor</h5>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+			<!--	<div class="col-12 col-sm-6 col-md-3 col-lg-2">-->
+			<!--		<div class="card">-->
+			<!--			<div class="card-body">-->
+			<!--				<span class="stats stats-receptor d-inline-block" aria-hidden="true"></span>-->
+			<!--			    <h5 class="card-title">Turismo receptor</h5>-->
+			<!--			    <p class="card-text">Caracteriza los viajes turísticos de los visitantes del Cesar, en los principales municipios turísticos, con recolección de datos mensuales.</p>-->
 						    
-						</div>
-						<div class="card-footer bg-success text-white"><a href="/indicadores/receptor" class="text-white">Ir al indicador</a></div>
-					</div>
+			<!--			</div>-->
+			<!--			<div class="card-footer bg-success text-white"><a href="/indicadores/receptor" class="text-white">Ir al indicador</a></div>-->
+			<!--		</div>-->
 					
+			<!--	</div>-->
+			<!--	<div class="col-12 col-sm-6 col-md-3 col-lg-2">-->
+			<!--		<div class="card">-->
+			<!--			<div class="card-body">-->
+			<!--				<span class="stats stats-interno d-inline-block" aria-hidden="true"></span>-->
+			<!--			    <h5 class="card-title">Turismo interno</h5>-->
+			<!--			    <p class="card-text">Caracteriza los viajes turísticos de los hogares de los municipios con vocación turística dentro del Cesar, con medición en temporadas de vacaciones.</p>-->
+						    
+			<!--			</div>-->
+			<!--			<div class="card-footer bg-success text-white"><a href="/indicadores/interno" class="text-white">Ir al indicador</a></div>-->
+			<!--		</div>-->
+					
+			<!--	</div>-->
+			<!--	<div class="col-12 col-sm-6 col-md-3 col-lg-2">-->
+			<!--		<div class="card">-->
+			<!--			<div class="card-body">-->
+			<!--				<span class="stats stats-emisor d-inline-block" aria-hidden="true"></span>-->
+			<!--			    <h5 class="card-title">Turismo emisor</h5>-->
+			<!--			    <p class="card-text">Caracteriza los viajes turísticos de los hogares de los municipios con vocación turística fuera del Cesar, con medición en temporadas de vacaciones.</p>-->
+						    
+			<!--			</div>-->
+			<!--			<div class="card-footer bg-success text-white"><a href="/indicadores/emisor" class="text-white">Ir al indicador</a></div>-->
+			<!--		</div>-->
+					
+			<!--	</div>-->
+			<!--	<div class="col-12 col-sm-6 col-md-3 col-lg-2">-->
+			<!--		<div class="card">-->
+			<!--			<div class="card-body">-->
+			<!--				<span class="stats stats-oferta d-inline-block" aria-hidden="true"></span>-->
+			<!--			    <h5 class="card-title">Oferta turística</h5>-->
+			<!--			    <p class="card-text">Caracteriza la oferta turística en el Cesar con recolección de datos trimestrales. Variables mínimas (ocupación hotelera) recopiladas mensualmente.</p>-->
+						    
+			<!--			</div>-->
+			<!--			<div class="card-footer bg-success text-white"><a href="/indicadores/oferta" class="text-white">Ir al indicador</a></div>-->
+			<!--		</div>-->
+					
+			<!--	</div>-->
+			<!--	<div class="col-12 col-sm-6 col-md-3 col-lg-2">-->
+			<!--		<div class="card">-->
+			<!--			<div class="card-body">-->
+			<!--				<span class="stats stats-empleo d-inline-block" aria-hidden="true"></span>-->
+			<!--			    <h5 class="card-title">Empleo</h5>-->
+			<!--			    <p class="card-text">Medir el impacto de la industria turística en la generación de empleo en el Cesar, con recolección de datos trimestrales.</p>-->
+						    
+			<!--			</div>-->
+			<!--			<div class="card-footer bg-success text-white"><a href="/indicadores/empleo" class="text-white">Ir al indicador</a></div>-->
+			<!--		</div>-->
+					
+			<!--	</div>-->
+			<!--	<div class="col-12 col-sm-6 col-md-3 col-lg-2">-->
+			<!--		<div class="card">-->
+			<!--			<div class="card-body">-->
+			<!--				<span class="stats stats-sostenible d-inline-block" aria-hidden="true"></span>-->
+			<!--			    <h5 class="card-title">Turismo sostenible</h5>-->
+			<!--			    <p class="card-text">Medición de turismo sostenible en el Cesardesde el punto de vista ambiental, social y económico, anualmente.</p>-->
+						    
+			<!--			</div>-->
+			<!--			<div class="card-footer bg-success text-white"><a href="/indicadores/sostenibilidad" class="text-white">Ir al indicador</a></div>-->
+			<!--		</div>-->
+					
+			<!--	</div>-->
+			<!--</div>-->
+			<div id="linksStats" class="tiles">
+				<div class="tile" id="linkStat-receptor">
+					<div class="tile-img">
+						<span class="stats stats-receptor d-inline-block" aria-hidden="true"></span>
+					</div>
+					<div class="tile-body">
+						<div class="tile-caption">
+							<h3>Turismo receptor</h3>
+						</div>
+						<p class="text-muted">
+							Caracteriza los viajes turísticos de los visitantes del Cesar, en los principales municipios turísticos, con recolección de datos mensuales.
+						</p>
+						<div class="tile-buttons">
+							<a href="/indicadores/receptor" class="btn btn-block btn-secondary">Ir al indicador</a>
+						</div>
+					</div>
 				</div>
-				<div class="col-12 col-sm-6 col-md-3 col-lg-2">
-					<div class="card">
-						<div class="card-body">
-							<span class="stats stats-interno d-inline-block" aria-hidden="true"></span>
-						    <h5 class="card-title">Turismo interno</h5>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						    
-						</div>
-						<div class="card-footer bg-success text-white"><a href="/indicadores/interno" class="text-white">Ir al indicador</a></div>
+				<div class="tile" id="linkStat-interno">
+					<div class="tile-img">
+						<span class="stats stats-interno d-inline-block" aria-hidden="true"></span>
 					</div>
-					
+					<div class="tile-body">
+						<div class="tile-caption">
+							<h3>Turismo interno</h3>
+						</div>
+						<p class="text-muted">
+							Caracteriza los viajes turísticos de los hogares de los municipios con vocación turística dentro del Cesar, con medición en temporadas de vacaciones.
+						</p>
+						<div class="tile-buttons">
+							<a href="/indicadores/interno" class="btn btn-block btn-secondary">Ir al indicador</a>
+						</div>
+					</div>
 				</div>
-				<div class="col-12 col-sm-6 col-md-3 col-lg-2">
-					<div class="card">
-						<div class="card-body">
-							<span class="stats stats-emisor d-inline-block" aria-hidden="true"></span>
-						    <h5 class="card-title">Turismo emisor</h5>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						    
-						</div>
-						<div class="card-footer bg-success text-white"><a href="/indicadores/emisor" class="text-white">Ir al indicador</a></div>
+				<div class="tile" id="linkStat-emisor">
+					<div class="tile-img">
+						<span class="stats stats-emisor d-inline-block" aria-hidden="true"></span>
 					</div>
-					
+					<div class="tile-body">
+						<div class="tile-caption">
+							<h3>Turismo emisor</h3>
+						</div>
+						<p class="text-muted">
+							Caracteriza los viajes turísticos de los hogares de los municipios con vocación turística fuera del Cesar, con medición en temporadas de vacaciones.
+						</p>
+						<div class="tile-buttons">
+							<a href="/indicadores/emisor" class="btn btn-block btn-secondary">Ir al indicador</a>
+						</div>
+					</div>
 				</div>
-				<div class="col-12 col-sm-6 col-md-3 col-lg-2">
-					<div class="card">
-						<div class="card-body">
-							<span class="stats stats-oferta d-inline-block" aria-hidden="true"></span>
-						    <h5 class="card-title">Oferta turística</h5>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						    
-						</div>
-						<div class="card-footer bg-success text-white"><a href="/indicadores/oferta" class="text-white">Ir al indicador</a></div>
+				<div class="tile" id="linkStat-oferta">
+					<div class="tile-img">
+						<span class="stats stats-oferta d-inline-block" aria-hidden="true"></span>
 					</div>
-					
+					<div class="tile-body">
+						<div class="tile-caption">
+							<h3>Oferta turística</h3>
+						</div>
+						<p class="text-muted">
+							Caracteriza la oferta turística en el Cesar con recolección de datos trimestrales. Variables mínimas (ocupación hotelera) recopiladas mensualmente.
+						</p>
+						<div class="tile-buttons">
+							<a href="/indicadores/oferta" class="btn btn-block btn-secondary">Ir al indicador</a>
+						</div>
+					</div>
 				</div>
-				<div class="col-12 col-sm-6 col-md-3 col-lg-2">
-					<div class="card">
-						<div class="card-body">
-							<span class="stats stats-empleo d-inline-block" aria-hidden="true"></span>
-						    <h5 class="card-title">Empleo</h5>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						    
-						</div>
-						<div class="card-footer bg-success text-white"><a href="/indicadores/empleo" class="text-white">Ir al indicador</a></div>
+				<div class="tile" id="linkStat-empleo">
+					<div class="tile-img">
+						<span class="stats stats-empleo d-inline-block" aria-hidden="true"></span>
 					</div>
-					
+					<div class="tile-body">
+						<div class="tile-caption">
+							<h3>Generación de empleo</h3>
+						</div>
+						<p class="text-muted">
+							Mide el impacto de la industria turística en la generación de empleo en el Cesar, con recolección de datos trimestrales.
+						</p>
+						<div class="tile-buttons">
+							<a href="/indicadores/empleo" class="btn btn-block btn-secondary">Ir al indicador</a>
+						</div>
+					</div>
 				</div>
-				<div class="col-12 col-sm-6 col-md-3 col-lg-2">
-					<div class="card">
-						<div class="card-body">
-							<span class="stats stats-sostenible d-inline-block" aria-hidden="true"></span>
-						    <h5 class="card-title">Turismo sostenible</h5>
-						    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						    
-						</div>
-						<div class="card-footer bg-success text-white"><a href="/indicadores/sostenibilidad" class="text-white">Ir al indicador</a></div>
+				<div class="tile" id="linkStat-sostenible">
+					<div class="tile-img">
+						<span class="stats stats-sostenible d-inline-block" aria-hidden="true"></span>
 					</div>
-					
+					<div class="tile-body">
+						<div class="tile-caption">
+							<h3>Turismo sostenible</h3>
+						</div>
+						<p class="text-muted">
+							Medición de turismo sostenible en el Cesardesde el punto de vista ambiental, social y económico, anualmente.
+						</p>
+						<div class="tile-buttons">
+							<a href="/indicadores/sostenibilidad" class="btn btn-block btn-secondary">Ir al indicador</a>
+						</div>
+					</div>
 				</div>
 			</div>
 			

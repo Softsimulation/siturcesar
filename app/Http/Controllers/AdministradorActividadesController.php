@@ -67,8 +67,8 @@ class AdministradorActividadesController extends Controller
         $sitios = Actividad::find($id)->sitiosConActividades()->pluck('sitios_id')->toArray();
         $categorias_turismo = Actividad::find($id)->categoriaTurismoConActividades()->pluck('categoria_turismo_id')->toArray();
         
-        $portadaIMG = Multimedia_Actividad::where('portada', true)->where('actividades_id', $id)->pluck('ruta')->first();
-        $imagenes = Multimedia_Actividad::where('portada', false)->where('tipo', false)->where('actividades_id', $id)->pluck('ruta')->toArray();
+        $portadaIMG = Multimedia_Actividad::where('portada', true)->where('actividades_id', $id)->select('ruta', 'texto_alternativo')->first();
+        $imagenes = Multimedia_Actividad::where('portada', false)->where('tipo', false)->where('actividades_id', $id)->select('ruta', 'texto_alternativo')->get();
         
         return ['actividad' => $actividad,
             'success' => true,
@@ -185,8 +185,8 @@ class AdministradorActividadesController extends Controller
         $actividad->valor_min = $request->valor_minimo;
         $actividad->valor_max = $request->valor_maximo;
         $actividad->estado = true;
-        $actividad->user_create = $this->user->username;
-        $actividad->user_update = $this->user->username;
+        $actividad->user_create = "Situr";
+        $actividad->user_update = "Situr";
         $actividad->created_at = Carbon::now();
         $actividad->updated_at = Carbon::now();
         $actividad->save();
@@ -204,18 +204,31 @@ class AdministradorActividadesController extends Controller
     public function postGuardarmultimedia (Request $request){
         $validator = \Validator::make($request->all(), [
             'portadaIMG' => 'required|max:2097152',
+            'portadaIMGText' => 'required',
             'id' => 'required|exists:actividades|numeric',
-            'image' => 'array|max:5'
+            'image' => 'array|max:20',
+            'imageText' => 'array|max:20',
+            'image.*' => 'max:2097152',
+            'imageText.*' => 'required'
         ],[
             'portadaIMG.required' => 'Se necesita una imagen de portada.',
             'portadaIMG.max' => 'La imagen de portada debe pesar menos de 2MB',
+            
+            'portadaIMGText.required' => 'Se necesita el texto de la imagen de portada.',
             
             'id.required' => 'Se necesita un identificador para la actividad.',
             'id.exists' => 'El identificador de la actividad no se encuentra registrado en la base de datos.',
             'id.numeric' => 'El identificador de la actividad debe ser un valor numérico.',
             
             'image.array' => 'Error al enviar los datos. Recargue la página.',
-            'image.max' => 'Máximo se pueden subir 5 imágenes para la actividad.'
+            'image.max' => 'Máximo se pueden subir 5 imágenes para la actividad.',
+            
+            'imageText.array' => 'Error al enviar los datos. Recargue la página.',
+            'imageText.max' => 'Máximo se pueden subir 20 imágenes para la actividad.',
+            
+            'image.*.max' => 'El peso máximo por imagen es de 2MB. Por favor verifique si se cumple esta condición.',
+            
+            'imageText.*.required' => 'Una de las imágenes que se quiere subir no tiene texto alternativo.'
         ]);
         
         if($validator->fails()){
@@ -225,31 +238,33 @@ class AdministradorActividadesController extends Controller
         $actividad = Actividad::find($request->id);
         Multimedia_Actividad::where('actividades_id', $actividad->id)->where('portada', true)->delete();
         $portadaNombre = "portada.".pathinfo($request->portadaIMG->getClientOriginalName())['extension'];
-        if (Storage::disk('multimedia-actividad')->exists('actividad-'.$request->id.'/'.$portadaNombre)){
-            Storage::disk('multimedia-actividad')->deleteDirectory('actividad-'.$request->id);
-        }
+        Storage::disk('multimedia-actividad')->deleteDirectory('actividad-'.$request->id);
+        // if (Storage::disk('multimedia-actividad')->exists('actividad-'.$request->id.'/'.$portadaNombre)){
+        //     Storage::disk('multimedia-actividad')->deleteDirectory('actividad-'.$request->id);
+        // }
         
         $multimedia_actividad = new Multimedia_Actividad();
         $multimedia_actividad->actividades_id = $actividad->id;
         $multimedia_actividad->ruta = "/multimedia/actividades/actividad-".$request->id."/".$portadaNombre;
+        $multimedia_actividad->texto_alternativo = $request->portadaIMGText;
         $multimedia_actividad->tipo = false;
         $multimedia_actividad->portada = true;
         $multimedia_actividad->estado = true;
-        $multimedia_actividad->user_create = $this->user->username;
-        $multimedia_actividad->user_update = $this->user->username;
+        $multimedia_actividad->user_create = "Situr";
+        $multimedia_actividad->user_update = "Situr";
         $multimedia_actividad->created_at = Carbon::now();
         $multimedia_actividad->updated_at = Carbon::now();
         $multimedia_actividad->save();
         
         Storage::disk('multimedia-actividad')->put('actividad-'.$request->id.'/'.$portadaNombre, File::get($request->portadaIMG));
         
-        Multimedia_Actividad::where('actividades_id', $actividad->id)->where('tipo', false)->where('portada', false)->delete();
-        for ($i = 0; $i < 5; $i++){
-            $nombre = "imagen-".$i.".*";
-            if (Storage::disk('multimedia-actividad')->exists('actividad-'.$request->id.'/'.$nombre)){
-                Storage::disk('multimedia-actividad')->delete('actividad-'.$request->id.'/'.$nombre);
-            }
-        }
+        // Multimedia_Actividad::where('actividades_id', $actividad->id)->where('tipo', false)->where('portada', false)->delete();
+        // for ($i = 0; $i < 5; $i++){
+        //     $nombre = "imagen-".$i.".*";
+        //     if (Storage::disk('multimedia-actividad')->exists('actividad-'.$request->id.'/'.$nombre)){
+        //         Storage::disk('multimedia-actividad')->delete('actividad-'.$request->id.'/portada.*');
+        //     }
+        // }
         //return ['success' => $request->image];
         if ($request->image != null){
             foreach($request->image as $key => $file){
@@ -257,11 +272,12 @@ class AdministradorActividadesController extends Controller
                 $multimedia_actividad = new Multimedia_Actividad();
                 $multimedia_actividad->actividades_id = $actividad->id;
                 $multimedia_actividad->ruta = "/multimedia/actividades/actividad-".$request->id."/".$nombre;
+                $multimedia_actividad->texto_alternativo = $request->imageText[$key];
                 $multimedia_actividad->tipo = false;
                 $multimedia_actividad->portada = false;
                 $multimedia_actividad->estado = true;
-                $multimedia_actividad->user_create = $this->user->username;
-                $multimedia_actividad->user_update = $this->user->username;
+                $multimedia_actividad->user_create = "Situr";
+                $multimedia_actividad->user_update = "Situr";
                 $multimedia_actividad->created_at = Carbon::now();
                 $multimedia_actividad->updated_at = Carbon::now();
                 $multimedia_actividad->save();
