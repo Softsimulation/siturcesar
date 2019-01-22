@@ -340,7 +340,7 @@
 
     <div id="contentPage">
         <div id="cont-filtros" ng-show="!pantallaCompleta">
-            <img id="logoSitur" src="{{asset('Content/image/logo.min.png')}}" alt="Logo SITUR Cesar" class="img-responsive"/>
+            <img id="logoSitur" src="{{asset('Content/image/logo.min.png')}}" alt="Logo SITUR Magdalena" class="img-responsive"/>
             <h1 id="tituloMuestraMaestra">Muestra maestra</h1>
             <h2>
                 {{$periodo->nombre}}  
@@ -479,6 +479,11 @@
             <hr style="margin: 4%;">
             
             <div id="filtrosZonas" >
+                
+                <div class="checkbox" style="margin:5px;" ng-init="verLabels=false"  >
+                   <label><input type="checkbox" ng-model="verLabels" ng-change="verOcultarLabels()" >Ver etiquestas</label>
+                </div>
+                
                 <div class="checkbox" style="margin:5px;" >
                    <label><input type="checkbox" ng-model="filtro.verZonas" ng-change="verOcultarZonas()" >Ver bloques</label>
                 </div>
@@ -571,8 +576,8 @@
             <ng-map id="mapa" zoom="9" center="@{{centro}}" styles="@{{styloMapa}}" map-type-control="false" street-view-control="true" street-view-control-options="{position: 'RIGHT_BOTTOM'}"  > 
               
                 <marker ng-repeat="pro in (proveedores|filter:filtro.busqueda|filter:filterProveedores) as proveedoresFiltrados" position="@{{pro.latitud}},@{{pro.longitud}}"  id="@{{pro.id}}"
-                    icon="@{{ getIcono(pro) }}" on-click="showInfoMapa(event,pro,$index)" 
-                    draggable="@{{pro.editar}}" on-dragend="ChangedPositionsProveedor()" label="@{{pro.concat}}"  >     
+                    icon="{ url:'@{{ getIcono(pro) }}', scaledSize:[20,20], labelOrigin:[12,-10] }" on-click="showInfoMapa(event,pro,$index)" 
+                    draggable="@{{pro.editar}}" on-dragend="ChangedPositionsProveedor()" label="@{{ verLabels ? pro.concat :  null}}"  >     
                 </marker>
         
                 <shape index="fig-@{{$index}}" ng-repeat="item in dataPerido.zonas|filter:filterZonas" fill-color="@{{item.color}}" 
@@ -738,10 +743,10 @@
                         <label class="control-label" for="encargado">Encargados</label>
                         <ui-select multiple ng-model="zona.encargados" name="encargado" id="encargado" theme="bootstrap" sortable="true"  ng-required="true" >
                             <ui-select-match placeholder="Seleccione un tipo">
-                                <span ng-bind="$item.codigo"></span>
+                                <span ng-bind="$item.user.nombre"></span>
                             </ui-select-match>
                             <ui-select-choices repeat="t.id as t in (digitadores |filter:$select.search)">
-                                <span ng-bind="t.codigo" title="@{{t.codigo}}"></span>
+                                <span ng-bind="t.user.nombre" title="@{{t.user.nombre}}"></span>
                             </ui-select-choices>
                         </ui-select>
                     </div>
@@ -838,7 +843,7 @@
                       <p>  
                             <b>ENCARGADOS:</b> 
                             <ul>
-                                <li ng-repeat="it in z.encargados" > @{{it.codigo}} </li> 
+                                <li ng-repeat="it in z.encargados" > @{{it.user.nombre}} </li> 
                             </ul>
                       </p>
                   </td>
@@ -1029,13 +1034,13 @@
                 <div class="col-md-6">
                     <div class="form-group" ng-class="{'error' : (formP.$submitted || formP.latitud.$touched) && formP.latitud.$error.required}" >
                       <label>Latitud:</label>
-                      <input type="text" class="form-control"  name="latitud" ng-model="proveedorInformal.latitud" required readonly >
+                      <input type="text" class="form-control"  name="latitud" ng-model="proveedorInformal.latitud" required >
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" ng-class="{'error' : (formP.$submitted || formP.longitud.$touched) && formP.longitud.$error.required}" >
                       <label>Longitud:</label>
-                      <input type="text" class="form-control"  name="longitud" ng-model="proveedorInformal.longitud" required readonly >
+                      <input type="text" class="form-control"  name="longitud" ng-model="proveedorInformal.longitud" required >
                     </div>
                 </div>
             </div>
@@ -1061,7 +1066,7 @@
     <script src="{{asset('/js/plugins/checklist-model.js')}}"></script>
     <script src="{{asset('/js/plugins/ADM-dateTimePicker.min.js')}}"></script>
     <script src="/js/plugins/tokml.js"></script>
-    <script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places"></script>
+    <script src="https://maps.google.com/maps/api/js?key=AIzaSyC55uUNZFEafP0702kEyGLlSmGE29R9s5k&libraries=placeses,visualization,drawing,geometry,places"></script>
     <script src="/js/plugins/ng-map.js"></script>
     <script src="/js/plugins/geoxml3.js"></script>
     <script src="{{asset('/js/muestraMaestra/servicios.js')}}"></script>
