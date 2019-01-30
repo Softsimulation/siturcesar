@@ -14,7 +14,7 @@
    <table style="width:60%" style="text-align:left" >
        <tr>
            <td colspan="8" >
-               <img src="img/brand/others/logos.png" />
+               <img src="img/brand/72.png" />
            </td>
        </tr>
        <tr>
@@ -23,7 +23,7 @@
        </tr>
        <tr>
            <td colspan="4" >MUNICIPIO:</td>
-           <td colspan="4" >Santa Marta</td>
+           <td colspan="4" >Valledupar</td>
        </tr>
        <tr>
            <td colspan="4" >IDENTIFICACION DE PLANILLA:</td>
@@ -41,8 +41,8 @@
            <td colspan="4" >NOMBRE DEL VERIFICADOR/CODIGO:</td>
            <td colspan="4" >
                 @foreach ($zona['encargados'] as $encargado)
-                    {{$encargado['codigo'] . ","}} 
-                @endforeach        
+                    {{$encargado->user['nombre'] . ","}} 
+                @endforeach           
            </td>
        </tr>
    </table>
