@@ -147,6 +147,9 @@
         					            <li>
                             <a role="menuitem" href="{{asset('publicaciones/listadoadmin')}}">Biblioteca Digital</a>
                         </li>
+                                  <li>
+                            <a role="menuitem" href="{{asset('informes/configuracion')}}">Informes</a>
+                        </li>
                           <li>
                             <a role="menuitem" href="{{asset('noticias/listadonoticias')}}">Noticias</a>
                         </li>
