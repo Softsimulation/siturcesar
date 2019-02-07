@@ -40,11 +40,11 @@ class PublicoNoticiaController extends Controller
         ->where(function($q)use($request){ if( isset($request->tipoNoticia) && $request->tipoNoticia != null ){$q->where('tipos_noticias.id',$request->tipoNoticia);}})
         ->where(function($q)use($request){ if( isset($request->buscar) && $request->buscar != null ){$q->where('noticias_has_idiomas.titulo','like','%'.$request->buscar.'%');}})             
         ->select("noticias.id as idNoticia","noticias.enlace_fuente","noticias.es_interno","noticias.estado",
-        "noticias_has_idiomas.titulo as tituloNoticia","noticias_has_idiomas.resumen","noticias_has_idiomas.texto",
+        "noticias_has_idiomas.titulo as tituloNoticia","noticias_has_idiomas.resumen","noticias_has_idiomas.texto","noticias.created_at as fecha",
         "tipos_noticias.id as idTipoNoticia","tipos_noticias_has_idiomas.nombre as nombreTipoNoticia","multimedias_noticias.ruta as portada", "multimedias_noticias.es_portada")->paginate(10);
         
         $tiposNoticias = Tipo_noticia_Idioma::where('idiomas_id',1)->get();
-        
+        //return array('noticias' => $noticias,"tiposNoticias"=>$tiposNoticias);
         return view('noticias.ListadoNoticiasPublico',array('noticias' => $noticias,"tiposNoticias"=>$tiposNoticias));
 	}
 	public function getTop(Request $request) {
