@@ -137,7 +137,7 @@ function getItemType($type){
 			          <img class="d-block w-100" src="{{$sliders[$i]->rutaSlider}}" alt="{{$sliders[$i]->textoAlternativoSlider}}">
 			          @if($sliders[$i]->tituloSlider != null && $sliders[$i]->tituloSlider != "")
 			          <div class="carousel-caption d-none d-md-block">
-			            <p class="h3" class="text-center col-12">{{$sliders[$i]->tituloSlider}} @if($sliders[$i]->descripcionSlider != null && $sliders[$i]->descripcionSlider != "")<small>{{$sliders[$i]->descripcionSlider}}</small>@endif</p>
+			            <p class="h2" class="text-center text-md-left col-12">{{$sliders[$i]->tituloSlider}} @if($sliders[$i]->descripcionSlider != null && $sliders[$i]->descripcionSlider != "")<small class="d-block">{{$sliders[$i]->descripcionSlider}}</small>@endif</p>
 			          </div>
 			          @endif
 			        </div>
