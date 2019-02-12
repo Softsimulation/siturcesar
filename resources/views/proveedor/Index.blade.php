@@ -12,30 +12,30 @@ function getItemType($type){
     $path = ""; $name = "";
     switch($type){
         case(1):
-            $name = trans('resources.entidad.actividades');
-            $path = "/actividades/ver/";
+            $name = "Alojamientos";
+            $path = "/proveedor/ver/";
             break;
         case(2):
-            $name = trans('resources.entidad.atracciones');
-            $path = "/atracciones/ver/";
+            $name = "Establecimientos de gastronomía";
+            $path = "/proveedor/ver/";
             break;
         case(3):
-            $name = trans('resources.entidad.destinos');
-            $path = "/destinos/ver/";
+            $name = "Agencias de viaje";
+            $path = "/proveedor/ver/";
             break;
         case(4):
-            $name = trans('resources.entidad.eventos');
-            $path = "/eventos/ver/";
+            $name = "Establecimientos de esparcimiento";
+            $path = "/proveedor/ver/";
             break; 
         case(5):
-            $name = trans('resources.entidad.rutasTuristicas');
-            $path = "/rutas/ver/";
+            $name = "Transporte especializado";
+            $path = "/proveedor/ver/";
             break;
     }
     return (object)array('name'=>$name, 'path'=>$path);
 }
 
-$tituloPagina = "Proveedores";
+$tituloPagina = "Prestadores de servicios turísticos";
 
 $colorTipo = ['primary','success','danger', 'info', 'warning'];
 
@@ -43,43 +43,48 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
 ?>
 @extends('layout._publicLayout')
 
-@section('Title', '¿Qué hacer?')
+@section('Title', 'Prestadores de servicios turísticos')
 
-@section('estilos')
+
+
+@section('TitleSection','Prestadores de servicios turísticos')
+
+@section('meta_og')
+<meta property="og:title" content="{{$tituloPagina}}" />
+<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
+<meta property="og:description" content="Conoce los prestadores de servicios turísticos del departamento del Cesar"/>
+@endsection
+
+@section ('estilos')
     <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
-    
+    <!--<link href="{{asset('/css/public/details.css')}}" rel="stylesheet">-->
+    <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
     <style>
-        header {
-            position: relative;
-            background: black;
-            margin-bottom: 1rem;
-        }
-        .tile .tile-caption h3 {
-            margin: 0;
-            font-size: 1rem;
-            text-transform: uppercase;
-            font-weight: 700;
-        }
-        .ionicons-inline {
-            font-size: 1.5rem;
-        }
-        .tile .tile-img .text-overlap {
-            font-family: Roboto, sans-serif;
-        }
-        .tile-date {
-            font-size: 0.875rem;
-            font-family: Roboto, sans-serif;
-            color: #757575;
-        }
-        .nav-bar > .brand a img{
-            width: auto;
-            height: 72px;
-        }
         #opciones{
             text-align:right;
+            background-color: white;
+            padding: 4px .5rem;
+            margin-top: 1rem;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position:relative;
+            z-index: 2;
+            box-shadow: 0px -1px 5px -2px rgba(0,0,0,.3);
         }
-        #opciones button, #opciones form{
+        #opciones>button, #opciones form{
             display:inline-block;
+            border: 0;
+            margin: 0 2px;
+        }
+        #opciones button {
+            box-shadow: 0px 1px 3px 0px rgba(0,0,0,.3);
+            background-color: white;
+        }
+        #opciones button:hover{
+            box-shadow: 0px 4px 12px 0px rgba(0,0,0,.2);
         }
         .input-group .form-control{
             font-size: 1rem;
@@ -92,76 +97,125 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
             border-radius: 2px;
             border: 0;
         }
+        .mdi::before {
+            font-size: 1rem;
+        }
         #collapseFilter{
             position: fixed;
             left: 0px;
             top: 0px;
             height: 100%;
-            max-width: 220px;
+            min-width: 250px;
+            max-width: 280px;
+            overflow: auto;
             background-color: rgba(255, 255, 255, 0.95);
-            z-index: 60;
+            z-index: 100;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+        }
+        .input-group>.input-group-prepend:not(:first-child)>.input-group-text .btn {
+            border-radius: 0;
+            border: 0;
+        }
+        
+        .input-group>.input-group-prepend:not(:first-child)>.input-group-text {
+            padding: 0;
+        }
+        
+        .card-header {
+            padding: 2px .5rem;
+        }
+        .card-header .btn {
+            padding: 0;
+            color: #333;
+            white-space: wrap;
+        }
+        .tile.tile-overlap .tile-img {
+            background-image: url(/img/no-image.jpg);
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        .label {
+            display: inline-block;
+            padding: .2rem .5rem;
+            font-size: .875rem;
+            font-weight: 500;
+            border-radius: 2px;
+            margin-bottom: 2px;
+        }
+        .tile-date {
+            display:inline-block;
+            background-color: #ddd;
+            color: #333;
+        }
+        .tile.tile-overlap .tile-img img {
+            font-size: 0.875rem;
+            text-align: center;
+            color: dimgrey;
         }
     </style>
-    
-@endsection
-
-@section('TitleSection','Actividades')
-
-@section('meta_og')
-<meta property="og:title" content="que hacer" />
-<meta property="og:image" content="{{asset('/res/img/brand/128.png')}}" />
-<meta property="og:description" content="¿Qué hacer?"/>
-@endsection
-
-@section ('estilos')
-    <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
-    <link href="{{asset('/css/public/details.css')}}" rel="stylesheet">
-    <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
-    
 @endsection
 
 @section('content')
-<div class="container">
-    <h2 class="text-uppercase">{{$tituloPagina}}</h2>
-    
-    <div id="opciones">
-        <button type="button" class="btn btn-default" onclick="changeViewList(this,'listado','tile-list')" title="Vista de lista"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span><span class="sr-only">{{trans('resources.listado.vistaLista')}}</span></button>
-        <button type="button" class="btn btn-default" onclick="changeViewList(this,'listado','')" title="Vista de mosaico"><span class="glyphicon glyphicon-th-large" aria-hidden="true"></span><span class="sr-only">{{trans('resources.listado.vistaMosaico')}}</span></button>
-        <form class="form-inline">
-            <div class="form-group">
-                <label class="sr-only" for="searchMain">{{trans('resources.listado.buscadorGeneral')}}</label>
-                <div class="input-group">
-                    <input type="text" class="form-control" id="searchMain" placeholder="{{trans('resources.listado.queDeseaBuscar')}}" maxlength="255">
-                    <div class="input-group-addon"><button type="submit" class="btn btn-default" title="Buscar"><span class="glyphicon glyphicon-search" aria-hidden="true"></span><span class="sr-only">{{trans('resources.listado.buscar')}}</span></button></div>
-                </div>
-                
+<div class="header-list">
+        <div class="container">
+            <h2 class="title-section">{{$tituloPagina}}</h2>
+            <div id="opciones">
+                <button type="button" class="btn btn-default d-none d-sm-inline-block" onclick="changeViewList(this,'listado','tile-list')" title="Vista de lista"><span class="mdi mdi-view-sequential" aria-hidden="true"></span><span class="sr-only">Vista de lista</span></button>
+                <button type="button" class="btn btn-default d-none d-sm-inline-block" onclick="changeViewList(this,'listado','')" title="Vista de mosaico"><span class="mdi mdi-view-grid" aria-hidden="true"></span><span class="sr-only">Vista de mosaico</span></button>
+                <form class="form-inline" method="GET" action="/proveedor/index">
+                    
+                    <div class="col-auto">
+                      <label class="sr-only" for="searchMain">Buscador general</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control" id="searchMain" name="buscar" placeholder="¿Qué desea buscar?" maxlength="255">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                              <button type="submit" class="btn btn-default" title="Buscar"><span class="mdi mdi-magnify" aria-hidden="true"></span><span class="sr-only">Buscar</span></button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </form>
+                <!--<button type="button" class="btn btn-default"><span class="mdi mdi-filter" aria-hidden="true" title="Filtrar resultados" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"></span><span class="sr-only">Filtrar resultados</span></button>-->
             </div>
-            
-        </form>
-        <!--<button type="button" class="btn btn-default"><span class="glyphicon glyphicon-filter" aria-hidden="true" title="Filtrar resultados" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"></span><span class="sr-only">Filtrar resultados</span></button>-->
+        </div>
+        
     </div>
-    <hr/>
+
+<div class="container">
+    
+   
+    <br/>
     
     @if(count($proveedores))
     <div id="listado" class="tiles">
     @for($i = 0; $i < count($proveedores); $i++)
+    
         <div class="tile">
             
-            <div class="tile-img">
-                @if($proveedores[$i]->portada != null && $proveedores[$i]->portada != "")
-                <img src="{{$proveedores[$i]->portada}}" alt="Imagen de presentación de {{$proveedores[$i]->nombre}}"/>
+            <div class="tile-img img-error">
+                @if(isset($proveedores[$i]->multimediaProveedores) && count($proveedores[$i]->multimediaProveedores))
+                <img src="{{$proveedores[$i]->multimediaProveedores[0]->ruta}}" alt="Imagen de presentación de {{$proveedores[$i]->proveedorRnt->razon_social}}"/>
+                @else
+                <img src="/img/proveedor_default.png" alt="" role="presentation" class="h-100 p-3">
                 @endif
+                @if(isset($proveedores[$i]->proveedorRnt->categoria))
                 <div class="text-overlap">
-                    <span class="label label-{{$colorTipo[1]}}">{{getItemType(5)->name}}</span>
+                    
+                    <a href="/proveedor/index?tipo={{$proveedores[$i]->proveedorRnt->categoria->id}}"><span class="btn btn-sm btn-info">{{$proveedores[$i]->proveedorRnt->categoria->categoriaProveedoresConIdiomas[0]->nombre}}</span></a>
+                    {{-- <!--<span class="label bg-{{$colorTipo[$proveedores[$i]->proveedorRnt->categoria->id]}}">{{getItemType($proveedores[$i]->proveedorRnt->categoria->id)->name}}</span>--> --}}
                 </div>
+                @endif
             </div>
             
             <div class="tile-body">
                 <div class="tile-caption">
                     
-                    <h3><a href="{{getItemType(1)->path}}{{$proveedores[$i]->id}}">{{$proveedores[$i]->nombre}}</a></h3>
+                    <h3><a href="{{getItemType(1)->path}}{{$proveedores[$i]->id}}">{{$proveedores[$i]->proveedorRnt->razon_social}}</a></h3>
                 </div>
+                
                 @if($proveedores[$i]->tipo == 4)
                 <p class="tile-date">{{trans('resources.listado.fechaEvento', ['fechaInicio' => date('d/m/Y', strtotime($proveedores[$i]->fecha_inicio)), 'fechaFin' => date('d/m/Y', strtotime($proveedores[$i]->fecha_fin))])}}</p>
                 @endif
