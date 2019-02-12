@@ -101,6 +101,9 @@ function getItemType($type){
 	.stats {
     	background-image: url(../../img/icons/sprite-stats-white.png);
 	}
+	.text-small{
+		font-size: 65%;
+	}
 	
 	@media only screen and (min-width: 768px) {
 		#linksStats.tiles .tile{
@@ -135,9 +138,22 @@ function getItemType($type){
 			        @for($i = 0; $i < count($sliders); $i++)
 			        <div class="carousel-item @if($i == 0) active @endif">
 			          <img class="d-block w-100" src="{{$sliders[$i]->rutaSlider}}" alt="{{$sliders[$i]->textoAlternativoSlider}}">
+			          
+			          
 			          @if($sliders[$i]->tituloSlider != null && $sliders[$i]->tituloSlider != "")
 			          <div class="carousel-caption d-none d-md-block">
-			            <p class="h3" class="text-center col-12">{{$sliders[$i]->tituloSlider}} @if($sliders[$i]->descripcionSlider != null && $sliders[$i]->descripcionSlider != "")<small>{{$sliders[$i]->descripcionSlider}}</small>@endif</p>
+			          	@if($sliders[$i]->enlaceAccesoSlider != null && $sliders[$i]->enlaceAccesoSlider != "")
+			          		<a href="{{$sliders[$i]->enlaceAccesoSlider}}" class="text-white" @if(!$sliders[$i]->enlaceInterno) target="_blank" @endif>
+			          			<p class="h2" class="text-center text-md-left col-12">
+			          				{{$sliders[$i]->tituloSlider}} 
+			          				 @if(!$sliders[$i]->enlaceInterno)<span class="fas fa-external-link-alt text-small" aria-hidden="true"></span>@else<span class="fas fa-link text-small" aria-hidden="true"></span>@endif
+			          				@if($sliders[$i]->descripcionSlider != null && $sliders[$i]->descripcionSlider != "")
+			          				
+			          				<small class="d-block">{{$sliders[$i]->descripcionSlider}}</small>@endif</p>
+			          		</a>
+			          	@else
+			            <p class="h2" class="text-center text-md-left col-12">{{$sliders[$i]->tituloSlider}} @if($sliders[$i]->descripcionSlider != null && $sliders[$i]->descripcionSlider != "")<small class="d-block">{{$sliders[$i]->descripcionSlider}}</small>@endif</p>
+			          	@endif
 			          </div>
 			          @endif
 			        </div>
