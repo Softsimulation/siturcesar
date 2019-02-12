@@ -127,6 +127,26 @@ function parse_yturl($url)
             @endif
             
             <p style="white-space: pre-line;" class="mt-3">{{$destino->destinoConIdiomas[0]->descripcion}}</p>
+            <ul class="enlaces-entidades shadow-sm">
+                <li>
+                    <a href="/proveedor/index?tipo=1">
+                        <span class="fas fa-bed d-block" aria-hidden="true"></span>
+                        Hoteles
+                    </a>
+                </li>
+                <li>
+                    <a href="/proveedor/index?tipo=15">
+                        <span class="fas fa-plane-departure d-block" aria-hidden="true"></span>
+                        Agencias de viajes y turismo
+                    </a>
+                </li>
+                <li>
+                    <a href="/proveedor/index?tipo=10">
+                        <span class="fas fa-home d-block" aria-hidden="true"></span>
+                        Vivienda turística
+                    </a>
+                </li>
+            </ul>
         </div>
         
     </section>

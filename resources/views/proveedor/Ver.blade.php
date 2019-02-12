@@ -24,7 +24,11 @@ function parse_yturl($url)
     <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
     <link href="{{asset('/css/public/details.css')}}" rel="stylesheet">
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
-    
+    <style>
+        header{
+            position: relative;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -39,8 +43,7 @@ function parse_yturl($url)
         {{ session('error') }}
     </div>
 @endif
-
-
+    @if(count($proveedor->multimediaProveedores) > 0)
     <div id="carousel-main-page" class="carousel slide carousel-fade" data-ride="carousel">
       <ol class="carousel-indicators">
         @for($i = 0; $i < count($proveedor->multimediaProveedores); $i++)
@@ -72,6 +75,21 @@ function parse_yturl($url)
       </div>
       
     </div>
+    @else
+    <div class="text-center mt-3 mb-3">
+        <h2 class="text-center container">{{$proveedor->proveedorRnt->razon_social}}
+	        <small class="d-block">
+	            <span class="{{ ($proveedor->calificacion_legusto > 0.0) ? (($proveedor->calificacion_legusto <= 0.9) ? 'mdi mdi-star-half' : 'mdi mdi-star') : 'mdi mdi-star-outline'}}" aria-hidden="true"></span>
+	            <span class="{{ ($proveedor->calificacion_legusto > 1.0) ? (($proveedor->calificacion_legusto <= 1.9) ? 'mdi mdi-star-half' : 'mdi mdi-star') : 'mdi mdi-star-outline'}}" aria-hidden="true"></span>
+	            <span class="{{ ($proveedor->calificacion_legusto > 2.0) ? (($proveedor->calificacion_legusto <= 2.9) ? 'mdi mdi-star-half' : 'mdi mdi-star') : 'mdi mdi-star-outline'}}" aria-hidden="true"></span>
+	            <span class="{{ ($proveedor->calificacion_legusto > 3.0) ? (($proveedor->calificacion_legusto <= 3.9) ? 'mdi mdi-star-half' : 'mdi mdi-star') : 'mdi mdi-star-outline'}}" aria-hidden="true"></span>
+	            <span class="{{ ($proveedor->calificacion_legusto > 4.0) ? (($proveedor->calificacion_legusto <= 5.0) ? 'mdi mdi-star-half' : 'mdi mdi-star') : 'mdi mdi-star-outline'}}" aria-hidden="true"></span>
+	            <span class="sr-only">Posee una calificación de {{$proveedor->calificacion_legusto}}</span>
+	            
+	        </small>
+        </h2>
+    </div>
+    @endif
     <div id="title-main-page">
     	<div class="container">
     		<div class="row align-items-center d-flex justify-content-center">
@@ -129,12 +147,14 @@ function parse_yturl($url)
     <section id="informacionGeneral">
         <div class="container">
             <h3>Información general</h3>
+            @if(count($proveedor->multimediaProveedores) > 0)
             <h4 class="text-center">{{$proveedor->proveedorRnt->razon_social}}</h4>
+            @endif
             @if(Session::has('message'))
                 <div class="alert alert-info" role="alert" style="text-align: center;">{{Session::get('message')}}</div>
             @endif
             
-            @if($video_promocional != null)
+            @if(isset($video_promocional) && $video_promocional != null)
             <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional)?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
             <p style="white-space: pre-line;">{{$proveedor->proveedorRnt->idiomas[0]->descripcion}}</p>
@@ -145,6 +165,64 @@ function parse_yturl($url)
         <div class="container">
             <h3>Características</h3>
             <!--<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>-->
+            @if(true)
+            <ul class="list-group list-group-flush text-center">
+              <li class="list-group-item">
+                  <div class="row justify-content-center">
+                    <div class="col-xs-2">
+                        <span class="ion-cash" aria-hidden="true"></span> <span class="sr-only">Valor</span>
+                    </div>
+                    <div class="col-auto">
+                        ${{number_format(intval($proveedor->valor_min))}} - ${{number_format(intval($proveedor->valor_max))}}
+                    </div>
+                    
+                </div>
+              </li>
+              @if(isset($proveedor->proveedoresConIdiomas) && count($proveedor->proveedoresConIdiomas) > 0)
+              <li class="list-group-item">
+                            
+                    <div class="row justify-content-center">
+                        <div class="col-xs-2">
+                            <span class="ion-android-time" aria-hidden="true"></span> <span class="sr-only">Horario</span>
+                        </div>
+                        <div class="col-auto">
+                            {{$proveedor->proveedoresConIdiomas[0]->horario}}
+                        </div>
+                        
+                    </div>
+                </li>
+                @endif
+                @if($proveedor->telefono != null)
+              <li class="list-group-item">
+                  
+                    <div class="row justify-content-center">
+                        <div class="col-xs-2">
+                            <span class="ion-android-call" aria-hidden="true"></span> <span class="sr-only">Telefóno</span>
+                        </div>
+                        <div class="col-auto">
+                            {{$proveedor->telefono}}
+                        </div>
+                        
+                    </div>
+                             
+              </li>
+              @endif   
+              @if($proveedor->sitio_web != null)
+              <li class="list-group-item">
+                  
+                    <div class="row">
+                        <div class="col-xs-2">
+                            <span class="ion-android-globe" aria-hidden="true"></span> <span class="sr-only">Sitio web</span>
+                        </div>
+                        <div class="col">
+                            <a href="{{$proveedor->sitio_web}}" target="_blank" rel="noopener noreferrer">Clic para ir al sitio web</a>
+                        </div>
+                    </div>
+                            
+              </li>
+              @endif    
+            </ul>
+            @else
             <div class="row">
                 <div class="col-xs-12 col-md-8">
                     <div id="map"></div>
@@ -163,6 +241,8 @@ function parse_yturl($url)
                                 </div>
                                 
                             </div>
+                            @if(isset($proveedor->proveedoresConIdiomas) && count($proveedor->proveedoresConIdiomas) > 0)
+                            
                             <div class="row">
                                 <div class="col-xs-2">
                                     <span class="ion-android-time" aria-hidden="true"></span> <span class="sr-only">Horario</span>
@@ -172,6 +252,7 @@ function parse_yturl($url)
                                 </div>
                                 
                             </div>
+                            @endif
                             @if($proveedor->telefono != null)
                             <div class="row">
                                 <div class="col-xs-2">
@@ -197,9 +278,11 @@ function parse_yturl($url)
                     </ul>
                 </div>
             </div>
+            @endif
+            
         </div>
     </section>
-    @if(count($proveedor->actividadesProveedores) > 0)
+    {{--@if(count($proveedor->actividadesProveedores) > 0)
     Actividades
     <div class="row">
         @foreach ($proveedor->actividadesProveedores as $actividad)
@@ -208,7 +291,7 @@ function parse_yturl($url)
         </div>
         @endforeach
     </div>
-    @endif
+    @endif--}}
     <section id="comentarios">
         <div class="container">
             <h3>Comentarios</h3>
@@ -340,6 +423,9 @@ function parse_yturl($url)
             $(this).find('.checks .ionicons-inline').addClass('ion-android-star-outline');
         })
     });
+</script>
+<script>
+    
 </script>
 <script async defer
    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC55uUNZFEafP0702kEyGLlSmGE29R9s5k&callback=initMap">
