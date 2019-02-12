@@ -169,7 +169,7 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
                     <div class="col-auto">
                       <label class="sr-only" for="searchMain">Buscador general</label>
                       <div class="input-group">
-                        <input type="text" class="form-control" id="searchMain" name="buscar" placeholder="¿Qué desea buscar?" maxlength="255">
+                        <input type="text" class="form-control" id="searchMain" name="buscar" placeholder="¿Qué desea buscar?" maxlength="255" @if(isset($_GET['buscar']) && $_GET['buscar'] != "") value="{{$_GET['buscar']}}" @endif>
                         <div class="input-group-prepend">
                           <div class="input-group-text">
                               <button type="submit" class="btn btn-default" title="Buscar"><span class="mdi mdi-magnify" aria-hidden="true"></span><span class="sr-only">Buscar</span></button>
@@ -178,6 +178,9 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
                       </div>
                     </div>
                 </form>
+                @if(isset($_GET['buscar']) || isset($_GET['tipo']))
+                <a role="button" class="btn btn-default d-sm-inline-block" href="/proveedor">Limpiar filtros</a>
+                @endif
                 <!--<button type="button" class="btn btn-default"><span class="mdi mdi-filter" aria-hidden="true" title="Filtrar resultados" data-toggle="collapse" data-target="#collapseFilter" aria-expanded="false" aria-controls="collapseFilter"></span><span class="sr-only">Filtrar resultados</span></button>-->
             </div>
         </div>
