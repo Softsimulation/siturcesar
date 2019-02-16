@@ -9,6 +9,8 @@ use Storage;
 use File;
 use DB;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Sector;
 use App\Models\Perfil_Usuario;
 use App\Models\Categoria_Turismo;
@@ -23,7 +25,15 @@ use App\Models\Idioma;
 
 class AdministradorProveedoresController extends Controller
 {
-    //
+    public function __construct()
+    {
+       
+        $this->middleware('auth');
+        $this->middleware('role:Admin|Promocion');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+    }
     
     public function getCrear(){
         return view('administradorproveedores.Crear');

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Sector;
 use App\Models\Perfil_Usuario;
 use App\Models\Tipo_Evento;
@@ -21,7 +23,15 @@ use File;
 
 class AdministradorEventosController extends Controller
 {
-    //
+    public function __construct()
+    {
+       
+        $this->middleware('auth');
+        $this->middleware('role:Admin|Promocion');
+        if(Auth::user() != null){
+            $this->user = User::where('id',Auth::user()->id)->first(); 
+        }
+    }
     public function getCrear(){
         return view('administradoreventos.Crear');
     }
