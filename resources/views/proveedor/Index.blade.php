@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Input;
 header("Access-Control-Allow-Origin: *");
 
 function parse_yturl($url) 
@@ -241,7 +242,7 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
         <p>{{trans('resources.listado.noHayElementos')}}</p>
     </div>
     @endif
-    {!!$proveedores->links()!!}
+    {!!$proveedores->appends(Input::except('page'))->links()!!}
 </div>
     
 @endsection
