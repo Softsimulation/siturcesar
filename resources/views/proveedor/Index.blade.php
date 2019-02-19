@@ -192,7 +192,7 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
    
     <br/>
     
-    @if(count($proveedores))
+    @if(count($proveedores) > 0)
     <div id="listado" class="tiles">
     @for($i = 0; $i < count($proveedores); $i++)
     
@@ -241,6 +241,7 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
         <p>{{trans('resources.listado.noHayElementos')}}</p>
     </div>
     @endif
+    {!!$proveedores->links()!!}
 </div>
     
 @endsection
