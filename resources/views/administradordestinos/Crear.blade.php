@@ -165,9 +165,9 @@
                 </div>
             </div>
             <div>
-                <h4>Galería de imágenes (Max. 5 imágenes)</h4> 
+                <h4>Galería de imágenes (Max. 19 imágenes)</h4> 
                 <div class="col-sm-12">
-                    <file-input text ng-model="imagenes" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="imagenes" label="Seleccione las imágenes de la atracción." multiple max-files="5"></file-input>
+                    <file-input text ng-model="imagenes" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="imagenes" label="Seleccione las imágenes de la atracción." multiple max-files="19"></file-input>
                 </div>
             </div>
             <div class="row">
