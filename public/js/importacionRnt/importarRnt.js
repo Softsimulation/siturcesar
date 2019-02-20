@@ -20,6 +20,7 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
    
    $scope.nuevos =  [];
    $scope.antiguos =  [];
+   $scope.swAgregarSinRnt = true;
    
    $scope.cargarDocumento = function(){
        
@@ -53,6 +54,7 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
                 $("body").attr("class", "cbp-spmenu-push");
                 $scope.nuevos = data.nuevos;
                 $scope.antiguos = data.antiguos;
+                $scope.sinRnt = data.sinRnt;
             } else {
                 $("body").attr("class", "cbp-spmenu-push");
                 swal("Error", "Por favor corrija los errores", "error");
@@ -120,8 +122,17 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
         $('#modalAgregar').modal('show');
    }
    
-   $scope.guardarRegistro = function(){
-       if(!$scope.addForm.$valid){
+   $scope.abrirModalCrearSinRnt = function(registro){
+        $scope.registro = angular.copy(registro);
+        $scope.indexCrear = $scope.nuevos.indexOf(registro);
+        $scope.addFormSinRnt.$setPristine();
+        $scope.addFormSinRnt.$setUntouched();
+        $scope.addFormSinRnt.$submitted = false;
+        $('#modalAgregarSinRnt').modal('show');
+   }
+   
+   $scope.guardarRegistro = function(sw){
+       if( (!$scope.addForm.$valid && $scope.sw == 0) || (!$scope.addFormSinRnt.$valid && $scope.sw == 1) ){
             swal("Info", "Verifique que todos los campos estén ingresados.","info");
             return;
         }                 
@@ -143,6 +154,7 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
                 
                 setTimeout(function () {
                     $('#modalAgregar').modal('hide');
+                    $('#modalAgregarSinRnt').modal('hide');
                 }, 2000);
                 
             } else {
@@ -172,11 +184,11 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
         event.overlay.setMap(null);
     }
     
-    $scope.sobreescribirRegistro = function(){
-        if(!$scope.addForm.$valid){
+    $scope.sobreescribirRegistro = function(sw){
+        if( (!$scope.addForm.$valid && $scope.sw == 0) || (!$scope.addFormSinRnt.$valid && $scope.sw == 1) ){
             swal("Info", "Verifique que todos los campos estén ingresados.","info");
             return;
-        }                 
+        }                  
        
         $("body").attr("class", "cbp-spmenu-push charging");
         proveedorServi.EditarProveedor($scope.registro).then(function (data) {
@@ -194,6 +206,7 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
                 
                 setTimeout(function () {
                     $('#modalAgregar').modal('hide');
+                    $('#modalAgregarSinRnt').modal('hide');
                 }, 2000);
                 
             } else {
@@ -209,7 +222,11 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
         
     }
     
-    $scope.guardarRegistroHavilitar = function(){
+    $scope.guardarRegistroHavilitar = function(sw){
+        if( (!$scope.addForm.$valid && $scope.sw == 0) || (!$scope.addFormSinRnt.$valid && $scope.sw == 1) ){
+            swal("Info", "Verifique que todos los campos estén ingresados.","info");
+            return;
+        } 
         $("body").attr("class", "cbp-spmenu-push charging");
         proveedorServi.CrearHabilitarProveedor($scope.registro).then(function (data) {
             if (data.success) {
@@ -226,6 +243,7 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
                 
                 setTimeout(function () {
                     $('#modalAgregar').modal('hide');
+                    $('#modalAgregarSinRnt').modal('hide');
                 }, 2000);
                 
             } else {
@@ -237,6 +255,65 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
             $("body").attr("class", "cbp-spmenu-push");
             swal("Error", "No se realizo la solicitud, reinicie la página","error");
         })
+    }
+    
+    
+    $scope.agregarTodosSinRnt = function(){
+        swal({
+            title: "Agregar registros",
+            text: "¿Está seguro? Se agregaran todos los registros correctos mostrados en este panel",
+            type: "info",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        },
+        function () {
+            setTimeout(function () {
+                $("body").attr("class", "charging");
+                proveedorServi.AgregarLoteSinRnt( { 'proveedores' : $scope.sinRnt } ).then(function(data){
+                    if(data.success){
+                        swal({
+                            title: "Agregadis",
+                            text: data.mensaje,
+                            type: "success",
+                            timer: 1000,
+                            showConfirmButton: false
+                        });
+                        $scope.swAgregarSinRnt = false;
+                        $scope.errores = null;
+                    }else{
+                        swal("Error", "Verifique la información y vuelva a intentarlo.", "error");
+                        $scope.errores = data.errores; 
+                    }
+                     $("body").attr("class", "cbp-spmenu-push");
+                }).catch(function(){
+                    $("body").attr("class", "cbp-spmenu-push");
+                    swal("Error","Error en la petición, recargue la pagina","error");
+                })
+            }, 2000);
+        });
+    }
+    
+    $scope.quitarRegistroSinRnt = function(index){
+        swal({
+            title: "Eliminar registro",
+            text: "¿Está seguro? Para volver a acceder al registro tendrá que cargar nuevamente el archivo.",
+            type: "warning",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            cancelButtonText: "Cancelar"
+            // showLoaderOnConfirm: true,
+        },
+        function () {
+            $scope.$apply(function () {
+                $scope.sinRnt.splice(index,1);
+            });
+            // setTimeout(function () {
+            //     $("body").attr("class", "charging");
+            //     $scope.sinRnt.splice(index,1);
+            //     $("body").attr("class", "cbp-spmenu-push");
+            // }, 500);
+        });
     }
     
    
