@@ -147,6 +147,9 @@
         					            <li>
                             <a role="menuitem" href="<?php echo e(asset('publicaciones/listadoadmin')); ?>">Biblioteca Digital</a>
                         </li>
+                                  <li>
+                            <a role="menuitem" href="<?php echo e(asset('informes/configuracion')); ?>">Informes</a>
+                        </li>
                           <li>
                             <a role="menuitem" href="<?php echo e(asset('noticias/listadonoticias')); ?>">Noticias</a>
                         </li>
