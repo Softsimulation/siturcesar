@@ -89,25 +89,42 @@ function parse_yturl($url)
     		<div class="row align-items-center d-flex justify-content-center">
 	    		
 	    		<div class="col-12 col-md-12 row align-items-center d-flex justify-content-center">
-    			    <div class="col text-center">
-    					<a href="#informacionGeneral">
-    						<i class="ionicons ion-information-circled" aria-hidden="true"></i>
-    						Información general
+    			 <!--   <div class="col text-center">-->
+    				<!--	<a href="#informacionGeneral">-->
+    				<!--		<i class="ionicons ion-information-circled" aria-hidden="true"></i>-->
+    				<!--		Información general-->
+    				<!--	</a>-->
+    				<!--</div>-->
+    				<!--<div class="col text-center">-->
+    				<!--	<a href="#caracteristicas">-->
+    				<!--		<i class="ionicons ion-android-apps" aria-hidden="true"></i>-->
+    				<!--		Características-->
+    				<!--	</a>-->
+    				<!--</div>-->
+    				<!--<div class="col text-center">-->
+    				<!--	<a href="#comentarios">-->
+    				<!--		<i class="ionicons ion-chatbubbles" aria-hidden="true"></i>-->
+    				<!--		Comentarios-->
+    				<!--	</a>-->
+    				<!--</div>-->
+    				<div class="col text-center">
+    					<a href="/actividades/index">
+    						<span class="fas fa-hiking d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+    						¿Qué hacer?
     					</a>
     				</div>
     				<div class="col text-center">
-    					<a href="#caracteristicas">
-    						<i class="ionicons ion-android-apps" aria-hidden="true"></i>
-    						Características
+    					<a href="/proveedor">
+    						<span class="fas fa-bed d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+    						¿Dónde dormir?
     					</a>
     				</div>
     				<div class="col text-center">
-    					<a href="#comentarios">
-    						<i class="ionicons ion-chatbubbles" aria-hidden="true"></i>
-    						Comentarios
+    					<a href="/proveedor">
+    						<span class="fas fa-utensils d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+    						¿Qué comer?
     					</a>
     				</div>
-	    				
 	    		</div>
 	    	</div>	
     	</div>
@@ -127,26 +144,26 @@ function parse_yturl($url)
             @endif
             
             <p style="white-space: pre-line;" class="mt-3">{{$destino->destinoConIdiomas[0]->descripcion}}</p>
-            <ul class="enlaces-entidades shadow-sm">
-                <li>
-                    <a href="/proveedor/index?tipo=1">
-                        <span class="fas fa-bed d-block" aria-hidden="true"></span>
-                        Hoteles
-                    </a>
-                </li>
-                <li>
-                    <a href="/proveedor/index?tipo=15">
-                        <span class="fas fa-plane-departure d-block" aria-hidden="true"></span>
-                        Agencias de viajes y turismo
-                    </a>
-                </li>
-                <li>
-                    <a href="/proveedor/index?tipo=10">
-                        <span class="fas fa-home d-block" aria-hidden="true"></span>
-                        Vivienda turística
-                    </a>
-                </li>
-            </ul>
+            <!--<ul class="enlaces-entidades shadow-sm">-->
+            <!--    <li>-->
+            <!--        <a href="/proveedor/index?tipo=1">-->
+            <!--            <span class="fas fa-bed d-block" aria-hidden="true"></span>-->
+            <!--            Hoteles-->
+            <!--        </a>-->
+            <!--    </li>-->
+            <!--    <li>-->
+            <!--        <a href="/proveedor/index?tipo=15">-->
+            <!--            <span class="fas fa-plane-departure d-block" aria-hidden="true"></span>-->
+            <!--            Agencias de viajes y turismo-->
+            <!--        </a>-->
+            <!--    </li>-->
+            <!--    <li>-->
+            <!--        <a href="/proveedor/index?tipo=10">-->
+            <!--            <span class="fas fa-home d-block" aria-hidden="true"></span>-->
+            <!--            Vivienda turística-->
+            <!--        </a>-->
+            <!--    </li>-->
+            <!--</ul>-->
         </div>
         
     </section>
