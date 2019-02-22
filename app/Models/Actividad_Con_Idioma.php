@@ -31,7 +31,7 @@ class Actividad_Con_Idioma extends Model
     /**
      * @var array
      */
-    protected $fillable = ['actividades_id', 'idiomas', 'nombre', 'descripcion'];
+    protected $fillable = ['actividades_id', 'idiomas', 'nombre', 'descripcion', 'recomendaciones', 'reglas', 'como_llegar'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

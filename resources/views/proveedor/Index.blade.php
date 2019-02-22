@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Input;
 header("Access-Control-Allow-Origin: *");
 
 function parse_yturl($url) 
@@ -192,7 +193,7 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
    
     <br/>
     
-    @if(count($proveedores))
+    @if(count($proveedores) > 0)
     <div id="listado" class="tiles">
     @for($i = 0; $i < count($proveedores); $i++)
     
@@ -241,6 +242,7 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
         <p>{{trans('resources.listado.noHayElementos')}}</p>
     </div>
     @endif
+    {!!$proveedores->appends(Input::except('page'))->links()!!}
 </div>
     
 @endsection
