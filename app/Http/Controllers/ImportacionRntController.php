@@ -186,9 +186,15 @@ class ImportacionRntController extends Controller
 		$sinRnt_retornar = array();
 		foreach($sinRnt as $registro){
 			$registro = $this->MutarRegistro($registro);
+			$validar = $this->validarRegistroSinRNt($registro,$estadosProveedor,$subCategorias,$municipios);
+		    
 			$similar = $proveedoresIngresados->filter(function($value, $key)use($registro){
 		    	return ($value['nit'] == $registro['nit'] && $registro['nit'] != null && $registro['nit'] != 0) || ($value['correo'] == $registro['correo'] && strpos($value['correo'], '@') !== false);
 		    })->first();
+		    
+		    $registro['es_correcto'] = $validar['success'] ? 1 : 0;
+		    $registro['estado_carga'] = $validar['success'] ? 'Correcto' : 'Incorrecto';
+		    $registro['campos'] = $validar['campos'];
 		    
 		    if($similar){
 		    	$registro = $this->MutarEditarRegistro($registro,$similar);
@@ -747,6 +753,94 @@ class ImportacionRntController extends Controller
         
         return ["success" => true, "registro" => $registro, 'campos' => null];
     }
+    
+    public function validarRegistroSinRNt($registro,$estadosProveedor,$subCategorias,$municipios){
+    	$sw = 0;
+        $campos = "";
+        
+        if($registro["estado"] == null || $registro["estado"] == ""){
+            $sw = 1;
+            if(strlen($campos)>0){$campos .= ", ";}
+            $campos .= "Estado requerido";
+        }else{
+        	$estado = $estadosProveedor->where('nombre',$registro["estado"])->first();
+            if($estado == null){
+            	$sw = 1;
+	            if(strlen($campos)>0){$campos .= ", ";}
+	            $campos .= "Estado digitado no se encuentra ingresado en el sistema";
+            }else{
+            	$registro["estados_proveedor_id"] = $estado->id;	
+            }
+        }
+        
+        if($registro["municipio"] == null || $registro["municipio"] == ""){
+            $sw = 1;
+            if(strlen($campos)>0){$campos .= ", ";}
+            $campos .= "Municipio requerido";
+        }else{
+        	$mun = $municipios->where('nombre',$registro["municipio"])->first();
+        	if($mun == null){
+            	$sw = 1;
+	            if(strlen($campos)>0){$campos .= ", ";}
+	            $campos .= "Municipio digitado no se encuentra ingresado en el sistema";
+            }else{
+            	$registro["municipio_id"] = $mun->id;
+            }
+        }
+        
+        if($registro["nombre_comercial"] == null || $registro["nombre_comercial"] == ""){
+            $sw = 1;
+            if(strlen($campos)>0){$campos .= ", ";}
+            $campos .= "Nombre Comercial RNT requerido";
+        }
+        
+        
+        if($registro["sub_categoria"] == null || $registro["sub_categoria"] == ""){
+            $sw = 1;
+            if(strlen($campos)>0){$campos .= ", ";}
+            $campos .= "Subcategoria requerido";
+        }else{
+        	$subCat = $subCategorias->where('nombre',$registro["sub_categoria"])->first();
+            if($subCat == null){
+            	$sw = 1;
+	            if(strlen($campos)>0){$campos .= ", ";}
+	            $campos .= "SubCategoría digitada no se encuentra ingresada en el sistema";
+            }else{
+            	$registro["categoria_proveedores_id"] = $subCat->id;
+            }
+        }
+        
+        if($registro["direccion_comercial"] == null || $registro["direccion_comercial"] == ""){
+            $sw = 1;
+            if(strlen($campos)>0){$campos .= ", ";}
+            $campos .= "Direccion Comercial requerido";
+        }
+        
+        // if($registro["telefono"] == null || $registro["telefono"] == ""){
+        //     $sw = 1;
+        //     if(strlen($campos)>0){$campos .= ", ";}
+        //     $campos .= "Telefono requerido";
+        // }
+        
+        // if($registro["celular"] == null || $registro["celular"] == ""){
+        //     $sw = 1;
+        //     if(strlen($campos)>0){$campos .= ", ";}
+        //     $campos .= "Celular requerido";
+        // }
+        
+        if($registro["correo"] == null || $registro["correo"] == ""){
+            $sw = 1;
+            if(strlen($campos)>0){$campos .= ", ";}
+            $campos .= "Correo Electronico requerido";
+        }
+        
+        $campos .= ".";
+        if($sw == 1){
+            return ["success" => false, 'campos' => $campos];
+        }
+        
+        return ["success" => true, "registro" => $registro, 'campos' => null];
+    }
  
     public static function MayusculaTilde($cadena){
 		//$cadena = str_replace("á", "Á", $cadena); 
@@ -811,8 +905,8 @@ class ImportacionRntController extends Controller
 			'categoria' => 'required|max:255',
 			'sub_categoria' => 'required|max:255',
 			'direccion_comercial' => 'required|max:455',
-			'telefono' => 'required|max:255',
-			'celular' => 'required|max:255',
+			'telefono' => 'max:255',
+			'celular' => 'max:255',
 			'correo' => 'required|max:455',
 			//'latitud' => 'required',
 			//'longitud' => 'required',
@@ -840,8 +934,8 @@ class ImportacionRntController extends Controller
 					$proveedorActualizar->razon_social = $proveedor['nombre_comercial'];
 					$proveedorActualizar->categoria_proveedores_id = $categoriaProveedor->categoria_proveedores_id;
 					$proveedorActualizar->direccion = $proveedor['direccion_comercial'];
-					$proveedorActualizar->telefono = $proveedor['telefono'];
-					$proveedorActualizar->celular = $proveedor['celular'];
+					$proveedorActualizar->telefono = strlen($proveedor['telefono']) ? $proveedor['telefono'] : null;
+					$proveedorActualizar->celular = strlen($proveedor['celular']) ? $proveedor['celular'] : null;
 					$proveedorActualizar->email = $proveedor['correo'];
 					$proveedorActualizar->latitud = strlen($proveedor['latitud']) ? $proveedor['latitud'] : null;
 					$proveedorActualizar->longitud = strlen($proveedor['longitud']) ? $proveedor['longitud'] : null;
@@ -873,7 +967,7 @@ class ImportacionRntController extends Controller
 			}
     	}
     	
-    	return ["success" => true, "mensaje" => "Se han creado ".$count." proveedores."];
+    	return ["success" => true, "mensaje" => "Se han creado ".$count." proveedores.", 'contador' => $count];
 	}
     
 }

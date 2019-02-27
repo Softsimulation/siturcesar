@@ -45,7 +45,7 @@ class DestinosController extends Controller
         
         $video_promocional = Destino::where('id', $id)->with(['multimediaDestinos' => function($queryMultimediaDestinos){
             $queryMultimediaDestinos->where('tipo', true);
-        }])->first()->multimediaDestinos;
+        }])->where('id', $id)->first()->multimediaDestinos;
         
         if (count($video_promocional) > 0){
             $video_promocional = $video_promocional[0]->ruta;

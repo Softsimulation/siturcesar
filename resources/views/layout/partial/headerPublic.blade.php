@@ -116,9 +116,9 @@
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/empleo">Empleo</a>
                             </li>
-                            <li role="none">
-                                <a role="menuitem" href="/indicadores/secundarios">Estadisticas secundarias</a>
-                            </li>
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/indicadores/secundarios">Estadisticas secundarias</a>-->
+                            <!--</li>-->
                             <li role="none">
                                 <a role="menuitem" href="/MuestraMaestra/detalles">Verificación de proveedores RNT</a>
                             </li>
@@ -126,12 +126,9 @@
                             <!--<li role="none">-->
                             <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
                             <!--</li>-->
-                            <li role="none">
-                                <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>
-                            </li>
-                            <li role="none">
-                                <a role="menuitem" href="/indicadores/secundarios">Indicadores secundarios</a>
-                            </li>
+                            <!--<li role="none">-->
+                            <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
+                            <!--</li>-->
                         </ul>
                     </li>
                     
