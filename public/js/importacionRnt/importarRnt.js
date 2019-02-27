@@ -279,7 +279,9 @@ angular.module('importarRntApp', ["checklist-model","proveedorService",'angularU
                             timer: 1000,
                             showConfirmButton: false
                         });
-                        $scope.swAgregarSinRnt = false;
+                        if(data.contador != 0){
+                            $scope.swAgregarSinRnt = false;    
+                        }
                         $scope.errores = null;
                     }else{
                         swal("Error", "Verifique la información y vuelva a intentarlo.", "error");

@@ -18,7 +18,17 @@ angular.module('receptor.gasto', ['ui.select'])
                 $scope.tipos = data.tipos;
                 $scope.rubros = data.rubros;
                 $scope.encuestaReceptor = data.encuesta;
-                
+                for(var i = 0 ;i<$scope.rubros.length;i++){
+                    if($scope.rubros[i].gastos_visitantes.length>0){
+                        if(($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena != null && $scope.rubros[i].gastos_visitantes[0].divisas_magdalena != null) && $scope.rubros[i].gastos_visitantes[0].personas_cubiertas != null ){
+                            if($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena!= null) {
+                                $scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena = $scope.formato($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena,0)
+                            }
+                               
+                        }
+                    }
+                }
+                $scope.encuestaReceptor.CostoPaquete = $scope.formato($scope.encuestaReceptor.CostoPaquete);
                 for(var i = 0; i<$scope.rubros.length;i++){
                     $scope.cambiarAlquiler($scope.rubros[i]);
                 }
@@ -31,7 +41,31 @@ angular.module('receptor.gasto', ['ui.select'])
             });
         }
     })
-     $scope.limpiarGasto = function(){
+    
+    $scope.formato = function(input, decimals) {
+    		amount = input;
+    		amount += ''; // por si pasan un numero en vez de un string
+            amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+        
+            decimals = decimals || 0; // por si la variable no fue fue pasada
+        
+            // si no es un numero o es igual a cero retorno el mismo cero
+            if (isNaN(amount) || amount === 0) 
+                return parseFloat(0).toFixed(decimals);
+        
+            // si es mayor o menor que cero retorno el valor formateado como numero
+            amount = '' + amount.toFixed(decimals);
+        
+            var amount_parts = amount.split('.'),
+                regexp = /(\d+)(\d{3})/;
+        
+            while (regexp.test(amount_parts[0]))
+                amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+        	input = amount_parts.join('.');
+            return input;
+    }
+        
+    $scope.limpiarGasto = function(){
         if($scope.encuestaReceptor.RealizoGasto == 0){
             var aux = [];
             aux = $scope.encuestaReceptor.Financiadores;
@@ -160,16 +194,23 @@ angular.module('receptor.gasto', ['ui.select'])
                 return;   
             }
         }
-        
+         if($scope.encuestaReceptor.CostoPaquete != null){
+            var valorSinComas = $scope.encuestaReceptor.CostoPaquete.replace(/,/g, '');
+            $scope.encuestaReceptor.CostoPaquete = valorSinComas;
+        }
         $scope.encuestaReceptor.Rubros = [];
         for(var i = 0 ;i<$scope.rubros.length;i++){
             if($scope.rubros[i].gastos_visitantes.length>0){
-                if($scope.rubros[i].gastos_visitantes[0] != null){
-                    if((($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena != null && $scope.rubros[i].gastos_visitantes[0].divisas_magdalena != null) && $scope.rubros[i].gastos_visitantes[0].personas_cubiertas != null)|| $scope.rubros[i].gastos_visitantes[0].gastos_asumidos_otros != undefined  ){
+                if(($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_fuera != null && $scope.rubros[i].gastos_visitantes[0].divisas_fuera != null) || ($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena != null && $scope.rubros[i].gastos_visitantes[0].divisas_magdalena != null) && $scope.rubros[i].gastos_visitantes[0].personas_cubiertas != null ){
+                        if($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_fuera!= null) {
+                            $scope.rubros[i].gastos_visitantes[0].cantidad_pagada_fuera = Number($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_fuera)
+                        }
+                        if($scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena!= null) {
+                            var valorSinComas = $scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena.replace(/,/g, '');
+                            $scope.rubros[i].gastos_visitantes[0].cantidad_pagada_magdalena = Number(valorSinComas)
+                        }
                         $scope.encuestaReceptor.Rubros.push($scope.rubros[i]);
-                    }
                 }
-                
             }
         }
         $scope.encuestaReceptor.id = $scope.id;

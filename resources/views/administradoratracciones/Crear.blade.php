@@ -98,8 +98,16 @@
                     <div class="col-xs-2 col-sm-12">
                         <div class="form-group" ng-class="{'has-error': (crearAtraccionForm.$submitted || crearAtraccionForm.descripcion.$touched) && crearAtraccionForm.descripcion.$error.required}">
                             <label for="descripcion"><span class="asterisk">*</span> Descripción</label>
-                            <textarea style="resize: none;" ng-model="atraccion.datosGenerales.descripcion" rows="5" required name="descripcion" id="descripcion" class="form-control" placeholder="Descripción de la atracción (De 100 a 1,000 caracteres)"></textarea>
-                            
+                            <ng-ckeditor  
+                                      ng-model="atraccion.datosGenerales.descripcion"
+                                      id="descripcion" 
+                                      skin="moono" 
+                                      remove-buttons="Image" 
+                                      remove-plugins="iframe,flash,smiley"
+                                      name="descripcion"
+                                      required
+                                      >
+                            </ng-ckeditor>
                         </div>
                     </div>
                     <div class="col-xs-2 col-sm-4">
@@ -212,7 +220,7 @@
             <div>
                 <h4>Subir imágenes</h4>
                 <div class="col-sm-12">
-                    <file-input text ng-model="imagenes" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="imagenes" label="Seleccione las imágenes de la atracción." multiple max-files="5"></file-input>
+                    <file-input text ng-model="imagenes" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="imagenes" label="Seleccione las imágenes de la atracción." multiple max-files="19"></file-input>
                 </div>
             </div>
             <div class="row">
@@ -322,4 +330,6 @@
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyC55uUNZFEafP0702kEyGLlSmGE29R9s5k&libraries=placeses,visualization,drawing,geometry,places"></script>
 <script src="{{asset('/js/plugins/gmaps.js')}}"></script>
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>
+<script src="{{asset('/js/plugins/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('/js/plugins/ckeditor/ngCkeditor-v2.0.1.js')}}"></script>
 @endsection
