@@ -174,7 +174,7 @@
                                     <label for="pago" class="col-md-12 control-label" style="color:dimgray;">E2. ¿Cuánto pagó usted por el paquete turístico o excursión?</label>
 
                                     <div class="col-md-12">
-                                        <input type="number" ng-required="encuestaReceptor.ViajoDepartamento==1" class="form-control" min="1" name="pago" ng-model="encuestaReceptor.CostoPaquete" placeholder="Solo números">
+                                        <input type="text" onkeyup="formatoMoneda(this,0)" ng-required="encuestaReceptor.ViajoDepartamento==1" class="form-control" min="1" name="pago" ng-model="encuestaReceptor.CostoPaquete" placeholder="Solo números">
                                         <span ng-show="GastoForm.$submitted || GastoForm.pago.$touched">
                                             <span class="label label-danger" ng-show="GastoForm.pago.$error.min">* El valor debe ser mayor a 0.</span>
                                             <span class="label label-danger" ng-show="GastoForm.pago.$error.required">* Campo requerido.</span>
@@ -442,7 +442,7 @@
                                                             <div class="col-xs-12 col-md-6">
                                                                 <div class="form-group">
                                                                     <label for="gastoFuera" class="control-label" style="color:dimgray;">Cantidad</label>
-                                                                    <input type="number" class="form-control" name="cantDentro@{{$index}}" min="1" placeholder="Cantidad" ng-blur="cambiarAlquiler(rub)" ng-model="rub.gastos_visitantes[0].cantidad_pagada_magdalena" ng-disabled="encuestaReceptor.poderLLenar" ng-required ="rub.gastos_visitantes[0].divisas_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null" >
+                                                                    <input type="text" onkeyup="formatoMoneda(this,0)" class="form-control" name="cantDentro@{{$index}}" min="1" placeholder="Cantidad" ng-blur="cambiarAlquiler(rub)" ng-model="rub.gastos_visitantes[0].cantidad_pagada_magdalena" ng-disabled="encuestaReceptor.poderLLenar" ng-required ="rub.gastos_visitantes[0].divisas_magdalena != null || rub.gastos_visitantes[0].personas_cubiertas != null" >
                                                                     <span ng-show="GastoForm.$submitted || GastoForm.cantDentro@{{$index}}.$touched">
                                                                         <span class="label label-danger" ng-show="GastoForm.cantDentro@{{$index}}.$error.min">*El valor debe ser mayor a 0</span>
                                                                         <span class="label label-danger" ng-show="GastoForm.cantDentro@{{$index}}.$error.number">* Solo números.</span>
@@ -592,7 +592,30 @@
 @endsection
 
 @section('javascript')
-    // <script>
+     <script>
+        function formatoMoneda(input, decimals) {
+    		amount = input.value;
+    		amount += ''; // por si pasan un numero en vez de un string
+            amount = parseFloat(amount.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+        
+            decimals = decimals || 0; // por si la variable no fue fue pasada
+        
+            // si no es un numero o es igual a cero retorno el mismo cero
+            if (isNaN(amount) || amount === 0) 
+                return parseFloat(0).toFixed(decimals);
+        
+            // si es mayor o menor que cero retorno el valor formateado como numero
+            amount = '' + amount.toFixed(decimals);
+        
+            var amount_parts = amount.split('.'),
+                regexp = /(\d+)(\d{3})/;
+        
+            while (regexp.test(amount_parts[0]))
+                amount_parts[0] = amount_parts[0].replace(regexp, '$1' + ',' + '$2');
+        	input.value = amount_parts.join('.');
+            //return amount_parts.join('.');
+        }
+     
     //     $(window).on('scroll', function () {
             
     //         if ($('#tgastos').length && $(this).width() > 992) {

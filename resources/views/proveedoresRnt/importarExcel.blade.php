@@ -202,6 +202,7 @@
                                         <th>Categoría</th>
                                         <!-- <th>Correo</th>-->
                                         <th>Estado</th>
+                                        <th style="max-width: 140px;">Estado carga</th>
                                         <th style="width: 90px;"></th>
                                     </tr>
                                     <tr dir-paginate="item in sinRnt|filter:prop.searchSinRnt|itemsPerPage:10 as results" pagination-id="paginacion_sin_rnt" >
@@ -210,6 +211,7 @@
                                         <td>@{{item.categoria}}</td>
                                         <!-- <td>@{{item.correo}}</td>-->
                                         <td>@{{item.estado}}</td>
+                                        <td ng-if="item.es_correcto ==1">Correcto</td><td ng-if="item.es_correcto !=1">Incorrecto</td>
                                         <td style="text-align: center;">
                                             <button type="button" title="Agregar registro" ng-if="swAgregarSinRnt" ng-click="abrirModalCrearSinRnt(item)" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-pencil"></span><span class="sr-only">Agregar registro</span></button>
                                             <button type="button" title="Ver registro" ng-click="abrirModalVer(item)" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-eye-open"></span><span class="sr-only">Ver registro</span></button>
@@ -971,7 +973,7 @@
     					<div class="row">
         			        <div class="col-xs-12 col-sm-3">
         			            <div class="form-group">
-        			                <label class="control-label" for="addFormSinRnt-numero_rnt"><span class="asterisk">*</span> No. de RNT</label>
+        			                <label class="control-label" for="addFormSinRnt-numero_rnt"> No. de RNT</label>
         			                <input type="text" class="form-control" ng-model="registro.numero_rnt" name="numero_rnt" id="addFormSinRnt-numero_rnt">
         			                <span class="text-input-alt" ng-if="registro.es_similar == 1">@{{registro.numero_rnt2}}</span>
         			            </div>
@@ -1006,8 +1008,8 @@
         			        </div>
         			        <div class="col-xs-12 col-sm-12">
         			            <div class="form-group" ng-class="{'has-error': (addFormSinRnt.$submitted || addFormSinRnt.nombre_comercial_plataforma.$touched) && addFormSinRnt.nombre_comercial_plataforma.$error.required}">
-        			                <label class="control-label" for="addFormSinRnt-nombre_comercial_plataforma"><span class="asterisk">*</span> Nombre comercial plataforma</label>
-        			                <input type="text" class="form-control" ng-model="registro.nombre_comercial_plataforma" name="nombre_comercial_plataforma" id="addFormSinRnt-nombre_comercial_plataforma" required>
+        			                <label class="control-label" for="addFormSinRnt-nombre_comercial_plataforma"> Nombre comercial plataforma</label>
+        			                <input type="text" class="form-control" ng-model="registro.nombre_comercial_plataforma" name="nombre_comercial_plataforma" id="addFormSinRnt-nombre_comercial_plataforma">
         			                <span class="text-input-alt" ng-if="registro.es_similar == 1">@{{registro.nombre_comercial_plataforma2}}</span>
         			            </div>
         			        </div>

@@ -119,6 +119,24 @@
                             <span class="text-error" ng-if="(crearActividadForm.$submitted || crearActividadForm.valor_maximo.$touched) && crearActividadForm.valor_maximo.$error.min">El valor máximo no puede ser menor al mínimo</span>        
                         </div>
                     </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label for="recomendaciones">Recomendaciones</label>
+                            <textarea style="resize: none;" rows="6" class="form-control" id="recomendaciones" name="recomendaciones" ng-model="actividad.datosGenerales.recomendaciones" placeholder="Máximo 1,000 caracteres."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label for="reglas">Reglas</label>
+                            <textarea style="resize: none;" rows="6" class="form-control" id="reglas" name="reglas" ng-model="actividad.datosGenerales.reglas" placeholder="Reglas o normas que deben seguir los visitantes. Máximo 1,000 caracteres."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label for="como_llegar">Cómo llegar</label>
+                            <textarea style="resize: none;" rows="6" class="form-control" id="como_llegar" name="como_llegar" ng-model="actividad.datosGenerales.como_llegar" placeholder="Pasos o indicaciones para llegar al lugar. Máximo 1,000 caracteres."></textarea>
+                        </div>
+                    </div>
                     <div class="col-xs-12 text-center">
                         <hr/>
                         <button type="submit" ng-click="guardarDatosGenerales()" class="btn btn-lg btn-success">Guardar</button>
@@ -153,7 +171,7 @@
                 <div>
                     <h4>Galería de imágenes</h4>
                     <div class="col-sm-12">
-                        <file-input text ng-model="imagenes" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="imagenes" label="Seleccione las imágenes de la atracción." multiple max-files="5"></file-input>
+                        <file-input text ng-model="imagenes" accept="image/*" icon-class="glyphicon glyphicon-plus" id-input="imagenes" label="Seleccione las imágenes de la atracción." multiple max-files="19"></file-input>
                     </div>
                 </div>
                 <div class="row">
