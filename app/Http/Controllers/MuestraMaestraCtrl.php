@@ -658,8 +658,8 @@ class MuestraMaestraCtrl extends Controller
     public function getExcelinfoperiodo($id){
         
         
-        $proveedores = new Collection(DB::select("SELECT *from proveedores_periodos(?)", array($id) ));
-        $proveedoresInformales = new Collection(DB::select("SELECT *from proveedores_informales_periodos(?)", array($id) ));
+        $proveedores = new Collection(DB::select("SELECT *from proveedores_periodos_completos(?)", array($id) ));
+        $proveedoresInformales = new Collection(DB::select("SELECT *from proveedores_informales_periodos_completos(?)", array($id) ));
         
                            
         //return View("MuestraMaestra.formatoDescargaInformacionPeriodo", [ "proveedores"=> $proveedores, "proveedoresInformales"=> $proveedoresInformales ]);
