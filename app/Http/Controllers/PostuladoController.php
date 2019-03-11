@@ -41,15 +41,15 @@ class PostuladoController extends Controller
         $validator = \Validator::make($request->all(), [
 			'nombres' => 'required|max:150',
 			'apellidos' => 'required|max:150',
-			'email' => 'required|email|max:455',
+			'email' => 'required|email|max:455|unique:users,email',
 			'fecha_nacimiento' => 'required',
-			'profesion' => 'required|max:455',
+			'profesion' => 'max:455',
 			'sexo' => 'required|boolean',
 			'municipio_id' => 'required|exists:municipios,id',
 			'password1' => 'required|max:255',
 			'password2' => 'required|max:255',
     	],[
-       		
+       		'email.unique'=> 'Ya existe un usuario registrado con el mismo correo.'
     	]);
        
     	if($validator->fails()){
@@ -66,22 +66,24 @@ class PostuladoController extends Controller
 		        return ["success"=>false,"errores"=> [["La contraseña no coincide con el usuario."]] ];    
 		    }
 		}else{
+		    
 		    $user = User::create([
     	        'nombre' => $request->nombres,
+    	        'apellido' => $request->apellidos,
     	        'email' => $request->email,
     	        'password' => $request->password1,
     	        'username' => $request->email,
-    	        'estado' => 1
+    	        'estado' => true
     	    ]);    
 		}
-	    
+	   
 	    $postulado = Datos_Adicional_Usuario::create([
 	        'users_id' => $user->id,
             'nombres' => $request->nombres,
             'apellidos' => $request->apellidos,
             'fecha_nacimiento' => date('Y-m-d H:i',strtotime(str_replace("/","-",$request->fecha_nacimiento))),
             'sexo' => $request->sexo,
-            'profesion' => $request->profesion,
+            'profesion' => isset($request->profesion) ? $request->profesion : null,
             'municipio_id' => $request->municipio_id,
             'user_create' => 'admin',
             'user_update' => 'admin',
