@@ -95,7 +95,22 @@ class AdministradorDestinosController extends Controller
             $queryTipoDestinoConIdiomas->select('idiomas_id', 'tipo_destino_id', 'nombre');
         }])->select('id')->get();
         
-        return ['success' => true, 'tipos_sitio' => $tipos_sitio];
+        $categorias_turismo = Categoria_Turismo::with([
+            'categoriaTurismoConIdiomas' => function ($queryCategoriaTurismoConIdiomas){
+                $queryCategoriaTurismoConIdiomas->with(['idioma' => function ($queryIdioma){
+                    $queryIdioma->select('id', 'nombre', 'culture');
+                }])->select('categoria_turismo_id', 'idiomas_id', 'nombre');
+            }, 
+            'tipoTurismo' => function($queryTipoTurismo){
+                $queryTipoTurismo->with(['tipoTurismoConIdiomas' => function($queryTipoTurismoConIdiomas){
+                    $queryTipoTurismoConIdiomas->with(['idioma' => function ($queryIdioma){
+                        $queryIdioma->select('id', 'nombre', 'culture');
+                    }])->select('idiomas_id', 'tipo_turismo_id', 'nombre');
+                }])->select('id');
+            }
+            ])->select('tipo_turismo_id', 'id')->where('estado', true)->get();
+        
+        return ['success' => true, 'tipos_sitio' => $tipos_sitio, 'categorias_turismo' => $categorias_turismo];
     }
     
     public function getDatosdestino($id){
