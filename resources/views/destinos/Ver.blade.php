@@ -10,14 +10,14 @@ function parse_yturl($url)
 ?>
 @extends('layout._publicLayout')
 
-@section('Title',$destino->destinoConIdiomas[0]->nombre)
+@section('Title',$destino->destinoConIdiomas->nombre)
 
 @section('TitleSection','Destinos')
 
 @section('meta_og')
-<meta property="og:title" content="Visita a {{$destino->destinoConIdiomas[0]->nombre}} en el departamento del Cesar" />
+<meta property="og:title" content="Visita a {{$destino->destinoConIdiomas->nombre}} en el departamento del Cesar" />
 <meta property="og:image" content="{{asset('/img/brand/128.png')}}" />
-<meta property="og:description" content="{{$destino->destinoConIdiomas[0]->descripcion}}"/>
+<meta property="og:description" content="{{$destino->destinoConIdiomas->descripcion}}"/>
 @endsection
 
 @section ('estilos')
@@ -62,14 +62,14 @@ function parse_yturl($url)
       
         @for($i = 0; $i < count($destino->multimediaDestinos); $i++)
         <div class="carousel-item {{  $i === 0 ? 'active' : '' }}">
-          <img class="d-block" src="{{$destino->multimediaDestinos[$i]->ruta}}" alt="Imagen de presentación de {{$destino->destinoConIdiomas[0]->nombre}}">
+          <img class="d-block" src="{{$destino->multimediaDestinos[$i]->ruta}}" alt="Imagen de presentación de {{$destino->destinoConIdiomas->nombre}}">
           
         </div>
         @endfor
         
         <div class="carousel-caption d-flex align-items-start flex-column justify-content-end flex-wrap">
-		    <h2 class="text-center container">{{$destino->destinoConIdiomas[0]->nombre}}
-		    {{--Tipo de destino: {{$destino->tipoDestino->tipoDestinoConIdiomas[0]->nombre}} --}}
+		    <h2 class="text-center container">{{$destino->destinoConIdiomas->nombre}}
+		    {{--Tipo de destino: {{$destino->tipoDestino->tipoDestinoConIdiomas->nombre}} --}}
 		        <small class="d-block">
 		            <span class="{{ ($destino->calificacion_legusto > 0.0) ? (($destino->calificacion_legusto <= 0.9) ? 'ion-android-star-half' : 'ion-android-star') : 'ion-android-star-outline'}}" aria-hidden="true"></span>
 		            <span class="{{ ($destino->calificacion_legusto > 1.0) ? (($destino->calificacion_legusto <= 1.9) ? 'ion-android-star-half' : 'ion-android-star') : 'ion-android-star-outline'}}" aria-hidden="true"></span>
@@ -120,7 +120,7 @@ function parse_yturl($url)
     					</a>
     				</div>
     				<div class="col text-center">
-    					<a href="/proveedor?index?tipo=11&destino={{$municipio->id}}">
+    					<a href="/proveedor/index?tipo=12&destino={{$municipio->id}}">
     						<span class="fas fa-utensils d-block" aria-hidden="true" style="font-size: 2rem;"></span>
     						¿Qué comer?
     					</a>
@@ -133,7 +133,7 @@ function parse_yturl($url)
     <section id="informacionGeneral">
         <div class="container">
             <h3>Información general</h3>
-            <h4 class="text-center">{{$destino->destinoConIdiomas[0]->nombre}}</h4>
+            <h4 class="text-center">{{$destino->destinoConIdiomas->nombre}}</h4>
             <!--<div class="text-center">-->
             <!--    <button type="button" class="btn btn-lg btn-link" id="btn-favorite">-->
             <!--        <span class="ionicons ion-android-favorite-outline" aria-hidden="true"></span>-->
@@ -143,7 +143,7 @@ function parse_yturl($url)
             <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional)?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
             
-            <p style="white-space: pre-line;" class="mt-3">{{$destino->destinoConIdiomas[0]->descripcion}}</p>
+            <p style="white-space: pre-line;" class="mt-3">{{$destino->destinoConIdiomas->descripcion}}</p>
             <!--<ul class="enlaces-entidades shadow-sm">-->
             <!--    <li>-->
             <!--        <a href="/proveedor/index?tipo=1">-->
@@ -167,15 +167,15 @@ function parse_yturl($url)
         </div>
         
     </section>
-    <section id="caracteristicas">
+    <section id="caracteristicas mb-3">
         <div class="container">
             <h3>Características</h3>
             <!--<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>-->
             <div class="row">
-                <div class="col-xs-12 @if(count($destino->sectores) > 0) col-md-8 @else col-md-12 @endif">
+                <div class="col-xs-12 @if(count($destino->sectores) > 0) col-md-12 @else col-md-12 @endif">
                     <div id="map"></div>
                 </div>
-                @if(count($destino->sectores) > 0)
+                @if(count($destino->sectores) > 0 && false)
                 <div class="col-xs-12 col-md-4">
                     <div class="row">
                         <h4>Sectores</h4>
@@ -189,24 +189,30 @@ function parse_yturl($url)
                 @endif
             </div>
         </div>
-        <div class="container mt-3 mb-3">
-            <div class="row justify-content-center">
-                @if($destino->como_llegar)
-                <div class="col-md-4">
-                    <h3>Como llegar</h3>
-                    <p>{{$destino->como_llegar}}</p>
+        <div class="container mt-3 mb-3 pt-3">
+            <div class="row justify-content-center text-center">
+                @if($destino->destinoConIdiomas->como_llegar && $destino->destinoConIdiomas->como_llegar != "")
+                <div class="col-md-6 pb-3">
+                    <h3 class="h4 mb-3">Como llegar</h3>
+                    <p style="white-space: pre-line;">{{$destino->destinoConIdiomas->como_llegar}}</p>
                 </div>
                 @endif
-                @if($destino->reglas)
-                <div class="col-md-4">
-                    <h3>Reglas</h3>
-                    <p>{{$destino->reglas}}</p>
+                @if($destino->destinoConIdiomas->reglas && $destino->destinoConIdiomas->reglas != "")
+                <div class="col-md-6 pb-3">
+                    <h3 class="h4 mb-3">Reglas</h3>
+                    <p style="white-space: pre-line;">{{$destino->destinoConIdiomas->reglas}}</p>
                 </div>
                 @endif
-                @if($destino->recomendaciones)
-                <div class="col-md-4">
-                    <h3>Recomendaciones</h3>
-                    <p>{{$destino->recomendaciones}}</p>
+                @if($destino->destinoConIdiomas->recomendaciones && $destino->destinoConIdiomas->recomendaciones != "")
+                <div class="col-md-6 pb-3">
+                    <h3 class="h4 mb-3">Recomendaciones</h3>
+                    <p style="white-space: pre-line;">{{$destino->destinoConIdiomas->recomendaciones}}</p>
+                </div>
+                @endif
+                @if($destino->destinoConIdiomas->informacion_practica && $destino->destinoConIdiomas->informacion_practica != "")
+                <div class="col-md-6 pb-3">
+                    <h3 class="h4 mb-3">Información practica</h3>
+                    <p style="white-space: pre-line;">{{$destino->destinoConIdiomas->informacion_practica}}</p>
                 </div>
                 @endif
             </div>
@@ -215,10 +221,10 @@ function parse_yturl($url)
     <section id="comentarios">
         <div class="container">
             <h3>Comentarios</h3>
-            <p class="text-center">Te invitamos a que compartas tu opinión acerca de {{$destino->destinoConIdiomas[0]->nombre}}</p>   
+            <p class="text-center">Te invitamos a que compartas tu opinión acerca de {{$destino->destinoConIdiomas->nombre}}</p>   
             <div class="text-center">
                 <a id="btn-share-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{\Request::url()}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><span class="ion-social-facebook" aria-hidden="true"></span> Facebook</a>
-                <a id="btn-share-twitter" href="https://twitter.com/intent/tweet?text=Visita a {{$destino->destinoConIdiomas[0]->nombre}} en el departamento del Cesar.&url={{\Request::url()}}&hashtags=SITURCesar" class="btn btn-info" target="_blank" rel="noopener noreferrer"><span class="ion-social-twitter" aria-hidden="true"></span> Twitter</a>
+                <a id="btn-share-twitter" href="https://twitter.com/intent/tweet?text=Visita a {{$destino->destinoConIdiomas->nombre}} en el departamento del Cesar.&url={{\Request::url()}}&hashtags=SITURCesar" class="btn btn-info" target="_blank" rel="noopener noreferrer"><span class="ion-social-twitter" aria-hidden="true"></span> Twitter</a>
                 <a id="btn-share-googleplus" href="https://plus.google.com/share?url={{\Request::url()}}" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>
             </div>
             <div class="row" id="puntajes">
