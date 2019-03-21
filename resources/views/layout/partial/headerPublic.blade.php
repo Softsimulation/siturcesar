@@ -81,21 +81,6 @@
                             <li role="none">
                                 <a role="menuitem" href="/proveedor">Prestadores de servicios turísticos</a>
                             </li>
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/Mapa">Mapa del departamento</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/PlanificaTuViaje">Planifica tu viaje</a>-->
-                            <!--</li>-->
                         </ul>
                     </li>
                     <li>
@@ -116,19 +101,17 @@
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/empleo">Empleo</a>
                             </li>
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/indicadores/secundarios">Estadisticas secundarias</a>-->
-                            <!--</li>-->
+                            
+                            <li role="none">
+                                <a role="menuitem" href="/indicadores/secundarios">Estadisticas secundarias</a>
+                            </li>
                             <li role="none">
                                 <a role="menuitem" href="/MuestraMaestra/detalles">Verificación de proveedores RNT</a>
                             </li>
-                           
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
-                            <!--</li>-->
+                            <li role="none">
+                                <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>
+                            </li>
+                            
                         </ul>
                     </li>
                     

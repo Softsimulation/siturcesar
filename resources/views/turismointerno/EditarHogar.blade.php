@@ -380,7 +380,32 @@
                         
                         <div class="row">
                             
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+							
+							
+							
+							 <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <label for="inputNombreEncuestado" class="col-xs-12 control-label">Nivel de educación</label>
+                                    <div class="col-xs-12">
+
+                                        <select class="form-control" ng-model="integrante.Nivel_Educacion" id="inputPaisResidencia" name="nivel" ng-required="true">
+                                            <option value="" disabled>Seleccione un nivel de educación</option>
+                                            <option ng-repeat="item in niveles" value="@{{item.id}}">@{{item.nombre}}</option>
+                                        </select>
+
+                                        <span ng-show="IntegranteForm.$submitted || IntegranteForm.nivel.$touched">
+                                            <span class="label label-danger" ng-show="IntegranteForm.nivel.$error.required">*El campo es requerido</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            
+                        </div>
+                        
+                        <div class="row">
+						
+						    <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label for="inputNombreEncuestado" class="col-xs-12 control-label">Estado Civil</label>
                                     <div class="col-xs-12">
@@ -397,11 +422,7 @@
                                 </div>
                             </div>
                             
-                        </div>
-                        
-                        <div class="row">
-                            
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label for="inputNombreEncuestado" class="col-xs-12 control-label">Ocupacion</label>
                                     <div class="col-xs-12">
@@ -438,8 +459,7 @@
                             
                         </div>
                         
-
-                        <div class="row">
+                           <div class="row">
                             
                             <div class="col-xs-12 col-sm-6 col-md-6">
                                 <div class="form-group">
@@ -458,27 +478,9 @@
                                     </div>
                                 </div>
                             </div>
-                           
-
-                            <div class="col-xs-12 col-sm-6 col-md-6">
-                                <div class="form-group">
-                                    <label for="inputNombreEncuestado" class="col-xs-12 control-label">Nivel de educación</label>
-                                    <div class="col-xs-12">
-
-                                        <select class="form-control" ng-model="integrante.Nivel_Educacion" id="inputPaisResidencia" name="nivel" ng-required="true">
-                                            <option value="" disabled>Seleccione un nivel de educación</option>
-                                            <option ng-repeat="item in niveles" value="@{{item.id}}">@{{item.nombre}}</option>
-                                        </select>
-
-                                        <span ng-show="IntegranteForm.$submitted || IntegranteForm.nivel.$touched">
-                                            <span class="label label-danger" ng-show="IntegranteForm.nivel.$error.required">*El campo es requerido</span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
+                        
                         </div>
-
-                        <div class="row">
+						     <div class="row">
 
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
@@ -498,7 +500,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+						   <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12" ng-if="integrante.Viaje == '0'">
                                 <div class="form-group">
                                     <label for="inputNombreEncuestado" class="col-xs-12 control-label">¿Por qué motivos no realizó ningún viaje?</label>
@@ -516,6 +518,12 @@
                                 </div>
                             </div>
                         </div>
+                        
+
+                     
+
+                   
+                     
 
 
 

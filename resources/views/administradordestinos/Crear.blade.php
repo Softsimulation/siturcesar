@@ -113,11 +113,40 @@
                             </ui-select>
                         </div>
                     </div>
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 col-md-12">
                         <div class="form-group" ng-class="{'has-error': (crearDestinoForm.$submitted || crearDestinoForm.descripcion.$touched) && crearDestinoForm.descripcion.$error.required}">
                             <label for="descripcion"><span class="asterisk">*</span> Descripción</label>
-                            <textarea style="resize: none;" ng-model="destino.datosGenerales.descripcion" rows="5" required name="descripcion" id="descripcion" class="form-control" placeholder="Descripción del destino (De 100 a 1,000 caracteres)"></textarea>
-                                
+                            <ng-ckeditor  
+                                      ng-model="destino.datosGenerales.descripcion"
+                                       
+                                      skin="moono" 
+                                      remove-buttons="Image" 
+                                      remove-plugins="iframe,flash,smiley"
+                                      name="descripcion"
+                                      required
+                                      >
+                            </ng-ckeditor>
+                            <span class="messages" ng-show="crearDestinoForm.$submitted || crearDestinoForm.descripcion.$touched">
+                                <span ng-show="crearDestinoForm.descripcion.$error.required" class="text-error">* El campo es obligatorio.</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label for="informacion_practica">Información práctica</label>
+                            <textarea style="resize: none;" rows="6" class="form-control" id="informacion_practica" name="informacion_practica" ng-model="destino.datosGenerales.informacion_practica" placeholder="Máximo 1,000 caracteres."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label for="reglas">Reglas</label>
+                            <textarea style="resize: none;" rows="6" class="form-control" id="reglas" name="reglas" ng-model="destino.datosGenerales.reglas" placeholder="Reglas o normas que deben seguir los visitantes. Máximo 1,000 caracteres."></textarea>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4">
+                        <div class="form-group">
+                            <label for="como_llegar">Cómo llegar</label>
+                            <textarea style="resize: none;" rows="6" class="form-control" id="como_llegar" name="como_llegar" ng-model="destino.datosGenerales.como_llegar" placeholder="Pasos o indicaciones para llegar al lugar. Máximo 1,000 caracteres."></textarea>
                         </div>
                     </div>
                     <div class="col-xs-12">
@@ -128,7 +157,6 @@
                             </div>
                             <button type="button" ng-click="searchAdress()" class="btn btn-default">Buscar</button>
                         </div>
-                            
                     </div>
                     <div class="col-xs-12">
                         <div id="direccion_map" style="height: 400px; margin: 1rem 0;">
@@ -204,4 +232,6 @@
 <script src="{{asset('/js/plugins/directiva-tigre.js')}}"></script>
 <script src="https://maps.google.com/maps/api/js?key=AIzaSyC55uUNZFEafP0702kEyGLlSmGE29R9s5k&libraries=placeses,visualization,drawing,geometry,places"></script>
 <script src="{{asset('/js/plugins/gmaps.js')}}"></script>
+<script src="{{asset('/js/plugins/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('/js/plugins/ckeditor/ngCkeditor-v2.0.1.js')}}"></script>
 @endsection

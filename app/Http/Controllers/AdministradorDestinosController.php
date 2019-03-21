@@ -68,10 +68,12 @@ class AdministradorDestinosController extends Controller
     
     public function getDatosIdioma ($id, $idIdioma){
         $destino = Destino::with(['destinoConIdiomas' => function ($queryDestinoConIdiomass) use ($id, $idIdioma){
-            $queryDestinoConIdiomass->where('idiomas_id', $idIdioma)->select('destino_id', 'idiomas_id', 'nombre', 'descripcion');
+            $queryDestinoConIdiomass->where('idiomas_id', $idIdioma)->select('destino_id', 'idiomas_id', 'nombre', 'descripcion', 'informacion_practica', 'reglas', 'como_llegar');
         }])->where('id', $id)->select('id')->first();
         
         $idioma = Idioma::find($idIdioma);
+        
+        //return ['destino' => $destino];
         
         return ['destino' => $destino, 'success' => Destino_Con_Idioma::where('destino_id', $id)->where('idiomas_id', $idIdioma)->first() != null, 'idioma' => $idioma];
     }
@@ -132,6 +134,9 @@ class AdministradorDestinosController extends Controller
         $validator = \Validator::make($request->all(), [
             'nombre' => 'required|max:255',
             'descripcion' => 'required|min:100',
+            'informacion_practica' => 'max:1000',
+            'como_llegar' => 'max:1000',
+            'reglas' => 'max:1000',
             'tipo' => 'required|numeric|exists:tipo_destino,id',
             'pos' => 'required'
         ],[
@@ -141,6 +146,10 @@ class AdministradorDestinosController extends Controller
             'descripcion.required' => 'Se necesita una descripción para el destino.',
             'descripcion.max' => 'Se ha excedido el número máximo de caracteres para el campo "Descripción".',
             'descripcion.min' => 'Se deben ingresar mínimo 100 caracteres para la descripción.',
+            
+            'informacion_practica.max' => 'Se ha excedido el número máximo de caracteres para el campo "Información práctica".',
+            'reglas.max' => 'Se ha excedido el número máximo de caracteres para el campo "Reglas".',
+            'como_llegar.max' => 'Se ha excedido el número máximo de caracteres para el campo "Cómo llegar".',
             
             'tipo.required' => 'Se requiere ingresar un tipo de destino.',
             'tipo.numeric' => '"Tipo de destino" debe tener un valor numérico.',
@@ -328,6 +337,9 @@ class AdministradorDestinosController extends Controller
             'nombre' => 'required|max:255',
             'id' => 'required|exists:destino|numeric',
             'idIdioma' => 'required|exists:idiomas,id|numeric',
+            'informacion_practica' => 'max:1000',
+            'como_llegar' => 'max:1000',
+            'reglas' => 'max:1000',
             'descripcion' => 'required|min:100'
         ],[
             'nombre.required' => 'Se necesita un nombre para el destino.',
@@ -341,6 +353,9 @@ class AdministradorDestinosController extends Controller
             'idIdioma.numeric' => 'El identificador del idioma debe ser un valor numérico.',
             'idIdioma.exists' => 'El idioma especificado no se encuentra registrado en la base de datos.',
             
+            'informacion_practica.max' => 'Se ha excedido el número máximo de caracteres para el campo "Información práctica".',
+            'reglas.max' => 'Se ha excedido el número máximo de caracteres para el campo "Reglas".',
+            'como_llegar.max' => 'Se ha excedido el número máximo de caracteres para el campo "Cómo llegar".',
             
             'descripcion.required' => 'Se necesita una descripción para el destino.',
             'descripcion.max' => 'Se ha excedido el número máximo de caracteres para el campo "Descripción".',
@@ -357,17 +372,23 @@ class AdministradorDestinosController extends Controller
             Destino_Con_Idioma::where('destino_id', $request->id)->where('idiomas_id', $request->idIdioma)
                 ->update([
                 'nombre' => $request->nombre,
-                'descripcion' => $request->descripcion]);
+                'descripcion' => $request->descripcion,
+                'como_llegar' => $request->como_llegar,
+                'informacion_practica' => $request->informacion_practica,
+                'reglas' => $request->reglas]);
         }else{
             Destino_Con_Idioma::create([
                 'destino_id' => $request->id,
                 'idiomas_id' => $request->idIdioma,
                 'nombre' => $request->nombre,
-                'descripcion' => $request->descripcion]);
+                'descripcion' => $request->descripcion,
+                'como_llegar' => $request->como_llegar,
+                'informacion_practica' => $request->informacion_practica,
+                'reglas' => $request->reglas]);
         }
         
         $destino = Destino::with(['destinoConIdiomas' => function ($queryDestinoConIdiomas) use ($request){
-            $queryDestinoConIdiomas->where('idiomas_id', $request->idIdioma)->select('destino_id', 'idiomas_id', 'nombre', 'descripcion');
+            $queryDestinoConIdiomas->where('idiomas_id', $request->idIdioma)->select('destino_id', 'idiomas_id', 'nombre', 'descripcion', 'informacion_practica', 'reglas', 'como_llegar');
         }])->where('id', $request->id)->select('id')->first();
         
         return ['success' => true, 'destino' => $destino];
