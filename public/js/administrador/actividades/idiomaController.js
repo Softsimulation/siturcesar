@@ -12,7 +12,10 @@ angular.module('actividades.idioma', [])
             if (data.success){
                 $scope.actividad.datosGenerales = {
                     'nombre': data.actividad.actividades_con_idiomas[0].nombre,
-                    'descripcion' : data.actividad.actividades_con_idiomas[0].descripcion
+                    'descripcion' : data.actividad.actividades_con_idiomas[0].descripcion,
+                    'recomendaciones': data.actividad.actividades_con_idiomas[0].recomendaciones,
+                    'reglas': data.actividad.actividades_con_idiomas[0].reglas,
+                    'como_llegar': data.actividad.actividades_con_idiomas[0].como_llegar
                 };
             }
             $scope.idioma = data.idioma;
@@ -30,11 +33,14 @@ angular.module('actividades.idioma', [])
         $scope.actividad.datosGenerales.id = $scope.id;
         $scope.actividad.datosGenerales.idIdioma = $scope.idIdioma;
         actividadesServi.postEditaridioma($scope.actividad.datosGenerales).then(function(data){
+            $("body").attr("class", "cbp-spmenu-push");
             if (data.success){
-                $("body").attr("class", "cbp-spmenu-push");
                 $scope.actividad.datosGenerales = {
                     'nombre': data.actividad.actividades_con_idiomas[0].nombre,
-                    'descripcion' : data.actividad.actividades_con_idiomas[0].descripcion
+                    'descripcion' : data.actividad.actividades_con_idiomas[0].descripcion,
+                    'recomendaciones': data.actividad.actividades_con_idiomas[0].recomendaciones,
+                    'reglas': data.actividad.actividades_con_idiomas[0].reglas,
+                    'como_llegar': data.actividad.actividades_con_idiomas[0].como_llegar
                 };
                 swal('¡Éxito!', 'Actividad modificada con éxito.', 'success');
             }else{

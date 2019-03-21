@@ -166,7 +166,7 @@
                 <div class="col-md-4">
                     <div class="form-group" ng-class="{'error': (crearForm.$submitted || crearForm.profesion.$touched) && crearForm.profesion.$error.required }">
                         <label class="control-label" for="profesion">Profesión</label>
-                        <input type="text" class="form-control" name="profesion" id="profesion" placeholder="Ingrese la profesión. Máx. 255 caracteres" maxlength="255" ng-model="usuario.profesion" required />
+                        <input type="text" class="form-control" name="profesion" id="profesion" placeholder="Ingrese la profesión. Máx. 255 caracteres" maxlength="255" ng-model="usuario.profesion" ng-required="id !== undefined" />
                         <span class="text-error" ng-show="(crearForm.$submitted || crearForm.profesion.$touched) && crearForm.profesion.$error.required">El campo es requerido</span>
                     </div>
                 </div>
@@ -226,15 +226,15 @@
                     <div class="form-group" ng-class="{ 'error':(((crearForm.$submitted || crearForm.password1.$touched) && crearForm.password1.$error.required))}">
                         <label class="control-label" for="password1">Contraseña</label>
                         <input class="form-control" type="password" name="password1" id="password1" ng-model="usuario.password1" required ng-maxlength="150" />
-                        <span class="text-error" ng-show="(crearForm.$submitted || crearForm.password1.$touched) && crearForm.password1.$error.required">&nbsp;</span>
+                        <span class="text-error" ng-show="(crearForm.$submitted || crearForm.password1.$touched) && crearForm.password1.$error.required">*EL campo es requerido</span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group" ng-class="{ 'error':(((crearForm.$submitted || crearForm.password2.$touched) && crearForm.password2.$error.required))}">
                         <label class="control-label" for="password2">Confirmar contraseña</label>
                         <input class="form-control" type="password" name="password2" id="password2" ng-model="usuario.password2" required ng-maxlength="150" />
-                        <span class="text-error" ng-show="(crearForm.$submitted || crearForm.password2.$touched) && crearForm.password2.$error.required">&nbsp;</span>
-                        <span class="text-error" ng-show="usuario.password2 != usuario.password1">&nbsp;</span>
+                        <span class="text-error" ng-show="(crearForm.$submitted || crearForm.password2.$touched) && crearForm.password2.$error.required">*EL campo es requerido</span>
+                        <span class="text-error" ng-show="usuario.password2 != usuario.password1">Verifique que las constraseñas coincidas</span>
                     </div>
                 </div>
             </div>

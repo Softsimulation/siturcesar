@@ -136,7 +136,7 @@ class AdministradorActividadesController extends Controller
     
     public function getDatosIdioma ($id, $idIdioma){
         $actividad = Actividad::with(['actividadesConIdiomas' => function ($queryActividadesConIdiomas) use ($id, $idIdioma){
-            $queryActividadesConIdiomas->where('idiomas', $idIdioma)->select('actividades_id', 'idiomas', 'nombre', 'descripcion');
+            $queryActividadesConIdiomas->where('idiomas', $idIdioma)->select('actividades_id', 'idiomas', 'nombre', 'descripcion', 'recomendaciones', 'reglas', 'como_llegar');
         }])->where('id', $id)->select('id')->first();
         
         $idioma = Idioma::find($idIdioma);
@@ -147,8 +147,11 @@ class AdministradorActividadesController extends Controller
     public function postCrearactividad(Request $request){
         $validator = \Validator::make($request->all(), [
             'nombre' => 'required|max:255',
-            'descripcion' => 'required|max:1000|min:100',
+            'descripcion' => 'required|min:100',
             'valor_minimo' => 'required|numeric',
+            'recomendaciones' => 'max:1000',
+            'reglas' => 'max:1000',
+            'como_llegar' => 'max:1000',
             'valor_maximo' => 'required|numeric'
         ],[
             'nombre.required' => 'Se necesita un nombre para la actividad.',
@@ -160,6 +163,12 @@ class AdministradorActividadesController extends Controller
             
             'valor_minimo.required' => 'Se requiere ingresar un valor mínimo para la actividad.',
             'valor_minimo.numeric' => '"Valor mínimo" debe tener un valor numérico.',
+            
+            'recomendaciones.max' => 'Se ha excedido el número máximo de caracteres para el campo "Recomendaciones".',
+            
+            'reglas.max' => 'Se ha excedido el número máximo de caracteres para el campo "Reglas".',
+            
+            'como_llegar.max' => 'Se ha excedido el número máximo de caracteres para el campo "Cómo llegar".',
             
             'valor_maximo.required' => 'Se requiere ingresar un valor máximo para la actividad.',
             'valor_maximo.numeric' => '"Valor máximo" debe tener un valor numérico.'
@@ -196,6 +205,9 @@ class AdministradorActividadesController extends Controller
         $actividad_con_idioma->idiomas = 1;
         $actividad_con_idioma->nombre = $request->nombre;
         $actividad_con_idioma->descripcion = $request->descripcion;
+        $actividad_con_idioma->recomendaciones = $request->recomendaciones;
+        $actividad_con_idioma->como_llegar = $request->como_llegar;
+        $actividad_con_idioma->reglas = $request->reglas;
         $actividad_con_idioma->save();
         
         return ['success' => true, 'id' => $actividad->id];
@@ -258,7 +270,7 @@ class AdministradorActividadesController extends Controller
         
         Storage::disk('multimedia-actividad')->put('actividad-'.$request->id.'/'.$portadaNombre, File::get($request->portadaIMG));
         
-        // Multimedia_Actividad::where('actividades_id', $actividad->id)->where('tipo', false)->where('portada', false)->delete();
+        Multimedia_Actividad::where('actividades_id', $actividad->id)->where('tipo', false)->where('portada', false)->delete();
         // for ($i = 0; $i < 5; $i++){
         //     $nombre = "imagen-".$i.".*";
         //     if (Storage::disk('multimedia-actividad')->exists('actividad-'.$request->id.'/'.$nombre)){
@@ -268,21 +280,23 @@ class AdministradorActividadesController extends Controller
         //return ['success' => $request->image];
         if ($request->image != null){
             foreach($request->image as $key => $file){
-                $nombre = "imagen-".$key.".".pathinfo($file->getClientOriginalName())['extension'];
-                $multimedia_actividad = new Multimedia_Actividad();
-                $multimedia_actividad->actividades_id = $actividad->id;
-                $multimedia_actividad->ruta = "/multimedia/actividades/actividad-".$request->id."/".$nombre;
-                $multimedia_actividad->texto_alternativo = $request->imageText[$key];
-                $multimedia_actividad->tipo = false;
-                $multimedia_actividad->portada = false;
-                $multimedia_actividad->estado = true;
-                $multimedia_actividad->user_create = "Situr";
-                $multimedia_actividad->user_update = "Situr";
-                $multimedia_actividad->created_at = Carbon::now();
-                $multimedia_actividad->updated_at = Carbon::now();
-                $multimedia_actividad->save();
-                
-                Storage::disk('multimedia-actividad')->put('actividad-'.$request->id.'/'.$nombre, File::get($file));
+                if (!is_string($file)){
+                    $nombre = "imagen-".$key.".".pathinfo($file->getClientOriginalName())['extension'];
+                    $multimedia_actividad = new Multimedia_Actividad();
+                    $multimedia_actividad->actividades_id = $actividad->id;
+                    $multimedia_actividad->ruta = "/multimedia/actividades/actividad-".$request->id."/".$nombre;
+                    $multimedia_actividad->texto_alternativo = $request->imageText[$key];
+                    $multimedia_actividad->tipo = false;
+                    $multimedia_actividad->portada = false;
+                    $multimedia_actividad->estado = true;
+                    $multimedia_actividad->user_create = "Situr";
+                    $multimedia_actividad->user_update = "Situr";
+                    $multimedia_actividad->created_at = Carbon::now();
+                    $multimedia_actividad->updated_at = Carbon::now();
+                    $multimedia_actividad->save();
+                    
+                    Storage::disk('multimedia-actividad')->put('actividad-'.$request->id.'/'.$nombre, File::get($file));
+                }
             }
         }
         
@@ -369,7 +383,10 @@ class AdministradorActividadesController extends Controller
             'nombre' => 'required|max:255',
             'id' => 'required|exists:actividades|numeric',
             'idIdioma' => 'required|exists:idiomas,id|numeric',
-            'descripcion' => 'required|max:1000|min:100'
+            'recomendaciones' => 'max:1000',
+            'reglas' => 'max:1000',
+            'como_llegar' => 'max:1000',
+            'descripcion' => 'required|min:100'
         ],[
             'nombre.required' => 'Se necesita un nombre para la actividad.',
             'nombre.max' => 'Se ha excedido el número máximo de caracteres para el campo "Nombre".',
@@ -382,6 +399,11 @@ class AdministradorActividadesController extends Controller
             'idIdioma.numeric' => 'El identificador del idioma debe ser un valor numérico.',
             'idIdioma.exists' => 'El idioma especificado no se encuentra registrado en la base de datos.',
             
+            'recomendaciones.max' => 'Se ha excedido el número máximo de caracteres para el campo "Recomendaciones".',
+            
+            'reglas.max' => 'Se ha excedido el número máximo de caracteres para el campo "Reglas".',
+            
+            'como_llegar.max' => 'Se ha excedido el número máximo de caracteres para el campo "Cómo llegar".',
             
             'descripcion.required' => 'Se necesita una descripción para la actividad.',
             'descripcion.max' => 'Se ha excedido el número máximo de caracteres para el campo "Descripción".',
@@ -399,17 +421,23 @@ class AdministradorActividadesController extends Controller
             Actividad_Con_Idioma::where('actividades_id', $request->id)->where('idiomas', $request->idIdioma)
                 ->update([
                 'nombre' => $request->nombre,
-                'descripcion' => $request->descripcion]);
+                'descripcion' => $request->descripcion,
+                'recomendaciones' => $request->recomendaciones,
+                'como_llegar' => $request->como_llegar,
+                'reglas' => $request->reglas]);
         }else{
             Actividad_Con_Idioma::create([
                 'actividades_id' => $request->id,
                 'idiomas' => $request->idIdioma,
                 'nombre' => $request->nombre,
-                'descripcion' => $request->descripcion]);
+                'descripcion' => $request->descripcion,
+                'recomendaciones' => $request->recomendaciones,
+                'como_llegar' => $request->como_llegar,
+                'reglas' => $request->reglas]);
         }
         
         $actividad = Actividad::with(['actividadesConIdiomas' => function ($queryActividadesConIdiomas) use ($request){
-            $queryActividadesConIdiomas->where('idiomas', $request->idIdioma)->select('actividades_id', 'idiomas', 'nombre', 'descripcion');
+            $queryActividadesConIdiomas->where('idiomas', $request->idIdioma)->select('actividades_id', 'idiomas', 'nombre', 'descripcion', 'recomendaciones', 'como_llegar', 'reglas');
         }])->where('id', $request->id)->select('id')->first();
         
         return ['success' => true, 'actividad' => $actividad];

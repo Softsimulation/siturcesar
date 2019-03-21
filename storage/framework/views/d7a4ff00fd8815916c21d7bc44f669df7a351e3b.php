@@ -140,19 +140,25 @@
                                     <a role="menuitem" href="<?php echo e(asset('administradorproveedores')); ?>">Administrar proveedores</a>
                                 </li>
                                 <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoratracciones')); ?>">Administrar atracciones</a></li>
-        					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoractividades')); ?>">Administrar actividades</a></li>
+        					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoragit ctividades')); ?>">Administrar actividades</a></li>
         					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradoreventos')); ?>">Administrar eventos</a></li>
         					    <li role="none"><a role="menuitem" href="<?php echo e(asset('administradorrutas')); ?>">Administrar rutas turísticas</a></li>
         					    <li role="none"><a role="menuitem" href="<?php echo e(asset('sliders/listadosliders')); ?>">Galería de imágenes</a></li>
-        					      <li><a role="menuitem" href="<?php echo e(asset('/InformacionDepartamento/configuracionacercade')); ?>">Acerca del departamento</a></li>
-        					        <li><a role="menuitem" href="<?php echo e(asset('/InformacionDepartamento/configuracionrequisitos')); ?>">Requisitos del viaje</a></li>
-        					    <li><a role="menuitem" href="<?php echo e(asset('/bolsaEmpleo/vacantes')); ?>">Bolsa de empleo</a></li>
-        					    <li><a role="menuitem" href="<?php echo e(asset('/publicaciones/listadoadmin')); ?>">Biblioteca Digital</a></li>
-        					    <li><a role="menuitem" href="<?php echo e(asset('/noticias/listadonoticias')); ?>">Noticias</a></li>
-        					    <li><a role="menuitem" href="<?php echo e(asset('/informes/configuracion')); ?>">Informes</a></li>
+        					            <li>
+                            <a role="menuitem" href="<?php echo e(asset('publicaciones/listadoadmin')); ?>">Biblioteca Digital</a>
+                        </li>
+                                  <li>
+                            <a role="menuitem" href="<?php echo e(asset('informes/configuracion')); ?>">Informes</a>
+                        </li>
+                          <li>
+                            <a role="menuitem" href="<?php echo e(asset('noticias/listadonoticias')); ?>">Noticias</a>
+                        </li>
+                          <li>
+                            <a role="menuitem" href="<?php echo e(asset('bolsaEmpleo/vacantes')); ?>">Bolsa de empleo</a>
+                        </li>
                             </ul>
                         </li>
-                          
+                         
                         <li>
                             <a role="menuitem" href="<?php echo e(asset('turismoreceptor/listadoencuestas')); ?>">Turismo receptor</a>
                         </li>
@@ -193,13 +199,16 @@
                          <li>
                             <a role="menuitem" href="<?php echo e(asset('encuesta/listado')); ?>">Encuestas personalizadas</a>
                         </li>
-                        
+                  
                           <li>
                             <a role="menuitem" href="<?php echo e(asset('EstadisticasSecundarias/configuracion')); ?>">Estadísticas secundarias</a>
                         </li>
                         
                         <li>
                             <a role="menuitem" href="<?php echo e(asset('exportacion')); ?>">Exportación</a>
+                        </li>
+                         <li>
+                            <a role="menuitem" href="<?php echo e(asset('calcularindicadores')); ?>">Calcular indicadores</a>
                         </li>
                         <li>
                             <a role="menuitem" href="#menuPaises" aria-haspopup="true" aria-expanded="false">Administrar países</a>
@@ -214,9 +223,6 @@
                                     <a role="menuitem" href="<?php echo e(asset('administrarmunicipios')); ?>">Municipios</a>
                                 </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a role="menuitem" href="<?php echo e(asset('usuario/listadousuarios')); ?>">Administración de Usuario</a>
                         </li>
                     </ul>
                 </nav>

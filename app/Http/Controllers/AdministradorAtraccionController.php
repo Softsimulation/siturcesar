@@ -146,6 +146,7 @@ class AdministradorAtraccionController extends Controller
                 $queryIdioma->select('id', 'nombre', 'culture');
             }])->select('actividades_id', 'idiomas', 'nombre', 'descripcion');
         }])->where('estado', true)->select('id')->get();
+        
             
         return ['success' => true, 
             'sectores' => $sectores, 
@@ -233,7 +234,7 @@ class AdministradorAtraccionController extends Controller
             
             'reglas.max' => 'Se ha excedido el número máximo de caracteres para el campo "Reglas".',
             
-            'como_llegar.max' => 'Se ha excedido el número máximo de caracteres para el campo "Como llegar".',
+            'como_llegar.max' => 'Se ha excedido el número máximo de caracteres para el campo "Cómo llegar".',
             
             'pos.required' => 'Agregue un marcador en el mapa de Google.'
         ]);

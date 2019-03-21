@@ -64,35 +64,23 @@
                         <a role="menuitem" href="#menu-visitarAlCesar" aria-haspopup="true" aria-expanded="false">Visita al Cesar</a>
                         <ul role="menu" id="menu-visitarAlCesar" aria-label="Visita al Cesar">
                             <li role="none">
-                                <a role="menuitem" href="/quehacer/?tipo=3">Destinos</a>
+                                <a role="menuitem" href="/quehacer/index?tipo=3">Destinos</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/quehacer/?tipo=4">Eventos</a>
+                                <a role="menuitem" href="/quehacer/index?tipo=4">Eventos</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/quehacer/?tipo=1">Actividades</a>
+                                <a role="menuitem" href="/quehacer/index?tipo=1">Actividades</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/quehacer/?tipo=2">Atracciones</a>
+                                <a role="menuitem" href="/quehacer/index?tipo=2">Atracciones</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/quehacer/?tipo=5">Rutas turísticas</a>
+                                <a role="menuitem" href="/quehacer/index?tipo=5">Rutas turísticas</a>
                             </li>
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/PST">Proveedores de Servicios Turísticos</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/Mapa">Mapa del departamento</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/Departamento/AcercaDe">Acerca del departamento</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/Departamento/Requisitos">Requisitos para su viaje</a>-->
-                            <!--</li>-->
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/PlanificaTuViaje">Planifica tu viaje</a>-->
-                            <!--</li>-->
+                            <li role="none">
+                                <a role="menuitem" href="/proveedor">Prestadores de servicios turísticos</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -120,10 +108,6 @@
                             <li role="none">
                                 <a role="menuitem" href="/MuestraMaestra/detalles">Verificación de proveedores RNT</a>
                             </li>
-                           
-                            <!--<li role="none">-->
-                            <!--    <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>-->
-                            <!--</li>-->
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>
                             </li>
