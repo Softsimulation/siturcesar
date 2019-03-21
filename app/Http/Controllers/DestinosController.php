@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Destino;
+use App\Models\Municipio;
 use App\Models\Comentario_Destino;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Models\Proveedores_rnt;
+use DB;
 
 class DestinosController extends Controller
 {
@@ -34,7 +37,7 @@ class DestinosController extends Controller
                 $queryTipoDestinoConIdiomas->orderBy('idiomas_id')->select('idiomas_id', 'tipo_destino_id', 'nombre');
             }])->select('id');
         }, 'destinoConIdiomas' => function($queryDestinoConIdiomas){
-            $queryDestinoConIdiomas->orderBy('idiomas_id')->select('destino_id', 'idiomas_id', 'nombre', 'descripcion');
+            $queryDestinoConIdiomas->orderBy('idiomas_id')->select('destino_id', 'idiomas_id', 'nombre', 'descripcion', 'como_llegar', 'recomendaciones', 'reglas');
         }, 'multimediaDestinos' => function ($queryMultimediaDestinos){
             $queryMultimediaDestinos->where('tipo', false)->orderBy('portada', 'desc')->select('destino_id', 'ruta');
         }, 'sectores' => function($querySectores){
@@ -47,14 +50,23 @@ class DestinosController extends Controller
             $queryMultimediaDestinos->where('tipo', true);
         }])->where('id', $id)->first()->multimediaDestinos;
         
+        // $proveedores = Proveedores_rnt::select(DB::raw('proveedores_rnt.id AS id, proveedores_rnt.razon_social AS razon_social, proveedores_rnt.latitud AS latitud
+        // , proveedores_rnt.longitud AS longitud, proveedores_rnt.telefono AS telefono, proveedores_rnt.celular AS celular, proveedores_rnt.email AS email'))
+        // ->join('municipios', 'municipios.id', '=', 'proveedores_rnt.municipio_id')
+        // ->whereRaw('lower(municipios.nombre) like lower(?)', ["%{$destino->destinoConIdiomas[0]->nombre}%"])->get();
+        
+        $municipio = Municipio::whereRaw('lower(nombre) like lower(?)', ["%{$destino->destinoConIdiomas[0]->nombre}%"])->first();
+        
         if (count($video_promocional) > 0){
             $video_promocional = $video_promocional[0]->ruta;
         }else {
             $video_promocional = null;
         }
         
+        
+        
         //return ['destino' => $destino, 'video_promocional' => $video_promocional];
-        return view('destinos.Ver', ['destino' => $destino, 'video_promocional' => $video_promocional]);
+        return view('destinos.Ver', ['destino' => $destino, 'video_promocional' => $video_promocional, 'municipio' => $municipio]);
     }
     
         public function postGuardarcomentario(Request $request){

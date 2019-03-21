@@ -166,7 +166,12 @@ $colorTipo = ['primary','success','danger', 'info', 'warning'];
                 <button type="button" class="btn btn-default d-none d-sm-inline-block" onclick="changeViewList(this,'listado','tile-list')" title="Vista de lista"><span class="mdi mdi-view-sequential" aria-hidden="true"></span><span class="sr-only">Vista de lista</span></button>
                 <button type="button" class="btn btn-default d-none d-sm-inline-block" onclick="changeViewList(this,'listado','')" title="Vista de mosaico"><span class="mdi mdi-view-grid" aria-hidden="true"></span><span class="sr-only">Vista de mosaico</span></button>
                 <form class="form-inline" method="GET" action="/proveedor/index">
-                    
+                    @if (isset($_GET['tipo']))
+                        <input type="hidden" name="tipo" value="{{ $_GET['tipo'] }}" />
+                    @endif
+                    @if (isset($_GET['destino']))
+                        <input type="hidden" name="destino" value="{{ $_GET['destino'] }}" />
+                    @endif
                     <div class="col-auto">
                       <label class="sr-only" for="searchMain">Buscador general</label>
                       <div class="input-group">
