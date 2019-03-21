@@ -79,7 +79,7 @@ function parse_yturl($url)
 		            
 		        </small>
 	        </h2>
-	        <div class="text-center">
+	        <div class="d-block w-100 text-center">
             @if(Auth::check())
                 <form role="form" action="/atracciones/favorito" method="post">
                     {{ csrf_field() }}

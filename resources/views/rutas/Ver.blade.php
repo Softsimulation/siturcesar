@@ -55,7 +55,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{$atraccion->sitio->sitiosConIdiomas->nombre}}</h5>
                 <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#{{$atraccion->id}}" class="btn btn-sm btn-success">Ver atracción</a>
+                <a href="/atracciones/ver/{{$atraccion->id}}" class="btn btn-sm btn-success">Ver atracción</a>
               </div>
             </div>
             

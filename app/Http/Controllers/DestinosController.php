@@ -64,8 +64,6 @@ class DestinosController extends Controller
             $video_promocional = null;
         }
         
-        
-        
         //return ['destino' => $destino, 'video_promocional' => $video_promocional];
         return view('destinos.Ver', ['destino' => $destino, 'video_promocional' => $video_promocional, 'municipio' => $municipio]);
     }
