@@ -51,7 +51,7 @@ function parse_yturl($url)
         {{ session('error') }}
     </div>
 @endif
-
+    
     <div id="carousel-main-page" class="carousel slide carousel-fade" data-ride="carousel">
       <ol class="carousel-indicators">
         @for($i = 0; $i < count($destino->multimediaDestinos); $i++)
@@ -108,19 +108,19 @@ function parse_yturl($url)
     				<!--	</a>-->
     				<!--</div>-->
     				<div class="col text-center">
-    					<a href="/actividades/index">
+    					<a href="/quehacer/index?tipo=1">
     						<span class="fas fa-hiking d-block" aria-hidden="true" style="font-size: 2rem;"></span>
     						¿Qué hacer?
     					</a>
     				</div>
     				<div class="col text-center">
-    					<a href="/proveedor">
+    					<a href="/proveedor/index?tipo=1&destino={{$municipio->id}}">
     						<span class="fas fa-bed d-block" aria-hidden="true" style="font-size: 2rem;"></span>
     						¿Dónde dormir?
     					</a>
     				</div>
     				<div class="col text-center">
-    					<a href="/proveedor">
+    					<a href="/proveedor?index?tipo=11&destino={{$municipio->id}}">
     						<span class="fas fa-utensils d-block" aria-hidden="true" style="font-size: 2rem;"></span>
     						¿Qué comer?
     					</a>
@@ -185,6 +185,28 @@ function parse_yturl($url)
                         </div>
                         @endforeach
                     </div>
+                </div>
+                @endif
+            </div>
+        </div>
+        <div class="container mt-3 mb-3">
+            <div class="row justify-content-center">
+                @if($destino->como_llegar)
+                <div class="col-md-4">
+                    <h3>Como llegar</h3>
+                    <p>{{$destino->como_llegar}}</p>
+                </div>
+                @endif
+                @if($destino->reglas)
+                <div class="col-md-4">
+                    <h3>Reglas</h3>
+                    <p>{{$destino->reglas}}</p>
+                </div>
+                @endif
+                @if($destino->recomendaciones)
+                <div class="col-md-4">
+                    <h3>Recomendaciones</h3>
+                    <p>{{$destino->recomendaciones}}</p>
                 </div>
                 @endif
             </div>
