@@ -143,7 +143,7 @@ function parse_yturl($url)
             <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional)?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
             
-            <p style="white-space: pre-line;" class="mt-3">{{$destino->destinoConIdiomas->descripcion}}</p>
+            <p style="white-space: pre-line;" class="mt-3">{!! $destino->destinoConIdiomas->descripcion !!}</p>
             <!--<ul class="enlaces-entidades shadow-sm">-->
             <!--    <li>-->
             <!--        <a href="/proveedor/index?tipo=1">-->
