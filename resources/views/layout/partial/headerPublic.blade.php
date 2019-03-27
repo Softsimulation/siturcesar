@@ -67,9 +67,6 @@
                                 <a role="menuitem" href="/quehacer/index?tipo=3">Destinos</a>
                             </li>
                             <li role="none">
-                                <a role="menuitem" href="/quehacer/index?tipo=4">Eventos</a>
-                            </li>
-                            <li role="none">
                                 <a role="menuitem" href="/quehacer/index?tipo=1">Actividades</a>
                             </li>
                             <li role="none">
@@ -80,6 +77,9 @@
                             </li>
                             <li role="none">
                                 <a role="menuitem" href="/proveedor">Prestadores de servicios turísticos</a>
+                            </li>
+                            <li role="none">
+                                <a role="menuitem" href="/quehacer/index?tipo=4">Eventos</a>
                             </li>
                         </ul>
                     </li>
