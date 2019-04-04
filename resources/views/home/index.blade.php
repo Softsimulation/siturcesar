@@ -213,7 +213,7 @@ function getItemType($type){
 		    				<div class="col text-center">
 		    					<a href="/promocionBolsaEmpleo/vacantes">
 		    						<span class="links links-bolsaEmpleo" aria-hidden="true"></span>
-		    						Bolsa de empleo
+		    						Bolsa de empleojj
 		    					</a>
 		    				</div>
 		    				<div class="col text-center">
