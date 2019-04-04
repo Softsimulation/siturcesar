@@ -117,4 +117,8 @@ class HomeController extends Controller
         $tiposNoticias = Tipo_noticia_Idioma::where('idiomas_id',1)->get();
         return view('home.index',array('noticias' => $noticias,"tiposNoticias"=>$tiposNoticias, 'sugeridos' => $query, 'sliders' => $this->getSliders()));
 	}
+	
+	   public function getHabeas(){
+        return view('home.habeas');
+    }
 }
