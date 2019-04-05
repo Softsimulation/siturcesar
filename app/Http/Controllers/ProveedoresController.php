@@ -33,8 +33,10 @@ class ProveedoresController extends Controller
         }, 'multimediaProveedores' => function ($queryMultimediaProveedores){
             $queryMultimediaProveedores->where('tipo', false)->orderBy('portada', 'desc')->select('proveedor_id', 'ruta');
         }])->whereHas('proveedorRnt',function($query) use($request){
-            
-             if(isset($request->tipo) && $request->tipo != null){
+            if(isset($request->destino) && $request->destino != null){
+                $query->where('municipio_id',$request->destino);
+            }
+            if(isset($request->tipo) && $request->tipo != null){
                 $query->where('categoria_proveedores_id',$request->tipo);
             }
             if(isset($request->buscar) && $request->buscar != null){

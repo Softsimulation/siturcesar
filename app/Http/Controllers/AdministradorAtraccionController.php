@@ -146,6 +146,7 @@ class AdministradorAtraccionController extends Controller
                 $queryIdioma->select('id', 'nombre', 'culture');
             }])->select('actividades_id', 'idiomas', 'nombre', 'descripcion');
         }])->where('estado', true)->select('id')->get();
+        
             
         return ['success' => true, 
             'sectores' => $sectores, 
