@@ -30,6 +30,18 @@
         <span class="glyphicon glyphicon-filter" aria-hidden="true"></span><span class="sr-only">Filtros de búsqueda</span>
     </button>
 </div>
+<div class="flex-list">
+    <p> Fecha inicial
+        <adm-dtp name="fecha_inicial" id="fecha_inicial" ng-model='fecha_inicial'  maxdate="'@{{fecha_final}}'"
+                                             options="optionFecha" ng-required="true"></adm-dtp>
+    </p>
+    <p> Fecha final
+        <adm-dtp name="fecha_final" id="fecha_final" ng-model='fecha_final' mindate="'@{{fecha_inicial}}'"
+                                             options="optionFecha" ng-required="true"></adm-dtp>
+    </p>
+    <button type="button" class="btn btn-info" ng-click="buscarEncuestasPorRango()">Buscar</button>
+    <button type="button" class="btn btn-info" ng-click="refrescar()">Refrescar</button>
+</div>
 <div class="collapse" id="filtrosEncuestas">
   <div class="well">
     <div class="flex-list">
@@ -103,6 +115,9 @@
                                     <li><a href="/turismoreceptor/seccionfuentesinformacion/@{{item.id}}">Fuentes de información</a></li>
                                   </ul>
                                 </div>
+                                <button  id="dLabel" type="button" class="btn btn-xs btn-default" title="Eliminar encuesta" ng-click="eliminarEncuesta(item)">
+                                    <span class="glyphicon glyphicon-trash"></span><span class="sr-only">Eliminar</span>
+                                </button>
                                 <a class="btn btn-xs btn-link" href="/turismoreceptor/editardatos/@{{item.id}}" title="Editar encuesta" ng-if="item.EstadoId != 7 && item.EstadoId != 8"><span class="glyphicon glyphicon-pencil"></span></a>
                             </td>
                     </tr>
@@ -124,6 +139,7 @@
 
 @section('javascript')
 <script src="{{asset('/js/dir-pagination.js')}}"></script>
+<script src="{{asset('/js/plugins/ADM-dateTimePicker.min.js')}}"></script>
 <script src="{{asset('/js/administrador/listadoreceptor/services.js')}}" type="text/javascript"></script>
 <script src="{{asset('/js/administrador/listadoreceptor/listadoreceptor.js')}}" type="text/javascript"></script>
 @endsection
