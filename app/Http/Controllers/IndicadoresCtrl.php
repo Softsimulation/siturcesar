@@ -165,7 +165,7 @@ class IndicadoresCtrl extends Controller
             case 3: $periodos = DB::select("SELECT *from tiempo_tipo_alojamiento_receptor(?) order by id DESC", array($cultura) );
                     $data = $this->MedioTransporteReceptor($periodos[0],$cultura);  break;
                 
-            case 4: $periodos = DB::select("SELECT *from tiempo_gasto_medio_receptor(?) order by id DESC", array($cultura) );
+            case 4: $periodos = DB::select("SELECT id,year from tiempo_gasto_medio_receptor(?) order by id DESC", array($cultura) );
                     $data = $this->GastoMedioReceptor($periodos[0],$cultura);  break;
                 
             case 5: $periodos = DB::select("SELECT id, year from tiempo_gasto_medio_rubro_receptor(?) order by id DESC", array($cultura) );
