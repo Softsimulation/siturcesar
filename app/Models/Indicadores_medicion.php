@@ -18,5 +18,8 @@ class Indicadores_medicion extends Model
     {
         return $this->belongsToMany('App\Models\Tipos_grafica', 'graficas_indicadores', 'indicador_medicion_id', 'tipo_grafica_id')->withPivot("es_principal");
     }
-
+    public function tipoIndicador()
+    {
+        return $this->belongsTo('App\Models\Tipo_Medicion_Indicador','tipo_medicion_indicador_id');
+    }
 }
