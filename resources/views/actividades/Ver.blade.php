@@ -26,15 +26,18 @@ function parse_yturl($url)
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
     <style>
         .btn.btn-lg.btn-circled{
-                font-size: 1.825rem;
-                color: red;
-                background: whitesmoke;
-                height: 50px;
-                width: 50px;
-                padding: 0;
-                border-radius: 50%;
-                margin-bottom: 2rem;
-            }
+            font-size: 1.825rem;
+            line-height: 1.75;
+            background: whitesmoke;
+            height: 50px;
+            width: 50px;
+            padding: 0;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+        }
+        .btn-favorite{
+            color: red;
+        }
     </style>
 @endsection
 
@@ -79,7 +82,16 @@ function parse_yturl($url)
 		            
 		        </small>
 	        </h2>
-	        <div class="text-center w-100">
+	        <div class="d-block w-100 text-center">
+	            <a role="button" href="#informacionGeneral" class="btn btn-lg btn-circled text-muted" title="Información general">
+                  <span class="ion-information-circled" aria-hidden="true"></span><span class="sr-only">Información general</span>
+                </a>
+                <a role="button" href="#caracteristicas" class="btn btn-lg btn-circled text-muted" title="Características">
+                  <span class="ion-android-apps" aria-hidden="true"></span><span class="sr-only">Características</span>
+                </a>
+                <a role="button" href="#comentarios" class="btn btn-lg btn-circled text-muted" title="Comentarios">
+                  <span class="ion-chatbubbles" aria-hidden="true"></span><span class="sr-only">Comentarios</span>
+                </a>
                 @if(Auth::check())
                     <form role="form" action="/actividades/favorito" method="post">
                         {{ csrf_field() }}
@@ -89,7 +101,7 @@ function parse_yturl($url)
                         </button>    
                     </form>
                 @else
-                    <button type="button" class="btn btn-lg btn-circled" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
+                    <button type="button" class="btn btn-lg btn-circled btn-favorite" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
                       <span class="ion-android-favorite-outline" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
                     </button>
                 @endif
@@ -101,28 +113,45 @@ function parse_yturl($url)
     <div id="title-main-page">
     	<div class="container">
     		<div class="row align-items-center d-flex justify-content-center">
-	    		
-	    		<div class="col-12 col-md-12 row align-items-center d-flex justify-content-center">
-    			    <div class="col text-center">
-    					<a href="#informacionGeneral">
-    						<i class="ionicons ion-information-circled" aria-hidden="true"></i>
-    						Información general
-    					</a>
-    				</div>
-    				<div class="col text-center">
-    					<a href="#caracteristicas">
-    						<i class="ionicons ion-android-apps" aria-hidden="true"></i>
-    						Características
-    					</a>
-    				</div>
-    				<div class="col text-center">
-    					<a href="#comentarios">
-    						<i class="ionicons ion-chatbubbles" aria-hidden="true"></i>
-    						Comentarios
-    					</a>
-    				</div>
+	    		<div class="col col-md-3 text-center">
+					<a href="/quehacer/index?tipo=1">
+						<span class="fas fa-hiking d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Qué hacer?
+					</a>
+				</div>
+				<div class="col col-md-3 text-center">
+					<a href="/proveedor/index?tipo=1">
+						<span class="fas fa-bed d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Dónde dormir?
+					</a>
+				</div>
+				<div class="col col-md-3 text-center">
+					<a href="/proveedor/index?tipo=12">
+						<span class="fas fa-utensils d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Qué comer?
+					</a>
+				</div>
+	    		<!--<div class="col-12 col-md-12 row align-items-center d-flex justify-content-center">-->
+    			<!--    <div class="col text-center">-->
+    			<!--		<a href="#informacionGeneral">-->
+    			<!--			<i class="ionicons ion-information-circled" aria-hidden="true"></i>-->
+    			<!--			Información general-->
+    			<!--		</a>-->
+    			<!--	</div>-->
+    			<!--	<div class="col text-center">-->
+    			<!--		<a href="#caracteristicas">-->
+    			<!--			<i class="ionicons ion-android-apps" aria-hidden="true"></i>-->
+    			<!--			Características-->
+    			<!--		</a>-->
+    			<!--	</div>-->
+    			<!--	<div class="col text-center">-->
+    			<!--		<a href="#comentarios">-->
+    			<!--			<i class="ionicons ion-chatbubbles" aria-hidden="true"></i>-->
+    			<!--			Comentarios-->
+    			<!--		</a>-->
+    			<!--	</div>-->
 	    				
-	    		</div>
+	    		<!--</div>-->
 	    	</div>	
     	</div>
     	

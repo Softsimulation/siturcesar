@@ -24,11 +24,7 @@ function parse_yturl($url)
     <link href="{{asset('/css/public/pages.css')}}" rel="stylesheet">
     <link href="{{asset('/css/public/details.css')}}" rel="stylesheet">
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
-    <style>
-        header{
-            position: relative;
-        }
-    </style>
+    
 @endsection
 
 @section('content')
@@ -165,7 +161,7 @@ function parse_yturl($url)
         <div class="container">
             <h3>Características</h3>
             <!--<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>-->
-            @if(true)
+            @if(false)
             <ul class="list-group list-group-flush text-center">
               <li class="list-group-item">
                   <div class="row justify-content-center">
@@ -224,16 +220,16 @@ function parse_yturl($url)
             </ul>
             @else
             <div class="row">
-                <div class="col-xs-12 col-md-8">
+                <div class="col-12 col-md-8">
                     <div id="map"></div>
                 </div>
-                <div class="col-xs-12 col-md-4">
+                <div class="col-12 col-md-4">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item active text-uppercase"><strong>Detalles</strong></li>
+                        <li class="list-group-item text-uppercase"><strong class="text-primary">Detalles</strong></li>
                         
                         <li class="list-group-item">
                             <div class="row">
-                                <div class="col-xs-2">
+                                <div class="col-1">
                                     <span class="ion-cash" aria-hidden="true"></span> <span class="sr-only">Valor</span>
                                 </div>
                                 <div class="col">
@@ -241,40 +237,45 @@ function parse_yturl($url)
                                 </div>
                                 
                             </div>
+                        </li>
                             @if(isset($proveedor->proveedoresConIdiomas) && count($proveedor->proveedoresConIdiomas) > 0)
-                            
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <span class="ion-android-time" aria-hidden="true"></span> <span class="sr-only">Horario</span>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <span class="ion-android-time" aria-hidden="true"></span> <span class="sr-only">Horario</span>
+                                    </div>
+                                    <div class="col">
+                                        {{$proveedor->proveedoresConIdiomas[0]->horario}}
+                                    </div>
+                                    
                                 </div>
-                                <div class="col">
-                                    {{$proveedor->proveedoresConIdiomas[0]->horario}}
-                                </div>
-                                
-                            </div>
+                            </li>
                             @endif
                             @if($proveedor->telefono != null)
-                            <div class="row">
-                                <div class="col-xs-2">
-                                    <span class="ion-android-call" aria-hidden="true"></span> <span class="sr-only">Telefóno</span>
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <div class="col-1">
+                                        <span class="ion-android-call" aria-hidden="true"></span> <span class="sr-only">Telefóno</span>
+                                    </div>
+                                    <div class="col">
+                                        {{$proveedor->telefono}}
+                                    </div>
+                                    
                                 </div>
-                                <div class="col">
-                                    {{$proveedor->telefono}}
-                                </div>
-                                
-                            </div>
+                            </li>
                             @endif
                             @if($proveedor->sitio_web != null)
+                            <li class="list-group-item">
                             <div class="row">
-                                <div class="col-xs-2">
+                                <div class="col-1">
                                     <span class="ion-android-globe" aria-hidden="true"></span> <span class="sr-only">Sitio web</span>
                                 </div>
                                 <div class="col">
                                     <a href="{{$proveedor->sitio_web}}" target="_blank" rel="noopener noreferrer">Clic para ir al sitio web</a>
                                 </div>
                             </div>
+                            </li>
                             @endif
-                        </li>
                     </ul>
                 </div>
             </div>
@@ -425,7 +426,17 @@ function parse_yturl($url)
     });
 </script>
 <script>
-    
+    // Initialize and add the map
+    function initMap() {
+        var lat = parseFloat("<?php print($proveedor->proveedorRnt->latitud); ?>"), long = parseFloat("<?php print($proveedor->proveedorRnt->longitud); ?>");
+      // The location of Uluru
+      var pos = {lat: lat, lng: long};
+      // The map, centered at Uluru
+      var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 12, center: pos});
+      // The marker, positioned at Uluru
+      var marker = new google.maps.Marker({position: pos, map: map});
+    }
 </script>
 <script async defer
    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC55uUNZFEafP0702kEyGLlSmGE29R9s5k&callback=initMap">

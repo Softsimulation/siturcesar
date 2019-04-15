@@ -43,9 +43,9 @@ class Sitio extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function sectore()
+    public function sector()
     {
-        return $this->belongsTo('App\Models\Sectore', 'sectores_id');
+        return $this->belongsTo('App\Models\Sector', 'sectores_id');
     }
 
     /**

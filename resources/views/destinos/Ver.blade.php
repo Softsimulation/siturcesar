@@ -26,15 +26,18 @@ function parse_yturl($url)
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
     <style>
         .btn.btn-lg.btn-circled{
-                font-size: 1.825rem;
-                color: red;
-                background: whitesmoke;
-                height: 50px;
-                width: 50px;
-                padding: 0;
-                border-radius: 50%;
-                margin-bottom: 2rem;
-            }
+            font-size: 1.825rem;
+            line-height: 1.75;
+            background: whitesmoke;
+            height: 50px;
+            width: 50px;
+            padding: 0;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+        }
+        .btn-favorite{
+            color: red;
+        }
     </style>
 @endsection
 
@@ -80,6 +83,17 @@ function parse_yturl($url)
 		            
 		        </small>
 	        </h2>
+	        <div class="d-block w-100 text-center">
+	            <a role="button" href="#informacionGeneral" class="btn btn-lg btn-circled text-muted" title="Información general">
+                  <span class="ion-information-circled" aria-hidden="true"></span><span class="sr-only">Información general</span>
+                </a>
+                <a role="button" href="#caracteristicas" class="btn btn-lg btn-circled text-muted" title="Características">
+                  <span class="ion-android-apps" aria-hidden="true"></span><span class="sr-only">Características</span>
+                </a>
+                <a role="button" href="#comentarios" class="btn btn-lg btn-circled text-muted" title="Comentarios">
+                  <span class="ion-chatbubbles" aria-hidden="true"></span><span class="sr-only">Comentarios</span>
+                </a>
+            </div>
 		  </div>
       </div>
       
@@ -87,7 +101,24 @@ function parse_yturl($url)
     <div id="title-main-page">
     	<div class="container">
     		<div class="row align-items-center d-flex justify-content-center">
-	    		
+	    		<div class="col col-md-3 text-center">
+					<a href="/quehacer/index?tipo=1">
+						<span class="fas fa-hiking d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Qué hacer?
+					</a>
+				</div>
+				<div class="col col-md-3 text-center">
+					<a href="/proveedor/index?tipo=1&destino={{$municipio->id}}">
+						<span class="fas fa-bed d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Dónde dormir?
+					</a>
+				</div>
+				<div class="col col-md-3 text-center">
+					<a href="/proveedor/index?tipo=12&destino={{$municipio->id}}">
+						<span class="fas fa-utensils d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Qué comer?
+					</a>
+				</div>
 	    		<div class="col-12 col-md-12 row align-items-center d-flex justify-content-center">
     			 <!--   <div class="col text-center">-->
     				<!--	<a href="#informacionGeneral">-->
@@ -107,24 +138,7 @@ function parse_yturl($url)
     				<!--		Comentarios-->
     				<!--	</a>-->
     				<!--</div>-->
-    				<div class="col text-center">
-    					<a href="/quehacer/index?tipo=1">
-    						<span class="fas fa-hiking d-block" aria-hidden="true" style="font-size: 2rem;"></span>
-    						¿Qué hacer?
-    					</a>
-    				</div>
-    				<div class="col text-center">
-    					<a href="/proveedor/index?tipo=1&destino={{$municipio->id}}">
-    						<span class="fas fa-bed d-block" aria-hidden="true" style="font-size: 2rem;"></span>
-    						¿Dónde dormir?
-    					</a>
-    				</div>
-    				<div class="col text-center">
-    					<a href="/proveedor/index?tipo=12&destino={{$municipio->id}}">
-    						<span class="fas fa-utensils d-block" aria-hidden="true" style="font-size: 2rem;"></span>
-    						¿Qué comer?
-    					</a>
-    				</div>
+    				
 	    		</div>
 	    	</div>	
     	</div>
@@ -167,7 +181,7 @@ function parse_yturl($url)
         </div>
         
     </section>
-    <section id="caracteristicas mb-3">
+    <section id="caracteristicas" class="mb-3">
         <div class="container">
             <h3>Características</h3>
             <!--<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>-->
@@ -225,7 +239,7 @@ function parse_yturl($url)
             <div class="text-center">
                 <a id="btn-share-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{\Request::url()}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><span class="ion-social-facebook" aria-hidden="true"></span> Facebook</a>
                 <a id="btn-share-twitter" href="https://twitter.com/intent/tweet?text=Visita a {{$destino->destinoConIdiomas->nombre}} en el departamento del Cesar.&url={{\Request::url()}}&hashtags=SITURCesar" class="btn btn-info" target="_blank" rel="noopener noreferrer"><span class="ion-social-twitter" aria-hidden="true"></span> Twitter</a>
-                <a id="btn-share-googleplus" href="https://plus.google.com/share?url={{\Request::url()}}" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>
+                <!--<a id="btn-share-googleplus" href="https://plus.google.com/share?url={{\Request::url()}}" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>-->
             </div>
             <div class="row" id="puntajes">
                 <div class="col-xs-12 col-md-4">

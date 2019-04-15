@@ -48,7 +48,7 @@
         }
 		#title-main-page {
 		    background-color: #018037;
-		    padding: 2% 0;
+		    padding: 1rem 0;
 		    color: white;
 		    margin-bottom: 2%;
 		}
