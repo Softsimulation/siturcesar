@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Models\Actividad;
+use App\Models\Actividades;
 
 class ActividadesController extends Controller
 {
@@ -25,6 +26,7 @@ class ActividadesController extends Controller
             $querySitiosConActividades->join('atracciones', 'sitios.id', '=', 'atracciones.sitios_id')->select('sitios.id as id' ,'sitios.latitud as latitud', 'sitios.longitud as longitud');
         }])->where('id', $id)->select('id', 'valor_min', 'valor_max', 'calificacion_legusto', 'calificacion_llegar', 'calificacion_recomendar', 'calificacion_volveria')->first();
         
+       
         //return ['actividad' => $actividad];
         return view('actividades.Ver', ['actividad' => $actividad]);
     }
