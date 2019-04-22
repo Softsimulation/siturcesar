@@ -133,7 +133,7 @@ class MuestraMaestraCtrl extends Controller
                                                                 ])->select("id","destino_id")->get(),
                 "estados"=> Estado_proveedor::where("id","!=",7)->get(),
                 
-                "municipios"=> municipio::where("departamento_id",1411)->select('id','nombre')->get() 
+                "municipios"=> municipio::where("departamento_id",1403)->select('id','nombre')->get() 
                 //Proveedores_rnt::join("municipios","municipios.id","=","municipio_id")->select('municipios.id','municipios.nombre')->distinct()->get()
                 
             ]);
