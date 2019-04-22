@@ -10,6 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::controller('/indicadoresMedicion','IndicadoresMedicionController');
 Route::get('/PlanificaTuViaje','InformacionDepartamentoCtrl@PlanificaTuViaje');
 Route::get('/Departamento/AcercaDe','InformacionDepartamentoCtrl@AcercaDe');
 Route::get('/Departamento/Requisitos','InformacionDepartamentoCtrl@Requisitos');

@@ -37,18 +37,18 @@
 }
 @media only screen and (min-width: 768px) {
     .carousel-inner>.carousel-item {
-        height: 450px;
+        height: 480px;
     }
     
 }
 @media only screen and (min-width: 992px) {
     .carousel-inner>.carousel-item {
-        height: 500px;
+        height: 530px;
     }
 }
 @media only screen and (min-width: 1200px) {
     .carousel-inner>.carousel-item {
-        height: 550px;
+        height: 580px;
     }
     .tiles .tile:not(.inline-tile){
         width: calc(33.3% - 1rem);
@@ -56,7 +56,7 @@
 }
 @media only screen and (min-width: 1400px) {
     .carousel-inner>.carousel-item {
-        height: 600px;
+        height: 630px;
     }
 }
 @media only screen and (min-width: 1600px) {

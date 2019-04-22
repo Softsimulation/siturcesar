@@ -11,6 +11,7 @@ var pp=angular.module('admin.indicadores', ['serviceIndicadores','angularUtils.d
             $scope.indicadores = data.indicadores;
             $scope.tiposMedicion = data.tiposMedicion;
             $scope.indicadoresMedicion = data.indicadoresMedicion;
+            $scope.temporadas = data.temporadas;
         })
         .catch(function(){
             $("body").attr("class", "cbp-spmenu-push");

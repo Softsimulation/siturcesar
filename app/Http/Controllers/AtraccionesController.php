@@ -11,6 +11,8 @@ use App\Http\Requests;
 use App\Models\Atracciones;
 use App\Models\Comentario_Atraccion;
 use App\Models\Atraccion_Favorita;
+use App\Models\Sitio;
+use App\Models\Municipio;
 
 class AtraccionesController extends Controller
 {
@@ -46,21 +48,27 @@ class AtraccionesController extends Controller
             return response('Not found.', 404);
         }
         
-        $atraccion = Atracciones::with(['comentariosAtracciones'=> function ($queryComentario){
-            $queryComentario->orderBy('fecha', 'DESC')->with(['user']);
-        },
-        'sitio' => function ($querySitio){
-            $querySitio->with(['sitiosConIdiomas' => function ($querySitiosConIdiomas){
+        $atraccion = Atracciones::with([
+        'sitio' => function($querySitio){
+            
+            $querySitio->with(['sector'=>function($sector){
+                    $sector->with(['destino'=>function($destino){
+                        $destino->with('destinoConIdiomas');
+                    }]);
+                },'sitiosConIdiomas' => function ($querySitiosConIdiomas){
                 $querySitiosConIdiomas->orderBy('idiomas_id')->select('idiomas_id', 'sitios_id', 'nombre', 'descripcion');
-            }, 'multimediaSitios' => function($queryMultimediaSitios){
+                }, 'multimediaSitios' => function($queryMultimediaSitios){
                 $queryMultimediaSitios->select('sitios_id', 'ruta')->orderBy('portada', 'desc')->where('tipo', false);
-            }, 'sitiosConActividades' => function ($querySitiosConActividades){
+                }, 'sitiosConActividades' => function ($querySitiosConActividades){
                 $querySitiosConActividades->with(['actividadesConIdiomas' => function($queryActividadesConIdiomas){
                     $queryActividadesConIdiomas->select('actividades_id', 'idiomas', 'nombre');
                 }, 'multimediasActividades' => function($queryMultimediasActividades){
                     $queryMultimediasActividades->where('portada', true)->select('actividades_id', 'ruta');
-                }])->select('actividades.id');
-            }])->select('id', 'longitud', 'latitud', 'direccion');
+                }
+                ])->select('actividades.id');
+            }])->select('id', 'longitud', 'latitud', 'direccion', 'sectores_id');
+        },'comentariosAtracciones'=> function ($queryComentario){
+            $queryComentario->orderBy('fecha', 'DESC')->with(['user']);
         }, 'atraccionesConIdiomas' => function ($queryAtraccionesConIdiomas){
             $queryAtraccionesConIdiomas->orderBy('idiomas_id')->select('atracciones_id', 'idiomas_id'  , 'como_llegar', 'horario', 'periodo', 'recomendaciones', 'reglas');
         }, 'atraccionesConTipos' => function ($queryAtraccionesConTipos){
@@ -81,7 +89,13 @@ class AtraccionesController extends Controller
             $querySitio->with(['multimediaSitios' => function ($queryMultimediaSitios){
                 $queryMultimediaSitios->where('tipo', true);
             }]);
-        }])->first()->sitio->multimediaSitios;
+        }])->get();
+        
+        //return $atraccion->sitio->sector->destino->destinoConIdiomas->where('idiomas_id', 1)->first()->nombre;
+        
+        $municipio = Municipio::whereRaw('lower(nombre) like lower(?)', ["%{$atraccion->sitio->sector->destino->destinoConIdiomas->where('idiomas_id', 1)->first()->nombre}%"])->first();
+        
+        //var_dump($video_promocional);
         
         if (count($video_promocional) > 0){
             $video_promocional = $video_promocional[0]->ruta;
@@ -89,9 +103,11 @@ class AtraccionesController extends Controller
             $video_promocional = null;
         }
         
+      
+        
         //return ['atraccion' => $atraccion, 'video_promocional' => $video_promocional];
         
-        return view('atracciones.Ver', ['atraccion' => $atraccion, 'video_promocional' => $video_promocional]);
+        return view('atracciones.Ver', ['atraccion' => $atraccion, 'video_promocional' => $video_promocional, 'municipio' => $municipio]);
     }
     
     
