@@ -112,7 +112,7 @@ function parse_yturl($url)
             @endif
             <div class="row">
                 <div class="col-12 col-md-8">
-                    <p style="white-space: pre-line;">{{$evento->eventosConIdiomas[0]->descripcion}}</p>
+                    <div style="white-space: pre-line;">{!! $evento->eventosConIdiomas[0]->descripcion !!}</div>
                 </div>
                 <div class="col-12 col-md-4">
                     <ul class="list-group list-group-flush">
