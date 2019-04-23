@@ -182,11 +182,11 @@ class IndicadorAdministradorController extends Controller
                     break;
                 case 4:
                     $idMes = Mes_Anio::where('mes_id',$request->mes)->where('anio_id',$request->anio)->first();
-                    $respuesta = $this->calcularOferta($request->indicador_id,$d_tiempo->id,$idMes,$indicador->id);
+                    $respuesta = $this->calcularOferta($request->indicador_id,$d_tiempo->id,$idMes->id,$indicador->id);
                     break;
                 case 5:
                     $idMes = Mes_Anio::where('mes_id',$request->mes)->where('anio_id',$request->anio)->first();
-                    $respuesta = $this->calcularEmpleo($request->indicador_id,$d_tiempo->id,$idMes,$indicador->id);
+                    $respuesta = $this->calcularEmpleo($request->indicador_id,$d_tiempo->id,$idMes->id,$indicador->id);
                     break;
             }
             
