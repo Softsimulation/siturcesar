@@ -27,15 +27,18 @@ function parse_yturl($url)
     <link href="//cdn.materialdesignicons.com/2.5.94/css/materialdesignicons.min.css" rel="stylesheet">
     <style>
         .btn.btn-lg.btn-circled{
-                font-size: 1.825rem;
-                color: red;
-                background: whitesmoke;
-                height: 50px;
-                width: 50px;
-                padding: 0;
-                border-radius: 50%;
-                margin-bottom: 2rem;
-            }
+            font-size: 1.825rem;
+            line-height: 1.75;
+            background: whitesmoke;
+            height: 50px;
+            width: 50px;
+            padding: 0;
+            border-radius: 50%;
+            margin-bottom: 2rem;
+        }
+        .btn-favorite{
+            color: red;
+        }
     </style>
 @endsection
 @section('content')
@@ -80,8 +83,22 @@ function parse_yturl($url)
 		        </small>
 	        </h2>
 	        <div class="d-block w-100 text-center">
+	            <a role="button" href="#informacionGeneral" class="btn btn-lg btn-circled text-muted" title="Información general">
+                  <span class="ion-information-circled" aria-hidden="true"></span><span class="sr-only">Información general</span>
+                </a>
+                <a role="button" href="#caracteristicas" class="btn btn-lg btn-circled text-muted" title="Características">
+                  <span class="ion-android-apps" aria-hidden="true"></span><span class="sr-only">Características</span>
+                </a>
+                @if($paraTenerEnCuentaContieneAlgo)
+                <a role="button" href="#paraTenerEnCuenta" class="btn btn-lg btn-circled text-muted" title="¿Qué debo tener en cuenta?">
+                  <span class="ion-help-circled" aria-hidden="true"></span><span class="sr-only">¿Qué debo tener en cuenta?</span>
+                </a>
+                @endif
+                <a role="button" href="#comentarios" class="btn btn-lg btn-circled text-muted" title="Comentarios">
+                  <span class="ion-chatbubbles" aria-hidden="true"></span><span class="sr-only">Comentarios</span>
+                </a>
             @if(Auth::check())
-                <form role="form" action="/atracciones/favorito" method="post">
+                <form role="form" action="/atracciones/favorito" method="post" class="d-inline-block">
                     {{ csrf_field() }}
                     <input type="hidden" name="atraccion_id" value="{{$atraccion->id}}" />
                     <button type="submit" class="btn btn-lg btn-circled btn-favorite">
@@ -89,7 +106,7 @@ function parse_yturl($url)
                     </button>    
                 </form>
             @else
-                <button type="button" class="btn btn-lg btn-circled" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
+                <button type="button" class="btn btn-lg btn-circled btn-favorite" title="Marcar como favorito" data-toggle="modal" data-target="#modalIniciarSesion">
                   <span class="ion-android-favorite-outline" aria-hidden="true"></span><span class="sr-only">Marcar como favorito</span>
                 </button>
             @endif
@@ -100,35 +117,53 @@ function parse_yturl($url)
     </div>
     <div id="title-main-page">
     	<div class="container">
-    		<div class="row align-items-center d-flex justify-content-center">
-	    		
+    		<div class="row align-items-center justify-content-center">
+	    		<div class="col col-md-3 text-center">
+					<a href="/quehacer/index?tipo=1">
+						<span class="fas fa-hiking d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Qué hacer?
+					</a>
+				</div>
+				<div class="col col-md-3 text-center">
+					<a href="/proveedor/index?tipo=1&destino={{$municipio->id}}">
+						<span class="fas fa-bed d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Dónde dormir?
+					</a>
+				</div>
+				<div class="col col-md-3 text-center">
+					<a href="/proveedor/index?tipo=12&destino={{$municipio->id}}">
+						<span class="fas fa-utensils d-block" aria-hidden="true" style="font-size: 2rem;"></span>
+						¿Qué comer?
+					</a>
+				</div>
 	    		<div class="col-12 col-md-12 row align-items-center d-flex justify-content-center">
-    			    <div class="col text-center">
-    					<a href="#informacionGeneral">
-    						<i class="ionicons ion-information-circled" aria-hidden="true"></i>
-    						Información general
-    					</a>
-    				</div>
-    				<div class="col text-center">
-    					<a href="#caracteristicas">
-    						<i class="ionicons ion-android-apps" aria-hidden="true"></i>
-    						Características
-    					</a>
-    				</div>
-    				@if($paraTenerEnCuentaContieneAlgo)
-    				<div class="col text-center">
-    					<a href="#paraTenerEnCuenta">
-    						<i class="ionicons ion-help-circled" aria-hidden="true"></i>
-    						¿Qué debo tener en cuenta?
-    					</a>
-    				</div>
-    				@endif
-    				<div class="col text-center">
-    					<a href="#comentarios">
-    						<i class="ionicons ion-chatbubbles" aria-hidden="true"></i>
-    						Comentarios
-    					</a>
-    				</div>
+    			 <!--   <div class="col text-center">-->
+    				<!--	<a href="#informacionGeneral">-->
+    				<!--		<i class="ionicons ion-information-circled" aria-hidden="true"></i>-->
+    				<!--		Información general-->
+    				<!--	</a>-->
+    				<!--</div>-->
+    				<!--<div class="col text-center">-->
+    				<!--	<a href="#caracteristicas">-->
+    				<!--		<i class="ionicons ion-android-apps" aria-hidden="true"></i>-->
+    				<!--		Características-->
+    				<!--	</a>-->
+    				<!--</div>-->
+    				<!--@if($paraTenerEnCuentaContieneAlgo)-->
+    				<!--<div class="col text-center">-->
+    				<!--	<a href="#paraTenerEnCuenta">-->
+    				<!--		<i class="ionicons ion-help-circled" aria-hidden="true"></i>-->
+    				<!--		¿Qué debo tener en cuenta?-->
+    				<!--	</a>-->
+    				<!--</div>-->
+    				<!--@endif-->
+    				<!--<div class="col text-center">-->
+    				<!--	<a href="#comentarios">-->
+    				<!--		<i class="ionicons ion-chatbubbles" aria-hidden="true"></i>-->
+    				<!--		Comentarios-->
+    				<!--	</a>-->
+    				<!--</div>-->
+    				
 	    				
 	    		</div>
 	    	</div>	
@@ -146,7 +181,7 @@ function parse_yturl($url)
             @if($video_promocional != null)
             <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional) ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
-            <p style="white-space: pre-line;" class="mt-3">{{$atraccion->sitio->sitiosConIdiomas[0]->descripcion}}</p>
+            <div style="white-space: pre-line;" class="mt-3">{!!$atraccion->sitio->sitiosConIdiomas[0]->descripcion!!}</div>
         </div>
         
     </section>
@@ -251,7 +286,7 @@ function parse_yturl($url)
                 <div class="text-center">
                 <a id="btn-share-facebook" href="https://www.facebook.com/sharer/sharer.php?u={{\Request::url()}}" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><span class="ion-social-facebook" aria-hidden="true"></span> Facebook</a>
                 <a id="btn-share-twitter" href="https://twitter.com/home?status=Realiza {{$atraccion->atraccionesConIdiomas[0]->nombre}} en el departamento del Cesar. Conoce más en {{\Request::url()}}" class="btn btn-info" target="_blank" rel="noopener noreferrer"><span class="ion-social-twitter" aria-hidden="true"></span> Twitter</a>
-                <a id="btn-share-googleplus" href="https://plus.google.com/share?url={{\Request::url()}}" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>
+                <!--<a id="btn-share-googleplus" href="https://plus.google.com/share?url={{\Request::url()}}" class="btn btn-danger" target="_blank" rel="noopener noreferrer"><span class="ion-social-googleplus" aria-hidden="true"></span> Google +</a>-->
             </div>
             </div>
             <div class="row" id="puntajes">

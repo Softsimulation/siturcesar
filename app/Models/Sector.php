@@ -36,7 +36,7 @@ class Sector extends Model
      */
     public function destino()
     {
-        return $this->belongsTo('App\Models\Destino');
+        return $this->belongsTo('App\Models\Destino','destino_id');
     }
 
     /**

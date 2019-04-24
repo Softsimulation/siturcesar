@@ -195,6 +195,7 @@
                             <li ng-repeat="idioma in slider.idiomas"><a href="" ng-click="abirModalEditarSlider(idioma.id,slider)" >Editar @{{idioma.nombre}} </a>
                             <li ng-if="slider.prioridadSlider!=1 && slider.prioridadSlider !=0"><a href="" ng-click="subirPrioridadSlider(slider)" >Subir Prioridad</a></li>
                             <li ng-if="slider.prioridadSlider!=8 && slider.prioridadSlider !=0"><a href="" ng-click="bajarPrioridadSlider(slider)" >Bajar Prioridad</a></li>
+                            <li><a href="ajustar/@{{slider.id}}" ng-click="" >Ajustar imagen</a></li>
                         </ul>
                     </div>
                 </div>

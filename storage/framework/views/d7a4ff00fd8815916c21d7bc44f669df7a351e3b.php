@@ -208,6 +208,11 @@
                             <a role="menuitem" href="<?php echo e(asset('exportacion')); ?>">Exportación</a>
                         </li>
                          <li>
+                            <a role="menuitem" href="<?php echo e(asset('indicadoresMedicion/listado')); ?>">Gestionar indicadores</a>
+                        </li>
+                        
+                        
+                         <li>
                             <a role="menuitem" href="<?php echo e(asset('calcularindicadores')); ?>">Calcular indicadores</a>
                         </li>
                         <li>
