@@ -181,7 +181,7 @@ function parse_yturl($url)
             @if($video_promocional != null)
             <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional) ?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
-            <p style="white-space: pre-line;" class="mt-3">{{$atraccion->sitio->sitiosConIdiomas[0]->descripcion}}</p>
+            <div style="white-space: pre-line;" class="mt-3">{!!$atraccion->sitio->sitiosConIdiomas[0]->descripcion!!}</div>
         </div>
         
     </section>

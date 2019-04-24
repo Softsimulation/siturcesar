@@ -190,18 +190,6 @@
 </div>
 
 <div class="container">
-    <!--<div class="dropdown text-center" ng-init="indicadorSelect={{$indicadores[0]['id']}}">-->
-    <!--  <button type="button" class="btn btn-outline-primary text-uppercase dropdown-toggle"id="dropdownMenuIndicadores" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ver más estadísticas <span class="glyphicon glyphicon-menu-down" aria-hidden="true"></span></button>-->
-      
-    <!--  <ul class="dropdown-menu" aria-labelledby="dropdownMenuIndicadores" ng-init="buscarData( {{$indicadores[0]['id']}} )">-->
-    <!--    @foreach ($indicadores as $indicador)-->
-    <!--        <li ng-class="{'active': (indicadorSelect=={{$indicador['id']}}) }">-->
-    <!--          <button type="button" ng-click="changeIndicador({{$indicador['id']}})">{{$indicador["idiomas"][0]['nombre']}}</button>-->
-    <!--        </li>-->
-    <!--    @endforeach-->
-        
-    <!--  </ul>-->
-    <!--</div>-->
     
     <br>
     
@@ -225,6 +213,7 @@
                     <div class="panel-heading pl-3 pr-3">
                         <form name="form" >
                             <div class="row filtros" >
+                                
                                 <div class="col-12 col-sm-12 col-md-4 col-lg-3" >
                                     <label for="yearSelect" class="sr-only">Periodo</label>
                                     <div class="input-group mb-3">
@@ -233,14 +222,8 @@
                                       </div>
                                       <select class="form-control" ng-model="yearSelect" id="yearSelect" ng-change="changePeriodo()" ng-options="y as y.year for y in periodos | unique: 'year'" required aria-describedby="addon-periodo">
                                         </select>
-                                      <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">-->
                                     </div>
                                     
-                                    <!--<div class="input-group">-->
-                                    <!--    <label class="input-group-addon">Período </label>-->
-                                    <!--    <select class="form-control" ng-model="yearSelect" ng-change="changePeriodo()" ng-options="y as y.year for y in periodos | unique: 'year'" requerid >-->
-                                    <!--    </select>-->
-                                    <!--</div>-->
                                 </div>
                                 
                                 <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-show="yearSelect.mes" >
@@ -251,53 +234,58 @@
                                       </div>
                                       <select class="form-control" ng-model="mesSelect" id="mesSelect" ng-change="filtro.id=mesSelect.id;filtro.mes=mesSelect.mes;filtrarDatos()" ng-options="m as m.mes for m in periodos | filter:{ 'year': yearSelect.year }" ng-required="yearSelect.mes"  >
                                         </select>
-                                      <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">-->
                                     </div>
-                                    
-                                    <!--<div class="input-group">-->
-                                    <!--    <label class="input-group-addon">Mes</label>-->
-                                    <!--    <select class="form-control" ng-model="mesSelect" ng-change="filtro.id=mesSelect.id;filtro.mes=mesSelect.mes;filtrarDatos()" ng-options="m as m.mes for m in periodos | filter:{ 'year': yearSelect.year }" ng-requerid="yearSelect.mes"  >-->
-                                    <!--    </select>-->
-                                    <!--</div>-->
                                 </div>
                                 
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-show="yearSelect.meses" >
-                                    <label for="filtro-mes" class="sr-only">Meses</label>
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-4" ng-show="yearSelect.temporada" >
+                                    <label for="SelectTemporada" class="sr-only">Temporadas</label>
                                     <div class="input-group mb-3">
                                       <div class="input-group-prepend">
-                                        <span class="input-group-text" id="addon-filtro-mes">Meses</span>
+                                        <span class="input-group-text" id="addon-TempoSelect">Temporadas</span>
                                       </div>
-                                      <select class="form-control" ng-model="filtro.mes" id="filtro-mes" ng-change="filtrarDatos()" ng-options="m.id as m.nombre for m in yearSelect.meses" ng-required="yearSelect.meses"  >
+                                      <select class="form-control" id="SelectTemporada" ng-model="filtro.id" ng-change="filtrarDatos()" ng-options="t.id as t.temporada for t in periodos | filter:{ 'year': yearSelect.year }" ng-requerid="yearSelect.temporada"  >
                                         </select>
-                                      <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">-->
                                     </div>
-                                    
-                                    <!--<div class="input-group">-->
-                                    <!--    <label class="input-group-addon">Meses</label>-->
-                                    <!--    <select class="form-control" ng-model="filtro.mes" ng-change="filtrarDatos()" ng-options="m.id as m.nombre for m in yearSelect.meses" ng-requerid="yearSelect.meses"  >-->
-                                    <!--    </select>-->
-                                    <!--</div>-->
                                 </div>
                                 
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-show="yearSelect.temporadas" >
-                                    <label for="filtro-temporada" class="sr-only">Temporada</label>
+                                
+                                @if( isset($aspectos) )
+                                <div class="col-xs-12 col-md-3" ng-if="indicadorSelect==44">
+                                    <div class="input-group" >
+                                        <label for="aspecto" class="sr-only" >Aspecto </label>
+                                        <div class="input-group mb-3">
+                                          <div class="input-group-prepend">
+                                            <span class="input-group-text" id="addon-AspSelect">Aspecto</span>
+                                          </div>
+                                           <select class="form-control" ng-model="filtro.aspecto" id="aspecto" ng-change="filtrarDatos()" >
+                                                <option value="" selectd >Todos</option>
+                                                @for ($i = 0; $i < count($aspectos); $i++)
+                                                   <option value="{{$aspectos[$i]->aspecto_evaluacion}}" >{{$aspectos[$i]->nombre}}</option>
+                                                @endfor
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                
+                                @if( isset($tipoExperiencia) )
+                                <div class="col-xs-12 col-md-4" ng-if="indicadorSelect==61 || indicadorSelect==77">
+                                    <label for="experiencia" class="sr-only" ng-init="filtro.tipoExperiencia='{{$tipoExperiencia[0]['key']}}' " >Tipo experiencia  </label>
                                     <div class="input-group mb-3">
-                                      <div class="input-group-prepend">
-                                        <span class="input-group-text" id="addon-filtro-temporada">Temporada</span>
-                                      </div>
-                                      <select class="form-control" ng-model="filtro.mes" id="filtro-temporada" ng-change="filtrarDatos()" ng-options="m.id as m.nombre for m in yearSelect.temporadas" ng-required="yearSelect.meses"  >
+                                        <div class="input-group-prepend">
+                                         <span class="input-group-text" id="addon-AspSelect">Tipo experiencia </span>
+                                        </div>
+                                        <select class="form-control" ng-model="filtro.tipoExperiencia" id="experiencia" ng-change="filtrarDatos()" >
+                                            <option value="{{$tipoExperiencia[0]['key']}}" >{{$tipoExperiencia[0]['nombre']}}</option>
+                                            <option value="{{$tipoExperiencia[1]['key']}}" >{{$tipoExperiencia[1]['nombre']}}</option>
                                         </select>
-                                      <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">-->
                                     </div>
-                                    
-                                    <!--<div class="input-group">-->
-                                    <!--    <label class="input-group-addon">Temporada</label>-->
-                                    <!--    <select class="form-control" ng-model="filtro.temporada" ng-change="filtrarDatos()" ng-options="m.id as m.nombre for m in yearSelect.temporadas" ng-requerid="yearSelect.temporadas"  >-->
-                                    <!--    </select>-->
-                                    <!--</div>-->
                                 </div>
+                                @endif
+                                    
                                 
-                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-if="indicadorSelect==5 || indicadorSelect==13 || indicadorSelect==19">
+                                
+                                <div class="col-12 col-sm-12 col-md-4 col-lg-3" ng-if="indicadorSelect==5">
                                     
                                     <label for="SelectTipoGasto" class="sr-only">Gasto promedio</label>
                                     <div class="input-group mb-3">
@@ -308,16 +296,7 @@
                                             <option value="1" selected>Total</option>
                                             <option value="2">Por día</option>
                                         </select>
-                                      <!--<input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">-->
                                     </div>
-                                    
-                                    <!--<div class="input-group" >-->
-                                    <!--    <label class="input-group-addon colorInd">Gasto promedio </label>-->
-                                    <!--    <select class="form-control" ng-model="filtro.tipoGasto" id="SelectTipoGasto" ng-change="filtrarDatos()" >-->
-                                    <!--        <option value="1" selectd >Total</option>-->
-                                    <!--        <option value="2">Por día</option>-->
-                                    <!--    </select>-->
-                                    <!--</div>-->
                                 </div>
                                 
                                 <div class="col-12 col-sm-12 col-md-4 col-lg-3" >
@@ -335,25 +314,8 @@
                                       <p class="form-control text-truncate">
                                           <img src="@{{graficaSelect.icono}}" class="icono" ></img> @{{graficaSelect.nombre || " "}}
                                       </p>
-                                      <!--<input type="text" class="form-control" aria-label="Text input with dropdown button">-->
                                     </div>
                                     
-                                    <!--<div class="input-group" id="selectGrafica" >-->
-                                    <!--    <label class="input-group-addon">Gráfica </label>-->
-                                    <!--    <div class="btn-group" style="width: 100%;">-->
-                                    <!--        <button type="button" class="btn btn-default btn-select">-->
-                                    <!--           <img src="@{{graficaSelect.icono}}" class="icono" ></img> @{{graficaSelect.nombre || " "}}-->
-                                    <!--        </button>-->
-                                    <!--        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">-->
-                                    <!--            <span class="caret "></span>-->
-                                    <!--        </button>-->
-                                    <!--        <ul class="dropdown-menu menuTipoGrafica" role="menu">-->
-                                    <!--            <li ng-repeat="item in indicador.graficas" ng-click="changeTipoGrafica(item)"  >-->
-                                    <!--                <a> <img src="@{{item.icono}}" class="icono" ></img> @{{item.nombre}}</a>-->
-                                    <!--            </li>-->
-                                    <!--        </ul>-->
-                                    <!--    </div>-->
-                                    <!--</div>-->
                                 </div> 
                                 
                                 <div class="col-xs-12 col-sm-12 col-lg-2 menu-descraga" >
@@ -367,12 +329,6 @@
                                         <button type="button" class="dropdown-item" id="descargarPDF">Descargar gráfica: PDF</button>
                                         <button type="button" class="dropdown-item" id="descargarGraficaTabla">Descargar gráfica y tabla de datos: PDF</button>
                                       </div>
-                                      <!--<ul class="dropdown-menu dropdown-menu-right">-->
-                                      <!--  <li><button type="button" id="descargarPNG" >Descargar gráfica: PNG</button></li>-->
-                                       <!-- <li><a href id="descargarJPG" >Download JPG image</a></li> -->
-                                      <!--  <li><a href id="descargarPDF" >Descargar gráfica: PDF</a></li>-->
-                                      <!--  <li><a href id="descargarGraficaTabla" >Descargar gráfica y tabla de datos : PDF</a></li>-->
-                                      <!--</ul>-->
                                     </div>
                                     
                                 </div>
