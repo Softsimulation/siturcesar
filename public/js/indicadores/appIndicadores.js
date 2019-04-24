@@ -201,20 +201,20 @@
                     $scope.periodos = data.periodos;
                     $scope.indicador = data.indicador;
                     
-                    $scope.yearSelect = data.periodos[0];
-                    $scope.mesSelect = data.periodos[0];
-                    $scope.filtro.year = $scope.yearSelect.year;
-                    $scope.filtro.id = $scope.yearSelect.id;
-                    if($scope.yearSelect.mes){ $scope.filtro.mes = $scope.yearSelect.mes; }
-                    else if($scope.yearSelect.meses){ $scope.filtro.mes = $scope.yearSelect.meses[0].id; }
-                    //$scope.filtro.mes = $scope.yearSelect.mes;
-                    $scope.filtro.temporada =  $scope.yearSelect.temporadas ? $scope.yearSelect.temporadas[0].id : null;
+                    if( data.periodos.length>0 ){
+                        $scope.yearSelect = data.periodos[0];
+                        $scope.mesSelect = data.periodos[0];
+                        $scope.filtro.year = $scope.yearSelect.year;
+                        $scope.filtro.id = $scope.yearSelect.id;
+                        if($scope.yearSelect.mes){ $scope.filtro.mes = $scope.yearSelect.mes; }
+                    }
                     
                     $scope.label_x = data.indicador.idiomas[0].eje_x;
                     $scope.label_y = data.indicador.idiomas[0].eje_y;
-                    $scope.formato = ' ';
+                    $scope.formato = data.indicador.formato;
                     
                     $scope.inicializarDataGrafica(data.data);
+                    $('#content-main .nav-tabs a:first').tab('show');
                 });
                 
             indicadoresServi.getDataPivoTable(id);
@@ -255,9 +255,17 @@
             $scope.series = data.series;
             $scope.dataExtra = data.dataExtra;
             
-            if($scope.filtro.indicador==5 || $scope.filtro.indicador==13 || $scope.filtro.indicador==19){
+            if($scope.filtro.indicador==5){
                 $scope.tituloIndicadorGrafica = $scope.indicador.idiomas[0].nombre + " ("+ $("#SelectTipoGasto option:selected" ).text() +"/"+$scope.filtro.year+")";
-            }   
+            } 
+            else if($scope.yearSelect.temporada){
+                for(var i=0; i<$scope.periodos.length; i++){
+                    if($scope.periodos[i].id==$scope.yearSelect.id){
+                        $scope.tituloIndicadorGrafica = $scope.indicador.idiomas[0].nombre + " ("+ $scope.periodos[i].temporada +"/"+$scope.filtro.year+")";
+                        break;
+                    }
+                }
+            }
             else{
                 $scope.tituloIndicadorGrafica = $scope.indicador.idiomas[0].nombre + " ("+ ( $scope.filtro.mes? $scope.filtro.mes+"/" : "") + $scope.filtro.year+")";
             }
@@ -333,6 +341,5 @@
 		});
         
     }]);
-    
     
 }());
