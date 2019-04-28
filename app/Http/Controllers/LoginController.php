@@ -13,6 +13,17 @@ use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     public function getLogin(){
+        if(Auth::user() != null){
+            if(Auth::user()->hasRole("Admin")){
+                return redirect()->intended('usuario/listadousuarios'); 
+            }else if(Auth::user()->hasRole("Promocion")){
+                return redirect()->intended('noticias/listadonoticias'); 
+            }else if(Auth::user()->hasRole("Estadistico")){
+                return redirect()->intended('ofertaempleo/listadoproveedores'); 
+            }else{
+                return redirect()->intended('/');
+            }
+        }
         return view('Login');
     }
     public function postAutenticacion(Request $request){
