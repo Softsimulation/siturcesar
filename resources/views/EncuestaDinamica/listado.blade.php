@@ -72,6 +72,11 @@
                                     Copiar enlace
                                 </a>
                             </li>
+                            <li ng-if="encuesta.estados_encuestas_id==4">
+                                <a href="javascript:void(0)" ng-click="openModalCopiar(encuesta)" >
+                                    Copiar enlace de prueba
+                                </a>
+                            </li>
                             
                             <li>
                                 <a href="javascript:void(0)" ng-click="OpenModalCambiarEstado(encuesta)" >
