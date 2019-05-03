@@ -11,6 +11,7 @@
 |
 */
 Route::controller('/indicadoresMedicion','IndicadoresMedicionController');
+Route::controller('/factoresExpansion','FactorExpansionController');
 Route::get('/PlanificaTuViaje','InformacionDepartamentoCtrl@PlanificaTuViaje');
 Route::get('/Departamento/AcercaDe','InformacionDepartamentoCtrl@AcercaDe');
 Route::get('/Departamento/Requisitos','InformacionDepartamentoCtrl@Requisitos');
