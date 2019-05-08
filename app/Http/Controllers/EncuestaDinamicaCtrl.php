@@ -847,21 +847,21 @@ class EncuestaDinamicaCtrl extends Controller
                                                       ->with( [ 
                                                                "idiomas"=> function($qrr) use ($idIdioma) { $qrr->where("idiomas_id",$idIdioma)->select("id","preguntas_id","idiomas_id","pregunta"); }, 
                                                                "opciones"=>function($qrr) use ($idIdioma) { 
-                                                                                $qrr->with([ 
+                                                                                $qrr->where("estado",true)->with([ 
                                                                                            "idiomas"=> function($qrrr) use ($idIdioma) { 
                                                                                                             $qrrr->where("idiomas_id",$idIdioma)->select("id","opciones_preguntas_id","nombre"); 
                                                                                                         }
                                                                                         ])->select("id","preguntas_id","es_otro");
                                                                             },
                                                                 "subPreguntas"=>function($qrr) use ($idIdioma) { 
-                                                                                $qrr->with(["opciones", 
+                                                                                $qrr->where("estado",true)->with(["opciones", 
                                                                                             "idiomas"=> function($qrrr) use ($idIdioma) { 
                                                                                                             $qrrr->where("idiomas_id",$idIdioma)->select("id","sub_preguntas_id","nombre");
                                                                                                         }
                                                                                         ])->select("id","preguntas_id");
                                                                             },
                                                                 "OpcionesSubPreguntas"=>function($qrr) use ($idIdioma) { 
-                                                                                $qrr->with([ 
+                                                                                $qrr->where("estado",true)->with([ 
                                                                                            "idiomas"=> function($qrrr) use ($idIdioma) { 
                                                                                                             $qrrr->where("idiomas_id",$idIdioma)->select("id","opciones_sub_preguntas_id","nombre"); 
                                                                                                         }
