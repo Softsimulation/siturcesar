@@ -170,7 +170,7 @@ function parse_yturl($url)
             <!--</div>-->
             
             
-            <p>{{$actividad->actividadesConIdiomas[0]->descripcion}}</p>
+            <div style="white-space: pre-line;">{!! $actividad->actividadesConIdiomas[0]->descripcion !!}}</div>
         </div>
         
     </section>
