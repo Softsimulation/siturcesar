@@ -121,4 +121,10 @@ class HomeController extends Controller
 	   public function getHabeas(){
         return view('home.habeas');
     }
+      public function getSoporte(){
+        return view('home.soporte');
+    }
+      public function getBussiness(){
+        return view('home.bussiness');
+    }
 }
