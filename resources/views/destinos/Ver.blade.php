@@ -168,7 +168,7 @@ function parse_yturl($url)
             <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional)?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
             
-            <div style="white-space: pre-line;" class="mt-3">{!! $destino->destinoConIdiomas->descripcion !!}</div>
+            <div class="mt-3">{!! $destino->destinoConIdiomas->descripcion !!}</div>
             <!--<ul class="enlaces-entidades shadow-sm">-->
             <!--    <li>-->
             <!--        <a href="/proveedor/index?tipo=1">-->
@@ -536,7 +536,7 @@ function parse_yturl($url)
                         
                     </div>
                     <div class="text-center">
-                        <a href="/proveedor/index?tipo=1&destino={{$municipio->id}}" class="btn btn-sm d-block d-md-inline-block btn-outline-success mb-3">Ver más <span class="sr-only">lugares donde dormir</span></a>
+                        <a href="/proveedor/index?tipo=2&destino={{$municipio->id}}" class="btn btn-sm d-block d-md-inline-block btn-outline-success mb-3">Ver más <span class="sr-only">lugares donde dormir</span></a>
                     </div>
                 @endif
             </div>
