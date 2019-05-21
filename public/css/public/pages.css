@@ -58,11 +58,15 @@
     .carousel-inner>.carousel-item {
         height: 630px;
     }
+    .tiles .tile:not(.inline-tile){
+        width: calc(25% - 1rem);
+    }
 }
 @media only screen and (min-width: 1600px) {
     .carousel-inner>.carousel-item {
         height: 650px;
     }
+    
 }
 @media only screen and (min-width: 1900px) {
     .carousel-inner>.carousel-item {
