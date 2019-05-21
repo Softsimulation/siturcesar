@@ -106,7 +106,6 @@
             }
             .goog-te-banner {
                 background: black!important;
-                color: tton button {
                 color: #333!important;
             }
             .goog-te-button div {
@@ -123,11 +122,29 @@
                 border: 0!important;
             }
             .goog-te-menu-value span {
-                color: tton button {
                 color: #333!important;
                 font-family: Futura, sans-serif!important;
             }
-		
+		.pagination {
+            text-align: center;
+            justify-content:center;
+        }
+        
+        .pagination li a, .pagination li.active span, .pagination li.disabled span {
+            padding: .25rem .5rem;
+            border: 1px solid #ddd;
+            margin: 0 2px;
+            border-radius: 6px;
+        }
+        .pagination li.active span{
+            background-color: dodgerblue;
+            color: white;
+            border-color: dodgerblue;
+        }
+         .pagination li.disabled span {
+             color: grey;
+         }
+        
     </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

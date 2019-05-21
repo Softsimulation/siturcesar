@@ -36,13 +36,17 @@ class ProveedoresController extends Controller
             if(isset($request->destino) && $request->destino != null){
                 $query->where('municipio_id',$request->destino);
             }
-            if(isset($request->tipo) && $request->tipo != null){
-                $query->where('categoria_proveedores_id',$request->tipo);
-            }
+            // if(isset($request->tipo) && $request->tipo != null){
+            //     $query->where('categoria_proveedores_id',$request->tipo);
+            // }
             if(isset($request->buscar) && $request->buscar != null){
                 $query->whereRaw('lower(razon_social) like lower(?)', ["%{$request->buscar}%"]);
             }
             
+        })->whereHas('proveedorRnt.categoria', function ($query) use ($request){
+            if(isset($request->tipo) && $request->tipo != null){
+                $query->where('tipo_proveedores_id',$request->tipo);
+            }
         })->select('id', 'valor_min', 'valor_max', 'calificacion_legusto', 'proveedor_rnt_id')->where('estado', true)->paginate(8);
          
 
