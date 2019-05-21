@@ -440,6 +440,7 @@ function parse_yturl($url)
         </div>
 
         </section>
+        @if(count($dondeDormir) > 0 || count($dondeComer) > 0)
         <section id="relatedLinks">
             <div class="container">
                 <h3>Información relacionada</h3>
@@ -541,7 +542,7 @@ function parse_yturl($url)
                 @endif
             </div>
         </section>
-    
+        @endif
 @endsection
 @section('javascript')
 <!--<script src="{{asset('/js/public/vibrant.js')}}"></script>-->
