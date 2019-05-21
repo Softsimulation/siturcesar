@@ -39,6 +39,13 @@ function parse_yturl($url)
         .btn-favorite{
             color: red;
         }
+        .tile h5 a {
+            color: #004a87;
+            font-size: 1rem;
+        }
+        .tiles .ranking .ionicons-inline{
+            font-size: 1.5rem;
+        }
     </style>
 @endsection
 @section('content')
@@ -96,6 +103,9 @@ function parse_yturl($url)
                 @endif
                 <a role="button" href="#comentarios" class="btn btn-lg btn-circled text-muted" title="Comentarios">
                   <span class="ion-chatbubbles" aria-hidden="true"></span><span class="sr-only">Comentarios</span>
+                </a>
+                <a role="button" href="#relatedLinks" class="btn btn-lg btn-circled text-muted" title="Comentarios">
+                  <span class="ion-flag" aria-hidden="true"></span><span class="sr-only">Información relacionada</span>
                 </a>
             @if(Auth::check())
                 <form role="form" action="/atracciones/favorito" method="post" class="d-inline-block">
