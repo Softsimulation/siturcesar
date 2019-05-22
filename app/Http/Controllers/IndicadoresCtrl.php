@@ -157,136 +157,136 @@ class IndicadoresCtrl extends Controller
         switch($id){
             
             ////////////////////////////RECEPTOR/////////////////////////////
-            case 1: $periodos = DB::select("SELECT *from tiempo_motivos(?) order by id DESC", array($cultura) );
+            case 1: $periodos = DB::select("SELECT *from tiempo_motivos(?) ", array($cultura) );
                     $data = count($periodos)==0 ? [] : $this->getDataReceptor("motivo_viaje_receptor",$periodos[0],$cultura);  break;
                 
-            case 2: $periodos = DB::select("SELECT *from tiempo_tipo_alojamiento_receptor(?) order by id DESC", array($cultura) );
+            case 2: $periodos = DB::select("SELECT *from tiempo_tipo_alojamiento_receptor(?) ", array($cultura) );
                     $data = count($periodos)==0 ? [] : $this->getDataReceptor("tipo_alojamiento_receptor",$periodos[0],$cultura);  break;
             
-            case 3: $periodos = DB::select("SELECT *from tiempo_tipo_alojamiento_receptor(?) order by id DESC", array($cultura) );
+            case 3: $periodos = DB::select("SELECT *from tiempo_tipo_alojamiento_receptor(?) ", array($cultura) );
                     $data = count($periodos)==0 ? [] : $this->getDataReceptor("medio_transporte_receptor",$periodos[0],$cultura);  break;
                 
-            case 4: $periodos = DB::select("SELECT *from tiempo_gasto_medio_receptor(?) order by id DESC", array($cultura) );
+            case 4: $periodos = DB::select("SELECT *from tiempo_gasto_medio_receptor(?) ", array($cultura) );
                     $data = count($periodos)==0 ? [] : $this->GastoMedioReceptor($periodos[0],$cultura);  break;
                 
-            case 5: $periodos = DB::select("SELECT id, year from tiempo_gasto_medio_rubro_receptor(?) order by id DESC", array($cultura) );
+            case 5: $periodos = DB::select("SELECT id, year from tiempo_gasto_medio_rubro_receptor(?) ", array($cultura) );
                     $data = count($periodos)==0 ? [] : $this->GastoMedioBienesServiciosReceptor( $periodos[0] ,$cultura);  break;
                 
-            case 6: $periodos = DB::select("SELECT id, year from tiempo_duracion_media_receptor(?) order by id DESC", array($cultura) );
+            case 6: $periodos = DB::select("SELECT id, year from tiempo_duracion_media_receptor(?) ", array($cultura) );
                     $data = count($periodos)==0 ? [] : $this->DuracionMediaEstanciaReceptor($periodos[0],$cultura); break;
                 
-            case 7: $periodos = DB::select("SELECT id, year from tiempo_tamanio_grupo_viaje(?) order by id DESC", array($cultura) );
+            case 7: $periodos = DB::select("SELECT id, year from tiempo_tamanio_grupo_viaje(?) ", array($cultura) );
                     $data = count($periodos)==0 ? [] : $this->TamanoMedioGrupoViajeReceptor($periodos[0],$cultura);  break;
                     
                 
             ////////////////////////////////INTERNO/////////////////////////////////////////
             case 8: 
-                    $periodos = DB::select("SELECT * from tiempo_motivo_viaje_interno_emisor(?,?) order by id DESC", array($cultura,true) );
+                    $periodos = DB::select("SELECT * from tiempo_motivo_viaje_interno_emisor(?,?) ", array($cultura,true) );
                     $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("motivo_viaje_interno_emisor", $periodos[0], $cultura, true); break; 
                     
             case 9: 
-                    $periodos = DB::select("SELECT * from tiempo_tipo_alojamiento_interno_emisor(?,?) order by id DESC", array($cultura,true) );
+                    $periodos = DB::select("SELECT * from tiempo_tipo_alojamiento_interno_emisor(?,?) ", array($cultura,true) );
                     $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("tipo_alojamiento_interno_emisor", $periodos[0], $cultura, true); break;
                     
             case 10: 
-                     $periodos = DB::select("SELECT * from tiempo_tamanio_grupo_interno_emisor(?,?) order by id DESC", array($cultura,true) );
+                     $periodos = DB::select("SELECT * from tiempo_tamanio_grupo_interno_emisor(?,?) ", array($cultura,true) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("tamanio_grupo_interno_emisor", $periodos[0], $cultura, true); break;
                      
             case 11: 
-                     $periodos = DB::select("SELECT * from tiempo_medio_transporte_interno_emisor(?,?) order by id DESC", array($cultura,true) );
+                     $periodos = DB::select("SELECT * from tiempo_medio_transporte_interno_emisor(?,?) ", array($cultura,true) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("medio_transporte_interno_emisor", $periodos[0], $cultura, true); break;
                      
             case 12: 
-                     $periodos = DB::select("SELECT * from tiempo_duracion_media_interno_emisor(?,?) order by id DESC", array($cultura,true) );
+                     $periodos = DB::select("SELECT * from tiempo_duracion_media_interno_emisor(?,?) ", array($cultura,true) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("duracion_media_interno_emisor", $periodos[0], $cultura, true); break;
 
             case 13: 
-                      $periodos = DB::select("SELECT * from tiempo_gasto_medio_interno_emisor(?,?) order by id DESC", array($cultura,true) );
+                      $periodos = DB::select("SELECT * from tiempo_gasto_medio_interno_emisor(?,?) ", array($cultura,true) );
                       $data = count($periodos)==0 ? [] : $this->GastoMedioInternoEmisor($periodos[0], $cultura, true); break;
             
                       
             ////////////////////////////////EMISOR/////////////////////////////////////////
             case 14: 
-                     $periodos = DB::select("SELECT * from tiempo_motivo_viaje_interno_emisor(?,?) order by id DESC", array($cultura,false) );
+                     $periodos = DB::select("SELECT * from tiempo_motivo_viaje_interno_emisor(?,?) ", array($cultura,false) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("motivo_viaje_interno_emisor", $periodos[0], $cultura, false); break;
 
             case 15: 
-                     $periodos = DB::select("SELECT * from tiempo_tipo_alojamiento_interno_emisor(?,?) order by id DESC", array($cultura,false) );
+                     $periodos = DB::select("SELECT * from tiempo_tipo_alojamiento_interno_emisor(?,?) ", array($cultura,false) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("tipo_alojamiento_interno_emisor", $periodos[0], $cultura, false); break;
 
             case 16: 
-                     $periodos = DB::select("SELECT * from tiempo_tamanio_grupo_interno_emisor(?,?) order by id DESC", array($cultura,false) );
+                     $periodos = DB::select("SELECT * from tiempo_tamanio_grupo_interno_emisor(?,?) ", array($cultura,false) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("tamanio_grupo_interno_emisor", $periodos[0], $cultura, false); break;
             
             case 17: 
-                     $periodos = DB::select("SELECT * from tiempo_medio_transporte_interno_emisor(?,?) order by id DESC", array($cultura,false) );
+                     $periodos = DB::select("SELECT * from tiempo_medio_transporte_interno_emisor(?,?) ", array($cultura,false) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("medio_transporte_interno_emisor", $periodos[0], $cultura, false); break;
 
             case 18: 
-                     $periodos = DB::select("SELECT * from tiempo_duracion_media_interno_emisor(?,?) order by id DESC", array($cultura,false) );
+                     $periodos = DB::select("SELECT * from tiempo_duracion_media_interno_emisor(?,?) ", array($cultura,false) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorInternoEmisor("duracion_media_interno_emisor", $periodos[0], $cultura, false); break;
 
             case 19:  
-                     $periodos = DB::select("SELECT * from tiempo_gasto_medio_interno_emisor(?,?) order by id DESC", array($cultura,false) );
+                     $periodos = DB::select("SELECT * from tiempo_gasto_medio_interno_emisor(?,?) ", array($cultura,false) );
                      $data = count($periodos)==0 ? [] : $this->GastoMedioInternoEmisor($periodos[0], $cultura, false); break;          
             
             
             ////////////////////////////////OFERTA/////////////////////////////////////////          
             case 20: 
-                     $periodos = DB::select("SELECT * from tiempo_numero_establecimientos_oferta(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_numero_establecimientos_oferta(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioDB("numero_establecimientos_oferta", $periodos[0], $cultura); break; 
                      
             case 21: 
-                     $periodos = DB::select("SELECT * from tiempo_agencia_viaje_operadoras_oferta(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_agencia_viaje_operadoras_oferta(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioMesDB("agencia_viaje_operadoras_oferta", $periodos[0], $cultura); break;
                      
             case 22: 
-                     $periodos = DB::select("SELECT * from tiempo_ocupacion_media_oferta(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_ocupacion_media_oferta(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioDB("ocupacion_media_oferta", $periodos[0], $cultura); break;
             
             case 23: 
-                     $periodos = DB::select("SELECT * from tiempo_tasa_platos_comida_oferta(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_tasa_platos_comida_oferta(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioDB("tasa_platos_comida_oferta", $periodos[0], $cultura); break;
             
             case 24: 
-                     $periodos = DB::select("SELECT * from tiempo_tasa_unidades_comida_oferta(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_tasa_unidades_comida_oferta(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioDB("tasa_unidades_comida_oferta", $periodos[0], $cultura); break;
             
             case 25: 
-                     $periodos = DB::select("SELECT * from tiempo_viajes_emisores_oferta(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_viajes_emisores_oferta(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioDB("viajes_emisores_oferta", $periodos[0], $cultura); break;
             
             case 26: 
-                     $periodos = DB::select("SELECT * from tiempo_viajes_internos_oferta(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_viajes_internos_oferta(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioDB("viajes_internos_oferta", $periodos[0], $cultura); break;
             
             ////////////////////////////////EMPLEO/////////////////////////////////////////          
             case 27: 
-                     $periodos = DB::select("SELECT * from tiempo_vinculacion_laboral_empleo(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_vinculacion_laboral_empleo(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioTrimestreDB("vinculacion_laboral_empleo", $periodos[0], $cultura); 
                  break; 
                      
            case 28: 
-                     $periodos = DB::select("SELECT * from tiempo_numero_personas_empleo(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_numero_personas_empleo(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioTrimestreDB("numero_personas_empleo", $periodos[0], $cultura); break; 
                      
             case 29: 
-                     $periodos = DB::select("SELECT * from tiempo_dominio_ingles_empleo(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_dominio_ingles_empleo(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioTrimestreDB("dominio_ingles_empleo", $periodos[0], $cultura); break; 
             
             case 30: 
-                     $periodos = DB::select("SELECT * from tiempo_numero_empleados_empleo(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_numero_empleados_empleo(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioMesDB("numero_empleados_empleo", $periodos[0], $cultura); break; 
                      
             case 31: 
-                     $periodos = DB::select("SELECT * from tiempo_numero_empleados_tc_empleo(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_numero_empleados_tc_empleo(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioMesDB("numero_empleados_tc_empleo", $periodos[0], $cultura); break; 
             case 32: 
-                     $periodos = DB::select("SELECT * from tiempo_remuneracion_promedio_empleo(?) order by id DESC", array($cultura) ); 
+                     $periodos = DB::select("SELECT * from tiempo_remuneracion_promedio_empleo(?) ", array($cultura) ); 
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioTrimestreDB("remuneracion_promedio_empleo", $periodos[0], $cultura); break; 
             
             case 33: 
-                     $periodos = DB::select("SELECT * from tiempo_numero_vacantes_empleo(?) order by id DESC", array($cultura) );
+                     $periodos = DB::select("SELECT * from tiempo_numero_vacantes_empleo(?) ", array($cultura) );
                      $data = count($periodos)==0 ? [] : $this->getDataIndicadorPorAnioMesDB("numero_vacantes_empleo", $periodos[0], $cultura); break; 
                 
             default: break;
