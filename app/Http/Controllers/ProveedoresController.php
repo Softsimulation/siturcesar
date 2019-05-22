@@ -40,8 +40,12 @@ class ProveedoresController extends Controller
             //     $query->where('categoria_proveedores_id',$request->tipo);
             // }
             if(isset($request->buscar) && $request->buscar != null){
-                $query->whereRaw('lower(razon_social) like lower(?)', ["%{$request->buscar}%"]);
+                $query->whereHas('lower(razon_social) like lower(?)', ["%{$request->buscar}%"]);
+                 if(isset($request->tipo) && $request->tipo != null){
+                $query->where('tipo_proveedores_id',$request->tipo);
             }
+            }
+            
             
         })->whereHas('proveedorRnt.categoria', function ($query) use ($request){
             if(isset($request->tipo) && $request->tipo != null){
@@ -167,7 +171,7 @@ class ProveedoresController extends Controller
                     'proveedores_id' => $proveedor->id
                 ]);
                 return \Redirect::to('/proveedor/ver/'.$proveedor->id)
-                        ->with('message', 'Se ha añadido el proveedor a tus favoritos.')
+                        ->with('message', 'Se ha a単adido el proveedor a tus favoritos.')
                         ->withInput(); 
             }else{
                 Proveedor_Favorito::where('usuario_id',$this->user->id)->where('proveedores_id',$proveedor->id)->delete();

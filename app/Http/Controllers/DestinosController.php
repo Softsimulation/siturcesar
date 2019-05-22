@@ -59,8 +59,11 @@ class DestinosController extends Controller
         
         $municipio = Municipio::whereRaw('lower(nombre) like lower(?)', ["%{$destino->destinoConIdiomas->nombre}%"])->first();
         
-        $dondeDormir = $this->getProveedoresPorTipo(1, $municipio->id);
-        $dondeComer = $this->getProveedoresPorTipo(2, $municipio->id);
+        $dondeDormir = null; $dondeComer = null;
+        if($municipio != null){
+            $dondeDormir = $this->getProveedoresPorTipo(1, $municipio->id);
+            $dondeComer = $this->getProveedoresPorTipo(2, $municipio->id);
+        }
         
         if (count($video_promocional) > 0){
             $video_promocional = $video_promocional[0]->ruta;
