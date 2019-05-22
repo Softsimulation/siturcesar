@@ -47,12 +47,11 @@ class ProveedoresController extends Controller
             }
             
             
-            
-        })->whereHas('proveedorRnt.categoria', function($query) use($request){
+        })->whereHas('proveedorRnt.categoria', function ($query) use ($request){
             if(isset($request->tipo) && $request->tipo != null){
                 $query->where('tipo_proveedores_id',$request->tipo);
             }
-        })->select('id', 'valor_min', 'valor_max', 'calificacion_legusto', 'proveedor_rnt_id')->where('estado', true)->paginate(9);
+        })->select('id', 'valor_min', 'valor_max', 'calificacion_legusto', 'proveedor_rnt_id')->where('estado', true)->paginate(8);
          
 
         return view('proveedor.Index', ['proveedores' => $proveedores, 'params'=> $request->tipo]);
