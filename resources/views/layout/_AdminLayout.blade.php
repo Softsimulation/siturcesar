@@ -140,7 +140,7 @@
                                     <a role="menuitem" href="{{asset('administradorproveedores')}}">Administrar proveedores</a>
                                 </li>
                                 <li role="none"><a role="menuitem" href="{{asset('administradoratracciones')}}">Administrar atracciones</a></li>
-        					    <li role="none"><a role="menuitem" href="{{asset('administradoragit ctividades')}}">Administrar actividades</a></li>
+        					    <li role="none"><a role="menuitem" href="{{asset('administradoractividades')}}">Administrar actividades</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradoreventos')}}">Administrar eventos</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('administradorrutas')}}">Administrar rutas turísticas</a></li>
         					    <li role="none"><a role="menuitem" href="{{asset('sliders/listadosliders')}}">Galería de imágenes</a></li>
@@ -214,6 +214,10 @@
                         
                          <li>
                             <a role="menuitem" href="{{asset('calcularindicadores')}}">Calcular indicadores</a>
+                        </li>
+                        
+                        <li>
+                            <a role="menuitem" href="{{asset('usuario/listadousuarios')}}">Gestión de usuarios</a>
                         </li>
                         <li>
                             <a role="menuitem" href="#menuPaises" aria-haspopup="true" aria-expanded="false">Administrar países</a>

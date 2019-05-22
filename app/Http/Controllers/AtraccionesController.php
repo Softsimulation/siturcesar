@@ -13,6 +13,7 @@ use App\Models\Comentario_Atraccion;
 use App\Models\Atraccion_Favorita;
 use App\Models\Sitio;
 use App\Models\Municipio;
+use App\Models\Proveedor;
 
 class AtraccionesController extends Controller
 {
@@ -102,12 +103,40 @@ class AtraccionesController extends Controller
         }else {
             $video_promocional = null;
         }
-        
-      
+        $dondeDormir = null; $dondeComer = null;
+        if($municipio != null){
+            $dondeDormir = $this->getProveedoresPorTipo(1, $municipio->id);
+            $dondeComer = $this->getProveedoresPorTipo(2, $municipio->id);
+        }
         
         //return ['atraccion' => $atraccion, 'video_promocional' => $video_promocional];
         
-        return view('atracciones.Ver', ['atraccion' => $atraccion, 'video_promocional' => $video_promocional, 'municipio' => $municipio]);
+        return view('atracciones.Ver', ['atraccion' => $atraccion, 'video_promocional' => $video_promocional, 'municipio' => $municipio, 'dondeComer' => $dondeComer, 'dondeDormir' => $dondeDormir]);
+    }
+    
+    public function getProveedoresPorTipo($tipo, $municipioId){
+        $idioma = \Config::get('app.locale') == 'es' ? 1 : 2;
+        $proveedores = Proveedor::with(['proveedorRnt' => function ($queryProveedorRnt) use ($idioma){
+           
+            $queryProveedorRnt->with(['idiomas' => function ($queyProveedor_rnt_idioma) use ($idioma){
+                $queyProveedor_rnt_idioma->where('idioma_id', $idioma)->select('proveedor_rnt_id', 'idioma_id', 'descripcion', 'nombre')->orderBy('idioma_id');
+            }, 'categoria' => function ($queryCategoria) use ($idioma){
+                $queryCategoria->with(['categoriaProveedoresConIdiomas' => function($queryCategoriaProveedoresConIdiomas) use ($idioma){
+                    $queryCategoriaProveedoresConIdiomas->select('categoria_proveedores_id', 'nombre')->where('idiomas_id', $idioma);
+                }])->select('id');
+            }])->select('id', 'razon_social', 'categoria_proveedores_id');
+            
+        }, 'multimediaProveedores' => function ($queryMultimediaProveedores){
+            $queryMultimediaProveedores->where('tipo', false)->orderBy('portada', 'desc')->select('proveedor_id', 'ruta');
+        }])->whereHas('proveedorRnt',function($query) use($municipioId){
+            $query->where('municipio_id',$municipioId);
+            
+        })->whereHas('proveedorRnt.categoria', function ($query) use ($tipo){
+                $query->where('tipo_proveedores_id',$tipo);
+            
+        })->select('id', 'valor_min', 'valor_max', 'calificacion_legusto', 'proveedor_rnt_id')->where('estado', true)->take(3)->get();
+        
+        return $proveedores;
     }
     
     

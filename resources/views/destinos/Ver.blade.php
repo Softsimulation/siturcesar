@@ -38,6 +38,13 @@ function parse_yturl($url)
         .btn-favorite{
             color: red;
         }
+        .tile h5 a {
+            color: #004a87;
+            font-size: 1rem;
+        }
+        .tiles .ranking .ionicons-inline{
+            font-size: 1.5rem;
+        }
     </style>
 @endsection
 
@@ -93,6 +100,10 @@ function parse_yturl($url)
                 <a role="button" href="#comentarios" class="btn btn-lg btn-circled text-muted" title="Comentarios">
                   <span class="ion-chatbubbles" aria-hidden="true"></span><span class="sr-only">Comentarios</span>
                 </a>
+                <a role="button" href="#relatedLinks" class="btn btn-lg btn-circled text-muted" title="Comentarios">
+                  <span class="ion-flag" aria-hidden="true"></span><span class="sr-only">Información relacionada</span>
+                </a>
+                
             </div>
 		  </div>
       </div>
@@ -114,7 +125,7 @@ function parse_yturl($url)
 					</a>
 				</div>
 				<div class="col col-md-3 text-center">
-					<a href="/proveedor/index?tipo=12&destino={{$municipio->id}}">
+					<a href="/proveedor/index?tipo=2&destino={{$municipio->id}}">
 						<span class="fas fa-utensils d-block" aria-hidden="true" style="font-size: 2rem;"></span>
 						¿Qué comer?
 					</a>
@@ -157,7 +168,7 @@ function parse_yturl($url)
             <iframe src="https://www.youtube.com/embed/<?php echo parse_yturl($video_promocional)?>" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen style="width: 100%; height: 350px;"></iframe>
             @endif
             
-            <div style="white-space: pre-line;" class="mt-3">{!! $destino->destinoConIdiomas->descripcion !!}</div>
+            <div class="mt-3">{!! $destino->destinoConIdiomas->descripcion !!}</div>
             <!--<ul class="enlaces-entidades shadow-sm">-->
             <!--    <li>-->
             <!--        <a href="/proveedor/index?tipo=1">-->
@@ -181,7 +192,7 @@ function parse_yturl($url)
         </div>
         
     </section>
-    <section id="caracteristicas" class="mb-3">
+    <section id="caracteristicas">
         <div class="container">
             <h3>Características</h3>
             <!--<p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam porttitor, augue quis tempus dictum, augue dui molestie sem, vitae molestie augue ipsum id turpis. Fusce feugiat vestibulum ante. Sed a consequat eros, finibus luctus nisl. In ut diam congue, condimentum sem vel, sagittis dolor. Nunc ut vestibulum ex, vitae eleifend metus. Proin id ex eu erat aliquet egestas. Fusce id suscipit velit, ut sodales turpis. Aliquam turpis risus, luctus vitae lobortis finibus, condimentum in felis. Pellentesque vel erat tellus. Suspendisse potenti. Integer porta sed lorem ac iaculis. Pellentesque pretium ex et convallis condimentum. In luctus leo nulla, eu finibus justo volutpat quis.</p>-->
@@ -203,7 +214,7 @@ function parse_yturl($url)
                 @endif
             </div>
         </div>
-        <div class="container mt-3 mb-3 pt-3">
+        <div class="container mt-3 pt-3">
             <div class="row justify-content-center text-center">
                 @if($destino->destinoConIdiomas->como_llegar && $destino->destinoConIdiomas->como_llegar != "")
                 <div class="col-md-6 pb-3">
@@ -232,7 +243,114 @@ function parse_yturl($url)
             </div>
         </div>
     </section>
-    <section id="comentarios">
+    
+    
+    
+        
+        @if(count($dondeDormir) > 0 || count($dondeComer) > 0)
+        <section id="relatedLinks">
+            <div class="container">
+                <h3>Información relacionada</h3>
+                @if(count($dondeDormir) > 0)
+                    <h4 class="text-center text-uppercase">Lugares donde dormir</h4>
+                    <div id="listado" class="tiles justify-content-center m-0">
+                        @foreach($dondeDormir as $hospedaje)
+                        <div class="tile border">
+                            <div class="tile-img img-error">
+                                @if(isset($hospedaje->multimediaProveedores) && count($hospedaje->multimediaProveedores))
+                                <img src="{{$hospedaje->multimediaProveedores->first()->ruta}}" alt="Imagen de presentación de {{$hospedaje->proveedorRnt->razon_social}}"/>
+                                @else
+                                <img src="/img/proveedor_default.png" alt="" role="presentation" class="h-100 p-3">
+                                @endif
+                                @if(isset($hospedaje->proveedorRnt->categoria))
+                                <div class="text-overlap">
+                                    
+                                    <a href="/proveedor/index?tipo={{$hospedaje->proveedorRnt->categoria->id}}"><span class="btn btn-sm btn-info">{{$hospedaje->proveedorRnt->categoria->categoriaProveedoresConIdiomas->first()->nombre}}</span></a>
+                                    {{-- <!--<span class="label bg-{{$colorTipo[$proveedores[$i]->proveedorRnt->categoria->id]}}">{{getItemType($proveedores[$i]->proveedorRnt->categoria->id)->name}}</span>--> --}}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="tile-body">
+                                <div class="tile-caption">
+                                    
+                                    <h5><a href="/proveedor/ver/{{$hospedaje->id}}">{{$hospedaje->proveedorRnt->razon_social}}</a></h5>
+                                </div>
+                                
+                                @if($hospedaje->tipo == 4)
+                                <p class="tile-date">{{trans('resources.listado.fechaEvento', ['fechaInicio' => date('d/m/Y', strtotime($hospedaje->fecha_inicio)), 'fechaFin' => date('d/m/Y', strtotime($hospedaje->fecha_fin))])}}</p>
+                                @endif
+                                <div class="btn-block ranking text-center">
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 0.0) ? (($hospedaje->calificacion_legusto <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 1.0) ? (($hospedaje->calificacion_legusto <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 2.0) ? (($hospedaje->calificacion_legusto <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 3.0) ? (($hospedaje->calificacion_legusto <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 4.0) ? (($hospedaje->calificacion_legusto <= 5.0) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="sr-only">Posee una calificación de {{$hospedaje->calificacion_legusto}}</span>
+                    	            
+                    	          </div>
+                    	          
+                            </div>
+                        </div>
+                        
+                        @endforeach
+                        
+                    </div>
+                    <div class="text-center">
+                        <a href="/proveedor/index?tipo=1&destino={{$municipio->id}}" class="btn btn-sm d-block d-md-inline-block btn-outline-success mb-3">Ver más <span class="sr-only">lugares donde dormir</span></a>
+                    </div>
+                @endif
+                @if(count($dondeComer) > 0)
+                    <h4 class="text-center text-uppercase">Lugares donde comer</h4>
+                    <div id="listado" class="tiles justify-content-center m-0">
+                        @foreach($dondeComer as $hospedaje)
+                        <div class="tile border">
+                            <div class="tile-img img-error">
+                                @if(isset($hospedaje->multimediaProveedores) && count($hospedaje->multimediaProveedores))
+                                <img src="{{$hospedaje->multimediaProveedores->first()->ruta}}" alt="Imagen de presentación de {{$hospedaje->proveedorRnt->razon_social}}"/>
+                                @else
+                                <img src="/img/proveedor_default.png" alt="" role="presentation" class="h-100 p-3">
+                                @endif
+                                @if(isset($hospedaje->proveedorRnt->categoria))
+                                <div class="text-overlap">
+                                    
+                                    <a href="/proveedor/index?tipo={{$hospedaje->proveedorRnt->categoria->id}}"><span class="btn btn-sm btn-info">{{$hospedaje->proveedorRnt->categoria->categoriaProveedoresConIdiomas->first()->nombre}}</span></a>
+                                    {{-- <!--<span class="label bg-{{$colorTipo[$proveedores[$i]->proveedorRnt->categoria->id]}}">{{getItemType($proveedores[$i]->proveedorRnt->categoria->id)->name}}</span>--> --}}
+                                </div>
+                                @endif
+                            </div>
+                            <div class="tile-body">
+                                <div class="tile-caption">
+                                    
+                                    <h5><a href="/proveedor/ver/{{$hospedaje->id}}">{{$hospedaje->proveedorRnt->razon_social}}</a></h5>
+                                </div>
+                                
+                                @if($hospedaje->tipo == 4)
+                                <p class="tile-date">{{trans('resources.listado.fechaEvento', ['fechaInicio' => date('d/m/Y', strtotime($hospedaje->fecha_inicio)), 'fechaFin' => date('d/m/Y', strtotime($hospedaje->fecha_fin))])}}</p>
+                                @endif
+                                <div class="btn-block ranking text-center">
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 0.0) ? (($hospedaje->calificacion_legusto <= 0.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 1.0) ? (($hospedaje->calificacion_legusto <= 1.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 2.0) ? (($hospedaje->calificacion_legusto <= 2.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 3.0) ? (($hospedaje->calificacion_legusto <= 3.9) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="{{ ($hospedaje->calificacion_legusto > 4.0) ? (($hospedaje->calificacion_legusto <= 5.0) ? 'ionicons-inline ion-android-star-half' : 'ionicons-inline ion-android-star') : 'ionicons-inline ion-android-star-outline'}}" aria-hidden="true"></span>
+                    	              <span class="sr-only">Posee una calificación de {{$hospedaje->calificacion_legusto}}</span>
+                    	            
+                    	          </div>
+                    	          
+                            </div>
+                        </div>
+                        
+                        @endforeach
+                        
+                    </div>
+                    <div class="text-center">
+                        <a href="/proveedor/index?tipo=2&destino={{$municipio->id}}" class="btn btn-sm d-block d-md-inline-block btn-outline-success mb-3">Ver más <span class="sr-only">lugares donde dormir</span></a>
+                    </div>
+                @endif
+            </div>
+        </section>
+        
+        <section id="comentarios">
         <div class="container">
             <h3>Comentarios</h3>
             <p class="text-center">Te invitamos a que compartas tu opinión acerca de {{$destino->destinoConIdiomas->nombre}}</p>   
@@ -429,8 +547,8 @@ function parse_yturl($url)
         </div>
 
         </section>
-    
-    
+        
+        @endif
 @endsection
 @section('javascript')
 <!--<script src="{{asset('/js/public/vibrant.js')}}"></script>-->

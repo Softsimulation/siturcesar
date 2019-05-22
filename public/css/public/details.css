@@ -12,7 +12,7 @@
         width: 100%;  /* The width is the width of the web page */
     }
     section{
-        padding: 2% 0;
+        padding: 1rem 0;
         position:relative;
     }
     section h3{

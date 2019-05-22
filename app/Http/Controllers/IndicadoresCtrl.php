@@ -141,9 +141,10 @@ class IndicadoresCtrl extends Controller
     /////////////////////////////////////////////////////
     
     ///////////////////////INDICADORES////////////////////////////////
-    private function getDataIndicadoresMedicion($indicador){ 
+      private function getDataIndicadoresMedicion($indicador){ 
         $idioma = 1;
         return  Indicadores_medicion::where("tipo_medicion_indicador_id",$indicador)
+                                    ->where("estado",true)
                                     ->with([ "idiomas"=>function($q) use($idioma){ $q->where("idioma_id", $idioma); } ])
                                     ->orderBy('peso', 'asc')->get();
     }

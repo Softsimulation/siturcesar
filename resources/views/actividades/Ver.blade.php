@@ -170,7 +170,7 @@ function parse_yturl($url)
             <!--</div>-->
             
             
-            <div style="white-space: pre-line;">{!! $actividad->actividadesConIdiomas[0]->descripcion !!}}</div>
+            <div>{!! $actividad->actividadesConIdiomas[0]->descripcion !!}</div>
         </div>
         
     </section>
@@ -414,7 +414,7 @@ function parse_yturl($url)
     function initMap() {
           var sitiosConActividades = <?php print($actividad->sitiosConActividades); ?>;
           console.log(sitiosConActividades);
-          var lat = 10.1287919, long = -75.366555;
+          var lat = 10.3198872, long = -73.521013;
           var posInit = {lat: lat, lng: long};
           // Initialize and add the map
           var map = new google.maps.Map(
