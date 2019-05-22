@@ -101,7 +101,7 @@
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/empleo">Empleo</a>
                             </li>
-                            
+                            <!--
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/secundarios">Estadisticas secundarias</a>
                             </li>
@@ -111,6 +111,7 @@
                             <li role="none">
                                 <a role="menuitem" href="/indicadores/sostenibilidad">Turismo sostenible</a>
                             </li>
+                            -->
                             
                         </ul>
                     </li>
