@@ -36,14 +36,23 @@ class ProveedoresController extends Controller
             if(isset($request->destino) && $request->destino != null){
                 $query->where('municipio_id',$request->destino);
             }
-            if(isset($request->tipo) && $request->tipo != null){
-                $query->where('categoria_proveedores_id',$request->tipo);
-            }
+            // if(isset($request->tipo) && $request->tipo != null){
+            //     $query->where('categoria_proveedores_id',$request->tipo);
+            // }
             if(isset($request->buscar) && $request->buscar != null){
-                $query->whereRaw('lower(razon_social) like lower(?)', ["%{$request->buscar}%"]);
+                $query->whereHas('lower(razon_social) like lower(?)', ["%{$request->buscar}%"]);
+                 if(isset($request->tipo) && $request->tipo != null){
+                $query->where('tipo_proveedores_id',$request->tipo);
+            }
             }
             
-        })->select('id', 'valor_min', 'valor_max', 'calificacion_legusto', 'proveedor_rnt_id')->where('estado', true)->paginate(8);
+            
+            
+        })->whereHas('proveedorRnt.categoria', function($query) use($request){
+            if(isset($request->tipo) && $request->tipo != null){
+                $query->where('tipo_proveedores_id',$request->tipo);
+            }
+        })->select('id', 'valor_min', 'valor_max', 'calificacion_legusto', 'proveedor_rnt_id')->where('estado', true)->paginate(9);
          
 
         return view('proveedor.Index', ['proveedores' => $proveedores, 'params'=> $request->tipo]);
@@ -163,7 +172,7 @@ class ProveedoresController extends Controller
                     'proveedores_id' => $proveedor->id
                 ]);
                 return \Redirect::to('/proveedor/ver/'.$proveedor->id)
-                        ->with('message', 'Se ha añadido el proveedor a tus favoritos.')
+                        ->with('message', 'Se ha a単adido el proveedor a tus favoritos.')
                         ->withInput(); 
             }else{
                 Proveedor_Favorito::where('usuario_id',$this->user->id)->where('proveedores_id',$proveedor->id)->delete();
