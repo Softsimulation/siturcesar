@@ -310,6 +310,11 @@
                         </form>
                     </div>
                     <div class="panel-body">
+                        
+                        <div class="alert alert-info" role="alert" ng-show="data.length==1 && data[0]==0" > 
+                           <strong>Información!</strong>  Dentro de la recolección de información, no se encontraron datos para esta medición especifica, por ende el dato es 0% 
+                        </div>
+                        
                         <canvas id="base" class="chart-base" chart-type="graficaSelect.codigo" fill="black" style="background: white;"
                           chart-data="data" chart-labels="labels" chart-series="series" chart-options="options" chart-colors="colores" chart-dataset-override="override" >
                         </canvas>
