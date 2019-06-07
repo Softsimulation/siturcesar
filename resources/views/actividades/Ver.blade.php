@@ -200,6 +200,37 @@ function parse_yturl($url)
                     </ul>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-12 pt-3">
+                    @if(count($actividad->sitiosConActividades) > 0)
+                        <h4 class="text-center text-uppercase">Sitios donde hacer la actividad</h4>
+                        <div id="listado" class="tiles justify-content-center m-0">
+                            @foreach($actividad->sitiosConActividades as $sitio)
+                            <div class="tile border">
+                                <div class="tile-img img-error">
+                                    @if(isset($sitio->multimediaSitios) && count($sitio->multimediaSitios))
+                                    <img src="{{$sitio->multimediaSitios->first()->ruta}}" alt="Imagen de presentación de {{$sitio->sitiosConIdiomas->first()->nombre}}"/>
+                                    @else
+                                    <img src="/img/proveedor_default.png" alt="" role="presentation" class="h-100 p-3">
+                                    @endif
+                                    
+                                </div>
+                                <div class="tile-body">
+                                    <div class="tile-caption">
+                                        
+                                        <h5>{{$sitio->sitiosConIdiomas->first()->nombre}}</h5>
+                                    </div>
+                                    
+                        	          
+                                </div>
+                            </div>
+                            
+                            @endforeach
+                            
+                        </div>
+                    @endif
+                </div>
+            </div>
         </div>
     </section>
 
@@ -413,15 +444,43 @@ function parse_yturl($url)
     
     function initMap() {
           var sitiosConActividades = <?php print($actividad->sitiosConActividades); ?>;
-          console.log(sitiosConActividades);
           var lat = 10.3198872, long = -73.521013;
           var posInit = {lat: lat, lng: long};
+          var currentInfoWindow = false;
           // Initialize and add the map
           var map = new google.maps.Map(
               document.getElementById('map'), {zoom: 8, center: posInit});
           for (i = 0; i < sitiosConActividades.length; i++) { 
+              //console.log(sitiosConActividades[i].multimedia_sitios.shift().ruta);
+              var nombre = Object.assign([], sitiosConActividades[i].sitios_con_idiomas).shift().nombre;
+              var imagen = sitiosConActividades[i].multimedia_sitios.length > 0 ? Object.assign([], sitiosConActividades[i].multimedia_sitios).shift().ruta : "" ;
+              console.log(imagen);
+              var contentString = '<div id="content" style="display:flex; align-items: center; justify-content:center; max-width:320px; text-align:center;">' + 
+                  '<div style="width: 60px; height: 60px;overflow: hidden; text-align:center;border-radius:50%;display: flex; flex-grow: 0; margin-right: 6px;background:#eee;">'+
+                  '<img src="'+imagen+'" alt="" style="max-height: 100%; max-width: 100%;"></div>' +
+                  '<span>'+nombre+'</span>' +
+                  '</div>';
+            
+              var infowindow = new google.maps.InfoWindow({
+                content: contentString
+              });
+              
               var pos = {lat: parseFloat(sitiosConActividades[i].latitud), lng: parseFloat(sitiosConActividades[i].longitud)};
               var marker = new google.maps.Marker({position: pos, map: map});
+            //   marker.addListener('click', function() {
+            //     infowindow.open(map, marker);
+            //   });
+              google.maps.event.addListener(marker,'click', (function(marker,infowindow){ 
+                    
+                    return function() {
+                        if(currentInfoWindow){
+                            currentInfoWindow.close();
+                        }
+                        currentInfoWindow = infowindow;
+                        infowindow.open(map,marker);
+                    };
+                })(marker,infowindow));
+                
           }
             
         }

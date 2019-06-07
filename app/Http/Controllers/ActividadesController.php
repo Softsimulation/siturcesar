@@ -23,9 +23,15 @@ class ActividadesController extends Controller
         }, 'multimediasActividades' => function($queryMultimediasActividades){
             $queryMultimediasActividades->orderBy('portada', 'desc')->select('actividades_id', 'ruta');
         }, 'sitiosConActividades' => function ($querySitiosConActividades){
-            $querySitiosConActividades->join('atracciones', 'sitios.id', '=', 'atracciones.sitios_id')->select('sitios.id as id' ,'sitios.latitud as latitud', 'sitios.longitud as longitud');
-        }])->where('id', $id)->select('id', 'valor_min', 'valor_max', 'calificacion_legusto', 'calificacion_llegar', 'calificacion_recomendar', 'calificacion_volveria')->first();
+            //$querySitiosConActividades->join('atracciones', 'sitios.id', '=', 'atracciones.sitios_id');
+            $querySitiosConActividades->with(['sitiosConIdiomas'=>function($q){
+                $q->where('idiomas_id',1);
+            }, 'multimediaSitios'=>function($q){
+                $q->where('portada',true);
+            }]);
+        }])->where('id', $id)->first();
         
+        //return $actividad;
        
         //return ['actividad' => $actividad];
         return view('actividades.Ver', ['actividad' => $actividad]);
