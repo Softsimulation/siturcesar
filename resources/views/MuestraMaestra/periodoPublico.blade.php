@@ -8,7 +8,7 @@
 @section('estilos')
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style type="text/css">
-    
+        header { display:none!important; }
         #alertProveedores{
             position: fixed;
             max-width: 80%;
@@ -332,7 +332,9 @@
     
     <div id="contentPage">
         <div id="cont-filtros" ng-show="!pantallaCompleta">
-            <img id="logoSitur" src="{{asset('Content/image/logo.min.png')}}" alt="Logo SITUR Magdalena" class="img-responsive"/>
+            <p class="text-center" style="margin:0" >
+                <img id="logoSitur" src="{{asset('Content/image/logo.min.png')}}" alt="Logo SITUR Magdalena" />
+            </p>
             <h1 id="tituloMuestraMaestra">Muestra maestra</h1>
             <h2>
                 {{$periodo->nombre}}  
@@ -416,6 +418,7 @@
                     </div>
                   </div>
                   
+                  <!--
                   <div class="panel panel-default" ng-show="estados.length > 0">
                     <div class="panel-heading" role="tab" id="headingThree">
                       <h4 class="panel-title">
@@ -435,7 +438,7 @@
                       </div>
                     </div>
                   </div>
-                  
+                  -->
                   <div class="panel panel-default" ng-show="sectoresZonas.length > 0">
                     <div class="panel-heading" role="tab" id="headingFour">
                       <h4 class="panel-title">
