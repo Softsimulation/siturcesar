@@ -20,6 +20,7 @@
             } 
       };
       
+      
       return {
             
         getDataIndicador: function(id){ return http.get("/indicadores/dataindicador/"+id);  },
@@ -27,7 +28,6 @@
         
         getDataSecundarios: function(id){ return http.get("/indicadores/datasencundarios/"+id);  },
         filtrarDataSecundarias: function(data){ return http.get("/indicadores/filtrardatasecundaria/"+ data.indicador+ "/"+ data.year );  },
-        
         
         getDataPivoTable: function(indicador){
             
@@ -46,18 +46,18 @@
                                  };
             }
             
-           http.get("/indicadores/datapivotable/"+indicador)
+            http.get("/indicadores/datapivotable/"+indicador)
                 .then(function(data){
                     
                     if( !data ){
-                        $(".content-main .nav-tabs a:last").css("display", 'none');
+                        $("#content-main .nav-tabs a:last").css("display", 'none');
                     }
                     else if( data.length==0 ){
-                        $(".content-main .nav-tabs a:last").css("display", 'none');
+                        $("#content-main .nav-tabs a:last").css("display", 'none');
                     }
                     else{
                         
-                        $(".content-main .nav-tabs a:last").css("display", 'block');
+                        $("#content-main .nav-tabs a:last").css("display", 'block');
                         
                         $("#tablaDinamica").pivotUI(data, {
                             onRefresh: function (config) { config.rows = []; config.cols = []; },
