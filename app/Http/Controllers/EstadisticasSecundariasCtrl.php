@@ -39,7 +39,7 @@ class EstadisticasSecundariasCtrl extends Controller
     public function getDataconfiguracion(){ 
         return
             [
-                "meses"=> Mes_Indicador::get(),
+                "meses"=> Mes_Indicador::orderBy("mes_indicador.id")->get(),
                 "anios"=> Anio::get(),
                 "data"=> $this->getDataEstadisticas(),
                 "graficas"=> Tipos_grafica::get()

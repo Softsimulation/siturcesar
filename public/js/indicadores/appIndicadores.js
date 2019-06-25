@@ -111,8 +111,7 @@
             
             for(var i=0; i<$scope.indicador.graficas.length; i++){
                 if($scope.indicador.graficas[i].pivot.principal){
-                    $scope.changeTipoGrafica($scope.indicador.graficas[i]);
-                    $scope.changeTipoGrafica2($scope.indicador.graficas[i]);
+                    $scope.changeTipoGrafica($scope.indicador.graficas[i]);   
                     break;
                 }
             }

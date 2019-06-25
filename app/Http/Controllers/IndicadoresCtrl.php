@@ -59,7 +59,7 @@ class IndicadoresCtrl extends Controller
         return View("indicadores.estadisticasSecundarios", [ "indicadores"=> $data ] );
     }
     
-    public function getDatasencundarios($id){
+   public function getDatasencundarios($id){
     
         $idioma = 1;
         
@@ -72,7 +72,7 @@ class IndicadoresCtrl extends Controller
         }
         
         
-        if($estadistica){
+        if($estadistica){ 
             $years = null;
             if( count( $estadistica->rotulos ) > 0 ){
                 $years = Rotulos_estadistica::join("series_estadistica_rotulos","rotulos_estadisticas.id","=","rotulo_estadistica_id")
@@ -81,7 +81,7 @@ class IndicadoresCtrl extends Controller
                                             ->distinct()->get([ "anios.id","anios.anio" ]);
             }
             else{
-                $years = Series_estadistica::join("valor_series_tiempo","series_estadisticas.id","=","series_estadistica_id")
+                $years = Series_estadistica::join("valor_series_tiempo","series_estadisticas.id","=","serie_estadisitica_id")
                                            ->join("anios","anios.id","=","anio_id")
                                            ->where("estadisticas_secundaria_id",$estadistica->id)
                                            ->distinct()->get([ "anios.id","anios.anio" ]);
@@ -94,7 +94,7 @@ class IndicadoresCtrl extends Controller
     
     public function getFiltrardatasecundaria($id,$year){
         
-        
+        Series_estadistica_rotulo::get();
         $estadistica = Estadisitica_Secundaria::find($id);
         
         if($estadistica){
@@ -107,13 +107,13 @@ class IndicadoresCtrl extends Controller
                 
                 foreach($estadistica->series as $serie){
                     $dt = [];
-                    foreach($estadistica->rotulos as $rotulo){                         
-                        $dato = Series_estadistica_rotulo::where([ ["series_estadistica_id",$serie->id] , ["rotulo_estadistica_id",$rotulo->id], ["anio_id",$year]  ])->pluck("valor")->first();
+                    foreach($estadistica->rotulos as $rotulo){          
+                        $dato = Series_estadistica_rotulo::where([ ["serie_estadisitica_id",$serie->id] , ["rotulo_estadistica_id",$rotulo->id], ["anio_id",$year]  ])->pluck("valor")->first();
                         array_push( $dt, $dato );
                     }
                     array_push($datos,$dt); 
                 }
-                
+               
                 $labels = $idioma==1 ? $estadistica->rotulos->lists('nombre')->toArray() : $estadistica->rotulos->lists('name')->toArray();
             }
             else{
@@ -130,7 +130,13 @@ class IndicadoresCtrl extends Controller
                     }
                     
                     array_push($datos,$dt); 
-                    $labels = $strMes = $idioma==1? $meses->lists('nombre')->toArray() : $meses->lists('name')->toArray();
+                    
+                    $lbs = $strMes = $idioma==1? $meses->lists('nombre')->toArray() : $meses->lists('name')->toArray();
+                    
+                    if( count($lbs) > count($labels) ){
+                        $labels = $lbs;
+                    }
+                    
                 }
                 
             }
@@ -143,6 +149,7 @@ class IndicadoresCtrl extends Controller
         }
         
     }
+    
     
     /////////////////////////////////////////////////////
     
